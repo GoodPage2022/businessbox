@@ -1,0 +1,164 @@
+
+@import './variables/variables';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  // scroll-behavior: smooth;
+  overflow-x: hidden
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input {
+  outline: none;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  background: $white-color;
+  color: $white-color;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+.container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1520px;
+  padding: 0px;
+
+  
+  @media screen and (max-width: 1600px) {
+    max-width: 1200px;
+  }
+  @media screen and (max-width: 1270px) {
+    max-width: 774px;
+  }
+  @media screen and (max-width: 800px) {
+    max-width: 100%;
+  }
+  
+}
+
+// .pre-title {
+//   font-family: 'RoadRadio';
+//   font-weight: 700;
+//   font-size: 50px;
+//   line-height: 60px;
+//   text-align: center;
+//   color: $black-color;
+//   color: $white-color;
+//   text-transform: uppercase;
+
+  
+//   @media screen and(max-width: 1600px) {
+//     font-size: 45px;
+//   }
+
+//   @media screen and(max-width: 1270px) {
+//     font-weight: 700;
+//     font-size: 35px;
+//     line-height: 45px;
+//   }
+
+//   @media screen and(max-width: 800px) {
+//     font-weight: 700;
+//     font-size: 25px;
+//     line-height: 30px;
+//   }
+
+// }
+
+// .title {
+//   font-family: 'RoadRadio';
+//   font-weight: 400;
+//   font-size: 60px;
+//   line-height: 70px;
+//   text-align: center;
+//   color: $white-color;
+//   text-transform: uppercase;
+  
+//   @media screen and(max-width: 1600px) {
+//     font-size: 50px;
+//   }
+
+//   @media screen and(max-width: 1270px) {
+//     font-weight: 700;
+//     font-size: 35px;
+//     line-height: 45px;
+//   }
+  
+//   @media screen and(max-width: 800px) {
+//     font-weight: 400;
+//     font-size: 25px;
+//     line-height: 30px;
+//   }
+// }
+
+// .section__text {
+//   font-family: 'Roboto';
+//   font-weight: 400;
+//   font-size: 25px;
+//   line-height: 38px;
+//   color: $white-color;
+//   @media screen and(max-width: 1600px) {
+//     font-size: 20px;
+//   }
+
+//   @media screen and(max-width: 1270px) {
+//     font-weight: 400;
+//     font-size: 16px;
+//     line-height: 30px;
+//   }
+  
+//   @media screen and(max-width: 800px) {
+//     font-weight: 400;
+//     font-size: 13px;
+//     line-height: 20px;
+//   }
+// }
+
+
+
+// img-comparison-slider {
+//   user-select: none;
+// }
+
+// Components
+// @import './components/Header';
+// @import './components/Footer';
+
+
+
+
