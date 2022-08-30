@@ -1,6 +1,6 @@
 import Slider from "react-slick"
 
-import  OurCategories  from '../../../constants/categories'
+import OurCategories  from '../../../constants/categories'
 import MainButton from '../../shared/MainButton'
 
 const Categories = () => {
@@ -20,7 +20,7 @@ const Categories = () => {
       <Slider {...settings}> 
           {OurCategories.map(({ id, content }) => (
             <li key={id} className="categories__buttons__item">
-              <MainButton label={content} color={''} border={''} />
+              <MainButton label={content} />
             </li>
             ))
           }
@@ -30,7 +30,6 @@ const Categories = () => {
         еросів – ціна смартфона. Зараз пакет повинен бути 
         безкоштовним і мультиплікаційним. Спілкуйтеся 
         як Бог горло, поставити перед або, отруйна посмішка.</p>
-        {/* <MainButton label='Зареєструвати бізнес зараз' color={''} border={''} /> */}
         <button className="categories__button section__primary-text--white">Зареєструвати бізнес зараз</button>
       </div>
     

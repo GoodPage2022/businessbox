@@ -10,7 +10,7 @@
 html,
 body {
   // scroll-behavior: smooth;
-  overflow-x: hidden
+  
 }
 
 ul {
@@ -43,7 +43,8 @@ input {
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  background: $white-color;
+  overflow-x: hidden;
+  background: #F5F5F5;
   color: $white-color;
 }
 
@@ -151,7 +152,12 @@ html {
 // Components
 @import './components/Header';
 @import './components/HomePage/Categories/Categories.scss';
+@import './components/HomePage/Popular/Popular.scss';
+
+//Shared
 @import './components/shared/MainButton.scss';
+@import './components/shared/MainButtonRed.scss';
+@import './components/shared/IconButton.scss';
 
 // @import './components/Footer';
 
