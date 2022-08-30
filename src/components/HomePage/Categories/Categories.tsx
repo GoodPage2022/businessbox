@@ -10,7 +10,6 @@ const Categories = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 9,
-    centerMode: true,
     slidesToScroll: 1,
     arrows: false,
   };
