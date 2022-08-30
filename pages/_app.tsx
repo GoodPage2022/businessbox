@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 
 import Header from '../src/components/Header/Header'
+import Footer from '../src/components/Footer/Footer'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,11 +20,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           type="image/x-icon"
         />
       </Head>
-     <Header />
+      <Header />
        <main >
         <Component {...pageProps} />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }

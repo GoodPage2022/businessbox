@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import Logo from './Logo'
+import PolygonSVG from '../../assets/svg/polygon.svg'
 
 const Navbar = () => {
 
 
   return (
       <nav className="header__nav">
-        <Logo/>
         <ul className="header__nav__menu">
           <li className='header__nav__menu__item '>
             <Link  href="/">
-              <a className='section__secondary-text--white'>Каталог бізнесів</a>
+              <a className='section__secondary-text--white'>Категорії <PolygonSVG/></a>
             </Link></li>
           <li className='header__nav__menu__item  section__secondary-text--white'>
             <Link  href="/">
