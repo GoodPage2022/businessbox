@@ -30,7 +30,7 @@ const Categories = () => {
         еросів – ціна смартфона. Зараз пакет повинен бути 
         безкоштовним і мультиплікаційним. Спілкуйтеся 
         як Бог горло, поставити перед або, отруйна посмішка.</p>
-        <button className="categories__button section__primary-text--white">Зареєструвати бізнес зараз</button>
+        <button className="categories__button">Зареєструвати бізнес зараз</button>
       </div>
     
     </section>
