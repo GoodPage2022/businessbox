@@ -1,11 +1,10 @@
 import Link from 'next/link'
-// import LogoSVG from '../../assets/svg/main-logo.svg'
 
 const Logo = () => {
   return (
     <div className="header__logo">
-      <Link href="/">
-        <a>{/* <LogoSVG /> */}</a>
+      <Link  href="/">
+        <a className='header__logo__text'>Business Box</a>
       </Link>
       
     </div>

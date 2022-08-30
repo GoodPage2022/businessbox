@@ -1,0 +1,43 @@
+.categories {
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  background-image: url('../../../../public/assets/images/main-bg.png');
+  background-color: $black-color;
+  background-position: top 80px left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  &__container--desc {
+    position: relative;
+  }
+
+  &__title {
+    margin-top: 80px;
+    margin-bottom: 30px;
+    width: 789px;
+  }
+
+  &__text {
+    width: 598px;
+    margin-bottom: 30px;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 20px rgba(242, 42, 78, 0.5);
+    border-radius: 18px;
+    background: #F22A4E;       
+    cursor: pointer;
+  }
+
+
+
+  &__buttons {
+    display: flex;
+  }
+
+}

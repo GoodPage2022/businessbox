@@ -20,10 +20,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
      <Header />
-       {/* <main >
+       <main >
         <Component {...pageProps} />
       </main>
-      <Footer /> */}
+      {/* <Footer /> */}
     </>
   )
 }
