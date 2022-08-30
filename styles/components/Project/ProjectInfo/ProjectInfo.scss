@@ -1,0 +1,80 @@
+.projectInfo {
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  
+  &__container--desc {
+    position: relative;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+
+    &--icons {
+      display: flex;
+    }
+    &--red-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      margin-right: 20px;
+      background: $main-red-color;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      & svg {
+        width: 17px;
+        & path {
+          stroke: $white-color;
+        }
+      }
+    }
+    &--transparent-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      background: $transparent;
+      border-radius: 18px;
+      border: 1.5px solid $main-text-color;
+      cursor: pointer;
+      & svg {
+        width: 17px;
+      }
+    }
+  }
+
+  &__image-slider {
+    padding: 20px 0 20px 20px;
+    background: $white-color;
+    margin-bottom: 40px;
+
+    &--image {
+      position: relative;
+      width: 480px !important;
+      height: 270px;
+      overflow: hidden;
+      border-radius: 25px;
+    }
+  }
+
+  &__text {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  &__offers-title {
+    margin-bottom: 40px;
+  }
+
+}
+
+.slick-track {
+  margin-left: initial;
+}

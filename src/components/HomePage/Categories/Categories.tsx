@@ -7,9 +7,9 @@ const Categories = () => {
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 9,
+    slidesToShow: 8.5,
     slidesToScroll: 1,
     arrows: false,
   };

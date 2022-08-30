@@ -1,0 +1,52 @@
+.profileInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px 20px 30px;
+  background: $white-color;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+
+  &__image {
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+
+  &__name {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  &__networks {
+    display: flex;
+
+    &--item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 44px;
+      height: 44px;
+      background: $transparent;
+      border-radius: 18px;
+      border: 1.5px solid $main-text-color;
+      cursor: pointer;
+      & svg {
+        width: 17px;
+      }
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+
+  }
+}

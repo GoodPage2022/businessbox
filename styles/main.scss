@@ -45,7 +45,7 @@ body {
   min-height: -webkit-fill-available;
   overflow-x: hidden;
   background: #F5F5F5;
-  color: $white-color;
+  color: $main-text-color;
 }
 
 html {
@@ -150,18 +150,29 @@ html {
 
 
 // Components
+
+// Header
 @import './components/Header.scss';
+
+// HomePage
 @import './components/HomePage/Categories/Categories.scss';
 @import './components/HomePage/Popular/Popular.scss';
 @import './components/HomePage/RegisterBusiness/RegisterBusiness.scss';
+
+//Project
+@import './components/Project/ProjectInfo/ProjectInfo.scss';
+@import './components/Project/ProjectInfo/ProfileInfo.scss';
+@import './components/Project/ProjectInfo/Comment.scss';
+
+// Footer
 @import './components/Footer.scss';
 
 //Shared
 @import './components/shared/MainButton.scss';
 @import './components/shared/MainButtonRed.scss';
+@import './components/shared/MainButtonBlack.scss';
 @import './components/shared/IconButton.scss';
 
-// @import './components/Footer';
 
 // Slick/slider
 @import "slick-carousel/slick/slick.css";
