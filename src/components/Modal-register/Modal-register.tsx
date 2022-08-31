@@ -5,7 +5,7 @@ import { Formik, Form, Field } from "formik";
 import CrossSVG from "../../assets/svg/cross.svg";
 import router from "next/router";
 
-function Modal({ onClose, children }: { onClose: any; children: any }) {
+function Modal({ onClose }: { onClose: any }) {
   let modalRoot: any;
   if (typeof window !== "undefined") {
     modalRoot = document.querySelector("#modal-root");

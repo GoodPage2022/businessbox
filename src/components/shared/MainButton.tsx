@@ -1,10 +1,9 @@
-const MainButton = ( {label} : {label: string} ) => {
-
+const MainButton = ({ label }: { label: string }) => {
   return (
     <button className="main-button section__secondary-text--white">
       {label}
     </button>
-  )
-}
+  );
+};
 
-export default MainButton
+export default MainButton;

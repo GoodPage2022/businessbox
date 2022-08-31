@@ -1,15 +1,15 @@
-import Logo from './Logo'
-import Navbar from './Navbar'
+import Logo from "./Logo";
+import Navbar from "./Navbar";
 
 const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="container footer__container">
-        <Logo/>
-        <Navbar/>
+        <Logo />
+        <Navbar />
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
