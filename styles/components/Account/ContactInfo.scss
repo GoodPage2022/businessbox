@@ -1,56 +1,55 @@
-.modal-register {
-  &__overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 999999999;
-  }
+.contactInfo {
+  padding-bottom: 20%;
   &__container {
-    // max-width: calc(100vw - 48px);
-    // max-height: calc(100vh - 24px);
-    width: 1110px;
-    height: 874px;
-    background: #fafafa;
+    display: flex;
+  }
+
+  &__photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 30px;
+  }
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 16px 8px;
+    width: 100%;
+    border: 1px solid $main-text-color;
+    border-radius: 15px;
+    background: transparent;
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+  &__image {
+    position: relative;
     border-radius: 25px;
     overflow: hidden;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 20px;
   }
 
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-image: url("../../../public/assets/images/register-bg.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 60px 95px;
+  &__form {
+    width: 100%;
   }
 
-  &__button-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    width: 44px;
-    border: none;
-    border-radius: 18px;
-    background: $white-color;
-    cursor: pointer;
-  }
-
-  &__body {
-    padding: 60px 95px 80px;
-  }
-
-  &__name-wrapper {
+  &__first-wrapper {
     display: flex;
     margin-bottom: 20px;
+  }
+
+  &__second-wrapper {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  &__third-wrapper {
+    display: flex;
+    margin-bottom: 60px;
   }
   &__field {
     display: block;
@@ -92,16 +91,7 @@
       color: #888888;
     }
   }
-  &__phone-wrapper {
-    margin-bottom: 20px;
-  }
-  &__mail-wrapper {
-    margin-bottom: 20px;
-  }
-  &__city-wrapper {
-    display: flex;
-    margin-bottom: 60px;
-  }
+
   &__button {
     display: flex;
     align-items: center;

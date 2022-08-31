@@ -1,5 +1,4 @@
-
-@import './variables/variables';
+@import "./variables/variables";
 
 * {
   box-sizing: border-box;
@@ -10,7 +9,6 @@
 html,
 body {
   // scroll-behavior: smooth;
-  
 }
 
 ul {
@@ -44,7 +42,7 @@ body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
   overflow-x: hidden;
-  background: #F5F5F5;
+  background: #f5f5f5;
   color: $main-text-color;
 }
 
@@ -60,7 +58,6 @@ html {
   width: 100%;
   padding: 0px;
 
-  
   // @media screen and (max-width: 1600px) {
   //   max-width: 1200px;
   // }
@@ -70,7 +67,6 @@ html {
   // @media screen and (max-width: 800px) {
   //   max-width: 100%;
   // }
-  
 }
 
 // .pre-title {
@@ -83,7 +79,6 @@ html {
 //   color: $white-color;
 //   text-transform: uppercase;
 
-  
 //   @media screen and(max-width: 1600px) {
 //     font-size: 45px;
 //   }
@@ -108,7 +103,7 @@ html {
   line-height: 58px;
   text-align: left;
   color: $main-text-color;
-  
+
   &--white {
     font-weight: 700;
     font-size: 48px;
@@ -118,13 +113,13 @@ html {
   }
 }
 .section__primary-text {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
   color: $main-text-color;
   &--white {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
@@ -133,14 +128,14 @@ html {
 }
 
 .section__secondary-text {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: $main-text-color;
 
   &--white {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -148,40 +143,39 @@ html {
   }
 }
 
-
 // Components
 
 // Header
-@import './components/Header.scss';
+@import "./components/Header.scss";
 
 // HomePage
-@import './components/HomePage/Categories/Categories.scss';
-@import './components/HomePage/Popular/Popular.scss';
-@import './components/HomePage/RegisterBusiness/RegisterBusiness.scss';
+@import "./components/HomePage/Categories/Categories.scss";
+@import "./components/HomePage/Popular/Popular.scss";
+@import "./components/HomePage/RegisterBusiness/RegisterBusiness.scss";
 
 //Project
-@import './components/Project/ProjectInfo/ProjectInfo.scss';
-@import './components/Project/ProjectInfo/ProfileInfo.scss';
-@import './components/Project/ProjectInfo/Comment.scss';
+@import "./components/Project/ProjectInfo/ProjectInfo.scss";
+@import "./components/Project/ProjectInfo/ProfileInfo.scss";
+@import "./components/Project/ProjectInfo/Comment.scss";
+
+//Account
+@import "./components/Account/Account.scss";
+@import "./components/Account/ContactInfo.scss";
+@import "./components/Account/AccountHeader.scss";
 
 // Footer
-@import './components/Footer.scss';
+@import "./components/Footer.scss";
 
 //Shared
-@import './components/shared/MainButton.scss';
-@import './components/shared/MainButtonRed.scss';
-@import './components/shared/MainButtonBlack.scss';
-@import './components/shared/IconButton.scss';
+@import "./components/shared/MainButton.scss";
+@import "./components/shared/MainButtonRed.scss";
+@import "./components/shared/MainButtonBlack.scss";
+@import "./components/shared/IconButton.scss";
 
 //Modal
 
-@import './components/Modal/Modal-register.scss';
-
+@import "./components/Modal/Modal-register.scss";
 
 // Slick/slider
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
-
-
-
-
