@@ -1,0 +1,25 @@
+.myBusinesses {
+  &__container {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+  padding-bottom: 25%;
+  &__cards {
+    display: flex;
+  }
+
+  &__empty {
+    padding-top: 210px;
+  }
+
+  &__text {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: $main-text-color;
+    margin-top: 20px;
+  }
+}

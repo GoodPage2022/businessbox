@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import AccountHeader from "../AccountHeader";
+import AccountHeader from "../components/Account/AccountHeader";
 
 interface Props {
   children: any;
