@@ -1,10 +1,11 @@
-.main-button {
+.icon-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 7px 16px 8px;
+  height: 32px;
+  width: 34px;
   border: 1px solid $white-color;
   border-radius: 15px;
-  background: transparent;        
-  cursor: pointer;   
+  background: transparent;
+  cursor: pointer;  
  }

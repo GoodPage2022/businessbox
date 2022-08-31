@@ -10,7 +10,7 @@
 html,
 body {
   // scroll-behavior: smooth;
-  overflow-x: hidden
+  
 }
 
 ul {
@@ -43,8 +43,9 @@ input {
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  background: $white-color;
-  color: $white-color;
+  overflow-x: hidden;
+  background: #F5F5F5;
+  color: $main-text-color;
 }
 
 html {
@@ -102,21 +103,20 @@ html {
 // }
 
 .title {
-  font-weight: 400;
+  font-weight: 700;
   font-size: 48px;
-  line-height: 100%;
+  line-height: 58px;
   text-align: left;
   color: $main-text-color;
   
   &--white {
-    font-weight: 400;
+    font-weight: 700;
     font-size: 48px;
-    line-height: 100%;
+    line-height: 58px;
     text-align: left;
     color: $white-color;
   }
 }
-
 .section__primary-text {
   font-family: 'Montserrat';
   font-weight: 400;
@@ -150,11 +150,29 @@ html {
 
 
 // Components
-@import './components/Header';
-@import './components/HomePage/Categories/Categories.scss';
-@import './components/shared/MainButton.scss';
 
-// @import './components/Footer';
+// Header
+@import './components/Header.scss';
+
+// HomePage
+@import './components/HomePage/Categories/Categories.scss';
+@import './components/HomePage/Popular/Popular.scss';
+@import './components/HomePage/RegisterBusiness/RegisterBusiness.scss';
+
+//Project
+@import './components/Project/ProjectInfo/ProjectInfo.scss';
+@import './components/Project/ProjectInfo/ProfileInfo.scss';
+@import './components/Project/ProjectInfo/Comment.scss';
+
+// Footer
+@import './components/Footer.scss';
+
+//Shared
+@import './components/shared/MainButton.scss';
+@import './components/shared/MainButtonRed.scss';
+@import './components/shared/MainButtonBlack.scss';
+@import './components/shared/IconButton.scss';
+
 
 // Slick/slider
 @import "slick-carousel/slick/slick.css";

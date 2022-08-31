@@ -1,7 +1,7 @@
-const MainButton = ( {label, color, border} : {label: string, color: string, border: string} ) => {
+const MainButton = ( {label} : {label: string} ) => {
 
   return (
-    <button style={{background: color, border: border }} className="main-button section__secondary-text--white">
+    <button className="main-button section__secondary-text--white">
       {label}
     </button>
   )
