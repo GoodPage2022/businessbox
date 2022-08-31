@@ -8,7 +8,6 @@ const Header = () => {
   const [offset, setOffset] = useState(0);
   const { pathname } = useRouter();
   
-
   useEffect(() => {
     const onScroll = () => setOffset(window.pageYOffset);
 
@@ -19,11 +18,11 @@ const Header = () => {
   
   return (
     <header className={`header${(offset > 20 || pathname != '/') ? " scrolled" : ""}`}>
-      <div className="container header__container__desc">
+      <div className="container header__container__desc" >
         <Navbar />
         <Right/>
       </div>
-  
+      
     </header>
   )
 }
