@@ -1,18 +1,18 @@
 import type { NextPage } from "next";
 
 import React from "react";
+import Favorites from "../../src/components/Account/Favorites";
 
-import MyBusinesses from "../../src/components/Account/MyBusinesses";
 import AccountLayout from "../../src/layouts/AccountLayout";
 
-const MyBusiness: NextPage = () => {
+const MyFavorites: NextPage = () => {
   return (
     <>
       <AccountLayout>
-        <MyBusinesses />
+        <Favorites />
       </AccountLayout>
     </>
   );
 };
 
-export default MyBusiness;
+export default MyFavorites;

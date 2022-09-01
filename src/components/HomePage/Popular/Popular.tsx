@@ -3,12 +3,12 @@ import DotsSVG from "../../../assets/svg/dots.svg";
 import LinesSVG from "../../../assets/svg/lines.svg";
 import IconButton from "../../shared/IconButton";
 import PopularCards from "../../../constants/popular";
-import PopularCard from "./PopularCard";
+import PopularCard from "../../shared/BusinessCard";
 
 const Popular = () => {
   return (
     <section className="popular">
-      <div className="container popular__container--desc">
+      <div className="container popular__container">
         <div className="popular__buttons">
           <div className="popular__buttons--left">
             <button className="popular__button__filter">

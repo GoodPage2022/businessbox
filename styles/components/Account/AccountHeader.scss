@@ -11,7 +11,7 @@
   }
   &__left {
     display: flex;
-    & button:not(:last-child) {
+    &--item:not(:last-child) {
       margin-right: 20px;
     }
   }
@@ -39,6 +39,12 @@
 
     &--text {
       margin-left: 10px;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: $white-color;
     }
   }
 }

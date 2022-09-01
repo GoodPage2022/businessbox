@@ -1,18 +1,17 @@
 import type { NextPage } from "next";
-
 import React from "react";
 
-import MyBusinesses from "../../src/components/Account/MyBusinesses";
+import AddBusinessFinish from "../../src/components/Account/AddBusinessFinish";
 import AccountLayout from "../../src/layouts/AccountLayout";
 
-const MyBusiness: NextPage = () => {
+const AddMyBusinessFinish: NextPage = () => {
   return (
     <>
       <AccountLayout>
-        <MyBusinesses />
+        <AddBusinessFinish />
       </AccountLayout>
     </>
   );
 };
 
-export default MyBusiness;
+export default AddMyBusinessFinish;

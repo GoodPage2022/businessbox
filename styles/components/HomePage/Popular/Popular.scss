@@ -36,48 +36,9 @@
   }
 
   &__cards {
-    display: flex;
-  }
-
-  &__card {
-    width: 255px;
-    border-radius: 25px;
-    background: $white-color;
-    overflow: hidden;
-    &:not(:last-child) {
-      margin-right: 30px;
-    }
-    &--image {
-      position: relative;
-      height: 190px;
-      width: 255px;
-    }
-
-    &--info {
-      padding: 30px 20px;
-    }
-
-    &--title {
-      font-family: "Montserrat";
-      font-style: normal;
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 24px;
-      align-items: center;
-      color: $main-text-color;
-      margin-bottom: 10px;
-    }
-
-    &--description {
-      margin-bottom: 30px;
-    }
-
-    &--buttons {
-      display: flex;
-
-      & button:not(:last-child) {
-        margin-right: 10px;
-      }
-    }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    grid-column-gap: 30px;
   }
 }

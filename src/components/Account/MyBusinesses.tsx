@@ -1,5 +1,5 @@
 import PopularCards from "../../constants/popular";
-import PopularCard from "../HomePage/Popular/PopularCard";
+import PopularCard from "../shared/BusinessCard";
 
 const MyBusinesses = () => {
   return (

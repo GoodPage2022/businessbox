@@ -50,6 +50,10 @@ html {
   height: -webkit-fill-available;
 }
 
+main {
+  min-height: calc(100vh - 80px);
+}
+
 .container {
   position: relative;
   margin-left: auto;
@@ -163,6 +167,9 @@ html {
 @import "./components/Account/ContactInfo.scss";
 @import "./components/Account/AccountHeader.scss";
 @import "./components/Account/MyBusinesses.scss";
+@import "./components/Account/AddBusiness.scss";
+@import "./components/Account/AddBusinessFinish.scss";
+@import "./components/Account/Favorites.scss";
 
 // Footer
 @import "./components/Footer.scss";
@@ -171,7 +178,9 @@ html {
 @import "./components/shared/MainButton.scss";
 @import "./components/shared/MainButtonRed.scss";
 @import "./components/shared/MainButtonBlack.scss";
+@import "./components/shared/MainButtonGrey.scss";
 @import "./components/shared/IconButton.scss";
+@import "./components/shared/BusinessCard.scss";
 
 //Modal
 

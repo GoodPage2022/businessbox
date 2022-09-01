@@ -1,9 +1,11 @@
 import Slider from "react-slick";
+import { useRouter } from "next/router";
 
 import OurCategories from "../../../constants/categories";
 import MainButton from "../../shared/MainButton";
 
 const Categories = () => {
+  const router = useRouter();
   const settings = {
     dots: false,
     infinite: false,
@@ -15,7 +17,7 @@ const Categories = () => {
 
   return (
     <section className="categories">
-      <div className="container categories__container--desc">
+      <div className="container categories__container">
         <Slider {...settings}>
           {OurCategories.map(({ id, content }) => (
             <li key={id} className="categories__buttons__item">
@@ -31,7 +33,10 @@ const Categories = () => {
           смартфона. Зараз пакет повинен бути безкоштовним і мультиплікаційним.
           Спілкуйтеся як Бог горло, поставити перед або, отруйна посмішка.
         </p>
-        <button className="categories__button">
+        <button
+          className="categories__button"
+          onClick={() => router.push("/account/add-business")}
+        >
           Зареєструвати бізнес зараз
         </button>
       </div>
