@@ -94,7 +94,7 @@ const AddBusiness = () => {
               </div>
             </div>
             <button
-              onClick={() => router.push("/account/add-business")}
+              onClick={() => router.push("/account/add-business-finish")}
               className="addBusiness__button"
             >
               Далі
