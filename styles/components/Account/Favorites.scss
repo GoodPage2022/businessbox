@@ -1,0 +1,19 @@
+.favorites {
+  &__container {
+  }
+  &__cards {
+    &__item {
+      display: flex;
+      margin-bottom: 40px;
+    }
+  }
+  &__graphic {
+    position: relative;
+    width: 825px;
+    height: 414px;
+  }
+
+  &__empty {
+    padding-top: 210px;
+  }
+}
