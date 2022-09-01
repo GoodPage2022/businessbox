@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 
 const AccountHeader = () => {
   const { pathname } = useRouter();
+  const router = useRouter();
+
   const [isContactInfo, setIsContactInfo] = useState(() =>
     pathname === "/account/contact-info" ? true : false,
   );
@@ -48,16 +50,17 @@ const AccountHeader = () => {
             </button>
           ) : null}
           {isBusiness ? (
-            <button className="accountHeader__button-plus">
+            <button
+              onClick={() => router.push("/account/add-business")}
+              className="accountHeader__button-plus"
+            >
               <PlusSVG />
-              <span className="accountHeader__button-plus--text section__secondary-text--white">
+              <span className="accountHeader__button-plus--text">
                 Додати бізнес
               </span>
             </button>
           ) : null}
         </div>
-
-        {/* <ContactInfo /> */}
       </div>
     </div>
   );

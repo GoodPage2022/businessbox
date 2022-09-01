@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { Formik, Form, Field } from "formik";
 
-import MainButtonBlack from "../shared/MainButtonBlack";
-
 const ContactInfo = () => {
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
