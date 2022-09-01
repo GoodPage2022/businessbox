@@ -3,7 +3,7 @@ import DotsSVG from "../../../assets/svg/dots.svg";
 import LinesSVG from "../../../assets/svg/lines.svg";
 import IconButton from "../../shared/IconButton";
 import PopularCards from "../../../constants/popular";
-import PopularCard from "./PopularCard";
+import PopularCard from "../../shared/BusinessCard";
 
 const Popular = () => {
   return (

@@ -1,15 +1,21 @@
 .myBusinesses {
   &__container {
-    display: flex;
-    text-align: center;
-    justify-content: center;
   }
   padding-bottom: 25%;
   &__cards {
-    display: flex;
+    // display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: center;
+    grid-column-gap: 30px;
+    grid-row-gap: 20px;
   }
 
   &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding-top: 210px;
   }
 

@@ -23,6 +23,7 @@ const PopularCards = [
     title: 'Заголовок картки',
     description: 'Клієнт дуже важливий,за клієнтом піде клієнт. Ціна двох еросів – ціна смартфона.'
   },
+  
 ]
 
 export default PopularCards

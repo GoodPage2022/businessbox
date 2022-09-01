@@ -9,7 +9,7 @@ import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
 import OurComments from "../../../constants/comments";
 import PopularCards from "../../../constants/popular";
-import PopularCard from "../../HomePage/Popular/PopularCard";
+import PopularCard from "../../shared/BusinessCard";
 
 const ProjectInfo = () => {
   const imageSliderSettings = {

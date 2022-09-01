@@ -1,10 +1,10 @@
-import HeartSVG from "../../../assets/svg/heart.svg";
-import MessageSVG from "../../../assets/svg/message.svg";
-import IconButton from "../../shared/IconButton";
+import HeartSVG from "../../assets/svg/heart.svg";
+import MessageSVG from "../../assets/svg/message.svg";
+import IconButton from "./IconButton";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-const PopularCard = ({
+const BusinessCard = ({
   image,
   title,
   description,
@@ -15,8 +15,8 @@ const PopularCard = ({
 }) => {
   const router = useRouter();
   return (
-    <li className="popular__card" onClick={() => router.push("/project")}>
-      <div className="popular__card--image">
+    <li className="business-card" onClick={() => router.push("/project")}>
+      <div className="business-card--image">
         <Image
           className=""
           src={image}
@@ -25,12 +25,12 @@ const PopularCard = ({
           alt="card-image"
         />
       </div>
-      <div className="popular__card--info">
-        <h3 className="popular__card--title">{title}</h3>
-        <p className="popular__card--description section__secondary-text">
+      <div className="business-card--info">
+        <h3 className="business-card--title">{title}</h3>
+        <p className="business-card--description section__secondary-text">
           {description}
         </p>
-        <div className="popular__card--buttons">
+        <div className="business-card--buttons">
           <IconButton borderColor="#0C0C0C" icon={<HeartSVG />} />
           <IconButton borderColor="#0C0C0C" icon={<MessageSVG />} />
         </div>
@@ -39,4 +39,4 @@ const PopularCard = ({
   );
 };
 
-export default PopularCard;
+export default BusinessCard;

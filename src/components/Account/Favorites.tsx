@@ -1,5 +1,5 @@
 import PopularCards from "../../constants/popular";
-import PopularCard from "../HomePage/Popular/PopularCard";
+import PopularCard from "../shared/BusinessCard";
 import Image from "next/image";
 
 const Favorites = () => {
