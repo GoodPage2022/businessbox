@@ -32,7 +32,7 @@ const ProjectInfo = () => {
 
   return (
     <section className="projectInfo">
-      <div className="container projectInfo__container--desc">
+      <div className="container projectInfo__container">
         <div className="projectInfo__title">
           <h1 className="projectInfo__title--text title">Назва проекту</h1>
           <div className="projectInfo__title--icons">

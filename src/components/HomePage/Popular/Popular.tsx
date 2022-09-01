@@ -8,7 +8,7 @@ import PopularCard from "../../shared/BusinessCard";
 const Popular = () => {
   return (
     <section className="popular">
-      <div className="container popular__container--desc">
+      <div className="container popular__container">
         <div className="popular__buttons">
           <div className="popular__buttons--left">
             <button className="popular__button__filter">

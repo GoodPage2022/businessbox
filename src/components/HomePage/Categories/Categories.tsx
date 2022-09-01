@@ -17,7 +17,7 @@ const Categories = () => {
 
   return (
     <section className="categories">
-      <div className="container categories__container--desc">
+      <div className="container categories__container">
         <Slider {...settings}>
           {OurCategories.map(({ id, content }) => (
             <li key={id} className="categories__buttons__item">

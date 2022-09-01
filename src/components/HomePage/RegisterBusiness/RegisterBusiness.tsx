@@ -4,7 +4,7 @@ const RegisterBusiness = () => {
   const router = useRouter();
   return (
     <section className="registerBusiness">
-      <div className="container registerBusiness__container--desc">
+      <div className="container registerBusiness__container">
         <h2 className="registerBusiness__title title--white">
           Хочеш продати бізнес?
           <br /> Реєструй вже зараз
