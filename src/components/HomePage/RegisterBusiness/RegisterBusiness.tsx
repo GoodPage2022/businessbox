@@ -1,6 +1,7 @@
-import MainButton from "../../shared/MainButton";
+import { useRouter } from "next/router";
 
 const RegisterBusiness = () => {
+  const router = useRouter();
   return (
     <section className="registerBusiness">
       <div className="container registerBusiness__container--desc">
@@ -9,7 +10,10 @@ const RegisterBusiness = () => {
           <br /> Реєструй вже зараз
         </h2>
 
-        <button className="registerBusiness__button section__primary-text--white">
+        <button
+          className="registerBusiness__button section__primary-text--white"
+          onClick={() => router.push("/account/add-business")}
+        >
           Зареєструвати
         </button>
       </div>

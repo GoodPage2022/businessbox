@@ -44,6 +44,7 @@
     border-radius: 25px;
     background: $white-color;
     overflow: hidden;
+    cursor: pointer;
     &:not(:last-child) {
       margin-right: 30px;
     }

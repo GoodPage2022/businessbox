@@ -2,6 +2,7 @@ import HeartSVG from "../../../assets/svg/heart.svg";
 import MessageSVG from "../../../assets/svg/message.svg";
 import IconButton from "../../shared/IconButton";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const PopularCard = ({
   image,
@@ -12,8 +13,9 @@ const PopularCard = ({
   title: string;
   description: string;
 }) => {
+  const router = useRouter();
   return (
-    <li className="popular__card">
+    <li className="popular__card" onClick={() => router.push("/project")}>
       <div className="popular__card--image">
         <Image
           className=""

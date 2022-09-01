@@ -5,6 +5,7 @@ import EditSVG from "../../assets/svg/edit.svg";
 import PlusSVG from "../../assets/svg/plus.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import MainButtonGrey from "../shared/MainButtonGrey";
 
 const AccountHeader = () => {
   const { pathname } = useRouter();
@@ -16,31 +17,58 @@ const AccountHeader = () => {
   const [isBusiness, setIsBusiness] = useState(() =>
     pathname === "/account/my-businesses" ? true : false,
   );
+  const [isFavorites, setIsFavorites] = useState(() =>
+    pathname === "/account/favorites" ? true : false,
+  );
 
   return (
     <div className="accountHeader">
       <div className="container accountHeader__container">
         <ul className="accountHeader__left">
           <li className="accountHeader__left--item">
-            <Link href="/account/contact-info">
-              <a>
-                <MainButtonBlack label="Контактна інформація" />
-              </a>
-            </Link>
+            {isContactInfo ? (
+              <Link href="/account/contact-info">
+                <a>
+                  <MainButtonGrey label="Контактна інформація" />
+                </a>
+              </Link>
+            ) : (
+              <Link href="/account/contact-info">
+                <a>
+                  <MainButtonBlack label="Контактна інформація" />
+                </a>
+              </Link>
+            )}
           </li>
           <li className="accountHeader__left--item">
-            <Link href="/account/my-businesses">
-              <a>
-                <MainButtonBlack label="Мої бізнеси" />
-              </a>
-            </Link>
+            {isBusiness ? (
+              <Link href="/account/contact-info">
+                <a>
+                  <MainButtonGrey label="Мої бізнеси" />
+                </a>
+              </Link>
+            ) : (
+              <Link href="/account/my-businesses">
+                <a>
+                  <MainButtonBlack label="Мої бізнеси" />
+                </a>
+              </Link>
+            )}
           </li>
           <li className="accountHeader__left--item">
-            <Link href="/account/favorites">
-              <a>
-                <MainButtonBlack label="Обрані" />
-              </a>
-            </Link>
+            {isFavorites ? (
+              <Link href="/account/contact-info">
+                <a>
+                  <MainButtonGrey label="Обрані" />
+                </a>
+              </Link>
+            ) : (
+              <Link href="/account/favorites">
+                <a>
+                  <MainButtonBlack label="Обрані" />
+                </a>
+              </Link>
+            )}
           </li>
         </ul>
         <div className="accountHeader__right">

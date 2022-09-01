@@ -10,8 +10,9 @@ const Right = () => {
   const { pathname } = useRouter();
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+
   const openModal = () => {
-    router.push("/#register");
+    router.push(`${pathname}/#register`);
     setShowModal((prevState) => !prevState);
   };
   const closeModal = () => {
@@ -27,7 +28,10 @@ const Right = () => {
       <li onClick={openModal} className="header__right__btn">
         <MainButton label="Вхід" />
       </li>
-      <li className="header__right__btn">
+      <li
+        className="header__right__btn"
+        onClick={() => router.push("/account/add-business")}
+      >
         <MainButtonRed label="Зареєструвати бізнес" />
       </li>
       {showModal && <Modal onClose={closeModal}></Modal>}
