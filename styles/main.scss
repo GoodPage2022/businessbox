@@ -50,6 +50,10 @@ html {
   height: -webkit-fill-available;
 }
 
+main {
+  min-height: calc(100vh - 80px);
+}
+
 .container {
   position: relative;
   margin-left: auto;

@@ -1,9 +1,7 @@
 .myBusinesses {
   &__container {
   }
-  padding-bottom: 25%;
   &__cards {
-    // display: flex;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
