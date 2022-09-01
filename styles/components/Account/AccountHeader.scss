@@ -1,0 +1,44 @@
+.accountHeader {
+  position: relative;
+  padding-top: 120px;
+  padding-bottom: 40px;
+
+  &__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__left {
+    display: flex;
+    & button:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+  &__button-edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 32px;
+    background: $main-red-color;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__button-plus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 18px;
+    background: $main-red-color;
+    cursor: pointer;
+
+    &--text {
+      margin-left: 10px;
+    }
+  }
+}

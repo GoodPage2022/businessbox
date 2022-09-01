@@ -2,12 +2,12 @@
   position: relative;
   padding-top: 120px;
   padding-bottom: 80px;
-  background-image: url('../../../../public/assets/images/main-bg.png');
+  background-image: url("../../../../public/assets/images/main-bg.png");
   background-color: $black-color;
   background-position: top 80px left;
   background-repeat: no-repeat;
   background-size: cover;
-  
+
   &__container--desc {
     position: relative;
   }
@@ -31,19 +31,18 @@
     box-shadow: 0px 2px 20px rgba(242, 42, 78, 0.5);
     border-radius: 18px;
     border: none;
-    background: $main-red-color;       
+    background: $main-red-color;
     cursor: pointer;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
     align-items: center;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   &__buttons {
     display: flex;
   }
-
 }

@@ -2,7 +2,6 @@
   padding-top: 40px;
   padding-bottom: 80px;
 
-
   &__buttons {
     display: flex;
     justify-content: space-between;
@@ -23,9 +22,9 @@
     padding: 7px 16px 8px;
     border: 1px solid $black-color;
     border-radius: 15px;
-    background: transparent;        
-    cursor: pointer; 
-    
+    background: transparent;
+    cursor: pointer;
+
     &--text {
       margin-left: 10px;
     }
@@ -59,7 +58,7 @@
     }
 
     &--title {
-      font-family: 'Montserrat';
+      font-family: "Montserrat";
       font-style: normal;
       font-weight: 600;
       font-size: 20px;
@@ -68,19 +67,17 @@
       color: $main-text-color;
       margin-bottom: 10px;
     }
-    
+
     &--description {
       margin-bottom: 30px;
     }
 
     &--buttons {
       display: flex;
-        
+
       & button:not(:last-child) {
         margin-right: 10px;
       }
-
     }
   }
-
 }

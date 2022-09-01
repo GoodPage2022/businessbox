@@ -1,10 +1,15 @@
-const IconButton = ( {icon, borderColor} : {icon: any, borderColor: string} ) => {
-
+const IconButton = ({
+  icon,
+  borderColor,
+}: {
+  icon: any;
+  borderColor: string;
+}) => {
   return (
-    <button style={{borderColor: borderColor}} className="icon-button">
+    <button style={{ borderColor: borderColor }} className="icon-button">
       {icon}
     </button>
-  )
-}
+  );
+};
 
-export default IconButton
+export default IconButton;

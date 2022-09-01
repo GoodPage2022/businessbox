@@ -22,7 +22,7 @@
     align-items: center;
   }
 
-  &__logo {   
+  &__logo {
     margin-right: 47px;
     &__text {
       font-family: Montserrat;
@@ -47,9 +47,8 @@
         margin-right: 47px;
       }
     }
-    
   }
-  
+
   &__right {
     display: flex;
     align-items: center;
@@ -75,5 +74,4 @@
       }
     }
   }
-
 }
