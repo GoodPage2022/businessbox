@@ -5,7 +5,7 @@ import React from "react";
 import MyBusinesses from "../../src/components/Account/MyBusinesses";
 import AccountLayout from "../../src/layouts/AccountLayout";
 
-const MyBusiness: NextPage = () => {
+const MyFavorites: NextPage = () => {
   return (
     <>
       <AccountLayout>
@@ -15,4 +15,4 @@ const MyBusiness: NextPage = () => {
   );
 };
 
-export default MyBusiness;
+export default MyFavorites;
