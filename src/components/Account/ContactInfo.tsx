@@ -1,9 +1,29 @@
 import Image from "next/image";
 import { Formik, Form, Field } from "formik";
+import { useState } from "react";
 
 const ContactInfo = () => {
+  const [avatar, setAvatar]: [any, any] = useState(
+    "/assets/images/profile-photo.png",
+  );
+
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
+  };
+
+  const handleUpload = async (e: any) => {
+    const formData = new FormData();
+    if (e.target.files != null) {
+      formData.append("image", e.target.files[0]);
+
+      const res = await fetch("someUrl", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      setAvatar(data);
+    }
   };
 
   return (
@@ -13,15 +33,23 @@ const ContactInfo = () => {
           <div className="contactInfo__image">
             <Image
               className=""
-              src="/assets/images/profile-photo.png"
+              src={avatar}
               layout="fill"
               objectFit="cover"
               alt="card-image"
             />
           </div>
-          <button className="contactInfo__btn section__secondary-text">
+          <input
+            id="file"
+            name="file"
+            type="file"
+            accept="image/*,.png,.jpg"
+            className="contactInfo__custom-file-input"
+            onChange={handleUpload}
+          />
+          {/* <button className="contactInfo__btn section__secondary-text">
             Змінити фото
-          </button>
+          </button> */}
           <button className="contactInfo__btn section__secondary-text">
             Видалити фото
           </button>
