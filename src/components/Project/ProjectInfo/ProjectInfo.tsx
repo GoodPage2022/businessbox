@@ -24,9 +24,7 @@ const ProjectInfo = () => {
     slidesToScroll: 1,
     arrows: false,
   };
-  const router = useRouter();
   const [link, setLink] = useState("");
-  console.log(isCopy);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

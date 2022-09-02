@@ -22,6 +22,8 @@ const ContactInfo = () => {
     ProfileData.businessSphere,
   );
   const [isEdit, setIsEdit] = useState();
+  const [createObjectURL, setCreateObjectURL] = useState("");
+
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
   };
@@ -30,14 +32,14 @@ const ContactInfo = () => {
     const formData = new FormData();
     if (e.target.files != null) {
       formData.append("image", e.target.files[0]);
-
-      const res = await fetch("someUrl", {
+      setCreateObjectURL(URL.createObjectURL(e.target.files[0]));
+      const res = await fetch("public/upload", {
         method: "POST",
         body: formData,
       });
 
-      const data = await res.json();
-      setAvatar(data);
+      // const data = await res.json();
+      // setAvatar(data);
     }
   };
 

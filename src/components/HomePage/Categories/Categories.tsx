@@ -13,6 +13,7 @@ const Categories = () => {
     slidesToShow: 8.5,
     slidesToScroll: 1,
     arrows: false,
+    swipeToSlide: true,
   };
 
   return (

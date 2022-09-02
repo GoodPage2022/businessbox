@@ -76,7 +76,14 @@ function Modal({ onClose }: { onClose: any }) {
         </div>
         <div className="modal-register__body">
           <Formik
-            initialValues={{ name: "", phone: "", wishes: "" }}
+            initialValues={{
+              name: "",
+              phone: "",
+              surname: "",
+              mail: "",
+              business: "",
+              city: "",
+            }}
             validate={(values) => {
               const errors: any = {};
               if (!values.name) {
