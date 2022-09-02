@@ -1,16 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
+import { AccountEditButtonContext } from "../../contexts/AccountEditButton";
 import MainButtonBlack from "../shared/MainButtonBlack";
 import EditSVG from "../../assets/svg/edit.svg";
 import PlusSVG from "../../assets/svg/plus.svg";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import MainButtonGrey from "../shared/MainButtonGrey";
 
-const AccountHeader = () => {
+const AccountHeader = ({}) => {
   const { pathname } = useRouter();
   const router = useRouter();
-
+  const [state, dispatch] = React.useContext(AccountEditButtonContext);
   const [isContactInfo, setIsContactInfo] = useState(() =>
     pathname === "/account/contact-info" ? true : false,
   );
@@ -73,7 +74,10 @@ const AccountHeader = () => {
         </ul>
         <div className="accountHeader__right">
           {isContactInfo ? (
-            <button className="accountHeader__button-edit">
+            <button
+              className="accountHeader__button-edit"
+              onClick={() => dispatch({ type: "toggle_edit" })}
+            >
               <EditSVG />
             </button>
           ) : null}

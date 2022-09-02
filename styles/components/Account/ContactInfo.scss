@@ -1,6 +1,5 @@
 .contactInfo {
-  padding-bottom: 20%;
-  &__container {
+  &__profile {
     display: flex;
   }
 
@@ -119,6 +118,11 @@
       line-height: 24px;
       color: #888888;
     }
+  }
+
+  &__submit-btn {
+    display: flex;
+    justify-content: end;
   }
 
   &__button {
