@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
+import CopySVG from "../../../assets/svg/copy.svg";
 import OurCategoriesShort from "../../../constants/categories-short";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
@@ -10,8 +11,11 @@ import Comment from "./Comment";
 import OurComments from "../../../constants/comments";
 import PopularCards from "../../../constants/popular";
 import PopularCard from "../../shared/BusinessCard";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const ProjectInfo = () => {
+  const [isCopy, setIsCopy] = useState(false);
   const imageSliderSettings = {
     dots: false,
     infinite: false,
@@ -20,6 +24,13 @@ const ProjectInfo = () => {
     slidesToScroll: 1,
     arrows: false,
   };
+  const [link, setLink] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLink(window.location.href);
+    }
+  }, []);
 
   const categoriesSliderSettings = {
     dots: false,
@@ -39,11 +50,30 @@ const ProjectInfo = () => {
             <button className="projectInfo__title--red-icon">
               <HeartSVG />
             </button>
-            <button className="projectInfo__title--transparent-icon">
+            <button
+              className="projectInfo__title--transparent-icon"
+              onClick={() => setIsCopy((prev) => !prev)}
+            >
               <ArrowSVG />
             </button>
           </div>
         </div>
+        {isCopy && (
+          <div className="projectInfo__copy">
+            <div className="projectInfo__copy--text-wrapper">
+              <p className="section__primary-text">{link}</p>
+            </div>
+            <div
+              className="projectInfo__copy-button"
+              onClick={() => {
+                navigator.clipboard.writeText(link);
+                setIsCopy(false);
+              }}
+            >
+              <CopySVG />
+            </div>
+          </div>
+        )}
         <div className="projectInfo__image-slider">
           <Slider {...imageSliderSettings}>
             <li className="projectInfo__image-slider--image">

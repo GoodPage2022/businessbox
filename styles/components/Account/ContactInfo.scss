@@ -1,14 +1,42 @@
 .contactInfo {
-  padding-bottom: 20%;
-  &__container {
+  &__profile {
     display: flex;
   }
 
   &__photo {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
     margin-right: 30px;
+  }
+  &__custom-file-input {
+    color: transparent;
+    width: 160px;
+    margin-bottom: 10px;
+  }
+  &__custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+    display: none;
+  }
+  &__custom-file-input::before {
+    content: "Змінити фото";
+    display: inline-block;
+    border: 1px solid $main-text-color;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 15px;
+    padding: 7px 16px 8px;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: $main-text-color;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
   }
   &__btn {
     display: flex;
@@ -90,6 +118,11 @@
       line-height: 24px;
       color: #888888;
     }
+  }
+
+  &__submit-btn {
+    display: flex;
+    justify-content: end;
   }
 
   &__button {

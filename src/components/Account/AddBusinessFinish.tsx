@@ -11,7 +11,29 @@ const addBusinessFinish = () => {
     <section className="addBusinessFinish">
       <div className="container addBusinessFinish__container">
         <Formik
-          initialValues={{ name: "", phone: "", wishes: "" }}
+          initialValues={{
+            ownership: "",
+            quantityFounders: "",
+            quantityEmployees: "",
+            seasonality: "",
+            turnoverPerYear: "",
+            netProfit: "",
+            grossProfit: "",
+            turnoverNextYear: "",
+            credits: "",
+            returnEstimate: "",
+            assetsAndEquipment: "",
+            salaryFund: "",
+            nonPermanentCosts: "",
+            site: "",
+            instagram: "",
+            facebook: "",
+            youtube: "",
+            file: "",
+            reviews: "",
+            financialAccounting: "",
+            CRM: "",
+          }}
           validate={(values) => {
             const errors: any = {};
 

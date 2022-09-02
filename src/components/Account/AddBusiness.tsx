@@ -12,7 +12,14 @@ const AddBusiness = () => {
     <section className="addBusiness">
       <div className="container addBusiness__container">
         <Formik
-          initialValues={{ name: "", phone: "", wishes: "" }}
+          initialValues={{
+            name: "",
+            phone: "",
+            business: "",
+            price: "",
+            description: "",
+            file: "",
+          }}
           validate={(values) => {
             const errors: any = {};
 
