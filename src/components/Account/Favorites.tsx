@@ -1,6 +1,7 @@
 import PopularCards from "../../constants/popular";
 import PopularCard from "../shared/BusinessCard";
 import Image from "next/image";
+import { Chart } from "../Chart/Chart";
 
 const Favorites = () => {
   return (
@@ -16,6 +17,10 @@ const Favorites = () => {
                   image={image}
                 />
                 <div className="favorites__graphic">
+                  <Chart />
+                </div>
+
+                {/* <div className="favorites__graphic">
                   <Image
                     className=""
                     src="/assets/images/graphic.png"
@@ -23,7 +28,7 @@ const Favorites = () => {
                     objectFit="cover"
                     alt="building"
                   />
-                </div>
+                </div> */}
               </div>
             ))}
           </ul>
