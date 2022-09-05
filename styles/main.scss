@@ -1,5 +1,6 @@
 @import "./variables/variables";
-
+@import "../public/fonts/Montserrat/stylesheet.css";
+@import "../public/fonts/KyivTypeSans/stylesheet.css";
 * {
   box-sizing: border-box;
   margin: 0;
@@ -102,6 +103,7 @@ main {
 // }
 
 .title {
+  font-family: "Kyiv*Type Sans";
   font-weight: 700;
   font-size: 48px;
   line-height: 58px;
@@ -109,6 +111,7 @@ main {
   color: $main-text-color;
 
   &--white {
+    font-family: "Kyiv*Type Sans";
     font-weight: 700;
     font-size: 48px;
     line-height: 58px;
