@@ -31,10 +31,9 @@ const ContactInfo = () => {
 
       setAvatar(i);
       setCreateObjectURL(URL.createObjectURL(i));
-      console.log("aaaaaaaaaa");
-      uploadToServer(e);
+
+      // uploadToServer(e);
     }
-    console.log("ccccc");
   };
 
   const uploadToServer = async (e: any) => {
@@ -44,7 +43,6 @@ const ContactInfo = () => {
       method: "POST",
       body,
     });
-    console.log("bbbbbbbbbb");
   };
 
   return (
@@ -70,7 +68,10 @@ const ContactInfo = () => {
               type="file"
               accept="image/*,.png,.jpg"
               className="contactInfo__custom-file-input"
-              onChange={uploadToClient}
+              onChange={(e) => {
+                uploadToClient(e);
+                uploadToServer(e);
+              }}
             />
             {/* <button
               className="btn btn-primary"
@@ -79,7 +80,10 @@ const ContactInfo = () => {
             >
               qwewqe
             </button> */}
-            <button className="contactInfo__btn section__secondary-text">
+            <button
+              className="contactInfo__btn section__secondary-text"
+              onClick={() => setCreateObjectURL("")}
+            >
               Видалити фото
             </button>
           </div>
