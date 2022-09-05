@@ -15,7 +15,7 @@ const BaseLayout: FC<Props> = ({ children }) => {
         <link rel="shortcut icon" href="/assets/svg/favicon.svg" />
         <link
           rel="shortcut icon"
-          href="/assets/images/favicon.ico"
+          href="/assets/images/favicon.png"
           type="image/x-icon"
         />
       </Head>

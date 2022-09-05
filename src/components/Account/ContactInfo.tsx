@@ -7,11 +7,10 @@ import React from "react";
 import MainButtonRed from "../shared/MainButtonRed";
 
 const ContactInfo = () => {
-  const [avatar, setAvatar]: [any, any] = useState(
-    "/assets/images/profile-photo.png",
-  );
+  const [avatar, setAvatar]: [any, any] = useState("");
+  const [createObjectURL, setCreateObjectURL] = useState("");
+
   const [state, dispatch] = React.useContext(AccountEditButtonContext);
-  console.log(state.active);
 
   const [name, setName] = useState(ProfileData.name);
   const [lastname, setLastname] = useState(ProfileData.lastname);
@@ -21,26 +20,29 @@ const ContactInfo = () => {
   const [businessSphere, setBusinessSphere] = useState(
     ProfileData.businessSphere,
   );
-  const [isEdit, setIsEdit] = useState();
-  const [createObjectURL, setCreateObjectURL] = useState("");
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
   };
 
-  const handleUpload = async (e: any) => {
-    const formData = new FormData();
-    if (e.target.files != null) {
-      formData.append("image", e.target.files[0]);
-      setCreateObjectURL(URL.createObjectURL(e.target.files[0]));
-      const res = await fetch("public/upload", {
-        method: "POST",
-        body: formData,
-      });
+  const uploadToClient = (e: any) => {
+    if (e.target.files && e.target.files[0]) {
+      const i = e.target.files[0];
 
-      // const data = await res.json();
-      // setAvatar(data);
+      setAvatar(i);
+      setCreateObjectURL(URL.createObjectURL(i));
+
+      // uploadToServer(e);
     }
+  };
+
+  const uploadToServer = async (e: any) => {
+    const body = new FormData();
+    body.append("file", avatar);
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body,
+    });
   };
 
   return (
@@ -51,7 +53,10 @@ const ContactInfo = () => {
             <div className="contactInfo__image">
               <Image
                 className=""
-                src={avatar}
+                src={
+                  createObjectURL ||
+                  /* "/avatars/anner.jpg" ?? */ "/assets/images/profile-photo.png"
+                }
                 layout="fill"
                 objectFit="cover"
                 alt="card-image"
@@ -63,12 +68,22 @@ const ContactInfo = () => {
               type="file"
               accept="image/*,.png,.jpg"
               className="contactInfo__custom-file-input"
-              onChange={handleUpload}
+              onChange={(e) => {
+                uploadToClient(e);
+                uploadToServer(e);
+              }}
             />
-            {/* <button className="contactInfo__btn section__secondary-text">
-            Змінити фото
-          </button> */}
-            <button className="contactInfo__btn section__secondary-text">
+            {/* <button
+              className="btn btn-primary"
+              type="submit"
+              onClick={uploadToServer}
+            >
+              qwewqe
+            </button> */}
+            <button
+              className="contactInfo__btn section__secondary-text"
+              onClick={() => setCreateObjectURL("")}
+            >
               Видалити фото
             </button>
           </div>
