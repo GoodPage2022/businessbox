@@ -7,8 +7,8 @@ import React from "react";
 import MainButtonRed from "../shared/MainButtonRed";
 
 const ContactInfo = () => {
-  const [avatar, setAvatar]: [any, any] = useState("");
-  const [createObjectURL, setCreateObjectURL] = useState("");
+  const defaultAvatar = "/assets/images/profile-photo.png";
+  const [avatar, setAvatar] = useState(defaultAvatar);
 
   const [state, dispatch] = React.useContext(AccountEditButtonContext);
 
@@ -25,24 +25,21 @@ const ContactInfo = () => {
     resetForm({});
   };
 
-  const uploadToClient = (e: any) => {
-    if (e.target.files && e.target.files[0]) {
-      const i = e.target.files[0];
-
-      setAvatar(i);
-      setCreateObjectURL(URL.createObjectURL(i));
-
-      // uploadToServer(e);
-    }
-  };
-
   const uploadToServer = async (e: any) => {
+    const uploadImageURL = e.target.files[0];
+
     const body = new FormData();
-    body.append("file", avatar);
-    const response = await fetch("/api/upload", {
+    body.append("file", uploadImageURL);
+    await fetch("/api/upload", {
       method: "POST",
       body,
-    });
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((r) => {
+        setAvatar(`/avatars/${r.files.file.originalFilename}`);
+      });
   };
 
   return (
@@ -53,10 +50,7 @@ const ContactInfo = () => {
             <div className="contactInfo__image">
               <Image
                 className=""
-                src={
-                  createObjectURL ||
-                  /* "/avatars/anner.jpg" ?? */ "/assets/images/profile-photo.png"
-                }
+                src={avatar}
                 layout="fill"
                 objectFit="cover"
                 alt="card-image"
@@ -68,21 +62,12 @@ const ContactInfo = () => {
               type="file"
               accept="image/*,.png,.jpg"
               className="contactInfo__custom-file-input"
-              onChange={(e) => {
-                uploadToClient(e);
-                uploadToServer(e);
-              }}
+              onChange={uploadToServer}
             />
-            {/* <button
-              className="btn btn-primary"
-              type="submit"
-              onClick={uploadToServer}
-            >
-              qwewqe
-            </button> */}
+
             <button
               className="contactInfo__btn section__secondary-text"
-              onClick={() => setCreateObjectURL("")}
+              onClick={() => setAvatar(defaultAvatar)}
             >
               Видалити фото
             </button>
