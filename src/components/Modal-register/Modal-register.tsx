@@ -170,7 +170,7 @@ function Modal({ onClose }: { onClose: any }) {
                 </label>
               </div>
               <button className="modal-register__button" type="submit">
-                Зареєструвати бізнес
+                Зареєструватись
               </button>
             </Form>
           </Formik>
