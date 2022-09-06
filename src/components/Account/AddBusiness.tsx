@@ -1,10 +1,33 @@
 import { Formik, Form, Field } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const AddBusiness = () => {
   const router = useRouter();
+
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    const { name, phone, price, description, business } = values;
+
+    const newBusiness = {
+      data: {
+        title: name,
+        area: business,
+        price,
+        description,
+        // file,
+      }
+    }
+
+    try {
+      const newBusinessResponse = await axios.post(`${process.env.cockpitApiUrl}/collections/save/Businesses?token=${process.env.cockpitApiToken}`, newBusiness)
+      console.log("newUserResponse");
+      console.log(newBusinessResponse);
+    } catch (err: any) {
+      console.log("newUserResponse3");
+      console.log(err);
+    }
+
     resetForm({});
   };
 
