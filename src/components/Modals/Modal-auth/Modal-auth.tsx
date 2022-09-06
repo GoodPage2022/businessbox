@@ -13,7 +13,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const openRegisterModal = () => {
-    router.push(`/#register`);
+    router.push("/#register");
     dispatch({ type: "toggle_authModal" });
     dispatch({ type: "toggle_registrationModal" });
   };

@@ -1,10 +1,96 @@
-import { Formik, Form, Field } from "formik";
-// import { useRouter } from "next/router";
+import { Formik, Form, Field, FieldProps } from "formik";
+import { useState } from "react";
+import Select from "react-select";
 
-const addBusinessFinish = () => {
-  // const router = useRouter();
+import PolygonSVG from "../../assets/svg/polygon-black.svg";
+
+type CustomSelectProps = {
+  options: any;
+  placeholder?: string;
+  side?: string;
+  setter?: (e: any) => void;
+};
+
+const AddBusinessFinish = () => {
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
+  };
+
+  const [tt, setTt] = useState(false);
+
+  const addBusinessSelect: React.FC<FieldProps & CustomSelectProps> = ({
+    field,
+    options,
+    form,
+    placeholder,
+    setter,
+  }): JSX.Element => {
+    return (
+      <Select
+        styles={customStyles}
+        name={field.name}
+        options={options}
+        // menuIsOpen
+        placeholder={placeholder}
+        onChange={(e) => {
+          if (!!setter) setter(e.value);
+          form.setFieldValue(field.name, e.value);
+        }}
+        value={
+          options
+            ? options.find((option: any) => option.value === field.value)
+            : ""
+        }
+        className={`addBusinessFinish__select section__primary-text`}
+      />
+    );
+  };
+
+  const customStyles = {
+    menu: (provided: any, state: any) => ({
+      ...provided,
+      width: "100%",
+      margin: "0",
+      borderBottom: "1px dotted pink",
+      padding: 0,
+      borderRadius: "0 0 25px 25px",
+      cursor: "pointer",
+      // border: state.isActive ? "1px solid #888888" : "none",
+      boxShadow: "none",
+    }),
+    control: (styles: any, state: any) => ({
+      padding: "20px 25px",
+      background: "white",
+      // border: state.isFocused ? "1px solid #888888" : "none",
+      borderRadius: state.isFocused ? "25px 25px 0 0" : "25px",
+    }),
+    menuList: (styles: any, state: any) => ({
+      // border: "none",
+      padding: "0",
+      // border: state.isFocused ? "1px solid #888888" : "none",
+      borderTop: "1px solid #888888",
+    }),
+    option: (styles: any, state: any) => ({
+      ...styles,
+      padding: "20px 25px",
+    }),
+    valueContainer: (styles: any) => ({
+      ...styles,
+      border: "none",
+      padding: "0",
+      borderRadius: "25px",
+    }),
+    indicatorsContainer: (styles: any) => ({
+      ...styles,
+      display: "none",
+    }),
+
+    input: (styles: any) => ({
+      ...styles,
+      opacity: "0",
+      margin: "0",
+      padding: "0",
+    }),
   };
 
   return (
@@ -34,7 +120,7 @@ const addBusinessFinish = () => {
             financialAccounting: "",
             CRM: "",
           }}
-          validate={(values) => {
+          validate={(values: any) => {
             const errors: any = {};
 
             return errors;
@@ -47,13 +133,23 @@ const addBusinessFinish = () => {
                 <span className="addBusinessFinish__label">
                   Форма власності
                 </span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  name="ownership"
-                  required
-                  placeholder="-----"
-                />
+                <span className="addBusinessFinish__select--thumb">
+                  <Field
+                    // className="addBusinessFinish__input section__primary-text"
+                    type="text"
+                    name="ownership"
+                    required
+                    placeholder="-----"
+                    component={addBusinessSelect}
+                    className="addBusinessFinish__select section__primary-text"
+                    options={[
+                      { value: "yes", label: "Так" },
+                      { value: "no", label: "Ні" },
+                    ]}
+                  />
+
+                  <PolygonSVG className="addBusinessFinish__select--icon" />
+                </span>
               </label>
               <label className="addBusinessFinish__field">
                 <span className="addBusinessFinish__label">
@@ -83,17 +179,26 @@ const addBusinessFinish = () => {
                 <span className="addBusinessFinish__label">
                   Ваш бізнес має сезонність?
                 </span>
-                <Field
-                  as="select"
-                  className="addBusinessFinish__select section__primary-text"
-                  type="text"
-                  name="seasonality"
-                  required
-                  placeholder="Так"
-                >
-                  <option value="yes">Так</option>
-                  <option value="no">Ні</option>
-                </Field>
+                <span className="addBusinessFinish__select--thumb">
+                  <Field
+                    // as="select"
+                    component={addBusinessSelect}
+                    className="addBusinessFinish__select section__primary-text"
+                    type="text"
+                    name="seasonality"
+                    options={[
+                      { value: "yes", label: "Так" },
+                      { value: "no", label: "Ні" },
+                    ]}
+                    required
+                    placeholder="Так"
+                  >
+                    {/* <option value="yes">Так</option>
+                    <option value="no">Ні</option> */}
+                  </Field>
+
+                  <PolygonSVG className="addBusinessFinish__select--icon" />
+                </span>
               </label>
             </div>
             <div className="addBusinessFinish__second-wrapper">
@@ -160,21 +265,29 @@ const addBusinessFinish = () => {
                     <span className="addBusinessFinish__icon">$</span>
                   </span>
                 </label>
-                <label className="addBusinessFinish__field--select">
+                <label className="addBusinessFinish__field__select">
                   <span className="addBusinessFinish__label">
                     Наявність кредитів
                   </span>
-                  <Field
-                    as="select"
-                    className="addBusinessFinish__select--short section__primary-text"
-                    type="text"
-                    name="credits"
-                    required
-                    placeholder="Ні"
-                  >
-                    <option value="yes">Так</option>
-                    <option value="no">Ні</option>
-                  </Field>
+                  <span className="addBusinessFinish__select--thumb">
+                    <Field
+                      as="select"
+                      className="addBusinessFinish__select--short section__primary-text"
+                      type="text"
+                      name="credits"
+                      placeholder="Ні"
+                      component={addBusinessSelect}
+                      options={[
+                        { value: "yes", label: "Так" },
+                        { value: "no", label: "Ні" },
+                      ]}
+                      required
+                    >
+                      {/* <option value="yes">Так</option>
+                    <option value="no">Ні</option> */}
+                    </Field>
+                    <PolygonSVG className="addBusinessFinish__select--icon" />
+                  </span>
                 </label>
               </div>
               <label className="addBusinessFinish__field">
@@ -349,4 +462,4 @@ const addBusinessFinish = () => {
   );
 };
 
-export default addBusinessFinish;
+export default AddBusinessFinish;

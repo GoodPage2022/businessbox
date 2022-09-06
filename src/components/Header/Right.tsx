@@ -16,7 +16,7 @@ const Right = () => {
   const router = useRouter();
 
   const openModal = () => {
-    router.push(`${pathname}/#auth`);
+    router.push("#auth");
     dispatch({ type: "toggle_authModal" });
   };
 
