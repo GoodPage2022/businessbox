@@ -135,8 +135,6 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     placeholder="+380 (__) __ __ __"
                   />
                 </label>
-              </div>
-              <div className="modal-register__mail-wrapper">
                 <label className="modal-register__field">
                   <span className="modal-register__label">Електрона пошта</span>
                   <Field
@@ -148,6 +146,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   />
                 </label>
               </div>
+
               <div className="modal-register__city-wrapper">
                 <label className="modal-register__field">
                   <span className="modal-register__label">Місто</span>

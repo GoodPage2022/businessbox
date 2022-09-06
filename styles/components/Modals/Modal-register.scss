@@ -26,7 +26,6 @@
   }
   &__container {
     width: 1110px;
-    height: 874px;
     background: #fafafa;
     border-radius: 25px;
     overflow: hidden;
@@ -36,11 +35,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: url("../../../public/assets/images/register-bg.png");
+    background-image: url("../../../public/assets/images/register-modal-bg.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 60px 95px;
+    padding: 40px 60px;
   }
 
   &__button-close {
@@ -56,7 +55,7 @@
   }
 
   &__body {
-    padding: 60px 95px 80px;
+    padding: 40px 60px 60px 65px;
   }
 
   &__name-wrapper {
@@ -104,14 +103,12 @@
     }
   }
   &__phone-wrapper {
-    margin-bottom: 20px;
-  }
-  &__mail-wrapper {
+    display: flex;
     margin-bottom: 20px;
   }
   &__city-wrapper {
     display: flex;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
   &__button {
     display: flex;
