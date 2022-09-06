@@ -4,6 +4,7 @@ import { Formik, Form, Field } from "formik";
 
 import CrossSVG from "../../assets/svg/cross.svg";
 import router from "next/router";
+import axios from "axios";
 
 function Modal({ onClose }: { onClose: any }) {
   let modalRoot: any;
@@ -40,6 +41,24 @@ function Modal({ onClose }: { onClose: any }) {
       phone,
       wishes,
     };
+
+    
+    const newUser = {
+      user:{
+        name:"API User Test",
+        user:"veryadmin",
+        password:"sef90we!sd0",
+        email:"growler625@gmail.com",
+        group:"user",
+        api_key:1
+      }
+    }
+
+    const newUserResponse = await axios.post(`${process.env.cockpitApiUrl}/cockpit/saveUser?token=${process.env.cockpitApiToken}`, newUser)
+    console.log(newUserResponse);
+    
+
+
 
     const JSONdata = JSON.stringify(data);
     const endpoint = "/api/tg_bot";
