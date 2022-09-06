@@ -17,6 +17,9 @@ const env = {
 
 module.exports = withReactSvg({
   env,
+  images: {
+    domains: ['157.230.99.45', 'localhost']
+  },
   include: path.resolve(__dirname, 'src/assets/svg'),
   webpack(config, options) {
     return config
