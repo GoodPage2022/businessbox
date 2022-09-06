@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 
+import EyeSVG from "../../../assets/svg/eye.svg";
 import CrossSVG from "../../../assets/svg/cross.svg";
 import router from "next/router";
 import { MainContext } from "../../../contexts/mainContext";
 
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
+  const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -160,7 +162,23 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     placeholder="Дніпро"
                   />
                 </label>
-                <label className="modal-register__field">
+                <label className="modal-register__field--password">
+                  <span className="modal-register__label">Пароль</span>
+                  <span className="modal-register__input-wrapper">
+                    <Field
+                      className="modal-register__input section__primary-text"
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      required
+                      placeholder="******"
+                    />
+                    <EyeSVG
+                      className="modal-register__eye-icon"
+                      onClick={() => setShowPassword((prev: boolean) => !prev)}
+                    />
+                  </span>
+                </label>
+                {/*  <label className="modal-register__field">
                   <span className="modal-register__label">Сфера бізнесу</span>
                   <Field
                     className="modal-register__input section__primary-text"
@@ -169,7 +187,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     required
                     placeholder="Графічний дизайн"
                   />
-                </label>
+                </label> */}
               </div>
               <button className="modal-register__button" type="submit">
                 Зареєструватись

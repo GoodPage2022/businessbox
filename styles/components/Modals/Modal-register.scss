@@ -73,6 +73,23 @@
       margin-right: 30px;
     }
   }
+
+  &__field--password {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: 0.01em;
+    color: black;
+    margin-bottom: 40px;
+  }
+  &__eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+  }
   &__label {
     display: block;
     font-family: "Montserrat";
@@ -100,6 +117,11 @@
       font-size: 20px;
       line-height: 24px;
       color: #888888;
+    }
+
+    &-wrapper {
+      position: relative;
+      display: block;
     }
   }
   &__phone-wrapper {
