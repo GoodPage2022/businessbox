@@ -26,11 +26,6 @@ const Popular = () => {
     getBusinesses()
   }, [])
 
-  // useEffect(() => {
-  //   console.log(cards);
-    
-  // }, [cards])
-
   return (
     <section className="popular">
       <div className="container popular__container">

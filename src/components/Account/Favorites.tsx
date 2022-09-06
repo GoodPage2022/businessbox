@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 
 const Favorites = () => {
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
     const { data } = await axios.get(`${process.env.cockpitApiUrl}/collections/get/Businesses?token=${process.env.cockpitApiToken}`)
@@ -24,22 +24,17 @@ const Favorites = () => {
     getBusinesses()
   }, [])
 
-  useEffect(() => {
-    console.log(cards);
-    
-  }, [cards])
-
   return (
     <section className="favorites">
       <div className="container favorites__container">
         {cards.length > 0 ? (
           <ul className="favorites__cards">
-            {cards.map(({ id, title, description, image }) => (
-              <div key={id} className="favorites__cards__item">
+            {cards.map(({ _id, title, description, images }: any) => (
+              <div key={_id} className="favorites__cards__item">
                 <PopularCard
                   title={title}
                   description={description}
-                  image={image}
+                  image={`http://157.230.99.45:8082${images[0].path}`}
                 />
                 <div className="favorites__graphic">
                   <Chart />
