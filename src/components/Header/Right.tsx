@@ -5,20 +5,24 @@ import SearchSVG from "../../assets/svg/search.svg";
 import IconButton from "../shared/IconButton";
 import MainButton from "../shared/MainButton";
 import MainButtonRed from "../shared/MainButtonRed";
-import Modal from "../Modal-register/Modal-register";
+import ModalRegister from "../Modal-register/Modal-register";
+import { MainContext } from "../../contexts/mainContext";
+
 const Right = () => {
   const { pathname } = useRouter();
-  const [showModal, setShowModal] = useState(false);
+  const [state, dispatch] = React.useContext(MainContext);
+
   const router = useRouter();
 
   const openModal = () => {
     router.push(`${pathname}/#register`);
-    setShowModal((prevState) => !prevState);
+    dispatch({ type: "toggle_registrationModal" });
   };
   const closeModal = () => {
-    setShowModal((prevState) => !prevState);
+    dispatch({ type: "toggle_registrationModal" });
     router.push("/");
   };
+  console.log(state);
 
   return (
     <ul className="header__right">
@@ -34,7 +38,8 @@ const Right = () => {
       >
         <MainButtonRed label="Зареєструвати бізнес" />
       </li>
-      {showModal && <Modal onClose={closeModal}></Modal>}
+
+      <ModalRegister onClose={closeModal}></ModalRegister>
     </ul>
   );
 };

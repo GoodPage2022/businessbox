@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Formik, Form, Field } from "formik";
 import { useState } from "react";
 import ProfileData from "../../constants/profile-data";
-import { AccountEditButtonContext } from "../../contexts/AccountEditButton";
+import { MainContext } from "../../contexts/mainContext";
 import React from "react";
 import MainButtonRed from "../shared/MainButtonRed";
 
@@ -10,7 +10,7 @@ const ContactInfo = () => {
   const defaultAvatar = "/assets/images/profile-photo.png";
   const [avatar, setAvatar] = useState(defaultAvatar);
 
-  const [state, dispatch] = React.useContext(AccountEditButtonContext);
+  const [state, dispatch] = React.useContext(MainContext);
 
   const [name, setName] = useState(ProfileData.name);
   const [lastname, setLastname] = useState(ProfileData.lastname);
@@ -92,7 +92,7 @@ const ContactInfo = () => {
                     name="name"
                     value={name}
                     onChange={(e: any) => setName(e.target.value)}
-                    readOnly={state.active ? false : true}
+                    readOnly={state.isEdit ? false : true}
                     required
                     placeholder="Петро"
                   />
@@ -105,7 +105,7 @@ const ContactInfo = () => {
                     name="phone"
                     value={phone}
                     onChange={(e: any) => setPhone(e.target.value)}
-                    readOnly={state.active ? false : true}
+                    readOnly={state.isEdit ? false : true}
                     required
                     placeholder="+380 (__) __ __ __"
                   />
@@ -120,7 +120,7 @@ const ContactInfo = () => {
                     name="lastname"
                     value={lastname}
                     onChange={(e: any) => setLastname(e.target.value)}
-                    readOnly={state.active ? false : true}
+                    readOnly={state.isEdit ? false : true}
                     required
                     placeholder="Петренко"
                   />
@@ -133,7 +133,7 @@ const ContactInfo = () => {
                     name="mail"
                     value={mail}
                     onChange={(e: any) => setMail(e.target.value)}
-                    readOnly={state.active ? false : true}
+                    readOnly={state.isEdit ? false : true}
                     required
                     placeholder="example@mail.com"
                   />
@@ -148,7 +148,7 @@ const ContactInfo = () => {
                     name="city"
                     value={city}
                     onChange={(e: any) => setCity(e.target.value)}
-                    readOnly={state.active ? false : true}
+                    readOnly={state.isEdit ? false : true}
                     required
                     placeholder="Дніпро"
                   />
@@ -161,7 +161,7 @@ const ContactInfo = () => {
                     name="business"
                     value={businessSphere}
                     onChange={(e: any) => setBusinessSphere(e.target.value)}
-                    readOnly={state.active ? false : true}
+                    readOnly={state.isEdit ? false : true}
                     required
                     placeholder="Графічний дизайн"
                   />
@@ -170,7 +170,7 @@ const ContactInfo = () => {
             </Form>
           </Formik>
         </div>
-        {state.active ? (
+        {state.isEdit ? (
           <div
             className="contactInfo__submit-btn"
             onClick={() => dispatch({ type: "toggle_edit" })}

@@ -4,13 +4,10 @@ import { Formik, Form, Field } from "formik";
 
 import CrossSVG from "../../assets/svg/cross.svg";
 import router from "next/router";
+import { MainContext } from "../../contexts/mainContext";
 
-function Modal({ onClose }: { onClose: any }) {
-  let modalRoot: any;
-  if (typeof window !== "undefined") {
-    modalRoot = document.querySelector("#modal-root");
-  }
-
+function ModalRegister({ onClose }: { onClose: any }) {
+  const [state, dispatch] = React.useContext(MainContext);
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -63,8 +60,13 @@ function Modal({ onClose }: { onClose: any }) {
     resetForm({});
   };
 
-  return createPortal(
-    <div className="modal-register__overlay" onClick={handleBackdropClick}>
+  return (
+    <div
+      className={`modal-register__overlay${
+        state.isActiveModalRegistration == true ? " active" : ""
+      }`}
+      onClick={handleBackdropClick}
+    >
       <div className="modal-register__container">
         <div className="modal-register__header">
           <h2 className="modal-register__title title--white">
@@ -176,8 +178,7 @@ function Modal({ onClose }: { onClose: any }) {
           </Formik>
         </div>
       </div>
-    </div>,
-    modalRoot,
+    </div>
   );
 }
-export default Modal;
+export default ModalRegister;
