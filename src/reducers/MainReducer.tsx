@@ -22,4 +22,6 @@ export const reducer = (state: any, action: any) => {
 
 export const initialState = {
   isEdit: false,
+  isActiveModalAuth: false,
+  isActiveModalRegistration: false,
 };

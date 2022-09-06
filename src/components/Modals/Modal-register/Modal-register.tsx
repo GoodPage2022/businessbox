@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { createPortal } from "react-dom";
 import { Formik, Form, Field } from "formik";
 
-import CrossSVG from "../../assets/svg/cross.svg";
+import CrossSVG from "../../../assets/svg/cross.svg";
 import router from "next/router";
-import { MainContext } from "../../contexts/mainContext";
+import { MainContext } from "../../../contexts/mainContext";
 
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);

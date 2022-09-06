@@ -5,8 +5,9 @@ import SearchSVG from "../../assets/svg/search.svg";
 import IconButton from "../shared/IconButton";
 import MainButton from "../shared/MainButton";
 import MainButtonRed from "../shared/MainButtonRed";
-import ModalRegister from "../Modal-register/Modal-register";
+import ModalRegister from "../Modals/Modal-register/Modal-register";
 import { MainContext } from "../../contexts/mainContext";
+import ModalAuth from "../Modals/Modal-auth/Modal-auth";
 
 const Right = () => {
   const { pathname } = useRouter();
@@ -15,14 +16,19 @@ const Right = () => {
   const router = useRouter();
 
   const openModal = () => {
-    router.push(`${pathname}/#register`);
-    dispatch({ type: "toggle_registrationModal" });
+    router.push(`${pathname}/#auth`);
+    dispatch({ type: "toggle_authModal" });
   };
-  const closeModal = () => {
+
+  const closeAuthModal = () => {
+    dispatch({ type: "toggle_authModal" });
+    router.push("/");
+  };
+
+  const closeRegisterModal = () => {
     dispatch({ type: "toggle_registrationModal" });
     router.push("/");
   };
-  console.log(state);
 
   return (
     <ul className="header__right">
@@ -38,8 +44,8 @@ const Right = () => {
       >
         <MainButtonRed label="Зареєструвати бізнес" />
       </li>
-
-      <ModalRegister onClose={closeModal}></ModalRegister>
+      <ModalAuth onClose={closeAuthModal} />
+      <ModalRegister onClose={closeRegisterModal} />
     </ul>
   );
 };
