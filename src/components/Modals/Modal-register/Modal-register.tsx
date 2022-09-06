@@ -136,10 +136,12 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   />
                 </label>
                 <label className="modal-register__field">
-                  <span className="modal-register__label">Електрона пошта</span>
+                  <span className="modal-register__label">
+                    Електронна пошта
+                  </span>
                   <Field
                     className="modal-register__input section__primary-text"
-                    type="mail"
+                    type="email"
                     name="mail"
                     required
                     placeholder="example@mail.com"

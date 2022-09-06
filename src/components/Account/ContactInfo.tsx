@@ -15,13 +15,14 @@ const ContactInfo = () => {
   const [name, setName] = useState(ProfileData.name);
   const [lastname, setLastname] = useState(ProfileData.lastname);
   const [city, setCity] = useState(ProfileData.city);
-  const [mail, setMail] = useState(ProfileData.mail);
+  const [email, setEmail] = useState(ProfileData.email);
   const [phone, setPhone] = useState(ProfileData.phone);
   const [businessSphere, setBusinessSphere] = useState(
     ProfileData.businessSphere,
   );
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    dispatch({ type: "toggle_edit" });
     resetForm({});
   };
 
@@ -74,9 +75,16 @@ const ContactInfo = () => {
           </div>
 
           <Formik
-            initialValues={{ name: "", phone: "", wishes: "" }}
+            initialValues={{ name: "", phone: "", wishes: "", email: "" }}
             validate={(values) => {
               const errors: any = {};
+              if (!values.email) {
+                errors.email = "Required";
+              } else if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+              ) {
+                errors.email = "Invalid email address";
+              }
 
               return errors;
             }}
@@ -126,13 +134,13 @@ const ContactInfo = () => {
                   />
                 </label>
                 <label className="contactInfo__field">
-                  <span className="contactInfo__label">Електрона пошта</span>
+                  <span className="contactInfo__label">Електронна пошта</span>
                   <Field
                     className="contactInfo__input section__primary-text"
-                    type="mail"
-                    name="mail"
-                    value={mail}
-                    onChange={(e: any) => setMail(e.target.value)}
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={(e: any) => setEmail(e.target.value)}
                     readOnly={state.isEdit ? false : true}
                     required
                     placeholder="example@mail.com"
@@ -167,18 +175,17 @@ const ContactInfo = () => {
                   />
                 </label>
               </div>
+              {state.isEdit ? (
+                <div
+                  className="contactInfo__submit-btn"
+                  // onClick={() => dispatch({ type: "toggle_edit" })}
+                >
+                  <MainButtonRed label="Зберегти" />
+                </div>
+              ) : null}
             </Form>
           </Formik>
         </div>
-        {state.isEdit ? (
-          <div
-            className="contactInfo__submit-btn"
-            onClick={() => dispatch({ type: "toggle_edit" })}
-          >
-            <MainButtonRed label="Зберегти" />
-          </div> // <button onClick={() => dispatch({ type: "toggle_edit" })}>
-        ) : // </button>
-        null}
       </div>
     </section>
   );

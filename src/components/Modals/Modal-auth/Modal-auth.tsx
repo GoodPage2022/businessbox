@@ -108,10 +108,10 @@ function ModalAuth({ onClose }: { onClose: any }) {
           >
             <Form className="modal-auth__form">
               <label className="modal-auth__field--mail">
-                <span className="modal-auth__label">Електрона пошта</span>
+                <span className="modal-auth__label">Електронна пошта</span>
                 <Field
                   className="modal-auth__input section__primary-text"
-                  type="mail"
+                  type="email"
                   name="mail"
                   required
                   placeholder="example@mail.com"

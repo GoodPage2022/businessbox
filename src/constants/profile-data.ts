@@ -4,7 +4,7 @@ const ProfileData =
     name: 'Петро',
     lastname: 'Петренко',
     phone: '+38 066 666 6666',
-    mail: 'example@mail.com',
+    email: 'example@mail.com',
     city: 'Дніпро',
     businessSphere: 'Графічний дизайн'
 
