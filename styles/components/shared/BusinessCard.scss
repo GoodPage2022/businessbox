@@ -3,21 +3,48 @@
   border-radius: 25px;
   background: $white-color;
   overflow: hidden;
-  cursor: pointer;
-  // &:not(:last-child) {
-  //   margin-right: 30px;
-  // }
-  &--image {
+
+  &__image {
     position: relative;
     height: 190px;
     width: 255px;
   }
 
-  &--info {
-    padding: 30px 20px;
+  &__heart-icon {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 34px;
+    border: 1px solid $white-color;
+    border-radius: 15px;
+    background: $white-color;
+    cursor: pointer;
+
+    &.active {
+      border: 1px solid $main-red-color;
+      background: $main-red-color;
+      & svg {
+        & path {
+          fill: $white-color;
+          stroke: $white-color;
+        }
+      }
+    }
   }
 
-  &--title {
+  &__info {
+    padding: 30px 20px;
+    cursor: pointer;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 600;
@@ -28,15 +55,43 @@
     margin-bottom: 10px;
   }
 
-  &--description {
+  &__ckeck-icon {
+    &.active {
+      & g {
+        & path {
+          stroke: #21b660;
+        }
+      }
+    }
+  }
+
+  &__description {
     margin-bottom: 30px;
   }
 
-  &--buttons {
+  &__footer {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__views {
+    display: flex;
+    align-items: center;
+    padding: 7px 16px 8px;
+    border: 1px solid $main-text-color;
+    border-radius: 15px;
+  }
 
-    & button:not(:last-child) {
-      margin-right: 10px;
-    }
+  &__eye-icon {
+    margin-right: 10px;
+  }
+
+  &__price {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $main-text-color;
   }
 }
