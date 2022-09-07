@@ -109,10 +109,11 @@ function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
   return gradient;
 }
 export function Chart() {
-  const chartRef = useRef<ChartJS>(null);
-  const [chartData, setChartData] = useState<ChartData<"bar">>({
-    datasets: [],
-  });
+  const chartRef = useRef<any>(null);
+  const [chartData, setChartData]: [chartData: any, setChartData: any] =
+    useState<ChartData<"bar">>({
+      datasets: [],
+    });
   useEffect(() => {
     const chart = chartRef.current;
 

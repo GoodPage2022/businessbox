@@ -5,19 +5,19 @@ import IconButton from "../../shared/IconButton";
 import PopularCards from "../../../constants/popular";
 import PopularCard from "../../shared/BusinessCard";
 import { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 import { useSelector } from "react-redux";
 
 const Popular = () => {
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
 
-  const getBusinesses = async () => {    
-    const response = await axios.post(`/api/businesses/get`, { user })
+  const getBusinesses = async () => {
+    const response = await axios.post(`/api/businesses/get`, { user });
 
     if (response.data) {
-      setCards(response.data.entries)
-      return response.data.entries
+      setCards(response.data.entries);
+      return response.data.entries;
     }
 
     setCards([]);
@@ -66,6 +66,9 @@ const Popular = () => {
                   image={
                     /* images */ `http://157.230.99.45:8082${images[0].path}`
                   }
+                  price="12"
+                  views="123"
+                  isVerified={true}
                   // price={price}
                   // views={views}
                   // isVerified={isVerified}

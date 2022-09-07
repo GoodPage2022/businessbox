@@ -17,8 +17,8 @@ const BusinessCard = ({
   image: any;
   title: string;
   description: string;
-  price: number;
-  views: number;
+  price: string;
+  views: string;
   isVerified: boolean;
 }) => {
   const router = useRouter();

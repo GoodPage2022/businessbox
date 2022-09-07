@@ -3,19 +3,19 @@ import PopularCard from "../shared/BusinessCard";
 import Image from "next/image";
 import { Chart } from "../Chart/Chart";
 import { useEffect, useState } from "react";
-import axios from 'axios'
-import { useSelector } from "react-redux"
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Favorites = () => {
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/get`, { user })
+    const response = await axios.post(`/api/businesses/get`, { user });
 
     if (response.data) {
-      setCards(response.data.entries)
-      return response.data.entries
+      setCards(response.data.entries);
+      return response.data.entries;
     }
 
     setCards([]);
@@ -37,6 +37,9 @@ const Favorites = () => {
                   title={title}
                   description={description}
                   image={`http://157.230.99.45:8082${images[0].path}`}
+                  price="12"
+                  views="123"
+                  isVerified={true}
                 />
                 <div className="favorites__graphic">
                   <Chart />
