@@ -27,9 +27,8 @@ const BusinessCard = ({
       </div>
       <div className="business-card--info">
         <h3 className="business-card--title">{title}</h3>
-        <p className="business-card--description section__secondary-text">
-          {description}
-        </p>
+        <p className="business-card--description section__secondary-text" 
+          dangerouslySetInnerHTML={{ __html: description }} />
         <div className="business-card--buttons">
           <IconButton borderColor="#0C0C0C" icon={<HeartSVG />} />
           <IconButton borderColor="#0C0C0C" icon={<MessageSVG />} />

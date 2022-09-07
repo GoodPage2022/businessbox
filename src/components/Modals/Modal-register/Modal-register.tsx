@@ -5,6 +5,7 @@ import EyeSVG from "../../../assets/svg/eye.svg";
 import CrossSVG from "../../../assets/svg/cross.svg";
 import router from "next/router";
 import { MainContext } from "../../../contexts/mainContext";
+import axios from "axios";
 
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
@@ -30,33 +31,25 @@ function ModalRegister({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { name, phone, wishes } = values;
+    const { name, phone, mail, surname, business, city } = values;
 
-    const data = {
-      title: "Форма: Підібрати краще авто",
-      name,
-      phone,
-      wishes,
-    };
-
-    const JSONdata = JSON.stringify(data);
-    const endpoint = "/api/tg_bot";
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    };
-
-    const response = await fetch(endpoint, options);
-    // const result = await response.json()
-
-    if (response.status === 200) {
-      router.push("/thankyou");
-      localStorage.removeItem("url");
+    const newUser = {
+      user:{
+        name,
+        user: mail,
+        password:"secret",
+        email: mail,
+        group:"user",
+        api_key:1,
+        phone,
+        surname,
+        business,
+        city,    
+      }
     }
+
+    const newUserResponse = await axios.post(`${process.env.cockpitApiUrl}/cockpit/saveUser?token=${process.env.cockpitApiToken}`, newUser)
+    console.log(newUserResponse);
 
     resetForm({});
   };
@@ -95,10 +88,6 @@ function ModalRegister({ onClose }: { onClose: any }) {
               if (!values.phone) {
                 errors.phone = "Обязательное поле";
               }
-              // else if (!numberRegEpx.test(values.phone)) {
-              //   errors.phone = 'Не правильно введен номер'
-              // }
-
               return errors;
             }}
             onSubmit={handleSubmit}

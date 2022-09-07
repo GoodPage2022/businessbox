@@ -1,18 +1,38 @@
 import PopularCards from "../../constants/popular";
 import PopularCard from "../shared/BusinessCard";
+import { useEffect, useState } from "react";
+import axios from 'axios'
 
 const MyBusinesses = () => {
+  const [cards, setCards] = useState<any>([]);
+
+  const getBusinesses = async () => {
+    const { data } = await axios.get(`${process.env.cockpitApiUrl}/collections/get/Businesses?token=${process.env.cockpitApiToken}&limit=4`)
+
+    if (data) {
+      setCards(data.entries)
+      return data.entries
+    }
+
+    setCards([])
+    return [];
+  }
+  
+  useEffect(() => {
+    getBusinesses()
+  }, [])
+
   return (
     <section className="myBusinesses">
       <div className="container myBusinesses__container">
-        {PopularCards.length > 0 ? (
+        {cards.length > 0 ? (
           <ul className="myBusinesses__cards">
-            {PopularCards.map(({ id, title, description, image }) => (
+            {cards.map(({ _id, title, description, images }: any) => (
               <PopularCard
-                key={id}
+                key={_id}
                 title={title}
                 description={description}
-                image={image}
+                image={`http://157.230.99.45:8082${images[0].path}`}
               />
             ))}
           </ul>
