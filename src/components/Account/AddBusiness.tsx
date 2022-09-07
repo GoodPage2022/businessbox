@@ -10,22 +10,20 @@ const AddBusiness = () => {
     const { name, phone, price, description, business } = values;
 
     const newBusiness = {
-      data: {
-        title: name,
-        area: business,
-        price,
-        description,
-        // file,
-      }
+      title: name,
+      area: business,
+      price,
+      description,
+      // file,
     }
 
     try {
-      const newBusinessResponse = await axios.post(`${process.env.cockpitApiUrl}/collections/save/Businesses?token=${process.env.cockpitApiToken}`, newBusiness)
+      const newBusinessResponse = await axios.post(`/api/businesses/post`, newBusiness)
       console.log("newUserResponse");
       console.log(newBusinessResponse);
     } catch (err: any) {
       console.log("newUserResponse3");
-      console.log(err);
+      console.log(JSON.parse(err.response.data.err));
     }
 
     resetForm({});
