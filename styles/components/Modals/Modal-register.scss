@@ -26,7 +26,6 @@
   }
   &__container {
     width: 1110px;
-    background: #fafafa;
     border-radius: 25px;
     overflow: hidden;
   }
@@ -56,6 +55,7 @@
 
   &__body {
     padding: 40px 60px 60px 65px;
+    background: #fafafa;
   }
 
   &__name-wrapper {
