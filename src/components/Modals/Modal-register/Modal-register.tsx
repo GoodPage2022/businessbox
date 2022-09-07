@@ -177,16 +177,6 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     />
                   </span>
                 </label>
-                {/*  <label className="modal-register__field">
-                  <span className="modal-register__label">Сфера бізнесу</span>
-                  <Field
-                    className="modal-register__input section__primary-text"
-                    type="text"
-                    name="business"
-                    required
-                    placeholder="Графічний дизайн"
-                  />
-                </label> */}
               </div>
               <button className="modal-register__button" type="submit">
                 Зареєструватись

@@ -170,7 +170,7 @@ const ContactInfo = () => {
                   />
                 </label>
                 <label className="contactInfo__field">
-                  <span className="contactInfo__label">Сфера бізнесу</span>
+                  <span className="contactInfo__label">Категорія</span>
                   <Field
                     className="contactInfo__input section__primary-text"
                     type="text"

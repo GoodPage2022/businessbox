@@ -16,11 +16,14 @@ const AddBusiness = () => {
         price,
         description,
         // file,
-      }
-    }
+      },
+    };
 
     try {
-      const newBusinessResponse = await axios.post(`${process.env.cockpitApiUrl}/collections/save/Businesses?token=${process.env.cockpitApiToken}`, newBusiness)
+      const newBusinessResponse = await axios.post(
+        `${process.env.cockpitApiUrl}/collections/save/Businesses?token=${process.env.cockpitApiToken}`,
+        newBusiness,
+      );
       console.log("newUserResponse");
       console.log(newBusinessResponse);
     } catch (err: any) {
@@ -64,7 +67,7 @@ const AddBusiness = () => {
                   />
                 </label>
                 <label className="addBusiness__field">
-                  <span className="addBusiness__label">Сфера бізнесу</span>
+                  <span className="addBusiness__label">Категорія</span>
                   <Field
                     className="addBusiness__input section__primary-text"
                     type="text"
