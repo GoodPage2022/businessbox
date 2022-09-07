@@ -2,16 +2,18 @@ import PopularCards from "../../constants/popular";
 import PopularCard from "../shared/BusinessCard";
 import { useEffect, useState } from "react";
 import axios from 'axios'
+import { useSelector } from "react-redux";
 
 const MyBusinesses = () => {
+  const user = useSelector((state: any) => state.auth.user)
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const { data } = await axios.get(`/api/businesses/get`)
+    const response = await axios.post(`/api/businesses/get`, { user })
 
-    if (data) {
-      setCards(data.entries)
-      return data.entries
+    if (response.data) {
+      setCards(response.data.entries)
+      return response.data.entries
     }
 
     setCards([])
