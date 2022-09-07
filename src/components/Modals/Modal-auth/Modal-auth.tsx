@@ -7,8 +7,12 @@ import CrossSVG from "../../../assets/svg/cross.svg";
 import GoogleSVG from "../../../assets/svg/google.svg";
 import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { signIn } from '../../../../store/actions/auth';
 
 function ModalAuth({ onClose }: { onClose: any }) {
+  const dispatchRedux = useDispatch()
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -39,32 +43,22 @@ function ModalAuth({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { name, phone, wishes } = values;
+    const { mail, password } = values;
 
     const data = {
-      title: "Форма: Підібрати краще авто",
-      name,
-      phone,
-      wishes,
-    };
-
-    const JSONdata = JSON.stringify(data);
-    const endpoint = "/api/tg_bot";
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    };
-
-    const response = await fetch(endpoint, options);
-    // const result = await response.json()
-
-    if (response.status === 200) {
-      router.push("/thankyou");
-      localStorage.removeItem("url");
+      // user: mail,
+      // password
+      user: "sdfsdf@sdf.df",
+      password: "secret"
+    }
+  
+    try {
+      const signInResponse = await axios.post(`/api/account/signIn`, data)
+      if (signInResponse.status == 200)
+        dispatchRedux(signIn(signInResponse.data))
+    } catch (err: any) {
+      console.log("Sign In Error");
+      console.log(err);
     }
 
     resetForm({});

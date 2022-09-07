@@ -1,11 +1,16 @@
+import React from "react";
 import Slider from "react-slick";
 import { useRouter } from "next/router";
+import { MainContext } from "../../../contexts/mainContext";
 
 import OurCategories from "../../../constants/categories";
 import MainButton from "../../shared/MainButton";
+import { useSelector, useDispatch } from "react-redux";
 
 const Categories = () => {
+  const user = useSelector((state: any) => state.auth.user)
   const router = useRouter();
+  const [state, dispatch] = React.useContext(MainContext);
   const settings = {
     dots: false,
     infinite: false,
@@ -14,6 +19,11 @@ const Categories = () => {
     slidesToScroll: 1,
     arrows: false,
     swipeToSlide: true,
+  };
+
+  const openModal = () => {
+    router.push("#auth");
+    dispatch({ type: "toggle_authModal" });
   };
 
   return (
@@ -36,7 +46,7 @@ const Categories = () => {
         </p>
         <button
           className="categories__button"
-          onClick={() => router.push("/account/add-business")}
+          onClick={() => user != null ? router.push("/account/add-business") : openModal()}
         >
           Зареєструвати бізнес зараз
         </button>

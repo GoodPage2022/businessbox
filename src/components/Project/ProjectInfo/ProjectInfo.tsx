@@ -14,6 +14,10 @@ import Comment from "./Comment";
 import OurComments from "../../../constants/comments";
 import PopularCards from "../../../constants/popular";
 import PopularCard from "../../shared/BusinessCard";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import axios from 'axios'
+import { useDispatch, useSelector } from "react-redux";
 
 const ProjectInfo = () => {
   const [isCopy, setIsCopy] = useState(false);
@@ -44,15 +48,14 @@ const ProjectInfo = () => {
   };
 
   const [cards, setCards] = useState<any>([]);
+  const user = useSelector((state: any) => state.auth.user)
 
   const getBusinesses = async () => {
-    const { data } = await axios.get(
-      `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${process.env.cockpitApiToken}&limit=4`,
-    );
+    const response = await axios.post(`/api/businesses/get`, { user })
 
-    if (data) {
-      setCards(data.entries);
-      return data.entries;
+    if (response.data) {
+      setCards(response.data.entries)
+      return response.data.entries
     }
 
     setCards([]);

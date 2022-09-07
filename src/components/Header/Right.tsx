@@ -8,8 +8,10 @@ import MainButtonRed from "../shared/MainButtonRed";
 import ModalRegister from "../Modals/Modal-register/Modal-register";
 import { MainContext } from "../../contexts/mainContext";
 import ModalAuth from "../Modals/Modal-auth/Modal-auth";
+import { useSelector } from "react-redux";
 
 const Right = () => {
+  const user = useSelector((state: any) => state.auth.user)
   const { pathname } = useRouter();
   const [state, dispatch] = React.useContext(MainContext);
 
@@ -40,7 +42,7 @@ const Right = () => {
       </li>
       <li
         className="header__right__btn"
-        onClick={() => router.push("/account/add-business")}
+        onClick={() => user != null ? router.push("/account/add-business") : openModal()}
       >
         <MainButtonRed label="Зареєструвати бізнес" />
       </li>

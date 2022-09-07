@@ -5,19 +5,19 @@ import IconButton from "../../shared/IconButton";
 import PopularCards from "../../../constants/popular";
 import PopularCard from "../../shared/BusinessCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios'
+import { useSelector } from "react-redux";
 
 const Popular = () => {
+  const user = useSelector((state: any) => state.auth.user)
   const [cards, setCards] = useState<any>([]);
 
-  const getBusinesses = async () => {
-    const { data } = await axios.get(
-      `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${process.env.cockpitApiToken}&limit=4`,
-    );
+  const getBusinesses = async () => {    
+    const response = await axios.post(`/api/businesses/get`, { user })
 
-    if (data) {
-      setCards(data.entries);
-      return data.entries;
+    if (response.data) {
+      setCards(response.data.entries)
+      return response.data.entries
     }
 
     setCards([]);
