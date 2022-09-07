@@ -11,7 +11,7 @@ const Popular = () => {
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const { data } = await axios.get(`${process.env.cockpitApiUrl}/collections/get/Businesses?token=${process.env.cockpitApiToken}&limit=4`)
+    const { data } = await axios.get(`/api/businesses/get`)
 
     if (data) {
       setCards(data.entries)
