@@ -1,5 +1,8 @@
 import Slider from "react-slick";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
@@ -11,12 +14,10 @@ import Comment from "./Comment";
 import OurComments from "../../../constants/comments";
 import PopularCards from "../../../constants/popular";
 import PopularCard from "../../shared/BusinessCard";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import axios from 'axios'
 
 const ProjectInfo = () => {
   const [isCopy, setIsCopy] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const imageSliderSettings = {
     dots: false,
     infinite: false,
@@ -45,20 +46,22 @@ const ProjectInfo = () => {
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const { data } = await axios.get(`${process.env.cockpitApiUrl}/collections/get/Businesses?token=${process.env.cockpitApiToken}&limit=4`)
+    const { data } = await axios.get(
+      `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${process.env.cockpitApiToken}&limit=4`,
+    );
 
     if (data) {
-      setCards(data.entries)
-      return data.entries
+      setCards(data.entries);
+      return data.entries;
     }
 
-    setCards([])
+    setCards([]);
     return [];
-  }
-  
+  };
+
   useEffect(() => {
-    getBusinesses()
-  }, [])
+    getBusinesses();
+  }, []);
 
   return (
     <section className="projectInfo">
@@ -66,18 +69,30 @@ const ProjectInfo = () => {
         <div className="projectInfo__title">
           <h1 className="projectInfo__title--text title">Назва проекту</h1>
           <div className="projectInfo__title--icons">
-            <button className="projectInfo__title--red-icon">
+            <button
+              onClick={() => setIsLiked((prev) => !prev)}
+              className={`projectInfo__title--heart-icon ${
+                isLiked ? "active" : ""
+              }`}
+            >
               <HeartSVG />
             </button>
             <button
               className="projectInfo__title--transparent-icon"
-              onClick={() => setIsCopy((prev) => !prev)}
+              onClick={() => {
+                navigator.clipboard.writeText(link);
+                // setIsCopy(false);
+              }}
+              // onClick={() => setIsCopy((prev) => !prev)}
             >
               <ArrowSVG />
             </button>
           </div>
         </div>
-        {isCopy && (
+        <p className="projectInfo__city section__primary-text">
+          Україна, Дніпро
+        </p>
+        {/* {isCopy && (
           <div className="projectInfo__copy">
             <div className="projectInfo__copy--text-wrapper">
               <p className="section__primary-text">{link}</p>
@@ -92,7 +107,7 @@ const ProjectInfo = () => {
               <CopySVG />
             </div>
           </div>
-        )}
+        )} */}
         <div className="projectInfo__image-slider">
           <Slider {...imageSliderSettings}>
             <li className="projectInfo__image-slider--image">
@@ -133,7 +148,7 @@ const ProjectInfo = () => {
             ))}
           </Slider>
         </div>
-        <p className="projectInfo__text section__primary-text">
+        <p className="projectInfo__description section__primary-text">
           Клієнт дуже важливий, за клієнтом піде клієнт. Duis feugiat sapien і
           lectus convallis commodo. Curabitur vulputate lectus не від стрілок,
           нехай буде багато членів і не приймає. Меценат Tellus Sapien, dapibus
@@ -145,7 +160,10 @@ const ProjectInfo = () => {
           трохи часу зі стрілками. Але урна самого життя. Хворобливі і вагітні
           гравці. До того часу лікар хоче знати, що робити.
         </p>
-
+        <div className="projectInfo__price">
+          <p className="section__primary-text">Ціна:</p>
+          <p className="projectInfo__amount title">999.999₴</p>
+        </div>
         <ProfileInfo />
 
         {OurComments.map(({ id, name, mail, date, text, image }) => (

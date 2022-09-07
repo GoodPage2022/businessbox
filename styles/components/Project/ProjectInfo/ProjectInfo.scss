@@ -37,29 +37,56 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 
     &--icons {
       display: flex;
     }
-    &--red-icon {
+    &--heart-icon {
       display: flex;
-      justify-content: center;
-      align-items: center;
       width: 44px;
       height: 44px;
       margin-right: 20px;
-      background: $main-red-color;
       border-radius: 18px;
-      border: none;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $main-text-color;
+      background: $white-color;
       cursor: pointer;
       & svg {
-        width: 17px;
-        & path {
-          stroke: $white-color;
+        width: 20px;
+        height: 20px;
+      }
+
+      &.active {
+        border: 1px solid $main-red-color;
+        background: $main-red-color;
+        & svg {
+          & path {
+            // fill: $white-color;
+            stroke: $white-color;
+          }
         }
       }
     }
+    // &--red-icon {
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    //   width: 44px;
+    //   height: 44px;
+    //   margin-right: 20px;
+    //   background: $main-red-color;
+    //   border-radius: 18px;
+    //   border: none;
+    //   cursor: pointer;
+    //   & svg {
+    //     width: 17px;
+    //     & path {
+    //       stroke: $white-color;
+    //     }
+    //   }
+    // }
     &--transparent-icon {
       display: flex;
       justify-content: center;
@@ -76,6 +103,10 @@
     }
   }
 
+  &__city {
+    margin-bottom: 40px;
+  }
+
   &__image-slider {
     padding: 20px 0 20px 20px;
     background: $white-color;
@@ -90,9 +121,17 @@
     }
   }
 
-  &__text {
+  &__description {
     margin-top: 40px;
     margin-bottom: 40px;
+  }
+
+  &__price {
+    margin-bottom: 40px;
+  }
+
+  &__amount {
+    margin-top: 10px;
   }
 
   &__offers-title {
