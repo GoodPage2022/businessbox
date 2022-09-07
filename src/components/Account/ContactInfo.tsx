@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { Formik, Form, Field } from "formik";
-import { useState } from "react";
+import React, { useState } from "react";
+import MaskedInput from "react-text-mask";
+
 import ProfileData from "../../constants/profile-data";
 import { MainContext } from "../../contexts/mainContext";
-import React from "react";
 import MainButtonRed from "../shared/MainButtonRed";
+import phoneNumberMask from "../../masks/phoneNumberMask";
 
 const ContactInfo = () => {
   const defaultAvatar = "/assets/images/profile-photo.png";
@@ -108,14 +110,20 @@ const ContactInfo = () => {
                 <label className="contactInfo__field">
                   <span className="contactInfo__label">Телефон</span>
                   <Field
-                    className="contactInfo__input section__primary-text"
-                    type="text"
                     name="phone"
-                    value={phone}
-                    onChange={(e: any) => setPhone(e.target.value)}
-                    readOnly={state.isEdit ? false : true}
-                    required
-                    placeholder="+380 (__) __ __ __"
+                    render={({ field }: { field: any }) => (
+                      <MaskedInput
+                        {...field}
+                        mask={phoneNumberMask}
+                        placeholder="+380 (__) __ __ __"
+                        type="text"
+                        value={phone}
+                        readOnly={state.isEdit ? false : true}
+                        required
+                        onChange={(e: any) => setPhone(e.target.value)}
+                        className="contactInfo__input section__primary-text"
+                      />
+                    )}
                   />
                 </label>
               </div>
@@ -162,7 +170,7 @@ const ContactInfo = () => {
                   />
                 </label>
                 <label className="contactInfo__field">
-                  <span className="contactInfo__label">Сфера бізнесу</span>
+                  <span className="contactInfo__label">Категорія</span>
                   <Field
                     className="contactInfo__input section__primary-text"
                     type="text"

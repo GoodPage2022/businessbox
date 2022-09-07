@@ -18,13 +18,13 @@ const Favorites = () => {
       return response.data.entries
     }
 
-    setCards([])
+    setCards([]);
     return [];
-  }
-  
+  };
+
   useEffect(() => {
-    getBusinesses()
-  }, [])
+    getBusinesses();
+  }, []);
 
   return (
     <section className="favorites">
@@ -41,16 +41,6 @@ const Favorites = () => {
                 <div className="favorites__graphic">
                   <Chart />
                 </div>
-
-                {/* <div className="favorites__graphic">
-                  <Image
-                    className=""
-                    src="/assets/images/graphic.png"
-                    layout="fill"
-                    objectFit="cover"
-                    alt="building"
-                  />
-                </div> */}
               </div>
             ))}
           </ul>

@@ -64,7 +64,7 @@ const AddBusiness = () => {
                   />
                 </label>
                 <label className="addBusiness__field">
-                  <span className="addBusiness__label">Сфера бізнесу</span>
+                  <span className="addBusiness__label">Категорія</span>
                   <Field
                     className="addBusiness__input section__primary-text"
                     type="text"

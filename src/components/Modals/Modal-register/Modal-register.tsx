@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
+import MaskedInput from "react-text-mask";
+import axios from "axios";
 
 import EyeSVG from "../../../assets/svg/eye.svg";
 import CrossSVG from "../../../assets/svg/cross.svg";
-import router from "next/router";
 import { MainContext } from "../../../contexts/mainContext";
-import axios from "axios";
+import phoneNumberMask from "../../../masks/phoneNumberMask";
 
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
@@ -34,21 +35,24 @@ function ModalRegister({ onClose }: { onClose: any }) {
     const { name, phone, mail, surname, business, city } = values;
 
     const newUser = {
-      user:{
+      user: {
         name,
         user: mail,
-        password:"secret",
+        password: "secret",
         email: mail,
-        group:"user",
-        api_key:1,
+        group: "user",
+        api_key: 1,
         phone,
         surname,
         business,
-        city,    
-      }
-    }
+        city,
+      },
+    };
 
-    const newUserResponse = await axios.post(`${process.env.cockpitApiUrl}/cockpit/saveUser?token=${process.env.cockpitApiToken}`, newUser)
+    const newUserResponse = await axios.post(
+      `${process.env.cockpitApiUrl}/cockpit/saveUser?token=${process.env.cockpitApiToken}`,
+      newUser,
+    );
     console.log(newUserResponse);
 
     resetForm({});
@@ -119,11 +123,17 @@ function ModalRegister({ onClose }: { onClose: any }) {
                 <label className="modal-register__field">
                   <span className="modal-register__label">Телефон</span>
                   <Field
-                    className="modal-register__input section__primary-text"
-                    type="text"
                     name="phone"
-                    required
-                    placeholder="+380 (__) __ __ __"
+                    render={({ field }: { field: any }) => (
+                      <MaskedInput
+                        {...field}
+                        mask={phoneNumberMask}
+                        required
+                        placeholder="+380 (__) __ __ __"
+                        type="text"
+                        className="modal-register__input section__primary-text"
+                      />
+                    )}
                   />
                 </label>
                 <label className="modal-register__field">
@@ -167,16 +177,6 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     />
                   </span>
                 </label>
-                {/*  <label className="modal-register__field">
-                  <span className="modal-register__label">Сфера бізнесу</span>
-                  <Field
-                    className="modal-register__input section__primary-text"
-                    type="text"
-                    name="business"
-                    required
-                    placeholder="Графічний дизайн"
-                  />
-                </label> */}
               </div>
               <button className="modal-register__button" type="submit">
                 Зареєструватись

@@ -26,7 +26,7 @@
   &__container {
     display: flex;
     width: 1110px;
-    background: #fafafa;
+
     border-radius: 25px;
     overflow: hidden;
   }
@@ -63,6 +63,7 @@
   &__body {
     width: 100%;
     padding: 40px 60px 80px;
+    background: #fafafa;
   }
 
   &__form {
