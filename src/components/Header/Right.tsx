@@ -5,18 +5,28 @@ import SearchSVG from "../../assets/svg/search.svg";
 import IconButton from "../shared/IconButton";
 import MainButton from "../shared/MainButton";
 import MainButtonRed from "../shared/MainButtonRed";
-import Modal from "../Modal-register/Modal-register";
+import ModalRegister from "../Modals/Modal-register/Modal-register";
+import { MainContext } from "../../contexts/mainContext";
+import ModalAuth from "../Modals/Modal-auth/Modal-auth";
+
 const Right = () => {
   const { pathname } = useRouter();
-  const [showModal, setShowModal] = useState(false);
+  const [state, dispatch] = React.useContext(MainContext);
+
   const router = useRouter();
 
   const openModal = () => {
-    router.push(`${pathname}/#register`);
-    setShowModal((prevState) => !prevState);
+    router.push("#auth");
+    dispatch({ type: "toggle_authModal" });
   };
-  const closeModal = () => {
-    setShowModal((prevState) => !prevState);
+
+  const closeAuthModal = () => {
+    dispatch({ type: "toggle_authModal" });
+    router.push("/");
+  };
+
+  const closeRegisterModal = () => {
+    dispatch({ type: "toggle_registrationModal" });
     router.push("/");
   };
 
@@ -34,7 +44,8 @@ const Right = () => {
       >
         <MainButtonRed label="Зареєструвати бізнес" />
       </li>
-      {showModal && <Modal onClose={closeModal}></Modal>}
+      <ModalAuth onClose={closeAuthModal} />
+      <ModalRegister onClose={closeRegisterModal} />
     </ul>
   );
 };

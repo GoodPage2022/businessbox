@@ -186,8 +186,8 @@ main {
 @import "./components/shared/BusinessCard.scss";
 
 //Modal
-
-@import "./components/Modal/Modal-register.scss";
+@import "./components/Modals/Modal-register.scss";
+@import "./components/Modals/Modal-auth.scss";
 
 // Slick/slider
 @import "slick-carousel/slick/slick.css";

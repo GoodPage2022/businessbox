@@ -8,8 +8,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <BaseLayout>
         <Component {...pageProps} />
       </BaseLayout>
-
-      <div id="modal-root"></div>
     </>
   );
 }

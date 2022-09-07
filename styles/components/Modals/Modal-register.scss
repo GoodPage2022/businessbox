@@ -10,12 +10,22 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 999999999;
+
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    top: -50%;
+    transition: all 0.35s ease;
+
+    &.active {
+      visibility: visible;
+      pointer-events: all;
+      opacity: 1;
+      top: 0;
+    }
   }
   &__container {
-    // max-width: calc(100vw - 48px);
-    // max-height: calc(100vh - 24px);
     width: 1110px;
-    height: 874px;
     background: #fafafa;
     border-radius: 25px;
     overflow: hidden;
@@ -25,11 +35,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-image: url("../../../public/assets/images/register-bg.png");
+    background-image: url("../../../public/assets/images/register-modal-bg.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 60px 95px;
+    padding: 40px 60px;
   }
 
   &__button-close {
@@ -45,7 +55,7 @@
   }
 
   &__body {
-    padding: 60px 95px 80px;
+    padding: 40px 60px 60px 65px;
   }
 
   &__name-wrapper {
@@ -62,6 +72,23 @@
     &:not(:last-child) {
       margin-right: 30px;
     }
+  }
+
+  &__field--password {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: 0.01em;
+    color: black;
+    margin-bottom: 40px;
+  }
+  &__eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translate(0, -50%);
+    cursor: pointer;
   }
   &__label {
     display: block;
@@ -91,16 +118,19 @@
       line-height: 24px;
       color: #888888;
     }
+
+    &-wrapper {
+      position: relative;
+      display: block;
+    }
   }
   &__phone-wrapper {
-    margin-bottom: 20px;
-  }
-  &__mail-wrapper {
+    display: flex;
     margin-bottom: 20px;
   }
   &__city-wrapper {
     display: flex;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
   &__button {
     display: flex;

@@ -33,7 +33,7 @@
 
   &__custom-file-input {
     color: transparent;
-    width: 145px;
+    width: 170px;
     margin-bottom: 10px;
   }
   &__custom-file-input::-webkit-file-upload-button {
@@ -112,16 +112,34 @@
       color: #888888;
     }
   }
+  &__field__select {
+    margin-top: auto;
+  }
 
   &__select {
-    width: 100%;
-    border: none;
-    background: $white-color;
-    border-radius: 25px;
-    padding: 20px 25px;
+    // width: 100%;
+    // border: none;
+    // background: $white-color;
+    // border-radius: 25px;
+
+    // padding: 20px 25px;
     margin-bottom: 40px;
+    margin-top: auto;
     outline: none;
     cursor: pointer;
+
+    &--icon {
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      right: 25px;
+    }
+
+    & option /* + &--icon */ {
+      // right: 50px;
+      border-radius: 15px;
+      background: red;
+    }
 
     &::placeholder {
       font-family: "Montserrat";
@@ -132,6 +150,12 @@
       color: #888888;
     }
     appearance: none;
+
+    &--thumb {
+      position: relative;
+      display: block;
+      margin-bottom: 40px;
+    }
   }
 
   &__select--short {
@@ -141,6 +165,7 @@
     border-radius: 25px;
     padding: 20px 25px;
     margin-bottom: 40px;
+
     outline: none;
     cursor: pointer;
 

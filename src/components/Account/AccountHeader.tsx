@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { AccountEditButtonContext } from "../../contexts/AccountEditButton";
+import { MainContext } from "../../contexts/mainContext";
 import MainButtonBlack from "../shared/MainButtonBlack";
 import EditSVG from "../../assets/svg/edit.svg";
 import PlusSVG from "../../assets/svg/plus.svg";
@@ -11,7 +11,7 @@ import MainButtonGrey from "../shared/MainButtonGrey";
 const AccountHeader = ({}) => {
   const { pathname } = useRouter();
   const router = useRouter();
-  const [state, dispatch] = React.useContext(AccountEditButtonContext);
+  const [state, dispatch] = React.useContext(MainContext);
   const [isContactInfo, setIsContactInfo] = useState(() =>
     pathname === "/account/contact-info" ? true : false,
   );

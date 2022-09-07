@@ -43,7 +43,7 @@ const AddBusiness = () => {
             description: "",
             file: "",
           }}
-          validate={(values) => {
+          validate={(values: any) => {
             const errors: any = {};
 
             return errors;
