@@ -14,9 +14,6 @@ import Comment from "./Comment";
 import OurComments from "../../../constants/comments";
 import PopularCards from "../../../constants/popular";
 import PopularCard from "../../shared/BusinessCard";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import axios from 'axios'
 import { useDispatch, useSelector } from "react-redux";
 
 const ProjectInfo = () => {
@@ -48,14 +45,14 @@ const ProjectInfo = () => {
   };
 
   const [cards, setCards] = useState<any>([]);
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: any) => state.auth.user);
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/get`, { user })
+    const response = await axios.post(`/api/businesses/get`, { user });
 
     if (response.data) {
-      setCards(response.data.entries)
-      return response.data.entries
+      setCards(response.data.entries);
+      return response.data.entries;
     }
 
     setCards([]);
@@ -188,6 +185,9 @@ const ProjectInfo = () => {
               title={title}
               description={description}
               image={`http://157.230.99.45:8082${images[0].path}`}
+              price="12"
+              views="123"
+              isVerified={true}
             />
           ))}
         </ul>

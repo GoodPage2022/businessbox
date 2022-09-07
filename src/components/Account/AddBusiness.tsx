@@ -6,9 +6,8 @@ import { useSelector } from "react-redux";
 
 const AddBusiness = () => {
   const router = useRouter();
-
+  const user = useSelector((state: any) => state.auth.user);
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const user = useSelector((state: any) => state.auth.user)
     const { name, phone, price, description, business } = values;
 
     const newBusiness = {
@@ -17,10 +16,13 @@ const AddBusiness = () => {
       price,
       description,
       // file,
-    }
+    };
 
     try {
-      const newBusinessResponse = await axios.post(`/api/businesses/post`, { data: newBusiness, user})
+      const newBusinessResponse = await axios.post(`/api/businesses/post`, {
+        data: newBusiness,
+        user,
+      });
       console.log("newUserResponse");
       console.log(newBusinessResponse);
     } catch (err: any) {
