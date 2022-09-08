@@ -16,7 +16,7 @@ import PopularCards from "../../../constants/popular";
 import PopularCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
 
-const ProjectInfo = ({ projectId }: {projectId: string}) => {
+const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
   const [isCopy, setIsCopy] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -45,22 +45,22 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
     slidesToShow: 9,
     slidesToScroll: 1,
     arrows: false,
-  }
+  };
 
-  const [cards, setCards] = useState<any>([])
-  const user = useSelector((state: any) => state.auth.user)
+  const [cards, setCards] = useState<any>([]);
+  const user = useSelector((state: any) => state.auth.user);
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getList`, { user })
+    const response = await axios.post(`/api/businesses/getList`, { user });
 
     if (response.data) {
-      setCards(response.data.entries)
-      return response.data.entries
+      setCards(response.data.entries);
+      return response.data.entries;
     }
 
-    setCards([])
-    return []
-  }
+    setCards([]);
+    return [];
+  };
 
   const getBusinessInfo = async () => {
     let response
@@ -71,7 +71,7 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
         setProjectInfo(response.data.entries[0])
       }
     } catch (error) {
-      router.push('/404')
+      router.push("/404");
     }
 
     try {
@@ -85,26 +85,27 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
   }
 
   useEffect(() => {
-    getBusinesses()
-    getBusinessInfo()
-  }, [])
+    getBusinesses();
+    getBusinessInfo();
+  }, []);
 
-  useEffect(() => {    
+  useEffect(() => {
     if (projectInfo == null) {
-      setLoading(true)
+      setLoading(true);
     } else {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [projectInfo])
-  
-  if (loading)
-    return (<></>)
+  }, [projectInfo]);
+
+  if (loading) return <></>;
 
   return (
     <section className="projectInfo">
       <div className="container projectInfo__container">
         <div className="projectInfo__title">
-          <h1 className="projectInfo__title--text title">{ projectInfo.title }</h1>
+          <h1 className="projectInfo__title--text title">
+            {projectInfo.title}
+          </h1>
           <div className="projectInfo__title--icons">
             <button
               onClick={() => setIsLiked((prev) => !prev)}
@@ -127,7 +128,7 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
           </div>
         </div>
         <p className="projectInfo__city section__primary-text">
-          { projectInfo.state }, { projectInfo.city }
+          {projectInfo.state}, {projectInfo.city}
         </p>
         {/* {isCopy && (
           <div className="projectInfo__copy">
@@ -154,9 +155,10 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
                   src={`http://157.230.99.45:8082${img.path}`}
                   layout="fill"
                   objectFit="cover"
-                  alt=""/>
+                  alt=""
+                />
               </li>
-          )}
+            ))}
           </Slider>
         </div>
         <div className="projectInfo__categories-slider">
@@ -168,12 +170,13 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
             ))}
           </Slider>
         </div>
-        <p 
-          className="projectInfo__description section__primary-text" 
-          dangerouslySetInnerHTML={{ __html: projectInfo.description }} />
+        <p
+          className="projectInfo__description section__primary-text"
+          dangerouslySetInnerHTML={{ __html: projectInfo.description }}
+        />
         <div className="projectInfo__price">
           <p className="section__primary-text">Ціна:</p>
-          <p className="projectInfo__amount title">{ projectInfo.price }₴</p>
+          <p className="projectInfo__amount title">{projectInfo.price}₴</p>
         </div>
         <ProfileInfo />
 
