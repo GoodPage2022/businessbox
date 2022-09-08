@@ -24,7 +24,7 @@ ChartJS.register(
   Filler,
   Legend,
 );
-
+ChartJS.defaults.borderColor = "#0C0C0C";
 export const options = {
   responsive: true,
 
@@ -33,9 +33,18 @@ export const options = {
       ticks: {
         color: "#0C0C0C",
       },
-
+      offset: false,
       beginAtZero: false,
-      grid: { tickLength: 12, display: false },
+      grid: {
+        tickLength: 12,
+        display: false,
+
+        // color: (contex: any) => {
+        //   if (contex.tick.value === 0) {
+        //     return "#0C0C0C";
+        //   }
+        // },
+      },
     },
     y: {
       ticks: {
@@ -45,7 +54,11 @@ export const options = {
       grid: {
         tickLength: 20,
         tickWidth: 36,
-
+        // color: (contex: any) => {
+        //   if (contex.tick.value === 0) {
+        //     return "#0C0C0C";
+        //   }
+        // },
         // tickBorderDashOffset: 55,
         display: false,
       },
@@ -65,7 +78,7 @@ export const options = {
 };
 
 const labels = [
-  " ",
+  // " ",
   "01.01",
   "01.02",
   "01.03",
@@ -86,8 +99,8 @@ export const data = {
   datasets: [
     {
       fill: true,
-      display: false,
-      data: ["none", 1, 1, 1.5, 2, 3, 2, 4, 6, 2, 5.5, 5, 4],
+      // display: false,
+      data: [/* "none", */ 1, 1, 1.5, 2, 3, 2, 4, 6, 2, 5.5, 5, 4],
       borderColor: "#F22A4E",
       borderWidth: 5,
       backgroundColor: "rgba(53, 162, 235, 0.5)",
@@ -97,6 +110,12 @@ export const data = {
     },
   ],
 };
+
+data.labels.unshift("");
+// data.labels.push("");
+data.datasets[0].data.unshift(NaN);
+// data.datasets[0].data.push(null);
+
 function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
   const colorStart = "rgba(242, 42, 78, 0)";
   const colorEnd = "rgba(242, 42, 78, 0.5)";
