@@ -16,9 +16,11 @@ import PopularCards from "../../../constants/popular";
 import PopularCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
 
-const ProjectInfo = () => {
+const ProjectInfo = ({ projectId }: {projectId: string}) => {
+  const router = useRouter();
   const [isCopy, setIsCopy] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [loading, setLoading] = useState(true);
   const imageSliderSettings = {
     dots: false,
     infinite: false,
@@ -28,6 +30,7 @@ const ProjectInfo = () => {
     arrows: false,
   };
   const [link, setLink] = useState("");
+  const [projectInfo, setProjectInfo] = useState<any>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -42,32 +45,57 @@ const ProjectInfo = () => {
     slidesToShow: 9,
     slidesToScroll: 1,
     arrows: false,
-  };
+  }
 
-  const [cards, setCards] = useState<any>([]);
-  const user = useSelector((state: any) => state.auth.user);
+  const [cards, setCards] = useState<any>([])
+  const user = useSelector((state: any) => state.auth.user)
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/get`, { user });
+    const response = await axios.post(`/api/businesses/getList`, { user })
 
     if (response.data) {
-      setCards(response.data.entries);
-      return response.data.entries;
+      setCards(response.data.entries)
+      return response.data.entries
     }
 
-    setCards([]);
-    return [];
-  };
+    setCards([])
+    return []
+  }
+
+  const getBusinessInfo = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/get`, { user, projectId });
+      if (response.data) {
+        console.log(response.data);
+        setProjectInfo(response.data.entries[0])
+        return response.data.entries[0];
+      }
+    } catch (error) {
+      router.push('/404')
+    }
+  }
 
   useEffect(() => {
-    getBusinesses();
-  }, []);
+    getBusinesses()
+    getBusinessInfo()
+  }, [])
+
+  useEffect(() => {    
+    if (projectInfo == null) {
+      setLoading(true)
+    } else {
+      setLoading(false)
+    }
+  }, [projectInfo])
+  
+  if (loading)
+    return (<></>)
 
   return (
     <section className="projectInfo">
       <div className="container projectInfo__container">
         <div className="projectInfo__title">
-          <h1 className="projectInfo__title--text title">Назва проекту</h1>
+          <h1 className="projectInfo__title--text title">{ projectInfo.title }</h1>
           <div className="projectInfo__title--icons">
             <button
               onClick={() => setIsLiked((prev) => !prev)}
@@ -90,7 +118,7 @@ const ProjectInfo = () => {
           </div>
         </div>
         <p className="projectInfo__city section__primary-text">
-          Україна, Дніпро
+          { projectInfo.state }, { projectInfo.city }
         </p>
         {/* {isCopy && (
           <div className="projectInfo__copy">
@@ -110,33 +138,16 @@ const ProjectInfo = () => {
         )} */}
         <div className="projectInfo__image-slider">
           <Slider {...imageSliderSettings}>
-            <li className="projectInfo__image-slider--image">
-              <Image
-                className=""
-                src="/assets/images/project-image-1.png"
-                layout="fill"
-                objectFit="cover"
-                alt=""
-              />
-            </li>
-            <li className="projectInfo__image-slider--image">
-              <Image
-                className=""
-                src="/assets/images/project-image-2.png"
-                layout="fill"
-                objectFit="cover"
-                alt=""
-              />
-            </li>
-            <li className="projectInfo__image-slider--image">
-              <Image
-                className=""
-                src="/assets/images/project-image-3.png"
-                layout="fill"
-                objectFit="cover"
-                alt=""
-              />
-            </li>
+            {projectInfo.images.map((img: any) => 
+              <li className="projectInfo__image-slider--image">
+                <Image
+                  className=""
+                  src={`http://157.230.99.45:8082${img.path}`}
+                  layout="fill"
+                  objectFit="cover"
+                  alt=""/>
+              </li>
+          )}
           </Slider>
         </div>
         <div className="projectInfo__categories-slider">
@@ -148,21 +159,12 @@ const ProjectInfo = () => {
             ))}
           </Slider>
         </div>
-        <p className="projectInfo__description section__primary-text">
-          Клієнт дуже важливий, за клієнтом піде клієнт. Duis feugiat sapien і
-          lectus convallis commodo. Curabitur vulputate lectus не від стрілок,
-          нехай буде багато членів і не приймає. Меценат Tellus Sapien, dapibus
-          a ullamcorper sit amet, hendrerit sit amet ex. Футбол футбольний
-          сезон. But rutrum tellus neque, and eleifend orci convallis molestie.
-          Все життя школи часом буває дитячим салатом чи, піснею. Еней якраз
-          такий м`який, йому треба вкладати в озеро. Перед ним, перш за все, в
-          горлах лікарні стелити ліжка догляду та догляду; Завтра я проведу
-          трохи часу зі стрілками. Але урна самого життя. Хворобливі і вагітні
-          гравці. До того часу лікар хоче знати, що робити.
-        </p>
+        <p 
+          className="projectInfo__description section__primary-text" 
+          dangerouslySetInnerHTML={{ __html: projectInfo.description }} />
         <div className="projectInfo__price">
           <p className="section__primary-text">Ціна:</p>
-          <p className="projectInfo__amount title">999.999₴</p>
+          <p className="projectInfo__amount title">{ projectInfo.price }₴</p>
         </div>
         <ProfileInfo />
 
@@ -182,6 +184,7 @@ const ProjectInfo = () => {
           {cards.map(({ _id, title, description, images }: any) => (
             <PopularCard
               key={_id}
+              alias={_id}
               title={title}
               description={description}
               image={`http://157.230.99.45:8082${images[0].path}`}

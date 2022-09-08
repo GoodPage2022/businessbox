@@ -9,7 +9,7 @@ const MyBusinesses = () => {
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/get`, { user });
+    const response = await axios.post(`/api/businesses/getList`, { user });
 
     if (response.data) {
       setCards(response.data.entries);
@@ -32,6 +32,7 @@ const MyBusinesses = () => {
             {cards.map(({ _id, title, description, images }: any) => (
               <PopularCard
                 key={_id}
+                alias={_id}
                 title={title}
                 description={description}
                 image={`http://157.230.99.45:8082${images[0].path}`}

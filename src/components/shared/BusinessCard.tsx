@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Link from "next/link";
 
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
@@ -13,6 +14,7 @@ const BusinessCard = ({
   price,
   views,
   isVerified,
+  alias,
 }: {
   image: any;
   title: string;
@@ -20,6 +22,7 @@ const BusinessCard = ({
   price: string;
   views: string;
   isVerified: boolean;
+  alias: string;
 }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
@@ -40,10 +43,8 @@ const BusinessCard = ({
           <HeartSVG />
         </button>
       </div>
-      <div
-        className="business-card__info"
-        onClick={() => router.push("/project")}
-      >
+      <div className="business-card__info">
+        <Link href={`/catalog/${alias}`}><a className="business-card__link" title={title}></a></Link>
         <h3 className="business-card__title">
           {title}{" "}
           <CheckSVG

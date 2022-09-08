@@ -9,12 +9,13 @@ import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from '../../../../store/actions/auth';
+import { signIn as signInReducer } from '../../../../store/actions/auth';
 
 function ModalAuth({ onClose }: { onClose: any }) {
   const dispatchRedux = useDispatch()
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState("");
 
   const openRegisterModal = () => {
     router.push("/#register");
@@ -54,9 +55,13 @@ function ModalAuth({ onClose }: { onClose: any }) {
   
     try {
       const signInResponse = await axios.post(`/api/account/signIn`, data)
-      if (signInResponse.status == 200)
-        dispatchRedux(signIn(signInResponse.data))
+      if (signInResponse.status == 200) {
+        dispatchRedux(signInReducer(signInResponse.data))
+        dispatch({ type: "toggle_authModal" });
+        setAuthError("")
+      }
     } catch (err: any) {
+      setAuthError("Хибний логін або пароль")
       console.log("Sign In Error");
       console.log(err);
     }
@@ -101,6 +106,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
             onSubmit={handleSubmit}
           >
             <Form className="modal-auth__form">
+              {authError && <div className="modal-auth__failed">{authError}</div>}
               <label className="modal-auth__field--mail">
                 <span className="modal-auth__label">Електронна пошта</span>
                 <Field

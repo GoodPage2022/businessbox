@@ -11,7 +11,7 @@ const Favorites = () => {
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/get`, { user });
+    const response = await axios.post(`/api/businesses/getList`, { user });
 
     if (response.data) {
       setCards(response.data.entries);
@@ -35,6 +35,7 @@ const Favorites = () => {
               <div key={_id} className="favorites__cards__item">
                 <PopularCard
                   title={title}
+                  alias={_id}
                   description={description}
                   image={`http://157.230.99.45:8082${images[0].path}`}
                   price="12"

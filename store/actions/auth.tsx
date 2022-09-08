@@ -1,5 +1,4 @@
 import * as AUTH from "../types/auth";
-import { Dispatch, AnyAction } from 'redux';
 
 const signIn = (user: any) => {    
     return {
@@ -8,4 +7,10 @@ const signIn = (user: any) => {
     }
 } 
 
-export { signIn };
+const signOut = () => {    
+    return {
+        type: AUTH.SIGN_OUT
+    }
+} 
+
+export { signIn, signOut };

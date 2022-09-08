@@ -5,6 +5,7 @@ import { persistReducer } from 'redux-persist'
 import thunk from 'redux-thunk'
 import auth from './reducers/auth';
 
+
 const reducers = combineReducers({
     auth
 });

@@ -13,7 +13,7 @@ const Popular = () => {
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/get`, { user });
+    const response = await axios.post(`/api/businesses/getList`, { user });
 
     if (response.data) {
       setCards(response.data.entries);
@@ -62,6 +62,7 @@ const Popular = () => {
                 <PopularCard
                   key={_id}
                   title={title}
+                  alias={_id}
                   description={description}
                   image={
                     /* images */ `http://157.230.99.45:8082${images[0].path}`

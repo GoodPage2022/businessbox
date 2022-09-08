@@ -16,7 +16,7 @@ const handler = async(
       const response = await axios.post(`${process.env.cockpitApiUrl}/cockpit/authUser?token=${process.env.cockpitApiToken}`, data)
       res.status(200).json( response.data )
     } catch (err: any) {
-      res.status(500).json({err: JSON.stringify(err)})
+      res.status(500).json(err)
     }
 }
 

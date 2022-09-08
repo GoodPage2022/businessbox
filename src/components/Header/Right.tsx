@@ -8,14 +8,20 @@ import MainButtonRed from "../shared/MainButtonRed";
 import ModalRegister from "../Modals/Modal-register/Modal-register";
 import { MainContext } from "../../contexts/mainContext";
 import ModalAuth from "../Modals/Modal-auth/Modal-auth";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { signOut as signOutReducer } from '../../../store/actions/auth';
 
 const Right = () => {
   const user = useSelector((state: any) => state.auth.user)
+  const dispatchRedux = useDispatch();
   const { pathname } = useRouter();
   const [state, dispatch] = React.useContext(MainContext);
 
   const router = useRouter();
+
+  const signOut = () => {
+    dispatchRedux(signOutReducer())
+  }
 
   const openModal = () => {
     router.push("#auth");
@@ -37,8 +43,8 @@ const Right = () => {
       <li className="header__right__btn">
         <IconButton borderColor="#FFFFFF" icon={<SearchSVG />} />
       </li>
-      <li onClick={openModal} className="header__right__btn">
-        <MainButton label="Вхід" />
+      <li onClick={user == null ? openModal : signOut} className="header__right__btn">
+        <MainButton label={user == null ? `Вхід` : `Вихід`} />
       </li>
       <li
         className="header__right__btn"

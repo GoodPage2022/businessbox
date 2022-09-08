@@ -10,10 +10,9 @@ const handler = async(
   res: NextApiResponse<any>
 ) => {
   const token = req.body.user != null ? req.body.user.api_key : process.env.cockpitApiToken
-  const id = req.body.projectId
 
   try {
-    const response = await axios.get(`${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}&filter[_id]=${id}`)
+    const response = await axios.get(`${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}&limit=4`)
     res.status(200).json( response.data )
   } catch (err: any) {
     res.status(500).json({error: err})

@@ -1,7 +1,18 @@
+import React from "react";
 import { useRouter } from "next/router";
+import { MainContext } from "../../../contexts/mainContext";
+import { useSelector } from "react-redux";
 
 const RegisterBusiness = () => {
   const router = useRouter();
+  const user = useSelector((state: any) => state.auth.user)
+  const [state, dispatch] = React.useContext(MainContext);
+
+  const openModal = () => {
+    router.push("#auth");
+    dispatch({ type: "toggle_authModal" });
+  };
+
   return (
     <section className="registerBusiness">
       <div className="container registerBusiness__container">
@@ -12,7 +23,7 @@ const RegisterBusiness = () => {
 
         <button
           className="registerBusiness__button section__primary-text--white"
-          onClick={() => router.push("/account/add-business")}
+          onClick={() => user != null ? router.push("/account/add-business") : openModal()}
         >
           Зареєструвати
         </button>
