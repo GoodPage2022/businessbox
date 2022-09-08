@@ -1,97 +1,68 @@
 import { Formik, Form, Field, FieldProps } from "formik";
-import { useState } from "react";
-import Select from "react-select";
-
-import PolygonSVG from "../../assets/svg/polygon-black.svg";
-
-type CustomSelectProps = {
-  options: any;
-  placeholder?: string;
-  side?: string;
-  setter?: (e: any) => void;
-};
+import CustomSelect from "../shared/CustomSelect";
 
 const AddBusinessFinish = () => {
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
   };
 
-  const [tt, setTt] = useState(false);
+  // const addBusinessSelect: React.FC<FieldProps & CustomSelectProps> = ({
+  //   field,
+  //   options,
+  //   form,
+  //   placeholder,
+  //   setter,
+  // }): JSX.Element => {
+  //   return (
+  //     <Select
+  //       styles={customStyles}
+  //       name={field.name}
+  //       options={options}
+  //       classNamePrefix="custom-select"
+  //       // menuIsOpen
+  //       placeholder={placeholder}
+  //       onChange={(e) => {
+  //         if (!!setter) setter(e.value);
+  //         form.setFieldValue(field.name, e.value);
+  //       }}
+  //       value={
+  //         options
+  //           ? options.find((option: any) => option.value === field.value)
+  //           : ""
+  //       }
+  //     />
+  //   );
+  // };
 
-  const addBusinessSelect: React.FC<FieldProps & CustomSelectProps> = ({
-    field,
-    options,
-    form,
-    placeholder,
-    setter,
-  }): JSX.Element => {
-    return (
-      <Select
-        styles={customStyles}
-        name={field.name}
-        options={options}
-        // menuIsOpen
-        placeholder={placeholder}
-        onChange={(e) => {
-          if (!!setter) setter(e.value);
-          form.setFieldValue(field.name, e.value);
-        }}
-        value={
-          options
-            ? options.find((option: any) => option.value === field.value)
-            : ""
-        }
-        className={`addBusinessFinish__select section__primary-text`}
-      />
-    );
-  };
+  // const customStyles = {
+  //   dropdownIndicator: (base: any, state: any) => ({
+  //     ...base,
+  //     transition: "all .2s ease",
+  //     transform: state.selectProps.menuIsOpen ? "rotate(90deg)" : null,
+  //   }),
+  //   menu: (provided: any, state: any) => ({
+  //     ...provided,
+  //     margin: "0",
+  //     padding: 0,
+  //     cursor: "pointer",
+  //     boxShadow: "none",
+  //   }),
+  //   control: (styles: any, state: any) => ({}),
+  //   option: (styles: any, state: any) => ({
+  //     ...styles,
+  //   }),
+  //   valueContainer: (styles: any) => ({}),
+  //   indicatorsContainer: (styles: any) => ({
+  //     ...styles,
+  //   }),
 
-  const customStyles = {
-    menu: (provided: any, state: any) => ({
-      ...provided,
-      width: "100%",
-      margin: "0",
-      borderBottom: "1px dotted pink",
-      padding: 0,
-      borderRadius: "0 0 25px 25px",
-      cursor: "pointer",
-      // border: state.isActive ? "1px solid #888888" : "none",
-      boxShadow: "none",
-    }),
-    control: (styles: any, state: any) => ({
-      padding: "20px 25px",
-      background: "white",
-      // border: state.isFocused ? "1px solid #888888" : "none",
-      borderRadius: state.isFocused ? "25px 25px 0 0" : "25px",
-    }),
-    menuList: (styles: any, state: any) => ({
-      // border: "none",
-      padding: "0",
-      // border: state.isFocused ? "1px solid #888888" : "none",
-      borderTop: "1px solid #888888",
-    }),
-    option: (styles: any, state: any) => ({
-      ...styles,
-      padding: "20px 25px",
-    }),
-    valueContainer: (styles: any) => ({
-      ...styles,
-      border: "none",
-      padding: "0",
-      borderRadius: "25px",
-    }),
-    indicatorsContainer: (styles: any) => ({
-      ...styles,
-      display: "none",
-    }),
-
-    input: (styles: any) => ({
-      ...styles,
-      opacity: "0",
-      margin: "0",
-      padding: "0",
-    }),
-  };
+  //   input: (styles: any) => ({
+  //     ...styles,
+  //     opacity: "0",
+  //     margin: "0",
+  //     padding: "0",
+  //   }),
+  // };
 
   return (
     <section className="addBusinessFinish">
@@ -135,20 +106,21 @@ const AddBusinessFinish = () => {
                 </span>
                 <span className="addBusinessFinish__select--thumb">
                   <Field
-                    // className="addBusinessFinish__input section__primary-text"
+                    className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="ownership"
+                    // classNamePrefix="custom-select"
                     required
                     placeholder="-----"
-                    component={addBusinessSelect}
-                    className="addBusinessFinish__select section__primary-text"
+                    component={CustomSelect}
+                    // className="addBusinessFinish__select section__primary-text"
                     options={[
                       { value: "yes", label: "Так" },
                       { value: "no", label: "Ні" },
                     ]}
                   />
 
-                  <PolygonSVG className="addBusinessFinish__select--icon" />
+                  {/* <PolygonSVG className="addBusinessFinish__select--icon" /> */}
                 </span>
               </label>
               <label className="addBusinessFinish__field">
@@ -182,7 +154,7 @@ const AddBusinessFinish = () => {
                 <span className="addBusinessFinish__select--thumb">
                   <Field
                     // as="select"
-                    component={addBusinessSelect}
+                    component={CustomSelect}
                     className="addBusinessFinish__select section__primary-text"
                     type="text"
                     name="seasonality"
@@ -197,7 +169,7 @@ const AddBusinessFinish = () => {
                     <option value="no">Ні</option> */}
                   </Field>
 
-                  <PolygonSVG className="addBusinessFinish__select--icon" />
+                  {/* <PolygonSVG className="addBusinessFinish__select--icon" /> */}
                 </span>
               </label>
             </div>
@@ -276,17 +248,13 @@ const AddBusinessFinish = () => {
                       type="text"
                       name="credits"
                       placeholder="Ні"
-                      component={addBusinessSelect}
+                      component={CustomSelect}
                       options={[
                         { value: "yes", label: "Так" },
                         { value: "no", label: "Ні" },
                       ]}
                       required
-                    >
-                      {/* <option value="yes">Так</option>
-                    <option value="no">Ні</option> */}
-                    </Field>
-                    <PolygonSVG className="addBusinessFinish__select--icon" />
+                    ></Field>
                   </span>
                 </label>
               </div>
