@@ -136,34 +136,18 @@ const Popular = () => {
         )}
         <h2 className="popular__title title">Найпопулярніші</h2>
         <ul className="popular__cards">
-          {cards /* PopularCards */
-            .map(
-              ({
-                _id,
-                title,
-                description,
-                images /* ,
-                price,
-                views,
-                isVerified, */,
-              }: any) => (
-                <PopularCard
-                  key={_id}
-                  title={title}
-                  alias={_id}
-                  description={description}
-                  image={
-                    /* images */ `http://157.230.99.45:8082${images[0].path}`
-                  }
-                  price="12"
-                  views="123"
-                  isVerified={true}
-                  // price={price}
-                  // views={views}
-                  // isVerified={isVerified}
-                />
-              ),
-            )}
+          {cards.map(({ _id, title, description, images, view_count, price, is_verified }: any) => (
+            <PopularCard
+              key={_id}
+              alias={_id}
+              title={title}
+              description={description}
+              image={`http://157.230.99.45:8082${images[0].path}`}
+              price={price}
+              views={view_count ?? 0}
+              isVerified={is_verified}
+            />
+          ))}
         </ul>
       </div>
     </section>

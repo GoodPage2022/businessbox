@@ -31,16 +31,17 @@ const Favorites = () => {
       <div className="container favorites__container">
         {cards.length > 0 ? (
           <ul className="favorites__cards">
-            {cards.map(({ _id, title, description, images }: any) => (
+            {cards.map(({ _id, title, description, images, view_count, price, is_verified }: any) => (
               <div key={_id} className="favorites__cards__item">
                 <PopularCard
-                  title={title}
+                  key={_id}
                   alias={_id}
+                  title={title}
                   description={description}
                   image={`http://157.230.99.45:8082${images[0].path}`}
-                  price="12"
-                  views="123"
-                  isVerified={true}
+                  price={price}
+                  views={view_count ?? 0}
+                  isVerified={is_verified}
                 />
                 <div className="favorites__graphic">
                   <Chart />

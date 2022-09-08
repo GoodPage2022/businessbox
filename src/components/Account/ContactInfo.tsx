@@ -7,25 +7,70 @@ import ProfileData from "../../constants/profile-data";
 import { MainContext } from "../../contexts/mainContext";
 import MainButtonRed from "../shared/MainButtonRed";
 import phoneNumberMask from "../../masks/phoneNumberMask";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { signIn as signInReducer } from '../../../store/actions/auth';
 
 const ContactInfo = () => {
+  const user = useSelector((state: any) => state.auth.user);
+  const dispatchRedux = useDispatch()
+
   const defaultAvatar = "/assets/images/profile-photo.png";
   const [avatar, setAvatar] = useState(defaultAvatar);
 
   const [state, dispatch] = React.useContext(MainContext);
 
-  const [name, setName] = useState(ProfileData.name);
-  const [lastname, setLastname] = useState(ProfileData.lastname);
-  const [city, setCity] = useState(ProfileData.city);
-  const [email, setEmail] = useState(ProfileData.email);
-  const [phone, setPhone] = useState(ProfileData.phone);
-  const [businessSphere, setBusinessSphere] = useState(
-    ProfileData.businessSphere,
-  );
+  // const [name, setName] = useState(user.name);
+  // const [lastname, setLastname] = useState(user.surname);
+  // const [city, setCity] = useState(user.city);
+  // const [email, setEmail] = useState(user.email);
+  // const [phone, setPhone] = useState(user.phone);
+  // const [businessSphere, setBusinessSphere] = useState(
+  //   user.area,
+  // );
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     dispatch({ type: "toggle_edit" });
-    resetForm({});
+    const { name, phone, email, surname, city } = values;
+
+    const data = {
+      user,
+      userUpdate: {
+        _id: user._id,
+        name,
+        user: email,
+        email,
+        phone,
+        surname,
+        city,
+      },
+    };
+
+    try {
+      const updateUserResponse = await axios.post(
+        `/api/account/userUpdate`,
+        data,
+      );
+      
+      if (updateUserResponse.status == 200) {
+        dispatchRedux(signInReducer({
+          ...user,
+          name,
+          user: email,
+          email,
+          phone,
+          surname,
+          city,
+        }))
+      }
+
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+      resetForm({});
+  }
+      
+    // resetForm({});
   };
 
   const uploadToServer = async (e: any) => {
@@ -77,7 +122,13 @@ const ContactInfo = () => {
           </div>
 
           <Formik
-            initialValues={{ name: "", phone: "", wishes: "", email: "" }}
+            initialValues={{ 
+                name: user.name, 
+                phone: user.phone, 
+                surname: user.surname, 
+                email: user.email,  
+                city: user.city,  
+              }}
             validate={(values) => {
               const errors: any = {};
               if (!values.email) {
@@ -87,7 +138,7 @@ const ContactInfo = () => {
               ) {
                 errors.email = "Invalid email address";
               }
-
+              
               return errors;
             }}
             onSubmit={handleSubmit}
@@ -100,8 +151,6 @@ const ContactInfo = () => {
                     className="contactInfo__input section__primary-text"
                     type="text"
                     name="name"
-                    value={name}
-                    onChange={(e: any) => setName(e.target.value)}
                     readOnly={state.isEdit ? false : true}
                     required
                     placeholder="Петро"
@@ -117,10 +166,9 @@ const ContactInfo = () => {
                         mask={phoneNumberMask}
                         placeholder="+380 (__) __ __ __"
                         type="text"
-                        value={phone}
+                        value={field.value}
                         readOnly={state.isEdit ? false : true}
                         required
-                        onChange={(e: any) => setPhone(e.target.value)}
                         className="contactInfo__input section__primary-text"
                       />
                     )}
@@ -133,9 +181,7 @@ const ContactInfo = () => {
                   <Field
                     className="contactInfo__input section__primary-text"
                     type="text"
-                    name="lastname"
-                    value={lastname}
-                    onChange={(e: any) => setLastname(e.target.value)}
+                    name="surname"
                     readOnly={state.isEdit ? false : true}
                     required
                     placeholder="Петренко"
@@ -147,8 +193,6 @@ const ContactInfo = () => {
                     className="contactInfo__input section__primary-text"
                     type="email"
                     name="email"
-                    value={email}
-                    onChange={(e: any) => setEmail(e.target.value)}
                     readOnly={state.isEdit ? false : true}
                     required
                     placeholder="example@mail.com"
@@ -162,24 +206,19 @@ const ContactInfo = () => {
                     className="contactInfo__input section__primary-text"
                     type="text"
                     name="city"
-                    value={city}
-                    onChange={(e: any) => setCity(e.target.value)}
                     readOnly={state.isEdit ? false : true}
                     required
                     placeholder="Дніпро"
                   />
                 </label>
                 <label className="contactInfo__field">
-                  <span className="contactInfo__label">Категорія</span>
+                  <span className="contactInfo__label">Пароль</span>
                   <Field
                     className="contactInfo__input section__primary-text"
-                    type="text"
-                    name="business"
-                    value={businessSphere}
-                    onChange={(e: any) => setBusinessSphere(e.target.value)}
+                    type="password"
+                    name="password"
                     readOnly={state.isEdit ? false : true}
-                    required
-                    placeholder="Графічний дизайн"
+                    placeholder="********"
                   />
                 </label>
               </div>

@@ -11,14 +11,18 @@ const handler = async(
 ) => {
 
     const data = req.body
+    const newUser = {
+        user: data.user
+    }
 
     try {
-      const response = await axios.post(`${process.env.cockpitApiUrl}/cockpit/authUser?token=${process.env.cockpitApiToken}`, data)
-      res.status(200).json( response.data )
+      const newUserResponse = await axios.post(
+        `${process.env.cockpitApiUrl}/cockpit/saveUser?token=${process.env.cockpitApiToken}`,
+        newUser,
+      );      
+      res.status(200).json( newUserResponse.data )
     } catch (err: any) {
       res.status(500).json(err)
-      console.log(err);
-      
     }
 }
 

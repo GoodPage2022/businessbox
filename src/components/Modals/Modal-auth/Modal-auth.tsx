@@ -47,10 +47,10 @@ function ModalAuth({ onClose }: { onClose: any }) {
     const { mail, password } = values;
 
     const data = {
-      // user: mail,
-      // password
-      user: "sdfsdf@sdf.df",
-      password: "secret"
+      user: mail,
+      password
+      // user: "sdfsdf@sdf.df",
+      // password: "secret"
     }
   
     try {
@@ -58,6 +58,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
       if (signInResponse.status == 200) {
         dispatchRedux(signInReducer(signInResponse.data))
         dispatch({ type: "toggle_authModal" });
+        resetForm({})
         setAuthError("")
       }
     } catch (err: any) {
@@ -65,8 +66,6 @@ function ModalAuth({ onClose }: { onClose: any }) {
       console.log("Sign In Error");
       console.log(err);
     }
-
-    resetForm({});
   };
 
   return (
