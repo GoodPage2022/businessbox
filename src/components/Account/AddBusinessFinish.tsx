@@ -1,68 +1,10 @@
-import { Formik, Form, Field, FieldProps } from "formik";
+import { Formik, Form, Field } from "formik";
 import CustomSelect from "../shared/CustomSelect";
 
 const AddBusinessFinish = () => {
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
   };
-
-  // const addBusinessSelect: React.FC<FieldProps & CustomSelectProps> = ({
-  //   field,
-  //   options,
-  //   form,
-  //   placeholder,
-  //   setter,
-  // }): JSX.Element => {
-  //   return (
-  //     <Select
-  //       styles={customStyles}
-  //       name={field.name}
-  //       options={options}
-  //       classNamePrefix="custom-select"
-  //       // menuIsOpen
-  //       placeholder={placeholder}
-  //       onChange={(e) => {
-  //         if (!!setter) setter(e.value);
-  //         form.setFieldValue(field.name, e.value);
-  //       }}
-  //       value={
-  //         options
-  //           ? options.find((option: any) => option.value === field.value)
-  //           : ""
-  //       }
-  //     />
-  //   );
-  // };
-
-  // const customStyles = {
-  //   dropdownIndicator: (base: any, state: any) => ({
-  //     ...base,
-  //     transition: "all .2s ease",
-  //     transform: state.selectProps.menuIsOpen ? "rotate(90deg)" : null,
-  //   }),
-  //   menu: (provided: any, state: any) => ({
-  //     ...provided,
-  //     margin: "0",
-  //     padding: 0,
-  //     cursor: "pointer",
-  //     boxShadow: "none",
-  //   }),
-  //   control: (styles: any, state: any) => ({}),
-  //   option: (styles: any, state: any) => ({
-  //     ...styles,
-  //   }),
-  //   valueContainer: (styles: any) => ({}),
-  //   indicatorsContainer: (styles: any) => ({
-  //     ...styles,
-  //   }),
-
-  //   input: (styles: any) => ({
-  //     ...styles,
-  //     opacity: "0",
-  //     margin: "0",
-  //     padding: "0",
-  //   }),
-  // };
 
   return (
     <section className="addBusinessFinish">
