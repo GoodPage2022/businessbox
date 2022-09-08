@@ -9,9 +9,14 @@ const MyBusinesses = () => {
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getList`, { user });
+    const filter = {
+      _by: user._id
+    }
+    const response = await axios.post(`/api/businesses/getList`, { user, filter });
 
     if (response.data) {
+      console.log(response.data.entries);
+      
       setCards(response.data.entries);
       return response.data.entries;
     }
@@ -29,16 +34,16 @@ const MyBusinesses = () => {
       <div className="container myBusinesses__container">
         {cards.length > 0 ? (
           <ul className="myBusinesses__cards">
-            {cards.map(({ _id, title, description, images }: any) => (
+            {cards.map(({ _id, title, description, images, view_count, price, is_verified }: any) => (
               <PopularCard
                 key={_id}
                 alias={_id}
                 title={title}
                 description={description}
                 image={`http://157.230.99.45:8082${images[0].path}`}
-                price="12"
-                views="123"
-                isVerified={true}
+                price={price}
+                views={view_count ?? 0}
+                isVerified={is_verified}
               />
             ))}
           </ul>

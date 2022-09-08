@@ -63,15 +63,24 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
   }
 
   const getBusinessInfo = async () => {
+    let response
+
     try {
-      const response = await axios.post(`/api/businesses/get`, { user, projectId });
+      response = await axios.post(`/api/businesses/get`, { user, projectId });
       if (response.data) {
-        console.log(response.data);
         setProjectInfo(response.data.entries[0])
-        return response.data.entries[0];
       }
     } catch (error) {
       router.push('/404')
+    }
+
+    try {
+      const addViewCount = await axios.post(`/api/businesses/view`, { user, project: response?.data.entries[0] });
+      
+      console.log("addViewCount");
+      console.log(addViewCount);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -138,8 +147,8 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
         )} */}
         <div className="projectInfo__image-slider">
           <Slider {...imageSliderSettings}>
-            {projectInfo.images.map((img: any) => 
-              <li className="projectInfo__image-slider--image">
+            {projectInfo.images.map((img: any, index: number) => 
+              <li key={index} className="projectInfo__image-slider--image">
                 <Image
                   className=""
                   src={`http://157.230.99.45:8082${img.path}`}
@@ -181,16 +190,16 @@ const ProjectInfo = ({ projectId }: {projectId: string}) => {
 
         <h2 className="projectInfo__offers-title title">Схожі пропозиції</h2>
         <ul className="popular__cards">
-          {cards.map(({ _id, title, description, images }: any) => (
+          {cards.map(({ _id, title, description, images, view_count, price, is_verified }: any) => (
             <PopularCard
               key={_id}
               alias={_id}
               title={title}
               description={description}
               image={`http://157.230.99.45:8082${images[0].path}`}
-              price="12"
-              views="123"
-              isVerified={true}
+              price={price}
+              views={view_count ?? 0}
+              isVerified={is_verified}
             />
           ))}
         </ul>

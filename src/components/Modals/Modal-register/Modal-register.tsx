@@ -32,29 +32,27 @@ function ModalRegister({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { name, phone, mail, surname, business, city } = values;
+    const { name, phone, mail, surname, password, city } = values;
 
     const newUser = {
       user: {
         name,
         user: mail,
-        password: "secret",
+        password,
+        // password: "secret",
         email: mail,
         group: "user",
         api_key: 1,
         phone,
         surname,
-        business,
         city,
       },
     };
 
-    const newUserResponse = await axios.post(
-      `${process.env.cockpitApiUrl}/cockpit/saveUser?token=${process.env.cockpitApiToken}`,
-      newUser,
-    );
+    const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
     console.log(newUserResponse);
-
+    onClose();
+    
     resetForm({});
   };
 

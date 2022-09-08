@@ -10,23 +10,18 @@ const handler = async(
   res: NextApiResponse<any>
 ) => {
   const token = req.body.user != null ? req.body.user.api_key : process.env.cockpitApiToken
-  const queryFilter = req.body.filter
+  const id = req.body.project._id
+  const projectViewCount = req.body.project.view_count ?? 0
 
-  let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}&limit=4`
-
-  if (queryFilter) {
-    const filter = Object.keys(queryFilter)
-      .map(
-        (pn: any) => 
-          "filter[" + encodeURIComponent(pn) + "]=" + encodeURIComponent(queryFilter[pn]))
-      .join("&")
-
-      queryUrl += "&" + filter
+  const data = {
+    data: {
+        _id: id,
+        view_count: parseInt(projectViewCount) + 1
+    }
   }
 
-
   try {
-    const response = await axios.get(queryUrl)
+    const response = await axios.post(`${process.env.cockpitApiUrl}/collections/save/Businesses?token=${token}`, data)
     res.status(200).json( response.data )
   } catch (err: any) {
     res.status(500).json({error: err})
