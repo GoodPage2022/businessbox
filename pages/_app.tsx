@@ -7,18 +7,22 @@ import { Provider } from "react-redux";
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 
-function MyApp({ Component, pageProps }: AppProps) {
+import { SessionProvider } from 'next-auth/react'
+
+function MyApp({ Component, pageProps, session }: any) {
   let persistor = persistStore(store);
 
   return (
     <>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BaseLayout>
-            <Component {...pageProps} />
-          </BaseLayout>
-        </PersistGate>
-      </Provider>
+      <SessionProvider session={session}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <BaseLayout>
+              <Component {...pageProps} />
+            </BaseLayout>
+          </PersistGate>
+        </Provider>
+      </SessionProvider>
     </>
   );
 }

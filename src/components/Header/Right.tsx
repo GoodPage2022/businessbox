@@ -10,16 +10,21 @@ import { MainContext } from "../../contexts/mainContext";
 import ModalAuth from "../Modals/Modal-auth/Modal-auth";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut as signOutReducer } from '../../../store/actions/auth';
+import { useSession, signOut as signOutGoogle } from 'next-auth/react'
 
 const Right = () => {
-  const user = useSelector((state: any) => state.auth.user)
+  const { data: session } = useSession()
+  const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
   const { pathname } = useRouter();
   const [state, dispatch] = React.useContext(MainContext);
 
   const router = useRouter();
 
-  const signOut = () => {
+  const signOut = async () => {
+    if (session !== undefined) {
+      await signOutGoogle()
+    }
     dispatchRedux(signOutReducer())
   }
 

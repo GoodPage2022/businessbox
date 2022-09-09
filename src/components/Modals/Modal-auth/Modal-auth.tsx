@@ -10,12 +10,35 @@ import MainButtonRed from "../../shared/MainButtonRed";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn as signInReducer } from '../../../../store/actions/auth';
+import { useSession, signIn as signInGoogle } from 'next-auth/react'
 
 function ModalAuth({ onClose }: { onClose: any }) {
+  const { data: session } = useSession()
+  const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch()
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
+
+  const signInGoogleRequest = async (session: any) => {
+    try {
+      const signInResponse = await axios.post(`/api/account/signIn`, { session })
+      if (signInResponse.status == 200) {
+        dispatchRedux(signInReducer(signInResponse.data))
+        setAuthError("")
+      }
+    } catch (err: any) {
+      setAuthError("Google auth error")
+      console.log("Sign In Error");
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    if (session != null && user == null ) {
+      signInGoogleRequest(session)
+    }
+  }, [session, user])
 
   const openRegisterModal = () => {
     router.push("/#register");
@@ -146,7 +169,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
               </div>
               <p className="modal-auth__text section__secondary-text">або</p>
 
-              <button className="modal-auth__google" type="button">
+              <button className="modal-auth__google" onClick={() => signInGoogle()} type="button">
                 <GoogleSVG />
                 <span className="modal-auth__google--text section__secondary-text">
                   Увійти за допомогою Google
