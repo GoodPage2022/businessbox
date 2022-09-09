@@ -147,7 +147,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
         )} */}
         <div className="projectInfo__image-slider">
-          <Slider {...imageSliderSettings}>
+          {projectInfo.images && <Slider {...imageSliderSettings}>
             {projectInfo.images.map((img: any, index: number) => 
               <li key={index} className="projectInfo__image-slider--image">
                 <Image
@@ -159,7 +159,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 />
               </li>
             )}
-          </Slider>
+          </Slider>}
         </div>
         <div className="projectInfo__categories-slider">
           <Slider {...categoriesSliderSettings}>

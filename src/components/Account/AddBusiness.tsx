@@ -23,6 +23,8 @@ const AddBusiness = () => {
         data: newBusiness,
         user,
       });
+      router.push(`/account/add-business-finish/${newBusinessResponse.data.data._id}`)
+
       console.log("newUserResponse");
       console.log(newBusinessResponse);
     } catch (err: any) {
@@ -126,7 +128,7 @@ const AddBusiness = () => {
               </div>
             </div>
             <button
-              onClick={() => router.push("/account/add-business-finish")}
+              type="submit"
               className="addBusiness__button"
             >
               Далі

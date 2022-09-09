@@ -1,8 +1,79 @@
 import { Formik, Form, Field } from "formik";
 import CustomSelect from "../shared/CustomSelect";
+import { useRouter } from 'next/router'
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const AddBusinessFinish = () => {
+  const router = useRouter()
+  const user = useSelector((state: any) => state.auth.user);
+  const { businessId } = router.query  
+  
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    const {
+      property_form,
+      number_of_founders,
+      number_of_employees,
+      seasonality,
+      year_turnover,
+      monthly_net_profit,
+      gross_monthly_income,
+      estimated_turnover_next_year,
+      loans,
+      return_on_investment,
+      equipment_market_value,
+      monthly_salary_fund,
+      year_nonfixed_costs,
+      website,
+      instagram,
+      facebook,
+      youtube,
+      file,
+      public_reviews,
+      financial_accounting_system,
+      crm,
+    } = values
+
+    const newBusiness = {
+      _id: businessId,
+      property_form,
+      number_of_founders,
+      number_of_employees,
+      seasonality,
+      year_turnover,
+      monthly_net_profit,
+      gross_monthly_income,
+      estimated_turnover_next_year,
+      loans,
+      return_on_investment,
+      equipment_market_value,
+      monthly_salary_fund,
+      year_nonfixed_costs,
+      website,
+      instagram,
+      facebook,
+      youtube,
+      // file,
+      public_reviews,
+      financial_accounting_system,
+      crm,
+    };
+
+    try {
+      const newBusinessResponse = await axios.post(`/api/businesses/post`, {
+        data: newBusiness,
+        user,
+      });
+
+      router.push(`/account/my-businesses`)
+
+      console.log("newUserResponse");
+      console.log(newBusinessResponse);
+    } catch (err: any) {
+      console.log("newUserResponse3");
+      console.log(JSON.parse(err.response.data.err));
+    }
+
     resetForm({});
   };
 
@@ -11,27 +82,27 @@ const AddBusinessFinish = () => {
       <div className="container addBusinessFinish__container">
         <Formik
           initialValues={{
-            ownership: "",
-            quantityFounders: "",
-            quantityEmployees: "",
+            property_form: "",
+            number_of_founders: "",
+            number_of_employees: "",
             seasonality: "",
-            turnoverPerYear: "",
-            netProfit: "",
-            grossProfit: "",
-            turnoverNextYear: "",
-            credits: "",
-            returnEstimate: "",
-            assetsAndEquipment: "",
-            salaryFund: "",
-            nonPermanentCosts: "",
-            site: "",
+            year_turnover: "",
+            monthly_net_profit: "",
+            gross_monthly_income: "",
+            estimated_turnover_next_year: "",
+            loans: "",
+            return_on_investment: "",
+            equipment_market_value: "",
+            monthly_salary_fund: "",
+            year_nonfixed_costs: "",
+            website: "",
             instagram: "",
             facebook: "",
             youtube: "",
             file: "",
-            reviews: "",
-            financialAccounting: "",
-            CRM: "",
+            public_reviews: "",
+            financial_accounting_system: "",
+            crm: "",
           }}
           validate={(values: any) => {
             const errors: any = {};
@@ -50,7 +121,7 @@ const AddBusinessFinish = () => {
                   <Field
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
-                    name="ownership"
+                    name="property_form"
                     // classNamePrefix="custom-select"
                     required
                     placeholder="-----"
@@ -72,7 +143,7 @@ const AddBusinessFinish = () => {
                 <Field
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
-                  name="quantityFounders"
+                  name="number_of_founders"
                   required
                   placeholder="-----"
                 />
@@ -84,7 +155,7 @@ const AddBusinessFinish = () => {
                 <Field
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
-                  name="quantityEmployees"
+                  name="number_of_employees"
                   required
                   placeholder="-----"
                 />
@@ -124,7 +195,7 @@ const AddBusinessFinish = () => {
                   <Field
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
-                    name="turnoverPerYear"
+                    name="year_turnover"
                     required
                     placeholder="-----"
                   />
@@ -139,7 +210,7 @@ const AddBusinessFinish = () => {
                   <Field
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
-                    name="netProfit"
+                    name="monthly_net_profit"
                     required
                     placeholder="-----"
                   />
@@ -154,7 +225,7 @@ const AddBusinessFinish = () => {
                   <Field
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
-                    name="grossProfit"
+                    name="gross_monthly_income"
                     required
                     placeholder="-----"
                   />
@@ -172,7 +243,7 @@ const AddBusinessFinish = () => {
                     <Field
                       className="addBusinessFinish__input section__primary-text"
                       type="text"
-                      name="turnoverNextYear"
+                      name="estimated_turnover_next_year"
                       required
                       placeholder="-----"
                     />
@@ -188,7 +259,7 @@ const AddBusinessFinish = () => {
                       as="select"
                       className="addBusinessFinish__select--short section__primary-text"
                       type="text"
-                      name="credits"
+                      name="loans"
                       placeholder="Ні"
                       component={CustomSelect}
                       options={[
@@ -209,7 +280,7 @@ const AddBusinessFinish = () => {
                   <Field
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
-                    name="returnEstimate"
+                    name="return_on_investment"
                     required
                     placeholder="-----"
                   />
@@ -226,7 +297,7 @@ const AddBusinessFinish = () => {
                   <Field
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
-                    name="assetsAndEquipment"
+                    name="equipment_market_value"
                     required
                     placeholder="-----"
                   />
@@ -241,7 +312,7 @@ const AddBusinessFinish = () => {
                   <Field
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
-                    name="salaryFund"
+                    name="monthly_salary_fund"
                     required
                     placeholder="-----"
                   />
@@ -256,7 +327,7 @@ const AddBusinessFinish = () => {
                   <Field
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
-                    name="nonPermanentCosts"
+                    name="year_nonfixed_costs"
                     required
                     placeholder="-----"
                   />
@@ -271,7 +342,7 @@ const AddBusinessFinish = () => {
                 <Field
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
-                  name="site"
+                  name="website"
                   required
                   placeholder="-----"
                 />
@@ -329,7 +400,7 @@ const AddBusinessFinish = () => {
                   as="textarea"
                   className="addBusinessFinish__textarea section__primary-text"
                   type="text"
-                  name="reviews"
+                  name="public_reviews"
                   required
                   placeholder="-----"
                 />
@@ -343,7 +414,7 @@ const AddBusinessFinish = () => {
                 <Field
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
-                  name="financialAccounting"
+                  name="financial_accounting_system"
                   required
                   placeholder="-----"
                 />
@@ -353,13 +424,14 @@ const AddBusinessFinish = () => {
                 <Field
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
-                  name="CRM"
+                  name="crm"
                   required
                   placeholder="-----"
                 />
               </label>
             </div>
             <button
+              type="submit"
               // onClick={() => router.push("/account/add-business-finish")}
               className="addBusinessFinish__button"
             >
