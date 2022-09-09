@@ -1,0 +1,72 @@
+.custom-select {
+  &__control {
+    font-family: "Montserrat";
+    font-size: 20px;
+    line-height: 24px;
+    color: #0c0c0c;
+    display: block;
+    width: 100%;
+    border: none;
+    background: $white-color;
+    border-radius: 25px;
+    padding: 20px 25px;
+    outline: none;
+    cursor: pointer;
+  }
+  &__control--menu-is-open {
+    border-radius: 25px 25px 0 0 !important;
+  }
+
+  &__menu {
+    overflow: hidden !important;
+    border-radius: 0 0 25px 25px !important;
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: #888888;
+      content: "";
+    }
+  }
+  &__menu-list {
+    overflow: hidden;
+    padding: 0 !important;
+  }
+  &__option {
+    padding: 20px 25px !important;
+    font-family: "Montserrat" !important;
+    font-size: 20px !important;
+    line-height: 24px !important;
+    color: $main-text-color !important;
+  }
+  &__value-container {
+    padding: 0;
+    align-items: center;
+    display: grid;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  &__single-value {
+    margin: 0 !important;
+  }
+  &__input {
+    &:after {
+      white-space: none !important;
+    }
+  }
+
+  &__indicator-separator {
+    display: none;
+  }
+  &__indicators {
+    position: absolute !important;
+    right: 5%;
+    top: 21%;
+  }
+
+  &__indicator {
+    color: $main-text-color !important;
+  }
+}

@@ -117,31 +117,10 @@
   }
 
   &__select {
-    // width: 100%;
-    // border: none;
-    // background: $white-color;
-    // border-radius: 25px;
-
-    // padding: 20px 25px;
     margin-bottom: 40px;
     margin-top: auto;
     outline: none;
     cursor: pointer;
-
-    &--icon {
-      position: absolute;
-      pointer-events: none;
-
-      top: 50%;
-      transform: translate(0, -50%);
-      right: 25px;
-    }
-
-    & option /* + &--icon */ {
-      // right: 50px;
-      border-radius: 15px;
-      background: red;
-    }
 
     &::placeholder {
       font-family: "Montserrat";
