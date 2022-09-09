@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import ReactTooltip from "react-tooltip";
 
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
@@ -26,6 +27,7 @@ const BusinessCard = ({
 }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
+
   return (
     <li className="business-card">
       <div className="business-card__image">
@@ -44,14 +46,21 @@ const BusinessCard = ({
         </button>
       </div>
       <div className="business-card__info">
-        <Link href={`/catalog/${alias}`}><a className="business-card__link" title={title}></a></Link>
+        <Link href={`/catalog/${alias}`}>
+          <a className="business-card__link" title={title}></a>
+        </Link>
         <h3 className="business-card__title">
-          {title}{" "}
+          {title}
+
           <CheckSVG
+            data-tip={
+              isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
+            }
             className={`business-card__ckeck-icon ${
               isVerified ? "active" : ""
             }`}
           />
+          <ReactTooltip />
         </h3>
         <p
           className="business-card__description section__secondary-text"

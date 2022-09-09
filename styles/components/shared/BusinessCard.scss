@@ -67,6 +67,7 @@
   }
 
   &__ckeck-icon {
+    z-index: 555;
     &.active {
       & g {
         & path {
