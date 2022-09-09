@@ -31,7 +31,7 @@ const ContactInfo = () => {
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     dispatch({ type: "toggle_edit" });
-    const { name, phone, email, surname, city } = values;
+    const { name, phone, email, surname, city, password } = values;
 
     const data = {
       user,
@@ -43,6 +43,7 @@ const ContactInfo = () => {
         phone,
         surname,
         city,
+        password,
       },
     };
 
@@ -64,6 +65,11 @@ const ContactInfo = () => {
         }))
       }
 
+      resetForm({
+        values: {
+          password: ""
+        }
+      });
     } catch (error) {
       console.log("error");
       console.log(error);
@@ -127,7 +133,8 @@ const ContactInfo = () => {
                 phone: user.phone, 
                 surname: user.surname, 
                 email: user.email,  
-                city: user.city,  
+                city: user.city,
+                password: ""
               }}
             validate={(values) => {
               const errors: any = {};
