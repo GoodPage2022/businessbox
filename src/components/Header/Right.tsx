@@ -9,6 +9,7 @@ import IconButton from "../shared/IconButton";
 import MainButton from "../shared/MainButton";
 import MainButtonRed from "../shared/MainButtonRed";
 import ModalRegister from "../Modals/Modal-register/Modal-register";
+import ModalForgotPassword from "../Modals/modal-forgot-password/Modal-forgot-password";
 import { MainContext } from "../../contexts/mainContext";
 import ModalAuth from "../Modals/Modal-auth/Modal-auth";
 import { signOut as signOutReducer } from "../../../store/actions/auth";
@@ -36,6 +37,11 @@ const Right = () => {
 
   const closeRegisterModal = () => {
     dispatch({ type: "toggle_registrationModal" });
+    router.push("/");
+  };
+
+  const closeForgotPasswordModal = () => {
+    dispatch({ type: "toggle_forgotPasswordModal" });
     router.push("/");
   };
 
@@ -69,6 +75,7 @@ const Right = () => {
       </li>
       <ModalAuth onClose={closeAuthModal} />
       <ModalRegister onClose={closeRegisterModal} />
+      <ModalForgotPassword onClose={closeForgotPasswordModal} />
     </ul>
   );
 };

@@ -9,10 +9,10 @@ import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn as signInReducer } from '../../../../store/actions/auth';
+import { signIn as signInReducer } from "../../../../store/actions/auth";
 
 function ModalAuth({ onClose }: { onClose: any }) {
-  const dispatchRedux = useDispatch()
+  const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
@@ -21,6 +21,12 @@ function ModalAuth({ onClose }: { onClose: any }) {
     router.push("/#register");
     dispatch({ type: "toggle_authModal" });
     dispatch({ type: "toggle_registrationModal" });
+  };
+
+  const openForgotPasswordModal = () => {
+    router.push("/#forgot-password");
+    dispatch({ type: "toggle_authModal" });
+    dispatch({ type: "toggle_forgotPasswordModal" });
   };
 
   useEffect(() => {
@@ -48,21 +54,21 @@ function ModalAuth({ onClose }: { onClose: any }) {
 
     const data = {
       user: mail,
-      password
+      password,
       // user: "sdfsdf@sdf.df",
       // password: "secret"
-    }
-  
+    };
+
     try {
-      const signInResponse = await axios.post(`/api/account/signIn`, data)
+      const signInResponse = await axios.post(`/api/account/signIn`, data);
       if (signInResponse.status == 200) {
-        dispatchRedux(signInReducer(signInResponse.data))
+        dispatchRedux(signInReducer(signInResponse.data));
         dispatch({ type: "toggle_authModal" });
-        resetForm({})
-        setAuthError("")
+        resetForm({});
+        setAuthError("");
       }
     } catch (err: any) {
-      setAuthError("Хибний логін або пароль")
+      setAuthError("Хибний логін або пароль");
       console.log("Sign In Error");
       console.log(err);
     }
@@ -105,7 +111,9 @@ function ModalAuth({ onClose }: { onClose: any }) {
             onSubmit={handleSubmit}
           >
             <Form className="modal-auth__form">
-              {authError && <div className="modal-auth__failed">{authError}</div>}
+              {authError && (
+                <div className="modal-auth__failed">{authError}</div>
+              )}
               <label className="modal-auth__field--mail">
                 <span className="modal-auth__label">Електронна пошта</span>
                 <Field
@@ -155,6 +163,10 @@ function ModalAuth({ onClose }: { onClose: any }) {
               <button
                 className="modal-auth__forgot-password section__secondary-text"
                 type="button"
+                onClick={() => {
+                  console.log("qwessss");
+                  openForgotPasswordModal();
+                }}
               >
                 Забули пароль?
               </button>
