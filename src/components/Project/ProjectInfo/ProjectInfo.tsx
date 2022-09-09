@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import ReactTooltip from "react-tooltip";
+import { findDOMNode } from "react-dom";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
@@ -18,7 +20,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
-  const [isCopy, setIsCopy] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(true);
   const imageSliderSettings = {
@@ -37,6 +38,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       setLink(window.location.href);
     }
   }, []);
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(link);
+  };
 
   const categoriesSliderSettings = {
     dots: false,
@@ -119,15 +124,24 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               <HeartSVG />
             </button>
             <button
+              data-tip
+              data-for="copyTip"
+              data-event="click"
               className="projectInfo__title--transparent-icon"
-              onClick={() => {
-                navigator.clipboard.writeText(link);
-                // setIsCopy(false);
-              }}
-              // onClick={() => setIsCopy((prev) => !prev)}
+              data-event-off={"focusout"}
             >
               <ArrowSVG />
             </button>
+            <ReactTooltip
+              id="copyTip"
+              afterShow={() => {
+                copyLink();
+              }}
+              scrollHide={true}
+              clickable={true}
+            >
+              Текст скопійовано в буфер обміну
+            </ReactTooltip>
           </div>
         </div>
         <p className="projectInfo__city section__primary-text">
