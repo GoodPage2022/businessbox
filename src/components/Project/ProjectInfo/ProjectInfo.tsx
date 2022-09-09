@@ -158,7 +158,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   alt=""
                 />
               </li>
-            ))}
+            )}
           </Slider>
         </div>
         <div className="projectInfo__categories-slider">
