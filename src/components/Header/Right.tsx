@@ -12,12 +12,12 @@ import ModalRegister from "../Modals/Modal-register/Modal-register";
 import ModalForgotPassword from "../Modals/modal-forgot-password/Modal-forgot-password";
 import { MainContext } from "../../contexts/mainContext";
 import ModalAuth from "../Modals/Modal-auth/Modal-auth";
-import { useSelector, useDispatch } from "react-redux";
-import { signOut as signOutReducer } from '../../../store/actions/auth';
-import { useSession, signOut as signOutGoogle } from 'next-auth/react'
+
+import { signOut as signOutReducer } from "../../../store/actions/auth";
+import { useSession, signOut as signOutGoogle } from "next-auth/react";
 
 const Right = () => {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
   const { pathname } = useRouter();
@@ -26,10 +26,10 @@ const Right = () => {
 
   const signOut = async () => {
     if (session !== undefined) {
-      await signOutGoogle()
+      await signOutGoogle();
     }
-    dispatchRedux(signOutReducer())
-  }
+    dispatchRedux(signOutReducer());
+  };
 
   const openModal = () => {
     router.push("#auth");
@@ -52,37 +52,39 @@ const Right = () => {
   };
 
   return (
-    <ul className="header__right">
-      <li className="header__right__btn">
-        <IconButton borderColor="#FFFFFF" icon={<SearchSVG />} />
-      </li>
-      <li
-        className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
-      >
-        {user == null ? (
-          <span onClick={openModal}>
-            <MainButton label={`Вхід`} />
-          </span>
-        ) : (
-          <Link href="/account/contact-info">
-            <a>
-              <IconButton borderColor="#FFFFFF" icon={<UserSVG />} />{" "}
-            </a>
-          </Link>
-        )}
-      </li>
-      <li
-        className="header__right__btn"
-        onClick={() =>
-          user != null ? router.push("/account/add-business") : openModal()
-        }
-      >
-        <MainButtonRed label="Зареєструвати бізнес" />
-      </li>
+    <>
+      <ul className="header__right">
+        <li className="header__right__btn">
+          <IconButton borderColor="#FFFFFF" icon={<SearchSVG />} />
+        </li>
+        <li
+          className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
+        >
+          {user == null ? (
+            <span onClick={openModal}>
+              <MainButton label={`Вхід`} />
+            </span>
+          ) : (
+            <Link href="/account/contact-info">
+              <a>
+                <IconButton borderColor="#FFFFFF" icon={<UserSVG />} />{" "}
+              </a>
+            </Link>
+          )}
+        </li>
+        <li
+          className="header__right__btn"
+          onClick={() =>
+            user != null ? router.push("/account/add-business") : openModal()
+          }
+        >
+          <MainButtonRed label="Зареєструвати бізнес" />
+        </li>
+      </ul>
       <ModalAuth onClose={closeAuthModal} />
       <ModalRegister onClose={closeRegisterModal} />
       <ModalForgotPassword onClose={closeForgotPasswordModal} />
-    </ul>
+    </>
   );
 };
 
