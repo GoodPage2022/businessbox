@@ -15,6 +15,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveModalRegistration: !state.isActiveModalRegistration,
       };
+    case "toggle_forgotPasswordModal":
+      return {
+        ...state,
+        isActiveModalForgotPassword: !state.isActiveModalForgotPassword,
+      };
     default:
       return state;
   }
@@ -24,4 +29,5 @@ export const initialState = {
   isEdit: false,
   isActiveModalAuth: false,
   isActiveModalRegistration: false,
+  isActiveModalForgotPassword: false,
 };

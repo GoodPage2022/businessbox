@@ -100,7 +100,8 @@ export const data = {
     {
       fill: true,
       // display: false,
-      data: [/* "none", */ 1, 1, 1.5, 2, 3, 2, 4, 6, 2, 5.5, 5, 4],
+      // data: [/* "none", */ 1, 1, 1.5, 2, 3, 2, 4, 6, 2, 5.5, 5, 4],
+      data: [1, 2, 3, 4, 5, 6, 5, 4, 3, 10, 11, 12],
       borderColor: "#F22A4E",
       borderWidth: 5,
       backgroundColor: "rgba(53, 162, 235, 0.5)",
@@ -111,9 +112,9 @@ export const data = {
   ],
 };
 
-data.labels.unshift("");
+// data.labels.unshift("");
 // data.labels.push("");
-data.datasets[0].data.unshift(NaN);
+// data.datasets[0].data.unshift(NaN);
 // data.datasets[0].data.push(null);
 
 function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {

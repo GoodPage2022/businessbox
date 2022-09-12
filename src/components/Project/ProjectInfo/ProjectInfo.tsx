@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import ReactTooltip from "react-tooltip";
+import { findDOMNode } from "react-dom";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
@@ -38,6 +40,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     }
   }, []);
 
+  const copyLink = () => {
+    navigator.clipboard.writeText(link);
+  };
+
   const categoriesSliderSettings = {
     dots: false,
     infinite: false,
@@ -63,20 +69,23 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinessInfo = async () => {
-    let response
+    let response;
 
     try {
       response = await axios.post(`/api/businesses/get`, { user, projectId });
       if (response.data) {
-        setProjectInfo(response.data.entries[0])
+        setProjectInfo(response.data.entries[0]);
       }
     } catch (error) {
       router.push("/404");
     }
 
     try {
-      const addViewCount = await axios.post(`/api/businesses/view`, { user, project: response?.data.entries[0] });
-      
+      const addViewCount = await axios.post(`/api/businesses/view`, {
+        user,
+        project: response?.data.entries[0],
+      });
+
       console.log("addViewCount");
       console.log(addViewCount);
     } catch (error) {
@@ -116,15 +125,24 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               <HeartSVG />
             </button>
             <button
+              data-tip
+              data-for="copyTip"
+              data-event="click"
               className="projectInfo__title--transparent-icon"
-              onClick={() => {
-                navigator.clipboard.writeText(link);
-                // setIsCopy(false);
-              }}
-              // onClick={() => setIsCopy((prev) => !prev)}
+              data-event-off={"focusout"}
             >
               <ArrowSVG />
             </button>
+            <ReactTooltip
+              id="copyTip"
+              afterShow={() => {
+                copyLink();
+              }}
+              scrollHide={true}
+              clickable={true}
+            >
+              Текст скопійовано в буфер обміну
+            </ReactTooltip>
           </div>
         </div>
         <p className="projectInfo__city section__primary-text">

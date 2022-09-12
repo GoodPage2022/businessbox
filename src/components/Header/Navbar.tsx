@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 
@@ -12,11 +12,11 @@ const Navbar = () => {
             <a className="section__secondary-text--white">Каталог бізнесів</a>
           </Link>
         </li>
-        <li className="header__nav__menu__item  section__secondary-text--white">
+        {/* <li className="header__nav__menu__item  section__secondary-text--white">
           <Link href="/">
             <a className="section__secondary-text--white">Про нас</a>
           </Link>
-        </li>
+        </li> */}
         <li className="header__nav__menu__item   section__secondary-text--white">
           <Link href="/">
             <a className="section__secondary-text--white">Контакти</a>
