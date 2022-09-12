@@ -11,6 +11,7 @@ import ModalRegister from "../Modals/Modal-register/Modal-register";
 import ModalForgotPassword from "../Modals/modal-forgot-password/Modal-forgot-password";
 import { MainContext } from "../../contexts/mainContext";
 import ModalAuth from "../Modals/Modal-auth/Modal-auth";
+import { useDispatch, useSelector } from "react-redux";
 
 import { signOut as signOutReducer } from "../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
