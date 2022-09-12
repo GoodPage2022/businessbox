@@ -79,7 +79,27 @@
   }
 
   &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 40px;
+    &-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      border-radius: 18px;
+      border: none;
+      background: $main-text-color;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      align-items: center;
+      color: #ffffff;
+      cursor: pointer;
+    }
   }
 
   &__cards {

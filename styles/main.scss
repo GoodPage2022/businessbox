@@ -12,7 +12,8 @@ body {
   // scroll-behavior: smooth;
 }
 
-ul {
+ul,
+li {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -52,7 +53,7 @@ html {
 }
 
 main {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 230px);
 }
 
 .container {
@@ -160,10 +161,12 @@ main {
 @import "./components/HomePage/Popular/Popular.scss";
 @import "./components/HomePage/RegisterBusiness/RegisterBusiness.scss";
 
-//Project
-@import "./components/Project/ProjectInfo/ProjectInfo.scss";
-@import "./components/Project/ProjectInfo/ProfileInfo.scss";
-@import "./components/Project/ProjectInfo/Comment.scss";
+//Catalog
+@import "./components/Catalog/Catalog/CatalogView.scss";
+@import "./components/Catalog/Catalog/Sidebar.scss";
+@import "./components/Catalog/ProjectInfo/ProjectInfo.scss";
+@import "./components/Catalog/ProjectInfo/ProfileInfo.scss";
+@import "./components/Catalog/ProjectInfo/Comment.scss";
 
 //Account
 @import "./components/Account/Account.scss";
@@ -175,7 +178,8 @@ main {
 @import "./components/Account/Favorites.scss";
 
 // Footer
-@import "./components/Footer.scss";
+@import "./components/Footer/Footer.scss";
+@import "./components/Footer/Networks.scss";
 
 //Shared
 @import "./components/shared/MainButton.scss";
@@ -185,6 +189,8 @@ main {
 @import "./components/shared/IconButton.scss";
 @import "./components/shared/BusinessCard.scss";
 @import "./components/shared/CustomSelect.scss";
+@import "./components/shared/Checkbox.scss";
+@import "./components/shared/Pagination.scss";
 
 //Modal
 @import "./components/Modals/Modal-register.scss";

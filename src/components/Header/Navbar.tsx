@@ -8,7 +8,7 @@ const Navbar = () => {
       <Logo />
       <ul className="header__nav__menu">
         <li className="header__nav__menu__item ">
-          <Link href="/">
+          <Link href="/catalog">
             <a className="section__secondary-text--white">Каталог бізнесів</a>
           </Link>
         </li>
