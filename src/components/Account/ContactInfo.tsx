@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Formik, Form, Field } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MaskedInput from "react-text-mask";
 
 import ProfileData from "../../constants/profile-data";
@@ -11,8 +11,10 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { signIn as signInReducer } from "../../../store/actions/auth";
 import { signOut as signOutReducer } from "../../../store/actions/auth";
+import { useSession, signOut as signOutGoogle } from "next-auth/react";
 
 const ContactInfo = () => {
+  const { data: session } = useSession();
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
 
@@ -21,7 +23,16 @@ const ContactInfo = () => {
 
   const [state, dispatch] = React.useContext(MainContext);
 
-  const signOut = () => {
+  useEffect(()=>{
+    if (user.avatar !== undefined) {
+      setAvatar(user.avatar.path)
+    }
+  },[user])
+
+  const signOut = async () => {
+    if (session !== undefined) {
+      await signOutGoogle();
+    }
     dispatchRedux(signOutReducer());
   };
 
@@ -97,9 +108,41 @@ const ContactInfo = () => {
       .then((res) => {
         return res.json();
       })
-      .then((r) => {
+      .then(async (r) => {
         setAvatar(`/avatars/${r.files.file.originalFilename}`);
-      });
+        
+        const data = {
+          user,
+          userUpdate: {
+            _id: user._id,
+            avatar: {
+              path: `/avatars/${r.files.file.originalFilename}`
+            },
+          },
+        };
+    
+        try {
+          const updateUserResponse = await axios.post(
+            `/api/account/userUpdate`,
+            data,
+          );
+          
+          if (updateUserResponse.status == 200) {
+            dispatchRedux(
+              signInReducer({
+                ...user,
+                avatar: {
+                  path: `/avatars/${r.files.file.originalFilename}`
+                }
+              }),
+            );
+          }         
+          console.log(updateUserResponse);
+        } catch (error) {
+          console.log("error");
+          console.log(error);
+        }
+    });
   };
 
   return (
@@ -127,7 +170,42 @@ const ContactInfo = () => {
 
             <button
               className="contactInfo__delete-btn section__secondary-text"
-              onClick={() => setAvatar(defaultAvatar)}
+              onClick={async () => {
+                setAvatar(defaultAvatar)
+
+                const data = {
+                  user,
+                  userUpdate: {
+                    _id: user._id,
+                    avatar: {
+                      path: defaultAvatar
+                    },
+                  },
+                };
+            
+                try {
+                  const updateUserResponse = await axios.post(
+                    `/api/account/userUpdate`,
+                    data,
+                  );
+                  
+                  if (updateUserResponse.status == 200) {
+                    dispatchRedux(
+                      signInReducer({
+                        ...user,
+                        avatar: {
+                          path: defaultAvatar
+                        }
+                      }),
+                    );
+                  }
+                  
+                  console.log(updateUserResponse);
+                } catch (error) {
+                  console.log("error");
+                  console.log(error);
+                }
+              }}
             >
               Видалити фото
             </button>

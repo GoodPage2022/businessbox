@@ -55,7 +55,7 @@ const MyBusinesses = () => {
                   image={
                     images == null || !images.length
                       ? ""
-                      : `http://157.230.99.45:8082${images[0].path}`
+                      : `${images[0].meta.assets == "" ? `` : `http://157.230.99.45:8082`}${images[0].path}`
                   }
                   price={price}
                   views={view_count ?? 0}

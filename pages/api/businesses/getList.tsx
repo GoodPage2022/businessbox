@@ -12,7 +12,7 @@ const handler = async(
   const token = (req.body.user != null && req.body.user?.api_key !== undefined) ? req.body.user.api_key : process.env.cockpitApiToken
   const queryFilter = req.body.filter
 
-  let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`
+  let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}&limit=4&sort[_created]=-1`
 
   if (queryFilter) {
     const filter = Object.keys(queryFilter)

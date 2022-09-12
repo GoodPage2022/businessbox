@@ -14,9 +14,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const form = new IncomingForm();
     form.parse(req, (err: any, fields: any, files: any) => {
       if (err) return res.status(501).send({});
-
-      var oldPath = files.file.filepath;
-      var newPath = `./public/avatars/${files.file.originalFilename}`;
+      
+      const oldPath = files.file.filepath;
+      const newPath = `./public/${fields.folder ?? `avatars`}/${files.file.originalFilename}`;
       mv(oldPath, newPath, function (err: any) {});
       return res.status(200).send({ fields, files });
     });

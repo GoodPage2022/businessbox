@@ -1,37 +1,74 @@
 import { Formik, Form, Field } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
 const AddBusiness = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
-  const [file, setFile] = useState<any>()
+  const [files, setFiles] = useState<any>()
+  
+  const uploadToServer = async (file: any) => {
+    const uploadImageURL = file;
+
+    const formData = new FormData();
+    formData.append("file", uploadImageURL);
+    formData.append("folder", "businesses");
+   
+    const options: AxiosRequestConfig = {
+      headers: { "Content-Type": "multipart/form-data" },
+    }
+
+    try {
+      const reponse = await axios.post("/api/upload", formData, options)
+      console.log('reponse');
+      console.log(reponse);
+      return reponse
+    } catch (error) {
+      console.log(error);
+      return error
+    }
+  }
 
   const handleSubmit = async (values: any, { resetForm, setFieldValue }: any) => {
     const { name, price, description, business } = values;
 
-    // const images = [
-    //   {
-    //     meta: {
-    //       title: "",
-    //       assets: ""
-    //     },
-    //     path: "/sdf/sd.png"
-    //   }
-    // ]
-
-    const newBusiness = {
+    let newBusiness: any = {
       title: name,
       area: business,
       price,
       description,
-      // images,
     }
 
-    console.log(newBusiness)
+    if (files) {
+
+      const filesToUpload = [...files]
+
+      let images: any = []
+      await Promise.all(filesToUpload.map(async (f: any) => {
+        const uploadedFiles: any = await uploadToServer(f)
+
+        console.log("uploadedFiles");
+        console.log(uploadedFiles);
+
+        images.push({
+          meta: {
+            title: "",
+            assets: ""
+          },
+          path: `/${uploadedFiles.data.fields.folder ?? `avatars`}/${uploadedFiles.data.files.file.originalFilename}`
+        })
+
+      }))
+
+      newBusiness['images'] = images
+    }
+
+    console.log("newBusiness");
+    console.log(newBusiness);
+    
 
     try {
       const newBusinessResponse = await axios.post(`/api/businesses/post`, {
@@ -135,16 +172,13 @@ const AddBusiness = () => {
                   id="file"
                   name="file"
                   type="file"
+                  multiple
+                  accept="image/*,.png,.jpg"
                   className="addBusiness__custom-file-input"
-                  onChange={(event) => {
-                    if (event.currentTarget.files != null) {
-                      console.log(event.currentTarget.files);
-                      
-                      setFile(event.currentTarget.files[0])
-                    }
-  
-                    // if (event.currentTarget.files != null)
-                      // setFieldValue("file", event.currentTarget.files[0]);
+                  data-label={`${files && files.length > 0 ? `Додано ${files.length} медіафали` : `Додати медіафали`}`}
+                  onChange={(e) => {
+                    if (e.currentTarget.files)
+                      setFiles(e.currentTarget.files)
                   }}
                 />
               </div>

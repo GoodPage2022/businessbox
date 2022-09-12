@@ -37,13 +37,16 @@
   }
   &__custom-file-input {
     color: transparent;
-    width: 170px;
+    width: 200px;
   }
   &__custom-file-input::-webkit-file-upload-button {
     visibility: hidden;
   }
   &__custom-file-input::before {
-    content: "Додати медіафали";
+    width: 200px;
+    box-sizing: border-box;
+    text-align: center;
+    content: attr(data-label);
     display: inline-block;
     border: 1px solid $main-text-color;
     border-radius: 15px;
