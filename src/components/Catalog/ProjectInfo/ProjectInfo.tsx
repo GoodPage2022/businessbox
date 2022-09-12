@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
+  const [isCopy, setIsCopy] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(true);
   const imageSliderSettings = {
@@ -90,7 +91,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   useEffect(() => {
     getBusinesses();
@@ -164,7 +165,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
         )} */}
         <div className="projectInfo__image-slider">
-          {projectInfo.images && <Slider {...imageSliderSettings}>
+          {projectInfo.imagesyarn && <Slider {...imageSliderSettings}>
             {projectInfo.images.map((img: any, index: number) => 
               <li key={index} className="projectInfo__image-slider--image">
                 <Image
@@ -210,28 +211,18 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
         <h2 className="projectInfo__offers-title title">Схожі пропозиції</h2>
         <ul className="popular__cards">
-          {cards.map(
-            ({
-              _id,
-              title,
-              description,
-              images,
-              view_count,
-              price,
-              is_verified,
-            }: any) => (
-              <PopularCard
-                key={_id}
-                alias={_id}
-                title={title}
-                description={description}
-                image={`http://157.230.99.45:8082${images[0].path}`}
-                price={price}
-                views={view_count ?? 0}
-                isVerified={is_verified}
-              />
-            ),
-          )}
+          {cards.map(({ _id, title, description, images, view_count, price, is_verified }: any) => (
+            <PopularCard
+              key={_id}
+              alias={_id}
+              title={title}
+              description={description}
+              image={images == null || !images.length ? '' : `http://157.230.99.45:8082${images[0].path}`}
+              price={price}
+              views={view_count ?? 0}
+              isVerified={is_verified}
+            />
+          ))}
         </ul>
       </div>
     </section>

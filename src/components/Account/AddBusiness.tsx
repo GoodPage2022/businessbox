@@ -3,20 +3,35 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const AddBusiness = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
-  const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { name, phone, price, description, business } = values;
+  const [file, setFile] = useState<any>()
+
+  const handleSubmit = async (values: any, { resetForm, setFieldValue }: any) => {
+    const { name, price, description, business } = values;
+
+    // const images = [
+    //   {
+    //     meta: {
+    //       title: "",
+    //       assets: ""
+    //     },
+    //     path: "/sdf/sd.png"
+    //   }
+    // ]
 
     const newBusiness = {
       title: name,
       area: business,
       price,
       description,
-      // file,
-    };
+      // images,
+    }
+
+    console.log(newBusiness)
 
     try {
       const newBusinessResponse = await axios.post(`/api/businesses/post`, {
@@ -45,7 +60,7 @@ const AddBusiness = () => {
             business: "",
             price: "",
             description: "",
-            file: "",
+            file: null,
           }}
           validate={(values: any) => {
             const errors: any = {};
@@ -122,7 +137,14 @@ const AddBusiness = () => {
                   type="file"
                   className="addBusiness__custom-file-input"
                   onChange={(event) => {
-                    // setFieldValue("file", event.currentTarget.files[0]);
+                    if (event.currentTarget.files != null) {
+                      console.log(event.currentTarget.files);
+                      
+                      setFile(event.currentTarget.files[0])
+                    }
+  
+                    // if (event.currentTarget.files != null)
+                      // setFieldValue("file", event.currentTarget.files[0]);
                   }}
                 />
               </div>

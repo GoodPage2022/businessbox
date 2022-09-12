@@ -9,10 +9,10 @@ const handler = async(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) => {
-  const token = req.body.user != null ? req.body.user.api_key : process.env.cockpitApiToken
+  const token = (req.body.user != null && req.body.user?.api_key !== undefined) ? req.body.user.api_key : process.env.cockpitApiToken
   const queryFilter = req.body.filter
 
-  let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}&limit=4`
+  let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`
 
   if (queryFilter) {
     const filter = Object.keys(queryFilter)
@@ -24,7 +24,9 @@ const handler = async(
       queryUrl += "&" + filter
   }
 
-
+  
+  
+  
   try {
     const response = await axios.get(queryUrl)
     res.status(200).json( response.data )

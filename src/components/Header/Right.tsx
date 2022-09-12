@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useSelector, useDispatch } from "react-redux";
 
 import UserSVG from "../../assets/svg/user.svg";
 import SearchSVG from "../../assets/svg/search.svg";
