@@ -9,16 +9,21 @@ import MainButtonRed from "../shared/MainButtonRed";
 import phoneNumberMask from "../../masks/phoneNumberMask";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { signIn as signInReducer } from '../../../store/actions/auth';
+import { signIn as signInReducer } from "../../../store/actions/auth";
+import { signOut as signOutReducer } from "../../../store/actions/auth";
 
 const ContactInfo = () => {
   const user = useSelector((state: any) => state.auth.user);
-  const dispatchRedux = useDispatch()
+  const dispatchRedux = useDispatch();
 
   const defaultAvatar = "/assets/images/profile-photo.png";
   const [avatar, setAvatar] = useState(defaultAvatar);
 
   const [state, dispatch] = React.useContext(MainContext);
+
+  const signOut = () => {
+    dispatchRedux(signOutReducer());
+  };
 
   // const [name, setName] = useState(user.name);
   // const [lastname, setLastname] = useState(user.surname);
@@ -52,19 +57,20 @@ const ContactInfo = () => {
         `/api/account/userUpdate`,
         data,
       );
-      
-      if (updateUserResponse.status == 200) {
-        dispatchRedux(signInReducer({
-          ...user,
-          name,
-          user: email,
-          email,
-          phone,
-          surname,
-          city,
-        }))
-      }
 
+      if (updateUserResponse.status == 200) {
+        dispatchRedux(
+          signInReducer({
+            ...user,
+            name,
+            user: email,
+            email,
+            phone,
+            surname,
+            city,
+          }),
+        );
+      }
       resetForm({
         values: {
           password: ""
@@ -74,8 +80,8 @@ const ContactInfo = () => {
       console.log("error");
       console.log(error);
       resetForm({});
-  }
-      
+    }
+
     // resetForm({});
   };
 
@@ -120,10 +126,17 @@ const ContactInfo = () => {
             />
 
             <button
-              className="contactInfo__btn section__secondary-text"
+              className="contactInfo__delete-btn section__secondary-text"
               onClick={() => setAvatar(defaultAvatar)}
             >
               Видалити фото
+            </button>
+
+            <button
+              onClick={signOut}
+              className="contactInfo__signout-btn section__secondary-text--white"
+            >
+              Вийти
             </button>
           </div>
 
@@ -145,7 +158,7 @@ const ContactInfo = () => {
               ) {
                 errors.email = "Invalid email address";
               }
-              
+
               return errors;
             }}
             onSubmit={handleSubmit}

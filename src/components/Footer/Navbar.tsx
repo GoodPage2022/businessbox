@@ -12,11 +12,11 @@ const Navbar = () => {
             </a>
           </Link>
         </li>
-        <li className="header__nav__menu__item  section__secondary-text--white">
+        {/* <li className="header__nav__menu__item  section__secondary-text--white">
           <Link href="/">
             <a className="section__secondary-text--white">Про нас</a>
           </Link>
-        </li>
+        </li> */}
         <li className="header__nav__menu__item   section__secondary-text--white">
           <Link href="/">
             <a className="section__secondary-text--white">Контакти</a>

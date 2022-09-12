@@ -6,6 +6,7 @@ interface ContextType {
     isEdit: boolean;
     isActiveModalAuth: boolean;
     isActiveModalRegistration: boolean;
+    isActiveModalForgotPassword: boolean;
   };
   dispatch: React.Dispatch<{ type: string; value: unknown }>;
 }

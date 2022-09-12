@@ -38,7 +38,7 @@
     -webkit-user-select: none;
     cursor: pointer;
   }
-  &__btn {
+  &__delete-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,6 +51,17 @@
     &:not(:last-child) {
       margin-bottom: 10px;
     }
+  }
+  &__signout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 7px 16px 8px;
+    border: none;
+    border-radius: 15px;
+    background: $main-red-color;
+    cursor: pointer;
   }
   &__image {
     position: relative;
