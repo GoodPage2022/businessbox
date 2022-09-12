@@ -38,7 +38,11 @@ const Favorites = () => {
                   alias={_id}
                   title={title}
                   description={description}
-                  image={images == null || !images.length ? '' : `http://157.230.99.45:8082${images[0].path}`}
+                  image={
+                    images == null || !images.length
+                      ? ""
+                      : `${images[0].meta.assets == "" ? `` : `http://157.230.99.45:8082`}${images[0].path}`
+                  }
                   price={price}
                   views={view_count ?? 0}
                   isVerified={is_verified}
