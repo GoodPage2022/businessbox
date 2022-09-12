@@ -9,7 +9,7 @@ const handler = async(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) => {
-    const token = req.body.user != null ? req.body.user.api_key : process.env.cockpitApiToken
+    const token = (req.body.user != null && req.body.user?.api_key !== undefined) ? req.body.user.api_key : process.env.cockpitApiToken
     const data = {
       data: req.body.data
     }
@@ -18,6 +18,9 @@ const handler = async(
       const newBusinessResponse = await axios.post(`${process.env.cockpitApiUrl}/collections/save/Businesses?token=${token}`, data)
       res.status(200).json({ data: newBusinessResponse.data })
     } catch (err: any) {
+      console.log(err);
+      console.log(req.body.user);
+      
       res.status(500).json({err: JSON.stringify(err)})
     }
 }

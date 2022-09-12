@@ -35,7 +35,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
   }
 
   useEffect(() => {
-    if (session != null && user == null ) {
+    if (session != null && user == null) {
       signInGoogleRequest(session)
     }
   }, [session, user])

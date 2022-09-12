@@ -5,8 +5,13 @@ import RegisterBusiness from "../src/components/HomePage/RegisterBusiness/Regist
 // import { useDispatch, useSelector } from "react-redux";
 // import { onSignIn } from '../store/actions/auth';
 // import { Dispatch, AnyAction } from 'redux';
+import axios from "axios";
 
 const IndexPage = () => {
+
+  // const signInResponse = async () => await axios.post(`/api/hello`)
+  // signInResponse()
+
   // const token = useSelector((state: any) => state.auth.token)
   // const dispatch = useDispatch()
   // dispatch(onSignIn("tokenSETTEDd"))

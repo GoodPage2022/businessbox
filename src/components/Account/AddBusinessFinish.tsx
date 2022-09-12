@@ -57,6 +57,7 @@ const AddBusinessFinish = () => {
       public_reviews,
       financial_accounting_system,
       crm,
+      _by: user._id
     };
 
     try {

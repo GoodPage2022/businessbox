@@ -8,14 +8,15 @@ const AddBusiness = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { name, phone, price, description, business } = values;
+    const { name, file, price, description, business } = values;
 
     const newBusiness = {
       title: name,
       area: business,
       price,
       description,
-      // file,
+      // _by: user._id,
+      file,
     };
 
     try {
