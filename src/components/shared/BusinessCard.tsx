@@ -31,13 +31,13 @@ const BusinessCard = ({
   return (
     <li className="business-card">
       <div className="business-card__image">
-        <Image
+        {image && <Image
           className=""
           src={image}
           layout="fill"
           objectFit="cover"
           alt="card-image"
-        />
+        />}
         <button
           onClick={() => setIsLiked((prev) => !prev)}
           className={`business-card__heart-icon ${isLiked ? "active" : ""}`}

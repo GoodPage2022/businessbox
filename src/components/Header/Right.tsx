@@ -12,18 +12,24 @@ import ModalRegister from "../Modals/Modal-register/Modal-register";
 import ModalForgotPassword from "../Modals/modal-forgot-password/Modal-forgot-password";
 import { MainContext } from "../../contexts/mainContext";
 import ModalAuth from "../Modals/Modal-auth/Modal-auth";
-import { signOut as signOutReducer } from "../../../store/actions/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { signOut as signOutReducer } from '../../../store/actions/auth';
+import { useSession, signOut as signOutGoogle } from 'next-auth/react'
 
 const Right = () => {
+  const { data: session } = useSession()
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
   const { pathname } = useRouter();
   const [state, dispatch] = React.useContext(MainContext);
   const router = useRouter();
 
-  const signOut = () => {
-    dispatchRedux(signOutReducer());
-  };
+  const signOut = async () => {
+    if (session !== undefined) {
+      await signOutGoogle()
+    }
+    dispatchRedux(signOutReducer())
+  }
 
   const openModal = () => {
     router.push("#auth");

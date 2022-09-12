@@ -16,7 +16,7 @@ const handler = async(
 
     try {
       const newBusinessResponse = await axios.post(`${process.env.cockpitApiUrl}/collections/save/Businesses?token=${token}`, data)
-      res.status(200).json({ data: JSON.stringify(newBusinessResponse.data) })
+      res.status(200).json({ data: newBusinessResponse.data })
     } catch (err: any) {
       res.status(500).json({err: JSON.stringify(err)})
     }

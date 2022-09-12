@@ -3,11 +3,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from 'next/router'
 
-import AddBusiness from "../../src/components/Account/AddBusiness";
-import AccountLayout from "../../src/layouts/AccountLayout";
+import AddBusinessFinish from "../../../src/components/Account/AddBusinessFinish";
+import AccountLayout from "../../../src/layouts/AccountLayout";
 
-const AddMyBusiness: NextPage = () => {
+const AddMyBusinessFinish: NextPage = () => {
   const router = useRouter()
+  const { businessId } = router.query
   const user = useSelector((state: any) => state.auth.user);
 
   if (user == null) {
@@ -15,13 +16,18 @@ const AddMyBusiness: NextPage = () => {
     return (<></>)
   }
 
+  if (businessId == null) {
+    // router.back()
+    return (<></>)
+  }
+
   return (
     <>
       <AccountLayout>
-        <AddBusiness />
+        <AddBusinessFinish />
       </AccountLayout>
     </>
   );
 };
 
-export default AddMyBusiness;
+export default AddMyBusinessFinish;

@@ -10,6 +10,8 @@ const withReactSvg = require('next-react-svg')
 const path = require('path')
 
 const env = {
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   cockpitApiUrl: process.env.API_URL,
   cockpitApiToken: process.env.API_TOKEN,
   cockpitBaseUrl: process.env.BASE_URL
