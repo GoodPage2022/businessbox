@@ -10,7 +10,7 @@
     grid-template-columns: repeat(4, 1fr);
     justify-content: center;
     opacity: 0.4;
-    // filter: blur(2px);
+    filter: blur(1px);
     grid-column-gap: 30px;
     grid-row-gap: 40px;
   }
