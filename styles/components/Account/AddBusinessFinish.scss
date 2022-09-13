@@ -2,12 +2,15 @@
   padding-bottom: 80px;
   &__first-wrapper {
     display: flex;
+    margin-bottom: 40px;
   }
   &__second-wrapper {
     display: flex;
+    margin-bottom: 40px;
   }
   &__third-wrapper {
     display: flex;
+    margin-bottom: 40px;
     &--left {
       display: flex;
       width: 100%;
@@ -16,19 +19,24 @@
   }
   &__fourth-wrapper {
     display: flex;
+    margin-bottom: 40px;
   }
   &__fifth-wrapper {
     display: flex;
+    margin-bottom: 40px;
     margin-top: 40px;
   }
   &__sixth-wrapper {
     display: flex;
+    margin-bottom: 40px;
   }
   &__seventh-wrapper {
     display: flex;
+    margin-bottom: 40px;
   }
   &__eighth-wrapper {
     display: flex;
+    margin-bottom: 40px;
   }
 
   &__custom-file-input {
@@ -93,13 +101,14 @@
   &__input {
     &-thumb {
       position: relative;
+      display: block;
     }
     width: 100%;
     border: none;
     background: $white-color;
     border-radius: 25px;
     padding: 20px 25px;
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
     outline: none;
     cursor: text;
 
@@ -135,7 +144,7 @@
     &--thumb {
       position: relative;
       display: block;
-      margin-bottom: 40px;
+      // margin-bottom: 40px;
     }
   }
 
@@ -195,11 +204,27 @@
     }
   }
 
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__button-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 16px 8px;
+    border: 1px solid $main-text-color;
+    border-radius: 15px;
+    background: transparent;
+    cursor: pointer;
+  }
+
   &__button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: auto;
     padding: 10px 20px;
     border: none;
     border-radius: 18px;
