@@ -77,17 +77,21 @@ const Popular = () => {
               <Form className="popular__form">
                 <label className="popular__field">
                   <span className="popular__label">Ціна</span>
-                  <Field
-                    type="text"
-                    name="price"
-                    required
-                    placeholder="-----"
-                    component={CustomSelect}
-                    options={[
-                      { value: "yes", label: "Так" },
-                      { value: "no", label: "Ні" },
-                    ]}
-                  />
+                  <div className="popular__price">
+                    <Field
+                      className="popular__input section__primary-text"
+                      type="text"
+                      name="from"
+                      placeholder="від"
+                    />
+                    <p className="popular__price--text">—</p>
+                    <Field
+                      className="popular__input section__primary-text"
+                      type="text"
+                      name="to"
+                      placeholder="до"
+                    />
+                  </div>
                 </label>
                 <label className="popular__field">
                   <span className="popular__label">Область</span>
