@@ -1,0 +1,14 @@
+.newBusinesses {
+  padding-bottom: 40px;
+
+  &__title {
+    margin-bottom: 40px;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    grid-column-gap: 30px;
+  }
+}
