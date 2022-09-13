@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
 import BusinessCard from "../../shared/BusinessCard";
 
-const NewBusinesses = () => {
+const SoldBusinesses = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
 
@@ -25,11 +24,11 @@ const NewBusinesses = () => {
   }, []);
 
   return (
-    <section className="newBusinesses">
-      <div className="container newBusinesses__container">
-        <h2 className="newBusinesses__title title">Нові бізнеси</h2>
+    <section className="soldBusinesses">
+      <div className="container soldBusinesses__container">
+        <h2 className="soldBusinesses__title title">Продані</h2>
 
-        <ul className="newBusinesses__cards">
+        <ul className="soldBusinesses__cards">
           {cards.map(
             ({
               _id,
@@ -66,4 +65,4 @@ const NewBusinesses = () => {
   );
 };
 
-export default NewBusinesses;
+export default SoldBusinesses;

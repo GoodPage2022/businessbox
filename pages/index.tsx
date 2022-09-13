@@ -3,6 +3,8 @@ import Categories from "../src/components/HomePage/Categories/Categories";
 import Popular from "../src/components/HomePage/Popular/Popular";
 import RegisterBusiness from "../src/components/HomePage/RegisterBusiness/RegisterBusiness";
 import NewBusinesses from "../src/components/HomePage/NewBusinesses/NewBusinesses";
+import SoldBusinesses from "../src/components/HomePage/SoldBusinesses/SoldBusinesses";
+
 // import { useDispatch, useSelector } from "react-redux";
 // import { onSignIn } from '../store/actions/auth';
 // import { Dispatch, AnyAction } from 'redux';
@@ -42,6 +44,7 @@ const IndexPage = () => {
       <Categories />
       <Popular />
       <NewBusinesses />
+      <SoldBusinesses />
       <RegisterBusiness />
     </>
   );

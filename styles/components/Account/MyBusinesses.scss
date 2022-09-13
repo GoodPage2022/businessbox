@@ -1,13 +1,11 @@
 .myBusinesses {
-  &__container {
-  }
   &__cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
     justify-content: center;
     grid-column-gap: 30px;
-    grid-row-gap: 20px;
+    grid-row-gap: 40px;
   }
 
   &__empty {
