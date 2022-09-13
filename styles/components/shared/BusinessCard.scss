@@ -33,7 +33,7 @@
     border-radius: 15px;
     background: $white-color;
     cursor: pointer;
-
+    z-index: 9999999;
     &.active {
       border: 1px solid $main-red-color;
       background: $main-red-color;

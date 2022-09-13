@@ -4,35 +4,39 @@ import { useRouter } from "next/router";
 import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import CustomSelect from "../shared/CustomSelect";
 
 const AddBusiness = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
-  const [files, setFiles] = useState<any>()
-  
+  const [files, setFiles] = useState<any>();
+
   const uploadToServer = async (file: any) => {
     const uploadImageURL = file;
 
     const formData = new FormData();
     formData.append("file", uploadImageURL);
     formData.append("folder", "businesses");
-   
+
     const options: AxiosRequestConfig = {
       headers: { "Content-Type": "multipart/form-data" },
-    }
+    };
 
     try {
-      const reponse = await axios.post("/api/upload", formData, options)
-      console.log('reponse');
+      const reponse = await axios.post("/api/upload", formData, options);
+      console.log("reponse");
       console.log(reponse);
-      return reponse
+      return reponse;
     } catch (error) {
       console.log(error);
-      return error
+      return error;
     }
-  }
+  };
 
-  const handleSubmit = async (values: any, { resetForm, setFieldValue }: any) => {
+  const handleSubmit = async (
+    values: any,
+    { resetForm, setFieldValue }: any,
+  ) => {
     const { name, price, description, business } = values;
 
     let newBusiness: any = {
@@ -40,42 +44,45 @@ const AddBusiness = () => {
       area: business,
       price,
       description,
-    }
+    };
 
     if (files) {
+      const filesToUpload = [...files];
 
-      const filesToUpload = [...files]
+      let images: any = [];
+      await Promise.all(
+        filesToUpload.map(async (f: any) => {
+          const uploadedFiles: any = await uploadToServer(f);
 
-      let images: any = []
-      await Promise.all(filesToUpload.map(async (f: any) => {
-        const uploadedFiles: any = await uploadToServer(f)
+          console.log("uploadedFiles");
+          console.log(uploadedFiles);
 
-        console.log("uploadedFiles");
-        console.log(uploadedFiles);
+          images.push({
+            meta: {
+              title: "",
+              assets: "",
+            },
+            path: `/${uploadedFiles.data.fields.folder ?? `avatars`}/${
+              uploadedFiles.data.files.file.originalFilename
+            }`,
+          });
+        }),
+      );
 
-        images.push({
-          meta: {
-            title: "",
-            assets: ""
-          },
-          path: `/${uploadedFiles.data.fields.folder ?? `avatars`}/${uploadedFiles.data.files.file.originalFilename}`
-        })
-
-      }))
-
-      newBusiness['images'] = images
+      newBusiness["images"] = images;
     }
 
     console.log("newBusiness");
     console.log(newBusiness);
-    
 
     try {
       const newBusinessResponse = await axios.post(`/api/businesses/post`, {
         data: newBusiness,
         user,
       });
-      router.push(`/account/add-business-finish/${newBusinessResponse.data.data._id}`)
+      router.push(
+        `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
+      );
 
       console.log("newUserResponse");
       console.log(newBusinessResponse);
@@ -122,11 +129,70 @@ const AddBusiness = () => {
                 <label className="addBusiness__field">
                   <span className="addBusiness__label">Категорія</span>
                   <Field
-                    className="addBusiness__input section__primary-text"
                     type="text"
                     name="business"
                     required
                     placeholder="Графічний дизайн"
+                    component={CustomSelect}
+                    options={[
+                      { value: "yes", label: "Графічний дизайн" },
+                      { value: "category_1", label: "Категорія 2" },
+                      { value: "category_2", label: "Категорія 3" },
+                      { value: "category_3", label: "Категорія 4" },
+                    ]}
+                  />
+                </label>
+                <label className="addBusiness__field">
+                  <span className="addBusiness__label">Регіон</span>
+                  <Field
+                    type="text"
+                    name="region"
+                    required
+                    placeholder="Україна"
+                    component={CustomSelect}
+                    options={[
+                      { value: "yes", label: "Україна" },
+                      { value: "category_1", label: "Не Україна" },
+                    ]}
+                  />
+                </label>
+                <label className="addBusiness__field">
+                  <span className="addBusiness__label">Місто</span>
+                  <Field
+                    type="text"
+                    name="city"
+                    required
+                    placeholder="Дніпро"
+                    component={CustomSelect}
+                    options={[
+                      { value: "yes", label: "Дніпро" },
+                      { value: "category_1", label: "Київ" },
+                      { value: "category_2", label: "Житомир" },
+                      { value: "category_3", label: "Львів" },
+                    ]}
+                  />
+                </label>
+              </div>
+              <div className="addBusiness__info-wrapper--right">
+                <label className="addBusiness__field">
+                  <span className="addBusiness__label">Опис</span>
+                  <Field
+                    as="textarea"
+                    className="addBusiness__textarea section__primary-text"
+                    type="text"
+                    name="description"
+                    required
+                    placeholder="Писати тут..."
+                  />
+                </label>
+                <label className="addBusiness__field">
+                  <span className="addBusiness__label">Рік створення</span>
+                  <Field
+                    className="addBusiness__input section__primary-text"
+                    type="text"
+                    name="year"
+                    required
+                    placeholder="-----"
                   />
                 </label>
                 <label className="addBusiness__field">
@@ -141,19 +207,6 @@ const AddBusiness = () => {
                     />
                     <span className="addBusiness__icon">$</span>
                   </span>
-                </label>
-              </div>
-              <div className="addBusiness__info-wrapper--right">
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Опис</span>
-                  <Field
-                    as="textarea"
-                    className="addBusiness__textarea section__primary-text"
-                    type="text"
-                    name="description"
-                    required
-                    placeholder="Писати тут..."
-                  />
                 </label>
               </div>
             </div>
@@ -175,18 +228,18 @@ const AddBusiness = () => {
                   multiple
                   accept="image/*,.png,.jpg"
                   className="addBusiness__custom-file-input"
-                  data-label={`${files && files.length > 0 ? `Додано ${files.length} медіафали` : `Додати медіафали`}`}
+                  data-label={`${
+                    files && files.length > 0
+                      ? `Додано ${files.length} медіафали`
+                      : `Додати медіафали`
+                  }`}
                   onChange={(e) => {
-                    if (e.currentTarget.files)
-                      setFiles(e.currentTarget.files)
+                    if (e.currentTarget.files) setFiles(e.currentTarget.files);
                   }}
                 />
               </div>
             </div>
-            <button
-              type="submit"
-              className="addBusiness__button"
-            >
+            <button type="submit" className="addBusiness__button">
               Далі
             </button>
           </Form>

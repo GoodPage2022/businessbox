@@ -20,6 +20,8 @@ const Categories = () => {
     slidesToScroll: 1,
     arrows: false,
     swipeToSlide: true,
+    autoplay: true,
+    autoplaySpeed: 15000,
   };
 
   const openModal = () => {

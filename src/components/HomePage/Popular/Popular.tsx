@@ -10,7 +10,7 @@ import DotsSVG from "../../../assets/svg/dots.svg";
 import LinesSVG from "../../../assets/svg/lines.svg";
 import IconButton from "../../shared/IconButton";
 import PopularCards from "../../../constants/popular";
-import PopularCard from "../../shared/BusinessCard";
+import BusinessCard from "../../shared/BusinessCard";
 
 const Popular = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -77,17 +77,21 @@ const Popular = () => {
               <Form className="popular__form">
                 <label className="popular__field">
                   <span className="popular__label">Ціна</span>
-                  <Field
-                    type="text"
-                    name="price"
-                    required
-                    placeholder="-----"
-                    component={CustomSelect}
-                    options={[
-                      { value: "yes", label: "Так" },
-                      { value: "no", label: "Ні" },
-                    ]}
-                  />
+                  <div className="popular__price">
+                    <Field
+                      className="popular__input section__primary-text"
+                      type="text"
+                      name="from"
+                      placeholder="від"
+                    />
+                    <p className="popular__price--text">—</p>
+                    <Field
+                      className="popular__input section__primary-text"
+                      type="text"
+                      name="to"
+                      placeholder="до"
+                    />
+                  </div>
                 </label>
                 <label className="popular__field">
                   <span className="popular__label">Область</span>
@@ -147,22 +151,36 @@ const Popular = () => {
         </div>
 
         <ul className="popular__cards">
-          {cards.map(({ _id, title, description, images, view_count, price, is_verified }: any) => (
-            <PopularCard
-              key={_id}
-              alias={_id}
-              title={title}
-              description={description}
-              image={
-                images == null || !images.length
-                  ? ""
-                  : `${images[0].meta.assets == "" ? `` : `http://157.230.99.45:8082`}${images[0].path}`
-              }
-              price={price}
-              views={view_count ?? 0}
-              isVerified={is_verified}
-            />
-          ))}
+          {cards.map(
+            ({
+              _id,
+              title,
+              description,
+              images,
+              view_count,
+              price,
+              is_verified,
+            }: any) => (
+              <BusinessCard
+                key={_id}
+                alias={_id}
+                title={title}
+                description={description}
+                image={
+                  images == null || !images.length
+                    ? ""
+                    : `${
+                        images[0].meta.assets == ""
+                          ? ``
+                          : `http://157.230.99.45:8082`
+                      }${images[0].path}`
+                }
+                price={price}
+                views={view_count ?? 0}
+                isVerified={is_verified}
+              />
+            ),
+          )}
         </ul>
       </div>
     </section>

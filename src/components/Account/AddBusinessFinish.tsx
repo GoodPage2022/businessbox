@@ -1,14 +1,15 @@
 import { Formik, Form, Field } from "formik";
 import CustomSelect from "../shared/CustomSelect";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import MainButtonBlack from "../shared/MainButtonBlack";
 
 const AddBusinessFinish = () => {
-  const router = useRouter()
+  const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
-  const { businessId } = router.query  
-  
+  const { businessId } = router.query;
+
   const handleSubmit = async (values: any, { resetForm }: any) => {
     const {
       property_form,
@@ -32,7 +33,7 @@ const AddBusinessFinish = () => {
       public_reviews,
       financial_accounting_system,
       crm,
-    } = values
+    } = values;
 
     const newBusiness = {
       _id: businessId,
@@ -57,7 +58,7 @@ const AddBusinessFinish = () => {
       public_reviews,
       financial_accounting_system,
       crm,
-      _by: user._id
+      _by: user._id,
     };
 
     try {
@@ -66,7 +67,7 @@ const AddBusinessFinish = () => {
         user,
       });
 
-      router.push(`/account/my-businesses`)
+      router.push(`/account/my-businesses`);
 
       console.log("newUserResponse");
       console.log(newBusinessResponse);
@@ -431,13 +432,22 @@ const AddBusinessFinish = () => {
                 />
               </label>
             </div>
-            <button
-              type="submit"
-              // onClick={() => router.push("/account/add-business-finish")}
-              className="addBusinessFinish__button"
-            >
-              Зареєструвати бізнес
-            </button>
+            <div className="addBusinessFinish__buttons">
+              <button
+                type="button"
+                onClick={() => router.back()}
+                className="addBusinessFinish__button-back"
+              >
+                Назад
+              </button>
+              <button
+                type="submit"
+                // onClick={() => router.push("/account/add-business-finish")}
+                className="addBusinessFinish__button"
+              >
+                Зареєструвати бізнес
+              </button>
+            </div>
           </Form>
         </Formik>
       </div>

@@ -30,14 +30,19 @@ const BusinessCard = ({
 
   return (
     <li className="business-card">
+      <Link href={`/catalog/${alias}`}>
+        <a className="business-card__link" title={title}></a>
+      </Link>
       <div className="business-card__image">
-        {image && <Image
-          className=""
-          src={image}
-          layout="fill"
-          objectFit="cover"
-          alt="card-image"
-        />}
+        {image && (
+          <Image
+            className=""
+            src={image}
+            layout="fill"
+            objectFit="cover"
+            alt="card-image"
+          />
+        )}
         <button
           onClick={() => setIsLiked((prev) => !prev)}
           className={`business-card__heart-icon ${isLiked ? "active" : ""}`}
@@ -46,9 +51,6 @@ const BusinessCard = ({
         </button>
       </div>
       <div className="business-card__info">
-        <Link href={`/catalog/${alias}`}>
-          <a className="business-card__link" title={title}></a>
-        </Link>
         <h3 className="business-card__title">
           {title}
 
