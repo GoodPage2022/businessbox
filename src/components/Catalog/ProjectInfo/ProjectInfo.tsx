@@ -91,7 +91,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     getBusinesses();
@@ -141,7 +141,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               scrollHide={true}
               clickable={true}
             >
-              Текст скопійовано в буфер обміну
+              Посилання скопійовано в буфер обміну
             </ReactTooltip>
           </div>
         </div>
@@ -165,19 +165,21 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
         )} */}
         <div className="projectInfo__image-slider">
-          {projectInfo.imagesyarn && <Slider {...imageSliderSettings}>
-            {projectInfo.images.map((img: any, index: number) => 
-              <li key={index} className="projectInfo__image-slider--image">
-                <Image
-                  className=""
-                  src={`http://157.230.99.45:8082${img.path}`}
-                  layout="fill"
-                  objectFit="cover"
-                  alt=""
-                />
-              </li>
-            )}
-          </Slider>}
+          {projectInfo.imagesyarn && (
+            <Slider {...imageSliderSettings}>
+              {projectInfo.images.map((img: any, index: number) => (
+                <li key={index} className="projectInfo__image-slider--image">
+                  <Image
+                    className=""
+                    src={`http://157.230.99.45:8082${img.path}`}
+                    layout="fill"
+                    objectFit="cover"
+                    alt=""
+                  />
+                </li>
+              ))}
+            </Slider>
+          )}
         </div>
         <div className="projectInfo__categories-slider">
           <Slider {...categoriesSliderSettings}>
@@ -211,22 +213,36 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
         <h2 className="projectInfo__offers-title title">Схожі пропозиції</h2>
         <ul className="popular__cards">
-          {cards.map(({ _id, title, description, images, view_count, price, is_verified }: any) => (
-            <PopularCard
-              key={_id}
-              alias={_id}
-              title={title}
-              description={description}
-              image={
-                images == null || !images.length
-                  ? ""
-                  : `${images[0].meta.assets == "" ? `` : `http://157.230.99.45:8082`}${images[0].path}`
-              }
-              price={price}
-              views={view_count ?? 0}
-              isVerified={is_verified}
-            />
-          ))}
+          {cards.map(
+            ({
+              _id,
+              title,
+              description,
+              images,
+              view_count,
+              price,
+              is_verified,
+            }: any) => (
+              <PopularCard
+                key={_id}
+                alias={_id}
+                title={title}
+                description={description}
+                image={
+                  images == null || !images.length
+                    ? ""
+                    : `${
+                        images[0].meta.assets == ""
+                          ? ``
+                          : `http://157.230.99.45:8082`
+                      }${images[0].path}`
+                }
+                price={price}
+                views={view_count ?? 0}
+                isVerified={is_verified}
+              />
+            ),
+          )}
         </ul>
       </div>
     </section>
