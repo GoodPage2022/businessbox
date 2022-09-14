@@ -1,12 +1,19 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import PhoneSVG from "../../../assets/svg/phone.svg";
 import MailSVG from "../../../assets/svg/mail.svg";
 import InstagramSVG from "../../../assets/svg/instagram.svg";
-import TwitterSVG from "../../../assets/svg/twitter.svg";
-import Link from "next/link";
+import YoutubeSVG from "../../../assets/svg/youtube.svg";
 
 const ProfileInfo = () => {
+  const [isPhoneShow, setIsPhoneShow] = useState(false);
+  const [isEmailShow, setIsEmailShow] = useState(false);
+  const [isInstagramShow, setIsInstagramShow] = useState(false);
+  const user = useSelector((state: any) => state.auth.user);
+
   return (
     <div className="profileInfo">
       <div className="profileInfo__info">
@@ -27,24 +34,73 @@ const ProfileInfo = () => {
         </div>
       </div>
       <div className="profileInfo__networks">
+        {isPhoneShow && (
+          <p className="profileInfo__contact section__primary-text">
+            {user == null ? (
+              <span className="profileInfo__contact--notAuth">
+                Тільки для авторизованих користувачів
+              </span>
+            ) : (
+              "+380 96 583 8577"
+            )}
+          </p>
+        )}
+        {isEmailShow && (
+          <p className="profileInfo__contact section__primary-text">
+            {user == null ? (
+              <span className="profileInfo__contact--notAuth">
+                Тільки для авторизованих користувачів
+              </span>
+            ) : (
+              "example@mail.com"
+            )}
+          </p>
+        )}
+        {isInstagramShow && (
+          <p className="profileInfo__contact section__primary-text">
+            {user == null ? (
+              <span className="profileInfo__contact--notAuth">
+                Тільки для авторизованих користувачів
+              </span>
+            ) : (
+              "instagram_example"
+            )}
+          </p>
+        )}
+
+        <button
+          onClick={() => {
+            setIsPhoneShow((prev) => !prev);
+            setIsEmailShow(false);
+            setIsInstagramShow(false);
+          }}
+          className="profileInfo__networks--item"
+        >
+          <PhoneSVG />
+        </button>
+        <button
+          onClick={() => {
+            setIsEmailShow((prev) => !prev);
+            setIsPhoneShow(false);
+            setIsInstagramShow(false);
+          }}
+          className="profileInfo__networks--item"
+        >
+          <MailSVG />
+        </button>
+        <button
+          onClick={() => {
+            setIsInstagramShow((prev) => !prev);
+            setIsPhoneShow(false);
+            setIsEmailShow(false);
+          }}
+          className="profileInfo__networks--item"
+        >
+          <InstagramSVG />
+        </button>
         <Link href="/">
           <a className="profileInfo__networks--item">
-            <PhoneSVG />
-          </a>
-        </Link>
-        <Link href="/">
-          <a className="profileInfo__networks--item">
-            <MailSVG />
-          </a>
-        </Link>
-        <Link href="/">
-          <a className="profileInfo__networks--item">
-            <InstagramSVG />
-          </a>
-        </Link>
-        <Link href="/">
-          <a className="profileInfo__networks--item">
-            <TwitterSVG />
+            <YoutubeSVG />
           </a>
         </Link>
       </div>
