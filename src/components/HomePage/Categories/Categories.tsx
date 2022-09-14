@@ -15,13 +15,13 @@ const Categories = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
     swipeToSlide: true,
     autoplay: true,
-    autoplaySpeed: 15000,
+    autoplaySpeed: 7000,
   };
 
   const openModal = () => {
