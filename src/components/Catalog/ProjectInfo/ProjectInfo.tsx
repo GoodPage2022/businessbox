@@ -8,14 +8,12 @@ import { findDOMNode } from "react-dom";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
-import CopySVG from "../../../assets/svg/copy.svg";
 import OurCategoriesShort from "../../../constants/categories-short";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
 import OurComments from "../../../constants/comments";
-import PopularCards from "../../../constants/popular";
-import PopularCard from "../../shared/BusinessCard";
+import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
@@ -226,7 +224,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               price,
               is_verified,
             }: any) => (
-              <PopularCard
+              <BusinessCard
                 key={_id}
                 alias={_id}
                 title={title}

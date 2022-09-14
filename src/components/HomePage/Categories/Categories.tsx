@@ -1,11 +1,8 @@
 import React from "react";
 import Slider from "react-slick";
 import { useRouter } from "next/router";
-import { MainContext } from "../../../contexts/mainContext";
-
-import OurCategories from "../../../constants/categories";
-import MainButton from "../../shared/MainButton";
 import { useSelector, useDispatch } from "react-redux";
+import { MainContext } from "../../../contexts/mainContext";
 
 const Categories = () => {
   const user = useSelector((state: any) => state.auth.user);
