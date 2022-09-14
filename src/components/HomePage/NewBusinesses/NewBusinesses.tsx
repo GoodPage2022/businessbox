@@ -9,7 +9,16 @@ const NewBusinesses = () => {
   const [cards, setCards] = useState<any>([]);
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getList`, { user });
+
+    const requestBody = {
+      user,
+      limit: 4,
+      sort: {
+        _created: -1
+      }
+    }
+
+    const response = await axios.post(`/api/businesses/getList`, requestBody);
 
     if (response.data) {
       setCards(response.data.entries);
