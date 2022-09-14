@@ -133,6 +133,14 @@ main {
     line-height: 24px;
     color: $white-color;
   }
+
+  &--bold {
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $main-text-color;
+  }
 }
 
 .section__secondary-text {
@@ -169,6 +177,7 @@ main {
 @import "./components/Catalog/ProjectInfo/ProjectInfo.scss";
 @import "./components/Catalog/ProjectInfo/ProfileInfo.scss";
 @import "./components/Catalog/ProjectInfo/Comment.scss";
+@import "./components/Catalog/ProjectInfo/DetailInfo.scss";
 
 //Account
 @import "./components/Account/Account.scss";

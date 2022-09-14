@@ -8,19 +8,17 @@ import { findDOMNode } from "react-dom";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
-import CopySVG from "../../../assets/svg/copy.svg";
 import OurCategoriesShort from "../../../constants/categories-short";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
 import OurComments from "../../../constants/comments";
-import PopularCards from "../../../constants/popular";
-import PopularCard from "../../shared/BusinessCard";
+import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
-  const [isCopy, setIsCopy] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(true);
   const imageSliderSettings = {
@@ -148,22 +146,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <p className="projectInfo__city section__primary-text">
           {projectInfo.state}, {projectInfo.city}
         </p>
-        {/* {isCopy && (
-          <div className="projectInfo__copy">
-            <div className="projectInfo__copy--text-wrapper">
-              <p className="section__primary-text">{link}</p>
-            </div>
-            <div
-              className="projectInfo__copy-button"
-              onClick={() => {
-                navigator.clipboard.writeText(link);
-                setIsCopy(false);
-              }}
-            >
-              <CopySVG />
-            </div>
-          </div>
-        )} */}
+
         <div className="projectInfo__image-slider">
           {projectInfo.imagesyarn && (
             <Slider {...imageSliderSettings}>
@@ -194,12 +177,31 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           className="projectInfo__description section__primary-text"
           dangerouslySetInnerHTML={{ __html: projectInfo.description }}
         />
-        <div className="projectInfo__price">
-          <p className="section__primary-text">Ціна:</p>
-          <p className="projectInfo__amount title">{projectInfo.price}₴</p>
+        <div className="projectInfo__info-wrapper">
+          <div className="projectInfo__price">
+            <p className="section__primary-text">Ціна:</p>
+            <p className="projectInfo__amount title">{projectInfo.price}₴</p>
+          </div>
+          <div className="projectInfo__button-wrapper">
+            <button
+              className="projectInfo__button-info"
+              onClick={() =>
+                user != null
+                  ? router.push(`/catalog/detail-info/${projectId}`)
+                  : setIsAuth(true)
+              }
+            >
+              Відкрити повну інформацію
+            </button>
+            {isAuth && (
+              <p className="projectInfo__err-msg">
+                Тільки для авторизованих користувачів
+              </p>
+            )}
+          </div>
         </div>
-        <ProfileInfo />
 
+        <ProfileInfo />
         {OurComments.map(({ id, name, mail, date, text, image }) => (
           <Comment
             key={id}
@@ -210,7 +212,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             text={text}
           />
         ))}
-
         <h2 className="projectInfo__offers-title title">Схожі пропозиції</h2>
         <ul className="popular__cards">
           {cards.map(
@@ -223,7 +224,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               price,
               is_verified,
             }: any) => (
-              <PopularCard
+              <BusinessCard
                 key={_id}
                 alias={_id}
                 title={title}

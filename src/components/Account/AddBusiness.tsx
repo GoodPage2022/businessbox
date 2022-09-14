@@ -37,13 +37,18 @@ const AddBusiness = () => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business } = values;
+    const { name, price, description, business, region, year, city, file } =
+      values;
 
     let newBusiness: any = {
       title: name,
       area: business,
       price,
       description,
+      region,
+      year,
+      city,
+      file,
     };
 
     if (files) {
@@ -80,6 +85,8 @@ const AddBusiness = () => {
         data: newBusiness,
         user,
       });
+      console.log(newBusinessResponse);
+
       router.push(
         `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
       );
@@ -100,10 +107,12 @@ const AddBusiness = () => {
         <Formik
           initialValues={{
             name: "",
-            phone: "",
             business: "",
             price: "",
             description: "",
+            region: "",
+            year: "",
+            city: "",
             file: null,
           }}
           validate={(values: any) => {

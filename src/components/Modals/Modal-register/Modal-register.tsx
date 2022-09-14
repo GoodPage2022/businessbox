@@ -52,7 +52,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
     const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
     console.log(newUserResponse);
     onClose();
-    
+
     resetForm({});
   };
 
@@ -102,15 +102,19 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="name"
+                    minLength={2}
+                    maxLength={255}
                     required
                     placeholder="Петро"
                   />
                 </label>
                 <label className="modal-register__field">
-                  <span className="modal-register__label">Призвіще</span>
+                  <span className="modal-register__label">Прізвище</span>
                   <Field
                     className="modal-register__input section__primary-text"
                     type="text"
+                    minLength={2}
+                    maxLength={255}
                     name="surname"
                     required
                     placeholder="Петренко"
@@ -142,6 +146,8 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="email"
                     name="mail"
+                    minLength={2}
+                    maxLength={255}
                     required
                     placeholder="example@mail.com"
                   />
@@ -155,6 +161,8 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="city"
+                    minLength={2}
+                    maxLength={255}
                     required
                     placeholder="Дніпро"
                   />
@@ -167,6 +175,8 @@ function ModalRegister({ onClose }: { onClose: any }) {
                       type={showPassword ? "text" : "password"}
                       name="password"
                       required
+                      minLength={6}
+                      maxLength={255}
                       placeholder="******"
                     />
                     <EyeSVG

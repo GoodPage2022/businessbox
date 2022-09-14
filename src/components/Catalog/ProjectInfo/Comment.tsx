@@ -31,7 +31,7 @@ const Comment = ({
         </div>
         <p className="comment__date section__primary-text">{date}</p>
       </div>
-      <p className="comment__text">{text}</p>
+      <p className="comment__text section__primary-text">{text}</p>
     </div>
   );
 };

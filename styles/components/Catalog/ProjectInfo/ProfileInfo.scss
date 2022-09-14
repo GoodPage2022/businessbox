@@ -25,9 +25,16 @@
     font-weight: 600;
     margin-bottom: 6px;
   }
+  &__contact {
+    margin-right: 15px;
 
+    &--notAuth {
+      color: $main-red-color;
+    }
+  }
   &__networks {
     display: flex;
+    align-items: center;
 
     &--item {
       display: flex;
@@ -41,6 +48,7 @@
       cursor: pointer;
       & svg {
         width: 17px;
+        height: 20px;
       }
 
       &:not(:last-child) {

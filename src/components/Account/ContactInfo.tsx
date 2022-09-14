@@ -23,11 +23,11 @@ const ContactInfo = () => {
 
   const [state, dispatch] = React.useContext(MainContext);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (user.avatar !== undefined) {
-      setAvatar(user.avatar.path)
+      setAvatar(user.avatar.path);
     }
-  },[user])
+  }, [user]);
 
   const signOut = async () => {
     if (session !== undefined) {
@@ -84,8 +84,8 @@ const ContactInfo = () => {
       }
       resetForm({
         values: {
-          password: ""
-        }
+          password: "",
+        },
       });
     } catch (error) {
       console.log("error");
@@ -110,39 +110,39 @@ const ContactInfo = () => {
       })
       .then(async (r) => {
         setAvatar(`/avatars/${r.files.file.originalFilename}`);
-        
+
         const data = {
           user,
           userUpdate: {
             _id: user._id,
             avatar: {
-              path: `/avatars/${r.files.file.originalFilename}`
+              path: `/avatars/${r.files.file.originalFilename}`,
             },
           },
         };
-    
+
         try {
           const updateUserResponse = await axios.post(
             `/api/account/userUpdate`,
             data,
           );
-          
+
           if (updateUserResponse.status == 200) {
             dispatchRedux(
               signInReducer({
                 ...user,
                 avatar: {
-                  path: `/avatars/${r.files.file.originalFilename}`
-                }
+                  path: `/avatars/${r.files.file.originalFilename}`,
+                },
               }),
             );
-          }         
+          }
           console.log(updateUserResponse);
         } catch (error) {
           console.log("error");
           console.log(error);
         }
-    });
+      });
   };
 
   return (
@@ -171,35 +171,35 @@ const ContactInfo = () => {
             <button
               className="contactInfo__delete-btn section__secondary-text"
               onClick={async () => {
-                setAvatar(defaultAvatar)
+                setAvatar(defaultAvatar);
 
                 const data = {
                   user,
                   userUpdate: {
                     _id: user._id,
                     avatar: {
-                      path: defaultAvatar
+                      path: defaultAvatar,
                     },
                   },
                 };
-            
+
                 try {
                   const updateUserResponse = await axios.post(
                     `/api/account/userUpdate`,
                     data,
                   );
-                  
+
                   if (updateUserResponse.status == 200) {
                     dispatchRedux(
                       signInReducer({
                         ...user,
                         avatar: {
-                          path: defaultAvatar
-                        }
+                          path: defaultAvatar,
+                        },
                       }),
                     );
                   }
-                  
+
                   console.log(updateUserResponse);
                 } catch (error) {
                   console.log("error");
@@ -219,14 +219,14 @@ const ContactInfo = () => {
           </div>
 
           <Formik
-            initialValues={{ 
-                name: user.name, 
-                phone: user.phone, 
-                surname: user.surname, 
-                email: user.email,  
-                city: user.city,
-                password: ""
-              }}
+            initialValues={{
+              name: user.name,
+              phone: user.phone,
+              surname: user.surname,
+              email: user.email,
+              city: user.city,
+              password: "",
+            }}
             validate={(values) => {
               const errors: any = {};
               if (!values.email) {
@@ -275,7 +275,7 @@ const ContactInfo = () => {
               </div>
               <div className="contactInfo__second-wrapper">
                 <label className="contactInfo__field">
-                  <span className="contactInfo__label">Призвіще</span>
+                  <span className="contactInfo__label">Прізвище</span>
                   <Field
                     className="contactInfo__input section__primary-text"
                     type="text"
