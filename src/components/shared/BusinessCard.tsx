@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ReactTooltip from "react-tooltip";
 
+import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
 import EyeSVG from "../../assets/svg/eye.svg";
@@ -27,9 +28,24 @@ const BusinessCard = ({
 }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
+  const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
+
+  useEffect(() => {
+    if (router.pathname === "/account/my-businesses") {
+      setIsMyBusinessesPage(true);
+    }
+  }, []);
 
   return (
     <li className="business-card">
+      {isMyBusinessesPage ? (
+        <button
+          className="business-card__button-edit"
+          onClick={() => router.push(`/account/edit-business/${alias}`)}
+        >
+          <EditSVG />
+        </button>
+      ) : null}
       <Link href={`/catalog/${alias}`}>
         <a className="business-card__link" title={title}></a>
       </Link>

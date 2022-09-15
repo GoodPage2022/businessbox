@@ -3,14 +3,16 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
 
-const AddBusiness = () => {
+const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
   const [files, setFiles] = useState<any>();
   const [addBusinessError, setAddBusinessError] = useState("");
+  const [businessInfo, setBusinessInfo] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   const uploadToServer = async (file: any) => {
     const uploadImageURL = file;
@@ -34,6 +36,34 @@ const AddBusiness = () => {
     }
   };
 
+  const getBusinessInfo = async () => {
+    let response;
+
+    try {
+      response = await axios.post(`/api/businesses/get`, { user, projectId });
+      console.log(response);
+
+      if (response.data) {
+        setBusinessInfo(response.data.entries[0]);
+      }
+    } catch (error) {
+      router.push("/404");
+    }
+  };
+
+  useEffect(() => {
+    getBusinessInfo();
+    console.log(`${businessInfo} businessInfo15/09`);
+  }, []);
+
+  useEffect(() => {
+    if (businessInfo == null) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [businessInfo]);
+
   const handleSubmit = async (
     values: any,
     { resetForm, setFieldValue }: any,
@@ -42,6 +72,7 @@ const AddBusiness = () => {
       values;
 
     let newBusiness: any = {
+      _id: projectId,
       title: name,
       area: business,
       price,
@@ -88,11 +119,9 @@ const AddBusiness = () => {
       });
       console.log(newBusinessResponse);
 
-      router.push(
-        `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
-      );
+      router.push(`/catalog/${projectId}`);
       setAddBusinessError("");
-      console.log("newUserResponse");
+      console.log("newBusinessResponse");
       console.log(newBusinessResponse);
     } catch (err: any) {
       setAddBusinessError("На жаль, виникла помилка. Спробуйте ще раз");
@@ -100,7 +129,7 @@ const AddBusiness = () => {
       console.log(JSON.parse(err.response.data.err));
     }
 
-    resetForm({});
+    // resetForm({});
   };
 
   function escapeHtml(text: string) {
@@ -117,19 +146,23 @@ const AddBusiness = () => {
     });
   }
 
+  console.log(businessInfo);
+
   return (
-    <section className="addBusiness">
-      <div className="container addBusiness__container">
+    <section className="addBusinessEdit">
+      <div className="container addBusinessEdit__container">
         <Formik
+          enableReinitialize={true}
           initialValues={{
-            name: "",
-            business: "",
-            price: "",
-            description: "",
-            region: "",
-            year: "",
-            city: "",
-            file: null,
+            name: businessInfo != null ? businessInfo.title : "",
+            business: businessInfo != null ? businessInfo.area : "",
+            price: businessInfo != null ? businessInfo.price : "",
+            description: businessInfo != null ? businessInfo.description : "",
+            region: businessInfo != null ? businessInfo.state : "",
+            year: businessInfo != null ? businessInfo.title : "",
+            city: businessInfo != null ? businessInfo.city : "",
+            file:
+              businessInfo != null ? businessInfo.public_reviews_media : null,
           }}
           validate={(values: any) => {
             escapeHtml(values.name);
@@ -146,13 +179,13 @@ const AddBusiness = () => {
           }}
           onSubmit={handleSubmit}
         >
-          <Form className="addBusiness__form">
-            <div className="addBusiness__info-wrapper">
-              <div className="addBusiness__info-wrapper--left">
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Назва</span>
+          <Form className="addBusinessEdit__form">
+            <div className="addBusinessEdit__info-wrapper">
+              <div className="addBusinessEdit__info-wrapper--left">
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Назва</span>
                   <Field
-                    className="addBusiness__input section__primary-text"
+                    className="addBusinessEdit__input section__primary-text"
                     type="text"
                     name="name"
                     minLength={1}
@@ -161,8 +194,8 @@ const AddBusiness = () => {
                     placeholder="-----"
                   />
                 </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Категорія</span>
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Категорія</span>
                   <Field
                     type="text"
                     name="business"
@@ -177,8 +210,8 @@ const AddBusiness = () => {
                     ]}
                   />
                 </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Регіон</span>
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Регіон</span>
                   <Field
                     type="text"
                     name="region"
@@ -191,8 +224,8 @@ const AddBusiness = () => {
                     ]}
                   />
                 </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Місто</span>
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Місто</span>
                   <Field
                     type="text"
                     name="city"
@@ -208,12 +241,12 @@ const AddBusiness = () => {
                   />
                 </label>
               </div>
-              <div className="addBusiness__info-wrapper--right">
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Опис</span>
+              <div className="addBusinessEdit__info-wrapper--right">
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Опис</span>
                   <Field
                     as="textarea"
-                    className="addBusiness__textarea section__primary-text"
+                    className="addBusinessEdit__textarea section__primary-text"
                     type="text"
                     name="description"
                     minLength={2}
@@ -222,10 +255,10 @@ const AddBusiness = () => {
                     placeholder="Писати тут..."
                   />
                 </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Рік створення</span>
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Рік створення</span>
                   <Field
-                    className="addBusiness__input section__primary-text"
+                    className="addBusinessEdit__input section__primary-text"
                     type="text"
                     name="year"
                     minLength={2}
@@ -234,11 +267,11 @@ const AddBusiness = () => {
                     placeholder="-----"
                   />
                 </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Ціна</span>
-                  <span className="addBusiness__input-thumb">
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Ціна</span>
+                  <span className="addBusinessEdit__input-thumb">
                     <Field
-                      className="addBusiness__input section__primary-text"
+                      className="addBusinessEdit__input section__primary-text"
                       type="text"
                       name="price"
                       minLength={2}
@@ -246,13 +279,13 @@ const AddBusiness = () => {
                       required
                       placeholder="-----"
                     />
-                    <span className="addBusiness__icon">$</span>
+                    <span className="addBusinessEdit__icon">$</span>
                   </span>
                 </label>
               </div>
             </div>
-            <div className="addBusiness__addMedia-wrapper">
-              <div className="addBusiness__addMedia-wrapper--image">
+            <div className="addBusinessEdit__addMedia-wrapper">
+              <div className="addBusinessEdit__addMedia-wrapper--image">
                 <Image
                   className=""
                   src="/assets/images/add-media.png"
@@ -261,7 +294,7 @@ const AddBusiness = () => {
                   alt="building"
                 />
               </div>
-              <div className="addBusiness__addMedia-wrapper--add-file">
+              <div className="addBusinessEdit__addMedia-wrapper--add-file">
                 <input
                   id="file"
                   name="file"
@@ -281,10 +314,10 @@ const AddBusiness = () => {
               </div>
             </div>
             {addBusinessError && (
-              <div className="addBusiness__failed">{addBusinessError}</div>
+              <div className="addBusinessEdit__failed">{addBusinessError}</div>
             )}
-            <button type="submit" className="addBusiness__button">
-              Далі
+            <button type="submit" className="addBusinessEdit__button">
+              Зберегти
             </button>
           </Form>
         </Formik>
@@ -293,4 +326,4 @@ const AddBusiness = () => {
   );
 };
 
-export default AddBusiness;
+export default AddBusinessEdit;

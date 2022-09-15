@@ -1,5 +1,23 @@
 .addBusinessFinish {
   padding-bottom: 80px;
+
+  &__failed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 16px 8px;
+    border: none;
+    border-radius: 15px;
+    background: #f22a4e;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #ffffff;
+    margin-bottom: 11px;
+    opacity: 1;
+  }
+
   &__first-wrapper {
     display: flex;
     margin-bottom: 40px;

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import ReactTooltip from "react-tooltip";
 import { findDOMNode } from "react-dom";
+import { Formik, Form, Field } from "formik";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
@@ -106,6 +107,45 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
   if (loading) return <></>;
 
+  const handleSubmit = async (
+    values: any,
+    { resetForm, setFieldValue }: any,
+  ) => {
+    const { comment } = values;
+
+    let newComment: any = {
+      text: comment,
+      date: new Date(Date.now()),
+    };
+    console.log(newComment);
+
+    try {
+      const newCommentResponse = await axios.post(`/api/comments/post`, {
+        data: newComment,
+        user,
+      });
+      console.log(newCommentResponse);
+      resetForm({});
+    } catch (err: any) {
+      console.log("newUserResponse3");
+      console.log(JSON.parse(err.response.data.err));
+    }
+  };
+
+  function escapeHtml(text: string) {
+    const map: any = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return text.replace(/[&<>"']/g, function (m: any) {
+      return map[m];
+    });
+  }
+
   return (
     <section className="projectInfo">
       <div className="container projectInfo__container">
@@ -201,17 +241,63 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
         </div>
 
-        <ProfileInfo />
-        {OurComments.map(({ id, name, mail, date, text, image }) => (
-          <Comment
-            key={id}
-            name={name}
-            mail={mail}
-            date={date}
-            image={image}
-            text={text}
-          />
-        ))}
+        <ProfileInfo projectData={projectInfo} />
+        {OurComments.length > 0 ? (
+          <ul className="projectInfo__comments">
+            {OurComments.map(({ id, name, mail, date, text, image }) => (
+              <Comment
+                key={id}
+                name={name}
+                mail={mail}
+                date={date}
+                image={image}
+                text={text}
+              />
+            ))}
+          </ul>
+        ) : (
+          <p className="projectInfo__comments-empty section__primary-text">
+            Нижче залишай питання та коментарі до бізнесу
+          </p>
+        )}
+        {user != null ? (
+          <Formik
+            initialValues={{
+              comment: "",
+            }}
+            validate={(values: any) => {
+              escapeHtml(values.comment);
+
+              const errors: any = {};
+
+              return errors;
+            }}
+            onSubmit={handleSubmit}
+          >
+            <Form className="projectInfo__form">
+              <label className="projectInfo__field">
+                <Field
+                  as="textarea"
+                  className="projectInfo__textarea section__primary-text"
+                  type="text"
+                  name="comment"
+                  minLength={2}
+                  maxLength={1000}
+                  required
+                  placeholder="Додати коментар..."
+                />
+              </label>
+              <div className="projectInfo__button-send">
+                <MainButtonBlack label="Опублікувати" />
+              </div>
+            </Form>
+          </Formik>
+        ) : (
+          <p className="projectInfo__comments-empty section__primary-text">
+            Додавати коментарі можливо після авторизації
+          </p>
+        )}
+
         <h2 className="projectInfo__offers-title title">Схожі пропозиції</h2>
         <ul className="popular__cards">
           {cards.map(

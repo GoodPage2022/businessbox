@@ -14,7 +14,7 @@ const Comment = ({
   text: string;
 }) => {
   return (
-    <div className="comment">
+    <li className="comment">
       <div className="comment__header">
         <div className="comment__user">
           <div className="comment__photo">
@@ -32,7 +32,7 @@ const Comment = ({
         <p className="comment__date section__primary-text">{date}</p>
       </div>
       <p className="comment__text section__primary-text">{text}</p>
-    </div>
+    </li>
   );
 };
 

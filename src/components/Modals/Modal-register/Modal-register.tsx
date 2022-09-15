@@ -11,6 +11,8 @@ import phoneNumberMask from "../../../masks/phoneNumberMask";
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [registerError, setRegisterError] = useState("");
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -49,12 +51,34 @@ function ModalRegister({ onClose }: { onClose: any }) {
       },
     };
 
-    const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
-    console.log(newUserResponse);
-    onClose();
-
-    resetForm({});
+    try {
+      const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
+      console.log(newUserResponse);
+      if (newUserResponse.status == 200) {
+        onClose();
+        resetForm({});
+        setRegisterError("");
+      }
+    } catch (err: any) {
+      setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
+      console.log("Register Error");
+      console.log(err);
+    }
   };
+
+  function escapeHtml(text: string) {
+    const map: any = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return text.replace(/[&<>"']/g, function (m: any) {
+      return map[m];
+    });
+  }
 
   return (
     <div
@@ -90,6 +114,14 @@ function ModalRegister({ onClose }: { onClose: any }) {
               if (!values.phone) {
                 errors.phone = "Обязательное поле";
               }
+
+              escapeHtml(values.name);
+              escapeHtml(values.business);
+              escapeHtml(values.surname);
+              escapeHtml(values.mail);
+              escapeHtml(values.city);
+              escapeHtml(values.phone);
+
               return errors;
             }}
             onSubmit={handleSubmit}
@@ -102,6 +134,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="name"
+                    validate={(val: any) => val.length > 4}
                     minLength={2}
                     maxLength={255}
                     required
@@ -186,6 +219,10 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   </span>
                 </label>
               </div>
+
+              {registerError && (
+                <div className="modal-register__failed">{registerError}</div>
+              )}
               <button className="modal-register__button" type="submit">
                 Зареєструватись
               </button>

@@ -8,7 +8,7 @@ import MailSVG from "../../../assets/svg/mail.svg";
 import InstagramSVG from "../../../assets/svg/instagram.svg";
 import YoutubeSVG from "../../../assets/svg/youtube.svg";
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ projectData }: { projectData: any }) => {
   const [isPhoneShow, setIsPhoneShow] = useState(false);
   const [isEmailShow, setIsEmailShow] = useState(false);
   const [isInstagramShow, setIsInstagramShow] = useState(false);
@@ -41,7 +41,7 @@ const ProfileInfo = () => {
                 Тільки для авторизованих користувачів
               </span>
             ) : (
-              "+380 96 583 8577"
+              user.phone
             )}
           </p>
         )}
@@ -52,7 +52,7 @@ const ProfileInfo = () => {
                 Тільки для авторизованих користувачів
               </span>
             ) : (
-              "example@mail.com"
+              user.email
             )}
           </p>
         )}
@@ -63,11 +63,10 @@ const ProfileInfo = () => {
                 Тільки для авторизованих користувачів
               </span>
             ) : (
-              "instagram_example"
+              projectData.instagram
             )}
           </p>
         )}
-
         <button
           onClick={() => {
             setIsPhoneShow((prev) => !prev);
@@ -88,21 +87,26 @@ const ProfileInfo = () => {
         >
           <MailSVG />
         </button>
-        <button
-          onClick={() => {
-            setIsInstagramShow((prev) => !prev);
-            setIsPhoneShow(false);
-            setIsEmailShow(false);
-          }}
-          className="profileInfo__networks--item"
-        >
-          <InstagramSVG />
-        </button>
-        <Link href="/">
-          <a className="profileInfo__networks--item">
-            <YoutubeSVG />
-          </a>
-        </Link>
+        {projectData.instagram && (
+          <button
+            onClick={() => {
+              setIsInstagramShow((prev) => !prev);
+              setIsPhoneShow(false);
+              setIsEmailShow(false);
+            }}
+            className="profileInfo__networks--item"
+          >
+            <InstagramSVG />
+          </button>
+        )}
+
+        {projectData.youtube && (
+          <Link href={projectData.youtube}>
+            <a className="profileInfo__networks--item">
+              <YoutubeSVG />
+            </a>
+          </Link>
+        )}
       </div>
     </div>
   );

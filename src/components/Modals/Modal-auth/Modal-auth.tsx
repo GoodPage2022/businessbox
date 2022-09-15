@@ -9,36 +9,38 @@ import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn as signInReducer } from '../../../../store/actions/auth';
-import { useSession, signIn as signInGoogle } from 'next-auth/react'
+import { signIn as signInReducer } from "../../../../store/actions/auth";
+import { useSession, signIn as signInGoogle } from "next-auth/react";
 
 function ModalAuth({ onClose }: { onClose: any }) {
-  const { data: session } = useSession()
+  const { data: session } = useSession();
   const user = useSelector((state: any) => state.auth.user);
-  const dispatchRedux = useDispatch()
+  const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
 
   const signInGoogleRequest = async (session: any) => {
     try {
-      const signInResponse = await axios.post(`/api/account/signIn`, { session })
+      const signInResponse = await axios.post(`/api/account/signIn`, {
+        session,
+      });
       if (signInResponse.status == 200) {
-        dispatchRedux(signInReducer(signInResponse.data))
-        setAuthError("")
+        dispatchRedux(signInReducer(signInResponse.data));
+        setAuthError("");
       }
     } catch (err: any) {
-      setAuthError("Google auth error")
+      setAuthError("Google auth error");
       console.log("Sign In Error");
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     if (session != null && user == null) {
-      signInGoogleRequest(session)
+      signInGoogleRequest(session);
     }
-  }, [session, user])
+  }, [session, user]);
 
   const openRegisterModal = () => {
     router.push("/#register");
@@ -86,7 +88,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
       const signInResponse = await axios.post(`/api/account/signIn`, data);
       if (signInResponse.status == 200) {
         dispatchRedux(signInReducer(signInResponse.data));
-        dispatch({ type: "toggle_authModal" });
+        onClose();
+        // dispatch({ type: "toggle_authModal" });
         resetForm({});
         setAuthError("");
       }
@@ -96,6 +99,20 @@ function ModalAuth({ onClose }: { onClose: any }) {
       console.log(err);
     }
   };
+
+  function escapeHtml(text: string) {
+    const map: any = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return text.replace(/[&<>"']/g, function (m: any) {
+      return map[m];
+    });
+  }
 
   return (
     <div
@@ -119,6 +136,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
             }}
             validate={(values) => {
               const errors: any = {};
+              escapeHtml(values.password);
+              escapeHtml(values.mail);
               // if (!values.name) {
               //   errors.name = "Обязательное поле";
               // }
@@ -143,6 +162,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
                   className="modal-auth__input section__primary-text"
                   type="email"
                   name="mail"
+                  minLength={2}
+                  maxLength={255}
                   required
                   placeholder="example@mail.com"
                 />
@@ -155,6 +176,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
                     className="modal-auth__input section__primary-text"
                     type={showPassword ? "text" : "password"}
                     name="password"
+                    minLength={6}
+                    maxLength={255}
                     required
                     placeholder="******"
                   />
@@ -177,7 +200,11 @@ function ModalAuth({ onClose }: { onClose: any }) {
               </div>
               <p className="modal-auth__text section__secondary-text">або</p>
 
-              <button className="modal-auth__google" onClick={() => signInGoogle()} type="button">
+              <button
+                className="modal-auth__google"
+                onClick={() => signInGoogle()}
+                type="button"
+              >
                 <GoogleSVG />
                 <span className="modal-auth__google--text section__secondary-text">
                   Увійти за допомогою Google
@@ -187,7 +214,6 @@ function ModalAuth({ onClose }: { onClose: any }) {
                 className="modal-auth__forgot-password section__secondary-text"
                 type="button"
                 onClick={() => {
-                  console.log("qwessss");
                   openForgotPasswordModal();
                 }}
               >
