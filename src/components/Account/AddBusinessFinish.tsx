@@ -404,7 +404,6 @@ const AddBusinessFinish = () => {
                   name="website"
                   minLength={2}
                   maxLength={255}
-                  required
                   placeholder="-----"
                 />
               </label>
@@ -416,7 +415,6 @@ const AddBusinessFinish = () => {
                   name="instagram"
                   minLength={2}
                   maxLength={255}
-                  required
                   placeholder="-----"
                 />
               </label>
@@ -430,7 +428,6 @@ const AddBusinessFinish = () => {
                   name="facebook"
                   minLength={2}
                   maxLength={255}
-                  required
                   placeholder="-----"
                 />
               </label>
@@ -442,7 +439,6 @@ const AddBusinessFinish = () => {
                   name="youtube"
                   minLength={2}
                   maxLength={255}
-                  required
                   placeholder="-----"
                 />
               </label>
@@ -468,7 +464,6 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__textarea section__primary-text"
                   type="text"
                   name="public_reviews"
-                  required
                   minLength={2}
                   maxLength={1000}
                   placeholder="-----"
@@ -498,7 +493,6 @@ const AddBusinessFinish = () => {
                   name="crm"
                   minLength={2}
                   maxLength={255}
-                  required
                   placeholder="-----"
                 />
               </label>
