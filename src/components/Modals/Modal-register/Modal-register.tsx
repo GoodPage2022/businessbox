@@ -11,6 +11,8 @@ import phoneNumberMask from "../../../masks/phoneNumberMask";
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
+  const [registerError, setRegisterError] = useState("");
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -49,11 +51,19 @@ function ModalRegister({ onClose }: { onClose: any }) {
       },
     };
 
-    const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
-    console.log(newUserResponse);
-    onClose();
-
-    resetForm({});
+    try {
+      const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
+      console.log(newUserResponse);
+      if (newUserResponse.status == 200) {
+        onClose();
+        resetForm({});
+        setRegisterError("");
+      }
+    } catch (err: any) {
+      setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
+      console.log("Register Error");
+      console.log(err);
+    }
   };
 
   return (
@@ -186,6 +196,10 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   </span>
                 </label>
               </div>
+
+              {registerError && (
+                <div className="modal-register__failed">{registerError}</div>
+              )}
               <button className="modal-register__button" type="submit">
                 Зареєструватись
               </button>
