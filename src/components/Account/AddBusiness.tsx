@@ -10,6 +10,7 @@ const AddBusiness = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
   const [files, setFiles] = useState<any>();
+  const [addBusinessError, setAddBusinessError] = useState("");
 
   const uploadToServer = async (file: any) => {
     const uploadImageURL = file;
@@ -90,16 +91,31 @@ const AddBusiness = () => {
       router.push(
         `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
       );
-
+      setAddBusinessError("");
       console.log("newUserResponse");
       console.log(newBusinessResponse);
     } catch (err: any) {
+      setAddBusinessError("На жаль, виникла помилка. Спробуйте ще раз");
       console.log("newUserResponse3");
       console.log(JSON.parse(err.response.data.err));
     }
 
     resetForm({});
   };
+
+  function escapeHtml(text: string) {
+    const map: any = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return text.replace(/[&<>"']/g, function (m: any) {
+      return map[m];
+    });
+  }
 
   return (
     <section className="addBusiness">
@@ -116,6 +132,14 @@ const AddBusiness = () => {
             file: null,
           }}
           validate={(values: any) => {
+            escapeHtml(values.name);
+            escapeHtml(values.business);
+            escapeHtml(values.price);
+            escapeHtml(values.description);
+            escapeHtml(values.region);
+            escapeHtml(values.year);
+            escapeHtml(values.city);
+
             const errors: any = {};
 
             return errors;
@@ -131,6 +155,8 @@ const AddBusiness = () => {
                     className="addBusiness__input section__primary-text"
                     type="text"
                     name="name"
+                    minLength={1}
+                    maxLength={255}
                     required
                     placeholder="-----"
                   />
@@ -190,6 +216,8 @@ const AddBusiness = () => {
                     className="addBusiness__textarea section__primary-text"
                     type="text"
                     name="description"
+                    minLength={2}
+                    maxLength={1000}
                     required
                     placeholder="Писати тут..."
                   />
@@ -200,6 +228,8 @@ const AddBusiness = () => {
                     className="addBusiness__input section__primary-text"
                     type="text"
                     name="year"
+                    minLength={2}
+                    maxLength={255}
                     required
                     placeholder="-----"
                   />
@@ -211,6 +241,8 @@ const AddBusiness = () => {
                       className="addBusiness__input section__primary-text"
                       type="text"
                       name="price"
+                      minLength={2}
+                      maxLength={255}
                       required
                       placeholder="-----"
                     />
@@ -248,6 +280,9 @@ const AddBusiness = () => {
                 />
               </div>
             </div>
+            {addBusinessError && (
+              <div className="addBusiness__failed">{addBusinessError}</div>
+            )}
             <button type="submit" className="addBusiness__button">
               Далі
             </button>

@@ -3,11 +3,12 @@ import CustomSelect from "../shared/CustomSelect";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import MainButtonBlack from "../shared/MainButtonBlack";
+import { useState } from "react";
 
 const AddBusinessFinish = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
+  const [addBusinessError, setAddBusinessError] = useState("");
   const { businessId } = router.query;
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
@@ -68,16 +69,31 @@ const AddBusinessFinish = () => {
       });
 
       router.push(`/account/my-businesses`);
-
+      setAddBusinessError("");
       console.log("newUserResponse");
       console.log(newBusinessResponse);
     } catch (err: any) {
+      setAddBusinessError("На жаль, виникла помилка. Спробуйте ще раз");
       console.log("newUserResponse3");
       console.log(JSON.parse(err.response.data.err));
     }
 
     resetForm({});
   };
+
+  function escapeHtml(text: string) {
+    const map: any = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return text.replace(/[&<>"']/g, function (m: any) {
+      return map[m];
+    });
+  }
 
   return (
     <section className="addBusinessFinish">
@@ -107,6 +123,27 @@ const AddBusinessFinish = () => {
             crm: "",
           }}
           validate={(values: any) => {
+            escapeHtml(values.property_form);
+            escapeHtml(values.number_of_founders);
+            escapeHtml(values.number_of_employees);
+            escapeHtml(values.seasonality);
+            escapeHtml(values.year_turnover);
+            escapeHtml(values.monthly_net_profit);
+            escapeHtml(values.gross_monthly_income);
+            escapeHtml(values.estimated_turnover_next_year);
+            escapeHtml(values.loans);
+            escapeHtml(values.return_on_investment);
+            escapeHtml(values.equipment_market_value);
+            escapeHtml(values.monthly_salary_fund);
+            escapeHtml(values.year_nonfixed_costs);
+            escapeHtml(values.website);
+            escapeHtml(values.loans);
+            escapeHtml(values.instagram);
+            escapeHtml(values.facebook);
+            escapeHtml(values.youtube);
+            escapeHtml(values.public_reviews);
+            escapeHtml(values.financial_accounting_system);
+            escapeHtml(values.crm);
             const errors: any = {};
 
             return errors;
@@ -146,6 +183,8 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="number_of_founders"
+                  minLength={2}
+                  maxLength={255}
                   required
                   placeholder="-----"
                 />
@@ -157,6 +196,8 @@ const AddBusinessFinish = () => {
                 <Field
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
+                  minLength={2}
+                  maxLength={255}
                   name="number_of_employees"
                   required
                   placeholder="-----"
@@ -198,6 +239,8 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="year_turnover"
+                    minLength={2}
+                    maxLength={255}
                     required
                     placeholder="-----"
                   />
@@ -213,6 +256,8 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="monthly_net_profit"
+                    minLength={2}
+                    maxLength={255}
                     required
                     placeholder="-----"
                   />
@@ -228,6 +273,8 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="gross_monthly_income"
+                    minLength={2}
+                    maxLength={255}
                     required
                     placeholder="-----"
                   />
@@ -247,6 +294,8 @@ const AddBusinessFinish = () => {
                       type="text"
                       name="estimated_turnover_next_year"
                       required
+                      minLength={2}
+                      maxLength={255}
                       placeholder="-----"
                     />
                     <span className="addBusinessFinish__icon">$</span>
@@ -284,6 +333,8 @@ const AddBusinessFinish = () => {
                     type="text"
                     name="return_on_investment"
                     required
+                    minLength={2}
+                    maxLength={255}
                     placeholder="-----"
                   />
                   <span className="addBusinessFinish__icon">$</span>
@@ -301,6 +352,8 @@ const AddBusinessFinish = () => {
                     type="text"
                     name="equipment_market_value"
                     required
+                    minLength={2}
+                    maxLength={255}
                     placeholder="-----"
                   />
                   <span className="addBusinessFinish__icon">$</span>
@@ -316,6 +369,8 @@ const AddBusinessFinish = () => {
                     type="text"
                     name="monthly_salary_fund"
                     required
+                    minLength={2}
+                    maxLength={255}
                     placeholder="-----"
                   />
                   <span className="addBusinessFinish__icon">$</span>
@@ -331,6 +386,8 @@ const AddBusinessFinish = () => {
                     type="text"
                     name="year_nonfixed_costs"
                     required
+                    minLength={2}
+                    maxLength={255}
                     placeholder="-----"
                   />
                   <span className="addBusinessFinish__icon">$</span>
@@ -345,6 +402,8 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="website"
+                  minLength={2}
+                  maxLength={255}
                   required
                   placeholder="-----"
                 />
@@ -355,6 +414,8 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="instagram"
+                  minLength={2}
+                  maxLength={255}
                   required
                   placeholder="-----"
                 />
@@ -367,6 +428,8 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="facebook"
+                  minLength={2}
+                  maxLength={255}
                   required
                   placeholder="-----"
                 />
@@ -377,6 +440,8 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="youtube"
+                  minLength={2}
+                  maxLength={255}
                   required
                   placeholder="-----"
                 />
@@ -404,6 +469,8 @@ const AddBusinessFinish = () => {
                   type="text"
                   name="public_reviews"
                   required
+                  minLength={2}
+                  maxLength={1000}
                   placeholder="-----"
                 />
               </label>
@@ -418,6 +485,8 @@ const AddBusinessFinish = () => {
                   type="text"
                   name="financial_accounting_system"
                   required
+                  minLength={2}
+                  maxLength={255}
                   placeholder="-----"
                 />
               </label>
@@ -427,11 +496,18 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="crm"
+                  minLength={2}
+                  maxLength={255}
                   required
                   placeholder="-----"
                 />
               </label>
             </div>
+            {addBusinessError && (
+              <div className="addBusinessFinish__failed">
+                {addBusinessError}
+              </div>
+            )}
             <div className="addBusinessFinish__buttons">
               <button
                 type="button"

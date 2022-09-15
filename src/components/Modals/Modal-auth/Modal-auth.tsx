@@ -100,6 +100,20 @@ function ModalAuth({ onClose }: { onClose: any }) {
     }
   };
 
+  function escapeHtml(text: string) {
+    const map: any = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return text.replace(/[&<>"']/g, function (m: any) {
+      return map[m];
+    });
+  }
+
   return (
     <div
       className={`modal-auth__overlay${
@@ -122,6 +136,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
             }}
             validate={(values) => {
               const errors: any = {};
+              escapeHtml(values.password);
+              escapeHtml(values.mail);
               // if (!values.name) {
               //   errors.name = "Обязательное поле";
               // }
@@ -146,6 +162,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
                   className="modal-auth__input section__primary-text"
                   type="email"
                   name="mail"
+                  minLength={2}
+                  maxLength={255}
                   required
                   placeholder="example@mail.com"
                 />
@@ -158,6 +176,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
                     className="modal-auth__input section__primary-text"
                     type={showPassword ? "text" : "password"}
                     name="password"
+                    minLength={6}
+                    maxLength={255}
                     required
                     placeholder="******"
                   />
