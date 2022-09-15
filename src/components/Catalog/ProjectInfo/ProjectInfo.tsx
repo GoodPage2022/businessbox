@@ -201,7 +201,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
         </div>
 
-        <ProfileInfo />
+        <ProfileInfo projectData={projectInfo} />
         {OurComments.map(({ id, name, mail, date, text, image }) => (
           <Comment
             key={id}
