@@ -35,7 +35,6 @@ const BusinessCard = ({
       setIsMyBusinessesPage(true);
     }
   }, []);
-  console.log(isMyBusinessesPage);
 
   return (
     <li className="business-card">

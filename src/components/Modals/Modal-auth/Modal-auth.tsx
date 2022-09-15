@@ -214,7 +214,6 @@ function ModalAuth({ onClose }: { onClose: any }) {
                 className="modal-auth__forgot-password section__secondary-text"
                 type="button"
                 onClick={() => {
-                  console.log("qwessss");
                   openForgotPasswordModal();
                 }}
               >
