@@ -61,10 +61,22 @@ const Categories = () => {
             отруйна посмішка.
           </p>
           <div className="categories-second__buttons">
-            <button className="categories-second__button">
+            <button
+              onClick={() =>
+                user != null
+                  ? router.push("/account/add-business")
+                  : openModal()
+              }
+              className="categories-second__button"
+            >
               Продати бізнес
             </button>
-            <button className="categories-second__button--white">
+            <button
+              onClick={() =>
+                user != null ? router.push("/catalog") : openModal()
+              }
+              className="categories-second__button--white"
+            >
               Інвестувати
             </button>
           </div>
