@@ -1,9 +1,32 @@
 .business-card {
+  position: relative;
   width: 255px;
   border-radius: 25px;
   background: $white-color;
   overflow: hidden;
-  position: relative;
+
+  &:hover &__button-edit {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__button-edit {
+    position: absolute;
+    top: 21px;
+    right: 21px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 34px;
+    height: 32px;
+    background: $main-red-color;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+  }
 
   &__link {
     position: absolute;
