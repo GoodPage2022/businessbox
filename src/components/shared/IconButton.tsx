@@ -5,7 +5,7 @@ const IconButton = ({
 }: {
   icon: any;
   borderColor: string;
-  onClick: any;
+  onClick?: any;
 }) => {
   return (
     <button
