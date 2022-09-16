@@ -15,8 +15,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   };
 
   try {
+    const token =
+      req.body.user != null && req.body.user?.api_key !== undefined
+        ? req.body.user.api_key
+        : process.env.cockpitApiToken;
+
     const response = await axios.post(
-      `${process.env.cockpitApiUrl}/cockpit/listUsers?token=${process.env.cockpitApiToken}`,
+      `${process.env.cockpitApiUrl}/cockpit/listUsers?token=${token}`,
       filter,
     );
 

@@ -158,8 +158,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             business: businessInfo != null ? businessInfo.area : "",
             price: businessInfo != null ? businessInfo.price : "",
             description: businessInfo != null ? businessInfo.description : "",
-            region: businessInfo != null ? businessInfo.state : "",
-            year: businessInfo != null ? businessInfo.title : "",
+            region: businessInfo != null ? businessInfo.region : "",
+            year: businessInfo != null ? businessInfo.year : "",
             city: businessInfo != null ? businessInfo.city : "",
             file:
               businessInfo != null ? businessInfo.public_reviews_media : null,
