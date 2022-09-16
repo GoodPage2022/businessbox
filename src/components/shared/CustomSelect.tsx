@@ -5,6 +5,7 @@ type CustomSelectProps = {
   options: any;
   placeholder?: string;
   side?: string;
+  changeFilter?: (e: any) => void;
   setter?: (e: any) => void;
 };
 
@@ -14,6 +15,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
   form,
   placeholder,
   setter,
+  changeFilter,
 }): JSX.Element => {
   return (
     <Select
@@ -23,7 +25,13 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       classNamePrefix="custom-select"
       // menuIsOpen
       placeholder={placeholder}
-      onChange={(e) => {
+      onChange={(e) => {        
+        if (!!changeFilter) changeFilter({
+          target: {
+            name: field.name,
+            value: e.label
+          }
+        })
         if (!!setter) setter(e.value);
         form.setFieldValue(field.name, e.value);
       }}

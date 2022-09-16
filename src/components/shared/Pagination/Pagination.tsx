@@ -3,16 +3,22 @@ import RightArrowSVG from "../../../assets/svg/right-arrow.svg";
 import IconButton from "../IconButton";
 import PaginationItem from "./PaginationItem";
 
-const Pagination = () => {
+const Pagination = ({ 
+  pageNumber, countCards, cardsPerPage 
+}: { 
+  pageNumber: number, countCards: number, cardsPerPage: number 
+}) => {
+  const countPages = Math.ceil(countCards / cardsPerPage)
+
   return (
     <div className="pagination">
-      <IconButton borderColor="#0C0C0C" icon={<LeftArrowSVG />} />
+      <IconButton setPageNumber={(Number(pageNumber) - 1) < 1 ? 1 : (Number(pageNumber) - 1)} borderColor="#0C0C0C" icon={<LeftArrowSVG />} />
       <ul className="pagination__list">
-        {[1, 2, 3].map((item) => (
-          <PaginationItem key={item} item={item} />
+        {Array.from(Array(countPages).keys()).map((item) => (
+          <PaginationItem key={item + 1} item={item + 1} pageNumber={pageNumber} />
         ))}
       </ul>
-      <IconButton borderColor="#0C0C0C" icon={<RightArrowSVG />} />
+      <IconButton setPageNumber={(Number(pageNumber) + 1) > countPages ? countPages : (Number(pageNumber) + 1)} borderColor="#0C0C0C" icon={<RightArrowSVG />} />
     </div>
   );
 };

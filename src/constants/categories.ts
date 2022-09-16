@@ -7,7 +7,7 @@ const OurCategories = [
   {
     id: 2,
     content:
-      'Категорія 2',
+      'Автомобільна',
   },
   {
     id: 3,

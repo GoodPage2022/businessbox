@@ -132,6 +132,10 @@ const AddBusiness = () => {
             file: null,
           }}
           validate={(values: any) => {
+            const errors: any = {};
+            // if (typeof values.price != "number")
+            //   error[]
+
             escapeHtml(values.name);
             escapeHtml(values.business);
             escapeHtml(values.price);
@@ -140,7 +144,6 @@ const AddBusiness = () => {
             escapeHtml(values.year);
             escapeHtml(values.city);
 
-            const errors: any = {};
 
             return errors;
           }}
@@ -241,6 +244,7 @@ const AddBusiness = () => {
                       className="addBusiness__input section__primary-text"
                       type="text"
                       name="price"
+                      pattern="[0-9]+"
                       minLength={2}
                       maxLength={255}
                       required
