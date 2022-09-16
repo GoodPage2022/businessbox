@@ -38,6 +38,9 @@ const BusinessCard = ({
 
   return (
     <li className="business-card">
+      <Link href={`/catalog/${alias}`}>
+        <a className="business-card__link" title={title}></a>
+      </Link>
       {isMyBusinessesPage ? (
         <button
           className="business-card__button-edit"
@@ -46,9 +49,6 @@ const BusinessCard = ({
           <EditSVG />
         </button>
       ) : null}
-      <Link href={`/catalog/${alias}`}>
-        <a className="business-card__link" title={title}></a>
-      </Link>
       <div className="business-card__image">
         {image && (
           <Image
@@ -68,7 +68,7 @@ const BusinessCard = ({
       </div>
       <div className="business-card__info">
         <h3 className="business-card__title">
-          {title}
+          <span>{title}</span>
 
           <CheckSVG
             data-tip={

@@ -15,6 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { signOut as signOutReducer } from "../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
+import Search from "./Search";
+
+const initialValues = {
+  search: "",
+};
 
 const Right = () => {
   const { data: session } = useSession();
@@ -23,6 +28,7 @@ const Right = () => {
   const { pathname } = useRouter();
   const [state, dispatch] = React.useContext(MainContext);
   const router = useRouter();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const signOut = async () => {
     if (session !== undefined) {
@@ -55,7 +61,16 @@ const Right = () => {
     <>
       <ul className="header__right">
         <li className="header__right__btn">
-          <IconButton borderColor="#FFFFFF" icon={<SearchSVG />} />
+          <Search active={isSearchOpen} />
+          {isSearchOpen ? (
+            ""
+          ) : (
+            <IconButton
+              onClick={() => setIsSearchOpen(true)}
+              borderColor="#FFFFFF"
+              icon={<SearchSVG />}
+            />
+          )}
         </li>
         <li
           className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
@@ -67,7 +82,11 @@ const Right = () => {
           ) : (
             <Link href="/account/contact-info">
               <a>
-                <IconButton borderColor="#FFFFFF" icon={<UserSVG />} />{" "}
+                <IconButton
+                  borderColor="#FFFFFF"
+                  icon={<UserSVG />}
+                  onClick={undefined}
+                />
               </a>
             </Link>
           )}
