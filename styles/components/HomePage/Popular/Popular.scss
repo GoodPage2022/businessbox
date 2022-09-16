@@ -146,4 +146,8 @@
 
 .cards-slider {
   margin-right: -30px;
+
+  & > div {
+    height: 100% !important;
+  }
 }

@@ -68,7 +68,7 @@ const BusinessCard = ({
       </div>
       <div className="business-card__info">
         <h3 className="business-card__title">
-          {title}
+          <span>{title}</span>
 
           <CheckSVG
             data-tip={

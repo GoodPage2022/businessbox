@@ -1,7 +1,7 @@
 .business-card {
   position: relative;
   width: 255px;
-  min-height: 414px;
+  height: 100%;
   border-radius: 25px;
   background: $white-color;
   overflow: hidden;
@@ -87,7 +87,17 @@
     line-height: 24px;
     align-items: center;
     color: $main-text-color;
+    height: 48px;
     margin-bottom: 10px;
+
+    & span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
   }
 
   &__ckeck-icon {
