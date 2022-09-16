@@ -8,7 +8,7 @@ const IconButton = ({
 }: {
   icon: any,
   borderColor: string,
-  setPageNumber: number,
+  setPageNumber?: number,
   onClick?: any;
 }) => {
   const router = useRouter();
@@ -16,30 +16,37 @@ const IconButton = ({
   
   let filtersObj: any = {}
 
-  if (filters && Array.isArray(filters)) {
-    filters.map((f: string, i: number)=>{
-      if (i % 2 == 1) {
-        if (filters[i - 1] == 'page') {
-          filtersObj[filters[i - 1]] = setPageNumber
-        } else {
-          filtersObj[filters[i - 1]] = f
+  if (!!setPageNumber) {
+    if (filters && Array.isArray(filters)) {
+      filters.map((f: string, i: number)=>{
+        if (i % 2 == 1) {
+          if (filters[i - 1] == 'page') {
+            filtersObj[filters[i - 1]] = setPageNumber
+          } else {
+            filtersObj[filters[i - 1]] = f
+          }
         }
-      }
-    })
-  } else {
-    filtersObj['page'] = setPageNumber
+      })
+    } else {
+      filtersObj['page'] = setPageNumber
+    }
   }
 
   return (
     <button 
     onClick={()=>{
-      let urlPage = "/catalog"
+      if (!!onClick) {
+        onClick()
+      } else {
 
-      Object.keys(filtersObj).map((f: any) => {
-        urlPage += "/" + f + "/" + filtersObj[f]
-      })
+        let urlPage = "/catalog"
 
-      router.push(urlPage)
+        Object.keys(filtersObj).map((f: any) => {
+          urlPage += "/" + f + "/" + filtersObj[f]
+        })
+
+        router.push(urlPage)
+      }
     }}
     style={{ borderColor: borderColor }} className="icon-button">
       {icon}
