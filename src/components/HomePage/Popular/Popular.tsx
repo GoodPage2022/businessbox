@@ -9,8 +9,7 @@ import FilterSVG from "../../../assets/svg/filter.svg";
 import DotsSVG from "../../../assets/svg/dots.svg";
 import LinesSVG from "../../../assets/svg/lines.svg";
 import IconButton from "../../shared/IconButton";
-import PopularCards from "../../../constants/popular";
-import BusinessCard from "../../shared/BusinessCard";
+import CardsSlider from "../CardsSlider/CardsSlider";
 
 const Popular = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -21,12 +20,12 @@ const Popular = () => {
   const getBusinesses = async () => {
     const requestBody = {
       user,
-      limit: 4,
+      limit: 10,
       sort: {
         view_count: -1,
-        _created: -1
-      }
-    }
+        _created: -1,
+      },
+    };
 
     const response = await axios.post(`/api/businesses/getList`, requestBody);
 
@@ -160,36 +159,7 @@ const Popular = () => {
         </div>
 
         <ul className="popular__cards">
-          {cards.map(
-            ({
-              _id,
-              title,
-              description,
-              images,
-              view_count,
-              price,
-              is_verified,
-            }: any) => (
-              <BusinessCard
-                key={_id}
-                alias={_id}
-                title={title}
-                description={description}
-                image={
-                  images == null || !images.length
-                    ? ""
-                    : `${
-                        images[0].meta.assets == ""
-                          ? ``
-                          : `http://157.230.99.45:8082`
-                      }${images[0].path}`
-                }
-                price={price}
-                views={view_count ?? 0}
-                isVerified={is_verified}
-              />
-            ),
-          )}
+          <CardsSlider cards={cards} />
         </ul>
       </div>
     </section>

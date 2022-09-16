@@ -1,18 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import PhoneSVG from "../../../assets/svg/phone.svg";
 import MailSVG from "../../../assets/svg/mail.svg";
 import InstagramSVG from "../../../assets/svg/instagram.svg";
 import YoutubeSVG from "../../../assets/svg/youtube.svg";
+import axios from "axios";
 
 const ProfileInfo = ({ projectData }: { projectData: any }) => {
   const [isPhoneShow, setIsPhoneShow] = useState(false);
   const [isEmailShow, setIsEmailShow] = useState(false);
+  const [businessOwner, setBusinessOwner]: [
+    businessOwner: any,
+    setBusinessOwner: any,
+  ] = useState(null);
   const [isInstagramShow, setIsInstagramShow] = useState(false);
   const user = useSelector((state: any) => state.auth.user);
+
+  const getUser = async () => {
+    const requestBody = {
+      userId: projectData._by,
+    };
+    const response = await axios.post(`/api/account/list`, requestBody);
+
+    if (response.data) {
+      setBusinessOwner(response.data);
+      return response.data;
+    }
+  };
+  console.log(businessOwner);
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div className="profileInfo">
@@ -27,9 +49,11 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
           />
         </div>
         <div className="profileInfo__data">
-          <p className="profileInfo__name section__primary-text">Ім’я автора</p>
+          <p className="profileInfo__name section__primary-text">
+            {businessOwner ? businessOwner.name : "Невідомо"}
+          </p>
           <p className="profileInfo__city section__primary-text">
-            Місто, Країна
+            {businessOwner ? businessOwner.city : "Невідомо"}
           </p>
         </div>
       </div>
@@ -40,8 +64,10 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
+            ) : businessOwner ? (
+              businessOwner.phone
             ) : (
-              user.phone
+              "Невідомо"
             )}
           </p>
         )}
@@ -51,8 +77,10 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
+            ) : businessOwner ? (
+              businessOwner.email
             ) : (
-              user.email
+              "Невідомо"
             )}
           </p>
         )}
