@@ -4,10 +4,12 @@ const IconButton = ({
   icon,
   borderColor,
   setPageNumber,
+  onClick,
 }: {
   icon: any,
   borderColor: string,
   setPageNumber: number,
+  onClick?: any;
 }) => {
   const router = useRouter();
   const { filters } = router.query;

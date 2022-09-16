@@ -136,10 +136,18 @@
   }
 
   &__cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content: center;
-    grid-column-gap: 30px;
-    grid-row-gap: 40px;
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // justify-content: center;
+    // grid-column-gap: 30px;
+    // grid-row-gap: 40px;
+  }
+}
+
+.cards-slider {
+  margin-right: -30px;
+
+  & > div {
+    height: 100% !important;
   }
 }
