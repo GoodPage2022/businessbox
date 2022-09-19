@@ -5,6 +5,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
+import CrossSVG from "../../assets/svg/cross.svg";
 
 const AddBusiness = () => {
   const router = useRouter();
@@ -144,7 +145,6 @@ const AddBusiness = () => {
             escapeHtml(values.year);
             escapeHtml(values.city);
 
-
             return errors;
           }}
           onSubmit={handleSubmit}
@@ -264,6 +264,9 @@ const AddBusiness = () => {
                   objectFit="cover"
                   alt="building"
                 />
+                <button type="button" className="addBusiness__button-close">
+                  <CrossSVG />
+                </button>
               </div>
               <div className="addBusiness__addMedia-wrapper--add-file">
                 <input

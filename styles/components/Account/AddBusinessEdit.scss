@@ -184,4 +184,19 @@
     color: $white-color;
     cursor: pointer;
   }
+
+  &__button-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 44px;
+    border: none;
+    border-radius: 18px;
+    background: $white-color;
+    cursor: pointer;
+  }
 }

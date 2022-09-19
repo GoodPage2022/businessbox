@@ -5,6 +5,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
+import CrossSVG from "../../assets/svg/cross.svg";
 
 const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -293,6 +294,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   objectFit="cover"
                   alt="building"
                 />
+                <button type="button" className="addBusinessEdit__button-close">
+                  <CrossSVG />
+                </button>
               </div>
               <div className="addBusinessEdit__addMedia-wrapper--add-file">
                 <input
