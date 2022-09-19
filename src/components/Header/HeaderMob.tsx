@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import CloseBurgerSVG from "../../assets/svg/close-burger.svg";
+import BurgerSVG from "../../assets/svg/burger-menu.svg";
 import UserSVG from "../../assets/svg/user.svg";
 import SearchSVG from "../../assets/svg/search.svg";
 import IconButton from "../shared/IconButton";
@@ -11,6 +13,7 @@ import ModalRegister from "../Modals/Modal-register/Modal-register";
 import ModalForgotPassword from "../Modals/modal-forgot-password/Modal-forgot-password";
 import { MainContext } from "../../contexts/mainContext";
 import ModalAuth from "../Modals/Modal-auth/Modal-auth";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import { signOut as signOutReducer } from "../../../store/actions/auth";
@@ -21,7 +24,7 @@ const initialValues = {
   search: "",
 };
 
-const Right = () => {
+const RightMob = () => {
   const { data: session } = useSession();
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
@@ -38,6 +41,9 @@ const Right = () => {
 
   const openContactInfo = () => {
     router.push("/account/contact-info");
+    if (state.isOpenBurger) {
+      dispatch({ type: "toggle_burger" });
+    }
   };
 
   const openModal = () => {
@@ -62,7 +68,28 @@ const Right = () => {
 
   return (
     <>
-      <ul className="header__right">
+      <div className="header__left">
+        {state.isOpenBurger ? (
+          <IconButton
+            onClick={() => dispatch({ type: "toggle_burger" })}
+            borderColor="#FFFFFF"
+            icon={<CloseBurgerSVG />}
+          />
+        ) : (
+          <IconButton
+            onClick={() => dispatch({ type: "toggle_burger" })}
+            borderColor="#FFFFFF"
+            icon={<BurgerSVG />}
+          />
+        )}
+
+        {!isSearchOpen && (
+          <Link href="/">
+            <a className="header__logo__text">Business Box</a>
+          </Link>
+        )}
+      </div>
+      <ul className={`header__right ${isSearchOpen ? "active" : ""}`}>
         <li className="header__right__btn">
           <Search active={isSearchOpen} />
           {isSearchOpen ? (
@@ -79,9 +106,7 @@ const Right = () => {
           className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
         >
           {user == null ? (
-            <span onClick={openModal}>
-              <MainButton label={`Вхід`} />
-            </span>
+            ""
           ) : (
             <IconButton
               borderColor="#FFFFFF"
@@ -90,15 +115,8 @@ const Right = () => {
             />
           )}
         </li>
-        <li
-          className="header__right__btn"
-          onClick={() =>
-            user != null ? router.push("/account/add-business") : openModal()
-          }
-        >
-          <MainButtonRed label="Зареєструвати бізнес" />
-        </li>
       </ul>
+
       <ModalAuth onClose={closeAuthModal} />
       <ModalRegister onClose={closeRegisterModal} />
       <ModalForgotPassword onClose={closeForgotPasswordModal} />
@@ -106,4 +124,4 @@ const Right = () => {
   );
 };
 
-export default Right;
+export default RightMob;

@@ -4,6 +4,7 @@ import { reducer, initialState } from "../reducers/MainReducer";
 interface ContextType {
   state: {
     isEdit: boolean;
+    isOpenBurger: boolean;
     isActiveModalAuth: boolean;
     isActiveModalRegistration: boolean;
     isActiveModalForgotPassword: boolean;
