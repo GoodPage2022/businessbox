@@ -28,3 +28,24 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: $size-mobile) {
+  .registerBusiness {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-image: url("../../../../public/assets/images/register-business-mob-bg.png");
+
+    &__title {
+      margin-bottom: 17px;
+
+      &--mob {
+        display: block;
+      }
+    }
+
+    &__button {
+      padding: 6px 12px;
+      border-radius: 11px;
+    }
+  }
+}
