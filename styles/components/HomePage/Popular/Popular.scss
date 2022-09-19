@@ -16,6 +16,10 @@
     }
   }
 
+  &__button__mob-filter {
+    display: none;
+  }
+
   &__button__filter {
     display: flex;
     align-items: center;
@@ -134,14 +138,6 @@
       cursor: pointer;
     }
   }
-
-  &__cards {
-    // display: grid;
-    // grid-template-columns: repeat(4, 1fr);
-    // justify-content: center;
-    // grid-column-gap: 30px;
-    // grid-row-gap: 40px;
-  }
 }
 
 .cards-slider {
@@ -149,5 +145,137 @@
 
   & > div {
     height: 100% !important;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .popular {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    &__buttons {
+      margin-bottom: 20px;
+    }
+
+    &__button__mob-filter {
+      display: block;
+    }
+
+    &__button__filter {
+      display: none;
+    }
+
+    &__filter {
+      margin-bottom: 40px;
+    }
+
+    &__form {
+      display: flex;
+      width: 100%;
+    }
+
+    &__field {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-top: auto;
+      &:not(:last-child) {
+        margin-right: 30px;
+      }
+    }
+    &__label {
+      display: block;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: $main-text-color;
+      margin-bottom: 10px;
+    }
+
+    &__price {
+      display: flex;
+
+      &--text {
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__input {
+      &-thumb {
+        position: relative;
+      }
+      width: 110px;
+      border: none;
+      background: $white-color;
+      border-radius: 25px;
+      padding: 20px 25px;
+      outline: none;
+      cursor: text;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: $grey-color;
+      }
+    }
+
+    &__select {
+      outline: none;
+      cursor: pointer;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: $grey-color;
+      }
+      appearance: none;
+    }
+
+    &__title {
+      margin-bottom: 20px;
+      &-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        border-radius: 18px;
+        border: none;
+        background: $main-text-color;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        align-items: center;
+        color: #ffffff;
+        cursor: pointer;
+      }
+    }
+
+    &__title-button {
+      display: none;
+    }
+  }
+
+  .cards-slider {
+    margin-right: 0;
+
+    & > div {
+      height: 100% !important;
+    }
   }
 }
