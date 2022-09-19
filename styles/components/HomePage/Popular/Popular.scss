@@ -145,6 +145,9 @@
 
   & > div {
     height: 100% !important;
+    & > div {
+      min-width: 100% !important;
+    }
   }
 }
 
@@ -274,8 +277,11 @@
   .cards-slider {
     margin-right: 0;
 
-    & > div {
-      height: 100% !important;
-    }
+    // & > div {
+    //   height: 100% !important;
+    //   & > div {
+    //     min-width: 100% !important;
+    //   }
+    // }
   }
 }

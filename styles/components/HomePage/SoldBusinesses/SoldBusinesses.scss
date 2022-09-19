@@ -6,12 +6,20 @@
   }
 
   &__cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content: center;
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // justify-content: center;
     opacity: 0.4;
     filter: blur(1px);
-    grid-column-gap: 30px;
-    grid-row-gap: 40px;
+    // grid-column-gap: 30px;
+    // grid-row-gap: 40px;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .soldBusinesses {
+    &__title {
+      margin-bottom: 20px;
+    }
   }
 }
