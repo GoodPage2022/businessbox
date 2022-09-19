@@ -60,6 +60,13 @@ const Popular = () => {
                 Фільтр
               </span>
             </button>
+            <span className="popular__button__mob-filter">
+              <IconButton
+                onClick={() => setIsShowFilter((prev) => !prev)}
+                borderColor="#0C0C0C"
+                icon={<FilterSVG />}
+              />
+            </span>
           </div>
           <div className="popular__buttons--right">
             {/* <IconButton borderColor="#0C0C0C" icon={<DotsSVG />} /> */}

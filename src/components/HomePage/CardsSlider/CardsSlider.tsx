@@ -14,8 +14,25 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     swipeToSlide: true,
     className: "cards-slider",
     adaptiveHeight: true,
-    autoplay: true,
-    // autoplaySpeed: 7000,
+    autoplay: false,
+    responsive: [
+      // {
+      //   breakpoint: 1270,
+      //   settings: {
+      //     slidesToShow: 2,
+      //     slidesToScroll: 1,
+      //     infinite: true,
+      //     dots: true,
+      //   },
+      // },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1.3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (

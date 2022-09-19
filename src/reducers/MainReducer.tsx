@@ -1,5 +1,10 @@
 export const reducer = (state: any, action: any) => {
   switch (action.type) {
+    case "toggle_burger":
+      return {
+        ...state,
+        isOpenBurger: !state.isOpenBurger,
+      };
     case "toggle_edit":
       return {
         ...state,
@@ -30,4 +35,5 @@ export const initialState = {
   isActiveModalAuth: false,
   isActiveModalRegistration: false,
   isActiveModalForgotPassword: false,
+  isOpenBurger: false,
 };

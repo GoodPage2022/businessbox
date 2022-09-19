@@ -20,3 +20,28 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: $size-mobile) {
+  .networks {
+    display: flex;
+    align-items: center;
+    background-color: $main-text-color;
+    margin-bottom: 40px;
+    &__item {
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+    &__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      width: 34px;
+      // border: 1px solid $white-color;
+      border-radius: 15px;
+      background: $white-color;
+      cursor: pointer;
+    }
+  }
+}

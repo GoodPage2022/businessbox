@@ -93,6 +93,36 @@ const BusinessCard = ({
           </div>
           <p className="business-card__price">{price}₴</p>
         </div>
+        <div className="business-card__footer-mob">
+          <div className="business-card__footer-mob--first">
+            <p className="business-card__price">{price}₴</p>
+            <button
+              onClick={() => setIsLiked((prev) => !prev)}
+              className={`business-card__heart-icon--mob ${
+                isLiked ? "active" : ""
+              }`}
+            >
+              <HeartSVG />
+            </button>
+          </div>
+          <div className="business-card__footer-mob--second">
+            <div className="business-card__views">
+              <EyeSVG className="business-card__eye-icon" />
+              <p className="business-card__views-count section__secondary-text">
+                {views}
+              </p>
+            </div>
+            <CheckSVG
+              data-tip={
+                isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
+              }
+              className={`business-card__ckeck-icon--mob ${
+                isVerified ? "active" : ""
+              }`}
+            />
+            <ReactTooltip />
+          </div>
+        </div>
       </div>
     </li>
   );

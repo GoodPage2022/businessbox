@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const RegisterBusiness = () => {
   const router = useRouter();
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: any) => state.auth.user);
   const [state, dispatch] = React.useContext(MainContext);
 
   const openModal = () => {
@@ -17,13 +17,16 @@ const RegisterBusiness = () => {
     <section className="registerBusiness">
       <div className="container registerBusiness__container">
         <h2 className="registerBusiness__title title--white">
-          Хочеш продати бізнес?
+          <span className="registerBusiness__title--mob">Хочеш</span> продати
+          бізнес?
           <br /> Реєструй вже зараз
         </h2>
 
         <button
           className="registerBusiness__button section__primary-text--white"
-          onClick={() => user != null ? router.push("/account/add-business") : openModal()}
+          onClick={() =>
+            user != null ? router.push("/account/add-business") : openModal()
+          }
         >
           Зареєструвати
         </button>

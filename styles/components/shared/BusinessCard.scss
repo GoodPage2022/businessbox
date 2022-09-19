@@ -121,6 +121,10 @@
     -webkit-box-orient: vertical;
   }
 
+  &__footer-mob {
+    display: none;
+  }
+
   &__footer {
     display: flex;
     align-items: center;
@@ -145,5 +149,137 @@
     font-size: 20px;
     line-height: 24px;
     color: $main-text-color;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .business-card {
+    width: 247px;
+
+    &:hover &__button-edit {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &__button-edit {
+      position: absolute;
+      top: 21px;
+      right: 21px;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 34px;
+      height: 32px;
+      background: $main-red-color;
+      border-radius: 15px;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &__image {
+      width: 247px;
+    }
+
+    &__heart-icon {
+      display: none;
+    }
+
+    &__info {
+      padding: 20px;
+    }
+
+    &__title {
+      height: 48px;
+
+      & span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+    }
+
+    &__ckeck-icon {
+      display: none;
+    }
+
+    &__description {
+      margin-bottom: 20px;
+    }
+
+    &__footer-mob {
+      display: block;
+
+      &--first {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      &--second {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    &__heart-icon--mob {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      width: auto;
+      border: none;
+      border-radius: 0;
+      background: $white-color;
+      cursor: pointer;
+      z-index: 20;
+      & svg {
+        width: 20px;
+        height: 20px;
+      }
+      &.active {
+        border: none;
+        & svg {
+          & path {
+            fill: $main-red-color;
+            stroke: $main-red-color;
+          }
+        }
+      }
+    }
+
+    &__ckeck-icon--mob {
+      z-index: 555;
+      width: 20px;
+      height: 20px;
+      &.active {
+        & g {
+          & path {
+            stroke: #21b660;
+          }
+        }
+      }
+    }
+
+    &__footer {
+      display: none;
+    }
+    &__views {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      border: none;
+      border-radius: 15px;
+    }
+
+    &__eye-icon {
+      margin-right: 10px;
+    }
   }
 }
