@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="footer">
-      <div className="container footer__container">
+      <div className="container footer__container--desctop">
         <div className="footer__logo">
           <Logo />
           <Networks />
@@ -125,10 +125,65 @@ const Footer: React.FC = () => {
               <a href="tel:0501234567">+38 (050) 123-45-67</a>
             </p>
             <p className="footer__contacts--item">
-              {" "}
               <a href="mailto:example@gmail.com">example@gmail.com</a>
             </p>
           </div>
+          <p className="footer__contacts--text section__secondary-text--white">
+            <CopyrightSVG className="footer__contacts--icon" />
+            Copyright 2022. All rights reserved.
+          </p>
+        </div>
+      </div>
+      <div className="container footer__container--mob">
+        <div className="footer__logo">
+          <Logo />
+        </div>
+        <Networks />
+        <div>
+          <p className="footer__contacts--item">
+            <a href="tel:0501234567">+38 (050) 123-45-67</a>
+          </p>
+          <p className="footer__contacts--item">
+            <a href="mailto:example@gmail.com">example@gmail.com</a>
+          </p>
+        </div>
+        <div className="footer__nav">
+          <div className="footer__categories">
+            <FormikProvider value={formik}>
+              <Field
+                type="text"
+                name="categories"
+                required
+                placeholder="Категорії"
+                component={FooterSelect}
+                options={[
+                  { value: "category_1", label: "Категорія 1" },
+                  { value: "category_2", label: "Категорія 2" },
+                  { value: "category_3", label: "Категорія 3" },
+                  { value: "category_4", label: "Категорія 4" },
+                  { value: "category_5", label: "Категорія 5" },
+                  { value: "category_6", label: "Категорія 6" },
+                  { value: "category_7", label: "Категорія 7" },
+                ]}
+              />
+            </FormikProvider>
+          </div>
+          <div className="footer__catalog">
+            <Link href="/catalog">
+              <a className="section__secondary-text--white footer__categories--button">
+                Каталог бізнесів
+              </a>
+            </Link>
+          </div>
+          <Link href="/">
+            <a className="section__secondary-text--white footer__categories--button">
+              Контакти
+            </a>
+          </Link>
+        </div>
+
+        <div className="footer__contacts">
+          <p className="section__secondary-text--white">Create by Good Page</p>
           <p className="footer__contacts--text section__secondary-text--white">
             <CopyrightSVG className="footer__contacts--icon" />
             Copyright 2022. All rights reserved.
