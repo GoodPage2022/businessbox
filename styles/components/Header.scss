@@ -95,9 +95,9 @@
     cursor: text;
 
     &.active {
-      border-top: 1px solid #888888;
-      border-left: 1px solid #888888;
-      border-right: 1px solid #888888;
+      border-top: 1px solid $grey-color;
+      border-left: 1px solid $grey-color;
+      border-right: 1px solid $grey-color;
     }
 
     &::placeholder {
@@ -106,7 +106,7 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 17px;
-      color: #888888;
+      color: $grey-color;
     }
 
     &:focus {
@@ -138,9 +138,9 @@
       min-height: 100%;
       background: $white-color;
       overflow: hidden;
-      border-bottom: 1px solid #888888;
-      border-left: 1px solid #888888;
-      border-right: 1px solid #888888;
+      border-bottom: 1px solid $grey-color;
+      border-left: 1px solid $grey-color;
+      border-right: 1px solid $grey-color;
 
       border-radius: 0 0 15px 15px;
       &::after {
@@ -149,7 +149,7 @@
         left: 10%;
         width: 80%;
         height: 1px;
-        background: #888888;
+        background: $grey-color;
         content: "";
       }
     }

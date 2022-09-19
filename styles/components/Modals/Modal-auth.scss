@@ -15,7 +15,7 @@
     margin-bottom: 11px;
     opacity: 1;
   }
-  
+
   &__overlay {
     position: fixed;
     top: 0;
@@ -143,7 +143,7 @@
       font-weight: 400;
       font-size: 20px;
       line-height: 24px;
-      color: #888888;
+      color: $grey-color;
     }
   }
 
@@ -193,7 +193,7 @@
     display: flex;
     margin: 0 auto;
     border: none;
-    color: #888888;
+    color: $grey-color;
     background: transparent;
     cursor: pointer;
   }

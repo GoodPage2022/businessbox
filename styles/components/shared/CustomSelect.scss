@@ -17,16 +17,16 @@
   }
   &__control--menu-is-open {
     border-radius: 25px 25px 0 0 !important;
-    border-top: 1px solid #888888;
-    border-left: 1px solid #888888;
-    border-right: 1px solid #888888;
+    border-top: 1px solid $grey-color;
+    border-left: 1px solid $grey-color;
+    border-right: 1px solid $grey-color;
     box-sizing: border-box;
   }
 
   &__menu {
-    border-bottom: 1px solid #888888;
-    border-left: 1px solid #888888;
-    border-right: 1px solid #888888;
+    border-bottom: 1px solid $grey-color;
+    border-left: 1px solid $grey-color;
+    border-right: 1px solid $grey-color;
     overflow: hidden !important;
     border-radius: 0 0 25px 25px !important;
     &::after {
@@ -35,7 +35,7 @@
       left: 10%;
       width: 80%;
       height: 1px;
-      background: #888888;
+      background: $grey-color;
       content: "";
     }
   }
