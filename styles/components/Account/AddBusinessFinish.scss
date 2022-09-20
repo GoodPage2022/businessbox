@@ -209,7 +209,6 @@
     padding: 20px 25px;
     outline: none;
     resize: none;
-    margin-bottom: 40px;
     cursor: text;
 
     &::placeholder {
@@ -237,6 +236,11 @@
     border-radius: 15px;
     background: transparent;
     cursor: pointer;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
   }
 
   &__button {
@@ -254,5 +258,197 @@
     line-height: 24px;
     color: $white-color;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .addBusinessFinish {
+    padding-bottom: 40px;
+
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+
+    &__first-wrapper {
+      display: block;
+      margin-bottom: 0;
+    }
+    &__second-wrapper {
+      display: block;
+      margin-bottom: 0;
+    }
+    &__third-wrapper {
+      display: block;
+      margin-bottom: 0;
+      &--left {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+    &__fourth-wrapper {
+      display: block;
+      margin-bottom: 0;
+    }
+    &__fifth-wrapper {
+      display: block;
+      margin-bottom: 0;
+      margin-top: 20px;
+    }
+    &__sixth-wrapper {
+      display: block;
+      margin-bottom: 0;
+    }
+    &__seventh-wrapper {
+      display: block;
+      margin-bottom: 0;
+    }
+    &__eighth-wrapper {
+      display: block;
+      margin-bottom: 0;
+    }
+
+    &__custom-file-input {
+      display: none;
+    }
+    &__custom-file-input::-webkit-file-upload-button {
+      display: none;
+    }
+    &__custom-file-input::before {
+      display: none;
+    }
+
+    &__form {
+      width: 100%;
+    }
+
+    &__field {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-top: auto;
+      margin-bottom: 20px;
+      &:not(:last-child) {
+        margin-right: 0;
+      }
+    }
+    &__label {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    &__label-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__input {
+      &-thumb {
+        position: relative;
+        display: block;
+      }
+      padding: 10px 20px;
+      &::placeholder {
+        font-size: 14px;
+        line-height: 17px;
+      }
+    }
+    &__field__select {
+    }
+
+    &__select {
+      margin-bottom: 40px;
+      margin-top: auto;
+      outline: none;
+      cursor: pointer;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: $grey-color;
+      }
+      appearance: none;
+
+      &--thumb {
+        position: relative;
+        display: block;
+      }
+    }
+
+    &__select--short {
+      width: 160px;
+      border: none;
+      background: $white-color;
+      border-radius: 25px;
+      padding: 20px 25px;
+      margin-bottom: 40px;
+
+      outline: none;
+      cursor: pointer;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: $grey-color;
+      }
+      appearance: none;
+    }
+    &__icon {
+      right: 20px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    &__textarea {
+      height: 148px;
+      padding: 10px 20px;
+      &::placeholder {
+        font-size: 14px;
+        line-height: 17px;
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__button-back {
+      padding: 7px 13px;
+    }
+
+    &__button {
+      padding: 7px 16px;
+      border: none;
+      border-radius: 18px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+    }
   }
 }
