@@ -124,9 +124,15 @@ function ModalAuth({ onClose }: { onClose: any }) {
       <div className="modal-auth__container">
         <div className="modal-auth__header">
           <h2 className="modal-auth__title title--white">Вікно входу</h2>
+          <button onClick={onClose} className="modal-auth__button-close--mob">
+            <CrossSVG />
+          </button>
         </div>
         <div className="modal-auth__body">
-          <button onClick={onClose} className="modal-auth__button-close">
+          <button
+            onClick={onClose}
+            className="modal-auth__button-close--desctop"
+          >
             <CrossSVG />
           </button>
           <Formik
