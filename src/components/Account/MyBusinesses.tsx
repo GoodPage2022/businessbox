@@ -3,11 +3,14 @@ import PopularCard from "../shared/BusinessCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import PlusSVG from "../../assets/svg/plus.svg";
+import { useRouter } from "next/router";
 
 const MyBusinesses = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
 
+  const router = useRouter();
   const getBusinesses = async () => {
     const filter = {
       _by: user._id,
@@ -36,34 +39,49 @@ const MyBusinesses = () => {
     <section className="myBusinesses">
       <div className="container myBusinesses__container">
         {cards.length > 0 ? (
-          <ul className="myBusinesses__cards">
-            {cards.map(
-              ({
-                _id,
-                title,
-                description,
-                images,
-                view_count,
-                price,
-                is_verified,
-              }: any) => (
-                <PopularCard
-                  key={_id}
-                  alias={_id}
-                  title={title}
-                  description={description}
-                  image={
-                    images == null || !images.length
-                      ? ""
-                      : `${images[0].meta.assets == "" ? `` : `http://157.230.99.45:8082`}${images[0].path}`
-                  }
-                  price={price}
-                  views={view_count ?? 0}
-                  isVerified={is_verified}
-                />
-              ),
-            )}
-          </ul>
+          <>
+            <ul className="myBusinesses__cards">
+              {cards.map(
+                ({
+                  _id,
+                  title,
+                  description,
+                  images,
+                  view_count,
+                  price,
+                  is_verified,
+                }: any) => (
+                  <PopularCard
+                    key={_id}
+                    alias={_id}
+                    title={title}
+                    description={description}
+                    image={
+                      images == null || !images.length
+                        ? ""
+                        : `${
+                            images[0].meta.assets == ""
+                              ? ``
+                              : `http://157.230.99.45:8082`
+                          }${images[0].path}`
+                    }
+                    price={price}
+                    views={view_count ?? 0}
+                    isVerified={is_verified}
+                  />
+                ),
+              )}
+            </ul>
+            <button
+              onClick={() => router.push("/account/add-business")}
+              className="myBusinesses__button-plus"
+            >
+              <PlusSVG />
+              <span className="myBusinesses__button-plus--text">
+                Додати бізнес
+              </span>
+            </button>
+          </>
         ) : (
           <div className="myBusinesses__empty">
             <h1 className="title">Тут немає жодної вашої компанії</h1>

@@ -242,7 +242,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   />
                 </label>
               </div>
-              <div className="addBusinessEdit__info-wrapper--right">
+              <div className="addBusinessEdit__info-wrapper--right-desctop">
                 <label className="addBusinessEdit__field">
                   <span className="addBusinessEdit__label">Опис</span>
                   <Field
@@ -284,7 +284,51 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   </span>
                 </label>
               </div>
+              <div className="addBusinessEdit__info-wrapper--right-mob">
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Рік створення</span>
+                  <Field
+                    className="addBusinessEdit__input section__primary-text"
+                    type="text"
+                    name="year"
+                    minLength={2}
+                    maxLength={255}
+                    required
+                    placeholder="-----"
+                  />
+                </label>
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Ціна</span>
+                  <span className="addBusinessEdit__input-thumb">
+                    <Field
+                      className="addBusinessEdit__input section__primary-text"
+                      type="text"
+                      name="price"
+                      pattern="[0-9]+"
+                      minLength={2}
+                      maxLength={255}
+                      required
+                      placeholder="-----"
+                    />
+                    <span className="addBusinessEdit__icon">$</span>
+                  </span>
+                </label>
+                <label className="addBusinessEdit__field">
+                  <span className="addBusinessEdit__label">Опис</span>
+                  <Field
+                    as="textarea"
+                    className="addBusinessEdit__textarea section__primary-text"
+                    type="text"
+                    name="description"
+                    minLength={2}
+                    maxLength={1000}
+                    required
+                    placeholder="Писати тут..."
+                  />
+                </label>
+              </div>
             </div>
+            <span className="addBusinessEdit__label">Медіа</span>
             <div className="addBusinessEdit__addMedia-wrapper">
               <div className="addBusinessEdit__addMedia-wrapper--image">
                 <Image
@@ -305,7 +349,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   type="file"
                   multiple
                   accept="image/*,.png,.jpg"
-                  className="addBusiness__custom-file-input"
+                  className="addBusinessEdit__custom-file-input--desctop"
                   data-label={`${
                     files && files.length > 0
                       ? `Додано ${files.length} медіафали`
@@ -315,6 +359,23 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     if (e.currentTarget.files) setFiles(e.currentTarget.files);
                   }}
                 />
+                <input
+                  id="file"
+                  name="file"
+                  type="file"
+                  multiple
+                  accept="image/*,.png,.jpg"
+                  className="addBusinessEdit__custom-file-input--mob"
+                  // data-label={`${
+                  //   files && files.length > 0
+                  //     ? `Додано ${files.length} медіафали`
+                  //     : `+`
+                  // }`}
+                  onChange={(e) => {
+                    if (e.currentTarget.files) setFiles(e.currentTarget.files);
+                  }}
+                />
+                <CrossSVG />
               </div>
             </div>
             {addBusinessError && (

@@ -58,22 +58,27 @@
   }
 
   &__button-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-bottom: 36px;
-    height: 44px;
-    width: 44px;
-    border: none;
-    border-radius: 18px;
-    background: $main-text-color;
-    cursor: pointer;
+    &--desctop {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-bottom: 36px;
+      height: 44px;
+      width: 44px;
+      border: none;
+      border-radius: 18px;
+      background: $main-text-color;
+      cursor: pointer;
 
-    & svg {
-      & path {
-        stroke: $white-color;
+      & svg {
+        & path {
+          stroke: $white-color;
+        }
       }
+    }
+    &--mob {
+      display: none;
     }
   }
 
@@ -196,5 +201,157 @@
     color: $grey-color;
     background: transparent;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .modal-auth {
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+
+    &__container {
+      display: block;
+      width: 375px;
+      border-radius: 15px 15px 0px 0px;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 100%;
+      background-image: url("../../../public/assets/images/auth-modal-mob-bg.png");
+
+      padding: 20px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    &__button-close {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: none;
+        margin-bottom: 0;
+        width: 34px;
+        height: 32px;
+        border: none;
+        background: $white-color;
+        border-radius: 15px;
+        cursor: pointer;
+
+        & svg {
+          width: 14px;
+          height: 14px;
+          & path {
+            stroke: $main-text-color;
+          }
+        }
+      }
+    }
+
+    &__body {
+      padding: 20px 20px 40px;
+    }
+
+    &__form {
+      width: 100%;
+    }
+
+    &__field--mail {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-bottom: 20px;
+    }
+    &__field--password {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-bottom: 40px;
+    }
+
+    &__eye-icon {
+      right: 20px;
+    }
+    &__label {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    &__input {
+      border-radius: 15px;
+      padding: 10px 20px;
+      font-size: 10px;
+      line-height: 12px;
+      &::placeholder {
+        font-size: 14px;
+        line-height: 17px;
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    &__button {
+      padding: 7px 16px 8px;
+      border-radius: 15px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $grey-color;
+      border: 1px solid $main-text-color;
+
+      background: transparent;
+    }
+
+    &__text {
+      font-size: 10px;
+      line-height: 12px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    &__google {
+      &--text {
+        font-size: 10px;
+        line-height: 12px;
+      }
+    }
+
+    &__forgot-password {
+      font-size: 10px;
+      line-height: 12px;
+    }
   }
 }

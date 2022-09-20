@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Field, FieldProps, FormikProvider, useFormik } from "formik";
 
-import Logo from "./Logo";
 import Select from "react-select";
 import Networks from "./Networks";
 import CopyrightSVG from "../../assets/svg/copyright.svg";
@@ -82,7 +81,9 @@ const Footer: React.FC = () => {
     <footer className="footer">
       <div className="container footer__container--desctop">
         <div className="footer__logo">
-          <Logo />
+          <Link href="/">
+            <a className="footer__logo__text">Business Box</a>
+          </Link>
           <Networks />
           <p className="section__secondary-text--white">Create by Good Page</p>
         </div>
@@ -136,7 +137,9 @@ const Footer: React.FC = () => {
       </div>
       <div className="container footer__container--mob">
         <div className="footer__logo">
-          <Logo />
+          <Link href="/">
+            <a className="footer__logo__text">Business Box</a>
+          </Link>
         </div>
         <Networks />
         <div>

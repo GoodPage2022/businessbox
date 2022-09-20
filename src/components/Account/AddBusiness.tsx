@@ -211,7 +211,7 @@ const AddBusiness = () => {
                   />
                 </label>
               </div>
-              <div className="addBusiness__info-wrapper--right">
+              <div className="addBusiness__info-wrapper--right-desctop">
                 <label className="addBusiness__field">
                   <span className="addBusiness__label">Опис</span>
                   <Field
@@ -254,7 +254,51 @@ const AddBusiness = () => {
                   </span>
                 </label>
               </div>
+              <div className="addBusiness__info-wrapper--right-mob">
+                <label className="addBusiness__field">
+                  <span className="addBusiness__label">Рік створення</span>
+                  <Field
+                    className="addBusiness__input section__primary-text"
+                    type="text"
+                    name="year"
+                    minLength={2}
+                    maxLength={255}
+                    required
+                    placeholder="-----"
+                  />
+                </label>
+                <label className="addBusiness__field">
+                  <span className="addBusiness__label">Ціна</span>
+                  <span className="addBusiness__input-thumb">
+                    <Field
+                      className="addBusiness__input section__primary-text"
+                      type="text"
+                      name="price"
+                      pattern="[0-9]+"
+                      minLength={2}
+                      maxLength={255}
+                      required
+                      placeholder="-----"
+                    />
+                    <span className="addBusiness__icon">$</span>
+                  </span>
+                </label>
+                <label className="addBusiness__field">
+                  <span className="addBusiness__label">Опис</span>
+                  <Field
+                    as="textarea"
+                    className="addBusiness__textarea section__primary-text"
+                    type="text"
+                    name="description"
+                    minLength={2}
+                    maxLength={1000}
+                    required
+                    placeholder="Писати тут..."
+                  />
+                </label>
+              </div>
             </div>
+            <span className="addBusiness__label">Медіа</span>
             <div className="addBusiness__addMedia-wrapper">
               <div className="addBusiness__addMedia-wrapper--image">
                 <Image
@@ -275,7 +319,7 @@ const AddBusiness = () => {
                   type="file"
                   multiple
                   accept="image/*,.png,.jpg"
-                  className="addBusiness__custom-file-input"
+                  className="addBusiness__custom-file-input--desctop"
                   data-label={`${
                     files && files.length > 0
                       ? `Додано ${files.length} медіафали`
@@ -285,6 +329,23 @@ const AddBusiness = () => {
                     if (e.currentTarget.files) setFiles(e.currentTarget.files);
                   }}
                 />
+                <input
+                  id="file"
+                  name="file"
+                  type="file"
+                  multiple
+                  accept="image/*,.png,.jpg"
+                  className="addBusiness__custom-file-input--mob"
+                  // data-label={`${
+                  //   files && files.length > 0
+                  //     ? `Додано ${files.length} медіафали`
+                  //     : `+`
+                  // }`}
+                  onChange={(e) => {
+                    if (e.currentTarget.files) setFiles(e.currentTarget.files);
+                  }}
+                />
+                <CrossSVG />
               </div>
             </div>
             {addBusinessError && (

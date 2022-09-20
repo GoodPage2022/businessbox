@@ -133,8 +133,13 @@
   }
 
   &__button-wrapper {
-    position: relative;
-    margin-top: auto;
+    &--desctop {
+      position: relative;
+      margin-top: auto;
+    }
+    &--mob {
+      display: none;
+    }
   }
 
   &__err-msg {
@@ -228,4 +233,125 @@
 
 .slick-track {
   margin-left: initial;
+}
+
+@media screen and (max-width: $size-mobile) {
+  .projectInfo {
+    padding-top: 92px;
+    padding-bottom: 40px;
+
+    &__title {
+      margin-bottom: 5px;
+      &--heart-icon {
+        margin-right: 10px;
+      }
+    }
+
+    &__city {
+      margin-bottom: 20px;
+    }
+
+    &__image-slider {
+      padding: 10px 0 10px 10px;
+      margin-bottom: 20px;
+      margin-right: -20px;
+
+      &--image {
+        width: 247px !important;
+        height: 142px !important;
+        border-radius: 12.455px;
+      }
+    }
+
+    &__categories-slider {
+      margin-right: -20px;
+    }
+
+    &__description {
+      margin-top: 20px;
+      margin-bottom: 14px;
+    }
+
+    &__info-wrapper {
+      display: block;
+      margin-bottom: 20px;
+    }
+    &__button-wrapper {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        position: relative;
+        display: block;
+        margin-top: auto;
+        margin-bottom: 14px;
+      }
+    }
+    &__err-msg {
+      position: absolute;
+      left: 11%;
+      bottom: -50%;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      color: $main-red-color;
+    }
+
+    &__button-info {
+      padding: 7px 14px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    &__comments {
+      margin-bottom: 40px;
+    }
+
+    &__comments-empty {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    &__form {
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    &__field {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    &__textarea {
+      border-radius: 20px;
+      padding: 20px 20px;
+
+      &::placeholder {
+        font-size: 14px;
+        line-height: 17px;
+      }
+    }
+
+    &__button-send {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    &__offers-title {
+      margin-bottom: 40px;
+    }
+  }
+
+  .slick-track {
+    margin-left: initial;
+  }
 }

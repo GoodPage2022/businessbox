@@ -62,15 +62,25 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
           <h2 className="modal-forgotPassword__title title--white">
             Забули пароль
           </h2>
-          <p className="modal-forgotPassword__text ">
+          <p className="modal-forgotPassword__text--desctop">
             Введіть адрес електронної пошти на який буде висланий новий пароль
             до вашого аккаунту
           </p>
-        </div>
-        <div className="modal-forgotPassword__body">
           <button
             onClick={onClose}
-            className="modal-forgotPassword__button-close"
+            className="modal-forgotPassword__button-close--mob"
+          >
+            <CrossSVG />
+          </button>
+        </div>
+        <div className="modal-forgotPassword__body">
+          <p className="modal-forgotPassword__text--mob">
+            Введіть адрес електронної пошти на який буде висланий новий пароль
+            до вашого аккаунту
+          </p>
+          <button
+            onClick={onClose}
+            className="modal-forgotPassword__button-close--desctop"
           >
             <CrossSVG />
           </button>

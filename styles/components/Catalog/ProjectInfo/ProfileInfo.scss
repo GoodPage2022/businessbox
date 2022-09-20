@@ -57,3 +57,55 @@
     }
   }
 }
+
+@media screen and (max-width: $size-mobile) {
+  .profileInfo {
+    display: block;
+    padding: 20px 0px 20px 40px;
+    margin-right: 20px;
+    margin-left: -20px;
+    &__info {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    &__name {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      margin-bottom: 6px;
+    }
+    &__contact {
+      margin-right: 18px;
+
+      &--notAuth {
+        color: $main-red-color;
+      }
+    }
+    &__networks {
+      display: flex;
+      align-items: center;
+
+      &--item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 44px;
+        height: 44px;
+        background: $transparent;
+        border-radius: 18px;
+        border: 1.5px solid $main-text-color;
+        cursor: pointer;
+        & svg {
+          width: 17px;
+          height: 20px;
+        }
+
+        &:not(:last-child) {
+          margin-right: 13px;
+        }
+      }
+    }
+  }
+}

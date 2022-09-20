@@ -60,13 +60,14 @@ const Popular = () => {
                 Фільтр
               </span>
             </button>
-            <span className="popular__button__mob-filter">
-              <IconButton
-                onClick={() => setIsShowFilter((prev) => !prev)}
-                borderColor="#0C0C0C"
-                icon={<FilterSVG />}
-              />
-            </span>
+            <button
+              className={`popular__button__mob-filter ${
+                isShowFilter ? "active" : ""
+              }`}
+              onClick={() => setIsShowFilter((prev) => !prev)}
+            >
+              <FilterSVG />
+            </button>
           </div>
           <div className="popular__buttons--right">
             {/* <IconButton borderColor="#0C0C0C" icon={<DotsSVG />} /> */}
@@ -74,86 +75,171 @@ const Popular = () => {
           </div>
         </div>
         {isShowFilter && (
-          <div className="popular__filter">
-            <Formik
-              initialValues={{
-                price: "",
-                businessSphere: "",
-                city: "",
-                region: "",
-              }}
-              validate={(values: any) => {
-                const errors: any = {};
+          <>
+            <div className="popular__filter--desctop">
+              <Formik
+                initialValues={{
+                  price: "",
+                  businessSphere: "",
+                  city: "",
+                  region: "",
+                }}
+                validate={(values: any) => {
+                  const errors: any = {};
 
-                return errors;
-              }}
-              onSubmit={handleSubmit}
-            >
-              <Form className="popular__form">
-                <label className="popular__field">
-                  <span className="popular__label">Ціна</span>
-                  <div className="popular__price">
+                  return errors;
+                }}
+                onSubmit={handleSubmit}
+              >
+                <Form className="popular__form">
+                  <label className="popular__field">
+                    <span className="popular__label">Ціна</span>
+                    <div className="popular__price">
+                      <Field
+                        className="popular__input section__primary-text"
+                        type="text"
+                        name="from"
+                        placeholder="від"
+                      />
+                      <p className="popular__price--text">—</p>
+                      <Field
+                        className="popular__input section__primary-text"
+                        type="text"
+                        name="to"
+                        placeholder="до"
+                      />
+                    </div>
+                  </label>
+                  <label className="popular__field">
+                    <span className="popular__label">Область</span>
                     <Field
-                      className="popular__input section__primary-text"
                       type="text"
-                      name="from"
-                      placeholder="від"
+                      name="region"
+                      required
+                      placeholder="-----"
+                      component={CustomSelect}
+                      options={[
+                        { value: "yes", label: "Так" },
+                        { value: "no", label: "Ні" },
+                      ]}
                     />
-                    <p className="popular__price--text">—</p>
+                  </label>
+                  <label className="popular__field">
+                    <span className="popular__label">Місто</span>
                     <Field
-                      className="popular__input section__primary-text"
                       type="text"
-                      name="to"
-                      placeholder="до"
+                      name="city"
+                      required
+                      placeholder="-----"
+                      component={CustomSelect}
+                      options={[
+                        { value: "yes", label: "Так" },
+                        { value: "no", label: "Ні" },
+                      ]}
                     />
+                  </label>
+                  <label className="popular__field">
+                    <span className="popular__label">Сфера бізнесу</span>
+                    <Field
+                      component={CustomSelect}
+                      className="popular__select section__primary-text"
+                      type="text"
+                      name="businessSphere"
+                      options={[
+                        { value: "yes", label: "Так" },
+                        { value: "no", label: "Ні" },
+                      ]}
+                      required
+                      placeholder="-----"
+                    ></Field>
+                  </label>
+                </Form>
+              </Formik>
+            </div>
+            <div className="popular__filter--mob">
+              <Formik
+                initialValues={{
+                  price: "",
+                  businessSphere: "",
+                  city: "",
+                  region: "",
+                }}
+                validate={(values: any) => {
+                  const errors: any = {};
+
+                  return errors;
+                }}
+                onSubmit={handleSubmit}
+              >
+                <Form className="popular__form">
+                  <label className="popular__field">
+                    <span className="popular__label">Ціна</span>
+                    <div className="popular__price">
+                      <Field
+                        className="popular__input section__primary-text"
+                        type="text"
+                        name="from"
+                        placeholder="від"
+                      />
+                      <p className="popular__price--text">—</p>
+                      <Field
+                        className="popular__input section__primary-text"
+                        type="text"
+                        name="to"
+                        placeholder="до"
+                      />
+                    </div>
+                  </label>
+                  <div className="popular__city-wrapper">
+                    <label className="popular__field">
+                      <span className="popular__label">Область</span>
+                      <Field
+                        type="text"
+                        name="region"
+                        required
+                        placeholder="-----"
+                        component={CustomSelect}
+                        options={[
+                          { value: "yes", label: "Так" },
+                          { value: "no", label: "Ні" },
+                        ]}
+                      />
+                    </label>
+                    <label className="popular__field">
+                      <span className="popular__label">Місто</span>
+                      <Field
+                        type="text"
+                        name="city"
+                        required
+                        placeholder="-----"
+                        component={CustomSelect}
+                        options={[
+                          { value: "yes", label: "Так" },
+                          { value: "no", label: "Ні" },
+                        ]}
+                      />
+                    </label>
                   </div>
-                </label>
-                <label className="popular__field">
-                  <span className="popular__label">Область</span>
-                  <Field
-                    type="text"
-                    name="region"
-                    required
-                    placeholder="-----"
-                    component={CustomSelect}
-                    options={[
-                      { value: "yes", label: "Так" },
-                      { value: "no", label: "Ні" },
-                    ]}
-                  />
-                </label>
-                <label className="popular__field">
-                  <span className="popular__label">Місто</span>
-                  <Field
-                    type="text"
-                    name="city"
-                    required
-                    placeholder="-----"
-                    component={CustomSelect}
-                    options={[
-                      { value: "yes", label: "Так" },
-                      { value: "no", label: "Ні" },
-                    ]}
-                  />
-                </label>
-                <label className="popular__field">
-                  <span className="popular__label">Сфера бізнесу</span>
-                  <Field
-                    component={CustomSelect}
-                    className="popular__select section__primary-text"
-                    type="text"
-                    name="businessSphere"
-                    options={[
-                      { value: "yes", label: "Так" },
-                      { value: "no", label: "Ні" },
-                    ]}
-                    required
-                    placeholder="-----"
-                  ></Field>
-                </label>
-              </Form>
-            </Formik>
-          </div>
+
+                  <label className="popular__field">
+                    <span className="popular__label">Сфера бізнесу</span>
+                    <Field
+                      component={CustomSelect}
+                      className="popular__select section__primary-text"
+                      type="text"
+                      name="businessSphere"
+                      options={[
+                        { value: "yes", label: "Так" },
+                        { value: "no", label: "Ні" },
+                      ]}
+                      required
+                      placeholder="-----"
+                    ></Field>
+                  </label>
+                </Form>
+              </Formik>
+            </div>
+          </>
         )}
         <div className="popular__title">
           <h2 className="title">Найпопулярніші</h2>
