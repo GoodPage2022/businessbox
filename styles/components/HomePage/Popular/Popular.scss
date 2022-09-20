@@ -36,7 +36,12 @@
   }
 
   &__filter {
-    margin-bottom: 40px;
+    &--desctop {
+      margin-bottom: 40px;
+    }
+    &--mob {
+      display: none;
+    }
   }
 
   &__form {
@@ -161,7 +166,24 @@
     }
 
     &__button__mob-filter {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      width: 34px;
+      border: 1px solid $main-text-color;
+      border-radius: 15px;
+      background: transparent;
+      cursor: pointer;
+
+      &.active {
+        background: $main-text-color;
+        & svg {
+          & rect {
+            fill: $white-color;
+          }
+        }
+      }
     }
 
     &__button__filter {
@@ -169,12 +191,33 @@
     }
 
     &__filter {
-      margin-bottom: 40px;
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: block;
+        padding-top: 60px;
+        border-top: 1px solid $grey-color;
+        margin-bottom: 40px;
+      }
     }
 
     &__form {
-      display: flex;
+      display: block;
       width: 100%;
+    }
+
+    &__city-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 40px 0;
+
+      & label {
+        &:not(:last-child) {
+          margin-right: 16px;
+        }
+      }
     }
 
     &__field {
@@ -184,9 +227,10 @@
       line-height: 1.17;
       letter-spacing: 0.01em;
       color: black;
-      margin-top: auto;
+      margin-top: none;
       &:not(:last-child) {
-        margin-right: 30px;
+        margin-right: 0;
+        margin-bottom: 0;
       }
     }
     &__label {
@@ -194,17 +238,21 @@
       font-family: "Montserrat";
       font-style: normal;
       font-weight: 600;
-      font-size: 20px;
-      line-height: 24px;
+      font-size: 18px;
+      line-height: 22px;
       color: $main-text-color;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+
+      &:last-child {
+        text-align: center;
+      }
     }
 
     &__price {
       display: flex;
 
       &--text {
-        padding: 0 10px;
+        padding: 0 14px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -215,7 +263,7 @@
       &-thumb {
         position: relative;
       }
-      width: 110px;
+      width: 50%;
       border: none;
       background: $white-color;
       border-radius: 25px;
@@ -227,8 +275,8 @@
         font-family: "Montserrat";
         font-style: normal;
         font-weight: 400;
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 17px;
         color: $grey-color;
       }
     }
