@@ -223,30 +223,6 @@
       opacity: 1;
     }
 
-    &__overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 999999999;
-      visibility: hidden;
-      pointer-events: none;
-      opacity: 0;
-      top: -50%;
-      transition: all 0.35s ease;
-
-      &.active {
-        visibility: visible;
-        pointer-events: all;
-        opacity: 1;
-        top: 0;
-      }
-    }
     &__container {
       display: block;
       width: 375px;
@@ -261,6 +237,11 @@
       background-image: url("../../../public/assets/images/auth-modal-mob-bg.png");
 
       padding: 20px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 29px;
     }
 
     &__button-close {

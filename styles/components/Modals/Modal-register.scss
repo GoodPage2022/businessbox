@@ -169,3 +169,120 @@
     }
   }
 }
+
+@media screen and (max-width: $size-mobile) {
+  .modal-register {
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+    &__container {
+      width: 375px;
+      border-radius: 15px 15px 0px 0px;
+    }
+
+    &__header {
+      background-image: url("../../../public/assets/images/register-modal-mob-bg.png");
+      padding: 20px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    &__button-close {
+      width: 34px;
+      height: 32px;
+      border-radius: 15px;
+
+      & svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__body {
+      padding: 20px 20px 40px;
+    }
+
+    &__field {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      &:not(:last-child) {
+        margin-right: 30px;
+      }
+    }
+
+    &__field--password {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-bottom: 40px;
+    }
+    &__eye-icon {
+      right: 20px;
+    }
+    &__label {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    &__input {
+      border-radius: 15px;
+      padding: 10px 20px;
+      font-size: 10px;
+      line-height: 12px;
+      &::placeholder {
+        font-size: 10px;
+        line-height: 12px;
+      }
+
+      &-wrapper {
+        position: relative;
+        display: block;
+      }
+    }
+    &__phone-wrapper {
+      display: block;
+      margin-bottom: 0;
+
+      & label {
+        margin-bottom: 20px;
+      }
+    }
+    &__city-wrapper {
+      display: block;
+      margin-bottom: 40px;
+
+      & label:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+    &__button {
+      padding: 7px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+}
