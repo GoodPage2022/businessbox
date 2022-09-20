@@ -147,7 +147,12 @@
 
 .cards-slider {
   margin-right: -30px;
-
+  .slick-list {
+    margin: 0 -10px;
+  }
+  .slick-slide {
+    padding: 0 10px;
+  }
   & > div {
     height: 100% !important;
     // & > div {

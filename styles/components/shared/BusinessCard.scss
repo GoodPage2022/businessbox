@@ -154,8 +154,8 @@
 
 @media screen and (max-width: $size-mobile) {
   .business-card {
-    width: 66vw;
-
+    width: 100%;
+    // width: 66vw;
     &:hover &__button-edit {
       opacity: 1;
       visibility: visible;
