@@ -3,6 +3,7 @@ import { Formik, Form, Field } from "formik";
 import React, { useEffect, useState } from "react";
 import MaskedInput from "react-text-mask";
 
+import EditSVG from "../../assets/svg/edit.svg";
 import ProfileData from "../../constants/profile-data";
 import { MainContext } from "../../contexts/mainContext";
 import MainButtonRed from "../shared/MainButtonRed";
@@ -159,60 +160,61 @@ const ContactInfo = () => {
                 alt="card-image"
               />
             </div>
-            <input
-              id="file"
-              name="file"
-              type="file"
-              accept="image/*,.png,.jpg"
-              className="contactInfo__custom-file-input"
-              onChange={uploadToServer}
-            />
+            <div className="contactInfo__image-buttons">
+              <input
+                id="file"
+                name="file"
+                type="file"
+                accept="image/*,.png,.jpg"
+                className="contactInfo__custom-file-input"
+                onChange={uploadToServer}
+              />
+              <button
+                className="contactInfo__delete-btn section__secondary-text"
+                onClick={async () => {
+                  setAvatar(defaultAvatar);
 
-            <button
-              className="contactInfo__delete-btn section__secondary-text"
-              onClick={async () => {
-                setAvatar(defaultAvatar);
-
-                const data = {
-                  user,
-                  userUpdate: {
-                    _id: user._id,
-                    avatar: {
-                      path: defaultAvatar,
+                  const data = {
+                    user,
+                    userUpdate: {
+                      _id: user._id,
+                      avatar: {
+                        path: defaultAvatar,
+                      },
                     },
-                  },
-                };
+                  };
 
-                try {
-                  const updateUserResponse = await axios.post(
-                    `/api/account/userUpdate`,
-                    data,
-                  );
-
-                  if (updateUserResponse.status == 200) {
-                    dispatchRedux(
-                      signInReducer({
-                        ...user,
-                        avatar: {
-                          path: defaultAvatar,
-                        },
-                      }),
+                  try {
+                    const updateUserResponse = await axios.post(
+                      `/api/account/userUpdate`,
+                      data,
                     );
-                  }
 
-                  console.log(updateUserResponse);
-                } catch (error) {
-                  console.log("error");
-                  console.log(error);
-                }
-              }}
-            >
-              Видалити фото
-            </button>
+                    if (updateUserResponse.status == 200) {
+                      dispatchRedux(
+                        signInReducer({
+                          ...user,
+                          avatar: {
+                            path: defaultAvatar,
+                          },
+                        }),
+                      );
+                    }
+
+                    console.log(updateUserResponse);
+                  } catch (error) {
+                    console.log("error");
+                    console.log(error);
+                  }
+                }}
+              >
+                Видалити фото
+              </button>
+            </div>
 
             <button
               onClick={signOut}
-              className="contactInfo__signout-btn section__secondary-text--white"
+              className="contactInfo__signout-btn--desctop section__secondary-text--white"
             >
               Вийти
             </button>
@@ -244,7 +246,16 @@ const ContactInfo = () => {
             <Form className="contactInfo__form">
               <div className="contactInfo__first-wrapper">
                 <label className="contactInfo__field">
-                  <span className="contactInfo__label">Ім’я</span>
+                  <div className="contactInfo__label--wrapper">
+                    <span className="contactInfo__label--first">Ім’я</span>
+                    <button
+                      className="contactInfo__button-edit"
+                      onClick={() => dispatch({ type: "toggle_edit" })}
+                    >
+                      <EditSVG />
+                    </button>
+                  </div>
+
                   <Field
                     className="contactInfo__input section__primary-text"
                     type="text"
@@ -254,6 +265,7 @@ const ContactInfo = () => {
                     placeholder="Петро"
                   />
                 </label>
+
                 <label className="contactInfo__field">
                   <span className="contactInfo__label">Телефон</span>
                   <Field
@@ -323,7 +335,7 @@ const ContactInfo = () => {
               {state.isEdit ? (
                 <div
                   className="contactInfo__submit-btn"
-                  // onClick={() => dispatch({ type: "toggle_edit" })}
+                  onClick={() => dispatch({ type: "toggle_edit" })}
                 >
                   <MainButtonRed label="Зберегти" />
                 </div>
@@ -331,6 +343,12 @@ const ContactInfo = () => {
             </Form>
           </Formik>
         </div>
+        <button
+          onClick={signOut}
+          className="contactInfo__signout-btn--mob section__secondary-text--white"
+        >
+          Вийти
+        </button>
       </div>
     </section>
   );
