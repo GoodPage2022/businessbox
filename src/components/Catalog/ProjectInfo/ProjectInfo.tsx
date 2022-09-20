@@ -16,6 +16,7 @@ import Comment from "./Comment";
 import OurComments from "../../../constants/comments";
 import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
+import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -29,6 +30,24 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     slidesToShow: 2.2,
     slidesToScroll: 1,
     arrows: false,
+    responsive: [
+      // {
+      //   breakpoint: 1270,
+      //   settings: {
+      //     slidesToShow: 2,
+      //     slidesToScroll: 1,
+      //     infinite: true,
+      //     dots: true,
+      //   },
+      // },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1.3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   const [link, setLink] = useState("");
   const [projectInfo, setProjectInfo] = useState<any>(null);
@@ -50,6 +69,24 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     slidesToShow: 9,
     slidesToScroll: 1,
     arrows: false,
+    responsive: [
+      // {
+      //   breakpoint: 1270,
+      //   settings: {
+      //     slidesToShow: 2,
+      //     slidesToScroll: 1,
+      //     infinite: true,
+      //     dots: true,
+      //   },
+      // },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2.7,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   const [cards, setCards] = useState<any>([]);
@@ -218,11 +255,28 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           dangerouslySetInnerHTML={{ __html: projectInfo.description }}
         />
         <div className="projectInfo__info-wrapper">
+          <div className="projectInfo__button-wrapper--mob">
+            <button
+              className="projectInfo__button-info"
+              onClick={() =>
+                user != null
+                  ? router.push(`/catalog/detail-info/${projectId}`)
+                  : setIsAuth(true)
+              }
+            >
+              Відкрити повну інформацію
+            </button>
+            {isAuth && (
+              <p className="projectInfo__err-msg">
+                Тільки для авторизованих користувачів
+              </p>
+            )}
+          </div>
           <div className="projectInfo__price">
             <p className="section__primary-text">Ціна:</p>
             <p className="projectInfo__amount title">{projectInfo.price}₴</p>
           </div>
-          <div className="projectInfo__button-wrapper">
+          <div className="projectInfo__button-wrapper--desctop">
             <button
               className="projectInfo__button-info"
               onClick={() =>
@@ -300,36 +354,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
         <h2 className="projectInfo__offers-title title">Схожі пропозиції</h2>
         <ul className="popular__cards">
-          {cards.map(
-            ({
-              _id,
-              title,
-              description,
-              images,
-              view_count,
-              price,
-              is_verified,
-            }: any) => (
-              <BusinessCard
-                key={_id}
-                alias={_id}
-                title={title}
-                description={description}
-                image={
-                  images == null || !images.length
-                    ? ""
-                    : `${
-                        images[0].meta.assets == ""
-                          ? ``
-                          : `http://157.230.99.45:8082`
-                      }${images[0].path}`
-                }
-                price={price}
-                views={view_count ?? 0}
-                isVerified={is_verified}
-              />
-            ),
-          )}
+          <CardsSlider cards={cards} />
         </ul>
       </div>
     </section>

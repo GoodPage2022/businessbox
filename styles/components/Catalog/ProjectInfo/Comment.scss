@@ -4,9 +4,14 @@
   }
 
   &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    &--desctop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &--mob {
+      display: none;
+    }
   }
 
   &__user {
@@ -30,5 +35,42 @@
 
   &__text {
     padding-left: 80px;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .comment {
+    &__header {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: flex;
+        margin-bottom: 10px;
+      }
+    }
+
+    &__user {
+      display: block;
+    }
+
+    &__photo {
+      margin-right: 10px;
+    }
+
+    &__name {
+      font-size: 18px;
+      line-height: 22px;
+      margin-right: 0;
+      margin-bottom: 2px;
+    }
+
+    &__mail {
+      margin-bottom: 2px;
+    }
+
+    &__text {
+      padding-left: 0;
+    }
   }
 }
