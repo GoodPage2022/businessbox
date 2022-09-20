@@ -169,8 +169,9 @@
       padding: 6px 12px;
       border-radius: 11px;
       font-weight: 600;
-      font-size: 20px;
-      line-height: 24px;
+      font-size: 12.64px;
+      line-height: 15px;
+      height: 27.81px;
 
       &--white {
         padding: 6px 12px;
@@ -200,25 +201,27 @@
     }
 
     &__button {
-      padding: 6px 12px;
-      border-radius: 11px;
+      padding: 5.9px 12px;
+      border-radius: 18px;
       font-weight: 600;
-      font-size: 20px;
-      line-height: 24px;
+      font-size: 12.64px;
+      line-height: 15px;
+      height: 27.81px;
 
       &--white {
         padding: 6px 12px;
-        border-radius: 11px;
+        border-radius: 18px;
         font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-        margin-left: 30px;
+        font-size: 12.64px;
+        line-height: 15px;
+        margin-left: 20px;
+        height: 27.81px;
       }
     }
   }
 
   .slick-dots {
-    bottom: 30px;
+    bottom: 25px;
   }
 
   .slick-dots li {
