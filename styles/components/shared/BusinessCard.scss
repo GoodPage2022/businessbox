@@ -41,7 +41,7 @@
   &__image {
     position: relative;
     height: 190px;
-    width: 255px;
+    width: 100%;
   }
 
   &__heart-icon {
@@ -154,7 +154,7 @@
 
 @media screen and (max-width: $size-mobile) {
   .business-card {
-    width: 247px;
+    width: 66vw;
 
     &:hover &__button-edit {
       opacity: 1;
@@ -180,7 +180,7 @@
     }
 
     &__image {
-      width: 247px;
+      // width: 100;
     }
 
     &__heart-icon {
