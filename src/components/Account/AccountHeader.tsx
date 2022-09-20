@@ -7,6 +7,7 @@ import MainButtonBlack from "../shared/MainButtonBlack";
 import EditSVG from "../../assets/svg/edit.svg";
 import PlusSVG from "../../assets/svg/plus.svg";
 import MainButtonGrey from "../shared/MainButtonGrey";
+import Slider from "react-slick";
 
 const AccountHeader = ({}) => {
   const { pathname } = useRouter();
@@ -22,9 +23,38 @@ const AccountHeader = ({}) => {
     pathname === "/account/favorites" ? true : false,
   );
 
+  const categoriesSliderSettings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    // slidesToShow: 2,
+    // slidesToScroll: 1,
+    arrows: false,
+    variableWidth: true,
+    className: "accountHeader__slider",
+    responsive: [
+      // {
+      //   breakpoint: 1270,
+      //   settings: {
+      //     slidesToShow: 2,
+      //     slidesToScroll: 1,
+      //     infinite: true,
+      //     dots: true,
+      //   },
+      // },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="accountHeader">
-      <div className="container accountHeader__container">
+      <div className="container accountHeader__container--desctop">
         <ul className="accountHeader__left">
           <li className="accountHeader__left--item">
             {isContactInfo ? (
@@ -93,6 +123,73 @@ const AccountHeader = ({}) => {
             </button>
           ) : null}
         </div>
+      </div>
+      <div className="container accountHeader__container--mob">
+        <Slider {...categoriesSliderSettings}>
+          <li className="accountHeader__left--item">
+            {isContactInfo ? (
+              <Link href="/account/contact-info">
+                <a>
+                  <button className="main-button-grey section__primary-text">
+                    Контактна інформація
+                  </button>
+                  {/* <MainButtonGrey label="Контактна інформація" /> */}
+                </a>
+              </Link>
+            ) : (
+              <Link href="/account/contact-info">
+                <a>
+                  <button className="main-button-black section__primary-text">
+                    Контактна інформація
+                  </button>
+                  {/* <MainButtonBlack label="Контактна інформація" /> */}
+                </a>
+              </Link>
+            )}
+          </li>
+          <li className="accountHeader__left--item">
+            {isBusiness ? (
+              <Link href="/account/contact-info">
+                <a>
+                  <button className="main-button-grey section__primary-text">
+                    Мої бізнеси
+                  </button>
+                  {/* <MainButtonGrey label="Мої бізнеси" /> */}
+                </a>
+              </Link>
+            ) : (
+              <Link href="/account/my-businesses">
+                <a>
+                  <button className="main-button-black section__primary-text">
+                    Мої бізнеси
+                  </button>
+                  {/* <MainButtonBlack label="Мої бізнеси" /> */}
+                </a>
+              </Link>
+            )}
+          </li>
+          <li className="accountHeader__left--item">
+            {isFavorites ? (
+              <Link href="/account/contact-info">
+                <a>
+                  <button className="main-button-grey section__primary-text">
+                    Обрані
+                  </button>
+                  {/* <MainButtonGrey label="Обрані" /> */}
+                </a>
+              </Link>
+            ) : (
+              <Link href="/account/favorites">
+                <a>
+                  <button className="main-button-black section__primary-text">
+                    Обрані
+                  </button>
+                  {/* <MainButtonBlack label="Обрані" /> */}
+                </a>
+              </Link>
+            )}
+          </li>
+        </Slider>
       </div>
     </div>
   );

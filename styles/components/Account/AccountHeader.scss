@@ -4,10 +4,15 @@
   padding-bottom: 40px;
 
   &__container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    &--desctop {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &--mob {
+      display: none;
+    }
   }
   &__left {
     display: flex;
@@ -45,6 +50,37 @@
       font-size: 20px;
       line-height: 24px;
       color: $white-color;
+    }
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .accountHeader {
+    padding-top: 92px;
+    padding-bottom: 20px;
+
+    &__slider {
+      .slick-list {
+        margin: 0 -10px;
+      }
+      .slick-slide {
+        padding: 0 10px;
+      }
+    }
+
+    &__container {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: block;
+      }
+    }
+    &__left {
+      display: block;
+      &--item:not(:last-child) {
+        margin-right: 0;
+      }
     }
   }
 }
