@@ -1,5 +1,6 @@
 import { Field, FormikProvider, useFormik } from "formik";
 import SearchItems from "../../constants/search-items";
+import SearchSVG from "../../assets/svg/search.svg";
 
 const initialValues = {
   search: "",
@@ -24,6 +25,7 @@ const Search = ({ active }: any) => {
           required
           placeholder="кав’ярня"
         />
+
         {SearchItems.length > 0 ? (
           <ul className="header__search-list">
             {SearchItems.map(({ id, title, desc }: any) => (
@@ -44,6 +46,9 @@ const Search = ({ active }: any) => {
           </ul>
         )}
       </FormikProvider>
+      <span className="header__search--icon">
+        <SearchSVG />
+      </span>
     </div>
   );
 };

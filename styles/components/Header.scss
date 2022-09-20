@@ -81,28 +81,25 @@
   }
 
   &__input {
-    &-thumb {
-      position: relative;
-      display: block;
-    }
+    position: relative;
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: #0c0c0c;
+    color: $white-color;
     width: 146px;
-    border: 1px solid transparent;
-    background: $white-color;
+    border: 1px solid $white-color;
+    background: transparent /* $white-color */;
     border-radius: 15px;
     padding: 7px 15px;
     outline: none;
     cursor: text;
 
     &.active {
-      border-top: 1px solid $grey-color;
-      border-left: 1px solid $grey-color;
-      border-right: 1px solid $grey-color;
+      // border-top: 1px solid $grey-color;
+      // border-left: 1px solid $grey-color;
+      // border-right: 1px solid $grey-color;
     }
 
     &::placeholder {
@@ -116,6 +113,12 @@
 
     &:focus {
       border-radius: 15px 15px 0 0;
+      border-top: 1px solid $grey-color;
+      border-left: 1px solid $grey-color;
+      border-right: 1px solid $grey-color;
+      border-bottom: none;
+      background: $white-color;
+      color: $main-text-color;
     }
 
     &:focus + .header__search-list {
@@ -134,6 +137,13 @@
       opacity: 1;
       visibility: visible;
       left: 0%;
+    }
+
+    &--icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translate(0, -45%);
     }
 
     &-list {
@@ -271,29 +281,13 @@
     }
 
     &__input {
-      &-thumb {
-        position: relative;
-        display: block;
-      }
       font-family: "Montserrat";
       font-style: normal;
       font-weight: 400;
       font-size: 14px;
       line-height: 17px;
-      color: #0c0c0c;
       width: 100%;
-      border: 1px solid transparent;
-      background: $white-color;
-      border-radius: 15px;
-      padding: 7px 15px;
-      outline: none;
       cursor: text;
-
-      &.active {
-        border-top: 1px solid $grey-color;
-        border-left: 1px solid $grey-color;
-        border-right: 1px solid $grey-color;
-      }
 
       &::placeholder {
         font-family: "Montserrat";
