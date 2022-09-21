@@ -8,6 +8,7 @@ interface ContextType {
     isActiveModalAuth: boolean;
     isActiveModalRegistration: boolean;
     isActiveModalForgotPassword: boolean;
+    isActiveMobFilter: boolean;
   };
   dispatch: React.Dispatch<{ type: string; value: unknown }>;
 }

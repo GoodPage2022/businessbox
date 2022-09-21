@@ -25,6 +25,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveModalForgotPassword: !state.isActiveModalForgotPassword,
       };
+    case "toggle_mobFilter":
+      return {
+        ...state,
+        isActiveMobFilter: !state.isActiveMobFilter,
+      };
     default:
       return state;
   }
@@ -36,4 +41,5 @@ export const initialState = {
   isActiveModalRegistration: false,
   isActiveModalForgotPassword: false,
   isOpenBurger: false,
+  isActiveMobFilter: false,
 };
