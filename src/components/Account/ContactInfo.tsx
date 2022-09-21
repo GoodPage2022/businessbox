@@ -14,8 +14,6 @@ import { signIn as signInReducer } from "../../../store/actions/auth";
 import { signOut as signOutReducer } from "../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
 
-import { PutObjectCommand, S3Client, ListObjectsCommand } from '@aws-sdk/client-s3';
-
 const ContactInfo = () => {
   const { data: session } = useSession();
   const user = useSelector((state: any) => state.auth.user);
@@ -25,31 +23,6 @@ const ContactInfo = () => {
   const [avatar, setAvatar] = useState(defaultAvatar);
 
   const [state, dispatch] = React.useContext(MainContext);
-
-  const s3Client = new S3Client({
-    endpoint: "https://daydrive.fra1.digitaloceanspaces.com", // Find your endpoint in the control panel, under Settings. Prepend "https://".
-    region: "fra1", // Must be "us-east-1" when creating new Spaces. Otherwise, use the region in your endpoint (e.g. nyc3).
-    credentials: {
-      accessKeyId: "DO00QXCGYN37XV3W66BZ", // Access key pair. You can create access key pairs using the control panel or API.
-      secretAccessKey: "3EQWMtV/x6S3iwOaJO6BQL7oi/lstGdyUNz8qgMhUd0" // Secret access key defined through an environment variable.
-    }
-  });
-
-  // Specifies a path within your Space, e.g. example-space-name/example-directory.
-  const bucketParams = { Bucket: "daydrive" };
-
-  // Returns a list of objects in your specified path.
-  const run = async () => {
-    try {
-      const data = await s3Client.send(new ListObjectsCommand(bucketParams));
-      console.log("Success", data);
-      return data;
-    } catch (err) {
-      console.log("Error", err);
-    }
-  };
-
-  run();
 
   useEffect(() => {
     if (user.avatar !== null) {
@@ -139,14 +112,14 @@ const ContactInfo = () => {
       console.log(reponse.data);
       
       if (reponse.status == 200) {
-        setAvatar(`/avatars/${reponse.data.files.file.originalFilename}`);
+        setAvatar(`${reponse.data.files ? "/avatars/" + reponse.data.files.file.originalFilename : reponse.data.url}`);
 
         const data = {
           user,
           userUpdate: {
             _id: user._id,
             avatar: {
-              path: `/avatars/${reponse.data.files.file.originalFilename}`,
+              path: `${reponse.data.files ? "/avatars/" + reponse.data.files.file.originalFilename : reponse.data.url}`,
             },
           },
         };
@@ -162,7 +135,7 @@ const ContactInfo = () => {
               signInReducer({
                 ...user,
                 avatar: {
-                  path: `/avatars/${reponse.data.files.file.originalFilename}`,
+                  path: `${reponse.data.files ? "/avatars/" + reponse.data.files.file.originalFilename : reponse.data.url}`,
                 },
               }),
             );
