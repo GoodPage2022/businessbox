@@ -9,7 +9,7 @@ import { MainContext } from "../../contexts/mainContext";
 import MainButtonRed from "../shared/MainButtonRed";
 import phoneNumberMask from "../../masks/phoneNumberMask";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { signIn as signInReducer } from "../../../store/actions/auth";
 import { signOut as signOutReducer } from "../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
@@ -100,24 +100,26 @@ const ContactInfo = () => {
   const uploadToServer = async (e: any) => {
     const uploadImageURL = e.target.files[0];
 
-    const body = new FormData();
-    body.append("file", uploadImageURL);
-    await fetch("/api/upload", {
-      method: "POST",
-      body,
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then(async (r) => {
-        setAvatar(`/avatars/${r.files.file.originalFilename}`);
+    const formData = new FormData();
+    formData.append("file", uploadImageURL);
+
+    const options: AxiosRequestConfig = {
+      headers: { "Content-Type": "multipart/form-data" },
+    };
+
+    try {
+      const reponse = await axios.post("/api/upload", formData, options);
+      console.log(reponse.data);
+      
+      if (reponse.status == 200) {
+        setAvatar(`/avatars/${reponse.data.files.file.originalFilename}`);
 
         const data = {
           user,
           userUpdate: {
             _id: user._id,
             avatar: {
-              path: `/avatars/${r.files.file.originalFilename}`,
+              path: `/avatars/${reponse.data.files.file.originalFilename}`,
             },
           },
         };
@@ -133,7 +135,7 @@ const ContactInfo = () => {
               signInReducer({
                 ...user,
                 avatar: {
-                  path: `/avatars/${r.files.file.originalFilename}`,
+                  path: `/avatars/${reponse.data.files.file.originalFilename}`,
                 },
               }),
             );
@@ -143,7 +145,11 @@ const ContactInfo = () => {
           console.log("error");
           console.log(error);
         }
-      });
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
   };
 
   return (
