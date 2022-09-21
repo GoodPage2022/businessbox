@@ -42,7 +42,8 @@ const BusinessCard = ({
   }, []);
 
   useEffect(() => {
-    setIsLiked(user.favourites.map((f: any)=>f._id).includes(alias) ? true : false)
+    if (!!user.favourites)
+      setIsLiked(user.favourites.map((f: any)=>f._id).includes(alias) ? true : false)
   }, [user]);
 
   const handleFavourites = async () => {
