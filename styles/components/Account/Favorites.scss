@@ -1,9 +1,14 @@
 .favorites {
   &__cards {
-    &__item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 40px;
+    &--desctop {
+      &__item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+      }
+    }
+    &--mob {
+      display: none;
     }
   }
   &__graphic {
@@ -17,5 +22,41 @@
     flex-direction: column;
     align-items: center;
     padding-top: 210px;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .favorites {
+    &__cards {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: block;
+      }
+      &__item {
+        padding-bottom: 20px;
+        &:not(:last-child) {
+          border-bottom: 1px solid $grey-color;
+        }
+
+        &:not(:first-child) {
+          margin-top: 20px;
+        }
+      }
+    }
+    &__graphic {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      margin-top: 20px;
+    }
+
+    &__empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 210px;
+    }
   }
 }
