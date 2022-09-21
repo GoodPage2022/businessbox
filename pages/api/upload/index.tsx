@@ -55,16 +55,17 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           return data;
         } catch (err) {
           console.log("Error", err);
+          return err
         }
       };
 
-      uploadObject()
+      const req = await uploadObject()
 
       // mv(oldPath, newPath, function (err: any) {
       //   return res.status(504).send(err);
       // });
       // await fs.writeFile(newPath, image);
-      return res.status(200).send({ fields, files });
+      return res.status(200).send(req);
     });
   } catch (error) {
     return res.status(504).send(error);
