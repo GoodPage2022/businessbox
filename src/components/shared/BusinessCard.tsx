@@ -42,7 +42,7 @@ const BusinessCard = ({
   }, []);
 
   useEffect(() => {
-    if (!!user.favourites)
+    if (!!user && !!user.favourites)
       setIsLiked(user.favourites.map((f: any)=>f._id).includes(alias) ? true : false)
   }, [user]);
 
@@ -90,12 +90,12 @@ const BusinessCard = ({
             alt="card-image"
           />
         )}
-        <button
+        {!!user && <button
           onClick={handleFavourites}
           className={`business-card__heart-icon ${isLiked ? "active" : ""}`}
         >
           <HeartSVG />
-        </button>
+        </button>}
       </div>
       <div className="business-card__info">
         <h3 className="business-card__title">
@@ -127,14 +127,14 @@ const BusinessCard = ({
         <div className="business-card__footer-mob">
           <div className="business-card__footer-mob--first">
             <p className="business-card__price">{price}₴</p>
-            <button
+            {!!user && <button
               onClick={handleFavourites}
               className={`business-card__heart-icon--mob ${
                 isLiked ? "active" : ""
               }`}
             >
               <HeartSVG />
-            </button>
+            </button>}
           </div>
           <div className="business-card__footer-mob--second">
             <div className="business-card__views">
