@@ -17,10 +17,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       
       const oldPath = files.file.filepath;
       const newPath = `./public/${fields.folder ?? `avatars`}/${files.file.originalFilename}`;
-      mv(oldPath, newPath, function (err: any) {});
+      mv(oldPath, newPath, function (err: any) {
+        return res.status(504).send(err);
+      });
       return res.status(200).send({ fields, files });
     });
   } catch (error) {
-    return res.status(504).send({});
+    return res.status(504).send(error);
   }
 }
