@@ -14,7 +14,7 @@
     // grid-column-gap: 30px;
     // grid-row-gap: 40px;
     &.grid {
-      & div {
+      & > div {
         & > div {
           & > div {
             display: grid;

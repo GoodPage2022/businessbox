@@ -1,39 +1,43 @@
 import { useEffect, useState } from "react";
-import Categories from "../HomePage/Categories/Categories";
-
-const Checkbox = ({ text, changeFilter, categories, datakey }: { datakey: number, text: string, changeFilter: any, categories: string[] }) => {
+const Checkbox = ({
+  text,
+  changeFilter,
+  categories,
+  datakey,
+}: {
+  datakey: number;
+  text: string;
+  changeFilter: any;
+  categories: string[];
+}) => {
   const [isChosen, setIsChosen] = useState<boolean>(false);
   const [isCheckboxtrue, setCheckboxtrue] = useState(true);
 
-  useEffect(()=>{
-    setIsChosen(categories.includes(text))
-  }, [categories])
-  
+  useEffect(() => {
+    setIsChosen(categories.includes(text));
+  }, [categories]);
 
   return (
     <div
       className="checkbox__wrapper"
-      onClick={(e:any) => {
+      onClick={(e: any) => {
         if (e.target.name != "category") return true;
 
         if (!categories.includes(text)) {
           changeFilter({
             target: {
               name: "category",
-              value: [
-                ...categories,
-                text
-              ]
-            }
-          })
+              value: [...categories, text],
+            },
+          });
         } else {
-          const categoriesFiltered = categories.filter((c) => c != text)
+          const categoriesFiltered = categories.filter((c) => c != text);
           changeFilter({
             target: {
               name: "category",
-              value: categoriesFiltered
-            }
-          })
+              value: categoriesFiltered,
+            },
+          });
         }
 
         setIsChosen((prev) => !prev);

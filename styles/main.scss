@@ -196,6 +196,7 @@ main {
 //Catalog
 @import "./components/Catalog/Catalog/CatalogView.scss";
 @import "./components/Catalog/Catalog/Sidebar.scss";
+@import "./components/Catalog/Catalog/MobFilter.scss";
 @import "./components/Catalog/ProjectInfo/ProjectInfo.scss";
 @import "./components/Catalog/ProjectInfo/ProfileInfo.scss";
 @import "./components/Catalog/ProjectInfo/Comment.scss";
@@ -222,6 +223,7 @@ main {
 @import "./components/shared/MainButtonGrey.scss";
 @import "./components/shared/IconButton.scss";
 @import "./components/shared/BusinessCard.scss";
+@import "./components/shared/BusinessCardFavorite.scss";
 @import "./components/shared/CustomSelect.scss";
 @import "./components/shared/Checkbox.scss";
 @import "./components/shared/Pagination.scss";

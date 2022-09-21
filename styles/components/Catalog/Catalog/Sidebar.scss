@@ -82,3 +82,9 @@
     appearance: none;
   }
 }
+
+@media screen and (max-width: $size-mobile) {
+  .sidebar {
+    display: none;
+  }
+}

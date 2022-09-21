@@ -6,6 +6,7 @@
   background: $white-color;
   border-radius: 20px;
   margin-bottom: 40px;
+  overflow: hidden;
 
   &__info {
     display: flex;
@@ -16,7 +17,7 @@
     position: relative;
     border-radius: 25px;
     overflow: hidden;
-    width: 100px;
+    min-width: 100px;
     height: 100px;
     margin-right: 20px;
   }
@@ -61,9 +62,7 @@
 @media screen and (max-width: $size-mobile) {
   .profileInfo {
     display: block;
-    padding: 20px 0px 20px 40px;
-    margin-right: 20px;
-    margin-left: -20px;
+    padding: 20px;
     &__info {
       display: flex;
       align-items: flex-start;

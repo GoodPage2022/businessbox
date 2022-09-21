@@ -1,5 +1,6 @@
 import PopularCards from "../../constants/popular";
 import PopularCard from "../shared/BusinessCard";
+import PopularCardMob from "../shared/BusinessCardFavorite";
 import Image from "next/image";
 import { Chart } from "../Chart/Chart";
 import { useEffect, useState } from "react";
@@ -45,29 +46,82 @@ const Favorites = () => {
     <section className="favorites">
       <div className="container favorites__container">
         {cards.length > 0 ? (
-          <ul className="favorites__cards">
-            {cards.map(({ _id, title, description, images, view_count, price, is_verified }: any) => (
-              <div key={_id} className="favorites__cards__item">
-                <PopularCard
-                  key={_id}
-                  alias={_id}
-                  title={title}
-                  description={description}
-                  image={
-                    images == null || !images.length
-                      ? ""
-                      : `${images[0].meta.assets == "" ? `` : `http://157.230.99.45:8082`}${images[0].path}`
-                  }
-                  price={price}
-                  views={view_count ?? 0}
-                  isVerified={is_verified}
-                />
-                <div className="favorites__graphic">
-                  <Chart />
-                </div>
-              </div>
-            ))}
-          </ul>
+          <>
+            <ul className="favorites__cards--desctop">
+              {cards.map(
+                ({
+                  _id,
+                  title,
+                  description,
+                  images,
+                  view_count,
+                  price,
+                  is_verified,
+                }: any) => (
+                  <div key={_id} className="favorites__cards__item">
+                    <PopularCard
+                      key={_id}
+                      alias={_id}
+                      title={title}
+                      description={description}
+                      image={
+                        images == null || !images.length
+                          ? ""
+                          : `${
+                              images[0].meta.assets == ""
+                                ? ``
+                                : `http://157.230.99.45:8082`
+                            }${images[0].path}`
+                      }
+                      price={price}
+                      views={view_count ?? 0}
+                      isVerified={is_verified}
+                    />
+                    <div className="favorites__graphic">
+                      <Chart />
+                    </div>
+                  </div>
+                ),
+              )}
+            </ul>
+            <ul className="favorites__cards--mob">
+              {cards.map(
+                ({
+                  _id,
+                  title,
+                  description,
+                  images,
+                  view_count,
+                  price,
+                  is_verified,
+                }: any) => (
+                  <div key={_id} className="favorites__cards__item">
+                    <PopularCardMob
+                      key={_id}
+                      alias={_id}
+                      title={title}
+                      description={description}
+                      image={
+                        images == null || !images.length
+                          ? ""
+                          : `${
+                              images[0].meta.assets == ""
+                                ? ``
+                                : `http://157.230.99.45:8082`
+                            }${images[0].path}`
+                      }
+                      price={price}
+                      views={view_count ?? 0}
+                      isVerified={is_verified}
+                    />
+                    <div className="favorites__graphic">
+                      <Chart />
+                    </div>
+                  </div>
+                ),
+              )}
+            </ul>
+          </>
         ) : (
           <div className="favorites__empty">
             <h1 className="title">Тут немає жодної обраної компанії</h1>

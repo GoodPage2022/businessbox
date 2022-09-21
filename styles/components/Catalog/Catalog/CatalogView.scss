@@ -1,6 +1,11 @@
 .catalogView {
   padding-top: 120px;
   padding-bottom: 80px;
+
+  &__buttons {
+    display: none;
+  }
+
   &__title {
     margin-bottom: 40px;
   }
@@ -36,5 +41,153 @@
     line-height: 29px;
     color: $main-text-color;
     margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .catalogView {
+    padding-top: 72px;
+    padding-bottom: 40px;
+    &.active {
+      // background: $white-color;
+    }
+
+    &__buttons {
+      padding: 20px 0;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &.active {
+        border-bottom: 1px solid $main-text-color;
+        background: $white-color;
+        // width: calc(100% + 40px);
+        // margin-left: -20px;
+        &::after {
+          position: absolute;
+          left: -20px;
+          width: calc(100% + 40px);
+          height: 100%;
+          background: white;
+          z-index: -1;
+          content: "";
+        }
+      }
+
+      &--right {
+        display: flex;
+        & button:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    &__button {
+      &__mob-filter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        width: 34px;
+        border: 1px solid $main-text-color;
+        border-radius: 15px;
+        background: transparent;
+        cursor: pointer;
+
+        &.active {
+          background: $main-text-color;
+          & svg {
+            & rect {
+              fill: $white-color;
+            }
+          }
+        }
+      }
+
+      &__columns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        width: 34px;
+        border: 1px solid $main-text-color;
+        border-radius: 15px;
+        background: transparent;
+        cursor: pointer;
+
+        &.active {
+          border: 1px solid $grey-color;
+          & svg {
+            & rect {
+              stroke: $grey-color;
+            }
+          }
+        }
+      }
+
+      &__rows {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        width: 34px;
+        border: 1px solid $main-text-color;
+        border-radius: 15px;
+        background: transparent;
+        cursor: pointer;
+
+        &.active {
+          border: 1px solid $grey-color;
+          & svg {
+            & rect {
+              stroke: $grey-color;
+            }
+          }
+        }
+      }
+    }
+
+    &__title {
+      display: none;
+    }
+
+    &__wrapper {
+      display: block;
+    }
+
+    &__cards {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      grid-column-gap: 0;
+      grid-row-gap: 20px;
+      border-left: none;
+      padding-left: 0px;
+      margin-bottom: 20px;
+
+      &.active {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-column-gap: 16px;
+        grid-row-gap: 20px;
+      }
+    }
+
+    &__empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 210px;
+    }
+
+    &__text {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 29px;
+      color: $main-text-color;
+      margin-top: 20px;
+    }
   }
 }
