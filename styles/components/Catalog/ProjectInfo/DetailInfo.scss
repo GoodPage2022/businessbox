@@ -7,32 +7,6 @@
     position: relative;
   }
 
-  &__copy {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: $white-color;
-    padding: 25px 30px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-
-    &--text-wrapper {
-      display: flex;
-      align-items: center;
-      height: 50px;
-      width: 100%;
-      margin-right: 60px;
-      padding: 13px 28px;
-      background: #d9d9d9;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 15px;
-    }
-  }
-
-  &__copy-button {
-    cursor: pointer;
-  }
-
   &__title {
     display: flex;
     align-items: center;
@@ -177,5 +151,129 @@
 
   &__offers-title {
     margin-bottom: 40px;
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .detailInfo {
+    padding-top: 92px;
+    padding-bottom: 40px;
+
+    &__title {
+      margin-bottom: 5px;
+
+      &--heart-icon {
+        width: 34px;
+        height: 32px;
+        margin-right: 10px;
+        border-radius: 15px;
+        cursor: pointer;
+        & svg {
+          width: 14px;
+          height: 14px;
+        }
+
+        &.active {
+          border: 1px solid $main-red-color;
+          background: $main-red-color;
+          & svg {
+            & path {
+              // fill: $white-color;
+              stroke: $white-color;
+            }
+          }
+        }
+      }
+      &--transparent-icon {
+        width: 34px;
+        height: 32px;
+        border-radius: 15px;
+        cursor: pointer;
+        & svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+
+    &__city {
+      margin-bottom: 20px;
+    }
+
+    &__list {
+      margin-bottom: 20px;
+      &::after {
+        display: none;
+      }
+      &-item {
+        display: block;
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+        &--left {
+          width: 100%;
+          margin-bottom: 10px;
+          font-size: 18px;
+          line-height: 22px;
+        }
+
+        &--right {
+          padding-left: 0;
+        }
+      }
+    }
+    &__first-wrapper {
+      border-top: 1px solid $main-text-color;
+      padding-top: 20px;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    &__second-wrapper {
+      display: block;
+      margin-bottom: 20px;
+    }
+    &__third-wrapper {
+      margin-bottom: 20px;
+    }
+    &__fourth-wrapper {
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    &__data {
+      &-label {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 10px;
+      }
+      &-wrapper--left {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      &-wrapper--right {
+        width: 100%;
+      }
+    }
+
+    &__button {
+      &-wrapper {
+        margin-bottom: 40px;
+      }
+
+      &-back {
+        padding: 7px 16px;
+        box-shadow: none;
+        border-radius: 15px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+      }
+    }
+
+    &__offers-title {
+      margin-bottom: 20px;
+    }
   }
 }

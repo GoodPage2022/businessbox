@@ -7,32 +7,6 @@
     position: relative;
   }
 
-  &__copy {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: $white-color;
-    padding: 25px 30px;
-    border-radius: 15px;
-    margin-bottom: 20px;
-
-    &--text-wrapper {
-      display: flex;
-      align-items: center;
-      height: 50px;
-      width: 100%;
-      margin-right: 60px;
-      padding: 13px 28px;
-      background: #d9d9d9;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 15px;
-    }
-  }
-
-  &__copy-button {
-    cursor: pointer;
-  }
-
   &__title {
     display: flex;
     align-items: center;

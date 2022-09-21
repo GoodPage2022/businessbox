@@ -7,6 +7,7 @@ import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
 import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
+import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
 
 const DetailInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -294,41 +295,12 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
             onClick={() => router.back()}
           >
             Назад
-          </button>{" "}
+          </button>
         </div>
 
         <h2 className="detailInfo__offers-title title">Схожі пропозиції</h2>
-        <ul className="popular__cards">
-          {cards.map(
-            ({
-              _id,
-              title,
-              description,
-              images,
-              view_count,
-              price,
-              is_verified,
-            }: any) => (
-              <BusinessCard
-                key={_id}
-                alias={_id}
-                title={title}
-                description={description}
-                image={
-                  images == null || !images.length
-                    ? ""
-                    : `${
-                        images[0].meta.assets == ""
-                          ? ``
-                          : `http://157.230.99.45:8082`
-                      }${images[0].path}`
-                }
-                price={price}
-                views={view_count ?? 0}
-                isVerified={is_verified}
-              />
-            ),
-          )}
+        <ul className="detailInfo__cards">
+          <CardsSlider cards={cards} />
         </ul>
       </div>
     </section>
