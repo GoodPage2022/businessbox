@@ -11,10 +11,10 @@ const MyFavorites: NextPage = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
 
-  // if (user == null) {
-  //   router.push('/')
-  //   return (<></>)
-  // }
+  if (user == null) {
+    router.push("/");
+    return <></>;
+  }
 
   return (
     <>
