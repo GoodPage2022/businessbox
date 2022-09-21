@@ -46,12 +46,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const uploadObject = async () => {
         try {
           const data = await s3Client.send(new PutObjectCommand(params));
-          console.log(
-            "Successfully uploaded object: " +
-              params.Bucket +
-              "/" +
-              params.Key
-          );
+          // console.log(
+          //   "Successfully uploaded object: " +
+          //     params.Bucket +
+          //     "/" +
+          //     params.Key
+          // );
+          console.log(data);
+          
           return data;
         } catch (err) {
           console.log("Error", err);
