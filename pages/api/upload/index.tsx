@@ -16,7 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       if (err) return res.status(501).send({});
       
       const oldPath = files.file.filepath;
-      const newPath = `./public/${fields.folder ?? `avatars`}/${files.file.originalFilename}`;
+      const newPath = `public/${fields.folder ?? `avatars`}/${files.file.originalFilename}`;
       mv(oldPath, newPath, function (err: any) {
         return res.status(504).send(err);
       });
