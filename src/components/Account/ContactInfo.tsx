@@ -25,7 +25,7 @@ const ContactInfo = () => {
   const [state, dispatch] = React.useContext(MainContext);
 
   useEffect(() => {
-    if (user.avatar !== undefined) {
+    if (user.avatar !== null) {
       setAvatar(user.avatar.path);
     }
   }, [user]);

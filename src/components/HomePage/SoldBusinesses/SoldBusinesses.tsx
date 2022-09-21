@@ -23,6 +23,7 @@ const SoldBusinesses = () => {
 
     if (response.data) {
       setCards(response.data.entries);
+
       return response.data.entries;
     }
 
