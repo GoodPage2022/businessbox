@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ReactTooltip from "react-tooltip";
+import { useSelector, useDispatch } from "react-redux";
+import axios, { AxiosRequestConfig } from "axios";
+import { signIn as signInReducer } from "../../../store/actions/auth";
 
 import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
@@ -26,15 +29,42 @@ const BusinessCard = ({
   isVerified: boolean;
   alias: string;
 }) => {
+  const dispatchRedux = useDispatch();
   const router = useRouter();
-  const [isLiked, setIsLiked] = useState(false);
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
+  const user = useSelector((state: any) => state.auth.user);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
 
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
       setIsMyBusinessesPage(true);
     }
   }, []);
+
+  useEffect(() => {
+    setIsLiked(user.favourites.map((f: any)=>f._id).includes(alias) ? true : false)
+  }, [user]);
+
+  const handleFavourites = async () => {
+    const requestBody = {
+      user,
+      project: {
+        _id: alias,
+        title
+      },
+    };
+
+    const response = await axios.post(`/api/account/favourites`, requestBody);
+    
+    if (response.status == 200) {
+      dispatchRedux(
+        signInReducer({
+          ...user,
+          favourites: response.data
+        }),
+      );
+    }
+  }
 
   return (
     <li className="business-card">
@@ -60,7 +90,7 @@ const BusinessCard = ({
           />
         )}
         <button
-          onClick={() => setIsLiked((prev) => !prev)}
+          onClick={handleFavourites}
           className={`business-card__heart-icon ${isLiked ? "active" : ""}`}
         >
           <HeartSVG />
@@ -97,7 +127,7 @@ const BusinessCard = ({
           <div className="business-card__footer-mob--first">
             <p className="business-card__price">{price}₴</p>
             <button
-              onClick={() => setIsLiked((prev) => !prev)}
+              onClick={handleFavourites}
               className={`business-card__heart-icon--mob ${
                 isLiked ? "active" : ""
               }`}

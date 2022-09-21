@@ -7,7 +7,7 @@ import PhoneSVG from "../../../assets/svg/phone.svg";
 import MailSVG from "../../../assets/svg/mail.svg";
 import InstagramSVG from "../../../assets/svg/instagram.svg";
 import YoutubeSVG from "../../../assets/svg/youtube.svg";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 const ProfileInfo = ({ projectData }: { projectData: any }) => {
   const [isPhoneShow, setIsPhoneShow] = useState(false);
@@ -23,7 +23,12 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
     const requestBody = {
       userId: projectData._by,
     };
-    const response = await axios.post(`/api/account/list`, requestBody);
+
+    const options: AxiosRequestConfig = {
+      headers: { "Content-Type": "multipart/form-data" },
+    };
+
+    const response = await axios.post(`/api/account/list`, requestBody, options);
 
     if (response.data) {
       setBusinessOwner(response.data);

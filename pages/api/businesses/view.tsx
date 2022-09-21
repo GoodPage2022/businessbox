@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from "axios";
+import clientPromise from '../../../mongodb/mongodb'
 
 type Data = {
   name: string
@@ -9,20 +10,24 @@ const handler = async(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) => {
-  const token = (req.body.user != null && req.body.user?.api_key !== undefined) ? req.body.user.api_key : process.env.cockpitApiToken
+  const token = process.env.cockpitApiToken
   const id = req.body.project._id
   const projectViewCount = req.body.project.view_count ?? 0
 
   const data = {
     data: {
         _id: id,
-        view_count: parseInt(projectViewCount) + 1
+        view_count: parseInt(projectViewCount) + 1,
     }
   }
 
   try {
-    const response = await axios.post(`${process.env.cockpitApiUrl}/collections/save/Businesses?token=${token}`, data)
-    res.status(200).json( response.data )
+    const client = await clientPromise
+    const db = client.db("bubox")
+    const da = await db.collection('collections_Businesses')
+              .updateOne({ _id: data.data._id }, 
+                        { $set: { view_count: data.data.view_count } })        
+    res.status(200).json( da )
   } catch (err: any) {
     res.status(500).json({error: err})
   }
