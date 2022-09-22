@@ -219,6 +219,11 @@
       overflow: hidden;
     }
 
+    &__title {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
     &__header {
       display: flex;
       align-items: center;

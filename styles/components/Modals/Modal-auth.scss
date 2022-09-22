@@ -204,6 +204,198 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .modal-auth {
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+
+    &__container {
+      display: flex;
+      width: 650px;
+
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    &__header {
+      min-width: 284px;
+      background-image: url("../../../public/assets/images/auth-modal-bg.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 90px 24px;
+    }
+
+    &__button-close {
+      &--desctop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-bottom: 29px;
+        height: 32px;
+        width: 32px;
+        border: none;
+        border-radius: 18px;
+        background: $main-text-color;
+        cursor: pointer;
+
+        & svg {
+          width: 14px;
+          height: 14px;
+          & path {
+            stroke: $white-color;
+          }
+        }
+      }
+      &--mob {
+        display: none;
+      }
+    }
+
+    &__body {
+      width: 100%;
+      padding: 44px 23px 44px 52px;
+      background: #fafafa;
+    }
+
+    &__form {
+      width: 100%;
+    }
+
+    &__field--mail {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-bottom: 27px;
+    }
+    &__field--password {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-bottom: 40px;
+    }
+
+    &__eye-icon {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      transform: translate(0, -50%);
+      cursor: pointer;
+    }
+    &__label {
+      display: block;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      color: $main-text-color;
+      margin-bottom: 10px;
+    }
+
+    &__input {
+      width: 100%;
+      border: none;
+      background: $white-color;
+      border-radius: 25px;
+      padding: 20px 50px 20px 25px;
+      font-size: 14px;
+      line-height: 17px;
+      outline: none;
+      cursor: text;
+      &-wrapper {
+        position: relative;
+        display: block;
+      }
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $grey-color;
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: $main-text-color;
+      cursor: pointer;
+      &:not(:disabled) {
+        cursor: pointer;
+      }
+    }
+
+    &__text {
+      display: none;
+    }
+    &__google {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      margin-bottom: 20px;
+      padding: 7px 16px 8px;
+      border: 1px solid $black-color;
+      border-radius: 15px;
+      background: transparent;
+      cursor: pointer;
+
+      &--text {
+        margin-left: 10px;
+      }
+    }
+
+    &__forgot-password {
+      display: flex;
+      margin: 0 auto;
+      border: none;
+      color: $grey-color;
+      background: transparent;
+      cursor: pointer;
+    }
+  }
+}
+
 @media screen and (max-width: $size-mobile) {
   .modal-auth {
     &__failed {
@@ -337,6 +529,7 @@
     }
 
     &__text {
+      display: block;
       font-size: 10px;
       line-height: 12px;
       text-align: center;
