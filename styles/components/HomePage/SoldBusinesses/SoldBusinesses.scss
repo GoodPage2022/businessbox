@@ -29,6 +29,18 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .soldBusinesses {
+    padding-bottom: 80px;
+    &__container {
+      overflow: hidden;
+    }
+    &__title {
+      margin-bottom: 40px;
+    }
+  }
+}
+
 @media screen and (max-width: $size-mobile) {
   .soldBusinesses {
     &__title {
