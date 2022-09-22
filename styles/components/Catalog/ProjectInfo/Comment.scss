@@ -38,6 +38,61 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .comment {
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    &__header {
+      &--desctop {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+      &--mob {
+        display: none;
+      }
+    }
+
+    &__user {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    &__photo {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      overflow: hidden;
+      border-radius: 20px;
+      margin-right: 10px;
+    }
+
+    &__name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      margin-right: 10px;
+    }
+
+    &__mail {
+      font-size: 14px;
+      line-height: 17px;
+    }
+    &__date {
+      font-size: 14px;
+      line-height: 17px;
+    }
+    &__text {
+      padding-left: 70px;
+      margin-top: -15px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+}
+
 @media screen and (max-width: $size-mobile) {
   .comment {
     &__header {
