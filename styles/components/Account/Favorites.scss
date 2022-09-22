@@ -1,9 +1,12 @@
 .favorites {
   &__cards {
     &--desctop {
-      &__item {
-        display: flex;
-        justify-content: space-between;
+    }
+    &__item {
+      display: flex;
+      justify-content: space-between;
+
+      &:not(:last-child) {
         margin-bottom: 40px;
       }
     }
