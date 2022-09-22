@@ -64,12 +64,11 @@ main {
   width: 100%;
   padding: 0px;
 
-  // @media screen and (max-width: 1600px) {
-  //   max-width: 1200px;
-  // }
-  // @media screen and (max-width: 1270px) {
-  //   max-width: 774px;
-  // }
+  @media screen and (max-width: $size-tablet) {
+    max-width: 768px;
+    padding: 0 24px;
+  }
+
   @media screen and (max-width: $size-mobile) {
     max-width: 100%;
     padding: 0 20px;
@@ -91,6 +90,16 @@ main {
     line-height: 58px;
     text-align: left;
     color: $white-color;
+  }
+
+  @media screen and (max-width: $size-tablet) {
+    font-size: 40px;
+    line-height: 48px;
+
+    &--white {
+      font-size: 40px;
+      line-height: 48px;
+    }
   }
 
   @media screen and (max-width: $size-mobile) {

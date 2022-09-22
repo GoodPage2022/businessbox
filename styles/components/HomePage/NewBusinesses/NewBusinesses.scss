@@ -14,6 +14,28 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .newBusinesses {
+    padding-bottom: 40px;
+
+    &__container {
+      overflow: hidden;
+    }
+
+    &__title {
+      margin-bottom: 40px;
+    }
+
+    &__cards {
+      // display: grid;
+      // grid-template-columns: repeat(4, 1fr);
+      // justify-content: center;
+      // grid-column-gap: 30px;
+      // grid-row-gap: 40px;
+    }
+  }
+}
+
 @media screen and (max-width: $size-mobile) {
   .newBusinesses {
     padding-bottom: 20px;

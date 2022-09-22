@@ -185,6 +185,197 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .contactInfo {
+    padding-bottom: 40px;
+    &__profile {
+      display: flex;
+    }
+
+    &__photo {
+      display: flex;
+      flex-direction: column;
+      margin-right: 30px;
+    }
+    &__custom-file-input {
+      color: transparent;
+      width: 160px;
+      margin-bottom: 10px;
+    }
+    &__custom-file-input::-webkit-file-upload-button {
+      visibility: hidden;
+      display: none;
+    }
+    &__custom-file-input::before {
+      content: "Змінити фото";
+      display: inline-block;
+      border: 1px solid $main-text-color;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+      border-radius: 15px;
+      padding: 7px 16px 8px;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $main-text-color;
+      outline: none;
+      white-space: nowrap;
+      -webkit-user-select: none;
+      cursor: pointer;
+    }
+    &__delete-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      width: 100%;
+      border: 1px solid $main-text-color;
+      border-radius: 15px;
+      background: transparent;
+      cursor: pointer;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+    &__signout-btn {
+      &--desctop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 7px 16px 8px;
+        border: none;
+        border-radius: 15px;
+        background: $main-red-color;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+
+      &--mob {
+        display: none;
+      }
+    }
+    &__image {
+      position: relative;
+      border-radius: 25px;
+      overflow: hidden;
+      width: 160px;
+      height: 160px;
+      margin-bottom: 20px;
+    }
+
+    &__form {
+      width: 100%;
+    }
+
+    &__first-wrapper {
+      display: block;
+      margin-bottom: 30px;
+    }
+
+    &__second-wrapper {
+      display: block;
+      margin-bottom: 30px;
+    }
+
+    &__third-wrapper {
+      display: block;
+      margin-bottom: 40px;
+    }
+    &__field {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      &:not(:last-child) {
+        margin-right: 0;
+        margin-bottom: 30px;
+      }
+    }
+    &__label {
+      display: block;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: $main-text-color;
+      margin-bottom: 10px;
+
+      &--wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      &--first {
+        display: block;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        color: $main-text-color;
+        margin-top: auto;
+      }
+    }
+
+    &__button-edit {
+      display: none;
+    }
+
+    &__input {
+      width: 345px;
+      border: none;
+      background: $white-color;
+      border-radius: 25px;
+      padding: 16px 25px;
+      outline: none;
+      font-size: 12px;
+      line-height: 15px;
+      cursor: text;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: $grey-color;
+      }
+    }
+
+    &__submit-btn {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 18px;
+      background: $main-red-color;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: $white-color;
+      &:not(:disabled) {
+        cursor: pointer;
+      }
+    }
+  }
+}
 @media screen and (max-width: $size-mobile) {
   .contactInfo {
     padding-bottom: 40px;

@@ -181,7 +181,7 @@ const AddBusiness = () => {
                   />
                 </label>
                 <label className="addBusiness__field">
-                  <span className="addBusiness__label">Регіон</span>
+                  <span className="addBusiness__label">Область</span>
                   <Field
                     type="text"
                     name="region"

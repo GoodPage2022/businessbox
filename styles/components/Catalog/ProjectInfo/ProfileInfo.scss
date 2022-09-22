@@ -25,6 +25,7 @@
   &__name {
     font-weight: 600;
     margin-bottom: 6px;
+    word-break: break-all;
   }
   &__contact {
     margin-right: 15px;
@@ -54,6 +55,79 @@
 
       &:not(:last-child) {
         margin-right: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .profileInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 24px 27px 30px;
+    background: $white-color;
+    border-radius: 20px;
+    margin-bottom: 34px;
+    overflow: hidden;
+
+    &__info {
+      display: flex;
+      align-items: center;
+    }
+
+    &__image {
+      position: relative;
+      border-radius: 25px;
+      overflow: hidden;
+      min-width: 100px;
+      height: 100px;
+      margin-right: 20px;
+    }
+
+    &__name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      margin-bottom: 0;
+    }
+
+    &__city {
+      font-size: 14px;
+      line-height: 17px;
+    }
+    &__contact {
+      margin-right: 15px;
+      font-size: 14px;
+      line-height: 17px;
+
+      &--notAuth {
+        color: $main-red-color;
+      }
+    }
+    &__networks {
+      display: flex;
+      align-items: center;
+
+      &--item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 34px;
+        height: 32px;
+        background: $transparent;
+        border-radius: 15px;
+
+        border: 1px solid $main-text-color;
+        cursor: pointer;
+        & svg {
+          width: 14px;
+          height: 14px;
+        }
+
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
       }
     }
   }
