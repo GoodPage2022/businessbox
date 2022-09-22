@@ -54,6 +54,12 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .accountHeader {
+    padding-top: 112px;
+  }
+}
+
 @media screen and (max-width: $size-mobile) {
   .accountHeader {
     padding-top: 92px;
