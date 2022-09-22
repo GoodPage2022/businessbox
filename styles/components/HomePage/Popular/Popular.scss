@@ -161,6 +161,197 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .popular {
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    &__container {
+      overflow: hidden;
+    }
+
+    &__buttons {
+      margin-bottom: 20px;
+    }
+
+    &__button__mob-filter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      width: 34px;
+      border: 1px solid $main-text-color;
+      border-radius: 15px;
+      background: transparent;
+      cursor: pointer;
+
+      &.active {
+        background: $main-text-color;
+        & svg {
+          & rect {
+            fill: $white-color;
+          }
+        }
+      }
+    }
+
+    &__button__filter {
+      display: none;
+    }
+
+    &__filter {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: block;
+        padding-top: 20px;
+        border-top: 1px solid $grey-color;
+        margin-bottom: 40px;
+      }
+    }
+
+    &__form {
+      display: block;
+      width: 100%;
+    }
+
+    &__city-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 40px 0;
+
+      & label {
+        &:not(:last-child) {
+          // margin-right: 42px;
+        }
+      }
+    }
+
+    &__field {
+      display: block;
+      width: 327px;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-top: none;
+      &:not(:last-child) {
+        margin-right: 0;
+        margin-bottom: 0;
+      }
+    }
+    &__label {
+      display: block;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 22px;
+      color: $main-text-color;
+      margin-bottom: 20px;
+
+      &:last-child {
+        text-align: center;
+      }
+    }
+
+    &__price {
+      display: flex;
+
+      &--text {
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__input {
+      &-thumb {
+        position: relative;
+      }
+      width: 159px;
+      border: none;
+      background: $white-color;
+      border-radius: 25px;
+      padding: 20px 25px;
+      outline: none;
+      cursor: text;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $grey-color;
+      }
+    }
+
+    &__select {
+      outline: none;
+      cursor: pointer;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: $grey-color;
+      }
+      appearance: none;
+    }
+
+    &__title {
+      margin-bottom: 40px;
+      &-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        border-radius: 18px;
+        border: none;
+        background: $main-text-color;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+
+        align-items: center;
+        color: #ffffff;
+        cursor: pointer;
+      }
+    }
+
+    &__title-button {
+      display: block;
+    }
+  }
+
+  // & > div {
+
+  .cards-slider {
+    margin-right: -24px;
+
+    .slick-list {
+      margin: 0 -15px;
+    }
+    .slick-slide {
+      padding: 0 15px;
+    }
+    & > div {
+      height: 100% !important;
+      // & > div {
+      //   min-width: 100% !important;
+      // }
+    }
+  }
+}
+
 @media screen and (max-width: $size-mobile) {
   .popular {
     padding-top: 20px;
@@ -272,7 +463,7 @@
       border: none;
       background: $white-color;
       border-radius: 25px;
-      padding: 20px 25px;
+      padding: 10px 20px;
       outline: none;
       cursor: text;
 
