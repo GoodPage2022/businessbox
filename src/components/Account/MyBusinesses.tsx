@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import PlusSVG from "../../assets/svg/plus.svg";
 import { useRouter } from "next/router";
+import CardsSlider from "../HomePage/CardsSlider/CardsSlider";
 
 const MyBusinesses = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -40,7 +41,7 @@ const MyBusinesses = () => {
       <div className="container myBusinesses__container">
         {cards.length > 0 ? (
           <>
-            <ul className="myBusinesses__cards">
+            <ul className="myBusinesses__cards--desctop">
               {cards.map(
                 ({
                   _id,
@@ -71,6 +72,9 @@ const MyBusinesses = () => {
                   />
                 ),
               )}
+            </ul>
+            <ul className="myBusinesses__cards--tablet">
+              <CardsSlider cards={cards} />
             </ul>
             <button
               onClick={() => router.push("/account/add-business")}

@@ -36,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 7px 16px;
     border: none;
     border-radius: 18px;
     background: $main-red-color;
@@ -46,9 +46,10 @@
       margin-left: 10px;
       font-family: "Montserrat";
       font-style: normal;
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 24px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
       color: $white-color;
     }
   }
