@@ -260,9 +260,13 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                       key={index}
                       className="projectInfo__image-slider--image"
                     >
-                      <Image
-                        className=""
-                        src={`http://157.230.99.45:8082${img.path}`}
+                    <Image
+                      className=""
+                      src={`${
+                        img.meta.assets == ""
+                          ? ``
+                          : `http://157.230.99.45:8082`
+                      }${img.path}`}
                         layout="fill"
                         objectFit="cover"
                         alt=""

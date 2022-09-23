@@ -94,27 +94,13 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     };
 
     if (files) {
-      const filesToUpload = [...files];
-
-      let images: any = [];
-      await Promise.all(
-        filesToUpload.map(async (f: any) => {
-          const uploadedFiles: any = await uploadToServer(f);
-
-          console.log("uploadedFiles");
-          console.log(uploadedFiles);
-
-          images.push({
-            meta: {
-              title: "",
-              assets: "",
-            },
-            path: `/${uploadedFiles.data.fields.folder ?? `avatars`}/${
-              uploadedFiles.data.files.file.originalFilename
-            }`,
-          });
-        }),
-      );
+      const images = files.map((f: any) => ({
+          meta: {
+            title: "",
+            assets: "",
+          },
+          path: f,
+      }))
 
       newBusiness["images"] = images;
     }
