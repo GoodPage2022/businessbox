@@ -20,11 +20,10 @@ function ModalAuth({ onClose }: { onClose: any }) {
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
 
-  console.log("user");
-  console.log(user);
-  console.log("session");
-  console.log(session);
-  
+  // console.log("user");
+  // console.log(user);
+  // console.log("session");
+  // console.log(session);
 
   const signInGoogleRequest = async (session: any) => {
     try {
@@ -37,8 +36,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
       }
     } catch (err: any) {
       setAuthError("Google auth error");
-      console.log("Sign In Error");
-      console.log(err);
+      // console.log("Sign In Error");
+      // console.log(err);
     }
   };
 
@@ -101,8 +100,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
       }
     } catch (err: any) {
       setAuthError("Хибний логін або пароль");
-      console.log("Sign In Error");
-      console.log(err);
+      // console.log("Sign In Error");
+      // console.log(err);
     }
   };
 

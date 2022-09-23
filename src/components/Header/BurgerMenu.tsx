@@ -75,8 +75,6 @@ const initialValues = {
 const BurgerMenu = () => {
   const [state, dispatch] = React.useContext(MainContext);
   const user = useSelector((state: any) => state.auth.user);
-  console.log(state.isOpenBurger);
-
   const openModal = () => {
     router.push("#auth");
     dispatch({ type: "toggle_authModal" });
@@ -89,9 +87,7 @@ const BurgerMenu = () => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    onSubmit: (values) => {},
   });
 
   return (

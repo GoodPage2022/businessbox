@@ -14,7 +14,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     swipeToSlide: true,
     className: "cards-slider",
     adaptiveHeight: true,
-    autoplay: false,
+    autoplay: true,
     responsive: [
       {
         breakpoint: 1439,
@@ -33,7 +33,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     ],
   };
 
-  return (
+  return cards.length > 1 ? (
     <Slider {...settings}>
       {cards.map(
         ({
@@ -66,6 +66,35 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         ),
       )}
     </Slider>
+  ) : (
+    cards.map(
+      ({
+        _id,
+        title,
+        description,
+        images,
+        view_count,
+        price,
+        is_verified,
+      }: any) => (
+        <BusinessCard
+          key={_id}
+          alias={_id}
+          title={title}
+          description={description}
+          image={
+            images == null || !images.length
+              ? ""
+              : `${
+                  images[0].meta.assets == "" ? `` : `http://157.230.99.45:8082`
+                }${images[0].path}`
+          }
+          price={price}
+          views={view_count ?? 0}
+          isVerified={is_verified}
+        />
+      ),
+    )
   );
 };
 
