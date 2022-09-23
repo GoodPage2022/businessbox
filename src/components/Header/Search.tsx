@@ -29,7 +29,7 @@ const Search = () => {
           className={`header__input ${SearchItems.length > 0 ? "active" : ""}`}
           type="text"
           name="search"
-          autocomplete="off"
+          autoComplete="off"
           minLength={1}
           maxLength={255}
           required

@@ -43,7 +43,9 @@ const BusinessCard = ({
 
   useEffect(() => {
     if (!!user && !!user.favourites)
-      setIsLiked(user.favourites.map((f: any)=>f._id).includes(alias) ? true : false)
+      setIsLiked(
+        user.favourites.map((f: any) => f._id).includes(alias) ? true : false,
+      );
   }, [user]);
 
   const handleFavourites = async () => {
@@ -51,21 +53,21 @@ const BusinessCard = ({
       user,
       project: {
         _id: alias,
-        title
+        title,
       },
     };
 
     const response = await axios.post(`/api/account/favourites`, requestBody);
-    
+
     if (response.status == 200) {
       dispatchRedux(
         signInReducer({
           ...user,
-          favourites: response.data
+          favourites: response.data,
         }),
       );
     }
-  }
+  };
 
   return (
     <li className="business-card">
@@ -90,12 +92,14 @@ const BusinessCard = ({
             alt="card-image"
           />
         )}
-        {!!user && <button
-          onClick={handleFavourites}
-          className={`business-card__heart-icon ${isLiked ? "active" : ""}`}
-        >
-          <HeartSVG />
-        </button>}
+        {!!user && (
+          <button
+            onClick={handleFavourites}
+            className={`business-card__heart-icon ${isLiked ? "active" : ""}`}
+          >
+            <HeartSVG />
+          </button>
+        )}
       </div>
       <div className="business-card__info">
         <h3 className="business-card__title">
@@ -127,14 +131,16 @@ const BusinessCard = ({
         <div className="business-card__footer-mob">
           <div className="business-card__footer-mob--first">
             <p className="business-card__price">{price}₴</p>
-            {!!user && <button
-              onClick={handleFavourites}
-              className={`business-card__heart-icon--mob ${
-                isLiked ? "active" : ""
-              }`}
-            >
-              <HeartSVG />
-            </button>}
+            {!!user && (
+              <button
+                onClick={handleFavourites}
+                className={`business-card__heart-icon--mob ${
+                  isLiked ? "active" : ""
+                }`}
+              >
+                <HeartSVG />
+              </button>
+            )}
           </div>
           <div className="business-card__footer-mob--second">
             <div className="business-card__views">

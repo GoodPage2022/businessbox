@@ -32,7 +32,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1439,
+        breakpoint: 1440,
         settings: {
           slidesToShow: 1.4,
           slidesToScroll: 1,
@@ -41,7 +41,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         },
       },
       {
-        breakpoint: 767,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1.3,
           slidesToScroll: 1,
@@ -64,14 +64,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
   const categoriesSliderSettings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 9,
+    slidesToShow: 8,
     slidesToScroll: 1,
     arrows: false,
     responsive: [
       {
-        breakpoint: 1439,
+        breakpoint: 1440,
         settings: {
           slidesToShow: 5,
           slidesToScroll: 1,
@@ -80,7 +80,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         },
       },
       {
-        breakpoint: 767,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2.7,
           slidesToScroll: 1,
