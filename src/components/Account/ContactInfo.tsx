@@ -110,16 +110,26 @@ const ContactInfo = () => {
     try {
       const reponse = await axios.post("/api/upload", formData, options);
       console.log(reponse.data);
-      
+
       if (reponse.status == 200) {
-        setAvatar(`${reponse.data.files ? "/avatars/" + reponse.data.files.file.originalFilename : reponse.data.url}`);
+        setAvatar(
+          `${
+            reponse.data.files
+              ? "/avatars/" + reponse.data.files.file.originalFilename
+              : reponse.data.url
+          }`,
+        );
 
         const data = {
           user,
           userUpdate: {
             _id: user._id,
             avatar: {
-              path: `${reponse.data.files ? "/avatars/" + reponse.data.files.file.originalFilename : reponse.data.url}`,
+              path: `${
+                reponse.data.files
+                  ? "/avatars/" + reponse.data.files.file.originalFilename
+                  : reponse.data.url
+              }`,
             },
           },
         };
@@ -135,7 +145,11 @@ const ContactInfo = () => {
               signInReducer({
                 ...user,
                 avatar: {
-                  path: `${reponse.data.files ? "/avatars/" + reponse.data.files.file.originalFilename : reponse.data.url}`,
+                  path: `${
+                    reponse.data.files
+                      ? "/avatars/" + reponse.data.files.file.originalFilename
+                      : reponse.data.url
+                  }`,
                 },
               }),
             );
@@ -255,6 +269,7 @@ const ContactInfo = () => {
                   <div className="contactInfo__label--wrapper">
                     <span className="contactInfo__label--first">Ім’я</span>
                     <button
+                      type="button"
                       className="contactInfo__button-edit"
                       onClick={() => dispatch({ type: "toggle_edit" })}
                     >
@@ -341,7 +356,7 @@ const ContactInfo = () => {
               {state.isEdit ? (
                 <div
                   className="contactInfo__submit-btn"
-                  onClick={() => dispatch({ type: "toggle_edit" })}
+                  // onClick={() => dispatch({ type: "toggle_edit" })}
                 >
                   <MainButtonRed label="Зберегти" />
                 </div>
@@ -350,6 +365,7 @@ const ContactInfo = () => {
           </Formik>
         </div>
         <button
+          type="button"
           onClick={signOut}
           className="contactInfo__signout-btn--mob section__secondary-text--white"
         >
