@@ -30,7 +30,6 @@ const RightMob = () => {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const router = useRouter();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const signOut = async () => {
     if (session !== undefined) {
@@ -84,19 +83,27 @@ const RightMob = () => {
         )}
 
         <Link href="/">
-          <a className={`header__logo__text ${isSearchOpen ? "hidden" : ""}`}>
+          <a
+            className={`header__logo__text ${
+              state.isActiveHeaderSearch ? "hidden" : ""
+            }`}
+          >
             Business Box
           </a>
         </Link>
       </div>
-      <ul className={`header__right ${isSearchOpen ? "active" : ""}`}>
+      <ul
+        className={`header__right ${
+          state.isActiveHeaderSearch ? "active" : ""
+        }`}
+      >
         <li className="header__right__btn">
-          <Search active={isSearchOpen} />
-          {isSearchOpen ? (
+          <Search />
+          {state.isActiveHeaderSearch ? (
             ""
           ) : (
             <IconButton
-              onClick={() => setIsSearchOpen(true)}
+              onClick={() => dispatch({ type: "toggle_headerSearch" })}
               borderColor="#FFFFFF"
               icon={<SearchSVG />}
             />

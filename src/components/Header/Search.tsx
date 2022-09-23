@@ -1,12 +1,16 @@
 import { Field, FormikProvider, useFormik } from "formik";
 import SearchItems from "../../constants/search-items";
 import SearchSVG from "../../assets/svg/search.svg";
+import { useState } from "react";
+import { MainContext } from "../../contexts/mainContext";
+import React from "react";
 
 const initialValues = {
   search: "",
 };
 
-const Search = ({ active }: any) => {
+const Search = () => {
+  const [state, dispatch] = React.useContext(MainContext);
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
@@ -14,9 +18,14 @@ const Search = ({ active }: any) => {
     },
   });
   return (
-    <div className={`header__search ${active ? "active" : ""}`}>
+    <div
+      className={`header__search ${state.isActiveHeaderSearch ? "active" : ""}`}
+    >
       <FormikProvider value={formik}>
         <Field
+          onBlur={(e: any) => {
+            dispatch({ type: "toggle_headerSearch" });
+          }}
           className={`header__input ${SearchItems.length > 0 ? "active" : ""}`}
           type="text"
           name="search"
