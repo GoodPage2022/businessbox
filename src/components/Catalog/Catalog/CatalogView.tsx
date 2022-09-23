@@ -13,6 +13,7 @@ import IconButton from "../../shared/IconButton";
 import MobFilter from "./MobFilter";
 import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
+import BusinessCardFavorites from "../../shared/BusinessCardFavorite";
 
 const CatalogView = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -21,11 +22,11 @@ const CatalogView = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [filtersObj, setFiltersObj] = useState<any>({});
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
+  const [screenWidth, setScreenWidth] = useState<any>(window.screen.width);
   const router = useRouter();
 
   const [state, dispatch] = React.useContext(MainContext);
   const { filters } = router.query;
-  const screenWidth = window.screen.width;
 
   const cardsPerPage = screenWidth < 768 ? 8 : 9;
 
@@ -235,26 +236,46 @@ const CatalogView = () => {
                   view_count,
                   price,
                   is_verified,
-                }: any) => (
-                  <BusinessCard
-                    key={_id}
-                    alias={_id}
-                    title={title}
-                    description={description}
-                    image={
-                      images == null || !images.length
-                        ? ""
-                        : `${
-                            images[0].meta.assets == ""
-                              ? ``
-                              : `http://157.230.99.45:8082`
-                          }${images[0].path}`
-                    }
-                    price={price}
-                    views={view_count ?? 0}
-                    isVerified={is_verified}
-                  />
-                ),
+                }: any) =>
+                  isRowsActive && screenWidth < 768 ? (
+                    <BusinessCardFavorites
+                      key={_id}
+                      alias={_id}
+                      title={title}
+                      description={description}
+                      image={
+                        images == null || !images.length
+                          ? ""
+                          : `${
+                              images[0].meta.assets == ""
+                                ? ``
+                                : `http://157.230.99.45:8082`
+                            }${images[0].path}`
+                      }
+                      price={price}
+                      views={view_count ?? 0}
+                      isVerified={is_verified}
+                    />
+                  ) : (
+                    <BusinessCard
+                      key={_id}
+                      alias={_id}
+                      title={title}
+                      description={description}
+                      image={
+                        images == null || !images.length
+                          ? ""
+                          : `${
+                              images[0].meta.assets == ""
+                                ? ``
+                                : `http://157.230.99.45:8082`
+                            }${images[0].path}`
+                      }
+                      price={price}
+                      views={view_count ?? 0}
+                      isVerified={is_verified}
+                    />
+                  ),
               )}
             </ul>
           ) : (

@@ -39,7 +39,7 @@ const MyBusinesses = () => {
   return (
     <section className="myBusinesses">
       <div className="container myBusinesses__container">
-        {cards.length < 0 ? (
+        {cards.length > 0 ? (
           <>
             <ul className="myBusinesses__cards--desctop">
               {cards.map(

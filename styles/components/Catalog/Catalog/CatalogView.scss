@@ -312,10 +312,15 @@
       grid-template-columns: repeat(1, 1fr);
       grid-template-rows: repeat(8, 1fr);
       grid-column-gap: 0;
+      justify-items: center;
       grid-row-gap: 20px;
       border-left: none;
       padding-left: 0px;
       margin-bottom: 20px;
+
+      & .business-card {
+        width: 100%;
+      }
 
       &.active {
         grid-template-columns: repeat(2, 1fr);

@@ -517,15 +517,16 @@
       display: none;
     }
   }
-
   .cards-slider {
-    margin-right: 0;
+    margin-right: -20px !important;
 
-    // & > div {
-    //   height: 100% !important;
-    //   & > div {
-    //     min-width: 100% !important;
-    //   }
-    // }
+    & > div {
+      margin: 0 -15px !important;
+      & > div {
+        & > div {
+          padding: 0 15px !important;
+        }
+      }
+    }
   }
 }

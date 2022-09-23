@@ -84,6 +84,7 @@
         display: block;
       }
       &__item {
+        display: block;
         padding-bottom: 20px;
         &:not(:last-child) {
           border-bottom: 1px solid $grey-color;
