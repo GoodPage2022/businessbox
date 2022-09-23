@@ -142,7 +142,7 @@ const MobFilter = ({
               </label>
               <div className="mobFilter__city">
                 <label className="mobFilter__field">
-                  <span className="mobFilter__label">Регіон</span>
+                  <span className="mobFilter__label">Область</span>
                   <Field
                     component={CustomSelect}
                     className="mobFilter__select section__primary-text"

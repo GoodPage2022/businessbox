@@ -1,9 +1,13 @@
 .favorites {
+  padding-bottom: 80px;
   &__cards {
     &--desctop {
-      &__item {
-        display: flex;
-        justify-content: space-between;
+    }
+    &__item {
+      display: flex;
+      justify-content: space-between;
+
+      &:not(:last-child) {
         margin-bottom: 40px;
       }
     }
@@ -28,6 +32,45 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .favorites {
+    padding-bottom: 40px;
+    &__cards {
+      &--desctop {
+      }
+      &__item {
+        display: flex;
+        justify-content: space-between;
+
+        &:not(:last-child) {
+          margin-bottom: 40px;
+        }
+      }
+      &--mob {
+        display: none;
+      }
+    }
+    &__graphic {
+      position: relative;
+      width: 444px;
+      height: 396px;
+
+      & canvas {
+        height: 396px !important;
+      }
+    }
+
+    &__empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 210px;
+      & h1 {
+        text-align: center;
+      }
+    }
+  }
+}
 @media screen and (max-width: $size-mobile) {
   .favorites {
     &__cards {

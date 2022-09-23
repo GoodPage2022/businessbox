@@ -220,7 +220,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   />
                 </label>
                 <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Регіон</span>
+                  <span className="addBusinessEdit__label">Область</span>
                   <Field
                     type="text"
                     name="region"

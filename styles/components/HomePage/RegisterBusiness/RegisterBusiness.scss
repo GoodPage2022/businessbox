@@ -29,6 +29,26 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .registerBusiness {
+    padding-top: 80px;
+    padding-bottom: 94px;
+    background-image: url("../../../../public/assets/images/registerBusiness-bg.png");
+
+    &__title {
+      margin-bottom: 30px;
+
+      &--mob {
+      }
+    }
+
+    &__button {
+      padding: 10px 20px;
+      border-radius: 18px;
+    }
+  }
+}
+
 @media screen and (max-width: $size-mobile) {
   .registerBusiness {
     padding-top: 60px;

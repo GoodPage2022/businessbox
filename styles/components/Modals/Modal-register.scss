@@ -98,7 +98,6 @@
     line-height: 1.17;
     letter-spacing: 0.01em;
     color: black;
-    margin-bottom: 40px;
   }
   &__eye-icon {
     position: absolute;
@@ -170,6 +169,190 @@
   }
 }
 
+@media screen and (max-width: $size-tablet) {
+  .modal-register {
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+
+    &__overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999999999;
+
+      visibility: hidden;
+      pointer-events: none;
+      opacity: 0;
+      top: -50%;
+      transition: all 0.35s ease;
+
+      &.active {
+        visibility: visible;
+        pointer-events: all;
+        opacity: 1;
+        top: 0;
+      }
+    }
+    &__container {
+      width: 650px;
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-image: url("../../../public/assets/images/register-modal-bg.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 40px 22px 60px 24px;
+    }
+
+    &__button-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      width: 32px;
+      border: none;
+      border-radius: 18px;
+      background: $white-color;
+      cursor: pointer;
+
+      & svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__body {
+      padding: 40px 24px;
+      background: #fafafa;
+    }
+
+    &__name-wrapper {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    &__field {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      &:not(:last-child) {
+        margin-right: 27px;
+      }
+    }
+
+    &__field--password {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+    }
+    &__eye-icon {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      transform: translate(0, -50%);
+      cursor: pointer;
+    }
+    &__label {
+      display: block;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: $main-text-color;
+      margin-bottom: 10px;
+    }
+
+    &__input {
+      width: 100%;
+      border: none;
+      background: $white-color;
+      border-radius: 25px;
+      padding: 16px 20px;
+      font-size: 12px;
+      line-height: 15px;
+      outline: none;
+      cursor: text;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: $grey-color;
+      }
+
+      &-wrapper {
+        position: relative;
+        display: block;
+      }
+    }
+    &__phone-wrapper {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    &__city-wrapper {
+      display: flex;
+      margin-bottom: 38px;
+    }
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      padding: 7px 16px;
+      border: none;
+      border-radius: 15px;
+      background: $main-red-color;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $white-color;
+      &:not(:disabled) {
+        cursor: pointer;
+      }
+    }
+  }
+}
 @media screen and (max-width: $size-mobile) {
   .modal-register {
     &__failed {

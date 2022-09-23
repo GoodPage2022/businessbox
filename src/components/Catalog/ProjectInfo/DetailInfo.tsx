@@ -274,7 +274,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
           </p>
         </div>
         <div className="detailInfo__fourth-wrapper">
-          <div className="detailInfo__data-wrapper--left">
+          <div className="detailInfo__data-wrapper--left detailInfo__data-wrapper--left--tablet">
             <p className="detailInfo__data-label section__primary-text--bold">
               У якій системі ведеться фінансовий облік?
             </p>
@@ -282,7 +282,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               {projectInfo.financial_accounting_system ?? "– – – – –"}
             </p>
           </div>
-          <div className="detailInfo__data-wrapper--right section__primary-text--bold">
+          <div className="detailInfo__data-wrapper--right detailInfo__data-wrapper--right--tablet section__primary-text--bold">
             <p className="detailInfo__data-label">Наявність CRM</p>
             <p className="detailInfo__data-name section__primary-text">
               {projectInfo.crm ?? "– – – – –"}

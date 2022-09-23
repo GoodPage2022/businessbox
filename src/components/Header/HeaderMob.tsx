@@ -83,11 +83,11 @@ const RightMob = () => {
           />
         )}
 
-        {!isSearchOpen && (
-          <Link href="/">
-            <a className="header__logo__text">Business Box</a>
-          </Link>
-        )}
+        <Link href="/">
+          <a className={`header__logo__text ${isSearchOpen ? "hidden" : ""}`}>
+            Business Box
+          </a>
+        </Link>
       </div>
       <ul className={`header__right ${isSearchOpen ? "active" : ""}`}>
         <li className="header__right__btn">

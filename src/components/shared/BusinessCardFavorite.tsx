@@ -9,7 +9,7 @@ import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
 import EyeSVG from "../../assets/svg/eye.svg";
 
-const BusinessCard = ({
+const BusinessCardFavorites = ({
   image,
   title,
   description,
@@ -130,4 +130,4 @@ const BusinessCard = ({
   );
 };
 
-export default BusinessCard;
+export default BusinessCardFavorites;
