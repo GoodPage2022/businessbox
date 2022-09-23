@@ -225,9 +225,27 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         </p>
 
         <div className="projectInfo__image-slider">
-          {projectInfo.imagesyarn && (
-            <Slider {...imageSliderSettings}>
-              {projectInfo.images.map((img: any, index: number) => (
+          {projectInfo.images.length > 1
+            ? projectInfo.imagesyarn && (
+                <Slider {...imageSliderSettings}>
+                  {projectInfo.images.map((img: any, index: number) => (
+                    <li
+                      key={index}
+                      className="projectInfo__image-slider--image"
+                    >
+                      <Image
+                        className=""
+                        src={`http://157.230.99.45:8082${img.path}`}
+                        layout="fill"
+                        objectFit="cover"
+                        alt=""
+                      />
+                    </li>
+                  ))}
+                </Slider>
+              )
+            : projectInfo.imagesyarn &&
+              projectInfo.images.map((img: any, index: number) => (
                 <li key={index} className="projectInfo__image-slider--image">
                   <Image
                     className=""
@@ -238,8 +256,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   />
                 </li>
               ))}
-            </Slider>
-          )}
         </div>
         <div className="projectInfo__categories-slider">
           <Slider {...categoriesSliderSettings}>
