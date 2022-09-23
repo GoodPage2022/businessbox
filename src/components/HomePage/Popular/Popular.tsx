@@ -15,7 +15,31 @@ const Popular = () => {
   const user = useSelector((state: any) => state.auth.user);
   const router = useRouter();
   const [cards, setCards] = useState<any>([]);
+  const [filtersObj, setFiltersObj] = useState<any>();
+  const [filterURL, setFilterURL] = useState<string>('/catalog');
   const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
+
+  const submitFilter = () => {
+    router.push(filterURL);
+  }
+
+  const changeFilter = (e: any) => {
+    const filtersObjFirstPage = {
+      ...filtersObj,
+      page: undefined,
+      [e.target.name]: e.target.value,
+    };
+
+    setFiltersObj(filtersObjFirstPage);
+
+    let filtersObjFirstPageString = "";
+    Object.keys(filtersObjFirstPage).map((f: any) => {
+      if (filtersObjFirstPage[f] != undefined && filtersObjFirstPage[f] != "")
+        filtersObjFirstPageString += "/" + f + "/" + filtersObjFirstPage[f];
+    });
+    
+    setFilterURL(`/catalog${filtersObjFirstPageString}`)
+  }
 
   const getBusinesses = async () => {
     const requestBody = {
@@ -82,10 +106,11 @@ const Popular = () => {
             <div className="popular__filter--desctop">
               <Formik
                 initialValues={{
-                  price: "",
-                  businessSphere: "",
-                  city: "",
-                  region: "",
+                  // priceFrom: "",
+                  // priceTo: "",
+                  // category: "",
+                  // city: "",
+                  // state: "",
                 }}
                 validate={(values: any) => {
                   const errors: any = {};
@@ -101,15 +126,17 @@ const Popular = () => {
                       <Field
                         className="popular__input section__primary-text"
                         type="text"
-                        name="from"
+                        name="priceFrom"
                         placeholder="від"
+                        onChange={changeFilter}
                       />
                       <p className="popular__price--text">—</p>
                       <Field
                         className="popular__input section__primary-text"
                         type="text"
-                        name="to"
+                        name="priceTo"
                         placeholder="до"
+                        onChange={changeFilter}
                       />
                     </div>
                   </label>
@@ -117,7 +144,7 @@ const Popular = () => {
                     <span className="popular__label">Область</span>
                     <Field
                       type="text"
-                      name="region"
+                      name="state"
                       required
                       placeholder="-----"
                       component={CustomSelect}
@@ -125,7 +152,8 @@ const Popular = () => {
                         { value: "yes", label: "Так" },
                         { value: "no", label: "Ні" },
                       ]}
-                    />
+                      changeFilter={changeFilter}
+                      />
                   </label>
                   <label className="popular__field">
                     <span className="popular__label">Місто</span>
@@ -139,7 +167,8 @@ const Popular = () => {
                         { value: "yes", label: "Так" },
                         { value: "no", label: "Ні" },
                       ]}
-                    />
+                      changeFilter={changeFilter}
+                      />
                   </label>
                   <label className="popular__field">
                     <span className="popular__label">Сфера бізнесу</span>
@@ -147,26 +176,27 @@ const Popular = () => {
                       component={CustomSelect}
                       className="popular__select section__primary-text"
                       type="text"
-                      name="businessSphere"
+                      name="category"
                       options={[
                         { value: "yes", label: "Так" },
                         { value: "no", label: "Ні" },
                       ]}
                       required
                       placeholder="-----"
-                    ></Field>
+                      changeFilter={changeFilter}
+                      ></Field>
                   </label>
-                  <button type="submit">Search!</button>
                 </Form>
               </Formik>
             </div>
             <div className="popular__filter--mob">
               <Formik
                 initialValues={{
-                  price: "",
-                  businessSphere: "",
-                  city: "",
-                  region: "",
+                  // priceFrom: "",
+                  // priceTo: "",
+                  // category: "",
+                  // city: "",
+                  // state: "",
                 }}
                 validate={(values: any) => {
                   const errors: any = {};
@@ -182,15 +212,17 @@ const Popular = () => {
                       <Field
                         className="popular__input section__primary-text"
                         type="text"
-                        name="from"
+                        name="priceFrom"
                         placeholder="від"
+                        onChange={changeFilter}
                       />
                       <p className="popular__price--text">—</p>
                       <Field
                         className="popular__input section__primary-text"
                         type="text"
-                        name="to"
+                        name="priceTo"
                         placeholder="до"
+                        onChange={changeFilter}
                       />
                     </div>
                   </label>
@@ -199,7 +231,7 @@ const Popular = () => {
                       <span className="popular__label">Область</span>
                       <Field
                         type="text"
-                        name="region"
+                        name="state"
                         required
                         placeholder="-----"
                         component={CustomSelect}
@@ -207,6 +239,7 @@ const Popular = () => {
                           { value: "yes", label: "Так" },
                           { value: "no", label: "Ні" },
                         ]}
+                        changeFilter={changeFilter}
                       />
                     </label>
                     <label className="popular__field">
@@ -221,6 +254,7 @@ const Popular = () => {
                           { value: "yes", label: "Так" },
                           { value: "no", label: "Ні" },
                         ]}
+                        changeFilter={changeFilter}
                       />
                     </label>
                   </div>
@@ -231,13 +265,14 @@ const Popular = () => {
                       component={CustomSelect}
                       className="popular__select section__primary-text"
                       type="text"
-                      name="businessSphere"
+                      name="category"
                       options={[
                         { value: "yes", label: "Так" },
                         { value: "no", label: "Ні" },
                       ]}
                       required
                       placeholder="-----"
+                      changeFilter={changeFilter}
                     ></Field>
                   </label>
                 </Form>
@@ -249,7 +284,7 @@ const Popular = () => {
           <h2 className="title">Найпопулярніші</h2>
           <button
             className="popular__title-button"
-            onClick={() => router.push("/catalog")}
+            onClick={submitFilter}
           >
             Підібрати бізнес
           </button>
