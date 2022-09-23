@@ -35,7 +35,7 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
       return response.data;
     }
   };
-  console.log(businessOwner);
+  // console.log(businessOwner);
 
   useEffect(() => {
     getUser();

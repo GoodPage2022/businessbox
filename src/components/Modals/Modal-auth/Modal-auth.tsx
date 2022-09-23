@@ -20,10 +20,10 @@ function ModalAuth({ onClose }: { onClose: any }) {
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
 
-  console.log("user");
-  console.log(user);
-  console.log("session");
-  console.log(session);
+  // console.log("user");
+  // console.log(user);
+  // console.log("session");
+  // console.log(session);
   
 
   const signInGoogleRequest = async (session: any) => {

@@ -7,16 +7,20 @@ import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
 import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
+import { signIn as signInReducer } from "../../../../store/actions/auth";
 import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
 
 const DetailInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(true);
+  const dispatchRedux = useDispatch();
+  const [cards, setCards] = useState<any>([]);
+  const user = useSelector((state: any) => state.auth.user);
 
   const [link, setLink] = useState("");
   const [projectInfo, setProjectInfo] = useState<any>(null);
-  console.log(projectInfo);
+  // console.log(projectInfo);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -27,9 +31,6 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
   const copyLink = () => {
     navigator.clipboard.writeText(link);
   };
-
-  const [cards, setCards] = useState<any>([]);
-  const user = useSelector((state: any) => state.auth.user);
 
   const getBusinesses = async () => {
     const response = await axios.post(`/api/businesses/getList`, { user });
@@ -42,6 +43,11 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
     setCards([]);
     return [];
   };
+
+  useEffect(() => {
+    if (!!user && !!user.favourites && !!projectInfo)
+      setIsLiked(user.favourites.map((f: any)=>f._id).includes(projectInfo._id) ? true : false)
+  }, [user, projectInfo]);
 
   const getBusinessInfo = async () => {
     let response;
@@ -61,8 +67,8 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
         project: response?.data.entries[0],
       });
 
-      console.log("addViewCount");
-      console.log(addViewCount);
+      // console.log("addViewCount");
+      // console.log(addViewCount);
     } catch (error) {
       console.log(error);
     }
@@ -81,6 +87,27 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
     }
   }, [projectInfo]);
 
+  const handleFavourites = async () => {
+    const requestBody = {
+      user,
+      project: {
+        _id: projectInfo._id,
+        title: projectInfo.title
+      },
+    };
+
+    const response = await axios.post(`/api/account/favourites`, requestBody);
+    
+    if (response.status == 200) {
+      dispatchRedux(
+        signInReducer({
+          ...user,
+          favourites: response.data
+        }),
+      );
+    }
+  }
+
   if (loading) return <></>;
 
   return (
@@ -89,14 +116,14 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
         <div className="detailInfo__title">
           <h1 className="detailInfo__title--text title">{projectInfo.title}</h1>
           <div className="detailInfo__title--icons">
-            <button
-              onClick={() => setIsLiked((prev) => !prev)}
+            {!!user && <button
+              onClick={handleFavourites}
               className={`detailInfo__title--heart-icon ${
                 isLiked ? "active" : ""
               }`}
             >
               <HeartSVG />
-            </button>
+            </button>}
             <button
               data-tip
               data-for="copyTip"

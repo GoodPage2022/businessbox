@@ -6,6 +6,7 @@ import axios from "axios";
 import ReactTooltip from "react-tooltip";
 import { findDOMNode } from "react-dom";
 import { Formik, Form, Field } from "formik";
+import { signIn as signInReducer } from "../../../../store/actions/auth";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
@@ -23,6 +24,9 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [cards, setCards] = useState<any>([]);
+  const user = useSelector((state: any) => state.auth.user);
+  const dispatchRedux = useDispatch();
   const imageSliderSettings = {
     dots: false,
     infinite: false,
@@ -51,6 +55,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
   const [link, setLink] = useState("");
   const [projectInfo, setProjectInfo] = useState<any>(null);
+
+  useEffect(() => {
+    if (!!user && !!user.favourites && !!projectInfo)
+      setIsLiked(user.favourites.map((f: any)=>f._id).includes(projectInfo._id) ? true : false)
+  }, [user, projectInfo]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -89,9 +98,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     ],
   };
 
-  const [cards, setCards] = useState<any>([]);
-  const user = useSelector((state: any) => state.auth.user);
-
   const getBusinesses = async () => {
     const response = await axios.post(`/api/businesses/getList`, { user });
 
@@ -122,8 +128,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         project: response?.data.entries[0],
       });
 
-      console.log("addViewCount");
-      console.log(addViewCount);
+      // console.log("addViewCount");
+      // console.log(addViewCount);
     } catch (error) {
       console.log(error);
     }
@@ -169,6 +175,27 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     }
   };
 
+  const handleFavourites = async () => {
+    const requestBody = {
+      user,
+      project: {
+        _id: projectInfo._id,
+        title: projectInfo.title
+      },
+    };
+
+    const response = await axios.post(`/api/account/favourites`, requestBody);
+    
+    if (response.status == 200) {
+      dispatchRedux(
+        signInReducer({
+          ...user,
+          favourites: response.data
+        }),
+      );
+    }
+  }
+
   function escapeHtml(text: string) {
     const map: any = {
       "&": "&amp;",
@@ -191,14 +218,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             {projectInfo.title}
           </h1>
           <div className="projectInfo__title--icons">
-            <button
-              onClick={() => setIsLiked((prev) => !prev)}
+            {!!user && <button
+              onClick={handleFavourites}
               className={`projectInfo__title--heart-icon ${
                 isLiked ? "active" : ""
               }`}
             >
               <HeartSVG />
-            </button>
+            </button>}
             <button
               data-tip
               data-for="copyTip"
@@ -225,13 +252,17 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         </p>
 
         <div className="projectInfo__image-slider">
-          {projectInfo.imagesyarn && (
+          {projectInfo.images && (
             <Slider {...imageSliderSettings}>
               {projectInfo.images.map((img: any, index: number) => (
                 <li key={index} className="projectInfo__image-slider--image">
                   <Image
                     className=""
-                    src={`http://157.230.99.45:8082${img.path}`}
+                    src={`${
+                      img.meta.assets == ""
+                        ? ``
+                        : `http://157.230.99.45:8082`
+                    }${img.path}`}
                     layout="fill"
                     objectFit="cover"
                     alt=""
