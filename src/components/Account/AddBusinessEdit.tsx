@@ -16,7 +16,11 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [loading, setLoading] = useState(true);
 
   const removeFile = (i: number) => {
-    setFiles(files.filter((fi: number, f: any) => fi != i))
+    setFiles(files.filter((f: any, fi: number) => {
+      console.log("fi", fi);
+      
+      return fi != i
+    }))
   }
 
   const uploadToServer = async (file: any) => {
@@ -65,9 +69,6 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     if (businessInfo == null) {
       setLoading(true);
     } else {
-      console.log("businessInfo.images");
-      console.log(businessInfo.images);
-      
       setFiles(businessInfo.images.map((img: any) => img.path))
       setLoading(false);
     }
@@ -220,7 +221,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   />
                 </label>
                 <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Область</span>
+                  <span className="addBusinessEdit__label">Регіон</span>
                   <Field
                     type="text"
                     name="region"
@@ -338,7 +339,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             </div>
             <span className="addBusinessEdit__label">Медіа</span>
             <div className="addBusinessEdit__addMedia-wrapper">
-              {files && files.map((i: number, f: any) => <div className="addBusinessEdit__addMedia-wrapper--image">
+              {files?.map((f: string, i: number) => (<div className="addBusinessEdit__addMedia-wrapper--image">
                 <Image
                   className=""
                   src={f}
@@ -349,7 +350,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                 <button type="button" onClick={() => removeFile(i)} className="addBusinessEdit__button-close">
                   <CrossSVG />
                 </button>
-              </div>)}
+              </div>))}
               <div className="addBusinessEdit__addMedia-wrapper--add-file">
                 <input
                   id="file"
