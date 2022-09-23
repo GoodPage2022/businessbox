@@ -190,7 +190,12 @@ const CatalogView = () => {
               className={`catalogView__button__mob-filter ${
                 state.isActiveMobFilter ? "active" : ""
               }`}
-              onClick={() => dispatch({ type: "toggle_mobFilter" })}
+              onClick={() => {
+                dispatch({ type: "toggle_mobFilter" });
+                document
+                  .querySelector("body")
+                  ?.classList.toggle("disable-scroll");
+              }}
             >
               <FilterSVG />
             </button>
