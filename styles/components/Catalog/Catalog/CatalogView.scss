@@ -28,9 +28,10 @@
 
   &__empty {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding-top: 210px;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 50vh;
   }
 
   &__text {
@@ -177,10 +178,10 @@
     }
 
     &__empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 210px;
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+      // padding-top: 210px;
     }
 
     &__text {
@@ -322,13 +323,6 @@
         grid-column-gap: 16px;
         grid-row-gap: 20px;
       }
-    }
-
-    &__empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 210px;
     }
 
     &__text {

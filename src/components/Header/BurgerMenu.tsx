@@ -132,7 +132,7 @@ const BurgerMenu = () => {
           className="header__nav__menu__item   section__primary-text--white"
           onClick={() => dispatch({ type: "toggle_burger" })}
         >
-          <Link href="/">
+          <Link href="#footer">
             <a className="section__primary-text--white">Контакти</a>
           </Link>
         </li>
