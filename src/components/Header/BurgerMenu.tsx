@@ -75,7 +75,6 @@ const initialValues = {
 const BurgerMenu = () => {
   const [state, dispatch] = React.useContext(MainContext);
   const user = useSelector((state: any) => state.auth.user);
-  // console.log(state.isOpenBurger);
 
   const openModal = () => {
     router.push("#auth");
@@ -89,9 +88,7 @@ const BurgerMenu = () => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    onSubmit: (values) => {},
   });
 
   return (
@@ -132,7 +129,7 @@ const BurgerMenu = () => {
           className="header__nav__menu__item   section__primary-text--white"
           onClick={() => dispatch({ type: "toggle_burger" })}
         >
-          <Link href="/">
+          <Link href="#footer">
             <a className="section__primary-text--white">Контакти</a>
           </Link>
         </li>

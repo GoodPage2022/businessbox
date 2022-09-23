@@ -38,6 +38,10 @@
     display: flex;
     align-items: center;
 
+    &--wrapper {
+      display: flex;
+    }
+
     &--item {
       display: flex;
       justify-content: center;
@@ -158,8 +162,11 @@
     }
     &__networks {
       display: flex;
-      align-items: center;
-
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      &--wrapper {
+        margin-bottom: 10px;
+      }
       &--item {
         display: flex;
         justify-content: center;

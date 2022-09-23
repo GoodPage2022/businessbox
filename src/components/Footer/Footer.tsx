@@ -78,7 +78,7 @@ const Footer: React.FC = () => {
   });
 
   return (
-    <footer className="footer">
+    <footer className="footer" id="footer">
       <div className="container footer__container--desctop">
         <div className="footer__logo">
           <Link href="/">
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer__contacts">
-          <Link href="/">
+          <Link href="#footer">
             <a className="section__secondary-text--white footer__categories--button">
               Контакти
             </a>
@@ -178,7 +178,7 @@ const Footer: React.FC = () => {
               </a>
             </Link>
           </div>
-          <Link href="/">
+          <Link href="#footer">
             <a className="section__secondary-text--white footer__categories--button">
               Контакти
             </a>

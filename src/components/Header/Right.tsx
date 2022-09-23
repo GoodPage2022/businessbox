@@ -27,7 +27,6 @@ const Right = () => {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const router = useRouter();
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const signOut = async () => {
     if (session !== undefined) {
@@ -64,12 +63,12 @@ const Right = () => {
     <>
       <ul className="header__right">
         <li className="header__right__btn">
-          <Search active={isSearchOpen} />
-          {isSearchOpen ? (
+          <Search />
+          {state.isActiveHeaderSearch ? (
             ""
           ) : (
             <IconButton
-              onClick={() => setIsSearchOpen(true)}
+              onClick={() => dispatch({ type: "toggle_headerSearch" })}
               borderColor="#FFFFFF"
               icon={<SearchSVG />}
             />

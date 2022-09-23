@@ -30,6 +30,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveMobFilter: !state.isActiveMobFilter,
       };
+    case "toggle_headerSearch":
+      return {
+        ...state,
+        isActiveHeaderSearch: !state.isActiveHeaderSearch,
+      };
     default:
       return state;
   }
@@ -42,4 +47,5 @@ export const initialState = {
   isActiveModalForgotPassword: false,
   isOpenBurger: false,
   isActiveMobFilter: false,
+  isActiveHeaderSearch: false,
 };

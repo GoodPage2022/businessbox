@@ -13,7 +13,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="header__nav__menu__item   section__secondary-text--white">
-          <Link href="/">
+          <Link href="#footer">
             <a className="section__secondary-text--white">Контакти</a>
           </Link>
         </li>

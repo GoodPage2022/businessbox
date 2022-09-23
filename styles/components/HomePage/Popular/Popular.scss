@@ -276,7 +276,9 @@
       border: none;
       background: $white-color;
       border-radius: 25px;
-      padding: 20px 25px;
+      padding: 16px 25px;
+      font-size: 12px;
+      line-height: 15px;
       outline: none;
       cursor: text;
 
@@ -284,8 +286,8 @@
         font-family: "Montserrat";
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
-        line-height: 17px;
+        font-size: 12px;
+        line-height: 15px;
         color: $grey-color;
       }
     }
@@ -517,15 +519,16 @@
       display: none;
     }
   }
-
   .cards-slider {
-    margin-right: 0;
+    margin-right: -20px !important;
 
-    // & > div {
-    //   height: 100% !important;
-    //   & > div {
-    //     min-width: 100% !important;
-    //   }
-    // }
+    & > div {
+      margin: 0 -15px !important;
+      & > div {
+        & > div {
+          padding: 0 15px !important;
+        }
+      }
+    }
   }
 }

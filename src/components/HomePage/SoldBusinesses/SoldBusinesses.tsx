@@ -34,14 +34,14 @@ const SoldBusinesses = () => {
   useEffect(() => {
     getBusinesses();
   }, []);
-
+  console.log(cards);
   return (
     <section className="soldBusinesses">
       <div className="container soldBusinesses__container">
         <h2 className="soldBusinesses__title title">Продані</h2>
 
         <ul
-          className={`soldBusinesses__cards ${cards.length < 5 ? "grid" : ""}`}
+          className={`soldBusinesses__cards ${cards.length < 1 ? "grid" : ""}`}
         >
           <CardsSlider cards={cards} />
         </ul>

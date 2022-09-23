@@ -13,16 +13,16 @@ const Favorites = () => {
 
   const getBusinesses = async () => {
     console.log(user.favourites);
-    
+
     if (!user.favourites || user.favourites.length == 0) {
       setCards([]);
-      return [];  
+      return [];
     }
 
     const filter = {
       _id: {
-        $in: user.favourites.map((f: any)=>f._id)
-      }
+        $in: user.favourites.map((f: any) => f._id),
+      },
     };
     const response = await axios.post(`/api/businesses/getList`, {
       user,

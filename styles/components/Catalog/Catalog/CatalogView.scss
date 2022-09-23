@@ -28,9 +28,10 @@
 
   &__empty {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding-top: 210px;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 50vh;
   }
 
   &__text {
@@ -177,10 +178,10 @@
     }
 
     &__empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 210px;
+      // display: flex;
+      // flex-direction: column;
+      // align-items: center;
+      // padding-top: 210px;
     }
 
     &__text {
@@ -311,10 +312,15 @@
       grid-template-columns: repeat(1, 1fr);
       grid-template-rows: repeat(8, 1fr);
       grid-column-gap: 0;
+      justify-items: center;
       grid-row-gap: 20px;
       border-left: none;
       padding-left: 0px;
       margin-bottom: 20px;
+
+      & .business-card {
+        width: 100%;
+      }
 
       &.active {
         grid-template-columns: repeat(2, 1fr);
@@ -322,13 +328,6 @@
         grid-column-gap: 16px;
         grid-row-gap: 20px;
       }
-    }
-
-    &__empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 210px;
     }
 
     &__text {

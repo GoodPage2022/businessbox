@@ -76,22 +76,38 @@ export const options = {
     },
   },
 };
+let screenWidth = 0;
+if (typeof window !== "undefined") {
+  // browser code
+  screenWidth = window.screen.width;
+}
 
-const labels = [
-  // " ",
-  "01.01",
-  "01.02",
-  "01.03",
-  "01.04",
-  "01.05",
-  "01.06",
-  "01.07",
-  "01.08",
-  "01.09",
-  "01.10",
-  "01.11",
-  "01.12",
-];
+const labels =
+  screenWidth > 1440
+    ? [
+        // " ",
+        "01.01",
+        "01.02",
+        "01.03",
+        "01.04",
+        "01.05",
+        "01.06",
+        "01.07",
+        "01.08",
+        "01.09",
+        "01.10",
+        "01.11",
+        "01.12",
+      ]
+    : [
+        // " ",
+        "01.01",
+        "01.02",
+        "01.03",
+        "01.04",
+        "01.05",
+        "01.06",
+      ];
 
 export const data = {
   labels,
@@ -101,7 +117,10 @@ export const data = {
       fill: true,
       // display: false,
       // data: [/* "none", */ 1, 1, 1.5, 2, 3, 2, 4, 6, 2, 5.5, 5, 4],
-      data: [1, 2, 3, 4, 5, 6, 5, 4, 3, 10, 11, 12],
+      data:
+        screenWidth > 1440
+          ? [1, 2, 3, 4, 5, 6, 5, 4, 3, 10, 11, 12]
+          : [5, 6, 5, 4, 3, 10],
       borderColor: "#F22A4E",
       borderWidth: 5,
       backgroundColor: "rgba(53, 162, 235, 0.5)",

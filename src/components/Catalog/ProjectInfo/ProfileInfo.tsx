@@ -28,7 +28,11 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
       headers: { "Content-Type": "multipart/form-data" },
     };
 
-    const response = await axios.post(`/api/account/list`, requestBody, options);
+    const response = await axios.post(
+      `/api/account/list`,
+      requestBody,
+      options,
+    );
 
     if (response.data) {
       setBusinessOwner(response.data);
@@ -100,46 +104,47 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
             )}
           </p>
         )}
-        <button
-          onClick={() => {
-            setIsPhoneShow((prev) => !prev);
-            setIsEmailShow(false);
-            setIsInstagramShow(false);
-          }}
-          className="profileInfo__networks--item"
-        >
-          <PhoneSVG />
-        </button>
-        <button
-          onClick={() => {
-            setIsEmailShow((prev) => !prev);
-            setIsPhoneShow(false);
-            setIsInstagramShow(false);
-          }}
-          className="profileInfo__networks--item"
-        >
-          <MailSVG />
-        </button>
-        {projectData.instagram && (
+        <div className="profileInfo__networks--wrapper">
           <button
             onClick={() => {
-              setIsInstagramShow((prev) => !prev);
-              setIsPhoneShow(false);
+              setIsPhoneShow((prev) => !prev);
               setIsEmailShow(false);
+              setIsInstagramShow(false);
             }}
             className="profileInfo__networks--item"
           >
-            <InstagramSVG />
+            <PhoneSVG />
           </button>
-        )}
-
-        {projectData.youtube && (
-          <Link href={projectData.youtube}>
-            <a className="profileInfo__networks--item">
-              <YoutubeSVG />
-            </a>
-          </Link>
-        )}
+          <button
+            onClick={() => {
+              setIsEmailShow((prev) => !prev);
+              setIsPhoneShow(false);
+              setIsInstagramShow(false);
+            }}
+            className="profileInfo__networks--item"
+          >
+            <MailSVG />
+          </button>
+          {projectData.instagram && (
+            <button
+              onClick={() => {
+                setIsInstagramShow((prev) => !prev);
+                setIsPhoneShow(false);
+                setIsEmailShow(false);
+              }}
+              className="profileInfo__networks--item"
+            >
+              <InstagramSVG />
+            </button>
+          )}
+          {projectData.youtube && (
+            <Link href={projectData.youtube}>
+              <a className="profileInfo__networks--item">
+                <YoutubeSVG />
+              </a>
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

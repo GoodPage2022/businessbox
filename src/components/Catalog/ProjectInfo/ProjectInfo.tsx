@@ -36,7 +36,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1439,
+        breakpoint: 1440,
         settings: {
           slidesToShow: 1.4,
           slidesToScroll: 1,
@@ -45,7 +45,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         },
       },
       {
-        breakpoint: 767,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1.3,
           slidesToScroll: 1,
@@ -73,14 +73,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
   const categoriesSliderSettings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: 9,
+    slidesToShow: 8,
     slidesToScroll: 1,
     arrows: false,
     responsive: [
       {
-        breakpoint: 1439,
+        breakpoint: 1440,
         settings: {
           slidesToShow: 5,
           slidesToScroll: 1,
@@ -89,7 +89,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         },
       },
       {
-        breakpoint: 767,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2.7,
           slidesToScroll: 1,
@@ -252,9 +252,26 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         </p>
 
         <div className="projectInfo__image-slider">
-          {projectInfo.images && (
-            <Slider {...imageSliderSettings}>
-              {projectInfo.images.map((img: any, index: number) => (
+          {projectInfo.images && projectInfo.images.length > 1
+            ? (
+                <Slider {...imageSliderSettings}>
+                  {projectInfo.images.map((img: any, index: number) => (
+                    <li
+                      key={index}
+                      className="projectInfo__image-slider--image"
+                    >
+                      <Image
+                        className=""
+                        src={`http://157.230.99.45:8082${img.path}`}
+                        layout="fill"
+                        objectFit="cover"
+                        alt=""
+                      />
+                    </li>
+                  ))}
+                </Slider>
+              )
+            : projectInfo.images.map((img: any, index: number) => (
                 <li key={index} className="projectInfo__image-slider--image">
                   <Image
                     className=""
@@ -269,8 +286,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   />
                 </li>
               ))}
-            </Slider>
-          )}
         </div>
         <div className="projectInfo__categories-slider">
           <Slider {...categoriesSliderSettings}>

@@ -9,6 +9,7 @@ interface ContextType {
     isActiveModalRegistration: boolean;
     isActiveModalForgotPassword: boolean;
     isActiveMobFilter: boolean;
+    isActiveHeaderSearch: boolean;
   };
   dispatch: React.Dispatch<{ type: string; value: unknown }>;
 }
