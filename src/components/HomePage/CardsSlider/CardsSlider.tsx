@@ -6,7 +6,7 @@ import BusinessCard from "../../shared/BusinessCard";
 const CardsSlider = ({ cards }: { cards: any }) => {
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 1000,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -20,14 +20,12 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         breakpoint: 1439,
         settings: {
           slidesToShow: 2.7,
-          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 767,
         settings: {
           slidesToShow: 1.3,
-          slidesToScroll: 1,
         },
       },
     ],
