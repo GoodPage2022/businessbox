@@ -14,10 +14,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const form = new IncomingForm();
     form.parse(req, async (err: any, fields: any, files: any) => {
+      console.log("files");
+      console.log(files);
+      
       if (err) return res.status(501).send({});
       
       const oldPath = files.file.filepath;
-      // const newPath = `public/${fields.folder ?? `avatars`}/${files.file.originalFilename}`;
 
       const image = await fs.readFile(oldPath);
 
@@ -39,12 +41,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         if (err) return res.status(500).send({ err });
         
         return res.status(200).send({ fields, url: data.Location });
-        // return res.status(200).send({
-        //   url: data.Location
-        // });
       });
-
-      // return res.status(500).send({ fields, files });
     });
   } catch (error) {
     return res.status(504).send(error);

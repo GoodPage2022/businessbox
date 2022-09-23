@@ -75,6 +75,7 @@ const initialValues = {
 const BurgerMenu = () => {
   const [state, dispatch] = React.useContext(MainContext);
   const user = useSelector((state: any) => state.auth.user);
+
   const openModal = () => {
     router.push("#auth");
     dispatch({ type: "toggle_authModal" });

@@ -39,7 +39,10 @@ const Popular = () => {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    resetForm({});
+    console.log(values);
+    
+
+    // resetForm({});
   };
 
   useEffect(() => {
@@ -153,6 +156,7 @@ const Popular = () => {
                       placeholder="-----"
                     ></Field>
                   </label>
+                  <button type="submit">Search!</button>
                 </Form>
               </Formik>
             </div>
