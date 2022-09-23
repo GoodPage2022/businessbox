@@ -10,8 +10,12 @@ import CrossSVG from "../../assets/svg/cross.svg";
 const AddBusiness = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
-  const [files, setFiles] = useState<any>();
+  const [files, setFiles] = useState<string[]>([]);
   const [addBusinessError, setAddBusinessError] = useState("");
+
+  const removeFile = (url: string) => {
+    setFiles(files.filter((f: any) => f != url))
+  }
 
   const uploadToServer = async (file: any) => {
     const uploadImageURL = file;
@@ -23,6 +27,9 @@ const AddBusiness = () => {
     const options: AxiosRequestConfig = {
       headers: { "Content-Type": "multipart/form-data" },
     };
+
+    console.log("send form");
+    
 
     try {
       const reponse = await axios.post("/api/upload", formData, options);
@@ -54,27 +61,13 @@ const AddBusiness = () => {
     };
 
     if (files) {
-      const filesToUpload = [...files];
-
-      let images: any = [];
-      await Promise.all(
-        filesToUpload.map(async (f: any) => {
-          const uploadedFiles: any = await uploadToServer(f);
-
-          console.log("uploadedFiles");
-          console.log(uploadedFiles);
-
-          images.push({
-            meta: {
-              title: "",
-              assets: "",
-            },
-            path: `/${uploadedFiles.data.fields.folder ?? `avatars`}/${
-              uploadedFiles.data.files.file.originalFilename
-            }`,
-          });
-        }),
-      );
+      const images = files.map((f: any) => ({
+          meta: {
+            title: "",
+            assets: "",
+          },
+          path: f,
+      }))
 
       newBusiness["images"] = images;
     }
@@ -300,33 +293,35 @@ const AddBusiness = () => {
             </div>
             <span className="addBusiness__label">Медіа</span>
             <div className="addBusiness__addMedia-wrapper">
-              <div className="addBusiness__addMedia-wrapper--image">
+              {files && files.map((f: any) => <div className="addBusiness__addMedia-wrapper--image">
                 <Image
                   className=""
-                  src="/assets/images/add-media.png"
+                  src={f}
                   layout="fill"
                   objectFit="cover"
                   alt="building"
                 />
-                <button type="button" className="addBusiness__button-close">
+                <button type="button" onClick={() => removeFile(f)} className="addBusiness__button-close">
                   <CrossSVG />
                 </button>
-              </div>
+              </div>)}
               <div className="addBusiness__addMedia-wrapper--add-file">
                 <input
                   id="file"
                   name="file"
                   type="file"
-                  multiple
                   accept="image/*,.png,.jpg"
                   className="addBusiness__custom-file-input--desctop"
-                  data-label={`${
-                    files && files.length > 0
-                      ? `Додано ${files.length} медіафали`
-                      : `Додати медіафали`
-                  }`}
-                  onChange={(e) => {
-                    if (e.currentTarget.files) setFiles(e.currentTarget.files);
+                  data-label={`Додати медіафал`}
+                  onChange={async (e) => {
+                    if (e.currentTarget?.files?.length) {
+                      const uploadedFiles: any = await uploadToServer(e.currentTarget.files[0]);
+                      console.log(uploadedFiles.data.url);
+                      setFiles([
+                        ...files,
+                        uploadedFiles.data.url
+                      ]);
+                    }
                   }}
                 />
                 <input
@@ -341,8 +336,15 @@ const AddBusiness = () => {
                   //     ? `Додано ${files.length} медіафали`
                   //     : `+`
                   // }`}
-                  onChange={(e) => {
-                    if (e.currentTarget.files) setFiles(e.currentTarget.files);
+                  onChange={async (e) => {
+                    if (e.currentTarget?.files?.length) {
+                      const uploadedFiles: any = await uploadToServer(e.currentTarget.files[0]);
+                      console.log(uploadedFiles.data.url);
+                      setFiles([
+                        ...files,
+                        uploadedFiles.data.url
+                      ]);
+                    }
                   }}
                 />
                 <CrossSVG />

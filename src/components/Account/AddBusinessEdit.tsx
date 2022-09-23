@@ -15,6 +15,10 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [businessInfo, setBusinessInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
+  const removeFile = (i: number) => {
+    setFiles(files.filter((fi: number, f: any) => fi != i))
+  }
+
   const uploadToServer = async (file: any) => {
     const uploadImageURL = file;
 
@@ -61,6 +65,10 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     if (businessInfo == null) {
       setLoading(true);
     } else {
+      console.log("businessInfo.images");
+      console.log(businessInfo.images);
+      
+      setFiles(businessInfo.images.map((img: any) => img.path))
       setLoading(false);
     }
   }, [businessInfo]);
@@ -330,18 +338,18 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             </div>
             <span className="addBusinessEdit__label">Медіа</span>
             <div className="addBusinessEdit__addMedia-wrapper">
-              <div className="addBusinessEdit__addMedia-wrapper--image">
+              {files && files.map((i: number, f: any) => <div className="addBusinessEdit__addMedia-wrapper--image">
                 <Image
                   className=""
-                  src="/assets/images/add-media.png"
+                  src={f}
                   layout="fill"
                   objectFit="cover"
                   alt="building"
                 />
-                <button type="button" className="addBusinessEdit__button-close">
+                <button type="button" onClick={() => removeFile(i)} className="addBusinessEdit__button-close">
                   <CrossSVG />
                 </button>
-              </div>
+              </div>)}
               <div className="addBusinessEdit__addMedia-wrapper--add-file">
                 <input
                   id="file"
@@ -350,14 +358,18 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   multiple
                   accept="image/*,.png,.jpg"
                   className="addBusinessEdit__custom-file-input--desctop"
-                  data-label={`${
-                    files && files.length > 0
-                      ? `Додано ${files.length} медіафали`
-                      : `Додати медіафали`
-                  }`}
-                  onChange={(e) => {
-                    if (e.currentTarget.files) setFiles(e.currentTarget.files);
+                  data-label={`Додати медіафал`}
+                  onChange={async (e) => {
+                    if (e.currentTarget?.files?.length) {
+                      const uploadedFiles: any = await uploadToServer(e.currentTarget.files[0]);
+                      console.log(uploadedFiles.data.url);
+                      setFiles([
+                        ...files,
+                        uploadedFiles.data.url
+                      ]);
+                    }
                   }}
+
                 />
                 <input
                   id="file"
@@ -371,8 +383,15 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   //     ? `Додано ${files.length} медіафали`
                   //     : `+`
                   // }`}
-                  onChange={(e) => {
-                    if (e.currentTarget.files) setFiles(e.currentTarget.files);
+                  onChange={async (e) => {
+                    if (e.currentTarget?.files?.length) {
+                      const uploadedFiles: any = await uploadToServer(e.currentTarget.files[0]);
+                      console.log(uploadedFiles.data.url);
+                      setFiles([
+                        ...files,
+                        uploadedFiles.data.url
+                      ]);
+                    }
                   }}
                 />
                 <CrossSVG />
