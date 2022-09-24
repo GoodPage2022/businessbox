@@ -325,7 +325,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             </div>
             <span className="addBusinessEdit__label">Медіа</span>
             <div className="addBusinessEdit__addMedia-wrapper">
-              {files?.map((f: string, i: number) => (<div className="addBusinessEdit__addMedia-wrapper--image">
+              {files?.map((f: string, i: number) => (<div key={i} className="addBusinessEdit__addMedia-wrapper--image">
                 <Image
                   className=""
                   src={f}

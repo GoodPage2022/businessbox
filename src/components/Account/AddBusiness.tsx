@@ -293,7 +293,7 @@ const AddBusiness = () => {
             </div>
             <span className="addBusiness__label">Медіа</span>
             <div className="addBusiness__addMedia-wrapper">
-              {files && files.map((f: any) => <div className="addBusiness__addMedia-wrapper--image">
+              {files && files.map((f: any, i: number) => <div key={i} className="addBusiness__addMedia-wrapper--image">
                 <Image
                   className=""
                   src={f}
