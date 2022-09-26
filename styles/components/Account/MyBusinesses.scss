@@ -91,10 +91,60 @@
       &--desctop {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(1, 1fr);
         justify-content: center;
-        grid-column-gap: 30px;
-        grid-row-gap: 40px;
+        grid-column-gap: 16px;
+        grid-row-gap: 20px;
+        margin-bottom: 64px;
+
+        .business-card {
+          &__info {
+            padding: 10px 15px;
+          }
+          &__image {
+            height: 120px;
+          }
+
+          &__title {
+            font-size: 14px;
+            line-height: 17px;
+            height: 36px;
+            margin-bottom: 5px;
+          }
+
+          &__description {
+            margin-bottom: 10px;
+          }
+
+          &__price {
+            font-size: 14px;
+            line-height: 17px;
+          }
+
+          &__footer-mob--first {
+            margin-bottom: 10px;
+          }
+
+          &__heart-icon--mob {
+            & svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+
+          &__eye-icon {
+            margin-right: 5px;
+          }
+          &__views-count {
+            font-size: 10px;
+            line-height: 12px;
+          }
+
+          &__ckeck-icon--mob {
+            width: 14px;
+            height: 14px;
+          }
+        }
       }
       &--tablet {
         display: none;
