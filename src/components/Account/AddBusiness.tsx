@@ -13,7 +13,7 @@ const AddBusiness = () => {
   const [files, setFiles] = useState<string[]>([]);
   const [addBusinessError, setAddBusinessError] = useState("");
   const [listAreas, setListAreas] = useState<any>();
-  const [listCities, setListCities] = useState([]);
+  const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
 
   const getListAreas = async () => {
@@ -45,10 +45,6 @@ const AddBusiness = () => {
   useEffect(()=>{
     getListCities(selectedArea)
   },[selectedArea])
-
-  // useEffect(()=>{
-  //   console.log(listCities);
-  // },[listCities])
 
   useEffect(()=>{
     getListAreas()
@@ -87,7 +83,7 @@ const AddBusiness = () => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business, region, year, city, file } =
+    const { name, price, description, business, state, year, city, file } =
       values;
 
     let newBusiness: any = {
@@ -95,9 +91,17 @@ const AddBusiness = () => {
       area: business,
       price,
       description,
-      region,
+      state: {
+        _id: state,
+        link: "Areas",
+        display: listAreas.filter((e:any)=>e.value==state)[0].label
+      },
       year,
-      city,
+      city: {
+        _id: city,
+        link: "Areas",
+        display: listCities.filter((e:any)=>e.value==city)[0].label
+      },
       file,
     };
 
@@ -161,7 +165,7 @@ const AddBusiness = () => {
             business: "",
             price: "",
             description: "",
-            region: "",
+            state: "",
             year: "",
             city: "",
             file: null,
@@ -175,7 +179,7 @@ const AddBusiness = () => {
             escapeHtml(values.business);
             escapeHtml(values.price);
             escapeHtml(values.description);
-            escapeHtml(values.region);
+            escapeHtml(values.state);
             escapeHtml(values.year);
             escapeHtml(values.city);
 
@@ -218,7 +222,7 @@ const AddBusiness = () => {
                   <span className="addBusiness__label">Область</span>
                   <Field
                     type="text"
-                    name="region"
+                    name="state"
                     required
                     placeholder="Оберіть"
                     component={CustomSelect}

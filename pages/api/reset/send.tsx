@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             return res.status(404).send('User not found');
 
         const resetKey = userToReset[0]._id.toString() + userToReset[0].api_key.toString().slice(-10)
-        const resetLink = 'http://localhost:3000/reset/' + resetKey
+        const resetLink = 'https://business-box.vercel.app/reset/' + resetKey
 
         var data = {
             service_id: 'service_h1w4a5p',

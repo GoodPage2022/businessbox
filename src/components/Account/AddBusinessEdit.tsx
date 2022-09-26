@@ -18,6 +18,43 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [businessInfo, setBusinessInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [state, dispatch] = React.useContext(MainContext);
+  const [listAreas, setListAreas] = useState<any>();
+  const [listCities, setListCities] = useState<any>();
+  const [selectedArea, setSelectedArea] = useState("");
+
+  const getListAreas = async () => {
+    try {
+      const reponse = await axios.post("/api/locations/getAreas", {});
+
+      if (reponse.status == 200) {
+        setListAreas(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  const getListCities = async (selectedArea: string) => {
+    try {
+      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+
+      if (reponse.status == 200) {
+        setListCities(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    getListCities(selectedArea)
+  },[selectedArea])
+
+  useEffect(()=>{
+    getListAreas()
+  },[])
 
   const removeFile = (i: number) => {
     setFiles(
@@ -71,7 +108,6 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
 
   useEffect(() => {
     getBusinessInfo();
-    console.log(`${businessInfo} businessInfo15/09`);
   }, []);
 
   useEffect(() => {
@@ -79,6 +115,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       setLoading(true);
     } else {
       setFiles(businessInfo.images.map((img: any) => img.path));
+      setSelectedArea(businessInfo.state._id)
+      console.log(businessInfo.city._id);
+      
       setLoading(false);
     }
   }, [businessInfo]);
@@ -87,7 +126,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business, region, year, city, file } =
+    const { name, price, description, business, state, year, city } =
       values;
 
     let newBusiness: any = {
@@ -96,10 +135,17 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       area: business,
       price,
       description,
-      region,
+      state: {
+        _id: state,
+        link: "Areas",
+        display: listAreas.filter((e:any)=>e.value==state)[0].label
+      },
       year,
-      city,
-      file,
+      city: {
+        _id: city,
+        link: "Areas",
+        display: listCities.filter((e:any)=>e.value==city)[0].label
+      },
     };
 
     if (files) {
@@ -163,20 +209,20 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             business: businessInfo != null ? businessInfo.area : "",
             price: businessInfo != null ? businessInfo.price : "",
             description: businessInfo != null ? businessInfo.description : "",
-            region: businessInfo != null ? businessInfo.region : "",
+            state: businessInfo != null ? businessInfo.state._id : "",
             year: businessInfo != null ? businessInfo.year : "",
-            city: businessInfo != null ? businessInfo.city : "",
+            city: businessInfo != null ? businessInfo.city._id : "",
             file:
               businessInfo != null ? businessInfo.public_reviews_media : null,
           }}
           validate={(values: any) => {
-            escapeHtml(values.name);
-            escapeHtml(values.business);
-            escapeHtml(values.price);
-            escapeHtml(values.description);
-            escapeHtml(values.region);
-            escapeHtml(values.year);
-            escapeHtml(values.city);
+            escapeHtml(values.name ?? "");
+            escapeHtml(values.business ?? "");
+            escapeHtml(values.price ?? "");
+            escapeHtml(values.description ?? "");
+            escapeHtml(values.state ?? "");
+            escapeHtml(values.year ?? "");
+            escapeHtml(values.city ?? "");
 
             const errors: any = {};
 
@@ -216,17 +262,15 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   />
                 </label>
                 <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Регіон</span>
+                  <span className="addBusinessEdit__label">Область</span>
                   <Field
                     type="text"
-                    name="region"
+                    name="state"
                     required
-                    placeholder="Україна"
+                    placeholder="Оберіть"
                     component={CustomSelect}
-                    options={[
-                      { value: "yes", label: "Україна" },
-                      { value: "category_1", label: "Не Україна" },
-                    ]}
+                    setter={setSelectedArea}
+                    options={listAreas}
                   />
                 </label>
                 <label className="addBusinessEdit__field">
@@ -235,14 +279,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     type="text"
                     name="city"
                     required
-                    placeholder="Дніпро"
+                    placeholder="Оберіть"
                     component={CustomSelect}
-                    options={[
-                      { value: "yes", label: "Дніпро" },
-                      { value: "category_1", label: "Київ" },
-                      { value: "category_2", label: "Житомир" },
-                      { value: "category_3", label: "Львів" },
-                    ]}
+                    options={listCities}
                   />
                 </label>
               </div>

@@ -14,9 +14,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const form = new IncomingForm();
     form.parse(req, async (err: any, fields: any, files: any) => {
-      console.log("files");
-      console.log(files);
-      
+
       if (err) return res.status(501).send({});
       
       const oldPath = files.file.filepath;
@@ -44,6 +42,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       });
     });
   } catch (error) {
+    console.log("error");
+    console.log(error);
+    
     return res.status(504).send(error);
   }
 }

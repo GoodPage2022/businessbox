@@ -146,7 +146,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
           </div>
         </div>
         <p className="detailInfo__city section__primary-text">
-          {projectInfo.state}, {projectInfo.city}
+          {projectInfo.state.display}, {projectInfo.city.display}
         </p>
         <ul className="detailInfo__list">
           <li className="detailInfo__list-item">
