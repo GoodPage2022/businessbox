@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
 import CrossSVG from "../../assets/svg/cross.svg";
 
@@ -12,6 +12,47 @@ const AddBusiness = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [files, setFiles] = useState<string[]>([]);
   const [addBusinessError, setAddBusinessError] = useState("");
+  const [listAreas, setListAreas] = useState<any>();
+  const [listCities, setListCities] = useState([]);
+  const [selectedArea, setSelectedArea] = useState("");
+
+  const getListAreas = async () => {
+    try {
+      const reponse = await axios.post("/api/locations/getAreas", {});
+
+      if (reponse.status == 200) {
+        setListAreas(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  const getListCities = async (selectedArea: string) => {
+    try {
+      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+
+      if (reponse.status == 200) {
+        setListCities(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    getListCities(selectedArea)
+  },[selectedArea])
+
+  // useEffect(()=>{
+  //   console.log(listCities);
+  // },[listCities])
+
+  useEffect(()=>{
+    getListAreas()
+  },[])
 
   const removeFile = (url: string) => {
     setFiles(files.filter((f: any) => f != url))
@@ -179,12 +220,10 @@ const AddBusiness = () => {
                     type="text"
                     name="region"
                     required
-                    placeholder="Україна"
+                    placeholder="Оберіть"
                     component={CustomSelect}
-                    options={[
-                      { value: "yes", label: "Україна" },
-                      { value: "category_1", label: "Не Україна" },
-                    ]}
+                    setter={setSelectedArea}
+                    options={listAreas}
                   />
                 </label>
                 <label className="addBusiness__field">
@@ -193,14 +232,9 @@ const AddBusiness = () => {
                     type="text"
                     name="city"
                     required
-                    placeholder="Дніпро"
+                    placeholder="Оберіть"
                     component={CustomSelect}
-                    options={[
-                      { value: "yes", label: "Дніпро" },
-                      { value: "category_1", label: "Київ" },
-                      { value: "category_2", label: "Житомир" },
-                      { value: "category_3", label: "Львів" },
-                    ]}
+                    options={listCities}
                   />
                 </label>
               </div>

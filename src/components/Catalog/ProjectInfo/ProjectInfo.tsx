@@ -134,8 +134,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         `/api/account/list`,
         requestBody,
       );
-
-      
       
       if (getUsers.data) {
         const commentObjects = response.data.entries.map((c: any) => ({
