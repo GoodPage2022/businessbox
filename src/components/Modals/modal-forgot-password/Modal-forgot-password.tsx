@@ -13,7 +13,7 @@ import MainButtonRed from "../../shared/MainButtonRed";
 function ModalForgotPassword({ onClose }: { onClose: any }) {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
-  const [showPassword, setShowPassword] = useState(false);
+  const [isformSent, setIsformSent] = useState(false);
   const [forgotPasswordError, setforgotPasswordError] = useState("");
 
   useEffect(() => {
@@ -41,14 +41,14 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
 
     const reqData = {
       to_email: email,
-    }
+    };
 
     try {
-      const response = await axios.post(`/api/reset/send`, reqData)
-      console.log(response.data)
+      const response = await axios.post(`/api/reset/send`, reqData);
+      setIsformSent(true);
+      console.log(response.data);
     } catch (err: any) {
       console.log(err);
-      
     }
   };
 
@@ -64,10 +64,13 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
           <h2 className="modal-forgotPassword__title title--white">
             Забули пароль
           </h2>
-          <p className="modal-forgotPassword__text--desctop">
-            Введіть адрес електронної пошти на який буде висланий новий пароль
-            до вашого аккаунту
-          </p>
+          {!isformSent && (
+            <p className="modal-forgotPassword__text--desctop">
+              Введіть адрес електронної пошти на який буде висланий новий пароль
+              до вашого аккаунту
+            </p>
+          )}
+
           <button
             onClick={onClose}
             className="modal-forgotPassword__button-close--mob"
@@ -76,60 +79,74 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
           </button>
         </div>
         <div className="modal-forgotPassword__body">
-          <p className="modal-forgotPassword__text--mob">
-            Введіть адрес електронної пошти на який буде висланий новий пароль
-            до вашого аккаунту
-          </p>
+          {!isformSent && (
+            <p className="modal-forgotPassword__text--mob">
+              Введіть адрес електронної пошти на який буде висланий новий пароль
+              до вашого аккаунту
+            </p>
+          )}
           <button
             onClick={onClose}
             className="modal-forgotPassword__button-close--desctop"
           >
             <CrossSVG />
           </button>
-          <Formik
-            initialValues={{
-              email: "",
-            }}
-            validate={(values) => {
-              const errors: any = {};
-              // if (!values.name) {
-              //   errors.name = "Обязательное поле";
-              // }
-              // if (!values.phone) {
-              //   errors.phone = "Обязательное поле";
-              // }
-              // else if (!numberRegEpx.test(values.phone)) {
-              //   errors.phone = 'Не правильно введен номер'
-              // }
+          {isformSent ? (
+            <>
+              <p className="modal-forgotPassword__send-title">
+                Запит відправлено
+              </p>
+              <p className="modal-forgotPassword__send-desc">
+                Вам на пошту відправлене посилання для скидання паролю.
+                Перевірте будь ласка вхідні листи.
+              </p>
+            </>
+          ) : (
+            <Formik
+              initialValues={{
+                email: "",
+              }}
+              validate={(values) => {
+                const errors: any = {};
+                // if (!values.name) {
+                //   errors.name = "Обязательное поле";
+                // }
+                // if (!values.phone) {
+                //   errors.phone = "Обязательное поле";
+                // }
+                // else if (!numberRegEpx.test(values.phone)) {
+                //   errors.phone = 'Не правильно введен номер'
+                // }
 
-              return errors;
-            }}
-            onSubmit={handleSubmit}
-          >
-            <Form className="modal-forgotPassword__form">
-              {forgotPasswordError && (
-                <div className="modal-forgotPassword__failed">
-                  {forgotPasswordError}
+                return errors;
+              }}
+              onSubmit={handleSubmit}
+            >
+              <Form className="modal-forgotPassword__form">
+                {forgotPasswordError && (
+                  <div className="modal-forgotPassword__failed">
+                    {forgotPasswordError}
+                  </div>
+                )}
+                <label className="modal-forgotPassword__field">
+                  <span className="modal-forgotPassword__label">
+                    Електронна пошта
+                  </span>
+                  <Field
+                    className="modal-forgotPassword__input section__primary-text"
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="example@mail.com"
+                  />
+                </label>
+
+                <div className="modal-forgotPassword__button">
+                  <MainButtonRed label="Відправити" />
                 </div>
-              )}
-              <label className="modal-forgotPassword__field">
-                <span className="modal-forgotPassword__label">
-                  Електронна пошта
-                </span>
-                <Field
-                  className="modal-forgotPassword__input section__primary-text"
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="example@mail.com"
-                />
-              </label>
-
-              <div className="modal-forgotPassword__button">
-                <MainButtonRed label="Відправити" />
-              </div>
-            </Form>
-          </Formik>
+              </Form>
+            </Formik>
+          )}
         </div>
       </div>
     </div>
