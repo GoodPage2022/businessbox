@@ -116,7 +116,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     let requestBody: any = {
       user,
       sort: {
-        _created: -1,
+        _created: 1,
       },
       filter: { "business._id": projectId  }
     };
@@ -221,6 +221,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         data: newComment,
         user,
       });
+
+      if (newCommentResponse.status == 200) {
+        getBusinessComments()
+      }
+
       console.log(newCommentResponse);
       resetForm({});
     } catch (err: any) {
