@@ -10,9 +10,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
   const filter = {
     filter: {
-      _id: data.userId,
+      _id: (typeof data.userId != "string") ? { $in: data.userId } : data.userId,
     },
-  };
+  };  
 
   try {
     const token =
@@ -26,14 +26,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     );
 
     if (response.data.length == 0) {
-      res.status(500).json("User not found");
+      return res.status(500).send("User not found");
     }
 
-    let user = response.data[0];
-    res.status(200).json(user);
+    let user = response.data;
+    return res.status(200).send(user);
   } catch (err: any) {
-    res.status(500).json(err);
     console.log(err);
+    return res.status(500).send(err);
   }
 };
 

@@ -35,7 +35,7 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
     );
 
     if (response.data) {
-      setBusinessOwner(response.data);
+      setBusinessOwner(response.data[0]);
       return response.data;
     }
   };

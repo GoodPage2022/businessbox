@@ -25,8 +25,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState<any>([]);
+  const [comments, setComments] = useState<any>([]);
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
+
   const imageSliderSettings = {
     dots: false,
     infinite: false,
@@ -110,6 +112,53 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     return [];
   };
 
+  const getBusinessComments = async () => {
+    let requestBody: any = {
+      user,
+      sort: {
+        _created: -1,
+      },
+      filter: { "business._id": projectId  }
+    };
+
+    const response = await axios.post(`/api/comments/getList`, requestBody);
+
+    if (response.data) {
+      const commentUserIds = response.data.entries.map((c:any)=>c.user)
+
+      const requestBody = {
+        userId: commentUserIds,
+      };
+  
+      const getUsers = await axios.post(
+        `/api/account/list`,
+        requestBody,
+      );
+
+      
+      
+      if (getUsers.data) {
+        const commentObjects = response.data.entries.map((c: any) => ({
+          _id: c._id,
+          name: getUsers.data.filter((u:any)=>u._id==c.user)[0].name,
+          mail: getUsers.data.filter((u:any)=>u._id==c.user)[0].email, 
+          date: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(c.date),
+          text: c.comment,
+          image: getUsers.data.filter((u:any)=>u._id==c.user)[0].avatar?.path ?? "/assets/images/profile-photo.png"
+        }))
+ 
+        console.log(commentObjects);
+        
+
+        setComments(commentObjects)
+        return response.data.entries;
+      }
+    }
+    
+    setComments([])
+    return [];
+  };
+
   const getBusinessInfo = async () => {
     let response;
 
@@ -144,6 +193,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     if (projectInfo == null) {
       setLoading(true);
     } else {
+      getBusinessComments()
       setLoading(false);
     }
   }, [projectInfo]);
@@ -157,9 +207,13 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     const { comment } = values;
 
     let newComment: any = {
-      text: comment,
-      date: new Date(Date.now()),
+      user_id: user._id,
+      business_title: projectInfo.title,
+      business_id: projectInfo._id,
+      comment,
+      date: Date.now().toString(),
     };
+
     console.log(newComment);
 
     try {
@@ -351,6 +405,24 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             {OurComments.map(({ id, name, mail, date, text, image }) => (
               <Comment
                 key={id}
+                name={name}
+                mail={mail}
+                date={date}
+                image={image}
+                text={text}
+              />
+            ))}
+          </ul>
+        ) : (
+          <p className="projectInfo__comments-empty section__primary-text">
+            Нижче залишай питання та коментарі до бізнесу
+          </p>
+        )}
+        {comments.length > 0 ? (
+          <ul className="projectInfo__comments">
+            {comments.map(({ _id, name, mail, date, text, image }: any) => (
+              <Comment
+                key={_id}
                 name={name}
                 mail={mail}
                 date={date}
