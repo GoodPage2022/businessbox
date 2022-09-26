@@ -11,12 +11,14 @@ const initialValues = {
 
 const Search = () => {
   const [state, dispatch] = React.useContext(MainContext);
+
   const searchInput = useRef<any>(null);
+
   useEffect(() => {
-    searchInput?.current?.focus();
+    if (state.isActiveHeaderSearch) searchInput?.current?.focus();
   }, [state.isActiveHeaderSearch]);
 
-  const [mobFilter, setMobFilter] = useState<any>(null);
+  // const [mobFilter, setMobFilter] = useState<any>(null);
 
   const formik = useFormik({
     initialValues,
@@ -26,18 +28,22 @@ const Search = () => {
   });
 
   useEffect(() => {
-    setMobFilter(document.querySelector(".header__input") as HTMLElement);
-  }, []);
+    (document.querySelector(".header__input") as HTMLElement).focus();
+    // if (state.isActiveHeaderSearch) {
+    //   mobFilter.focus();
+    // }
+  }, [state.isActiveHeaderSearch]);
 
-  useEffect(() => {
-    if (state.isActiveHeaderSearch) {
-      mobFilter.focus();
-    }
-  }, [state.isActiveHeaderSearch, mobFilter]);
+  // useEffect(() => {
+  //   if (state.isActiveHeaderSearch) {
+  //     console.log("zxczxczx");
+  //     mobFilter.focus();
+  //   }
+  // }, [state.isActiveHeaderSearch, mobFilter]);
 
-  if (state.isActiveHeaderSearch) {
-    mobFilter.focus();
-  }
+  // if (state.isActiveHeaderSearch) {
+  //   mobFilter.focus();
+  // }
 
   return (
     <div
@@ -46,7 +52,8 @@ const Search = () => {
       <FormikProvider value={formik}>
         <Field
           onBlur={(e: any) => {
-            dispatch({ type: "toggle_headerSearch" });
+            if (state.isActiveHeaderSearch)
+              dispatch({ type: "toggle_headerSearch" });
           }}
           className={`header__input ${SearchItems.length > 0 ? "active" : ""}`}
           type="text"
