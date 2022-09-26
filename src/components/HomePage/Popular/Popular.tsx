@@ -16,12 +16,12 @@ const Popular = () => {
   const router = useRouter();
   const [cards, setCards] = useState<any>([]);
   const [filtersObj, setFiltersObj] = useState<any>();
-  const [filterURL, setFilterURL] = useState<string>('/catalog');
+  const [filterURL, setFilterURL] = useState<string>("/catalog");
   const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
-
+  const [mobFilter, setMobFilter] = useState<any>(null);
   const submitFilter = () => {
     router.push(filterURL);
-  }
+  };
 
   const changeFilter = (e: any) => {
     const filtersObjFirstPage = {
@@ -37,9 +37,9 @@ const Popular = () => {
       if (filtersObjFirstPage[f] != undefined && filtersObjFirstPage[f] != "")
         filtersObjFirstPageString += "/" + f + "/" + filtersObjFirstPage[f];
     });
-    
-    setFilterURL(`/catalog${filtersObjFirstPageString}`)
-  }
+
+    setFilterURL(`/catalog${filtersObjFirstPageString}`);
+  };
 
   const getBusinesses = async () => {
     const requestBody = {
@@ -64,7 +64,6 @@ const Popular = () => {
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     console.log(values);
-    
 
     // resetForm({});
   };
@@ -74,7 +73,16 @@ const Popular = () => {
   }, []);
 
   return (
-    <section className="popular">
+    <section
+      className="popular"
+      onClick={(e) => {
+        setMobFilter(
+          document.querySelector(".popular__filter--mob") as HTMLElement,
+        );
+        // console.log(e.target == mobFilter);
+        // console.log(mobFilter);
+      }}
+    >
       <div className="container popular__container">
         <div className="popular__buttons">
           <div className="popular__buttons--left">
@@ -91,7 +99,9 @@ const Popular = () => {
               className={`popular__button__mob-filter ${
                 isShowFilter ? "active" : ""
               }`}
-              onClick={() => setIsShowFilter((prev) => !prev)}
+              onClick={() => {
+                setIsShowFilter((prev) => !prev);
+              }}
             >
               <FilterSVG />
             </button>
@@ -105,13 +115,15 @@ const Popular = () => {
           <>
             <div className="popular__filter--desctop">
               <Formik
-                initialValues={{
-                  // priceFrom: "",
-                  // priceTo: "",
-                  // category: "",
-                  // city: "",
-                  // state: "",
-                }}
+                initialValues={
+                  {
+                    // priceFrom: "",
+                    // priceTo: "",
+                    // category: "",
+                    // city: "",
+                    // state: "",
+                  }
+                }
                 validate={(values: any) => {
                   const errors: any = {};
 
@@ -153,7 +165,7 @@ const Popular = () => {
                         { value: "no", label: "Ні" },
                       ]}
                       changeFilter={changeFilter}
-                      />
+                    />
                   </label>
                   <label className="popular__field">
                     <span className="popular__label">Місто</span>
@@ -168,7 +180,7 @@ const Popular = () => {
                         { value: "no", label: "Ні" },
                       ]}
                       changeFilter={changeFilter}
-                      />
+                    />
                   </label>
                   <label className="popular__field">
                     <span className="popular__label">Сфера бізнесу</span>
@@ -184,20 +196,22 @@ const Popular = () => {
                       required
                       placeholder="-----"
                       changeFilter={changeFilter}
-                      ></Field>
+                    ></Field>
                   </label>
                 </Form>
               </Formik>
             </div>
             <div className="popular__filter--mob">
               <Formik
-                initialValues={{
-                  // priceFrom: "",
-                  // priceTo: "",
-                  // category: "",
-                  // city: "",
-                  // state: "",
-                }}
+                initialValues={
+                  {
+                    // priceFrom: "",
+                    // priceTo: "",
+                    // category: "",
+                    // city: "",
+                    // state: "",
+                  }
+                }
                 validate={(values: any) => {
                   const errors: any = {};
 
@@ -212,6 +226,7 @@ const Popular = () => {
                       <Field
                         className="popular__input section__primary-text"
                         type="text"
+                        //
                         name="priceFrom"
                         placeholder="від"
                         onChange={changeFilter}
@@ -282,10 +297,7 @@ const Popular = () => {
         )}
         <div className="popular__title">
           <h2 className="title">Найпопулярніші</h2>
-          <button
-            className="popular__title-button"
-            onClick={submitFilter}
-          >
+          <button className="popular__title-button" onClick={submitFilter}>
             Підібрати бізнес
           </button>
         </div>

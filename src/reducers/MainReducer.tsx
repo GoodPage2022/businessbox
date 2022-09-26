@@ -35,6 +35,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveHeaderSearch: !state.isActiveHeaderSearch,
       };
+    case "toggle_deleteBusiness":
+      return {
+        ...state,
+        isOpenDeleteBusiness: !state.isOpenDeleteBusiness,
+      };
     default:
       return state;
   }
@@ -48,4 +53,5 @@ export const initialState = {
   isOpenBurger: false,
   isActiveMobFilter: false,
   isActiveHeaderSearch: false,
+  isOpenDeleteBusiness: false,
 };

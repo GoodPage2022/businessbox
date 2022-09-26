@@ -184,6 +184,14 @@ const CatalogView = () => {
           className={`catalogView__buttons ${
             state.isActiveMobFilter ? "active" : ""
           }`}
+          onClick={(e) => {
+            if (state.isActiveMobFilter && e.currentTarget === e.target) {
+              dispatch({ type: "toggle_mobFilter" });
+              // document
+              //   .querySelector("body")
+              //   ?.classList.toggle("disable-scroll");
+            }
+          }}
         >
           <div className="catalogView__buttons--left">
             <button
@@ -192,9 +200,9 @@ const CatalogView = () => {
               }`}
               onClick={() => {
                 dispatch({ type: "toggle_mobFilter" });
-                document
-                  .querySelector("body")
-                  ?.classList.toggle("disable-scroll");
+                // document
+                //   .querySelector("body")
+                //   ?.classList.toggle("disable-scroll");
               }}
             >
               <FilterSVG />

@@ -25,13 +25,16 @@ const AccountHeader = ({}) => {
 
   const categoriesSliderSettings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     // slidesToShow: 2,
     // slidesToScroll: 1,
+    initialSlide: isBusiness ? 1 : isContactInfo ? 0 : 2,
     arrows: false,
     variableWidth: true,
     className: "accountHeader__slider",
+
+    // autoplay: true,
     responsive: [
       // {
       //   breakpoint: 1270,
@@ -46,7 +49,7 @@ const AccountHeader = ({}) => {
         breakpoint: 767,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToScroll: 1,
         },
       },
     ],
@@ -73,7 +76,7 @@ const AccountHeader = ({}) => {
           </li>
           <li className="accountHeader__left--item">
             {isBusiness ? (
-              <Link href="/account/contact-info">
+              <Link href="/account/my-businesses">
                 <a>
                   <MainButtonGrey label="Мої бізнеси" />
                 </a>
@@ -88,7 +91,7 @@ const AccountHeader = ({}) => {
           </li>
           <li className="accountHeader__left--item">
             {isFavorites ? (
-              <Link href="/account/contact-info">
+              <Link href="/account/favorites">
                 <a>
                   <MainButtonGrey label="Обрані" />
                 </a>
@@ -149,7 +152,7 @@ const AccountHeader = ({}) => {
           </li>
           <li className="accountHeader__left--item">
             {isBusiness ? (
-              <Link href="/account/contact-info">
+              <Link href="/account/my-businesses">
                 <a>
                   <button className="main-button-grey section__primary-text">
                     Мої бізнеси
@@ -170,7 +173,7 @@ const AccountHeader = ({}) => {
           </li>
           <li className="accountHeader__left--item">
             {isFavorites ? (
-              <Link href="/account/contact-info">
+              <Link href="/account/favorites">
                 <a>
                   <button className="main-button-grey section__primary-text">
                     Обрані

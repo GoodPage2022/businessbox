@@ -5,6 +5,8 @@ import CustomSelect from "../../shared/CustomSelect";
 import OurCategories from "../../../constants/categories";
 import { useRouter } from "next/router";
 import MoreCategoriesSVG from "../../../assets/svg/more-categ.svg";
+import { MainContext } from "../../../contexts/mainContext";
+import React from "react";
 
 const MobFilter = ({
   changeFilter,
@@ -21,6 +23,8 @@ const MobFilter = ({
   const [cutOurCategories, setCutOurCategories] = useState<any>(null);
   const router = useRouter();
   const { filters } = router.query;
+
+  const [state, dispatch] = React.useContext(MainContext);
 
   useEffect(() => {
     if (OurCategories.length > 10) {
@@ -72,8 +76,17 @@ const MobFilter = ({
     }
   }, [debouncedChange]);
 
+  const handleBackdropClick = (e: any) => {
+    if (e.target === e.currentTarget) {
+      dispatch({ type: "toggle_mobFilter" });
+    }
+  };
+
   return (
-    <div className={`mobFilter__overlay ${isActive ? "active" : ""}`}>
+    <div
+      className={`mobFilter__overlay ${isActive ? "active" : ""}`}
+      onClick={handleBackdropClick}
+    >
       <div className={`mobFilter ${isActive ? "active" : ""}`}>
         <Formik
           enableReinitialize

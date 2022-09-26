@@ -194,11 +194,17 @@
     }
   }
 
-  &__button {
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__save-button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: auto;
+    // margin-left: auto;
     padding: 10px 20px;
     border: none;
     border-radius: 18px;
@@ -210,6 +216,24 @@
     font-size: 20px;
     line-height: 24px;
     color: $white-color;
+    cursor: pointer;
+  }
+
+  &__delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 40px;
+    padding: 10px 20px;
+    border: 1px solid #f22a4e;
+    border-radius: 18px;
+    background: transparent;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: $main-text-color;
     cursor: pointer;
   }
 
@@ -269,7 +293,7 @@
     }
     &__addMedia-wrapper {
       display: grid;
-      grid-template-columns: 1fr 1fr;  
+      grid-template-columns: 1fr 1fr;
       padding: 20px;
       background: $white-color;
       margin-bottom: 40px;

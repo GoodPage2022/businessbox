@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
 import CrossSVG from "../../assets/svg/cross.svg";
+import { MainContext } from "../../contexts/mainContext";
+import React from "react";
+import ModalDeleteBusiness from "../Modals/Modal-delete-business/Modal-delete-business";
 
 const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -14,14 +17,20 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [addBusinessError, setAddBusinessError] = useState("");
   const [businessInfo, setBusinessInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [state, dispatch] = React.useContext(MainContext);
 
   const removeFile = (i: number) => {
-    setFiles(files.filter((f: any, fi: number) => {
-      console.log("fi", fi);
-      
-      return fi != i
-    }))
-  }
+    setFiles(
+      files.filter((f: any, fi: number) => {
+        console.log("fi", fi);
+
+        return fi != i;
+      }),
+    );
+  };
+  const closeModal = () => {
+    dispatch({ type: "toggle_deleteBusiness" });
+  };
 
   const uploadToServer = async (file: any) => {
     const uploadImageURL = file;
@@ -69,7 +78,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     if (businessInfo == null) {
       setLoading(true);
     } else {
-      setFiles(businessInfo.images.map((img: any) => img.path))
+      setFiles(businessInfo.images.map((img: any) => img.path));
       setLoading(false);
     }
   }, [businessInfo]);
@@ -95,12 +104,12 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
 
     if (files) {
       const images = files.map((f: any) => ({
-          meta: {
-            title: "",
-            assets: "",
-          },
-          path: f,
-      }))
+        meta: {
+          title: "",
+          assets: "",
+        },
+        path: f,
+      }));
 
       newBusiness["images"] = images;
     }
@@ -325,18 +334,27 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             </div>
             <span className="addBusinessEdit__label">Медіа</span>
             <div className="addBusinessEdit__addMedia-wrapper">
-              {files?.map((f: string, i: number) => (<div key={i} className="addBusinessEdit__addMedia-wrapper--image">
-                <Image
-                  className=""
-                  src={f}
-                  layout="fill"
-                  objectFit="cover"
-                  alt="building"
-                />
-                <button type="button" onClick={() => removeFile(i)} className="addBusinessEdit__button-close">
-                  <CrossSVG />
-                </button>
-              </div>))}
+              {files?.map((f: string, i: number) => (
+                <div
+                  key={i}
+                  className="addBusinessEdit__addMedia-wrapper--image"
+                >
+                  <Image
+                    className=""
+                    src={f}
+                    layout="fill"
+                    objectFit="cover"
+                    alt="building"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeFile(i)}
+                    className="addBusinessEdit__button-close"
+                  >
+                    <CrossSVG />
+                  </button>
+                </div>
+              ))}
               <div className="addBusinessEdit__addMedia-wrapper--add-file">
                 <input
                   id="file"
@@ -348,15 +366,13 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   data-label={`Додати медіафал`}
                   onChange={async (e) => {
                     if (e.currentTarget?.files?.length) {
-                      const uploadedFiles: any = await uploadToServer(e.currentTarget.files[0]);
+                      const uploadedFiles: any = await uploadToServer(
+                        e.currentTarget.files[0],
+                      );
                       console.log(uploadedFiles.data.url);
-                      setFiles([
-                        ...files,
-                        uploadedFiles.data.url
-                      ]);
+                      setFiles([...files, uploadedFiles.data.url]);
                     }
                   }}
-
                 />
                 <input
                   id="file"
@@ -372,12 +388,11 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   // }`}
                   onChange={async (e) => {
                     if (e.currentTarget?.files?.length) {
-                      const uploadedFiles: any = await uploadToServer(e.currentTarget.files[0]);
+                      const uploadedFiles: any = await uploadToServer(
+                        e.currentTarget.files[0],
+                      );
                       console.log(uploadedFiles.data.url);
-                      setFiles([
-                        ...files,
-                        uploadedFiles.data.url
-                      ]);
+                      setFiles([...files, uploadedFiles.data.url]);
                     }
                   }}
                 />
@@ -387,12 +402,22 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             {addBusinessError && (
               <div className="addBusinessEdit__failed">{addBusinessError}</div>
             )}
-            <button type="submit" className="addBusinessEdit__button">
-              Зберегти
-            </button>
+            <div className="addBusinessEdit__buttons">
+              <button
+                onClick={() => dispatch({ type: "toggle_deleteBusiness" })}
+                type="button"
+                className="addBusinessEdit__delete-button"
+              >
+                Видалити
+              </button>
+              <button type="submit" className="addBusinessEdit__save-button">
+                Зберегти
+              </button>
+            </div>
           </Form>
         </Formik>
       </div>
+      <ModalDeleteBusiness onClose={closeModal} />
     </section>
   );
 };

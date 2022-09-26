@@ -9,9 +9,16 @@ import { persistStore } from "redux-persist";
 
 import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps, session }: any) {
-  let persistor = persistStore(store);
+import { useRouter } from "next/router";
 
+function MyApp({ Component, pageProps, session }: any) {
+  const router = useRouter();
+  let persistor = persistStore(store);
+  // if (router.asPath !== "/catalog") {
+  //   if (typeof window !== "undefined") {
+  //     document.querySelector("body")?.classList.remove("disable-scroll");
+  //   }
+  // }
   return (
     <>
       <SessionProvider session={session}>

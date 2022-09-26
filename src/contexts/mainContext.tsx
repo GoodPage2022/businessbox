@@ -10,6 +10,7 @@ interface ContextType {
     isActiveModalForgotPassword: boolean;
     isActiveMobFilter: boolean;
     isActiveHeaderSearch: boolean;
+    isOpenDeleteBusiness: boolean;
   };
   dispatch: React.Dispatch<{ type: string; value: unknown }>;
 }
