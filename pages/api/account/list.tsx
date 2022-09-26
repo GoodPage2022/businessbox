@@ -26,7 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     );
 
     if (response.data.length == 0) {
-      return res.status(500).send("User not found");
+      return res.status(404).send("User not found");
     }
 
     let user = response.data;

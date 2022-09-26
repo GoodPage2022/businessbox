@@ -147,9 +147,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           image: getUsers.data.filter((u:any)=>u._id==c.user)[0].avatar?.path ?? "/assets/images/profile-photo.png"
         }))
  
-        console.log(commentObjects);
-        
-
         setComments(commentObjects)
         return response.data.entries;
       }
