@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,17 +37,19 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { mail, password } = values;
+    const { email } = values;
 
-    const data = {
-      user: mail,
-      password,
-      // user: "sdfsdf@sdf.df",
-      // password: "secret"
-    };
+    const reqData = {
+      to_email: email,
+    }
 
     try {
-    } catch (err: any) {}
+      const response = await axios.post(`/api/reset/send`, reqData)
+      console.log(response.data)
+    } catch (err: any) {
+      console.log(err);
+      
+    }
   };
 
   return (
