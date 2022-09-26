@@ -1,7 +1,7 @@
 import { Field, FormikProvider, useFormik } from "formik";
 import SearchItems from "../../constants/search-items";
 import SearchSVG from "../../assets/svg/search.svg";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
 
@@ -11,12 +11,34 @@ const initialValues = {
 
 const Search = () => {
   const [state, dispatch] = React.useContext(MainContext);
+  const searchInput = useRef<any>(null);
+  useEffect(() => {
+    searchInput?.current?.focus();
+  }, [state.isActiveHeaderSearch]);
+
+  const [mobFilter, setMobFilter] = useState<any>(null);
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
       console.log(values);
     },
   });
+
+  useEffect(() => {
+    setMobFilter(document.querySelector(".header__input") as HTMLElement);
+  }, []);
+
+  useEffect(() => {
+    if (state.isActiveHeaderSearch) {
+      mobFilter.focus();
+    }
+  }, [state.isActiveHeaderSearch, mobFilter]);
+
+  if (state.isActiveHeaderSearch) {
+    mobFilter.focus();
+  }
+
   return (
     <div
       className={`header__search ${state.isActiveHeaderSearch ? "active" : ""}`}
@@ -30,6 +52,7 @@ const Search = () => {
           type="text"
           name="search"
           autoComplete="off"
+          ref={searchInput}
           minLength={1}
           maxLength={255}
           required
