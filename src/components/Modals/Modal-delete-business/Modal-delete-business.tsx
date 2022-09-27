@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
-import router from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-
-import EyeSVG from "../../../assets/svg/eye.svg";
 import CrossSVG from "../../../assets/svg/cross.svg";
-import GoogleSVG from "../../../assets/svg/google.svg";
 import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
 
 function ModalDeleteBusiness({ onClose }: { onClose: any }) {
-  const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
-  const [showPassword, setShowPassword] = useState(false);
   const [deleteBusinessError, setdeleteBusinessError] = useState("");
 
   useEffect(() => {

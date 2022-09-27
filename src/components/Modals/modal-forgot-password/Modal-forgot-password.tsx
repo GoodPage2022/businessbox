@@ -14,6 +14,7 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const [isformSent, setIsformSent] = useState(false);
+  const [isGetErr, setIsGetErr] = useState(false);
   const [forgotPasswordError, setforgotPasswordError] = useState("");
 
   useEffect(() => {
@@ -48,6 +49,7 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
       setIsformSent(true);
       console.log(response.data);
     } catch (err: any) {
+      setIsGetErr(true);
       console.log(err);
     }
   };
@@ -91,15 +93,22 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
           >
             <CrossSVG />
           </button>
-          {isformSent ? (
+          {isformSent ?? isGetErr ? (
             <>
-              <p className="modal-forgotPassword__send-title">
-                Запит відправлено
-              </p>
-              <p className="modal-forgotPassword__send-desc">
-                Вам на пошту відправлене посилання для скидання паролю.
-                Перевірте будь ласка вхідні листи.
-              </p>
+              {isGetErr ? (
+                <p className="modal-forgotPassword__send-err">
+                  Упс, щось пішло не так. Повторіть спробу пізніше або напишіть
+                  нам на пошту
+                </p>
+              ) : (
+                <p className="modal-forgotPassword__send-title">
+                  Оновлення успішне. Пароль надіслано на пошту
+                </p>
+              )}
+
+              {/* <p className="modal-forgotPassword__send-desc">
+                Оновлення успішне. Пароль надіслано на пошту
+              </p> */}
             </>
           ) : (
             <Formik

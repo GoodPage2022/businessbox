@@ -16,6 +16,7 @@ const Categories = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    adaptiveHeight: true,
     swipeToSlide: true,
     autoplay: true,
     autoplaySpeed: 7000,
@@ -31,13 +32,13 @@ const Categories = () => {
       <section className="categories-first">
         <div className="container categories-first__container">
           <h1 className="categories-first__title title--white">
-            Великий продаючий заголовок можливо 2-3 рядки
+            Купити бізнес
           </h1>
           <p className="categories-first__text section__primary-text--white">
-            Клієнт дуже важливий, за клієнтом піде клієнт. Ціна двох еросів –
-            ціна смартфона. Зараз пакет повинен бути безкоштовним і
-            мультиплікаційним. Спілкуйтеся як Бог горло, поставити перед або,
-            отруйна посмішка.
+            Ми відібрали і підготували у простій та зрозумілій формі бізнеси, що
+            продаються в ринку. Також з легкістю допоможено розкласти будь-який
+            варіант, що тобі сподобається, до дрібних деталей. Твоє завдання -
+            просто вказати пальцем)
           </p>
           <button
             className="categories-first__button"
@@ -52,13 +53,13 @@ const Categories = () => {
       <section className="categories-second">
         <div className="container categories-second__container">
           <h1 className="categories-second__title title--white">
-            Великий продаючий заголовок можливо 2-3 рядки
+            Продати бізнес
           </h1>
           <p className="categories-second__text section__primary-text--white">
-            Клієнт дуже важливий, за клієнтом піде клієнт. Ціна двох еросів –
-            ціна смартфона. Зараз пакет повинен бути безкоштовним і
-            мультиплікаційним. Спілкуйтеся як Бог горло, поставити перед або,
-            отруйна посмішка.
+            Головною метою нашої платформи є - конект людини що продає власний
+            бізнес з компетентним покупцем, який про нього мріє. В свою чергу ми
+            розберемо, пояснимо, упакуємо та прорекламуємо бізнес, щоб твій
+            покупець якомога швидше тебе знайшов.
           </p>
           <div className="categories-second__buttons">
             <button
@@ -79,6 +80,20 @@ const Categories = () => {
             >
               Інвестувати
             </button>
+          </div>
+        </div>
+      </section>
+      <section className="categories-third">
+        <div className="container categories-third__container">
+          <h1 className="categories-third__title title--white">Франчайзинг</h1>
+          <p className="categories-third__text section__primary-text--white">
+            Ми відібрали та розклали по полицям найкращі варіанти франшиз у
+            зрозумілому для тебе форматі. Тепер знайти бажаже можна на одній
+            сторінці не випускаючи каву з рук. А ми в свою чергу будемо постійно
+            доповнювати варіанти новими партнерами
+          </p>
+          <div className="categories-third__buttons">
+            <p className="title--white">Далі буде…</p>
           </div>
         </div>
       </section>
