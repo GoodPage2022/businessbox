@@ -25,11 +25,14 @@ const AccountHeader = ({}) => {
 
   const categoriesSliderSettings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     // slidesToShow: 2,
     // slidesToScroll: 1,
     initialSlide: isBusiness ? 1 : isContactInfo ? 0 : 2,
+    rtl: isContactInfo ? false : true,
+    // focusOnSelect: true,
+
     arrows: false,
     variableWidth: true,
     className: "accountHeader__slider",
