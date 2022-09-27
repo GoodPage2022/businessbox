@@ -102,7 +102,12 @@ const CatalogView = () => {
           filterSetOfExp.push(param);
           break;
       }
+
     });
+
+    filterSetOfExp.push({
+      sold_out: false
+    })
 
     let requestBody: any = {
       user,

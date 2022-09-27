@@ -101,7 +101,17 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getList`, { user });
+    const requestBody: any = {
+      user,
+      sort: {
+        _created: -1,
+      },
+      filter: {
+        sold_out: false
+      }
+    };
+
+    const response = await axios.post(`/api/businesses/getList`, requestBody);
 
     if (response.data) {
       setCards(response.data.entries);
