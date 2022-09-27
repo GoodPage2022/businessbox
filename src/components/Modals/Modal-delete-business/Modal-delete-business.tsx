@@ -10,11 +10,12 @@ import GoogleSVG from "../../../assets/svg/google.svg";
 import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
 
-function ModalDeleteBusiness({ onClose }: { onClose: any }) {
+function ModalDeleteBusiness({ onClose, projectId, projectTitle }: { onClose: any, projectId: string, projectTitle: string }) {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
   const [deleteBusinessError, setdeleteBusinessError] = useState("");
+  const user = useSelector((state: any) => state.auth.user);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -37,17 +38,29 @@ function ModalDeleteBusiness({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { mail, password } = values;
+    const { deleteReason, deleteReasonOther } = values;
 
     const data = {
-      user: mail,
-      password,
-      // user: "sdfsdf@sdf.df",
-      // password: "secret"
+      user,
+      deleteReason,
+      deleteReasonOther,
+      projectId,
+      projectTitle
     };
 
     try {
-    } catch (err: any) {}
+      const reponseDelete = await axios.post("/api/businesses/delete", data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      const reponseDeleteReason = await axios.post("/api/businesses/deleteReason", data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    router.push("/account/my-businesses")
   };
 
   return (
@@ -84,24 +97,15 @@ function ModalDeleteBusiness({ onClose }: { onClose: any }) {
           </p>
           <Formik
             initialValues={{
-              email: "",
+              deleteReasonOther: "",
+              deleteReason: "sold",
             }}
             validate={(values) => {
               const errors: any = {};
-              // if (!values.name) {
-              //   errors.name = "Обязательное поле";
-              // }
-              // if (!values.phone) {
-              //   errors.phone = "Обязательное поле";
-              // }
-              // else if (!numberRegEpx.test(values.phone)) {
-              //   errors.phone = 'Не правильно введен номер'
-              // }
-
               return errors;
             }}
             onSubmit={handleSubmit}
-          >
+          >{({values})=>(
             <Form className="modal-deleteBusiness__form">
               {deleteBusinessError && (
                 <div className="modal-deleteBusiness__failed">
@@ -112,7 +116,9 @@ function ModalDeleteBusiness({ onClose }: { onClose: any }) {
                 <Field
                   className="modal-deleteBusiness__input section__primary-text"
                   type="radio"
-                  name="sold"
+                  value="sold"
+                  required
+                  name="deleteReason"
                 />
                 <span className="modal-deleteBusiness__label">
                   Бізнес вже продано
@@ -122,7 +128,9 @@ function ModalDeleteBusiness({ onClose }: { onClose: any }) {
                 <Field
                   className="modal-deleteBusiness__input section__primary-text"
                   type="radio"
-                  name="incorect"
+                  value="incorect"
+                  required
+                  name="deleteReason"
                 />
                 <span className="modal-deleteBusiness__label">
                   Введена некоректна інформація
@@ -132,7 +140,9 @@ function ModalDeleteBusiness({ onClose }: { onClose: any }) {
                 <Field
                   className="modal-deleteBusiness__input section__primary-text"
                   type="radio"
-                  name="other"
+                  value="other"
+                  name="deleteReason"
+                  required
                 />
                 <span className="modal-deleteBusiness__label">Інше</span>
               </label>
@@ -140,10 +150,10 @@ function ModalDeleteBusiness({ onClose }: { onClose: any }) {
                 <Field
                   className="modal-deleteBusiness__input-text section__primary-text"
                   type="text"
-                  name="name"
+                  name="deleteReasonOther"
                   minLength={1}
                   maxLength={255}
-                  required
+                  required={values.deleteReason == "other" ? true : false}
                   placeholder="Передумав продавати..."
                 />
               </label>
@@ -152,6 +162,7 @@ function ModalDeleteBusiness({ onClose }: { onClose: any }) {
                 <MainButtonRed label="Відправити" />
               </div>
             </Form>
+          )}
           </Formik>
         </div>
       </div>

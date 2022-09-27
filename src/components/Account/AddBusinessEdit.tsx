@@ -466,7 +466,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
           </Form>
         </Formik>
       </div>
-      <ModalDeleteBusiness onClose={closeModal} />
+      <ModalDeleteBusiness projectId={projectId} projectTitle={businessInfo?.title} onClose={closeModal} />
     </section>
   );
 };
