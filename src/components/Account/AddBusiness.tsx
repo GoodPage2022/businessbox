@@ -83,7 +83,7 @@ const AddBusiness = () => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business, state, year, city, file } =
+    const { name, price, description, business, state, year, city } =
       values;
 
     let newBusiness: any = {
@@ -102,7 +102,6 @@ const AddBusiness = () => {
         link: "Areas",
         display: listCities.filter((e:any)=>e.value==city)[0].label
       },
-      file,
     };
 
     if (files) {

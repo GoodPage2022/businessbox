@@ -312,7 +312,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
         </div>
         <p className="projectInfo__city section__primary-text">
-          {projectInfo.state.display}, {projectInfo.city.display}
+          {projectInfo.state?.display}, {projectInfo.city?.display}
         </p>
 
         <div className="projectInfo__image-slider">
