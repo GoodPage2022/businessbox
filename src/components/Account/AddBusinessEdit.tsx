@@ -150,25 +150,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       price_history: [
         ...businessInfo.price_history,
         {
-          field: {
-            type: "set",
-            label: "Додати ціну для графіка",
-            options: {
-              fields: [
-                {
-                  name: "Ціна",
-                  type: "text"
-                },
-                {
-                  name: "Дата",
-                  type: "date"
-                }
-              ]
-            }
-          },
           value: {
-            Ціна: price,
-            Дата: (new Date().getFullYear()) + "-" + ("0" + (new Date().getMonth())).slice(-2) + "-" + ("0" + (new Date().getDate())).slice(-2)
+            price,
+            date: (new Date().getFullYear()) + "-" + ("0" + (new Date().getMonth())).slice(-2) + "-" + ("0" + (new Date().getDate())).slice(-2)
           }
         }
       ]
