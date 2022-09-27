@@ -9,15 +9,17 @@ const handler = async(
 ) => {
     const reqData = req.body
 
+    
+    
     try {
         const client = await clientPromise
         const db = client.db("bubox")
         const dbCities = await db.collection('collections_Cities')
-                    .find({ AreaId: reqData.selectedArea }).toArray()
+        .find({ AreaId: reqData.selectedArea }).toArray()
         
         const listCities = dbCities.map((a:any)=>({
-            label: a.Title.toString(),
-            value: a._id.toString()
+            label: a.Title,
+            value: a._id
         }))
 
         return res.status(200).send(listCities)

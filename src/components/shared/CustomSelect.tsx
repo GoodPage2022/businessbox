@@ -29,7 +29,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
         if (!!changeFilter) changeFilter({
           target: {
             name: field.name,
-            value: e.label
+            value: (field.name == "state" || field.name == "city") ? e.value : e.label
           }
         })
         if (!!setter) setter(e.value);

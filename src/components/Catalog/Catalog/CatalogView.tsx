@@ -15,6 +15,10 @@ import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
 import BusinessCardFavorites from "../../shared/BusinessCardFavorite";
 
+const CancelToken = axios.CancelToken;
+let cancel:any
+
+
 const CatalogView = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
@@ -57,6 +61,10 @@ const CatalogView = () => {
   const getBusinesses = async (resetLimit?: boolean) => {
     let filterSetOfExp: any = [];
 
+    if (cancel !== undefined) {
+      cancel();
+    }
+
     Object.keys(filtersObj).map((f: any) => {
       switch (f) {
         case "page":
@@ -96,6 +104,16 @@ const CatalogView = () => {
             filterSetOfExp.push(param);
           }
           break;
+        case "state":
+          filterSetOfExp.push({
+            "state._id": filtersObj[f]
+          });
+          break;
+        case "city":
+          filterSetOfExp.push({
+            "city._id": filtersObj[f]
+          });
+          break;
         default:
           let param: any = {};
           param[f] = filtersObj[f];
@@ -130,7 +148,9 @@ const CatalogView = () => {
       };
     }
 
-    const response = await axios.post(`/api/businesses/getList`, requestBody);
+    const response = await axios.post(`/api/businesses/getList`, requestBody, { cancelToken: new CancelToken((c) => {
+      cancel = c;
+    }) });
 
     if (response.data) {
       if (resetLimit) {
@@ -147,16 +167,18 @@ const CatalogView = () => {
   };
 
   useEffect(() => {
-    buildFiltersObj();
+    if (!!filters && filters.length)
+      buildFiltersObj();    
   }, [filters]);
 
   useEffect(() => {
-    getBusinesses(true);
+    if (!!cards)
+      getBusinesses(true);
   }, [cards]);
 
   useEffect(() => {
+    
     getBusinesses();
-    // getBusinessesCount();
     setPageNumber(filtersObj.page ?? 1);
   }, [filtersObj]);
 
@@ -166,8 +188,6 @@ const CatalogView = () => {
       page: undefined,
       [e.target.name]: e.target.value,
     };
-
-    console.log(filtersObjFirstPage);
 
     setFiltersObj(filtersObjFirstPage);
 
