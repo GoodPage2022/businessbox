@@ -97,6 +97,16 @@ const handler = async(
   //   console.log(error);
   // } 
 
+  // try {
+  //   const client = await clientPromise
+  //   const db = client.db("bubox")
+  //   const da = await db.collection('collections_Businesses')
+  //             .updateMany({'sold_out': {$exists : false}}, {$set: {'sold_out': false}})        
+  // } catch (error) {
+  //   console.log("error");
+  //   console.log(error);
+  // } 
+
   res.status(200).json({ name: 'John Doe' })
 }
 

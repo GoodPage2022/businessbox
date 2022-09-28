@@ -146,6 +146,16 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
         link: "Areas",
         display: listCities.filter((e:any)=>e.value==city)[0].label
       },
+
+      price_history: [
+        ...businessInfo.price_history,
+        {
+          value: {
+            price,
+            date: (new Date().getFullYear()) + "-" + ("0" + (new Date().getMonth())).slice(-2) + "-" + ("0" + (new Date().getDate())).slice(-2)
+          }
+        }
+      ]
     };
 
     if (files) {
@@ -456,7 +466,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
           </Form>
         </Formik>
       </div>
-      <ModalDeleteBusiness onClose={closeModal} />
+      <ModalDeleteBusiness projectId={projectId} projectTitle={businessInfo?.title} onClose={closeModal} />
     </section>
   );
 };

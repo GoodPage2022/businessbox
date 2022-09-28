@@ -14,7 +14,6 @@ import OurCategoriesShort from "../../../constants/categories-short";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
-import OurComments from "../../../constants/comments";
 import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
 import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
@@ -101,7 +100,17 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getList`, { user });
+    const requestBody: any = {
+      user,
+      sort: {
+        _created: -1,
+      },
+      filter: {
+        sold_out: false
+      }
+    };
+
+    const response = await axios.post(`/api/businesses/getList`, requestBody);
 
     if (response.data) {
       setCards(response.data.entries);
@@ -302,7 +311,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
         </div>
         <p className="projectInfo__city section__primary-text">
-          {projectInfo.state.display}, {projectInfo.city.display}
+          {projectInfo.state?.display}, {projectInfo.city?.display}
         </p>
 
         <div className="projectInfo__image-slider">
@@ -400,24 +409,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         </div>
 
         <ProfileInfo projectData={projectInfo} />
-        {OurComments.length > 0 ? (
-          <ul className="projectInfo__comments">
-            {OurComments.map(({ id, name, mail, date, text, image }) => (
-              <Comment
-                key={id}
-                name={name}
-                mail={mail}
-                date={date}
-                image={image}
-                text={text}
-              />
-            ))}
-          </ul>
-        ) : (
-          <p className="projectInfo__comments-empty section__primary-text">
-            Нижче залишай питання та коментарі до бізнесу
-          </p>
-        )}
         {comments.length > 0 ? (
           <ul className="projectInfo__comments">
             {comments.map(({ _id, name, mail, date, text, image }: any) => (

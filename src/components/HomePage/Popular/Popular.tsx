@@ -49,6 +49,9 @@ const Popular = () => {
         view_count: -1,
         _created: -1,
       },
+      filter: {
+        sold_out: false
+      }
     };
 
     const response = await axios.post(`/api/businesses/getList`, requestBody);

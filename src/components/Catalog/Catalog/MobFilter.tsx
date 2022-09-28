@@ -4,6 +4,7 @@ import Checkbox from "../../shared/Checkbox";
 import CustomSelect from "../../shared/CustomSelect";
 import OurCategories from "../../../constants/categories";
 import { useRouter } from "next/router";
+import axios, { AxiosRequestConfig } from "axios";
 import MoreCategoriesSVG from "../../../assets/svg/more-categ.svg";
 import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
@@ -23,8 +24,44 @@ const MobFilter = ({
   const [cutOurCategories, setCutOurCategories] = useState<any>(null);
   const router = useRouter();
   const { filters } = router.query;
-
   const [state, dispatch] = React.useContext(MainContext);
+  const [listAreas, setListAreas] = useState<any>();
+  const [listCities, setListCities] = useState<any>();
+  const [selectedArea, setSelectedArea] = useState("");
+
+  const getListAreas = async () => {
+    try {
+      const reponse = await axios.post("/api/locations/getAreas", {});
+
+      if (reponse.status == 200) {
+        setListAreas(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  const getListCities = async (selectedArea: string) => {
+    try {
+      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+
+      if (reponse.status == 200) {
+        setListCities(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    getListCities(selectedArea)
+  },[selectedArea])
+
+  useEffect(()=>{
+    getListAreas()
+  },[])
 
   useEffect(() => {
     if (OurCategories.length > 10) {
@@ -67,6 +104,8 @@ const MobFilter = ({
       city: filtersObjI.city ?? "",
       state: filtersObjI.state ?? "",
     });
+
+    setSelectedArea(filtersObjI.state)
   }, [filtersObjI]);
 
   useEffect(() => {
@@ -161,10 +200,8 @@ const MobFilter = ({
                     className="mobFilter__select section__primary-text"
                     type="text"
                     name="state"
-                    options={[
-                      { value: "Так", label: "Так" },
-                      { value: "Ні", label: "Ні" },
-                    ]}
+                    setter={setSelectedArea}
+                    options={listAreas}
                     changeFilter={changeFilter}
                     required
                     placeholder="-----"
@@ -179,10 +216,7 @@ const MobFilter = ({
                     placeholder="-----"
                     component={CustomSelect}
                     changeFilter={changeFilter}
-                    options={[
-                      { value: "Київ", label: "Київ" },
-                      { value: "Дніпро", label: "Дніпро" },
-                    ]}
+                    options={listCities}
                   />
                 </label>
               </div>

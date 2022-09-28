@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import moment from 'moment';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -82,55 +83,6 @@ if (typeof window !== "undefined") {
   screenWidth = window.screen.width;
 }
 
-const labels =
-  screenWidth > 1440
-    ? [
-        // " ",
-        "01.01",
-        "01.02",
-        "01.03",
-        "01.04",
-        "01.05",
-        "01.06",
-        "01.07",
-        "01.08",
-        "01.09",
-        "01.10",
-        "01.11",
-        "01.12",
-      ]
-    : [
-        // " ",
-        "01.01",
-        "01.02",
-        "01.03",
-        "01.04",
-        "01.05",
-        "01.06",
-      ];
-
-export const data = {
-  labels,
-
-  datasets: [
-    {
-      fill: true,
-      // display: false,
-      // data: [/* "none", */ 1, 1, 1.5, 2, 3, 2, 4, 6, 2, 5.5, 5, 4],
-      data:
-        screenWidth > 1440
-          ? [1, 2, 3, 4, 5, 6, 5, 4, 3, 10, 11, 12]
-          : [5, 6, 5, 4, 3, 10],
-      borderColor: "#F22A4E",
-      borderWidth: 5,
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-      point: false,
-      lineTension: 0.5,
-      pointRadius: 0,
-    },
-  ],
-};
-
 // data.labels.unshift("");
 // data.labels.push("");
 // data.datasets[0].data.unshift(NaN);
@@ -147,7 +99,7 @@ function createGradient(ctx: CanvasRenderingContext2D, area: ChartArea) {
 
   return gradient;
 }
-export function Chart() {
+export function Chart({price_history, price, created} : {price_history: any, price: any, created: any}) {
   const chartRef = useRef<any>(null);
   const [chartData, setChartData]: [chartData: any, setChartData: any] =
     useState<ChartData<"bar">>({
@@ -159,6 +111,37 @@ export function Chart() {
     if (!chart) {
       return;
     }
+
+    let priceValues = [price, price]
+    
+    let priceLabels = [moment(created * 1000).format("YYYY-MM-DD"), (new Date().getFullYear()) + "-" + ("0" + (new Date().getMonth())).slice(-2) + "-" + ("0" + (new Date().getDate())).slice(-2)]
+
+    if (!!price_history && price_history.length == 1) {
+      priceValues = [price, price_history[0].value.price]
+      priceLabels = [price_history[0].value.date, price_history[0].value.date]
+    }
+
+    if (!!price_history && price_history.length > 1) {
+      priceValues = price_history.map((p: any)=>p.value.price)
+      priceLabels = price_history.map((p: any)=>p.value.date)
+    }
+
+    const data = {
+      labels: priceLabels.slice(screenWidth > 1440 ? -12 : -6),
+    
+      datasets: [
+        {
+          fill: true,
+          data: priceValues.slice(screenWidth > 1440 ? -12 : -6),
+          borderColor: "#F22A4E",
+          borderWidth: 5,
+          backgroundColor: "rgba(53, 162, 235, 0.5)",
+          point: false,
+          lineTension: 0.5,
+          pointRadius: 0,
+        },
+      ],
+    }    
 
     const chartData = {
       ...data,
