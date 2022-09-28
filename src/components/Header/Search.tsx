@@ -1,18 +1,25 @@
 import { Field, FormikProvider, useFormik } from "formik";
-import SearchItems from "../../constants/search-items";
+// import SearchItems from "../../constants/search-items";
 import SearchSVG from "../../assets/svg/search.svg";
 import { useEffect, useRef, useState } from "react";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const initialValues = {
   search: "",
 };
 
-const Search = () => {
-  const [state, dispatch] = React.useContext(MainContext);
+const CancelToken = axios.CancelToken;
+let cancel:any
 
+const Search = () => {
+  const [state, dispatch] = React.useContext(MainContext)
+  const [searchItems, setSearchItems] = React.useState<any>([])
+  const [searchValue, setSearchValue] = React.useState<string>("")
   const searchInput = useRef<any>(null);
+  const router = useRouter()
 
   useEffect(() => {
     if (state.isActiveHeaderSearch) searchInput?.current?.focus();
@@ -34,16 +41,27 @@ const Search = () => {
     // }
   }, [state.isActiveHeaderSearch]);
 
-  // useEffect(() => {
-  //   if (state.isActiveHeaderSearch) {
-  //     console.log("zxczxczx");
-  //     mobFilter.focus();
-  //   }
-  // }, [state.isActiveHeaderSearch, mobFilter]);
+  const handleSearchChange = async (e: any) => {
+    if (cancel !== undefined) {
+      cancel();
+    }
 
-  // if (state.isActiveHeaderSearch) {
-  //   mobFilter.focus();
-  // }
+    setSearchValue(e.target.value)
+
+    const requestBody = {
+      filter: e.target.value
+    }
+
+    const options = {
+      cancelToken: new CancelToken((c) => {
+        cancel = c;
+      }) 
+    }
+
+    const response = await axios.post(`/api/search/get`, requestBody, options);
+
+    setSearchItems(response.data.entries ?? []);
+  }
 
   return (
     <div
@@ -55,7 +73,7 @@ const Search = () => {
             if (state.isActiveHeaderSearch)
               dispatch({ type: "toggle_headerSearch" });
           }}
-          className={`header__input ${SearchItems.length > 0 ? "active" : ""}`}
+          className={`header__input ${searchItems.length > 0 ? "active" : ""}`}
           type="text"
           name="search"
           autoComplete="off"
@@ -64,14 +82,15 @@ const Search = () => {
           maxLength={255}
           required
           placeholder="кав’ярня"
+          onKeyUp={handleSearchChange}
         />
 
-        {SearchItems.length > 0 ? (
+        {searchItems.length > 0 ? (
           <ul className="header__search-list">
-            {SearchItems.map(({ id, title, desc }: any) => (
-              <li className="header__search-item" key={id}>
+            {searchItems.map(({ _id, title, description }: any) => (
+              <li className="header__search-item" key={_id} onClick={()=>router.push("/catalog/" + _id)}>
                 <p className="header__search-item--title">{title}</p>
-                <p className="header__search-item--desc">{desc}</p>
+                <p className="header__search-item--desc">{description?.replace(/(<([^>]+)>)/ig, '')}</p>
               </li>
             ))}
           </ul>
@@ -79,7 +98,7 @@ const Search = () => {
           <ul className="header__search-list">
             <li className="header__search-item">
               <p className="header__search-item--title">
-                Спробуйте інші ключові слова
+                {searchValue == "" ? "" : "Спробуйте інші ключові слова"}
               </p>
               <p className="header__search-item--desc"></p>
             </li>

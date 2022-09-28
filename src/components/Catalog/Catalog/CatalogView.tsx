@@ -18,7 +18,6 @@ import BusinessCardFavorites from "../../shared/BusinessCardFavorite";
 const CancelToken = axios.CancelToken;
 let cancel:any
 
-
 const CatalogView = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
