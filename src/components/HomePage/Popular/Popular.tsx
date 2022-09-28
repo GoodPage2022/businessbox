@@ -19,6 +19,44 @@ const Popular = () => {
   const [filterURL, setFilterURL] = useState<string>("/catalog");
   const [isShowFilter, setIsShowFilter] = useState<boolean>(false);
   const [mobFilter, setMobFilter] = useState<any>(null);
+  const [listAreas, setListAreas] = useState<any>();
+  const [listCities, setListCities] = useState<any>();
+  const [selectedArea, setSelectedArea] = useState("");
+
+  const getListAreas = async () => {
+    try {
+      const reponse = await axios.post("/api/locations/getAreas", {});
+
+      if (reponse.status == 200) {
+        setListAreas(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  const getListCities = async (selectedArea: string) => {
+    try {
+      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+
+      if (reponse.status == 200) {
+        setListCities(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    getListCities(selectedArea)
+  },[selectedArea])
+
+  useEffect(()=>{
+    getListAreas()
+  },[])
+  
   const submitFilter = () => {
     router.push(filterURL);
   };
@@ -163,10 +201,8 @@ const Popular = () => {
                       required
                       placeholder="-----"
                       component={CustomSelect}
-                      options={[
-                        { value: "yes", label: "Так" },
-                        { value: "no", label: "Ні" },
-                      ]}
+                      setter={setSelectedArea}
+                      options={listAreas}
                       changeFilter={changeFilter}
                     />
                   </label>
@@ -178,10 +214,7 @@ const Popular = () => {
                       required
                       placeholder="-----"
                       component={CustomSelect}
-                      options={[
-                        { value: "yes", label: "Так" },
-                        { value: "no", label: "Ні" },
-                      ]}
+                      options={listCities}
                       changeFilter={changeFilter}
                     />
                   </label>
@@ -253,10 +286,8 @@ const Popular = () => {
                         required
                         placeholder="-----"
                         component={CustomSelect}
-                        options={[
-                          { value: "yes", label: "Так" },
-                          { value: "no", label: "Ні" },
-                        ]}
+                        setter={setSelectedArea}
+                        options={listAreas}
                         changeFilter={changeFilter}
                       />
                     </label>
@@ -268,10 +299,7 @@ const Popular = () => {
                         required
                         placeholder="-----"
                         component={CustomSelect}
-                        options={[
-                          { value: "yes", label: "Так" },
-                          { value: "no", label: "Ні" },
-                        ]}
+                        options={listCities}
                         changeFilter={changeFilter}
                       />
                     </label>

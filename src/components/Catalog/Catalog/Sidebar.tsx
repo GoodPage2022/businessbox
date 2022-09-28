@@ -4,6 +4,7 @@ import Checkbox from "../../shared/Checkbox";
 import CustomSelect from "../../shared/CustomSelect";
 import OurCategories from "../../../constants/categories";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const Sidebar = ({
   changeFilter,
@@ -17,6 +18,43 @@ const Sidebar = ({
   const [initialValues, setInitialValues] = useState<any>({});
   const router = useRouter();
   const { filters } = router.query;
+  const [listAreas, setListAreas] = useState<any>();
+  const [listCities, setListCities] = useState<any>();
+  const [selectedArea, setSelectedArea] = useState("");
+
+  const getListAreas = async () => {
+    try {
+      const reponse = await axios.post("/api/locations/getAreas", {});
+
+      if (reponse.status == 200) {
+        setListAreas(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  const getListCities = async (selectedArea: string) => {
+    try {
+      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+
+      if (reponse.status == 200) {
+        setListCities(reponse.data)
+      }
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    getListCities(selectedArea)
+  },[selectedArea])
+
+  useEffect(()=>{
+    getListAreas()
+  },[])
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
@@ -53,6 +91,8 @@ const Sidebar = ({
       city: filtersObjI.city ?? "",
       state: filtersObjI.state ?? "",
     });
+
+    setSelectedArea(filtersObjI.state)
   }, [filtersObjI]);
 
   useEffect(() => {
@@ -124,10 +164,8 @@ const Sidebar = ({
                 className="sidebar__select section__primary-text"
                 type="text"
                 name="state"
-                options={[
-                  { value: "Так", label: "Так" },
-                  { value: "Ні", label: "Ні" },
-                ]}
+                setter={setSelectedArea}
+                options={listAreas}
                 changeFilter={changeFilter}
                 required
                 placeholder="-----"
@@ -142,10 +180,7 @@ const Sidebar = ({
                 placeholder="-----"
                 component={CustomSelect}
                 changeFilter={changeFilter}
-                options={[
-                  { value: "Київ", label: "Київ" },
-                  { value: "Дніпро", label: "Дніпро" },
-                ]}
+                options={listCities}
               />
             </label>
           </Form>
