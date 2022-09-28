@@ -112,7 +112,8 @@
       color: $grey-color;
     }
 
-    &:focus {
+    &:focus,
+    &.hasItems {
       border-radius: 15px 15px 0 0;
       border-top: 1px solid $grey-color;
       border-left: 1px solid $grey-color;
@@ -122,7 +123,8 @@
       color: $main-text-color;
     }
 
-    &:focus + .header__search-list {
+    &:focus + .header__search-list,
+    &.hasItems + .header__search-list {
       display: block;
     }
   }

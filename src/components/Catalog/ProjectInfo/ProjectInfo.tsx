@@ -190,8 +190,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
   useEffect(() => {
     getBusinesses();
-    getBusinessInfo();
   }, []);
+
+  useEffect(() => {
+    getBusinessInfo();
+  }, [projectId]);
 
   useEffect(() => {
     if (projectInfo == null) {

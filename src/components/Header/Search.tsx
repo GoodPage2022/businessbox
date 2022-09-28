@@ -18,6 +18,7 @@ let cancel:any
 const Search = () => {
   const [state, dispatch] = React.useContext(MainContext)
   const [searchItems, setSearchItems] = React.useState<any>([])
+  const [hasItems, setHasItems] = React.useState<boolean>(false)
   const [searchValue, setSearchValue] = React.useState<string>("")
   const searchInput = useRef<any>(null);
   const router = useRouter()
@@ -30,11 +31,7 @@ const Search = () => {
         dispatch({ type: "toggle_headerSearch" });
       }
     },
-    "header__search-item--desc",
-    "header__search-item--title",
   );
-
-  const [state, dispatch] = React.useContext(MainContext);
 
   const formik = useFormik({
     initialValues,
@@ -69,13 +66,23 @@ const Search = () => {
     setSearchItems(response.data.entries ?? []);
   }
 
+  useEffect(()=>{
+    if (searchValue != '')
+      setHasItems(true)
+  }, [searchItems, searchValue])
+
+  const handleSearchItemRouting = (id:any) => {
+    dispatch({ type: "toggle_headerSearch" });
+    router.push("/catalog/" + id)
+  }
+
   return (
     <div
       className={`header__search ${state.isActiveHeaderSearch ? "active" : ""}`}
     >
       <FormikProvider value={formik}>
         <Field
-          className={`header__input ${searchItems.length > 0 ? "active" : ""}`}
+          className={`header__input ${searchItems.length > 0 ? "active" : ""}${hasItems ? " hasItems" : ""}`}
           type="text"
           name="search"
           autoComplete="off"
@@ -88,9 +95,9 @@ const Search = () => {
         />
 
         {searchItems.length > 0 ? (
-          <ul className="header__search-list">
+          <ul className={`header__search-list`}>
             {searchItems.map(({ _id, title, description }: any) => (
-              <li className="header__search-item" key={_id} onClick={()=>router.push("/catalog/" + _id)}>
+              <li className="header__search-item" key={_id} onClick={()=>handleSearchItemRouting(_id)}>
                 <p className="header__search-item--title">{title}</p>
                 <p className="header__search-item--desc">{description?.replace(/(<([^>]+)>)/ig, '')}</p>
               </li>

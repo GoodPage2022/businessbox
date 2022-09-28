@@ -5,14 +5,16 @@ const useOnClickOutside = (
   handler: any,
   className_1?: string,
   className_2?: string,
+  className_3?: string,
 ) => {
   useEffect(() => {
-    const listener = (event: any) => {
+    const listener = (event: any) => {    
+      const regex = new RegExp('header__input|header__search');
+
       if (
-        ref.current?.className == event.target.className ||
+        event.target.className.toString().includes(ref.current?.className) ||
         ref.current?.contains(event.target) ||
-        event.target.className == className_1 ||
-        event.target.className == className_2
+        regex.test(event.target.className.toString())
       ) {
         return;
       }

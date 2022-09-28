@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import CrossSVG from "../../../assets/svg/cross.svg";
+import { useSelector, useDispatch } from "react-redux";
 import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 function ModalDeleteBusiness({ onClose, projectId, projectTitle }: { onClose: any, projectId: string, projectTitle: string }) {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const [deleteBusinessError, setdeleteBusinessError] = useState("");
   const user = useSelector((state: any) => state.auth.user);
+  const router = useRouter()
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
