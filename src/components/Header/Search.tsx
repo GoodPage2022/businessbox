@@ -1,9 +1,10 @@
 import { Field, FormikProvider, useFormik } from "formik";
 // import SearchItems from "../../constants/search-items";
 import SearchSVG from "../../assets/svg/search.svg";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
+import useOnClickOutside from "../../utils/useOnClickOutside";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -20,12 +21,20 @@ const Search = () => {
   const [searchValue, setSearchValue] = React.useState<string>("")
   const searchInput = useRef<any>(null);
   const router = useRouter()
+  const ref = useRef();
 
-  useEffect(() => {
-    if (state.isActiveHeaderSearch) searchInput?.current?.focus();
-  }, [state.isActiveHeaderSearch]);
+  useOnClickOutside(
+    ref,
+    () => {
+      if (state.isActiveHeaderSearch) {
+        dispatch({ type: "toggle_headerSearch" });
+      }
+    },
+    "header__search-item--desc",
+    "header__search-item--title",
+  );
 
-  // const [mobFilter, setMobFilter] = useState<any>(null);
+  const [state, dispatch] = React.useContext(MainContext);
 
   const formik = useFormik({
     initialValues,
@@ -36,9 +45,6 @@ const Search = () => {
 
   useEffect(() => {
     (document.querySelector(".header__input") as HTMLElement).focus();
-    // if (state.isActiveHeaderSearch) {
-    //   mobFilter.focus();
-    // }
   }, [state.isActiveHeaderSearch]);
 
   const handleSearchChange = async (e: any) => {
@@ -69,16 +75,12 @@ const Search = () => {
     >
       <FormikProvider value={formik}>
         <Field
-          onBlur={(e: any) => {
-            if (state.isActiveHeaderSearch)
-              dispatch({ type: "toggle_headerSearch" });
-          }}
           className={`header__input ${searchItems.length > 0 ? "active" : ""}`}
           type="text"
           name="search"
           autoComplete="off"
-          ref={searchInput}
           minLength={1}
+          innerRef={ref}
           maxLength={255}
           required
           placeholder="кав’ярня"

@@ -67,6 +67,9 @@
     padding-bottom: 20px;
 
     &__slider {
+      margin-right: -20px;
+      // margin-left: -20px;
+
       .slick-list {
         margin: 0 -5px;
       }
