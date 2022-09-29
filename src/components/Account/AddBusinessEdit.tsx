@@ -27,34 +27,36 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       const reponse = await axios.post("/api/locations/getAreas", {});
 
       if (reponse.status == 200) {
-        setListAreas(reponse.data)
+        setListAreas(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
   const getListCities = async (selectedArea: string) => {
     try {
-      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+      const reponse = await axios.post("/api/locations/getCities", {
+        selectedArea,
+      });
 
       if (reponse.status == 200) {
-        setListCities(reponse.data)
+        setListCities(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
-  useEffect(()=>{
-    getListCities(selectedArea)
-  },[selectedArea])
+  useEffect(() => {
+    getListCities(selectedArea);
+  }, [selectedArea]);
 
-  useEffect(()=>{
-    getListAreas()
-  },[])
+  useEffect(() => {
+    getListAreas();
+  }, []);
 
   const removeFile = (i: number) => {
     setFiles(
@@ -75,6 +77,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     const formData = new FormData();
     formData.append("file", uploadImageURL);
     formData.append("folder", "businesses");
+    formData.append("userApiKey", user.api_key);
+    formData.append("userEmail", user.email);
 
     const options: AxiosRequestConfig = {
       headers: { "Content-Type": "multipart/form-data" },
@@ -115,9 +119,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       setLoading(true);
     } else {
       setFiles(businessInfo.images.map((img: any) => img.path));
-      setSelectedArea(businessInfo.state._id)
+      setSelectedArea(businessInfo.state._id);
       console.log(businessInfo.city._id);
-      
+
       setLoading(false);
     }
   }, [businessInfo]);
@@ -126,8 +130,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business, state, year, city } =
-      values;
+    const { name, price, description, business, state, year, city } = values;
 
     let newBusiness: any = {
       _id: projectId,
@@ -138,13 +141,13 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       state: {
         _id: state,
         link: "Areas",
-        display: listAreas.filter((e:any)=>e.value==state)[0].label
+        display: listAreas.filter((e: any) => e.value == state)[0].label,
       },
       year,
       city: {
         _id: city,
         link: "Areas",
-        display: listCities.filter((e:any)=>e.value==city)[0].label
+        display: listCities.filter((e: any) => e.value == city)[0].label,
       },
 
       price_history: [
@@ -152,10 +155,15 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
         {
           value: {
             price,
-            date: (new Date().getFullYear()) + "-" + ("0" + (new Date().getMonth())).slice(-2) + "-" + ("0" + (new Date().getDate())).slice(-2)
-          }
-        }
-      ]
+            date:
+              new Date().getFullYear() +
+              "-" +
+              ("0" + new Date().getMonth()).slice(-2) +
+              "-" +
+              ("0" + new Date().getDate()).slice(-2),
+          },
+        },
+      ],
     };
 
     if (files) {
@@ -466,7 +474,11 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
           </Form>
         </Formik>
       </div>
-      <ModalDeleteBusiness projectId={projectId} projectTitle={businessInfo?.title} onClose={closeModal} />
+      <ModalDeleteBusiness
+        projectId={projectId}
+        projectTitle={businessInfo?.title}
+        onClose={closeModal}
+      />
     </section>
   );
 };

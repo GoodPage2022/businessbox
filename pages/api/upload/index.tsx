@@ -2,7 +2,8 @@ import { IncomingForm } from "formidable";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { promises as fs } from "fs";
 import aws from "aws-sdk";
-import { MongoClient } from "mongodb";
+
+import clientPromise from "../../../mongodb/mongodb";
 
 export const config = {
   api: {
@@ -10,22 +11,28 @@ export const config = {
   },
 };
 
-// let clientPromise: Promise<MongoClient>;
-
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const form = new IncomingForm();
     form.parse(req, async (err: any, fields: any, files: any) => {
       if (err) return res.status(501).send({});
 
-      // const client = await clientPromise;
-      // const db = client.db("bubox");
-      // const resetUserPassword = await db
-      //   .collection("cockpit_accounts")
-      //   .find({ filter:  })
-      //   .project({ api_key: 1, email: 1 })
-      //   .limit(1)
-      //   .toArray();
+      const userApiKey = fields.userApiKey;
+      const userEmail = fields.userEmail;
+
+      const client = await clientPromise;
+
+      const db = client.db("bubox");
+
+      const checkUserApiKey = await db
+        .collection("cockpit_accounts")
+        .find({ api_key: userApiKey, email: userEmail })
+        .limit(1)
+        .toArray();
+
+      if (checkUserApiKey.length == 0) {
+        return res.status(404).send("User not found");
+      }
 
       const oldPath = files.file.filepath;
 
