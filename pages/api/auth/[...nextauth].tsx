@@ -4,11 +4,11 @@ import NextAuth from "next-auth/next"
 export default NextAuth({
     providers: [
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+            clientId: process.env.clientId ?? "",
+            clientSecret: process.env.clientSecret ?? "",
         }),
     ],
-    secret: process.env.JWT_SECRET,
+    secret: process.env.jwtSecret,
     callbacks: {
         async session({ session, token, user }) {
             session.accessToken = token.accessToken;

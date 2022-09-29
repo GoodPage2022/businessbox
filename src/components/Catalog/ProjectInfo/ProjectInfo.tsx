@@ -169,10 +169,16 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     try {
       response = await axios.post(`/api/businesses/get`, { user, projectId });
       if (response.data) {
-        setProjectInfo(response.data.entries[0]);
+        if (response.data.entries.length > 0) {
+          setProjectInfo(response.data.entries[0]);
+        } else {
+          router.push("/404");
+          return false
+        }
       }
     } catch (error) {
       router.push("/404");
+      return false
     }
 
     try {

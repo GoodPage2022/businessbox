@@ -15,8 +15,8 @@ const handler = async(
   try {
     const response = await axios.get(`${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}&filter[_id]=${id}`)
     res.status(200).json( response.data )
-  } catch (err: any) {
-    res.status(500).json({error: err})
+  } catch (error: any) {
+    res.status(500).json({error})
   }
 }
 

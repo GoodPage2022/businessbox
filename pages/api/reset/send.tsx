@@ -18,10 +18,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const resetLink = 'https://business-box.vercel.app/reset/' + resetKey
 
         var data = {
-            service_id: 'service_h1w4a5p',
-            template_id: 'template_rgwqxdk',
-            user_id: 'Ne1Fvf_d2zZ67EgEG',
-            accessToken: "jJ1BBXQZiWRf4bS3ish7D",
+            service_id: process.env.emailjsServiceId,
+            template_id: process.env.emailjsTemplateId,
+            user_id: process.env.emailjsUserId,
+            accessToken: process.env.emailjsAccessToken,
             template_params: {
                 to_email: reqBody.to_email,
                 link: resetLink    

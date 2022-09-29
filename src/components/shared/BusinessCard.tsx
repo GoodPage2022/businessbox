@@ -34,6 +34,8 @@ const BusinessCard = ({
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
   const user = useSelector((state: any) => state.auth.user);
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [clickTime, setClickTime] = useState<number>(0);
+  const [clickPos, setClickPos] = useState<any>({});
 
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
@@ -70,10 +72,35 @@ const BusinessCard = ({
   };
 
   return (
-    <li className="business-card">
-      <Link href={`/catalog/${alias}`}>
-        <a className="business-card__link" title={title}></a>
-      </Link>
+    <li className="business-card"
+    onMouseDown={(e:any)=>{
+      setClickTime(Date.now());
+      setClickPos({
+        x: e.screenX,
+        y: e.screenY,
+      });
+      
+    }}
+    onMouseUp={(e:any)=>{
+      
+      const clickedTime = Date.now() - clickTime
+      const clickedPos = {
+        x: clickPos.x - e.screenX,
+        y: clickPos.y - e.screenY,
+      };
+
+      console.log(clickedTime);
+      console.log(clickedPos);
+      
+      if (clickedPos.x == 0 && clickedPos.y == 0) {
+        router.push(`/catalog/${alias}`)
+      }
+    }}>
+      {/* <Link href={`/catalog/${alias}`}>
+        <a className="business-card__link"
+        
+        title={title}></a>
+      </Link> */}
       {isMyBusinessesPage ? (
         <button
           className="business-card__button-edit"

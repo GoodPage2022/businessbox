@@ -38,10 +38,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
             if (response.status == 200) {
                 var data = {
-                    service_id: 'service_h1w4a5p',
-                    template_id: 'template_zxuesjv',
-                    user_id: 'Ne1Fvf_d2zZ67EgEG',
-                    accessToken: "jJ1BBXQZiWRf4bS3ish7D",
+                    service_id: process.env.emailjsServiceId,
+                    template_id: process.env.emailjsTemplateId2,
+                    user_id: process.env.emailjsUserId,
+                    accessToken: process.env.emailjsAccessToken,
                     template_params: {
                         to_email: resetUserPassword[0].email,
                         password: randomPassword

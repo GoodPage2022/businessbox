@@ -32,9 +32,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const image = await fs.readFile(oldPath);
 
       const s3 = new aws.S3({
-        endpoint: "fra1.digitaloceanspaces.com",
-        accessKeyId: "DO00QXCGYN37XV3W66BZ",
-        secretAccessKey: "3EQWMtV/x6S3iwOaJO6BQL7oi/lstGdyUNz8qgMhUd0",
+        endpoint: process.env.digiSpaceEndpoint,
+        accessKeyId: process.env.digiSpaceAccessKeyId,
+        secretAccessKey: process.env.digiSpaceSecretAccessKey,
       });
 
       s3.upload(
