@@ -21,38 +21,40 @@ const AddBusiness = () => {
       const reponse = await axios.post("/api/locations/getAreas", {});
 
       if (reponse.status == 200) {
-        setListAreas(reponse.data)
+        setListAreas(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
   const getListCities = async (selectedArea: string) => {
     try {
-      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+      const reponse = await axios.post("/api/locations/getCities", {
+        selectedArea,
+      });
 
       if (reponse.status == 200) {
-        setListCities(reponse.data)
+        setListCities(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
-  useEffect(()=>{
-    getListCities(selectedArea)
-  },[selectedArea])
+  useEffect(() => {
+    getListCities(selectedArea);
+  }, [selectedArea]);
 
-  useEffect(()=>{
-    getListAreas()
-  },[])
+  useEffect(() => {
+    getListAreas();
+  }, []);
 
   const removeFile = (url: string) => {
-    setFiles(files.filter((f: any) => f != url))
-  }
+    setFiles(files.filter((f: any) => f != url));
+  };
 
   const uploadToServer = async (file: any) => {
     const uploadImageURL = file;
@@ -60,13 +62,14 @@ const AddBusiness = () => {
     const formData = new FormData();
     formData.append("file", uploadImageURL);
     formData.append("folder", "businesses");
+    formData.append("userApiKey", user.api_key);
+    formData.append("userEmail", user.email);
 
     const options: AxiosRequestConfig = {
       headers: { "Content-Type": "multipart/form-data" },
     };
 
     console.log("send form");
-    
 
     try {
       const reponse = await axios.post("/api/upload", formData, options);
@@ -83,8 +86,7 @@ const AddBusiness = () => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business, state, year, city } =
-      values;
+    const { name, price, description, business, state, year, city } = values;
 
     let newBusiness: any = {
       title: name,
@@ -94,33 +96,38 @@ const AddBusiness = () => {
       state: {
         _id: state,
         link: "Areas",
-        display: listAreas.filter((e:any)=>e.value==state)[0].label
+        display: listAreas.filter((e: any) => e.value == state)[0].label,
       },
       year,
       city: {
         _id: city,
         link: "Areas",
-        display: listCities.filter((e:any)=>e.value==city)[0].label
+        display: listCities.filter((e: any) => e.value == city)[0].label,
       },
 
       price_history: [
         {
           value: {
             price,
-            date: (new Date().getFullYear()) + "-" + ("0" + (new Date().getMonth())).slice(-2) + "-" + ("0" + (new Date().getDate())).slice(-2)
-          }
-        }
-      ]
+            date:
+              new Date().getFullYear() +
+              "-" +
+              ("0" + new Date().getMonth()).slice(-2) +
+              "-" +
+              ("0" + new Date().getDate()).slice(-2),
+          },
+        },
+      ],
     };
 
     if (files) {
       const images = files.map((f: any) => ({
-          meta: {
-            title: "",
-            assets: "",
-          },
-          path: f,
-      }))
+        meta: {
+          title: "",
+          assets: "",
+        },
+        path: f,
+      }));
 
       newBusiness["images"] = images;
     }
@@ -339,18 +346,25 @@ const AddBusiness = () => {
             </div>
             <span className="addBusiness__label">Медіа</span>
             <div className="addBusiness__addMedia-wrapper">
-              {files && files.map((f: any, i: number) => <div key={i} className="addBusiness__addMedia-wrapper--image">
-                <Image
-                  className=""
-                  src={f}
-                  layout="fill"
-                  objectFit="cover"
-                  alt="building"
-                />
-                <button type="button" onClick={() => removeFile(f)} className="addBusiness__button-close">
-                  <CrossSVG />
-                </button>
-              </div>)}
+              {files &&
+                files.map((f: any, i: number) => (
+                  <div key={i} className="addBusiness__addMedia-wrapper--image">
+                    <Image
+                      className=""
+                      src={f}
+                      layout="fill"
+                      objectFit="cover"
+                      alt="building"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeFile(f)}
+                      className="addBusiness__button-close"
+                    >
+                      <CrossSVG />
+                    </button>
+                  </div>
+                ))}
               <div className="addBusiness__addMedia-wrapper--add-file">
                 <input
                   id="file"
@@ -361,12 +375,11 @@ const AddBusiness = () => {
                   data-label={`Додати медіафал`}
                   onChange={async (e) => {
                     if (e.currentTarget?.files?.length) {
-                      const uploadedFiles: any = await uploadToServer(e.currentTarget.files[0]);
+                      const uploadedFiles: any = await uploadToServer(
+                        e.currentTarget.files[0],
+                      );
                       console.log(uploadedFiles.data.url);
-                      setFiles([
-                        ...files,
-                        uploadedFiles.data.url
-                      ]);
+                      setFiles([...files, uploadedFiles.data.url]);
                     }
                   }}
                 />
@@ -384,12 +397,11 @@ const AddBusiness = () => {
                   // }`}
                   onChange={async (e) => {
                     if (e.currentTarget?.files?.length) {
-                      const uploadedFiles: any = await uploadToServer(e.currentTarget.files[0]);
+                      const uploadedFiles: any = await uploadToServer(
+                        e.currentTarget.files[0],
+                      );
                       console.log(uploadedFiles.data.url);
-                      setFiles([
-                        ...files,
-                        uploadedFiles.data.url
-                      ]);
+                      setFiles([...files, uploadedFiles.data.url]);
                     }
                   }}
                 />
