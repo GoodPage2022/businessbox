@@ -34,6 +34,11 @@ const Favorites = () => {
       return response.data.entries;
     }
 
+    if (response.status == 401) {
+      console.log("sdfsdfsdf");
+      
+    }
+
     setCards([]);
     return [];
   };

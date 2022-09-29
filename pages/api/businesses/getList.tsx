@@ -17,30 +17,6 @@ const handler = async(
 
   let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`
 
-  // if (queryFilter) {
-  //   const filter = Object.keys(queryFilter)
-  //     .map(
-  //       (pn: any) => 
-  //         "filter[" + encodeURIComponent(pn) + "]=" + encodeURIComponent(queryFilter[pn]))
-  //     .join("&")
-
-  //     queryUrl += "&" + filter
-  // }
-
-  // if (querySort) {
-  //   const filter = Object.keys(querySort)
-  //     .map(
-  //       (pn: any) => 
-  //         "sort[" + encodeURIComponent(pn) + "]=" + encodeURIComponent(querySort[pn]))
-  //     .join("&")
-
-  //     queryUrl += "&" + filter
-  // }
-
-  // if (queryLimit) {
-  //     queryUrl += "&limit=" + queryLimit
-  // }
-  
   let body: any = {}
 
   if (queryFilter) {
@@ -67,9 +43,9 @@ const handler = async(
   
   try {
     const response = await axios.post(queryUrl, body, options)
-    res.status(200).json( response.data )
-  } catch (err: any) {
-    res.status(500).json({error: err})
+    return res.status(200).send( response.data )
+  } catch (error: any) {
+    return res.status((error.response ? (error.response.status ?? 500) : 500)).send(error)
   }
 }
 

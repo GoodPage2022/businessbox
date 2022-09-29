@@ -1,7 +1,7 @@
 import { Formik, Form, Field } from "formik";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
 import CustomSelect from "../../shared/CustomSelect";
@@ -10,6 +10,9 @@ import DotsSVG from "../../../assets/svg/dots.svg";
 import LinesSVG from "../../../assets/svg/lines.svg";
 import IconButton from "../../shared/IconButton";
 import CardsSlider from "../CardsSlider/CardsSlider";
+
+import { signOut as signOutReducer } from "../../../../store/actions/auth";
+import { useSession, signOut as signOutGoogle } from "next-auth/react";
 
 const Popular = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -22,6 +25,8 @@ const Popular = () => {
   const [listAreas, setListAreas] = useState<any>();
   const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
+  const { data: session } = useSession();
+  const dispatchRedux = useDispatch();
 
   const getListAreas = async () => {
     try {
@@ -92,11 +97,20 @@ const Popular = () => {
       }
     };
 
-    const response = await axios.post(`/api/businesses/getList`, requestBody);
+    try {
+      const response = await axios.post(`/api/businesses/getList`, requestBody);
 
-    if (response.data) {
-      setCards(response.data.entries);
-      return response.data.entries;
+      if (response.data) {
+        setCards(response.data.entries);
+        return response.data.entries;
+      }
+    } catch (error: any) {
+      if (error.response.status == 401) {
+        if (session !== undefined) {
+          await signOutGoogle();
+        }
+        dispatchRedux(signOutReducer());
+      }
     }
 
     setCards([]);

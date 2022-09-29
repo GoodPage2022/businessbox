@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import FilterSVG from "../../../assets/svg/filter.svg";
 import DotsSVG from "../../../assets/svg/dots1.svg";
@@ -15,6 +15,9 @@ import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
 import BusinessCardFavorites from "../../shared/BusinessCardFavorite";
 
+import { signOut as signOutReducer } from "../../../../store/actions/auth";
+import { useSession, signOut as signOutGoogle } from "next-auth/react";
+
 const CancelToken = axios.CancelToken;
 let cancel:any
 
@@ -27,20 +30,13 @@ const CatalogView = () => {
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
   const [screenWidth, setScreenWidth] = useState<any>(window.screen.width);
   const router = useRouter();
+  const { data: session } = useSession();
+  const dispatchRedux = useDispatch();
 
   const [state, dispatch] = React.useContext(MainContext);
   const { filters } = router.query;
 
   const cardsPerPage = screenWidth < 768 ? 8 : 9;
-
-  // const getBusinessesCount = async () => {
-  //   const response = await axios.post(`/api/businesses/getList`);
-
-  //   if (response.data) {
-  //     setCountCards(response.data.entries.length);
-  //     return response.data.entries.length;
-  //   }
-  // }
 
   const buildFiltersObj = () => {
     let filtersObjB: any = {};
@@ -147,18 +143,28 @@ const CatalogView = () => {
       };
     }
 
-    const response = await axios.post(`/api/businesses/getList`, requestBody, { cancelToken: new CancelToken((c) => {
-      cancel = c;
-    }) });
+    try {
+      const response = await axios.post(`/api/businesses/getList`, requestBody, { cancelToken: new CancelToken((c) => {
+        cancel = c;
+      }) });
 
-    if (response.data) {
-      if (resetLimit) {
-        setCountCards(response.data.entries.length);
-        return response.data.entries.length;
-      } else {
-        setCards(response.data.entries);
-        return response.data.entries;
+      if (response.data) {
+        if (resetLimit) {
+          setCountCards(response.data.entries.length);
+          return response.data.entries.length;
+        } else {
+          setCards(response.data.entries);
+          return response.data.entries;
+        }
       }
+    } catch (error: any) {
+      if (error.response?.status == 401) {
+        if (session !== undefined) {
+          await signOutGoogle();
+        }
+        dispatchRedux(signOutReducer());
+      }
+      console.log(error);
     }
 
     setCards([]);
@@ -171,12 +177,12 @@ const CatalogView = () => {
   }, [filters]);
 
   useEffect(() => {
-    if (!!cards)
+    if (cards.length > 0) {
       getBusinesses(true);
+    }
   }, [cards]);
 
   useEffect(() => {
-    
     getBusinesses();
     setPageNumber(filtersObj.page ?? 1);
   }, [filtersObj]);
