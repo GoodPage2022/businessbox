@@ -140,7 +140,7 @@ const BusinessCard = ({
               isVerified ? "active" : ""
             }`}
           />
-          <ReactTooltip />
+          <ReactTooltip place="top" type="dark" effect="solid" />
         </h3>
         <p
           className="business-card__description section__secondary-text"
@@ -184,7 +184,7 @@ const BusinessCard = ({
                 isVerified ? "active" : ""
               }`}
             />
-            <ReactTooltip />
+            <ReactTooltip place="top" type="dark" effect="solid" />
           </div>
         </div>
       </div>
