@@ -42,11 +42,12 @@ const Categories = () => {
           </p>
           <button
             className="categories-first__button"
-            onClick={() =>
-              user != null ? router.push("/account/add-business") : openModal()
+            onClick={
+              () => router.push("/catalog")
+              // user != null ? router.push("/account/add-business") : openModal()
             }
           >
-            Зареєструвати бізнес зараз
+            Купити зараз
           </button>
         </div>
       </section>
