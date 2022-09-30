@@ -79,6 +79,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     formData.append("folder", "businesses");
     formData.append("userApiKey", user.api_key);
     formData.append("userEmail", user.email);
+    formData.append("subFolder", projectId);
 
     const options: AxiosRequestConfig = {
       headers: { "Content-Type": "multipart/form-data" },

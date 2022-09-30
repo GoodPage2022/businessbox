@@ -48,7 +48,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         {
           Bucket: "daydrive",
           ACL: "public-read",
-          Key: `${fields.folder ?? `avatars`}/${files.file.originalFilename}`,
+          Key: `${fields.folder ?? `avatars`}/${fields.subFolder ?? "temp"}/${
+            files.file.newFilename +
+            (files.file.mimetype == "image/jpeg" ? ".jpeg" : ".png")
+          }`,
           Body: image,
         },
         {

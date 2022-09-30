@@ -104,6 +104,8 @@ const ContactInfo = () => {
     formData.append("file", uploadImageURL);
     formData.append("userApiKey", user.api_key);
     formData.append("userEmail", user.email);
+    formData.append("subFolder", user._id);
+
     const options: AxiosRequestConfig = {
       headers: { "Content-Type": "multipart/form-data" },
     };
