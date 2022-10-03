@@ -20,6 +20,7 @@ const BusinessCard = ({
   views,
   isVerified,
   alias,
+  isSoldOut,
 }: {
   image: any;
   title: string;
@@ -28,6 +29,7 @@ const BusinessCard = ({
   views: string;
   isVerified: boolean;
   alias: string;
+  isSoldOut: boolean;
 }) => {
   const dispatchRedux = useDispatch();
   const router = useRouter();
@@ -72,30 +74,30 @@ const BusinessCard = ({
   };
 
   return (
-    <li className="business-card"
-    onMouseDown={(e:any)=>{
-      setClickTime(Date.now());
-      setClickPos({
-        x: e.screenX,
-        y: e.screenY,
-      });
-      
-    }}
-    onMouseUp={(e:any)=>{
-      
-      const clickedTime = Date.now() - clickTime
-      const clickedPos = {
-        x: clickPos.x - e.screenX,
-        y: clickPos.y - e.screenY,
-      };
+    <li
+      className={`business-card ${isSoldOut ? "sold" : ""}`}
+      onMouseDown={(e: any) => {
+        setClickTime(Date.now());
+        setClickPos({
+          x: e.screenX,
+          y: e.screenY,
+        });
+      }}
+      onMouseUp={(e: any) => {
+        const clickedTime = Date.now() - clickTime;
+        const clickedPos = {
+          x: clickPos.x - e.screenX,
+          y: clickPos.y - e.screenY,
+        };
 
-      console.log(clickedTime);
-      console.log(clickedPos);
-      
-      if (clickedPos.x == 0 && clickedPos.y == 0) {
-        router.push(`/catalog/${alias}`)
-      }
-    }}>
+        console.log(clickedTime);
+        console.log(clickedPos);
+
+        if (clickedPos.x == 0 && clickedPos.y == 0) {
+          router.push(`/catalog/${alias}`);
+        }
+      }}
+    >
       {/* <Link href={`/catalog/${alias}`}>
         <a className="business-card__link"
         
