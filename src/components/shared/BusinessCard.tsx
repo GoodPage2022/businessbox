@@ -29,7 +29,7 @@ const BusinessCard = ({
   views: string;
   isVerified: boolean;
   alias: string;
-  isSoldOut: boolean;
+  isSoldOut?: boolean;
 }) => {
   const dispatchRedux = useDispatch();
   const router = useRouter();
