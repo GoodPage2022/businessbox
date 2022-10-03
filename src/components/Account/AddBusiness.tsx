@@ -16,6 +16,7 @@ const AddBusiness = () => {
   const [listAreas, setListAreas] = useState<any>();
   const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
+  const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
 
   const getListAreas = async () => {
     try {
@@ -154,11 +155,10 @@ const AddBusiness = () => {
         const reponse = await axios.post("/api/upload/moveFiles", formData);
         console.log("reponse");
         console.log(reponse);
-        // return reponse;
       } catch (error) {
         console.log("error");
-        // return error;
       }
+      setIsSentBusiness(true);
       router.push(
         `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
       );
@@ -240,13 +240,19 @@ const AddBusiness = () => {
                     type="text"
                     name="business"
                     required
-                    placeholder="Графічний дизайн"
+                    placeholder="Торгівля"
                     component={CustomSelect}
                     options={[
-                      { value: "yes", label: "Графічний дизайн" },
-                      { value: "category_1", label: "Категорія 2" },
-                      { value: "category_2", label: "Категорія 3" },
-                      { value: "category_3", label: "Категорія 4" },
+                      { value: "Торгівля", label: "Торгівля" },
+                      { value: "Ресторани", label: "Ресторани" },
+                      { value: "Послуги", label: "Послуги" },
+                      { value: "Автомобільна", label: "Автомобільна" },
+                      { value: "Виробництво", label: "Виробництво" },
+                      {
+                        value: "ІТ та інтелектуальна власність",
+                        label: "ІТ та інтелектуальна власність",
+                      },
+                      { value: "Інше", label: "Інше" },
                     ]}
                   />
                 </label>
@@ -428,7 +434,11 @@ const AddBusiness = () => {
             {addBusinessError && (
               <div className="addBusiness__failed">{addBusinessError}</div>
             )}
-            <button type="submit" className="addBusiness__button">
+            <button
+              disabled={isSentBusiness ? true : false}
+              type="submit"
+              className="addBusiness__button"
+            >
               Далі
             </button>
           </Form>

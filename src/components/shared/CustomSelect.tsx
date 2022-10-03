@@ -25,13 +25,17 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       classNamePrefix="custom-select"
       // menuIsOpen
       placeholder={placeholder}
-      onChange={(e) => {        
-        if (!!changeFilter) changeFilter({
-          target: {
-            name: field.name,
-            value: (field.name == "state" || field.name == "city") ? e.value : e.label
-          }
-        })
+      onChange={(e) => {
+        if (!!changeFilter)
+          changeFilter({
+            target: {
+              name: field.name,
+              value:
+                field.name == "state" || field.name == "city"
+                  ? e.value
+                  : e.label,
+            },
+          });
         if (!!setter) setter(e.value);
         form.setFieldValue(field.name, e.value);
       }}
@@ -68,9 +72,9 @@ const customStyles = {
 
   input: (styles: any) => ({
     ...styles,
-    opacity: "0",
-    margin: "0",
-    padding: "0",
+    // opacity: "0",
+    // margin: "0",
+    // padding: "0",
   }),
 };
 

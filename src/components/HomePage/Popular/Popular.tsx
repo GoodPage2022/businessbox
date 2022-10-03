@@ -33,35 +33,37 @@ const Popular = () => {
       const reponse = await axios.post("/api/locations/getAreas", {});
 
       if (reponse.status == 200) {
-        setListAreas(reponse.data)
+        setListAreas(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
   const getListCities = async (selectedArea: string) => {
     try {
-      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+      const reponse = await axios.post("/api/locations/getCities", {
+        selectedArea,
+      });
 
       if (reponse.status == 200) {
-        setListCities(reponse.data)
+        setListCities(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
-  useEffect(()=>{
-    getListCities(selectedArea)
-  },[selectedArea])
+  useEffect(() => {
+    getListCities(selectedArea);
+  }, [selectedArea]);
 
-  useEffect(()=>{
-    getListAreas()
-  },[])
-  
+  useEffect(() => {
+    getListAreas();
+  }, []);
+
   const submitFilter = () => {
     router.push(filterURL);
   };
@@ -93,8 +95,8 @@ const Popular = () => {
         _created: -1,
       },
       filter: {
-        sold_out: false
-      }
+        sold_out: false,
+      },
     };
 
     try {
@@ -240,8 +242,16 @@ const Popular = () => {
                       type="text"
                       name="category"
                       options={[
-                        { value: "yes", label: "Так" },
-                        { value: "no", label: "Ні" },
+                        { value: "Торгівля", label: "Торгівля" },
+                        { value: "Ресторани", label: "Ресторани" },
+                        { value: "Послуги", label: "Послуги" },
+                        { value: "Автомобільна", label: "Автомобільна" },
+                        { value: "Виробництво", label: "Виробництво" },
+                        {
+                          value: "ІТ та інтелектуальна власність",
+                          label: "ІТ та інтелектуальна власність",
+                        },
+                        { value: "Інше", label: "Інше" },
                       ]}
                       required
                       placeholder="-----"

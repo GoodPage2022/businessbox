@@ -17,7 +17,7 @@
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       width: 100%;
@@ -25,7 +25,7 @@
       left: 0px;
       top: 0px;
       z-index: 999;
-      background: rgba(255,255,255,0);
+      background: rgba(255, 255, 255, 0);
       backdrop-filter: blur(1px);
       pointer-events: none;
     }

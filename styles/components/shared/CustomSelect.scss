@@ -60,7 +60,14 @@
   &__single-value {
     margin: 0 !important;
   }
+
+  &__input-container {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   &__input {
+    color: #0c0c0c !important;
     &:after {
       white-space: none !important;
     }
@@ -71,7 +78,7 @@
   }
   &__indicators {
     position: absolute !important;
-    right: 5%;
+    right: 10px;
     top: 21%;
   }
 
@@ -154,7 +161,7 @@
     }
     &__indicators {
       position: absolute !important;
-      right: 5%;
+      right: 10px;
       top: 15%;
     }
 
@@ -171,7 +178,7 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 17px;
-      padding: 10px 20px;
+      padding: 10px 30px 10px 20px;
       outline: none;
       cursor: pointer;
       border: 1px solid transparent;
@@ -233,7 +240,7 @@
     }
     &__indicators {
       position: absolute !important;
-      right: 20px;
+      right: 10px;
       top: 5%;
     }
 
