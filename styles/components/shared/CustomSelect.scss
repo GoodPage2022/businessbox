@@ -60,6 +60,12 @@
   &__single-value {
     margin: 0 !important;
   }
+
+  &__input-container {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
   &__input {
     color: #0c0c0c !important;
     &:after {
@@ -72,7 +78,7 @@
   }
   &__indicators {
     position: absolute !important;
-    right: 5%;
+    right: 10px;
     top: 21%;
   }
 

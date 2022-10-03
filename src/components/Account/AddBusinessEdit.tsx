@@ -270,13 +270,19 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     type="text"
                     name="business"
                     required
-                    placeholder="Графічний дизайн"
+                    placeholder="Торгівля"
                     component={CustomSelect}
                     options={[
-                      { value: "yes", label: "Графічний дизайн" },
-                      { value: "category_1", label: "Категорія 2" },
-                      { value: "category_2", label: "Категорія 3" },
-                      { value: "category_3", label: "Категорія 4" },
+                      { value: "Торгівля", label: "Торгівля" },
+                      { value: "Ресторани", label: "Ресторани" },
+                      { value: "Послуги", label: "Послуги" },
+                      { value: "Автомобільна", label: "Автомобільна" },
+                      { value: "Виробництво", label: "Виробництво" },
+                      {
+                        value: "ІТ та інтелектуальна власність",
+                        label: "ІТ та інтелектуальна власність",
+                      },
+                      { value: "Інше", label: "Інше" },
                     ]}
                   />
                 </label>
