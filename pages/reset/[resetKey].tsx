@@ -28,9 +28,9 @@ const Project: NextPage = () => {
 
   return (
     <>
-      <section className="myBusinesses">
-        <div className="container myBusinesses__container">
-          <div className="myBusinesses__empty">
+      <section className="reset">
+        <div className="container">
+          <div className="reset__empty">
             {isError ? (
               <h1 className="title">
                 Упс, щось пішло не так. Повторіть спробу пізніше або напишіть
