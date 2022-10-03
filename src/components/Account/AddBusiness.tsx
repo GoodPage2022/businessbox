@@ -11,6 +11,7 @@ const AddBusiness = () => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
   const [files, setFiles] = useState<string[]>([]);
+  const [tempFiles, setTempFiles] = useState<string[]>([]);
   const [addBusinessError, setAddBusinessError] = useState("");
   const [listAreas, setListAreas] = useState<any>();
   const [listCities, setListCities] = useState<any>();
@@ -62,6 +63,7 @@ const AddBusiness = () => {
     const formData = new FormData();
     formData.append("file", uploadImageURL);
     formData.append("folder", "businesses");
+    formData.append("subFolder", "temp");
     formData.append("userApiKey", user.api_key);
     formData.append("userEmail", user.email);
 
@@ -72,10 +74,11 @@ const AddBusiness = () => {
     console.log("send form");
 
     try {
-      const reponse = await axios.post("/api/upload", formData, options);
+      const response = await axios.post("/api/upload", formData, options);
+      setTempFiles([...tempFiles, response.data.url]);
       console.log("reponse");
-      console.log(reponse);
-      return reponse;
+      console.log(response);
+      return response;
     } catch (error) {
       console.log(error);
       return error;
@@ -140,8 +143,22 @@ const AddBusiness = () => {
         data: newBusiness,
         user,
       });
-      console.log(newBusinessResponse);
 
+      const formData = {
+        folder: "businesses",
+        subFolder: newBusinessResponse.data.data._id,
+        tempPaths: tempFiles,
+      };
+
+      try {
+        const reponse = await axios.post("/api/upload/moveFiles", formData);
+        console.log("reponse");
+        console.log(reponse);
+        // return reponse;
+      } catch (error) {
+        console.log("error");
+        // return error;
+      }
       router.push(
         `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
       );
