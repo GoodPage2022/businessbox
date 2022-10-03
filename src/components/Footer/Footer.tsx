@@ -96,13 +96,16 @@ const Footer: React.FC = () => {
               placeholder="Категорії"
               component={FooterSelect}
               options={[
-                { value: "category_1", label: "Категорія 1" },
-                { value: "category_2", label: "Категорія 2" },
-                { value: "category_3", label: "Категорія 3" },
-                { value: "category_4", label: "Категорія 4" },
-                { value: "category_5", label: "Категорія 5" },
-                { value: "category_6", label: "Категорія 6" },
-                { value: "category_7", label: "Категорія 7" },
+                { value: "Торгівля", label: "Торгівля" },
+                { value: "Ресторани", label: "Ресторани" },
+                { value: "Послуги", label: "Послуги" },
+                { value: "Автомобільна", label: "Автомобільна" },
+                { value: "Виробництво", label: "Виробництво" },
+                {
+                  value: "ІТ та інтелектуальна власність",
+                  label: "ІТ та інтелектуальна власність",
+                },
+                { value: "Інше", label: "Інше" },
               ]}
             />
           </FormikProvider>

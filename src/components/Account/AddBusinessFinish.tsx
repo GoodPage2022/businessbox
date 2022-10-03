@@ -167,8 +167,9 @@ const AddBusinessFinish = () => {
                     component={CustomSelect}
                     // className="addBusinessFinish__select section__primary-text"
                     options={[
-                      { value: "yes", label: "Так" },
-                      { value: "no", label: "Ні" },
+                      { value: "Приватна", label: "Приватна" },
+                      { value: "Колективна", label: "Колективна" },
+                      { value: "Державна", label: "Державна" },
                     ]}
                   />
 
