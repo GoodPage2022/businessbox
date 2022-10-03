@@ -97,18 +97,15 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
             <>
               {isGetErr ? (
                 <p className="modal-forgotPassword__send-err">
-                  Упс, щось пішло не так. Повторіть спробу пізніше або напишіть
-                  нам на пошту
+                  Упс, щось пішло не так. Повторіть спробу або напишіть нам на
+                  пошту
                 </p>
               ) : (
                 <p className="modal-forgotPassword__send-title">
-                  Оновлення успішне. Пароль надіслано на пошту
+                  Запит на зміну паролю, прийнято. Перейдіть на пошту для
+                  подальших інструкцій
                 </p>
               )}
-
-              {/* <p className="modal-forgotPassword__send-desc">
-                Оновлення успішне. Пароль надіслано на пошту
-              </p> */}
             </>
           ) : (
             <Formik
