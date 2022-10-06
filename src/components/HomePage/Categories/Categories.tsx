@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { MainContext } from "../../../contexts/mainContext";
+import MainSliderText from "../../../constants/main-slider";
 
 const Categories = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -10,6 +11,8 @@ const Categories = () => {
 
   const [state, dispatch] = React.useContext(MainContext);
   const settings = {
+    className: "main-slider",
+    dotsClass: "main-slider-dots",
     dots: true,
     infinite: true,
     speed: 1000,
@@ -18,8 +21,21 @@ const Categories = () => {
     arrows: false,
     adaptiveHeight: true,
     swipeToSlide: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 7000,
+    appendDots: (dots: any) => (
+      <div>
+        <ul className="main-slider-dots-list">{dots}</ul>
+      </div>
+    ),
+    customPaging: (i: any) => (
+      <div className="main-slider-dots-item">
+        <h2 className="main-slider-dots-item--title">
+          {MainSliderText[i].title}
+        </h2>
+        <p className="main-slider-dots-item--text">{MainSliderText[i].text}</p>
+      </div>
+    ),
   };
 
   const openModal = () => {
@@ -40,15 +56,17 @@ const Categories = () => {
             варіант, що тобі сподобається, до дрібних деталей. Твоє завдання -
             просто вказати пальцем)
           </p>
-          <button
-            className="categories-first__button"
-            onClick={
-              () => router.push("/catalog")
-              // user != null ? router.push("/account/add-business") : openModal()
-            }
-          >
-            Купити зараз
-          </button>
+          <div className="categories-first__buttons">
+            <button
+              className="categories-first__button"
+              onClick={
+                () => router.push("/catalog")
+                // user != null ? router.push("/account/add-business") : openModal()
+              }
+            >
+              Купити зараз
+            </button>
+          </div>
         </div>
       </section>
       <section className="categories-second">
