@@ -21,7 +21,7 @@ const Categories = () => {
     arrows: false,
     adaptiveHeight: true,
     swipeToSlide: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 7000,
     responsive: [
       {
