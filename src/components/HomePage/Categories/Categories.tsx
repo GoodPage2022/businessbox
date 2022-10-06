@@ -52,9 +52,9 @@ const Categories = () => {
           </h1>
           <p className="categories-first__text section__primary-text--white">
             Ми відібрали і підготували у простій та зрозумілій формі бізнеси, що
-            продаються в ринку. Також з легкістю допоможено розкласти будь-який
-            варіант, що тобі сподобається, до дрібних деталей. Твоє завдання -
-            просто вказати пальцем)
+            продаються в ринку. <br /> Також з легкістю допоможено розкласти
+            будь-який варіант, що тобі сподобається, до дрібних деталей. Твоє
+            завдання - просто вказати пальцем)
           </p>
           <div className="categories-first__buttons">
             <button
@@ -87,18 +87,18 @@ const Categories = () => {
                   ? router.push("/account/add-business")
                   : openModal()
               }
-              className="categories-second__button"
+              className="categories-second__button--white"
             >
               Продати бізнес
             </button>
-            <button
+            {/* <button
               onClick={() =>
                 user != null ? router.push("/catalog") : openModal()
               }
               className="categories-second__button--white"
             >
               Інвестувати
-            </button>
+            </button> */}
           </div>
         </div>
       </section>
