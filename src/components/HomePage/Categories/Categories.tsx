@@ -23,6 +23,12 @@ const Categories = () => {
     swipeToSlide: true,
     autoplay: false,
     autoplaySpeed: 7000,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: { vertical: true, verticalSwiping: true },
+      },
+    ],
     appendDots: (dots: any) => (
       <div>
         <ul className="main-slider-dots-list">{dots}</ul>
@@ -34,6 +40,31 @@ const Categories = () => {
           {MainSliderText[i].title}
         </h2>
         <p className="main-slider-dots-item--text">{MainSliderText[i].text}</p>
+        <p className="main-slider-dots-item--textFull">
+          {MainSliderText[i].textFull}
+        </p>
+        {i === 0 && (
+          <button
+            className="categories-first__button"
+            onClick={() => router.push("/catalog")}
+          >
+            Купити зараз
+          </button>
+        )}
+
+        {i === 1 && (
+          <button
+            onClick={() =>
+              user != null ? router.push("/account/add-business") : openModal()
+            }
+            className="categories-second__button--white"
+          >
+            Продати бізнес
+          </button>
+        )}
+        {i === 2 && (
+          <p className="title--white categories-third__continue">Далі буде…</p>
+        )}
       </div>
     ),
   };
