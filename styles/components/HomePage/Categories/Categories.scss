@@ -670,11 +670,22 @@
         height: 150px;
         transition: all 1s ease;
         overflow: hidden;
-        &--text {
+        &--textFull {
+          font-family: "Montserrat";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 20px;
+          color: #ffffff;
+          text-align: start;
+          display: block;
           position: relative;
           padding-bottom: 0;
           max-height: 60px;
           margin-bottom: 10px;
+        }
+        &--text {
+          display: none;
         }
         .categories-first__button {
           display: none;
@@ -704,7 +715,7 @@
         height: 307px;
         overflow: hidden;
 
-        .main-slider-dots-item--text {
+        .main-slider-dots-item--textFull {
           max-height: 180px;
           &::after {
             display: none;

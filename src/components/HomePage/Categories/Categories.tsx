@@ -39,7 +39,8 @@ const Categories = () => {
         <h2 className="main-slider-dots-item--title">
           {MainSliderText[i].title}
         </h2>
-        <p className="main-slider-dots-item--text">
+        <p className="main-slider-dots-item--text">{MainSliderText[i].text}</p>
+        <p className="main-slider-dots-item--textFull">
           {MainSliderText[i].textFull}
         </p>
         {i === 0 && (
