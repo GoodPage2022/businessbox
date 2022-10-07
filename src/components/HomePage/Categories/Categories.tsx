@@ -39,8 +39,7 @@ const Categories = () => {
         <h2 className="main-slider-dots-item--title">
           {MainSliderText[i].title}
         </h2>
-        <p className="main-slider-dots-item--text">{MainSliderText[i].text}</p>
-        <p className="main-slider-dots-item--textFull">
+        <p className="main-slider-dots-item--text">
           {MainSliderText[i].textFull}
         </p>
         {i === 0 && (
@@ -138,7 +137,7 @@ const Categories = () => {
           <h1 className="categories-third__title title--white">Франчайзинг</h1>
           <p className="categories-third__text section__primary-text--white">
             Ми відібрали та розклали по полицям найкращі варіанти франшиз у
-            зрозумілому для тебе форматі. Тепер знайти бажаже можна на одній
+            зрозумілому для тебе форматі. Тепер знайти бажане можна на одній
             сторінці не випускаючи каву з рук. А ми в свою чергу будемо постійно
             доповнювати варіанти новими партнерами
           </p>

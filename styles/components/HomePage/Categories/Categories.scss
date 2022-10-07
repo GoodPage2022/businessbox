@@ -232,8 +232,12 @@
 }
 
 .main-slider {
+  .slick-slide {
+    border: none;
+  }
   .slick-active {
     background: rgba(217, 217, 217, 0.2);
+    transition: all 1s ease;
   }
   &-dots {
     position: relative;
@@ -607,36 +611,69 @@
     }
     &__buttons {
       display: none;
-      // display: flex;
       height: 28px;
     }
   }
-
   .main-slider {
     &-dots {
       max-width: 100%;
       padding: 0 20px;
+
       &-list {
         bottom: 40px;
         left: 50%;
         transform: translate(-50%, 0);
+        & li {
+          position: relative;
+          &:first-child {
+            &::after {
+              position: absolute;
+              bottom: 0;
+              right: 39px;
+              visibility: visible;
+              color: white;
+              opacity: 1;
+              transition: all 3s ease;
+              content: "...";
+            }
+          }
+          &:nth-child(2) {
+            &::after {
+              position: absolute;
+              bottom: 0;
+              right: 32px;
+              opacity: 1;
+              color: white;
+              visibility: visible;
+              transition: all 3s ease;
+              content: "...";
+            }
+          }
+          &:nth-child(3) {
+            &::after {
+              position: absolute;
+              bottom: 0;
+              right: 35px;
+              opacity: 1;
+              visibility: visible;
+              transition: all 3s ease;
+              color: white;
+              content: "...";
+            }
+          }
+        }
       }
 
       &-item {
         width: 327px;
         padding: 20px 24px;
-
+        height: 150px;
+        transition: all 1s ease;
+        overflow: hidden;
         &--text {
+          position: relative;
           padding-bottom: 0;
-        }
-        &--textFull {
-          display: none;
-          font-family: "Montserrat";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 20px;
-          color: #ffffff;
+          max-height: 60px;
           margin-bottom: 10px;
         }
         .categories-first__button {
@@ -658,12 +695,21 @@
     }
 
     .slick-active {
-      & div {
+      &::after {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transition: all 0.1s ease !important;
+      }
+      .main-slider-dots-item {
+        height: 307px;
+        overflow: hidden;
+
         .main-slider-dots-item--text {
-          display: none;
-        }
-        .main-slider-dots-item--textFull {
-          display: block;
+          max-height: 180px;
+          &::after {
+            display: none;
+            content: "...";
+          }
         }
         .categories-first__button {
           display: block;
