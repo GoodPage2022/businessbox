@@ -1,10 +1,10 @@
 @keyframes animatedBackground {
   from {
-    background-size: 120% 120%;
+    background-size: auto 120%;
     transform: translate(-50% -50%);
   }
   to {
-    background-size: 100% 100%;
+    background-size: auto 100%;
   }
 }
 .slick-current {
@@ -490,8 +490,8 @@
   .categories-first {
     padding-top: 814px;
     padding-bottom: 10px;
-    background-image: url("../../../../public/assets/images/main-bg-first.png");
-    background-position: top 72px left;
+    background-image: url("../../../../public/assets/images/main-bg-first-mob.png");
+    background-position: top 72px left 50%;
 
     &__title {
       display: none;
@@ -533,8 +533,8 @@
   .categories-second {
     padding-top: 814px;
     padding-bottom: 10px;
-    background-image: url("../../../../public/assets/images/main-bg-sec-2.png");
-    background-position: top 72px left;
+    background-image: url("../../../../public/assets/images/main-bg-second-mob.png");
+    background-position: top 72px left 50%;
 
     &__title {
       margin-bottom: 20px;
@@ -562,13 +562,11 @@
         font-weight: 600;
         font-size: 12.64px;
         line-height: 15px;
-        // margin-left: 20px;
         height: 27.81px;
       }
     }
     &__buttons {
       display: none;
-      // display: flex;
       height: 28px;
     }
   }
@@ -576,8 +574,8 @@
   .categories-third {
     padding-top: 814px;
     padding-bottom: 10px;
-    background-image: url("../../../../public/assets/images/main-bg-third.png");
-    background-position: top 72px left;
+    background-image: url("../../../../public/assets/images/main-bg-third-mob.png");
+    background-position: top 72px left 50%;
 
     &__title {
       display: none;
