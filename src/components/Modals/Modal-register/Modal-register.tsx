@@ -34,7 +34,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { name, phone, mail, surname, password, city } = values;
+    const { name, phone, mail, surname, password, city } = values;    
 
     const newUser = {
       user: {
@@ -103,7 +103,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
               phone: "",
               surname: "",
               mail: "",
-              // business: "",
+              password: "",
               city: "",
             }}
             validate={(values) => {
@@ -113,6 +113,18 @@ function ModalRegister({ onClose }: { onClose: any }) {
               }
               if (!values.phone) {
                 errors.phone = "Обязательное поле";
+              }
+              if (!values.surname) {
+                errors.surname = "Обязательное поле";
+              }
+              if (!values.mail) {
+                errors.mail = "Обязательное поле";
+              }
+              if (!values.password) {
+                errors.password = "Обязательное поле";
+              }
+              if (!values.city) {
+                errors.city = "Обязательное поле";
               }
 
               escapeHtml(values.name);
