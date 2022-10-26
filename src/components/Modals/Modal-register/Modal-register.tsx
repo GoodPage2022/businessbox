@@ -103,7 +103,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
               phone: "",
               surname: "",
               mail: "",
-              business: "",
+              // business: "",
               city: "",
             }}
             validate={(values) => {
@@ -116,7 +116,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
               }
 
               escapeHtml(values.name);
-              escapeHtml(values.business);
+              // escapeHtml(values.business);
               escapeHtml(values.surname);
               escapeHtml(values.mail);
               escapeHtml(values.city);
@@ -134,7 +134,6 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="name"
-                    validate={(val: any) => val.length > 4}
                     minLength={2}
                     maxLength={255}
                     required
