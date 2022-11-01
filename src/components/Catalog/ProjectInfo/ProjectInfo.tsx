@@ -59,7 +59,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
   useEffect(() => {
     if (!!user && !!user.favourites && !!projectInfo)
-      setIsLiked(user.favourites.map((f: any)=>f._id).includes(projectInfo._id) ? true : false)
+      setIsLiked(
+        user.favourites.map((f: any) => f._id).includes(projectInfo._id)
+          ? true
+          : false,
+      );
   }, [user, projectInfo]);
 
   useEffect(() => {
@@ -106,8 +110,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         _created: -1,
       },
       filter: {
-        sold_out: false
-      }
+        sold_out: false,
+      },
     };
 
     const response = await axios.post(`/api/businesses/getList`, requestBody);
@@ -127,39 +131,45 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       sort: {
         _created: 1,
       },
-      filter: { "business._id": projectId  }
+      filter: { "business._id": projectId },
     };
 
     const response = await axios.post(`/api/comments/getList`, requestBody);
 
     if (response.data) {
-      const commentUserIds = response.data.entries.map((c:any)=>c.user)
+      const commentUserIds = response.data.entries.map((c: any) => c.user);
 
       const requestBody = {
         userId: commentUserIds,
       };
-  
-      const getUsers = await axios.post(
-        `/api/account/list`,
-        requestBody,
-      );
-      
+
+      const getUsers = await axios.post(`/api/account/list`, requestBody);
+
       if (getUsers.data) {
         const commentObjects = response.data.entries.map((c: any) => ({
           _id: c._id,
-          name: getUsers.data.filter((u:any)=>u._id==c.user)[0].name,
-          mail: getUsers.data.filter((u:any)=>u._id==c.user)[0].email, 
-          date: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(c.date),
+          name: getUsers.data.filter((u: any) => u._id == c.user)[0].name,
+          mail: getUsers.data.filter((u: any) => u._id == c.user)[0].email,
+          date: new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          }).format(c.date),
           text: c.comment,
-          image: getUsers.data.filter((u:any)=>u._id==c.user)[0].avatar?.path ?? "/assets/images/profile-photo.png"
-        }))
- 
-        setComments(commentObjects)
+          image:
+            getUsers.data.filter((u: any) => u._id == c.user)[0].avatar?.path ??
+            "/assets/images/profile-photo.png",
+        }));
+
+        setComments(commentObjects);
         return response.data.entries;
       }
     }
-    
-    setComments([])
+
+    setComments([]);
     return [];
   };
 
@@ -173,12 +183,12 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           setProjectInfo(response.data.entries[0]);
         } else {
           router.push("/404");
-          return false
+          return false;
         }
       }
     } catch (error) {
       router.push("/404");
-      return false
+      return false;
     }
 
     try {
@@ -206,7 +216,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     if (projectInfo == null) {
       setLoading(true);
     } else {
-      getBusinessComments()
+      getBusinessComments();
       setLoading(false);
     }
   }, [projectInfo]);
@@ -236,7 +246,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       });
 
       if (newCommentResponse.status == 200) {
-        getBusinessComments()
+        getBusinessComments();
       }
 
       console.log(newCommentResponse);
@@ -252,21 +262,21 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       user,
       project: {
         _id: projectInfo._id,
-        title: projectInfo.title
+        title: projectInfo.title,
       },
     };
 
     const response = await axios.post(`/api/account/favourites`, requestBody);
-    
+
     if (response.status == 200) {
       dispatchRedux(
         signInReducer({
           ...user,
-          favourites: response.data
+          favourites: response.data,
         }),
       );
     }
-  }
+  };
 
   function escapeHtml(text: string) {
     const map: any = {
@@ -290,14 +300,16 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             {projectInfo.title}
           </h1>
           <div className="projectInfo__title--icons">
-            {!!user && <button
-              onClick={handleFavourites}
-              className={`projectInfo__title--heart-icon ${
-                isLiked ? "active" : ""
-              }`}
-            >
-              <HeartSVG />
-            </button>}
+            {!!user && (
+              <button
+                onClick={handleFavourites}
+                className={`projectInfo__title--heart-icon ${
+                  isLiked ? "active" : ""
+                }`}
+              >
+                <HeartSVG />
+              </button>
+            )}
             <button
               data-tip
               data-for="copyTip"
@@ -324,37 +336,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         </p>
 
         <div className="projectInfo__image-slider">
-          {projectInfo.images && projectInfo.images.length > 1
-            ? (
-                <Slider {...imageSliderSettings}>
-                  {projectInfo.images.map((img: any, index: number) => (
-                    <li
-                      key={index}
-                      className="projectInfo__image-slider--image"
-                    >
-                    <Image
-                      className=""
-                      src={`${
-                        img.meta.assets == ""
-                          ? ``
-                          : `http://157.230.99.45:8082`
-                      }${img.path}`}
-                        layout="fill"
-                        objectFit="cover"
-                        alt=""
-                      />
-                    </li>
-                  ))}
-                </Slider>
-              )
-            : projectInfo.images.map((img: any, index: number) => (
+          {projectInfo.images && projectInfo.images.length > 1 ? (
+            <Slider {...imageSliderSettings}>
+              {projectInfo.images.map((img: any, index: number) => (
                 <li key={index} className="projectInfo__image-slider--image">
                   <Image
                     className=""
                     src={`${
-                      img.meta.assets == ""
-                        ? ``
-                        : `http://157.230.99.45:8082`
+                      img.meta.assets == "" ? `` : `http://157.230.99.45:8082`
                     }${img.path}`}
                     layout="fill"
                     objectFit="cover"
@@ -362,6 +351,22 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   />
                 </li>
               ))}
+            </Slider>
+          ) : (
+            projectInfo.images.map((img: any, index: number) => (
+              <li key={index} className="projectInfo__image-slider--image">
+                <Image
+                  className=""
+                  src={`${
+                    img.meta.assets == "" ? `` : `http://157.230.99.45:8082`
+                  }${img.path}`}
+                  layout="fill"
+                  objectFit="cover"
+                  alt=""
+                />
+              </li>
+            ))
+          )}
         </div>
         <div className="projectInfo__categories-slider">
           <Slider {...categoriesSliderSettings}>
@@ -457,7 +462,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   className="projectInfo__textarea section__primary-text"
                   type="text"
                   name="comment"
-                  minLength={2}
+                  minlength={1}
                   maxLength={1000}
                   required
                   placeholder="Додати коментар..."

@@ -318,7 +318,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     className="addBusinessEdit__textarea section__primary-text"
                     type="text"
                     name="description"
-                    minLength={2}
+                    minlength={1}
                     maxLength={1000}
                     required
                     placeholder="Писати тут..."
@@ -330,7 +330,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     className="addBusinessEdit__input section__primary-text"
                     type="text"
                     name="year"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -343,7 +343,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                       className="addBusinessEdit__input section__primary-text"
                       type="text"
                       name="price"
-                      minLength={2}
+                      minlength={1}
                       maxLength={255}
                       required
                       placeholder="-----"
@@ -359,7 +359,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     className="addBusinessEdit__input section__primary-text"
                     type="text"
                     name="year"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -373,7 +373,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                       type="text"
                       name="price"
                       pattern="[0-9]+"
-                      minLength={2}
+                      minlength={1}
                       maxLength={255}
                       required
                       placeholder="-----"
@@ -388,7 +388,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     className="addBusinessEdit__textarea section__primary-text"
                     type="text"
                     name="description"
-                    minLength={2}
+                    minlength={1}
                     maxLength={1000}
                     required
                     placeholder="Писати тут..."
@@ -427,7 +427,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   multiple
                   accept="image/*,.png,.jpg"
                   className="addBusinessEdit__custom-file-input--desctop"
-                  data-label={`Додати медіафал`}
+                  data-label={`Додати медіафайл`}
                   onChange={async (e) => {
                     if (e.currentTarget?.files?.length) {
                       const uploadedFiles: any = await uploadToServer(

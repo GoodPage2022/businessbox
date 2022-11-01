@@ -19,7 +19,7 @@ import { signOut as signOutReducer } from "../../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
 
 const CancelToken = axios.CancelToken;
-let cancel:any
+let cancel: any;
 
 const CatalogView = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -101,12 +101,12 @@ const CatalogView = () => {
           break;
         case "state":
           filterSetOfExp.push({
-            "state._id": filtersObj[f]
+            "state._id": filtersObj[f],
           });
           break;
         case "city":
           filterSetOfExp.push({
-            "city._id": filtersObj[f]
+            "city._id": filtersObj[f],
           });
           break;
         default:
@@ -115,12 +115,11 @@ const CatalogView = () => {
           filterSetOfExp.push(param);
           break;
       }
-
     });
 
     filterSetOfExp.push({
-      sold_out: false
-    })
+      sold_out: false,
+    });
 
     let requestBody: any = {
       user,
@@ -144,9 +143,15 @@ const CatalogView = () => {
     }
 
     try {
-      const response = await axios.post(`/api/businesses/getList`, requestBody, { cancelToken: new CancelToken((c) => {
-        cancel = c;
-      }) });
+      const response = await axios.post(
+        `/api/businesses/getList`,
+        requestBody,
+        {
+          cancelToken: new CancelToken((c) => {
+            cancel = c;
+          }),
+        },
+      );
 
       if (response.data) {
         if (resetLimit) {
@@ -172,8 +177,7 @@ const CatalogView = () => {
   };
 
   useEffect(() => {
-    if (!!filters && filters.length)
-      buildFiltersObj();    
+    if (!!filters && filters.length) buildFiltersObj();
   }, [filters]);
 
   useEffect(() => {
@@ -263,7 +267,7 @@ const CatalogView = () => {
           />
         </div>
 
-        <h2 className="title catalogView__title">Назва категорії</h2>
+        <h2 className="title catalogView__title">Каталог бізнесів</h2>
         <div className="catalogView__wrapper">
           <Sidebar changeFilter={changeFilter} filtersObj={filtersObj} />
           {cards.length > 0 ? (

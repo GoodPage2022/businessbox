@@ -288,7 +288,7 @@ const AddBusiness = () => {
                     className="addBusiness__textarea section__primary-text"
                     type="text"
                     name="description"
-                    minLength={2}
+                    minlength={1}
                     maxLength={1000}
                     required
                     placeholder="Писати тут..."
@@ -300,7 +300,7 @@ const AddBusiness = () => {
                     className="addBusiness__input section__primary-text"
                     type="text"
                     name="year"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -314,7 +314,7 @@ const AddBusiness = () => {
                       type="text"
                       name="price"
                       pattern="[0-9]+"
-                      minLength={2}
+                      minlength={1}
                       maxLength={255}
                       required
                       placeholder="-----"
@@ -330,7 +330,7 @@ const AddBusiness = () => {
                     className="addBusiness__input section__primary-text"
                     type="text"
                     name="year"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -344,7 +344,7 @@ const AddBusiness = () => {
                       type="text"
                       name="price"
                       pattern="[0-9]+"
-                      minLength={2}
+                      minlength={1}
                       maxLength={255}
                       required
                       placeholder="-----"
@@ -359,7 +359,7 @@ const AddBusiness = () => {
                     className="addBusiness__textarea section__primary-text"
                     type="text"
                     name="description"
-                    minLength={2}
+                    minlength={1}
                     maxLength={1000}
                     required
                     placeholder="Писати тут..."
@@ -395,7 +395,7 @@ const AddBusiness = () => {
                   type="file"
                   accept="image/*,.png,.jpg"
                   className="addBusiness__custom-file-input--desctop"
-                  data-label={`Додати медіафал`}
+                  data-label={`Додати медіафайл`}
                   onChange={async (e) => {
                     if (e.currentTarget?.files?.length) {
                       const uploadedFiles: any = await uploadToServer(

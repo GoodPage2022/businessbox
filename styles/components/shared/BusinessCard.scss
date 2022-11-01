@@ -138,6 +138,7 @@
     -webkit-line-clamp: 4; /* number of lines to show */
     line-clamp: 4;
     -webkit-box-orient: vertical;
+    height: 68px;
   }
 
   &__footer-mob {
@@ -385,6 +386,7 @@
     }
 
     &__description {
+      height: 60px;
       margin-bottom: 20px;
     }
 
