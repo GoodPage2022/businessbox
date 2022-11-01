@@ -34,7 +34,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { name, phone, mail, surname, password, city } = values;    
+    const { name, phone, mail, surname, password, city } = values;
 
     const newUser = {
       user: {
@@ -146,7 +146,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="name"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="Петро"
@@ -157,7 +157,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   <Field
                     className="modal-register__input section__primary-text"
                     type="text"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     name="surname"
                     required
@@ -190,7 +190,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="email"
                     name="mail"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="example@mail.com"
@@ -205,7 +205,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="city"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="Дніпро"

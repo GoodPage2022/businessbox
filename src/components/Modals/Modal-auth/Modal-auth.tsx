@@ -166,7 +166,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
                   className="modal-auth__input section__primary-text"
                   type="email"
                   name="mail"
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   required
                   placeholder="example@mail.com"

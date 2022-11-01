@@ -184,7 +184,7 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="number_of_founders"
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   required
                   placeholder="-----"
@@ -197,7 +197,7 @@ const AddBusinessFinish = () => {
                 <Field
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   name="number_of_employees"
                   required
@@ -240,7 +240,7 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="year_turnover"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -257,7 +257,7 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="monthly_net_profit"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -274,7 +274,7 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="gross_monthly_income"
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -295,7 +295,7 @@ const AddBusinessFinish = () => {
                       type="text"
                       name="estimated_turnover_next_year"
                       required
-                      minLength={2}
+                      minlength={1}
                       maxLength={255}
                       placeholder="-----"
                     />
@@ -334,7 +334,7 @@ const AddBusinessFinish = () => {
                     type="text"
                     name="return_on_investment"
                     required
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     placeholder="-----"
                   />
@@ -353,7 +353,7 @@ const AddBusinessFinish = () => {
                     type="text"
                     name="equipment_market_value"
                     required
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     placeholder="-----"
                   />
@@ -370,7 +370,7 @@ const AddBusinessFinish = () => {
                     type="text"
                     name="monthly_salary_fund"
                     required
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     placeholder="-----"
                   />
@@ -387,7 +387,7 @@ const AddBusinessFinish = () => {
                     type="text"
                     name="year_nonfixed_costs"
                     required
-                    minLength={2}
+                    minlength={1}
                     maxLength={255}
                     placeholder="-----"
                   />
@@ -403,7 +403,7 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="website"
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   placeholder="-----"
                 />
@@ -414,7 +414,7 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="instagram"
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   placeholder="-----"
                 />
@@ -427,7 +427,7 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="facebook"
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   placeholder="-----"
                 />
@@ -438,7 +438,7 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="youtube"
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   placeholder="-----"
                 />
@@ -465,7 +465,7 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__textarea section__primary-text"
                   type="text"
                   name="public_reviews"
-                  minLength={2}
+                  minlength={1}
                   maxLength={1000}
                   placeholder="-----"
                 />
@@ -481,7 +481,7 @@ const AddBusinessFinish = () => {
                   type="text"
                   name="financial_accounting_system"
                   required
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   placeholder="-----"
                 />
@@ -492,7 +492,7 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="crm"
-                  minLength={2}
+                  minlength={1}
                   maxLength={255}
                   placeholder="-----"
                 />
