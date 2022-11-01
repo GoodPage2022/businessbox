@@ -200,7 +200,6 @@ const AddBusinessFinish = () => {
                   minlength={1}
                   maxLength={255}
                   name="number_of_employees"
-                  required
                   placeholder="-----"
                 />
               </label>
@@ -219,7 +218,6 @@ const AddBusinessFinish = () => {
                       { value: "yes", label: "Так" },
                       { value: "no", label: "Ні" },
                     ]}
-                    required
                     placeholder="Так"
                   >
                     {/* <option value="yes">Так</option>
@@ -242,7 +240,6 @@ const AddBusinessFinish = () => {
                     name="year_turnover"
                     minlength={1}
                     maxLength={255}
-                    required
                     placeholder="-----"
                   />
                   <span className="addBusinessFinish__icon">$</span>
@@ -259,7 +256,6 @@ const AddBusinessFinish = () => {
                     name="monthly_net_profit"
                     minlength={1}
                     maxLength={255}
-                    required
                     placeholder="-----"
                   />
                   <span className="addBusinessFinish__icon">$</span>
@@ -276,7 +272,6 @@ const AddBusinessFinish = () => {
                     name="gross_monthly_income"
                     minlength={1}
                     maxLength={255}
-                    required
                     placeholder="-----"
                   />
                   <span className="addBusinessFinish__icon">$</span>
@@ -294,7 +289,6 @@ const AddBusinessFinish = () => {
                       className="addBusinessFinish__input section__primary-text"
                       type="text"
                       name="estimated_turnover_next_year"
-                      required
                       minlength={1}
                       maxLength={255}
                       placeholder="-----"
@@ -318,7 +312,6 @@ const AddBusinessFinish = () => {
                         { value: "yes", label: "Так" },
                         { value: "no", label: "Ні" },
                       ]}
-                      required
                     ></Field>
                   </span>
                 </label>
@@ -332,7 +325,6 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="return_on_investment"
-                    required
                     minlength={1}
                     maxLength={255}
                     placeholder="-----"
@@ -351,7 +343,6 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="equipment_market_value"
-                    required
                     minlength={1}
                     maxLength={255}
                     placeholder="-----"
@@ -368,7 +359,6 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="monthly_salary_fund"
-                    required
                     minlength={1}
                     maxLength={255}
                     placeholder="-----"
@@ -385,7 +375,6 @@ const AddBusinessFinish = () => {
                     className="addBusinessFinish__input section__primary-text"
                     type="text"
                     name="year_nonfixed_costs"
-                    required
                     minlength={1}
                     maxLength={255}
                     placeholder="-----"
@@ -479,7 +468,6 @@ const AddBusinessFinish = () => {
                   className="addBusinessFinish__input section__primary-text"
                   type="text"
                   name="financial_accounting_system"
-                  required
                   minlength={1}
                   maxLength={255}
                   placeholder="-----"
