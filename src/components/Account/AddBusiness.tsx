@@ -395,7 +395,7 @@ const AddBusiness = () => {
                   type="file"
                   accept="image/*,.png,.jpg"
                   className="addBusiness__custom-file-input--desctop"
-                  data-label={`Додати медіафал`}
+                  data-label={`Додати медіафайл`}
                   onChange={async (e) => {
                     if (e.currentTarget?.files?.length) {
                       const uploadedFiles: any = await uploadToServer(

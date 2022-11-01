@@ -427,7 +427,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   multiple
                   accept="image/*,.png,.jpg"
                   className="addBusinessEdit__custom-file-input--desctop"
-                  data-label={`Додати медіафал`}
+                  data-label={`Додати медіафайл`}
                   onChange={async (e) => {
                     if (e.currentTarget?.files?.length) {
                       const uploadedFiles: any = await uploadToServer(

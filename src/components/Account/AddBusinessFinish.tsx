@@ -325,8 +325,7 @@ const AddBusinessFinish = () => {
               </div>
               <label className="addBusinessFinish__field">
                 <span className="addBusinessFinish__label">
-                  Зразкова оцінка повернення інвестицій для покупця, враховуючи
-                  бажану вартість продажу бізнесу
+                  Орієнтовний період окупності бізнесу
                 </span>
                 <span className="addBusinessFinish__input-thumb">
                   <Field
@@ -362,7 +361,7 @@ const AddBusinessFinish = () => {
               </label>
               <label className="addBusinessFinish__field">
                 <span className="addBusinessFinish__label">
-                  Щомісячний зарплатний фонд (з огляду на премії та бонуси)
+                  Щомісячний зарплатний фонд (враховуючи премії та бонуси)
                 </span>
                 <span className="addBusinessFinish__input-thumb">
                   <Field
@@ -379,7 +378,7 @@ const AddBusinessFinish = () => {
               </label>
               <label className="addBusinessFinish__field">
                 <span className="addBusinessFinish__label">
-                  Приблизна сума непостійних витрат за роком
+                  Приблизна сума непостійних витрат протягом року
                 </span>
                 <span className="addBusinessFinish__input-thumb">
                   <Field

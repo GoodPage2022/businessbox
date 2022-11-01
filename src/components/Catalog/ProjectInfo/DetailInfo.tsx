@@ -46,7 +46,11 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
 
   useEffect(() => {
     if (!!user && !!user.favourites && !!projectInfo)
-      setIsLiked(user.favourites.map((f: any)=>f._id).includes(projectInfo._id) ? true : false)
+      setIsLiked(
+        user.favourites.map((f: any) => f._id).includes(projectInfo._id)
+          ? true
+          : false,
+      );
   }, [user, projectInfo]);
 
   const getBusinessInfo = async () => {
@@ -92,21 +96,21 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
       user,
       project: {
         _id: projectInfo._id,
-        title: projectInfo.title
+        title: projectInfo.title,
       },
     };
 
     const response = await axios.post(`/api/account/favourites`, requestBody);
-    
+
     if (response.status == 200) {
       dispatchRedux(
         signInReducer({
           ...user,
-          favourites: response.data
+          favourites: response.data,
         }),
       );
     }
-  }
+  };
 
   if (loading) return <></>;
 
@@ -116,14 +120,16 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
         <div className="detailInfo__title">
           <h1 className="detailInfo__title--text title">{projectInfo.title}</h1>
           <div className="detailInfo__title--icons">
-            {!!user && <button
-              onClick={handleFavourites}
-              className={`detailInfo__title--heart-icon ${
-                isLiked ? "active" : ""
-              }`}
-            >
-              <HeartSVG />
-            </button>}
+            {!!user && (
+              <button
+                onClick={handleFavourites}
+                className={`detailInfo__title--heart-icon ${
+                  isLiked ? "active" : ""
+                }`}
+              >
+                <HeartSVG />
+              </button>
+            )}
             <button
               data-tip
               data-for="copyTip"
@@ -224,8 +230,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
 
           <li className="detailInfo__list-item">
             <p className="detailInfo__list-item--left section__primary-text--bold">
-              Зразкова оцінка повернення інвестицій для покупця, враховуючи
-              бажану вартість продажу бізнесу
+              Орієнтовний період окупності бізнесу
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
               {projectInfo.return_on_investment ?? "– – – – –"}
@@ -233,7 +238,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
           </li>
           <li className="detailInfo__list-item">
             <p className="detailInfo__list-item--left section__primary-text--bold">
-              Щомісячний зарплатний фонд (з огляду на премії та бонуси)
+              Щомісячний зарплатний фонд (враховуючи премії та бонуси)
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
               {projectInfo.monthly_salary_fund ?? "– – – – –"}
@@ -249,7 +254,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
           </li>
           <li className="detailInfo__list-item">
             <p className="detailInfo__list-item--left section__primary-text--bold">
-              Приблизна сума непостійних витрат за роком
+              Приблизна сума непостійних витрат протягом року
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
               {projectInfo.year_nonfixed_costs ?? "– – – – –"}

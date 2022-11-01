@@ -67,7 +67,7 @@
     visibility: hidden;
   }
   &__custom-file-input::before {
-    content: "Додати медіафали";
+    content: "Додати медіафайли";
     display: inline-block;
     border: 1px solid $main-text-color;
     border-radius: 15px;
@@ -331,7 +331,7 @@
       visibility: hidden;
     }
     &__custom-file-input::before {
-      content: "Додати медіафали";
+      content: "Додати медіафайли";
       display: inline-block;
       border: 1px solid $main-text-color;
       border-radius: 15px;
