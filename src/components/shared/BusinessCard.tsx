@@ -105,9 +105,11 @@ const BusinessCard = ({
       </Link> */}
       {isMyBusinessesPage ? (
         <button
+          data-tip="Редагувати бізнес"
           className="business-card__button-edit"
           onClick={() => router.push(`/account/edit-business/${alias}`)}
         >
+          <ReactTooltip />
           <EditSVG />
         </button>
       ) : null}
