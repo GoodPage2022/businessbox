@@ -282,6 +282,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         value: "ІТ та інтелектуальна власність",
                         label: "ІТ та інтелектуальна власність",
                       },
+                      { value: "Кафе", label: "Кафе" },
+                      { value: "Фаст фуд", label: "Фаст фуд" },
                       { value: "Інше", label: "Інше" },
                     ]}
                   />
