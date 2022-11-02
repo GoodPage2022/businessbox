@@ -40,6 +40,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isOpenDeleteBusiness: !state.isOpenDeleteBusiness,
       };
+    case "toggle_registrationFinishModal":
+      return {
+        ...state,
+        isOpenModalRegisterFinish: !state.isOpenModalRegisterFinish,
+      };
     default:
       return state;
   }
@@ -54,4 +59,5 @@ export const initialState = {
   isActiveMobFilter: false,
   isActiveHeaderSearch: false,
   isOpenDeleteBusiness: false,
+  isOpenModalRegisterFinish: false,
 };

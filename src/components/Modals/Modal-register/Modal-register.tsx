@@ -58,6 +58,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
         onClose();
         resetForm({});
         setRegisterError("");
+        dispatch({ type: "toggle_registrationFinishModal" });
       }
     } catch (err: any) {
       setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
