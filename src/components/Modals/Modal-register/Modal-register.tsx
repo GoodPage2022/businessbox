@@ -53,7 +53,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
 
     try {
       const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
-      console.log(newUserResponse);
+
       if (newUserResponse.status == 200) {
         onClose();
         resetForm({});
@@ -61,9 +61,13 @@ function ModalRegister({ onClose }: { onClose: any }) {
         dispatch({ type: "toggle_registrationFinishModal" });
       }
     } catch (err: any) {
-      setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
       console.log("Register Error");
       console.log(err);
+      if (err.response.data.error === "Username is already used!") {
+        setRegisterError("Даний емейл уже використовується. Спробуйте інший");
+      } else {
+        setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
+      }
     }
   };
 
