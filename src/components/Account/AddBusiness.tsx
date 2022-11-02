@@ -290,7 +290,7 @@ const AddBusiness = () => {
                     className="addBusiness__textarea section__primary-text"
                     type="text"
                     name="description"
-                    minlength={1}
+                    minLength={1}
                     maxLength={1000}
                     required
                     placeholder="Писати тут..."
@@ -302,7 +302,7 @@ const AddBusiness = () => {
                     className="addBusiness__input section__primary-text"
                     type="text"
                     name="year"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -316,7 +316,7 @@ const AddBusiness = () => {
                       type="text"
                       name="price"
                       pattern="[0-9]+"
-                      minlength={1}
+                      minLength={1}
                       maxLength={255}
                       required
                       placeholder="-----"
@@ -332,7 +332,7 @@ const AddBusiness = () => {
                     className="addBusiness__input section__primary-text"
                     type="text"
                     name="year"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -346,7 +346,7 @@ const AddBusiness = () => {
                       type="text"
                       name="price"
                       pattern="[0-9]+"
-                      minlength={1}
+                      minLength={1}
                       maxLength={255}
                       required
                       placeholder="-----"
@@ -361,7 +361,7 @@ const AddBusiness = () => {
                     className="addBusiness__textarea section__primary-text"
                     type="text"
                     name="description"
-                    minlength={1}
+                    minLength={1}
                     maxLength={1000}
                     required
                     placeholder="Писати тут..."

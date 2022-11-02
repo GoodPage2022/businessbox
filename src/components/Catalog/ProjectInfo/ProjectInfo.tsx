@@ -462,7 +462,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   className="projectInfo__textarea section__primary-text"
                   type="text"
                   name="comment"
-                  minlength={1}
+                  minLength={1}
                   maxLength={1000}
                   required
                   placeholder="Додати коментар..."

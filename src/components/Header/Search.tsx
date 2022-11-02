@@ -13,25 +13,22 @@ const initialValues = {
 };
 
 const CancelToken = axios.CancelToken;
-let cancel:any
+let cancel: any;
 
 const Search = () => {
-  const [state, dispatch] = React.useContext(MainContext)
-  const [searchItems, setSearchItems] = React.useState<any>([])
-  const [hasItems, setHasItems] = React.useState<boolean>(false)
-  const [searchValue, setSearchValue] = React.useState<string>("")
+  const [state, dispatch] = React.useContext(MainContext);
+  const [searchItems, setSearchItems] = React.useState<any>([]);
+  const [hasItems, setHasItems] = React.useState<boolean>(false);
+  const [searchValue, setSearchValue] = React.useState<string>("");
   const searchInput = useRef<any>(null);
-  const router = useRouter()
+  const router = useRouter();
   const ref = useRef();
 
-  useOnClickOutside(
-    ref,
-    () => {
-      if (state.isActiveHeaderSearch) {
-        dispatch({ type: "toggle_headerSearch" });
-      }
-    },
-  );
+  useOnClickOutside(ref, () => {
+    if (state.isActiveHeaderSearch) {
+      dispatch({ type: "toggle_headerSearch" });
+    }
+  });
 
   const formik = useFormik({
     initialValues,
@@ -49,32 +46,31 @@ const Search = () => {
       cancel();
     }
 
-    setSearchValue(e.target.value)
+    setSearchValue(e.target.value);
 
     const requestBody = {
-      filter: e.target.value
-    }
+      filter: e.target.value,
+    };
 
     const options = {
       cancelToken: new CancelToken((c) => {
         cancel = c;
-      }) 
-    }
+      }),
+    };
 
     const response = await axios.post(`/api/search/get`, requestBody, options);
 
     setSearchItems(response.data.entries ?? []);
-  }
+  };
 
-  useEffect(()=>{
-    if (searchValue != '')
-      setHasItems(true)
-  }, [searchItems, searchValue])
+  useEffect(() => {
+    if (searchValue != "") setHasItems(true);
+  }, [searchItems, searchValue]);
 
-  const handleSearchItemRouting = (id:any) => {
+  const handleSearchItemRouting = (id: any) => {
     dispatch({ type: "toggle_headerSearch" });
-    router.push("/catalog/" + id)
-  }
+    router.push("/catalog/" + id);
+  };
 
   return (
     <div
@@ -82,7 +78,9 @@ const Search = () => {
     >
       <FormikProvider value={formik}>
         <Field
-          className={`header__input ${searchItems.length > 0 ? "active" : ""}${hasItems ? " hasItems" : ""}`}
+          className={`header__input ${searchItems.length > 0 ? "active" : ""}${
+            hasItems ? " hasItems" : ""
+          }`}
           type="text"
           name="search"
           autoComplete="off"
@@ -97,9 +95,15 @@ const Search = () => {
         {searchItems.length > 0 ? (
           <ul className={`header__search-list`}>
             {searchItems.map(({ _id, title, description }: any) => (
-              <li className="header__search-item" key={_id} onClick={()=>handleSearchItemRouting(_id)}>
+              <li
+                className="header__search-item"
+                key={_id}
+                onClick={() => handleSearchItemRouting(_id)}
+              >
                 <p className="header__search-item--title">{title}</p>
-                <p className="header__search-item--desc">{description?.replace(/(<([^>]+)>)/ig, '')}</p>
+                <p className="header__search-item--desc">
+                  {description?.replace(/(<([^>]+)>)/gi, "")}
+                </p>
               </li>
             ))}
           </ul>

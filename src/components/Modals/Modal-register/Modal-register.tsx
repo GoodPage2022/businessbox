@@ -151,7 +151,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="name"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="Петро"
@@ -162,7 +162,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   <Field
                     className="modal-register__input section__primary-text"
                     type="text"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     name="surname"
                     required
@@ -195,7 +195,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="email"
                     name="mail"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="example@mail.com"
@@ -210,7 +210,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="city"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="Дніпро"

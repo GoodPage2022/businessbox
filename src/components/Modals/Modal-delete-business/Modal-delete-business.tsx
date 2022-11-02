@@ -7,12 +7,20 @@ import MainButtonRed from "../../shared/MainButtonRed";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-function ModalDeleteBusiness({ onClose, projectId, projectTitle }: { onClose: any, projectId: string, projectTitle: string }) {
+function ModalDeleteBusiness({
+  onClose,
+  projectId,
+  projectTitle,
+}: {
+  onClose: any;
+  projectId: string;
+  projectTitle: string;
+}) {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const [deleteBusinessError, setdeleteBusinessError] = useState("");
   const user = useSelector((state: any) => state.auth.user);
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -42,7 +50,7 @@ function ModalDeleteBusiness({ onClose, projectId, projectTitle }: { onClose: an
       deleteReason,
       deleteReasonOther,
       projectId,
-      projectTitle
+      projectTitle,
     };
 
     try {
@@ -52,12 +60,15 @@ function ModalDeleteBusiness({ onClose, projectId, projectTitle }: { onClose: an
     }
 
     try {
-      const reponseDeleteReason = await axios.post("/api/businesses/deleteReason", data);
+      const reponseDeleteReason = await axios.post(
+        "/api/businesses/deleteReason",
+        data,
+      );
     } catch (error) {
       console.log(error);
     }
 
-    router.push("/account/my-businesses")
+    router.push("/account/my-businesses");
   };
 
   return (
@@ -102,64 +113,65 @@ function ModalDeleteBusiness({ onClose, projectId, projectTitle }: { onClose: an
               return errors;
             }}
             onSubmit={handleSubmit}
-          >{({values})=>(
-            <Form className="modal-deleteBusiness__form">
-              {deleteBusinessError && (
-                <div className="modal-deleteBusiness__failed">
-                  {deleteBusinessError}
-                </div>
-              )}
-              <label className="modal-deleteBusiness__field">
-                <Field
-                  className="modal-deleteBusiness__input section__primary-text"
-                  type="radio"
-                  value="sold"
-                  required
-                  name="deleteReason"
-                />
-                <span className="modal-deleteBusiness__label">
-                  Бізнес вже продано
-                </span>
-              </label>
-              <label className="modal-deleteBusiness__field">
-                <Field
-                  className="modal-deleteBusiness__input section__primary-text"
-                  type="radio"
-                  value="incorect"
-                  required
-                  name="deleteReason"
-                />
-                <span className="modal-deleteBusiness__label">
-                  Введена некоректна інформація
-                </span>
-              </label>
-              <label className="modal-deleteBusiness__field">
-                <Field
-                  className="modal-deleteBusiness__input section__primary-text"
-                  type="radio"
-                  value="other"
-                  name="deleteReason"
-                  required
-                />
-                <span className="modal-deleteBusiness__label">Інше</span>
-              </label>
-              <label className="modal-deleteBusiness__field">
-                <Field
-                  className="modal-deleteBusiness__input-text section__primary-text"
-                  type="text"
-                  name="deleteReasonOther"
-                  minLength={1}
-                  maxLength={255}
-                  required={values.deleteReason == "other" ? true : false}
-                  placeholder="Передумав продавати..."
-                />
-              </label>
+          >
+            {({ values }) => (
+              <Form className="modal-deleteBusiness__form">
+                {deleteBusinessError && (
+                  <div className="modal-deleteBusiness__failed">
+                    {deleteBusinessError}
+                  </div>
+                )}
+                <label className="modal-deleteBusiness__field">
+                  <Field
+                    className="modal-deleteBusiness__input section__primary-text"
+                    type="radio"
+                    value="sold"
+                    required
+                    name="deleteReason"
+                  />
+                  <span className="modal-deleteBusiness__label">
+                    Бізнес вже продано
+                  </span>
+                </label>
+                <label className="modal-deleteBusiness__field">
+                  <Field
+                    className="modal-deleteBusiness__input section__primary-text"
+                    type="radio"
+                    value="incorect"
+                    required
+                    name="deleteReason"
+                  />
+                  <span className="modal-deleteBusiness__label">
+                    Введена некоректна інформація
+                  </span>
+                </label>
+                <label className="modal-deleteBusiness__field">
+                  <Field
+                    className="modal-deleteBusiness__input section__primary-text"
+                    type="radio"
+                    value="other"
+                    name="deleteReason"
+                    required
+                  />
+                  <span className="modal-deleteBusiness__label">Інше</span>
+                </label>
+                <label className="modal-deleteBusiness__field">
+                  <Field
+                    className="modal-deleteBusiness__input-text section__primary-text"
+                    type="text"
+                    name="deleteReasonOther"
+                    minLength={1}
+                    maxLength={255}
+                    required={values.deleteReason == "other" ? true : false}
+                    placeholder="Передумав продавати..."
+                  />
+                </label>
 
-              <div className="modal-deleteBusiness__button">
-                <MainButtonRed label="Відправити" />
-              </div>
-            </Form>
-          )}
+                <div className="modal-deleteBusiness__button">
+                  <MainButtonRed label="Відправити" />
+                </div>
+              </Form>
+            )}
           </Formik>
         </div>
       </div>
