@@ -38,7 +38,7 @@ const BusinessCard = ({
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [clickTime, setClickTime] = useState<number>(0);
   const [clickPos, setClickPos] = useState<any>({});
-
+  const rate = 37;
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
       setIsMyBusinessesPage(true);
@@ -149,17 +149,32 @@ const BusinessCard = ({
           dangerouslySetInnerHTML={{ __html: description }}
         />
         <div className="business-card__footer">
-          <div className="business-card__views">
-            <EyeSVG className="business-card__eye-icon" />
-            <p className="business-card__views-count section__secondary-text">
-              {views}
-            </p>
+          <div className="business-card__footer--top">
+            <div className="business-card__views">
+              <EyeSVG className="business-card__eye-icon" />
+              <p className="business-card__views-count section__secondary-text">
+                {views}
+              </p>
+            </div>
+            <p className="business-card__price">{price}$</p>
           </div>
-          <p className="business-card__price">{price}₴</p>
+          <div className="business-card__footer--bottom">
+            <p className="section__secondary-text">
+              {Number(price) * rate} грн
+            </p>
+            <div className="business-card__rate">
+              <p className="business-card__rate--top section__secondary-text">
+                USD 37 грн
+              </p>
+              <p className="business-card__rate--bottom">
+                за даними kurs.com.ua
+              </p>
+            </div>
+          </div>
         </div>
         <div className="business-card__footer-mob">
           <div className="business-card__footer-mob--first">
-            <p className="business-card__price">{price}₴</p>
+            <p className="business-card__price">{price}$</p>
             {!!user && (
               <button
                 onClick={handleFavourites}
@@ -171,6 +186,21 @@ const BusinessCard = ({
               </button>
             )}
           </div>
+
+          <div className="business-card__footer-mob--price">
+            <p className="section__secondary-text">
+              {Number(price) * rate} грн
+            </p>
+            <div className="business-card__rate">
+              <p className="business-card__rate--top section__secondary-text">
+                USD 37 грн
+              </p>
+              <p className="business-card__rate--bottom">
+                за даними kurs.com.ua
+              </p>
+            </div>
+          </div>
+
           <div className="business-card__footer-mob--second">
             <div className="business-card__views">
               <EyeSVG className="business-card__eye-icon" />

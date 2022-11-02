@@ -144,12 +144,38 @@
   &__footer-mob {
     display: none;
   }
+  &__rate {
+    position: absolute;
+    top: -80px;
+    display: none;
+    background: #f5f5f5;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    border-top: 4px solid $main-red-color;
+    padding: 15px;
 
-  &__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    &--top {
+      margin-bottom: 5px;
+    }
   }
+  &__footer {
+    &--top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    &--bottom {
+      position: relative;
+      &:hover {
+        .business-card__rate {
+          display: block;
+        }
+      }
+    }
+  }
+
   &__views {
     display: flex;
     align-items: center;
@@ -303,9 +329,9 @@
     }
 
     &__footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      // display: flex;
+      // align-items: center;
+      // justify-content: space-between;
     }
     &__views {
       display: flex;
@@ -390,6 +416,21 @@
       margin-bottom: 20px;
     }
 
+    // &__rate {
+    //   position: absolute;
+    //   top: -80px;
+    //   display: none;
+    //   background: #f5f5f5;
+    //   border-radius: 0 0 10px 10px;
+    //   overflow: hidden;
+    //   border-top: 4px solid $main-red-color;
+    //   padding: 15px;
+
+    //   &--top {
+    //     margin-bottom: 5px;
+    //   }
+    // }
+
     &__footer-mob {
       display: block;
 
@@ -397,8 +438,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
       }
+
+      &--price {
+        position: relative;
+        margin-bottom: 10px;
+        &:hover {
+          .business-card__rate {
+            display: block;
+          }
+        }
+      }
+
       &--second {
         display: flex;
         align-items: center;

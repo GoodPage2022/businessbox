@@ -30,6 +30,7 @@ const BusinessCardFavorites = ({
   const [isLiked, setIsLiked] = useState(false);
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
 
+  const rate = 37;
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
       setIsMyBusinessesPage(true);
@@ -87,17 +88,32 @@ const BusinessCardFavorites = ({
           dangerouslySetInnerHTML={{ __html: description }}
         />
         <div className="business-card-favorite__footer">
-          <div className="business-card-favorite__views">
-            <EyeSVG className="business-card-favorite__eye-icon" />
-            <p className="business-card-favorite__views-count section__secondary-text">
-              {views}
-            </p>
+          <div className="business-card__footer--top">
+            <div className="business-card-favorite__views">
+              <EyeSVG className="business-card-favorite__eye-icon" />
+              <p className="business-card-favorite__views-count section__secondary-text">
+                {views}
+              </p>
+            </div>
+            <p className="business-card-favorite__price">{price}$</p>
           </div>
-          <p className="business-card-favorite__price">{price}₴</p>
+          <div className="business-card__footer--bottom">
+            <p className="section__secondary-text">
+              {Number(price) * rate} грн
+            </p>
+            <div className="business-card__rate">
+              <p className="business-card__rate--top section__secondary-text">
+                USD 37 грн
+              </p>
+              <p className="business-card__rate--bottom">
+                за даними kurs.com.ua
+              </p>
+            </div>
+          </div>
         </div>
         <div className="business-card-favorite__footer-mob">
           <div className="business-card-favorite__footer-mob--first">
-            <p className="business-card-favorite__price">{price}₴</p>
+            <p className="business-card-favorite__price">{price}$</p>
             <button
               onClick={() => setIsLiked((prev) => !prev)}
               className={`business-card-favorite__heart-icon--mob ${
@@ -106,6 +122,19 @@ const BusinessCardFavorites = ({
             >
               <HeartSVG />
             </button>
+          </div>
+          <div className="business-card-favorite__footer-mob--price">
+            <p className="section__secondary-text">
+              {Number(price) * rate} грн
+            </p>
+            <div className="business-card-favorite__rate">
+              <p className="business-card-favorite__rate--top section__secondary-text">
+                USD 37 грн
+              </p>
+              <p className="business-card-favorite__rate--bottom">
+                за даними kurs.com.ua
+              </p>
+            </div>
           </div>
           <div className="business-card-favorite__footer-mob--second">
             <div className="business-card-favorite__views">
