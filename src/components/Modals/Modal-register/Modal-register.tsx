@@ -64,7 +64,9 @@ function ModalRegister({ onClose }: { onClose: any }) {
       console.log("Register Error");
       console.log(err);
       if (err.response.data.error === "Username is already used!") {
-        setRegisterError("Даний емейл уже використовується. Спробуйте інший");
+        setRegisterError(
+          "Користувач з такою поштою вже зареєстрований в системі. Змініть пошту або скористайтеся функцією відновлення паролю",
+        );
       } else {
         setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
       }
