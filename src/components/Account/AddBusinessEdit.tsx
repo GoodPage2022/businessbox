@@ -132,7 +132,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business, state, year, city } = values;
+    const { name, price, description, business, state, year, city, currency } =
+      values;
 
     let newBusiness: any = {
       _id: projectId,
@@ -146,6 +147,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
         display: listAreas.filter((e: any) => e.value == state)[0].label,
       },
       year,
+      currency,
       city: {
         _id: city,
         link: "Areas",
@@ -189,7 +191,6 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
         user,
       });
       console.log(newBusinessResponse);
-
       router.push(`/catalog/${projectId}`);
       setAddBusinessError("");
       console.log("newBusinessResponse");
@@ -232,6 +233,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             state: businessInfo != null ? businessInfo.state._id : "",
             year: businessInfo != null ? businessInfo.year : "",
             city: businessInfo != null ? businessInfo.city._id : "",
+            // currency: businessInfo != null ? businessInfo.currency : "",
             file:
               businessInfo != null ? businessInfo.public_reviews_media : null,
           }}
@@ -338,31 +340,49 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         required
                         placeholder="-----"
                       />
-                    </label>
-                    <label className="addBusinessEdit__field">
-                      <span className="addBusinessEdit__label">Ціна</span>
-                      <span className="addBusinessEdit__input-thumb">
+                    </label>{" "}
+                    <div className="addBusinessEdit__price">
+                      <label className="addBusinessEdit__field">
+                        <span className="addBusinessEdit__label">Ціна</span>
+                        <span className="addBusinessEdit__input-thumb">
+                          <Field
+                            className="addBusinessEdit__input section__primary-text"
+                            type="text"
+                            name="price"
+                            minLength={1}
+                            onChange={(e: any) => {
+                              setFieldValue(
+                                "price",
+                                e.target.value.replaceAll(
+                                  /[A-Za-zА-Яа-я,./'` ]/g,
+                                  "",
+                                ),
+                              );
+                            }}
+                            maxLength={255}
+                            required
+                            placeholder="-----"
+                          />
+                          <span className="addBusinessEdit__icon">
+                            {businessInfo?.currency === "Гривня" ? "₴" : "$"}
+                          </span>
+                        </span>
+                      </label>
+                      <label className="addBusinessEdit__field">
+                        <span className="addBusinessEdit__label">Валюта</span>
                         <Field
-                          className="addBusinessEdit__input section__primary-text"
                           type="text"
-                          name="price"
-                          minLength={1}
-                          onChange={(e: any) => {
-                            setFieldValue(
-                              "price",
-                              e.target.value.replaceAll(
-                                /[A-Za-zА-Яа-я,./'` ]/g,
-                                "",
-                              ),
-                            );
-                          }}
-                          maxLength={255}
+                          name="currency"
                           required
-                          placeholder="-----"
+                          placeholder="Оберіть"
+                          component={CustomSelect}
+                          options={[
+                            { value: "Гривня", label: "Гривня" },
+                            { value: "Долар", label: "Долар" },
+                          ]}
                         />
-                        <span className="addBusinessEdit__icon">$</span>
-                      </span>
-                    </label>
+                      </label>
+                    </div>
                   </div>
                   <div className="addBusinessEdit__info-wrapper--right-mob">
                     <label className="addBusinessEdit__field">
@@ -388,31 +408,49 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         placeholder="-----"
                       />
                     </label>
-                    <label className="addBusinessEdit__field">
-                      <span className="addBusinessEdit__label">Ціна</span>
-                      <span className="addBusinessEdit__input-thumb">
+                    <div className="addBusinessEdit__price">
+                      <label className="addBusinessEdit__field">
+                        <span className="addBusinessEdit__label">Ціна</span>
+                        <span className="addBusinessEdit__input-thumb">
+                          <Field
+                            className="addBusinessEdit__input section__primary-text"
+                            type="text"
+                            name="price"
+                            pattern="[0-9]+"
+                            minLength={1}
+                            onChange={(e: any) => {
+                              setFieldValue(
+                                "price",
+                                e.target.value.replaceAll(
+                                  /[A-Za-zА-Яа-я,./'` ]/g,
+                                  "",
+                                ),
+                              );
+                            }}
+                            maxLength={255}
+                            required
+                            placeholder="-----"
+                          />
+                          <span className="addBusinessEdit__icon">
+                            {businessInfo?.currency === "Гривня" ? "₴" : "$"}
+                          </span>
+                        </span>
+                      </label>
+                      <label className="addBusinessEdit__field">
+                        <span className="addBusinessEdit__label">Валюта</span>
                         <Field
-                          className="addBusinessEdit__input section__primary-text"
                           type="text"
-                          name="price"
-                          pattern="[0-9]+"
-                          minLength={1}
-                          onChange={(e: any) => {
-                            setFieldValue(
-                              "price",
-                              e.target.value.replaceAll(
-                                /[A-Za-zА-Яа-я,./'` ]/g,
-                                "",
-                              ),
-                            );
-                          }}
-                          maxLength={255}
+                          name="currency"
                           required
-                          placeholder="-----"
+                          placeholder="Оберіть"
+                          component={CustomSelect}
+                          options={[
+                            { value: "Гривня", label: "Гривня" },
+                            { value: "Долар", label: "Долар" },
+                          ]}
                         />
-                        <span className="addBusinessEdit__icon">$</span>
-                      </span>
-                    </label>
+                      </label>
+                    </div>
                     <label className="addBusinessEdit__field">
                       <span className="addBusinessEdit__label">Опис</span>
                       <Field

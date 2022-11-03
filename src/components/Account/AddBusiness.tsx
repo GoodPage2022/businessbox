@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
 import CrossSVG from "../../assets/svg/cross.svg";
 import OurCategories from "../../constants/categories-select";
+import AddBusinessFinish from "./AddBusinessFinish";
 
 const AddBusiness = () => {
   const router = useRouter();
@@ -17,6 +18,7 @@ const AddBusiness = () => {
   const [listAreas, setListAreas] = useState<any>();
   const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
+  const [currencyState, setCurrencyState] = useState("Гривня");
   const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
 
   const getListAreas = async () => {
@@ -91,7 +93,8 @@ const AddBusiness = () => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business, state, year, city } = values;
+    const { name, price, description, business, state, year, city, currency } =
+      values;
 
     let newBusiness: any = {
       title: name,
@@ -104,6 +107,7 @@ const AddBusiness = () => {
         display: listAreas.filter((e: any) => e.value == state)[0].label,
       },
       year,
+      currency,
       city: {
         _id: city,
         link: "Areas",
@@ -160,9 +164,11 @@ const AddBusiness = () => {
         console.log("error");
       }
       setIsSentBusiness(true);
+      localStorage.setItem("currency", currencyState);
       router.push(
         `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
       );
+
       setAddBusinessError("");
       console.log("newUserResponse");
       console.log(newBusinessResponse);
@@ -205,9 +211,6 @@ const AddBusiness = () => {
           }}
           validate={(values: any) => {
             const errors: any = {};
-            // if (typeof values.price != "number")
-            //   error[]
-
             escapeHtml(values.name);
             escapeHtml(values.business);
             escapeHtml(values.price);
@@ -307,31 +310,50 @@ const AddBusiness = () => {
                         placeholder="-----"
                       />
                     </label>
-                    <label className="addBusiness__field">
-                      <span className="addBusiness__label">Ціна</span>
-                      <span className="addBusiness__input-thumb">
+                    <div className="addBusiness__price">
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">Ціна</span>
+                        <span className="addBusiness__input-thumb">
+                          <Field
+                            className="addBusiness__input section__primary-text"
+                            type="text"
+                            name="price"
+                            pattern="[0-9]+"
+                            onChange={(e: any) => {
+                              setFieldValue(
+                                "price",
+                                e.target.value.replaceAll(
+                                  /[A-Za-zА-Яа-я,./'` ]/g,
+                                  "",
+                                ),
+                              );
+                            }}
+                            minLength={1}
+                            maxLength={255}
+                            required
+                            placeholder="-----"
+                          />
+                          <span className="addBusiness__icon">
+                            {currencyState === "Гривня" ? "₴" : "$"}
+                          </span>
+                        </span>
+                      </label>
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">Валюта</span>
                         <Field
-                          className="addBusiness__input section__primary-text"
                           type="text"
-                          name="price"
-                          pattern="[0-9]+"
-                          onChange={(e: any) => {
-                            setFieldValue(
-                              "price",
-                              e.target.value.replaceAll(
-                                /[A-Za-zА-Яа-я,./'` ]/g,
-                                "",
-                              ),
-                            );
-                          }}
-                          minLength={1}
-                          maxLength={255}
+                          name="currency"
                           required
-                          placeholder="-----"
+                          setter={setCurrencyState}
+                          placeholder="Оберіть"
+                          component={CustomSelect}
+                          options={[
+                            { value: "Гривня", label: "Гривня" },
+                            { value: "Долар", label: "Долар" },
+                          ]}
                         />
-                        <span className="addBusiness__icon">$</span>
-                      </span>
-                    </label>
+                      </label>
+                    </div>
                   </div>
                   <div className="addBusiness__info-wrapper--right-mob">
                     <label className="addBusiness__field">
@@ -355,31 +377,50 @@ const AddBusiness = () => {
                         placeholder="-----"
                       />
                     </label>
-                    <label className="addBusiness__field">
-                      <span className="addBusiness__label">Ціна</span>
-                      <span className="addBusiness__input-thumb">
+                    <div className="addBusiness__price">
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">Ціна</span>
+                        <span className="addBusiness__input-thumb">
+                          <Field
+                            className="addBusiness__input section__primary-text"
+                            type="text"
+                            name="price"
+                            pattern="[0-9]+"
+                            minLength={1}
+                            maxLength={255}
+                            required
+                            onChange={(e: any) => {
+                              setFieldValue(
+                                "price",
+                                e.target.value.replaceAll(
+                                  /[A-Za-zА-Яа-я,./'` ]/g,
+                                  "",
+                                ),
+                              );
+                            }}
+                            placeholder="-----"
+                          />
+                          <span className="addBusiness__icon">
+                            {currencyState === "Гривня" ? "₴" : "$"}
+                          </span>
+                        </span>
+                      </label>
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">Валюта</span>
                         <Field
-                          className="addBusiness__input section__primary-text"
                           type="text"
-                          name="price"
-                          pattern="[0-9]+"
-                          minLength={1}
-                          maxLength={255}
+                          name="currency"
                           required
-                          onChange={(e: any) => {
-                            setFieldValue(
-                              "price",
-                              e.target.value.replaceAll(
-                                /[A-Za-zА-Яа-я,./'` ]/g,
-                                "",
-                              ),
-                            );
-                          }}
-                          placeholder="-----"
+                          setter={setCurrencyState}
+                          placeholder="Оберіть"
+                          component={CustomSelect}
+                          options={[
+                            { value: "Гривня", label: "Гривня" },
+                            { value: "Долар", label: "Долар" },
+                          ]}
                         />
-                        <span className="addBusiness__icon">$</span>
-                      </span>
-                    </label>
+                      </label>
+                    </div>
                     <label className="addBusiness__field">
                       <span className="addBusiness__label">Опис</span>
                       <Field

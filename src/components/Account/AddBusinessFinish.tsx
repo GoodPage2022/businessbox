@@ -10,6 +10,7 @@ const AddBusinessFinish = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [addBusinessError, setAddBusinessError] = useState("");
   const { businessId } = router.query;
+  const [currency, setCurrency] = useState(localStorage.getItem("currency"));
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     const {
@@ -271,7 +272,9 @@ const AddBusinessFinish = () => {
                         maxLength={255}
                         placeholder="-----"
                       />
-                      <span className="addBusinessFinish__icon">$</span>
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
                     </span>
                   </label>
                   <label className="addBusinessFinish__field">
@@ -296,7 +299,9 @@ const AddBusinessFinish = () => {
                         maxLength={255}
                         placeholder="-----"
                       />
-                      <span className="addBusinessFinish__icon">$</span>
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
                     </span>
                   </label>
                   <label className="addBusinessFinish__field">
@@ -321,7 +326,9 @@ const AddBusinessFinish = () => {
                         maxLength={255}
                         placeholder="-----"
                       />
-                      <span className="addBusinessFinish__icon">$</span>
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
                     </span>
                   </label>
                 </div>
@@ -349,7 +356,9 @@ const AddBusinessFinish = () => {
                           maxLength={255}
                           placeholder="-----"
                         />
-                        <span className="addBusinessFinish__icon">$</span>
+                        <span className="addBusinessFinish__icon">
+                          {currency === "Гривня" ? "₴" : "$"}
+                        </span>
                       </span>
                     </label>
                     <label className="addBusinessFinish__field__select">
@@ -394,7 +403,9 @@ const AddBusinessFinish = () => {
                         maxLength={255}
                         placeholder="-----"
                       />
-                      <span className="addBusinessFinish__icon">$</span>
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
                     </span>
                   </label>
                 </div>
@@ -421,7 +432,9 @@ const AddBusinessFinish = () => {
                         maxLength={255}
                         placeholder="-----"
                       />
-                      <span className="addBusinessFinish__icon">$</span>
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
                     </span>
                   </label>
                   <label className="addBusinessFinish__field">
@@ -446,7 +459,9 @@ const AddBusinessFinish = () => {
                         maxLength={255}
                         placeholder="-----"
                       />
-                      <span className="addBusinessFinish__icon">$</span>
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
                     </span>
                   </label>
                   <label className="addBusinessFinish__field">
@@ -471,7 +486,9 @@ const AddBusinessFinish = () => {
                         maxLength={255}
                         placeholder="-----"
                       />
-                      <span className="addBusinessFinish__icon">$</span>
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
                     </span>
                   </label>
                 </div>
