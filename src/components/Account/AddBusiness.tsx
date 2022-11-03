@@ -279,7 +279,7 @@ const AddBusiness = () => {
                     type="text"
                     name="description"
                     minLength={1}
-                    maxLength={1000}
+                    maxLength={2000}
                     required
                     placeholder="Писати тут..."
                   />
@@ -350,7 +350,7 @@ const AddBusiness = () => {
                     type="text"
                     name="description"
                     minLength={1}
-                    maxLength={1000}
+                    maxLength={2000}
                     required
                     placeholder="Писати тут..."
                   />
