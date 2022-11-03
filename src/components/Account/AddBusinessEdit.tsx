@@ -250,225 +250,274 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
           }}
           onSubmit={handleSubmit}
         >
-          <Form className="addBusinessEdit__form">
-            <div className="addBusinessEdit__info-wrapper">
-              <div className="addBusinessEdit__info-wrapper--left">
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Назва</span>
-                  <Field
-                    className="addBusinessEdit__input section__primary-text"
-                    type="text"
-                    name="name"
-                    minLength={1}
-                    maxLength={255}
-                    required
-                    placeholder="-----"
-                  />
-                </label>
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Категорія</span>
-                  <Field
-                    type="text"
-                    name="business"
-                    required
-                    placeholder="Торгівля"
-                    component={CustomSelect}
-                    options={OurCategories}
-                  />
-                </label>
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Область</span>
-                  <Field
-                    type="text"
-                    name="state"
-                    required
-                    placeholder="Оберіть"
-                    component={CustomSelect}
-                    setter={setSelectedArea}
-                    options={listAreas}
-                  />
-                </label>
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Місто</span>
-                  <Field
-                    type="text"
-                    name="city"
-                    required
-                    placeholder="Оберіть"
-                    component={CustomSelect}
-                    options={listCities}
-                  />
-                </label>
-              </div>
-              <div className="addBusinessEdit__info-wrapper--right-desctop">
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Опис</span>
-                  <Field
-                    as="textarea"
-                    className="addBusinessEdit__textarea section__primary-text"
-                    type="text"
-                    name="description"
-                    minLength={1}
-                    maxLength={2000}
-                    required
-                    placeholder="Писати тут..."
-                  />
-                </label>
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Рік створення</span>
-                  <Field
-                    className="addBusinessEdit__input section__primary-text"
-                    type="text"
-                    name="year"
-                    minLength={1}
-                    maxLength={255}
-                    required
-                    placeholder="-----"
-                  />
-                </label>
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Ціна</span>
-                  <span className="addBusinessEdit__input-thumb">
-                    <Field
-                      className="addBusinessEdit__input section__primary-text"
-                      type="text"
-                      name="price"
-                      minLength={1}
-                      maxLength={255}
-                      required
-                      placeholder="-----"
+          {({ setFieldValue }) => {
+            return (
+              <Form className="addBusinessEdit__form">
+                <div className="addBusinessEdit__info-wrapper">
+                  <div className="addBusinessEdit__info-wrapper--left">
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">Назва</span>
+                      <Field
+                        className="addBusinessEdit__input section__primary-text"
+                        type="text"
+                        name="name"
+                        minLength={1}
+                        maxLength={255}
+                        required
+                        placeholder="-----"
+                      />
+                    </label>
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">Категорія</span>
+                      <Field
+                        type="text"
+                        name="business"
+                        required
+                        placeholder="Торгівля"
+                        component={CustomSelect}
+                        options={OurCategories}
+                      />
+                    </label>
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">Область</span>
+                      <Field
+                        type="text"
+                        name="state"
+                        required
+                        placeholder="Оберіть"
+                        component={CustomSelect}
+                        setter={setSelectedArea}
+                        options={listAreas}
+                      />
+                    </label>
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">Місто</span>
+                      <Field
+                        type="text"
+                        name="city"
+                        required
+                        placeholder="Оберіть"
+                        component={CustomSelect}
+                        options={listCities}
+                      />
+                    </label>
+                  </div>
+                  <div className="addBusinessEdit__info-wrapper--right-desctop">
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">Опис</span>
+                      <Field
+                        as="textarea"
+                        className="addBusinessEdit__textarea section__primary-text"
+                        type="text"
+                        name="description"
+                        minLength={1}
+                        maxLength={2000}
+                        required
+                        placeholder="Писати тут..."
+                      />
+                    </label>
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">
+                        Рік створення
+                      </span>
+                      <Field
+                        className="addBusinessEdit__input section__primary-text"
+                        type="text"
+                        name="year"
+                        minLength={1}
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "year",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        maxLength={255}
+                        required
+                        placeholder="-----"
+                      />
+                    </label>
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">Ціна</span>
+                      <span className="addBusinessEdit__input-thumb">
+                        <Field
+                          className="addBusinessEdit__input section__primary-text"
+                          type="text"
+                          name="price"
+                          minLength={1}
+                          onChange={(e: any) => {
+                            setFieldValue(
+                              "price",
+                              e.target.value.replaceAll(
+                                /[A-Za-zА-Яа-я,./'` ]/g,
+                                "",
+                              ),
+                            );
+                          }}
+                          maxLength={255}
+                          required
+                          placeholder="-----"
+                        />
+                        <span className="addBusinessEdit__icon">$</span>
+                      </span>
+                    </label>
+                  </div>
+                  <div className="addBusinessEdit__info-wrapper--right-mob">
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">
+                        Рік створення
+                      </span>
+                      <Field
+                        className="addBusinessEdit__input section__primary-text"
+                        type="text"
+                        name="year"
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "year",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        minLength={1}
+                        maxLength={255}
+                        required
+                        placeholder="-----"
+                      />
+                    </label>
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">Ціна</span>
+                      <span className="addBusinessEdit__input-thumb">
+                        <Field
+                          className="addBusinessEdit__input section__primary-text"
+                          type="text"
+                          name="price"
+                          pattern="[0-9]+"
+                          minLength={1}
+                          onChange={(e: any) => {
+                            setFieldValue(
+                              "price",
+                              e.target.value.replaceAll(
+                                /[A-Za-zА-Яа-я,./'` ]/g,
+                                "",
+                              ),
+                            );
+                          }}
+                          maxLength={255}
+                          required
+                          placeholder="-----"
+                        />
+                        <span className="addBusinessEdit__icon">$</span>
+                      </span>
+                    </label>
+                    <label className="addBusinessEdit__field">
+                      <span className="addBusinessEdit__label">Опис</span>
+                      <Field
+                        as="textarea"
+                        className="addBusinessEdit__textarea section__primary-text"
+                        type="text"
+                        name="description"
+                        minLength={1}
+                        maxLength={2000}
+                        required
+                        placeholder="Писати тут..."
+                      />
+                    </label>
+                  </div>
+                </div>
+                <span className="addBusinessEdit__label">Медіа</span>
+                <div className="addBusinessEdit__addMedia-wrapper">
+                  {files?.map((f: string, i: number) => (
+                    <div
+                      key={i}
+                      className="addBusinessEdit__addMedia-wrapper--image"
+                    >
+                      <Image
+                        className=""
+                        src={f}
+                        layout="fill"
+                        objectFit="cover"
+                        alt="building"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeFile(i)}
+                        className="addBusinessEdit__button-close"
+                      >
+                        <CrossSVG />
+                      </button>
+                    </div>
+                  ))}
+                  <div className="addBusinessEdit__addMedia-wrapper--add-file">
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      multiple
+                      accept="image/*,.png,.jpg"
+                      className="addBusinessEdit__custom-file-input--desctop"
+                      data-label={`Додати медіафайл`}
+                      onChange={async (e) => {
+                        if (e.currentTarget?.files?.length) {
+                          const uploadedFiles: any = await uploadToServer(
+                            e.currentTarget.files[0],
+                          );
+                          console.log(uploadedFiles.data.url);
+                          setFiles([...files, uploadedFiles.data.url]);
+                        }
+                      }}
                     />
-                    <span className="addBusinessEdit__icon">$</span>
-                  </span>
-                </label>
-              </div>
-              <div className="addBusinessEdit__info-wrapper--right-mob">
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Рік створення</span>
-                  <Field
-                    className="addBusinessEdit__input section__primary-text"
-                    type="text"
-                    name="year"
-                    minLength={1}
-                    maxLength={255}
-                    required
-                    placeholder="-----"
-                  />
-                </label>
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Ціна</span>
-                  <span className="addBusinessEdit__input-thumb">
-                    <Field
-                      className="addBusinessEdit__input section__primary-text"
-                      type="text"
-                      name="price"
-                      pattern="[0-9]+"
-                      minLength={1}
-                      maxLength={255}
-                      required
-                      placeholder="-----"
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      multiple
+                      accept="image/*,.png,.jpg"
+                      className="addBusinessEdit__custom-file-input--mob"
+                      // data-label={`${
+                      //   files && files.length > 0
+                      //     ? `Додано ${files.length} медіафали`
+                      //     : `+`
+                      // }`}
+                      onChange={async (e) => {
+                        if (e.currentTarget?.files?.length) {
+                          const uploadedFiles: any = await uploadToServer(
+                            e.currentTarget.files[0],
+                          );
+                          console.log(uploadedFiles.data.url);
+                          setFiles([...files, uploadedFiles.data.url]);
+                        }
+                      }}
                     />
-                    <span className="addBusinessEdit__icon">$</span>
-                  </span>
-                </label>
-                <label className="addBusinessEdit__field">
-                  <span className="addBusinessEdit__label">Опис</span>
-                  <Field
-                    as="textarea"
-                    className="addBusinessEdit__textarea section__primary-text"
-                    type="text"
-                    name="description"
-                    minLength={1}
-                    maxLength={2000}
-                    required
-                    placeholder="Писати тут..."
-                  />
-                </label>
-              </div>
-            </div>
-            <span className="addBusinessEdit__label">Медіа</span>
-            <div className="addBusinessEdit__addMedia-wrapper">
-              {files?.map((f: string, i: number) => (
-                <div
-                  key={i}
-                  className="addBusinessEdit__addMedia-wrapper--image"
-                >
-                  <Image
-                    className=""
-                    src={f}
-                    layout="fill"
-                    objectFit="cover"
-                    alt="building"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeFile(i)}
-                    className="addBusinessEdit__button-close"
-                  >
                     <CrossSVG />
+                  </div>
+                </div>
+                {addBusinessError && (
+                  <div className="addBusinessEdit__failed">
+                    {addBusinessError}
+                  </div>
+                )}
+                <div className="addBusinessEdit__buttons">
+                  <button
+                    onClick={() => dispatch({ type: "toggle_deleteBusiness" })}
+                    type="button"
+                    className="addBusinessEdit__delete-button"
+                  >
+                    Видалити
+                  </button>
+                  <button
+                    type="submit"
+                    className="addBusinessEdit__save-button"
+                  >
+                    Зберегти
                   </button>
                 </div>
-              ))}
-              <div className="addBusinessEdit__addMedia-wrapper--add-file">
-                <input
-                  id="file"
-                  name="file"
-                  type="file"
-                  multiple
-                  accept="image/*,.png,.jpg"
-                  className="addBusinessEdit__custom-file-input--desctop"
-                  data-label={`Додати медіафайл`}
-                  onChange={async (e) => {
-                    if (e.currentTarget?.files?.length) {
-                      const uploadedFiles: any = await uploadToServer(
-                        e.currentTarget.files[0],
-                      );
-                      console.log(uploadedFiles.data.url);
-                      setFiles([...files, uploadedFiles.data.url]);
-                    }
-                  }}
-                />
-                <input
-                  id="file"
-                  name="file"
-                  type="file"
-                  multiple
-                  accept="image/*,.png,.jpg"
-                  className="addBusinessEdit__custom-file-input--mob"
-                  // data-label={`${
-                  //   files && files.length > 0
-                  //     ? `Додано ${files.length} медіафали`
-                  //     : `+`
-                  // }`}
-                  onChange={async (e) => {
-                    if (e.currentTarget?.files?.length) {
-                      const uploadedFiles: any = await uploadToServer(
-                        e.currentTarget.files[0],
-                      );
-                      console.log(uploadedFiles.data.url);
-                      setFiles([...files, uploadedFiles.data.url]);
-                    }
-                  }}
-                />
-                <CrossSVG />
-              </div>
-            </div>
-            {addBusinessError && (
-              <div className="addBusinessEdit__failed">{addBusinessError}</div>
-            )}
-            <div className="addBusinessEdit__buttons">
-              <button
-                onClick={() => dispatch({ type: "toggle_deleteBusiness" })}
-                type="button"
-                className="addBusinessEdit__delete-button"
-              >
-                Видалити
-              </button>
-              <button type="submit" className="addBusinessEdit__save-button">
-                Зберегти
-              </button>
-            </div>
-          </Form>
+              </Form>
+            );
+          }}
         </Formik>
       </div>
       <ModalDeleteBusiness
