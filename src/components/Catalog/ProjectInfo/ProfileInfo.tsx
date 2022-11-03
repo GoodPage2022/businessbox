@@ -24,22 +24,17 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
       userId: projectData._by,
     };
 
-    const options: AxiosRequestConfig = {
-      headers: { "Content-Type": "multipart/form-data" },
-    };
-
     const response = await axios.post(
       `/api/account/list`,
-      requestBody,
-      options,
+      requestBody
     );
 
     if (response.data) {
+      // console.log(response.data[0]);
       setBusinessOwner(response.data[0]);
       return response.data;
     }
   };
-  // console.log(businessOwner);
 
   useEffect(() => {
     getUser();
@@ -51,7 +46,7 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
         <div className="profileInfo__image">
           <Image
             className=""
-            src="/assets/images/profile-photo.png"
+            src={projectData.contact_seller_name ? "/assets/images/profile-photo.png" : (businessOwner ? businessOwner.avatar.path : "/assets/images/profile-photo.png")}
             layout="fill"
             objectFit="cover"
             alt="card-image"
@@ -59,10 +54,10 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
         </div>
         <div className="profileInfo__data">
           <p className="profileInfo__name section__primary-text">
-            {businessOwner ? businessOwner.name : "Невідомо"}
+            {projectData.contact_seller_name ?? (businessOwner ? businessOwner.name : "Невідомо")}
           </p>
           <p className="profileInfo__city section__primary-text">
-            {businessOwner ? businessOwner.city : "Невідомо"}
+            {projectData.contact_seller_city ?? (businessOwner ? businessOwner.city : "Невідомо")}
           </p>
         </div>
       </div>
@@ -73,11 +68,11 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
-            ) : businessOwner ? (
+            ) : (projectData.contact_seller_phone ?? (businessOwner ? (
               businessOwner.phone
             ) : (
               "Невідомо"
-            )}
+            )))}
           </p>
         )}
         {isEmailShow && (
@@ -86,11 +81,11 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
-            ) : businessOwner ? (
+            ) : (projectData.contact_seller_email ?? (businessOwner ? (
               businessOwner.email
             ) : (
               "Невідомо"
-            )}
+            )))}
           </p>
         )}
         {isInstagramShow && (
