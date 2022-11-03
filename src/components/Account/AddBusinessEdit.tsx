@@ -9,6 +9,7 @@ import CrossSVG from "../../assets/svg/cross.svg";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
 import ModalDeleteBusiness from "../Modals/Modal-delete-business/Modal-delete-business";
+import OurCategories from "../../constants/categories-select";
 
 const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -272,20 +273,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     required
                     placeholder="Торгівля"
                     component={CustomSelect}
-                    options={[
-                      { value: "Торгівля", label: "Торгівля" },
-                      { value: "Ресторани", label: "Ресторани" },
-                      { value: "Послуги", label: "Послуги" },
-                      { value: "Автомобільна", label: "Автомобільна" },
-                      { value: "Виробництво", label: "Виробництво" },
-                      {
-                        value: "ІТ та інтелектуальна власність",
-                        label: "ІТ та інтелектуальна власність",
-                      },
-                      { value: "Кафе", label: "Кафе" },
-                      { value: "Фаст фуд", label: "Фаст фуд" },
-                      { value: "Інше", label: "Інше" },
-                    ]}
+                    options={OurCategories}
                   />
                 </label>
                 <label className="addBusinessEdit__field">

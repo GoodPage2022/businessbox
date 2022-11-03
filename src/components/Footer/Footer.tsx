@@ -4,6 +4,7 @@ import { Field, FieldProps, FormikProvider, useFormik } from "formik";
 import Select from "react-select";
 import Networks from "./Networks";
 import CopyrightSVG from "../../assets/svg/copyright.svg";
+import OurCategories from "../../constants/categories-select";
 
 type CustomSelectProps = {
   options: any;
@@ -95,20 +96,7 @@ const Footer: React.FC = () => {
               required
               placeholder="Категорії"
               component={FooterSelect}
-              options={[
-                { value: "Торгівля", label: "Торгівля" },
-                { value: "Ресторани", label: "Ресторани" },
-                { value: "Послуги", label: "Послуги" },
-                { value: "Автомобільна", label: "Автомобільна" },
-                { value: "Виробництво", label: "Виробництво" },
-                {
-                  value: "ІТ та інтелектуальна власність",
-                  label: "ІТ та інтелектуальна власність",
-                },
-                { value: "Кафе", label: "Кафе" },
-                { value: "Фаст фуд", label: "Фаст фуд" },
-                { value: "Інше", label: "Інше" },
-              ]}
+              options={OurCategories}
             />
           </FormikProvider>
         </div>
@@ -164,20 +152,7 @@ const Footer: React.FC = () => {
                 required
                 placeholder="Категорії"
                 component={FooterSelect}
-                options={[
-                  { value: "Торгівля", label: "Торгівля" },
-                  { value: "Ресторани", label: "Ресторани" },
-                  { value: "Послуги", label: "Послуги" },
-                  { value: "Автомобільна", label: "Автомобільна" },
-                  { value: "Виробництво", label: "Виробництво" },
-                  {
-                    value: "ІТ та інтелектуальна власність",
-                    label: "ІТ та інтелектуальна власність",
-                  },
-                  { value: "Кафе", label: "Кафе" },
-                  { value: "Фаст фуд", label: "Фаст фуд" },
-                  { value: "Інше", label: "Інше" },
-                ]}
+                options={OurCategories}
               />
             </FormikProvider>
           </div>

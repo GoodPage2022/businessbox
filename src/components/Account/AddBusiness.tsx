@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
 import CrossSVG from "../../assets/svg/cross.svg";
+import OurCategories from "../../constants/categories-select";
 
 const AddBusiness = () => {
   const router = useRouter();
@@ -242,20 +243,7 @@ const AddBusiness = () => {
                     required
                     placeholder="Торгівля"
                     component={CustomSelect}
-                    options={[
-                      { value: "Торгівля", label: "Торгівля" },
-                      { value: "Ресторани", label: "Ресторани" },
-                      { value: "Послуги", label: "Послуги" },
-                      { value: "Автомобільна", label: "Автомобільна" },
-                      { value: "Виробництво", label: "Виробництво" },
-                      {
-                        value: "ІТ та інтелектуальна власність",
-                        label: "ІТ та інтелектуальна власність",
-                      },
-                      { value: "Кафе", label: "Кафе" },
-                      { value: "Фаст фуд", label: "Фаст фуд" },
-                      { value: "Інше", label: "Інше" },
-                    ]}
+                    options={OurCategories}
                   />
                 </label>
                 <label className="addBusiness__field">
