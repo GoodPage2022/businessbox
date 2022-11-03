@@ -4,12 +4,15 @@ import { Field, FieldProps, FormikProvider, useFormik } from "formik";
 import Select from "react-select";
 import Networks from "./Networks";
 import CopyrightSVG from "../../assets/svg/copyright.svg";
+import OurCategories from "../../constants/categories-select";
+import { useRouter } from "next/router";
 
 type CustomSelectProps = {
   options: any;
   placeholder?: string;
   side?: string;
   setter?: (e: any) => void;
+  changeFilter?: (e: any) => void;
 };
 
 const FooterSelect: React.FC<FieldProps & CustomSelectProps> = ({
@@ -18,6 +21,7 @@ const FooterSelect: React.FC<FieldProps & CustomSelectProps> = ({
   form,
   placeholder,
   setter,
+  changeFilter,
 }): JSX.Element => {
   return (
     <Select
@@ -28,6 +32,16 @@ const FooterSelect: React.FC<FieldProps & CustomSelectProps> = ({
       // menuIsOpen
       placeholder={placeholder}
       onChange={(e) => {
+        if (!!changeFilter)
+          changeFilter({
+            target: {
+              name: field.name,
+              value:
+                field.name == "state" || field.name == "city"
+                  ? e.value
+                  : e.label,
+            },
+          });
         if (!!setter) setter(e.value);
         form.setFieldValue(field.name, e.value);
       }}
@@ -70,13 +84,19 @@ const initialValues = {
 };
 
 const Footer: React.FC = () => {
+  const router = useRouter();
+
+  const changeFilter = (e: any) => {
+    let filtersUrl = `/catalog/category/${e.target.value}`;
+    router.push(filtersUrl);
+  };
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
       console.log(values);
     },
   });
-
   return (
     <footer className="footer" id="footer">
       <div className="container footer__container--desctop">
@@ -93,22 +113,10 @@ const Footer: React.FC = () => {
               type="text"
               name="categories"
               required
+              changeFilter={changeFilter}
               placeholder="Категорії"
               component={FooterSelect}
-              options={[
-                { value: "Торгівля", label: "Торгівля" },
-                { value: "Ресторани", label: "Ресторани" },
-                { value: "Послуги", label: "Послуги" },
-                { value: "Автомобільна", label: "Автомобільна" },
-                { value: "Виробництво", label: "Виробництво" },
-                {
-                  value: "ІТ та інтелектуальна власність",
-                  label: "ІТ та інтелектуальна власність",
-                },
-                { value: "Кафе", label: "Кафе" },
-                { value: "Фаст фуд", label: "Фаст фуд" },
-                { value: "Інше", label: "Інше" },
-              ]}
+              options={OurCategories}
             />
           </FormikProvider>
         </div>
@@ -164,20 +172,7 @@ const Footer: React.FC = () => {
                 required
                 placeholder="Категорії"
                 component={FooterSelect}
-                options={[
-                  { value: "Торгівля", label: "Торгівля" },
-                  { value: "Ресторани", label: "Ресторани" },
-                  { value: "Послуги", label: "Послуги" },
-                  { value: "Автомобільна", label: "Автомобільна" },
-                  { value: "Виробництво", label: "Виробництво" },
-                  {
-                    value: "ІТ та інтелектуальна власність",
-                    label: "ІТ та інтелектуальна власність",
-                  },
-                  { value: "Кафе", label: "Кафе" },
-                  { value: "Фаст фуд", label: "Фаст фуд" },
-                  { value: "Інше", label: "Інше" },
-                ]}
+                options={OurCategories}
               />
             </FormikProvider>
           </div>

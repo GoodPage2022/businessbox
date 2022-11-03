@@ -60,10 +60,13 @@
       width: auto !important;
     }
     &__menu-list {
-      overflow: hidden;
+      // overflow: hidden;
       padding: 0 !important;
-      overflow-y: hidden !important;
+      // overflow-y: hidden !important;
       max-height: 140px !important;
+      &::-webkit-scrollbar {
+        width: 0;
+      }
     }
     &__option {
       padding: 5px 0 !important;
@@ -214,10 +217,13 @@
         cursor: pointer;
       }
       &__menu-list {
-        overflow: hidden;
+        // overflow: hidden;
         padding: 0 !important;
-        overflow-y: hidden !important;
+        // overflow-y: hidden !important;
         max-height: 140px !important;
+        &::-webkit-scrollbar {
+          width: 0;
+        }
       }
       &__option {
         padding: 5px 0 !important;
@@ -356,8 +362,11 @@
       &__menu-list {
         overflow: hidden;
         padding: 0 !important;
-        overflow-y: hidden !important;
+        // overflow-y: hidden !important;
         max-height: 140px !important;
+        &::-webkit-scrollbar {
+          width: 0;
+        }
       }
       &__option {
         padding: 5px 0 !important;

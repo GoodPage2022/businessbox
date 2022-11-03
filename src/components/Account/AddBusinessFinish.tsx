@@ -10,6 +10,7 @@ const AddBusinessFinish = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [addBusinessError, setAddBusinessError] = useState("");
   const { businessId } = router.query;
+  const [currency, setCurrency] = useState(localStorage.getItem("currency"));
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     const {
@@ -150,363 +151,477 @@ const AddBusinessFinish = () => {
           }}
           onSubmit={handleSubmit}
         >
-          <Form className="addBusinessFinish__form">
-            <div className="addBusinessFinish__first-wrapper">
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Форма власності
-                </span>
-                <span className="addBusinessFinish__select--thumb">
-                  <Field
-                    className="addBusinessFinish__input section__primary-text"
-                    type="text"
-                    name="property_form"
-                    // classNamePrefix="custom-select"
-                    required
-                    placeholder="-----"
-                    component={CustomSelect}
-                    // className="addBusinessFinish__select section__primary-text"
-                    options={[
-                      { value: "Приватна", label: "Приватна" },
-                      { value: "Колективна", label: "Колективна" },
-                      { value: "Державна", label: "Державна" },
-                    ]}
-                  />
+          {({ setFieldValue }) => {
+            return (
+              <Form className="addBusinessFinish__form">
+                <div className="addBusinessFinish__first-wrapper">
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Форма власності
+                    </span>
+                    <span className="addBusinessFinish__select--thumb">
+                      <Field
+                        className="addBusinessFinish__input section__primary-text"
+                        type="text"
+                        name="property_form"
+                        // classNamePrefix="custom-select"
+                        required
+                        placeholder="-----"
+                        component={CustomSelect}
+                        // className="addBusinessFinish__select section__primary-text"
+                        options={[
+                          { value: "Приватна", label: "Приватна" },
+                          { value: "Колективна", label: "Колективна" },
+                          { value: "Державна", label: "Державна" },
+                        ]}
+                      />
 
-                  {/* <PolygonSVG className="addBusinessFinish__select--icon" /> */}
-                </span>
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Кількість засновників
-                </span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  name="number_of_founders"
-                  minLength={1}
-                  maxLength={255}
-                  required
-                  placeholder="-----"
-                />
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Кількість працівників
-                </span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  minLength={1}
-                  maxLength={255}
-                  name="number_of_employees"
-                  placeholder="-----"
-                />
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Ваш бізнес має сезонність?
-                </span>
-                <span className="addBusinessFinish__select--thumb">
-                  <Field
-                    // as="select"
-                    component={CustomSelect}
-                    className="addBusinessFinish__select section__primary-text"
-                    type="text"
-                    name="seasonality"
-                    options={[
-                      { value: "yes", label: "Так" },
-                      { value: "no", label: "Ні" },
-                    ]}
-                    placeholder="Так"
-                  >
-                    {/* <option value="yes">Так</option>
-                    <option value="no">Ні</option> */}
-                  </Field>
-
-                  {/* <PolygonSVG className="addBusinessFinish__select--icon" /> */}
-                </span>
-              </label>
-            </div>
-            <div className="addBusinessFinish__second-wrapper">
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Оборот протягом року
-                </span>
-                <span className="addBusinessFinish__input-thumb">
-                  <Field
-                    className="addBusinessFinish__input section__primary-text"
-                    type="text"
-                    name="year_turnover"
-                    minLength={1}
-                    maxLength={255}
-                    placeholder="-----"
-                  />
-                  <span className="addBusinessFinish__icon">$</span>
-                </span>
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Приблизний щомісячний чистий прибуток
-                </span>
-                <span className="addBusinessFinish__input-thumb">
-                  <Field
-                    className="addBusinessFinish__input section__primary-text"
-                    type="text"
-                    name="monthly_net_profit"
-                    minLength={1}
-                    maxLength={255}
-                    placeholder="-----"
-                  />
-                  <span className="addBusinessFinish__icon">$</span>
-                </span>
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Приблизний валовий дохід щомісячний
-                </span>
-                <span className="addBusinessFinish__input-thumb">
-                  <Field
-                    className="addBusinessFinish__input section__primary-text"
-                    type="text"
-                    name="gross_monthly_income"
-                    minLength={1}
-                    maxLength={255}
-                    placeholder="-----"
-                  />
-                  <span className="addBusinessFinish__icon">$</span>
-                </span>
-              </label>
-            </div>
-            <div className="addBusinessFinish__third-wrapper">
-              <div className="addBusinessFinish__third-wrapper--left">
-                <label className="addBusinessFinish__field">
-                  <span className="addBusinessFinish__label">
-                    Прогнозований оборот наступного року
-                  </span>
-                  <span className="addBusinessFinish__input-thumb">
+                      {/* <PolygonSVG className="addBusinessFinish__select--icon" /> */}
+                    </span>
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Кількість засновників
+                    </span>
                     <Field
                       className="addBusinessFinish__input section__primary-text"
                       type="text"
-                      name="estimated_turnover_next_year"
+                      name="number_of_founders"
+                      minLength={1}
+                      maxLength={255}
+                      onChange={(e: any) => {
+                        setFieldValue(
+                          "number_of_founders",
+                          e.target.value.replaceAll(
+                            /[A-Za-zА-Яа-я,./'` ]/g,
+                            "",
+                          ),
+                        );
+                      }}
+                      required
+                      placeholder="-----"
+                    />
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Кількість працівників
+                    </span>
+                    <Field
+                      className="addBusinessFinish__input section__primary-text"
+                      type="text"
+                      minLength={1}
+                      maxLength={255}
+                      onChange={(e: any) => {
+                        setFieldValue(
+                          "number_of_employees",
+                          e.target.value.replaceAll(
+                            /[A-Za-zА-Яа-я,./'` ]/g,
+                            "",
+                          ),
+                        );
+                      }}
+                      name="number_of_employees"
+                      placeholder="-----"
+                    />
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Ваш бізнес має сезонність?
+                    </span>
+                    <span className="addBusinessFinish__select--thumb">
+                      <Field
+                        // as="select"
+                        component={CustomSelect}
+                        className="addBusinessFinish__select section__primary-text"
+                        type="text"
+                        name="seasonality"
+                        options={[
+                          { value: "yes", label: "Так" },
+                          { value: "no", label: "Ні" },
+                        ]}
+                        placeholder="Так"
+                      >
+                        {/* <option value="yes">Так</option>
+                    <option value="no">Ні</option> */}
+                      </Field>
+
+                      {/* <PolygonSVG className="addBusinessFinish__select--icon" /> */}
+                    </span>
+                  </label>
+                </div>
+                <div className="addBusinessFinish__second-wrapper">
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Оборот протягом року
+                    </span>
+                    <span className="addBusinessFinish__input-thumb">
+                      <Field
+                        className="addBusinessFinish__input section__primary-text"
+                        type="text"
+                        name="year_turnover"
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "year_turnover",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        minLength={1}
+                        maxLength={255}
+                        placeholder="-----"
+                      />
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
+                    </span>
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Приблизний щомісячний чистий прибуток
+                    </span>
+                    <span className="addBusinessFinish__input-thumb">
+                      <Field
+                        className="addBusinessFinish__input section__primary-text"
+                        type="text"
+                        name="monthly_net_profit"
+                        minLength={1}
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "monthly_net_profit",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        maxLength={255}
+                        placeholder="-----"
+                      />
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
+                    </span>
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Приблизний валовий дохід щомісячний
+                    </span>
+                    <span className="addBusinessFinish__input-thumb">
+                      <Field
+                        className="addBusinessFinish__input section__primary-text"
+                        type="text"
+                        name="gross_monthly_income"
+                        minLength={1}
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "gross_monthly_income",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        maxLength={255}
+                        placeholder="-----"
+                      />
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div className="addBusinessFinish__third-wrapper">
+                  <div className="addBusinessFinish__third-wrapper--left">
+                    <label className="addBusinessFinish__field">
+                      <span className="addBusinessFinish__label">
+                        Прогнозований оборот наступного року
+                      </span>
+                      <span className="addBusinessFinish__input-thumb">
+                        <Field
+                          className="addBusinessFinish__input section__primary-text"
+                          type="text"
+                          name="estimated_turnover_next_year"
+                          minLength={1}
+                          onChange={(e: any) => {
+                            setFieldValue(
+                              "estimated_turnover_next_year",
+                              e.target.value.replaceAll(
+                                /[A-Za-zА-Яа-я,./'` ]/g,
+                                "",
+                              ),
+                            );
+                          }}
+                          maxLength={255}
+                          placeholder="-----"
+                        />
+                        <span className="addBusinessFinish__icon">
+                          {currency === "Гривня" ? "₴" : "$"}
+                        </span>
+                      </span>
+                    </label>
+                    <label className="addBusinessFinish__field__select">
+                      <span className="addBusinessFinish__label">
+                        Наявність кредитів
+                      </span>
+                      <span className="addBusinessFinish__select--thumb">
+                        <Field
+                          as="select"
+                          className="addBusinessFinish__select--short section__primary-text"
+                          type="text"
+                          name="loans"
+                          placeholder="Ні"
+                          component={CustomSelect}
+                          options={[
+                            { value: "yes", label: "Так" },
+                            { value: "no", label: "Ні" },
+                          ]}
+                        ></Field>
+                      </span>
+                    </label>
+                  </div>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Орієнтовний період окупності бізнесу
+                    </span>
+                    <span className="addBusinessFinish__input-thumb">
+                      <Field
+                        className="addBusinessFinish__input section__primary-text"
+                        type="text"
+                        name="return_on_investment"
+                        minLength={1}
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "return_on_investment",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        maxLength={255}
+                        placeholder="-----"
+                      />
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <div className="addBusinessFinish__fourth-wrapper">
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Приблизна ринкова вартість активів та обладнання
+                    </span>
+                    <span className="addBusinessFinish__input-thumb">
+                      <Field
+                        className="addBusinessFinish__input section__primary-text"
+                        type="text"
+                        name="equipment_market_value"
+                        minLength={1}
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "equipment_market_value",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        maxLength={255}
+                        placeholder="-----"
+                      />
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
+                    </span>
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Щомісячний зарплатний фонд (враховуючи премії та бонуси)
+                    </span>
+                    <span className="addBusinessFinish__input-thumb">
+                      <Field
+                        className="addBusinessFinish__input section__primary-text"
+                        type="text"
+                        name="monthly_salary_fund"
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "monthly_salary_fund",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        minLength={1}
+                        maxLength={255}
+                        placeholder="-----"
+                      />
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
+                    </span>
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Приблизна сума непостійних витрат протягом року
+                    </span>
+                    <span className="addBusinessFinish__input-thumb">
+                      <Field
+                        className="addBusinessFinish__input section__primary-text"
+                        type="text"
+                        name="year_nonfixed_costs"
+                        minLength={1}
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "year_nonfixed_costs",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        maxLength={255}
+                        placeholder="-----"
+                      />
+                      <span className="addBusinessFinish__icon">
+                        {currency === "Гривня" ? "₴" : "$"}
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <hr />
+                <div className="addBusinessFinish__fifth-wrapper">
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Сайт компанії
+                    </span>
+                    <Field
+                      className="addBusinessFinish__input section__primary-text"
+                      type="text"
+                      name="website"
                       minLength={1}
                       maxLength={255}
                       placeholder="-----"
                     />
-                    <span className="addBusinessFinish__icon">$</span>
-                  </span>
-                </label>
-                <label className="addBusinessFinish__field__select">
-                  <span className="addBusinessFinish__label">
-                    Наявність кредитів
-                  </span>
-                  <span className="addBusinessFinish__select--thumb">
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">Інстаграм</span>
                     <Field
-                      as="select"
-                      className="addBusinessFinish__select--short section__primary-text"
+                      className="addBusinessFinish__input section__primary-text"
                       type="text"
-                      name="loans"
-                      placeholder="Ні"
-                      component={CustomSelect}
-                      options={[
-                        { value: "yes", label: "Так" },
-                        { value: "no", label: "Ні" },
-                      ]}
-                    ></Field>
-                  </span>
-                </label>
-              </div>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Орієнтовний період окупності бізнесу
-                </span>
-                <span className="addBusinessFinish__input-thumb">
-                  <Field
-                    className="addBusinessFinish__input section__primary-text"
-                    type="text"
-                    name="return_on_investment"
-                    minLength={1}
-                    maxLength={255}
-                    placeholder="-----"
-                  />
-                  <span className="addBusinessFinish__icon">$</span>
-                </span>
-              </label>
-            </div>
-            <div className="addBusinessFinish__fourth-wrapper">
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Приблизна ринкова вартість активів та обладнання
-                </span>
-                <span className="addBusinessFinish__input-thumb">
-                  <Field
-                    className="addBusinessFinish__input section__primary-text"
-                    type="text"
-                    name="equipment_market_value"
-                    minLength={1}
-                    maxLength={255}
-                    placeholder="-----"
-                  />
-                  <span className="addBusinessFinish__icon">$</span>
-                </span>
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Щомісячний зарплатний фонд (враховуючи премії та бонуси)
-                </span>
-                <span className="addBusinessFinish__input-thumb">
-                  <Field
-                    className="addBusinessFinish__input section__primary-text"
-                    type="text"
-                    name="monthly_salary_fund"
-                    minLength={1}
-                    maxLength={255}
-                    placeholder="-----"
-                  />
-                  <span className="addBusinessFinish__icon">$</span>
-                </span>
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  Приблизна сума непостійних витрат протягом року
-                </span>
-                <span className="addBusinessFinish__input-thumb">
-                  <Field
-                    className="addBusinessFinish__input section__primary-text"
-                    type="text"
-                    name="year_nonfixed_costs"
-                    minLength={1}
-                    maxLength={255}
-                    placeholder="-----"
-                  />
-                  <span className="addBusinessFinish__icon">$</span>
-                </span>
-              </label>
-            </div>
-            <hr />
-            <div className="addBusinessFinish__fifth-wrapper">
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">Сайт компанії</span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  name="website"
-                  minLength={1}
-                  maxLength={255}
-                  placeholder="-----"
-                />
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">Інстаграм</span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  name="instagram"
-                  minLength={1}
-                  maxLength={255}
-                  placeholder="-----"
-                />
-              </label>
-            </div>
-            <div className="addBusinessFinish__sixth-wrapper">
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">Фейсбук</span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  name="facebook"
-                  minLength={1}
-                  maxLength={255}
-                  placeholder="-----"
-                />
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">Ютюб канал</span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  name="youtube"
-                  minLength={1}
-                  maxLength={255}
-                  placeholder="-----"
-                />
-              </label>
-            </div>
-            <div className="addBusinessFinish__seventh-wrapper">
-              <label className="addBusinessFinish__field">
-                <div className="addBusinessFinish__label-wrapper">
-                  <span className="addBusinessFinish__label">
-                    Відгуки про компанію, статті у ЗМІ
-                  </span>
-                  <input
-                    id="file"
-                    name="file"
-                    type="file"
-                    className="addBusinessFinish__custom-file-input"
-                    onChange={(event) => {
-                      // setFieldValue("file", event.currentTarget.files[0]);
-                    }}
-                  />
+                      name="instagram"
+                      minLength={1}
+                      maxLength={255}
+                      placeholder="-----"
+                    />
+                  </label>
                 </div>
-                <Field
-                  as="textarea"
-                  className="addBusinessFinish__textarea section__primary-text"
-                  type="text"
-                  name="public_reviews"
-                  minLength={1}
-                  maxLength={1000}
-                  placeholder="-----"
-                />
-              </label>
-            </div>
-            <div className="addBusinessFinish__eighth-wrapper">
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">
-                  У якій системі ведеться фінансовий облік?
-                </span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  name="financial_accounting_system"
-                  minLength={1}
-                  maxLength={255}
-                  placeholder="-----"
-                />
-              </label>
-              <label className="addBusinessFinish__field">
-                <span className="addBusinessFinish__label">Наявність CRM</span>
-                <Field
-                  className="addBusinessFinish__input section__primary-text"
-                  type="text"
-                  name="crm"
-                  minLength={1}
-                  maxLength={255}
-                  placeholder="-----"
-                />
-              </label>
-            </div>
-            {addBusinessError && (
-              <div className="addBusinessFinish__failed">
-                {addBusinessError}
-              </div>
-            )}
-            <div className="addBusinessFinish__buttons">
-              <button
-                type="button"
-                onClick={() => router.back()}
-                className="addBusinessFinish__button-back"
-              >
-                Назад
-              </button>
-              <button
-                type="submit"
-                // onClick={() => router.push("/account/add-business-finish")}
-                className="addBusinessFinish__button"
-              >
-                Зареєструвати бізнес
-              </button>
-            </div>
-          </Form>
+                <div className="addBusinessFinish__sixth-wrapper">
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">Фейсбук</span>
+                    <Field
+                      className="addBusinessFinish__input section__primary-text"
+                      type="text"
+                      name="facebook"
+                      minLength={1}
+                      maxLength={255}
+                      placeholder="-----"
+                    />
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">Ютюб канал</span>
+                    <Field
+                      className="addBusinessFinish__input section__primary-text"
+                      type="text"
+                      name="youtube"
+                      minLength={1}
+                      maxLength={255}
+                      placeholder="-----"
+                    />
+                  </label>
+                </div>
+                <div className="addBusinessFinish__seventh-wrapper">
+                  <label className="addBusinessFinish__field">
+                    <div className="addBusinessFinish__label-wrapper">
+                      <span className="addBusinessFinish__label">
+                        Відгуки про компанію, статті у ЗМІ
+                      </span>
+                      <input
+                        id="file"
+                        name="file"
+                        type="file"
+                        className="addBusinessFinish__custom-file-input"
+                        onChange={(event) => {
+                          // setFieldValue("file", event.currentTarget.files[0]);
+                        }}
+                      />
+                    </div>
+                    <Field
+                      as="textarea"
+                      className="addBusinessFinish__textarea section__primary-text"
+                      type="text"
+                      name="public_reviews"
+                      minLength={1}
+                      maxLength={1000}
+                      placeholder="-----"
+                    />
+                  </label>
+                </div>
+                <div className="addBusinessFinish__eighth-wrapper">
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      У якій системі ведеться фінансовий облік?
+                    </span>
+                    <Field
+                      className="addBusinessFinish__input section__primary-text"
+                      type="text"
+                      name="financial_accounting_system"
+                      minLength={1}
+                      maxLength={255}
+                      placeholder="-----"
+                    />
+                  </label>
+                  <label className="addBusinessFinish__field">
+                    <span className="addBusinessFinish__label">
+                      Наявність CRM
+                    </span>
+                    <Field
+                      className="addBusinessFinish__input section__primary-text"
+                      type="text"
+                      name="crm"
+                      minLength={1}
+                      maxLength={255}
+                      placeholder="-----"
+                    />
+                  </label>
+                </div>
+                {addBusinessError && (
+                  <div className="addBusinessFinish__failed">
+                    {addBusinessError}
+                  </div>
+                )}
+                <div className="addBusinessFinish__buttons">
+                  <button
+                    type="button"
+                    onClick={() => router.back()}
+                    className="addBusinessFinish__button-back"
+                  >
+                    Назад
+                  </button>
+                  <button
+                    type="submit"
+                    // onClick={() => router.push("/account/add-business-finish")}
+                    className="addBusinessFinish__button"
+                  >
+                    Зареєструвати бізнес
+                  </button>
+                </div>
+              </Form>
+            );
+          }}
         </Formik>
       </div>
     </section>

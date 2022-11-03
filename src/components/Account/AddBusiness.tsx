@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
 import CrossSVG from "../../assets/svg/cross.svg";
+import OurCategories from "../../constants/categories-select";
+import AddBusinessFinish from "./AddBusinessFinish";
 
 const AddBusiness = () => {
   const router = useRouter();
@@ -16,6 +18,7 @@ const AddBusiness = () => {
   const [listAreas, setListAreas] = useState<any>();
   const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
+  const [currencyState, setCurrencyState] = useState("Гривня");
   const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
 
   const getListAreas = async () => {
@@ -90,7 +93,8 @@ const AddBusiness = () => {
     values: any,
     { resetForm, setFieldValue }: any,
   ) => {
-    const { name, price, description, business, state, year, city } = values;
+    const { name, price, description, business, state, year, city, currency } =
+      values;
 
     let newBusiness: any = {
       title: name,
@@ -103,6 +107,7 @@ const AddBusiness = () => {
         display: listAreas.filter((e: any) => e.value == state)[0].label,
       },
       year,
+      currency,
       city: {
         _id: city,
         link: "Areas",
@@ -159,9 +164,11 @@ const AddBusiness = () => {
         console.log("error");
       }
       setIsSentBusiness(true);
+      localStorage.setItem("currency", currencyState);
       router.push(
         `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
       );
+
       setAddBusinessError("");
       console.log("newUserResponse");
       console.log(newBusinessResponse);
@@ -204,9 +211,6 @@ const AddBusiness = () => {
           }}
           validate={(values: any) => {
             const errors: any = {};
-            // if (typeof values.price != "number")
-            //   error[]
-
             escapeHtml(values.name);
             escapeHtml(values.business);
             escapeHtml(values.price);
@@ -219,231 +223,299 @@ const AddBusiness = () => {
           }}
           onSubmit={handleSubmit}
         >
-          <Form className="addBusiness__form">
-            <div className="addBusiness__info-wrapper">
-              <div className="addBusiness__info-wrapper--left">
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Назва</span>
-                  <Field
-                    className="addBusiness__input section__primary-text"
-                    type="text"
-                    name="name"
-                    minLength={1}
-                    maxLength={255}
-                    required
-                    placeholder="-----"
-                  />
-                </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Категорія</span>
-                  <Field
-                    type="text"
-                    name="business"
-                    required
-                    placeholder="Торгівля"
-                    component={CustomSelect}
-                    options={[
-                      { value: "Торгівля", label: "Торгівля" },
-                      { value: "Ресторани", label: "Ресторани" },
-                      { value: "Послуги", label: "Послуги" },
-                      { value: "Автомобільна", label: "Автомобільна" },
-                      { value: "Виробництво", label: "Виробництво" },
-                      {
-                        value: "ІТ та інтелектуальна власність",
-                        label: "ІТ та інтелектуальна власність",
-                      },
-                      { value: "Кафе", label: "Кафе" },
-                      { value: "Фаст фуд", label: "Фаст фуд" },
-                      { value: "Інше", label: "Інше" },
-                    ]}
-                  />
-                </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Область</span>
-                  <Field
-                    type="text"
-                    name="state"
-                    required
-                    placeholder="Оберіть"
-                    component={CustomSelect}
-                    setter={setSelectedArea}
-                    options={listAreas}
-                  />
-                </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Місто</span>
-                  <Field
-                    type="text"
-                    name="city"
-                    required
-                    placeholder="Оберіть"
-                    component={CustomSelect}
-                    options={listCities}
-                  />
-                </label>
-              </div>
-              <div className="addBusiness__info-wrapper--right-desctop">
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Опис</span>
-                  <Field
-                    as="textarea"
-                    className="addBusiness__textarea section__primary-text"
-                    type="text"
-                    name="description"
-                    minLength={1}
-                    maxLength={1000}
-                    required
-                    placeholder="Писати тут..."
-                  />
-                </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Рік створення</span>
-                  <Field
-                    className="addBusiness__input section__primary-text"
-                    type="text"
-                    name="year"
-                    minLength={1}
-                    maxLength={255}
-                    required
-                    placeholder="-----"
-                  />
-                </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Ціна</span>
-                  <span className="addBusiness__input-thumb">
-                    <Field
-                      className="addBusiness__input section__primary-text"
-                      type="text"
-                      name="price"
-                      pattern="[0-9]+"
-                      minLength={1}
-                      maxLength={255}
-                      required
-                      placeholder="-----"
-                    />
-                    <span className="addBusiness__icon">$</span>
-                  </span>
-                </label>
-              </div>
-              <div className="addBusiness__info-wrapper--right-mob">
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Рік створення</span>
-                  <Field
-                    className="addBusiness__input section__primary-text"
-                    type="text"
-                    name="year"
-                    minLength={1}
-                    maxLength={255}
-                    required
-                    placeholder="-----"
-                  />
-                </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Ціна</span>
-                  <span className="addBusiness__input-thumb">
-                    <Field
-                      className="addBusiness__input section__primary-text"
-                      type="text"
-                      name="price"
-                      pattern="[0-9]+"
-                      minLength={1}
-                      maxLength={255}
-                      required
-                      placeholder="-----"
-                    />
-                    <span className="addBusiness__icon">$</span>
-                  </span>
-                </label>
-                <label className="addBusiness__field">
-                  <span className="addBusiness__label">Опис</span>
-                  <Field
-                    as="textarea"
-                    className="addBusiness__textarea section__primary-text"
-                    type="text"
-                    name="description"
-                    minLength={1}
-                    maxLength={1000}
-                    required
-                    placeholder="Писати тут..."
-                  />
-                </label>
-              </div>
-            </div>
-            <span className="addBusiness__label">Медіа</span>
-            <div className="addBusiness__addMedia-wrapper">
-              {files &&
-                files.map((f: any, i: number) => (
-                  <div key={i} className="addBusiness__addMedia-wrapper--image">
-                    <Image
-                      className=""
-                      src={f}
-                      layout="fill"
-                      objectFit="cover"
-                      alt="building"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeFile(f)}
-                      className="addBusiness__button-close"
-                    >
-                      <CrossSVG />
-                    </button>
+          {({ setFieldValue }) => {
+            return (
+              <Form className="addBusiness__form">
+                <div className="addBusiness__info-wrapper">
+                  <div className="addBusiness__info-wrapper--left">
+                    <label className="addBusiness__field">
+                      <span className="addBusiness__label">Назва</span>
+                      <Field
+                        className="addBusiness__input section__primary-text"
+                        type="text"
+                        name="name"
+                        minLength={1}
+                        maxLength={255}
+                        required
+                        placeholder="-----"
+                      />
+                    </label>
+                    <label className="addBusiness__field">
+                      <span className="addBusiness__label">Категорія</span>
+                      <Field
+                        type="text"
+                        name="business"
+                        required
+                        placeholder="Торгівля"
+                        component={CustomSelect}
+                        options={OurCategories}
+                      />
+                    </label>
+                    <label className="addBusiness__field">
+                      <span className="addBusiness__label">Область</span>
+                      <Field
+                        type="text"
+                        name="state"
+                        required
+                        placeholder="Оберіть"
+                        component={CustomSelect}
+                        setter={setSelectedArea}
+                        options={listAreas}
+                      />
+                    </label>
+                    <label className="addBusiness__field">
+                      <span className="addBusiness__label">Місто</span>
+                      <Field
+                        type="text"
+                        name="city"
+                        required
+                        placeholder="Оберіть"
+                        component={CustomSelect}
+                        options={listCities}
+                      />
+                    </label>
                   </div>
-                ))}
-              <div className="addBusiness__addMedia-wrapper--add-file">
-                <input
-                  id="file"
-                  name="file"
-                  type="file"
-                  accept="image/*,.png,.jpg"
-                  className="addBusiness__custom-file-input--desctop"
-                  data-label={`Додати медіафайл`}
-                  onChange={async (e) => {
-                    if (e.currentTarget?.files?.length) {
-                      const uploadedFiles: any = await uploadToServer(
-                        e.currentTarget.files[0],
-                      );
-                      console.log(uploadedFiles.data.url);
-                      setFiles([...files, uploadedFiles.data.url]);
-                    }
-                  }}
-                />
-                <input
-                  id="file"
-                  name="file"
-                  type="file"
-                  multiple
-                  accept="image/*,.png,.jpg"
-                  className="addBusiness__custom-file-input--mob"
-                  // data-label={`${
-                  //   files && files.length > 0
-                  //     ? `Додано ${files.length} медіафали`
-                  //     : `+`
-                  // }`}
-                  onChange={async (e) => {
-                    if (e.currentTarget?.files?.length) {
-                      const uploadedFiles: any = await uploadToServer(
-                        e.currentTarget.files[0],
-                      );
-                      console.log(uploadedFiles.data.url);
-                      setFiles([...files, uploadedFiles.data.url]);
-                    }
-                  }}
-                />
-                <CrossSVG />
-              </div>
-            </div>
-            {addBusinessError && (
-              <div className="addBusiness__failed">{addBusinessError}</div>
-            )}
-            <button
-              disabled={isSentBusiness ? true : false}
-              type="submit"
-              className="addBusiness__button"
-            >
-              Далі
-            </button>
-          </Form>
+                  <div className="addBusiness__info-wrapper--right-desctop">
+                    <label className="addBusiness__field">
+                      <span className="addBusiness__label">Опис</span>
+                      <Field
+                        as="textarea"
+                        className="addBusiness__textarea section__primary-text"
+                        type="text"
+                        name="description"
+                        minLength={1}
+                        maxLength={2000}
+                        required
+                        placeholder="Писати тут..."
+                      />
+                    </label>
+                    <label className="addBusiness__field">
+                      <span className="addBusiness__label">Рік створення</span>
+                      <Field
+                        className="addBusiness__input section__primary-text"
+                        type="text"
+                        name="year"
+                        minLength={1}
+                        maxLength={255}
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "year",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        required
+                        placeholder="-----"
+                      />
+                    </label>
+                    <div className="addBusiness__price">
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">Ціна</span>
+                        <span className="addBusiness__input-thumb">
+                          <Field
+                            className="addBusiness__input section__primary-text"
+                            type="text"
+                            name="price"
+                            pattern="[0-9]+"
+                            onChange={(e: any) => {
+                              setFieldValue(
+                                "price",
+                                e.target.value.replaceAll(
+                                  /[A-Za-zА-Яа-я,./'` ]/g,
+                                  "",
+                                ),
+                              );
+                            }}
+                            minLength={1}
+                            maxLength={255}
+                            required
+                            placeholder="-----"
+                          />
+                          <span className="addBusiness__icon">
+                            {currencyState === "Гривня" ? "₴" : "$"}
+                          </span>
+                        </span>
+                      </label>
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">Валюта</span>
+                        <Field
+                          type="text"
+                          name="currency"
+                          required
+                          setter={setCurrencyState}
+                          placeholder="Оберіть"
+                          component={CustomSelect}
+                          options={[
+                            { value: "Гривня", label: "Гривня" },
+                            { value: "Долар", label: "Долар" },
+                          ]}
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div className="addBusiness__info-wrapper--right-mob">
+                    <label className="addBusiness__field">
+                      <span className="addBusiness__label">Рік створення</span>
+                      <Field
+                        className="addBusiness__input section__primary-text"
+                        type="text"
+                        name="year"
+                        minLength={1}
+                        maxLength={255}
+                        onChange={(e: any) => {
+                          setFieldValue(
+                            "year",
+                            e.target.value.replaceAll(
+                              /[A-Za-zА-Яа-я,./'` ]/g,
+                              "",
+                            ),
+                          );
+                        }}
+                        required
+                        placeholder="-----"
+                      />
+                    </label>
+                    <div className="addBusiness__price">
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">Ціна</span>
+                        <span className="addBusiness__input-thumb">
+                          <Field
+                            className="addBusiness__input section__primary-text"
+                            type="text"
+                            name="price"
+                            pattern="[0-9]+"
+                            minLength={1}
+                            maxLength={255}
+                            required
+                            onChange={(e: any) => {
+                              setFieldValue(
+                                "price",
+                                e.target.value.replaceAll(
+                                  /[A-Za-zА-Яа-я,./'` ]/g,
+                                  "",
+                                ),
+                              );
+                            }}
+                            placeholder="-----"
+                          />
+                          <span className="addBusiness__icon">
+                            {currencyState === "Гривня" ? "₴" : "$"}
+                          </span>
+                        </span>
+                      </label>
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">Валюта</span>
+                        <Field
+                          type="text"
+                          name="currency"
+                          required
+                          setter={setCurrencyState}
+                          placeholder="Оберіть"
+                          component={CustomSelect}
+                          options={[
+                            { value: "Гривня", label: "Гривня" },
+                            { value: "Долар", label: "Долар" },
+                          ]}
+                        />
+                      </label>
+                    </div>
+                    <label className="addBusiness__field">
+                      <span className="addBusiness__label">Опис</span>
+                      <Field
+                        as="textarea"
+                        className="addBusiness__textarea section__primary-text"
+                        type="text"
+                        name="description"
+                        minLength={1}
+                        maxLength={2000}
+                        required
+                        placeholder="Писати тут..."
+                      />
+                    </label>
+                  </div>
+                </div>
+                <span className="addBusiness__label">Медіа</span>
+                <div className="addBusiness__addMedia-wrapper">
+                  {files &&
+                    files.map((f: any, i: number) => (
+                      <div
+                        key={i}
+                        className="addBusiness__addMedia-wrapper--image"
+                      >
+                        <Image
+                          className=""
+                          src={f}
+                          layout="fill"
+                          objectFit="cover"
+                          alt="building"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeFile(f)}
+                          className="addBusiness__button-close"
+                        >
+                          <CrossSVG />
+                        </button>
+                      </div>
+                    ))}
+                  <div className="addBusiness__addMedia-wrapper--add-file">
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      accept="image/*,.png,.jpg"
+                      className="addBusiness__custom-file-input--desctop"
+                      data-label={`Додати медіафайл`}
+                      onChange={async (e) => {
+                        if (e.currentTarget?.files?.length) {
+                          const uploadedFiles: any = await uploadToServer(
+                            e.currentTarget.files[0],
+                          );
+                          console.log(uploadedFiles.data.url);
+                          setFiles([...files, uploadedFiles.data.url]);
+                        }
+                      }}
+                    />
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      multiple
+                      accept="image/*,.png,.jpg"
+                      className="addBusiness__custom-file-input--mob"
+                      // data-label={`${
+                      //   files && files.length > 0
+                      //     ? `Додано ${files.length} медіафали`
+                      //     : `+`
+                      // }`}
+                      onChange={async (e) => {
+                        if (e.currentTarget?.files?.length) {
+                          const uploadedFiles: any = await uploadToServer(
+                            e.currentTarget.files[0],
+                          );
+                          console.log(uploadedFiles.data.url);
+                          setFiles([...files, uploadedFiles.data.url]);
+                        }
+                      }}
+                    />
+                    <CrossSVG />
+                  </div>
+                </div>
+                {addBusinessError && (
+                  <div className="addBusiness__failed">{addBusinessError}</div>
+                )}
+                <button
+                  disabled={isSentBusiness ? true : false}
+                  type="submit"
+                  className="addBusiness__button"
+                >
+                  Далі
+                </button>
+              </Form>
+            );
+          }}
         </Formik>
       </div>
     </section>
