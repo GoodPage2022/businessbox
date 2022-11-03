@@ -13,6 +13,7 @@ import CardsSlider from "../CardsSlider/CardsSlider";
 
 import { signOut as signOutReducer } from "../../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
+import OurCategories from "../../../constants/categories-select";
 
 const Popular = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -241,20 +242,7 @@ const Popular = () => {
                       className="popular__select section__primary-text"
                       type="text"
                       name="category"
-                      options={[
-                        { value: "Торгівля", label: "Торгівля" },
-                        { value: "Ресторани", label: "Ресторани" },
-                        { value: "Послуги", label: "Послуги" },
-                        { value: "Автомобільна", label: "Автомобільна" },
-                        { value: "Виробництво", label: "Виробництво" },
-                        {
-                          value: "ІТ та інтелектуальна власність",
-                          label: "ІТ та інтелектуальна власність",
-                        },
-                        { value: "Кафе", label: "Кафе" },
-                        { value: "Фаст фуд", label: "Фаст фуд" },
-                        { value: "Інше", label: "Інше" },
-                      ]}
+                      options={OurCategories}
                       required
                       placeholder="-----"
                       changeFilter={changeFilter}
