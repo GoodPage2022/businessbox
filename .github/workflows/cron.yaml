@@ -1,7 +1,7 @@
 name: daily-cron
 on:
   schedule:
-  - cron: '40 21 * * *'
+  - cron: '16 22 * * *'
 
 jobs:
   cron:
