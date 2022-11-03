@@ -46,7 +46,7 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
         <div className="profileInfo__image">
           <Image
             className=""
-            src={projectData.contact_seller_name ? "/assets/images/profile-photo.png" : (businessOwner ? businessOwner.avatar.path : "/assets/images/profile-photo.png")}
+            src={projectData.contact_seller_name ? "/assets/images/profile-photo.png" : ((businessOwner && businessOwner.avatar?.path) ? businessOwner.avatar?.path : "/assets/images/profile-photo.png")}
             layout="fill"
             objectFit="cover"
             alt="card-image"
@@ -57,7 +57,7 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
             {projectData.contact_seller_name ?? (businessOwner ? businessOwner.name : "Невідомо")}
           </p>
           <p className="profileInfo__city section__primary-text">
-            {projectData.contact_seller_city ?? (businessOwner ? businessOwner.city : "Невідомо")}
+            {projectData.contact_seller_name ? "" : (businessOwner ? businessOwner.city : "Невідомо")}
           </p>
         </div>
       </div>

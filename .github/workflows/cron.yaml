@@ -1,0 +1,12 @@
+name: daily-cron
+on:
+  schedule:
+    - cron: '25 21 * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update USD currency
+        run: |
+          curl --request POST \
+          --url 'https://business-box.vercel.app/api/currency/update'
