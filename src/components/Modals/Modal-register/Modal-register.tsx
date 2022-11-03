@@ -53,16 +53,23 @@ function ModalRegister({ onClose }: { onClose: any }) {
 
     try {
       const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
-      console.log(newUserResponse);
+
       if (newUserResponse.status == 200) {
         onClose();
         resetForm({});
         setRegisterError("");
+        dispatch({ type: "toggle_registrationFinishModal" });
       }
     } catch (err: any) {
-      setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
       console.log("Register Error");
       console.log(err);
+      if (err.response.data.error === "Username is already used!") {
+        setRegisterError(
+          "Користувач з такою поштою вже зареєстрований в системі. Змініть пошту або скористайтеся функцією відновлення паролю",
+        );
+      } else {
+        setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
+      }
     }
   };
 
@@ -146,7 +153,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="name"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="Петро"
@@ -157,7 +164,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   <Field
                     className="modal-register__input section__primary-text"
                     type="text"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     name="surname"
                     required
@@ -190,7 +197,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="email"
                     name="mail"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="example@mail.com"
@@ -205,7 +212,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     className="modal-register__input section__primary-text"
                     type="text"
                     name="city"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="Дніпро"

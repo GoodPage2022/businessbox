@@ -27,6 +27,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [comments, setComments] = useState<any>([]);
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
+  const rate = 37;
 
   const imageSliderSettings = {
     dots: false,
@@ -402,6 +403,19 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           <div className="projectInfo__price">
             <p className="section__primary-text">Ціна:</p>
             <p className="projectInfo__amount title">{projectInfo.price}₴</p>
+            <div className="projectInfo__amount-uah">
+              <p className="section__secondary-text">
+                {Number(projectInfo.price) * rate} грн
+              </p>
+              <div className="projectInfo__rate">
+                <p className="projectInfo__rate--top section__secondary-text">
+                  USD 37 грн
+                </p>
+                <p className="projectInfo__rate--bottom">
+                  за даними kurs.com.ua
+                </p>
+              </div>
+            </div>
           </div>
           <div className="projectInfo__button-wrapper--desctop">
             <button
@@ -462,7 +476,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   className="projectInfo__textarea section__primary-text"
                   type="text"
                   name="comment"
-                  minlength={1}
+                  minLength={1}
                   maxLength={1000}
                   required
                   placeholder="Додати коментар..."

@@ -32,6 +32,16 @@ const OurCategories = [
   {
     id: 7,
     content:
+      'Кафе',
+  },
+  {
+    id: 8,
+    content:
+      'Фаст фуд',
+  },
+  {
+    id: 7,
+    content:
       'Інше',
   },
  

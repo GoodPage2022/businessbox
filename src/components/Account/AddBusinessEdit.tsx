@@ -282,6 +282,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         value: "ІТ та інтелектуальна власність",
                         label: "ІТ та інтелектуальна власність",
                       },
+                      { value: "Кафе", label: "Кафе" },
+                      { value: "Фаст фуд", label: "Фаст фуд" },
                       { value: "Інше", label: "Інше" },
                     ]}
                   />
@@ -318,7 +320,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     className="addBusinessEdit__textarea section__primary-text"
                     type="text"
                     name="description"
-                    minlength={1}
+                    minLength={1}
                     maxLength={1000}
                     required
                     placeholder="Писати тут..."
@@ -330,7 +332,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     className="addBusinessEdit__input section__primary-text"
                     type="text"
                     name="year"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -343,7 +345,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                       className="addBusinessEdit__input section__primary-text"
                       type="text"
                       name="price"
-                      minlength={1}
+                      minLength={1}
                       maxLength={255}
                       required
                       placeholder="-----"
@@ -359,7 +361,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     className="addBusinessEdit__input section__primary-text"
                     type="text"
                     name="year"
-                    minlength={1}
+                    minLength={1}
                     maxLength={255}
                     required
                     placeholder="-----"
@@ -373,7 +375,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                       type="text"
                       name="price"
                       pattern="[0-9]+"
-                      minlength={1}
+                      minLength={1}
                       maxLength={255}
                       required
                       placeholder="-----"
@@ -388,7 +390,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     className="addBusinessEdit__textarea section__primary-text"
                     type="text"
                     name="description"
-                    minlength={1}
+                    minLength={1}
                     maxLength={1000}
                     required
                     placeholder="Писати тут..."

@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOut as signOutReducer } from "../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
 import Search from "./Search";
+import ModalRegisterFinish from "../Modals/register-finish/Modal-register-finish";
 
 const initialValues = {
   search: "",
@@ -57,6 +58,11 @@ const RightMob = () => {
 
   const closeRegisterModal = () => {
     dispatch({ type: "toggle_registrationModal" });
+    router.push("/");
+  };
+
+  const closeRegisterFinishModal = () => {
+    dispatch({ type: "toggle_registrationFinishModal" });
     router.push("/");
   };
 
@@ -126,6 +132,7 @@ const RightMob = () => {
 
       <ModalAuth onClose={closeAuthModal} />
       <ModalRegister onClose={closeRegisterModal} />
+      <ModalRegisterFinish onClose={closeRegisterFinishModal} />
       <ModalForgotPassword onClose={closeForgotPasswordModal} />
     </>
   );

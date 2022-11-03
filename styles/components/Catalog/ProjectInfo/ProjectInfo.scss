@@ -148,6 +148,32 @@
 
   &__amount {
     margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__rate {
+    position: absolute;
+    top: -80px;
+    display: none;
+    background: $white-color;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    border-top: 4px solid $main-red-color;
+    padding: 15px;
+
+    &--top {
+      margin-bottom: 5px;
+    }
+  }
+
+  &__amount-uah {
+    position: relative;
+    margin-bottom: 10px;
+    &:hover {
+      .projectInfo__rate {
+        display: block;
+      }
+    }
   }
 
   &__comments {
