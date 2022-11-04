@@ -21,6 +21,7 @@ const BusinessCard = ({
   isVerified,
   alias,
   isSoldOut,
+  rate=0,
 }: {
   image: any;
   title: string;
@@ -30,6 +31,7 @@ const BusinessCard = ({
   isVerified: boolean;
   alias: string;
   isSoldOut?: boolean;
+  rate?: number;
 }) => {
   const dispatchRedux = useDispatch();
   const router = useRouter();
@@ -38,7 +40,6 @@ const BusinessCard = ({
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [clickTime, setClickTime] = useState<number>(0);
   const [clickPos, setClickPos] = useState<any>({});
-  const rate = 37;
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
       setIsMyBusinessesPage(true);
@@ -162,14 +163,14 @@ const BusinessCard = ({
           </div>
           <div className="business-card__footer--bottom">
             <p className="section__secondary-text">
-              {Number(price) * rate} грн
+              {(Number(price) * rate).toFixed(0)} грн
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">
-                USD 37 грн
+                USD {rate} грн
               </p>
               <p className="business-card__rate--bottom">
-                за даними kurs.com.ua
+                за даними privatbank.ua
               </p>
             </div>
           </div>
@@ -191,14 +192,14 @@ const BusinessCard = ({
 
           <div className="business-card__footer-mob--price">
             <p className="section__secondary-text">
-              {Number(price) * rate} грн
+              {(Number(price) * rate).toFixed(0)} грн
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">
-                USD 37 грн
+                USD {rate} грн
               </p>
               <p className="business-card__rate--bottom">
-                за даними kurs.com.ua
+                за даними privatbank.ua
               </p>
             </div>
           </div>

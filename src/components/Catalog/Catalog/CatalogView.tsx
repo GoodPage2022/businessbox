@@ -25,6 +25,7 @@ const CatalogView = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
   const [countCards, setCountCards] = useState<number>(0);
+  const [rate, setRate] = useState<number>(0);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [filtersObj, setFiltersObj] = useState<any>({});
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
@@ -176,6 +177,18 @@ const CatalogView = () => {
     return [];
   };
 
+  const getCurrencyRate = async () => {
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(`/api/currency/get`);
+
+    if (rateUSDStus == 200) {
+      setRate(rateUSD);
+    }
+  }
+
+  useEffect(() => {
+    getCurrencyRate()
+  }, []);
+
   useEffect(() => {
     if (!!filters && filters.length) buildFiltersObj();
   }, [filters]);
@@ -289,6 +302,7 @@ const CatalogView = () => {
                       key={_id}
                       alias={_id}
                       title={title}
+                      rate={rate}
                       description={description}
                       image={
                         images == null || !images.length
@@ -307,6 +321,7 @@ const CatalogView = () => {
                     <BusinessCard
                       key={_id}
                       alias={_id}
+                      rate={rate}
                       title={title}
                       description={description}
                       image={

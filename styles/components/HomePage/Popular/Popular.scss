@@ -1,6 +1,7 @@
 .popular {
   padding-top: 40px;
-  padding-bottom: 40px;
+  // padding-bottom: 40px;
+  padding-bottom: 0px;
 
   &__buttons {
     display: flex;
@@ -164,7 +165,8 @@
 @media screen and (max-width: $size-tablet) {
   .popular {
     padding-top: 40px;
-    padding-bottom: 40px;
+    // padding-bottom: 40px;
+    padding-bottom: 0px;
 
     &__container {
       overflow: hidden;

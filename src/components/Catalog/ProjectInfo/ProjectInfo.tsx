@@ -27,7 +27,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [comments, setComments] = useState<any>([]);
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
-  const rate = 37;
+  const [rate, setRate] = useState(0);
 
   const imageSliderSettings = {
     dots: false,
@@ -204,6 +204,18 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       console.log(error);
     }
   };
+
+  const getCurrencyRate = async () => {
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(`/api/currency/get`);
+
+    if (rateUSDStus == 200) {
+      setRate(rateUSD);
+    }
+  }
+
+  useEffect(() => {
+    getCurrencyRate()
+  }, []);
 
   useEffect(() => {
     getBusinesses();
@@ -405,14 +417,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             <p className="projectInfo__amount title">{projectInfo.price}₴</p>
             <div className="projectInfo__amount-uah">
               <p className="section__secondary-text">
-                {Number(projectInfo.price) * rate} грн
+                {(Number(projectInfo.price) * rate).toFixed(0)} грн
               </p>
               <div className="projectInfo__rate">
                 <p className="projectInfo__rate--top section__secondary-text">
-                  USD 37 грн
+                  USD {rate} грн
                 </p>
                 <p className="projectInfo__rate--bottom">
-                  за даними kurs.com.ua
+                  за даними privatbank.ua
                 </p>
               </div>
             </div>

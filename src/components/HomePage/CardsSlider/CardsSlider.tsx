@@ -1,9 +1,10 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import Slider from "react-slick";
 
 import debounce from "lodash.debounce";
 
 import BusinessCard from "../../shared/BusinessCard";
+import axios from "axios";
 
 const CardsSlider = ({ cards }: { cards: any }) => {
   const settings = {
@@ -36,8 +37,21 @@ const CardsSlider = ({ cards }: { cards: any }) => {
   };
 
   const [scrollLock, setScrollLock] = useState(false);
+  const [rate, setRate] = useState<number>(0);
 
   const slider = useRef<any>(null);
+
+  const getCurrencyRate = async () => {
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(`/api/currency/get`);
+
+    if (rateUSDStus == 200) {
+      setRate(rateUSD);
+    }
+  }
+
+  useEffect(() => {
+    getCurrencyRate()
+  }, []);
 
   const debouncedChangeHandler = useMemo(
     () =>
@@ -79,6 +93,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
             <BusinessCard
               key={_id}
               alias={_id}
+              rate={rate}
               title={title}
               description={description}
               image={
@@ -112,6 +127,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         <BusinessCard
           key={_id}
           alias={_id}
+          rate={rate}
           title={title}
           description={description}
           image={

@@ -153,13 +153,15 @@
 
   &__rate {
     position: absolute;
-    top: -80px;
+    top: 20px;
     display: none;
     background: $white-color;
     border-radius: 0 0 10px 10px;
     overflow: hidden;
+    border: 1px solid $main-red-color;
     border-top: 4px solid $main-red-color;
     padding: 15px;
+    z-index: 9;
 
     &--top {
       margin-bottom: 5px;

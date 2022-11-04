@@ -17,6 +17,7 @@ const BusinessCardFavorites = ({
   views,
   isVerified,
   alias,
+  rate=0
 }: {
   image: any;
   title: string;
@@ -25,12 +26,12 @@ const BusinessCardFavorites = ({
   views: string;
   isVerified: boolean;
   alias: string;
+  rate: number;
 }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
 
-  const rate = 37;
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
       setIsMyBusinessesPage(true);
@@ -99,14 +100,14 @@ const BusinessCardFavorites = ({
           </div>
           <div className="business-card__footer--bottom">
             <p className="section__secondary-text">
-              {Number(price) * rate} грн
+              {(Number(price) * rate).toFixed(0)} грн
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">
-                USD 37 грн
+                USD {rate} грн
               </p>
               <p className="business-card__rate--bottom">
-                за даними kurs.com.ua
+                за даними privatbank.ua
               </p>
             </div>
           </div>
@@ -125,14 +126,14 @@ const BusinessCardFavorites = ({
           </div>
           <div className="business-card-favorite__footer-mob--price">
             <p className="section__secondary-text">
-              {Number(price) * rate} грн
+              {(Number(price) * rate).toFixed(0)} грн
             </p>
             <div className="business-card-favorite__rate">
               <p className="business-card-favorite__rate--top section__secondary-text">
-                USD 37 грн
+                USD {rate} грн
               </p>
               <p className="business-card-favorite__rate--bottom">
-                за даними kurs.com.ua
+                за даними privatbank.ua
               </p>
             </div>
           </div>
