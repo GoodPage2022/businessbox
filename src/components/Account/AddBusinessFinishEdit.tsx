@@ -5,19 +5,32 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-const AddBusinessFinish = () => {
+const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
   const user = useSelector((state: any) => state.auth.user);
   const [addBusinessError, setAddBusinessError] = useState("");
-  const { businessId } = router.query;
   const [currency, setCurrency] = useState(localStorage.getItem("currency"));
+  const [businessInfo, setBusinessInfo] = useState<any>(null);
   const [isGoBackClicked, setIsGoBackClicked] = useState<boolean>(false);
 
+  const getBusinessInfo = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/get`, {
+        user,
+        projectId,
+      });
+
+      if (response.data) {
+        setBusinessInfo(response.data.entries[0]);
+      }
+    } catch (error) {
+      router.push("/404");
+    }
+  };
+
   useEffect(() => {
-    window.onpopstate = () => {
-      router.push(`/account/edit-business/${businessId}`);
-    };
-  });
+    getBusinessInfo();
+  }, []);
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     const {
@@ -45,7 +58,7 @@ const AddBusinessFinish = () => {
     } = values;
 
     const newBusiness = {
-      _id: businessId,
+      _id: projectId,
       property_form,
       number_of_founders,
       number_of_employees,
@@ -75,14 +88,15 @@ const AddBusinessFinish = () => {
         data: newBusiness,
         user,
       });
+
       setAddBusinessError("");
       console.log("newUserResponse");
       console.log(newBusinessResponse);
 
       if (isGoBackClicked) {
-        router.push(`/account/edit-business/${businessId}`);
+        router.push(`/account/edit-business/${projectId}`);
       } else {
-        router.push(`/account/my-businesses`);
+        router.push(`/catalog/${projectId}`);
       }
     } catch (err: any) {
       setAddBusinessError("На жаль, виникла помилка. Спробуйте ще раз");
@@ -94,45 +108,72 @@ const AddBusinessFinish = () => {
   };
 
   function escapeHtml(text: string) {
-    const map: any = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;",
-    };
+    if (text) {
+      const map: any = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;",
+      };
 
-    return text.replace(/[&<>"']/g, function (m: any) {
-      return map[m];
-    });
+      return text.replace(/[&<>"']/g, function (m: any) {
+        return map[m];
+      });
+    }
   }
 
+  console.log(businessInfo);
   return (
     <section className="addBusinessFinish">
       <div className="container addBusinessFinish__container">
         <Formik
+          enableReinitialize={true}
           initialValues={{
-            property_form: "",
-            number_of_founders: "",
-            number_of_employees: "",
-            seasonality: "",
-            year_turnover: "",
-            monthly_net_profit: "",
-            gross_monthly_income: "",
-            estimated_turnover_next_year: "",
-            loans: "",
-            return_on_investment: "",
-            equipment_market_value: "",
-            monthly_salary_fund: "",
-            year_nonfixed_costs: "",
-            website: "",
-            instagram: "",
-            facebook: "",
-            youtube: "",
-            file: "",
-            public_reviews: "",
-            financial_accounting_system: "",
-            crm: "",
+            property_form:
+              businessInfo != null ? businessInfo.property_form : "",
+            number_of_founders:
+              businessInfo != null ? businessInfo.number_of_founders : "",
+            number_of_employees:
+              businessInfo != null ? businessInfo.number_of_employees : "",
+            seasonality:
+              businessInfo != null
+                ? businessInfo.seasonality
+                  ? "yes"
+                  : "no"
+                : "",
+            year_turnover:
+              businessInfo != null ? businessInfo.year_turnover : "",
+            monthly_net_profit:
+              businessInfo != null ? businessInfo.monthly_net_profit : "",
+            gross_monthly_income:
+              businessInfo != null ? businessInfo.gross_monthly_income : "",
+            estimated_turnover_next_year:
+              businessInfo != null
+                ? businessInfo.estimated_turnover_next_year
+                : "",
+            loans:
+              businessInfo != null ? (businessInfo.loans ? "yes" : "no") : "",
+            return_on_investment:
+              businessInfo != null ? businessInfo.return_on_investment : "",
+            equipment_market_value:
+              businessInfo != null ? businessInfo.equipment_market_value : "",
+            monthly_salary_fund:
+              businessInfo != null ? businessInfo.monthly_salary_fund : "",
+            year_nonfixed_costs:
+              businessInfo != null ? businessInfo.year_nonfixed_costs : "",
+            website: businessInfo != null ? businessInfo.website : "",
+            instagram: businessInfo != null ? businessInfo.instagram : "",
+            facebook: businessInfo != null ? businessInfo.facebook : "",
+            youtube: businessInfo != null ? businessInfo.youtube : "",
+            file: businessInfo != null ? businessInfo.file : "",
+            public_reviews:
+              businessInfo != null ? businessInfo.public_reviews : "",
+            financial_accounting_system:
+              businessInfo != null
+                ? businessInfo.financial_accounting_system
+                : "",
+            crm: businessInfo != null ? businessInfo.crm : "",
           }}
           validate={(values: any) => {
             escapeHtml(values.property_form);
@@ -616,7 +657,7 @@ const AddBusinessFinish = () => {
                 )}
                 <div className="addBusinessFinish__buttons">
                   <button
-                    type="submit"
+                    type="button"
                     onClick={
                       () => setIsGoBackClicked(true)
                       // router.push(`/account/edit-business/${businessId}`)
@@ -625,12 +666,8 @@ const AddBusinessFinish = () => {
                   >
                     Назад
                   </button>
-                  <button
-                    type="submit"
-                    // onClick={() => router.push("/account/add-business-finish")}
-                    className="addBusinessFinish__button"
-                  >
-                    Зареєструвати бізнес
+                  <button type="submit" className="addBusinessFinish__button">
+                    Зберегти
                   </button>
                 </div>
               </Form>
@@ -642,4 +679,4 @@ const AddBusinessFinish = () => {
   );
 };
 
-export default AddBusinessFinish;
+export default AddBusinessFinishEdit;

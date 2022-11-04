@@ -210,7 +210,11 @@
   &__buttons {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+
+    &-wrapper {
+      display: flex;
+    }
   }
 
   &__save-button {
@@ -222,7 +226,7 @@
     border: none;
     border-radius: 18px;
     background: $main-red-color;
-
+    margin-left: 40px;
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 600;
@@ -236,7 +240,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 40px;
     padding: 10px 20px;
     border: 1px solid #f22a4e;
     border-radius: 18px;
@@ -643,6 +646,17 @@
 
     &__form {
       width: 100%;
+    }
+
+    &__save-button {
+      padding: 10px 16px;
+      margin-left: 18px;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+    }
+    &__delete-button {
+      padding: 10px 16px;
     }
 
     &__field {
