@@ -356,7 +356,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   <Image
                     className=""
                     src={`${
-                      img.meta.assets == "" ? `` : `http://157.230.99.45:8082`
+                      img.meta.assets == "" ? `` : `https://admin.bissbox.com`
                     }${img.path}`}
                     layout="fill"
                     objectFit="cover"
@@ -371,7 +371,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 <Image
                   className=""
                   src={`${
-                    img.meta.assets == "" ? `` : `http://157.230.99.45:8082`
+                    img.meta.assets == "" ? `` : `https://admin.bissbox.com`
                   }${img.path}`}
                   layout="fill"
                   objectFit="cover"
@@ -383,7 +383,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         </div>
         <div className="projectInfo__categories-slider">
           <Slider {...categoriesSliderSettings}>
-            {OurCategoriesShort.map(({ id, content }) => (
+            {[projectInfo.area].map((content, id) => (
               <li key={id} className="categories__buttons__item">
                 <MainButtonBlack label={content} />
               </li>

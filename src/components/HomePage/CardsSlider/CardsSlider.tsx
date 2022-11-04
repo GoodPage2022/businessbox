@@ -103,7 +103,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
                   : `${
                       images[0].meta.assets == ""
                         ? ``
-                        : `http://157.230.99.45:8082`
+                        : `https://admin.bissbox.com`
                     }${images[0].path}`
               }
               price={price}
@@ -137,7 +137,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
             images == null || !images.length
               ? ""
               : `${
-                  images[0].meta.assets == "" ? `` : `http://157.230.99.45:8082`
+                  images[0].meta.assets == "" ? `` : `https://admin.bissbox.com`
                 }${images[0].path}`
           }
           price={price}

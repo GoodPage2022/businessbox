@@ -77,7 +77,7 @@ const Favorites = () => {
                           : `${
                               images[0].meta.assets == ""
                                 ? ``
-                                : `http://157.230.99.45:8082`
+                                : `https://admin.bissbox.com`
                             }${images[0].path}`
                       }
                       price={price}
@@ -116,7 +116,7 @@ const Favorites = () => {
                           : `${
                               images[0].meta.assets == ""
                                 ? ``
-                                : `http://157.230.99.45:8082`
+                                : `https://admin.bissbox.com`
                             }${images[0].path}`
                       }
                       price={price}
