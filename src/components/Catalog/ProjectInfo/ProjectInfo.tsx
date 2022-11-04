@@ -382,13 +382,15 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           )}
         </div>
         <div className="projectInfo__categories-slider">
-          <Slider {...categoriesSliderSettings}>
+          <ul>
+          {/* <Slider {...categoriesSliderSettings}> */}
             {[projectInfo.area].map((content, id) => (
               <li key={id} className="categories__buttons__item">
                 <MainButtonBlack label={content} />
               </li>
             ))}
-          </Slider>
+          {/* </Slider> */}
+          </ul>
         </div>
         <p
           className="projectInfo__description section__primary-text"

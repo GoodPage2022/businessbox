@@ -29,7 +29,7 @@ const env = {
 module.exports = withReactSvg({
   env,
   images: {
-    domains: ['157.230.99.45', 'localhost', "daydrive.fra1.digitaloceanspaces.com"]
+    domains: ['admin.bissbox.com', '157.230.99.45', 'localhost', "daydrive.fra1.digitaloceanspaces.com"]
   },
   include: path.resolve(__dirname, 'src/assets/svg'),
   webpack(config, options) {

@@ -6,7 +6,7 @@ const handler = async(
   res: NextApiResponse
 ) => {
   const token = (req.body.user != null && req.body.user?.api_key !== undefined) ? req.body.user.api_key : process.env.cockpitApiToken
-  const queryFilter = req.body.filter
+  const queryFilter = {is_approved: true}
   const queryLimit = req.body.limit
   const querySort = req.body.sort
   const querySkip = req.body.skip
@@ -39,6 +39,8 @@ const handler = async(
   
   try {
     const response = await axios.post(queryUrl, body, options)
+    console.log(response.data);
+    
     res.status(200).json( response.data )
   } catch (err: any) {
     res.status(500).json({error: err})
