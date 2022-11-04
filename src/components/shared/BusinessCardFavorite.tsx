@@ -17,6 +17,7 @@ const BusinessCardFavorites = ({
   views,
   isVerified,
   alias,
+  currency="Гривня",
   rate=0
 }: {
   image: any;
@@ -26,7 +27,8 @@ const BusinessCardFavorites = ({
   views: string;
   isVerified: boolean;
   alias: string;
-  rate: number;
+  currency?: string;
+  rate?: number;
 }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
@@ -96,11 +98,11 @@ const BusinessCardFavorites = ({
                 {views}
               </p>
             </div>
-            <p className="business-card-favorite__price">{price}$</p>
+            <p className="business-card-favorite__price">{currency == "Гривня" ? (Number(price) / rate).toFixed(0) : Number(price).toFixed(0)}$</p>
           </div>
           <div className="business-card__footer--bottom">
             <p className="section__secondary-text">
-              {(Number(price) * rate).toFixed(0)} грн
+            {currency == "Гривня" ? Number(price).toFixed(0) : (Number(price) * rate).toFixed(0)} грн
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">

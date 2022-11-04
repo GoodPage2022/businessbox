@@ -21,6 +21,7 @@ const BusinessCard = ({
   isVerified,
   alias,
   isSoldOut,
+  currency="Гривня",
   rate=0,
 }: {
   image: any;
@@ -31,6 +32,7 @@ const BusinessCard = ({
   isVerified: boolean;
   alias: string;
   isSoldOut?: boolean;
+  currency?: string,
   rate?: number;
 }) => {
   const dispatchRedux = useDispatch();
@@ -159,11 +161,11 @@ const BusinessCard = ({
                 {views}
               </p>
             </div>
-            <p className="business-card__price">{price}$</p>
+            <p className="business-card__price">{currency == "Гривня" ? (Number(price) / rate).toFixed(0) : Number(price).toFixed(0)}$</p>
           </div>
           <div className="business-card__footer--bottom">
             <p className="section__secondary-text">
-              {(Number(price) * rate).toFixed(0)} грн
+            {currency == "Гривня" ? Number(price).toFixed(0) : (Number(price) * rate).toFixed(0)} грн
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">
@@ -177,7 +179,7 @@ const BusinessCard = ({
         </div>
         <div className="business-card__footer-mob">
           <div className="business-card__footer-mob--first">
-            <p className="business-card__price">{price}$</p>
+            <p className="business-card__price">{currency == "Гривня" ? (Number(price) / rate).toFixed(0) : Number(price).toFixed(0)}$</p>
             {!!user && (
               <button
                 onClick={handleFavourites}
@@ -192,7 +194,7 @@ const BusinessCard = ({
 
           <div className="business-card__footer-mob--price">
             <p className="section__secondary-text">
-              {(Number(price) * rate).toFixed(0)} грн
+              {currency == "Гривня" ? Number(price).toFixed(0) : (Number(price) * rate).toFixed(0)} грн
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">

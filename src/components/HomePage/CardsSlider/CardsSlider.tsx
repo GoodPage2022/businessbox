@@ -89,6 +89,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
             view_count,
             price,
             is_verified,
+            sold_out
           }: any) => (
             <BusinessCard
               key={_id}
@@ -108,6 +109,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
               price={price}
               views={view_count ?? 0}
               isVerified={is_verified}
+              isSoldOut={sold_out}
             />
           ),
         )}
@@ -123,6 +125,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         view_count,
         price,
         is_verified,
+        sold_out,
       }: any) => (
         <BusinessCard
           key={_id}
@@ -140,6 +143,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
           price={price}
           views={view_count ?? 0}
           isVerified={is_verified}
+          isSoldOut={sold_out}
         />
       ),
     )

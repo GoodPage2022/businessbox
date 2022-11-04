@@ -414,10 +414,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
           <div className="projectInfo__price">
             <p className="section__primary-text">Ціна:</p>
-            <p className="projectInfo__amount title">{projectInfo.price}₴</p>
+            <p className="projectInfo__amount title">{projectInfo.currency == "Гривня" ? (Number(projectInfo.price) / rate).toFixed(0) : Number(projectInfo.price).toFixed(0)}$</p>
             <div className="projectInfo__amount-uah">
               <p className="section__secondary-text">
-                {(Number(projectInfo.price) * rate).toFixed(0)} грн
+                {projectInfo.currency == "Гривня" ? Number(projectInfo.price).toFixed(0) : (Number(projectInfo.price) * rate).toFixed(0)} грн
               </p>
               <div className="projectInfo__rate">
                 <p className="projectInfo__rate--top section__secondary-text">
