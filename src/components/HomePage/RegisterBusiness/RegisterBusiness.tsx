@@ -24,9 +24,14 @@ const RegisterBusiness = () => {
 
         <button
           className="registerBusiness__button section__primary-text--white"
-          onClick={() =>
-            user != null ? router.push("/account/add-business") : openModal()
-          }
+          onClick={() => {
+            if (user != null) {
+              router.push("/account/add-business");
+            } else {
+              localStorage.setItem("redirectToAddBusiness", "true");
+              openModal();
+            }
+          }}
         >
           Зареєструвати
         </button>

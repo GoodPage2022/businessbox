@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import UserSVG from "../../assets/svg/user.svg";
+import ExitSVG from "../../assets/svg/exit.svg";
 import SearchSVG from "../../assets/svg/search.svg";
 import IconButton from "../shared/IconButton";
 import MainButton from "../shared/MainButton";
@@ -47,7 +48,6 @@ const Right = () => {
 
   const closeAuthModal = () => {
     dispatch({ type: "toggle_authModal" });
-    router.push("/");
   };
 
   const closeRegisterModal = () => {
@@ -97,12 +97,26 @@ const Right = () => {
         </li>
         <li
           className="header__right__btn"
-          onClick={() =>
-            user != null ? router.push("/account/add-business") : openModal()
-          }
+          onClick={() => {
+            if (user != null) {
+              router.push("/account/add-business");
+            } else {
+              localStorage.setItem("redirectToAddBusiness", "true");
+              openModal();
+            }
+          }}
         >
           <MainButtonRed label="Зареєструвати бізнес" />
         </li>
+        {user != null && (
+          <li className="header__right__btn exit">
+            <IconButton
+              onClick={signOut}
+              borderColor="#FFFFFF"
+              icon={<ExitSVG />}
+            />
+          </li>
+        )}
       </ul>
       <ModalAuth onClose={closeAuthModal} />
       <ModalRegister onClose={closeRegisterModal} />

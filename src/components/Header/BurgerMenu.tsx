@@ -13,6 +13,7 @@ const BurgerMenu = () => {
   const openModal = () => {
     router.push("#auth");
     dispatch({ type: "toggle_authModal" });
+    dispatch({ type: "toggle_burger" });
   };
 
   const openAddBusiness = () => {
@@ -51,7 +52,14 @@ const BurgerMenu = () => {
 
         <li
           className="burgerMenu__button"
-          onClick={() => (user != null ? openAddBusiness() : openModal())}
+          onClick={() => {
+            if (user != null) {
+              openAddBusiness();
+            } else {
+              localStorage.setItem("redirectToAddBusiness", "true");
+              openModal();
+            }
+          }}
         >
           <MainButtonRed label="Зареєструвати бізнес" />
         </li>

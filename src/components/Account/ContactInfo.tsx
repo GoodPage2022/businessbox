@@ -30,21 +30,12 @@ const ContactInfo = () => {
     }
   }, [user]);
 
-  const signOut = async () => {
-    if (session !== undefined) {
-      await signOutGoogle();
-    }
-    dispatchRedux(signOutReducer());
-  };
-
-  // const [name, setName] = useState(user.name);
-  // const [lastname, setLastname] = useState(user.surname);
-  // const [city, setCity] = useState(user.city);
-  // const [email, setEmail] = useState(user.email);
-  // const [phone, setPhone] = useState(user.phone);
-  // const [businessSphere, setBusinessSphere] = useState(
-  //   user.area,
-  // );
+  // const signOut = async () => {
+  //   if (session !== undefined) {
+  //     await signOutGoogle();
+  //   }
+  //   dispatchRedux(signOutReducer());
+  // };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     dispatch({ type: "toggle_edit" });
@@ -235,12 +226,12 @@ const ContactInfo = () => {
               </button>
             </div>
 
-            <button
+            {/* <button
               onClick={signOut}
               className="contactInfo__signout-btn--desctop section__secondary-text--white"
             >
               Вийти
-            </button>
+            </button> */}
           </div>
 
           <Formik
@@ -367,13 +358,13 @@ const ContactInfo = () => {
             </Form>
           </Formik>
         </div>
-        <button
+        {/* <button
           type="button"
           onClick={signOut}
           className="contactInfo__signout-btn--mob section__secondary-text--white"
         >
           Вийти
-        </button>
+        </button> */}
       </div>
     </section>
   );
