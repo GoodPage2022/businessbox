@@ -18,7 +18,20 @@ const handler = async(
             value: a._id.toString()
         }))
 
-        return res.status(200).send(listArea)
+        const listAreaSorted = listArea.sort((a, b) => {
+            let fa = a.label.toLowerCase(),
+                fb = b.label.toLowerCase();
+        
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return res.status(200).send(listAreaSorted)
     } catch (error) {
         console.log("error");
         console.log(error);
