@@ -93,6 +93,7 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
       console.log("newUserResponse");
       console.log(newBusinessResponse);
       localStorage.removeItem("currency");
+
       if (isGoBackClicked) {
         router.push(`/account/edit-business/${projectId}`);
       } else {
@@ -123,7 +124,6 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
     }
   }
 
-  console.log(businessInfo);
   return (
     <section className="addBusinessFinish">
       <div className="container addBusinessFinish__container">
@@ -217,7 +217,7 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
                         type="text"
                         name="property_form"
                         // classNamePrefix="custom-select"
-                        required
+                        required={isGoBackClicked ? false : true}
                         placeholder="-----"
                         component={CustomSelect}
                         // className="addBusinessFinish__select section__primary-text"
@@ -250,7 +250,7 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
                           ),
                         );
                       }}
-                      required
+                      required={isGoBackClicked ? false : true}
                       placeholder="-----"
                     />
                   </label>
@@ -657,7 +657,7 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
                 )}
                 <div className="addBusinessFinish__buttons">
                   <button
-                    type="button"
+                    type="submit"
                     onClick={
                       () => setIsGoBackClicked(true)
                       // router.push(`/account/edit-business/${businessId}`)

@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import UserSVG from "../../assets/svg/user.svg";
+import ExitSVG from "../../assets/svg/exit.svg";
 import SearchSVG from "../../assets/svg/search.svg";
 import IconButton from "../shared/IconButton";
 import MainButton from "../shared/MainButton";
@@ -107,6 +108,15 @@ const Right = () => {
         >
           <MainButtonRed label="Зареєструвати бізнес" />
         </li>
+        {user != null && (
+          <li className="header__right__btn exit">
+            <IconButton
+              onClick={signOut}
+              borderColor="#FFFFFF"
+              icon={<ExitSVG />}
+            />
+          </li>
+        )}
       </ul>
       <ModalAuth onClose={closeAuthModal} />
       <ModalRegister onClose={closeRegisterModal} />

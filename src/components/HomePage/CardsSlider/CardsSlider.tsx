@@ -23,14 +23,14 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         breakpoint: 1440,
         settings: {
           slidesToShow: 2.7,
-          infinite: false,
+          infinite: true,
         },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 1.3,
-          infinite: false,
+          infinite: true,
         },
       },
     ],
@@ -42,15 +42,17 @@ const CardsSlider = ({ cards }: { cards: any }) => {
   const slider = useRef<any>(null);
 
   const getCurrencyRate = async () => {
-    const { data: rateUSD, status: rateUSDStus } = await axios.get(`/api/currency/get`);
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(
+      `/api/currency/get`,
+    );
 
     if (rateUSDStus == 200) {
       setRate(rateUSD);
     }
-  }
+  };
 
   useEffect(() => {
-    getCurrencyRate()
+    getCurrencyRate();
   }, []);
 
   const debouncedChangeHandler = useMemo(
@@ -89,7 +91,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
             view_count,
             price,
             is_verified,
-            sold_out
+            sold_out,
           }: any) => (
             <BusinessCard
               key={_id}

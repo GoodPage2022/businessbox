@@ -558,7 +558,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                       disabled={isSentBusiness ? true : false}
                       type="submit"
                       onClick={() => setIsContinueClicked(true)}
-                      className="addBusiness__button"
+                      className="addBusinessEdit__button"
                     >
                       Далі
                     </button>

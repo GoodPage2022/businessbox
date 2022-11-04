@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import ExitSVG from "../../assets/svg/exit.svg";
 import CloseBurgerSVG from "../../assets/svg/close-burger.svg";
 import BurgerSVG from "../../assets/svg/burger-menu.svg";
 import UserSVG from "../../assets/svg/user.svg";
@@ -127,6 +128,15 @@ const RightMob = () => {
             />
           )}
         </li>
+        {user != null && (
+          <li className="header__right__btn exit">
+            <IconButton
+              onClick={signOut}
+              borderColor="#FFFFFF"
+              icon={<ExitSVG />}
+            />
+          </li>
+        )}
       </ul>
 
       <ModalAuth onClose={closeAuthModal} />

@@ -176,7 +176,7 @@ const AddBusinessFinish = () => {
                         type="text"
                         name="property_form"
                         // classNamePrefix="custom-select"
-                        required
+                        required={isGoBackClicked ? false : true}
                         placeholder="-----"
                         component={CustomSelect}
                         // className="addBusinessFinish__select section__primary-text"
@@ -209,7 +209,7 @@ const AddBusinessFinish = () => {
                           ),
                         );
                       }}
-                      required
+                      required={isGoBackClicked ? false : true}
                       placeholder="-----"
                     />
                   </label>
