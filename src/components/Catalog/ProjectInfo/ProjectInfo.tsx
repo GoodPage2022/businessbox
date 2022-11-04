@@ -22,6 +22,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
   const [isAuth, setIsAuth] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [commentIsSent, setCommentIsSent] = useState(false);
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState<any>([]);
   const [comments, setComments] = useState<any>([]);
@@ -259,10 +260,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       });
 
       if (newCommentResponse.status == 200) {
-        getBusinessComments();
+        setCommentIsSent(true)
+        setTimeout(
+          () => setCommentIsSent(false), 
+          3000
+        )
+        getBusinessComments()
       }
 
-      console.log(newCommentResponse);
       resetForm({});
     } catch (err: any) {
       console.log("newUserResponse3");
@@ -497,6 +502,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 />
               </label>
               <div className="projectInfo__button-send">
+                <p className={`projectInfo__button-send--success ${commentIsSent ? "active" : ""}`}>Коментар буде опубліковано після модерації</p>
                 <MainButtonBlack label="Опублікувати" />
               </div>
             </Form>

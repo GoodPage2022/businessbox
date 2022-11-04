@@ -226,6 +226,18 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    &--success {
+      flex: 1;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .35s ease;
+
+      &.active {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
   }
 
   &__offers-title {
