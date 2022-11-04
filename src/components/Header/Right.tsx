@@ -47,7 +47,6 @@ const Right = () => {
 
   const closeAuthModal = () => {
     dispatch({ type: "toggle_authModal" });
-    router.push("/");
   };
 
   const closeRegisterModal = () => {
@@ -97,9 +96,14 @@ const Right = () => {
         </li>
         <li
           className="header__right__btn"
-          onClick={() =>
-            user != null ? router.push("/account/add-business") : openModal()
-          }
+          onClick={() => {
+            if (user != null) {
+              router.push("/account/add-business");
+            } else {
+              localStorage.setItem("redirectToAddBusiness", "true");
+              openModal();
+            }
+          }}
         >
           <MainButtonRed label="Зареєструвати бізнес" />
         </li>

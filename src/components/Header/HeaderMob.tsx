@@ -53,7 +53,6 @@ const RightMob = () => {
 
   const closeAuthModal = () => {
     dispatch({ type: "toggle_authModal" });
-    router.push("/");
   };
 
   const closeRegisterModal = () => {

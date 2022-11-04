@@ -78,7 +78,7 @@ const AddBusinessFinish = () => {
       setAddBusinessError("");
       console.log("newUserResponse");
       console.log(newBusinessResponse);
-
+      localStorage.removeItem("currency");
       if (isGoBackClicked) {
         router.push(`/account/edit-business/${businessId}`);
       } else {

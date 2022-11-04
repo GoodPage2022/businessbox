@@ -92,7 +92,7 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
       setAddBusinessError("");
       console.log("newUserResponse");
       console.log(newBusinessResponse);
-
+      localStorage.removeItem("currency");
       if (isGoBackClicked) {
         router.push(`/account/edit-business/${projectId}`);
       } else {

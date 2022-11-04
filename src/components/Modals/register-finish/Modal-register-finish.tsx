@@ -1,12 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Formik, Form, Field } from "formik";
-import router from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-
-import EyeSVG from "../../../assets/svg/eye.svg";
+import React, { useEffect } from "react";
 import CrossSVG from "../../../assets/svg/cross.svg";
-import GoogleSVG from "../../../assets/svg/google.svg";
 import { MainContext } from "../../../contexts/mainContext";
 
 function ModalRegisterFinish({ onClose }: { onClose: any }) {
