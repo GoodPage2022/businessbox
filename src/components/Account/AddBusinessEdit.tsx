@@ -5,6 +5,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
+import Editor from "../shared/Editor";
 import CrossSVG from "../../assets/svg/cross.svg";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
@@ -322,6 +323,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         maxLength={2000}
                         required
                         placeholder="Писати тут..."
+                        component={Editor}
                       />
                     </label>
                     <label className="addBusinessEdit__field">
@@ -469,6 +471,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         maxLength={2000}
                         required
                         placeholder="Писати тут..."
+                        component={Editor}
                       />
                     </label>
                   </div>

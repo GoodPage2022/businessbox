@@ -434,6 +434,7 @@ const AddBusiness = () => {
                         maxLength={2000}
                         required
                         placeholder="Писати тут..."
+                        component={Editor}
                       />
                     </label>
                   </div>
