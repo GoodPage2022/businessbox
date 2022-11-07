@@ -5,6 +5,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
+import Editor from "../shared/Editor";
 import CrossSVG from "../../assets/svg/cross.svg";
 import OurCategories from "../../constants/categories-select";
 import AddBusinessFinish from "./AddBusinessFinish";
@@ -287,6 +288,7 @@ const AddBusiness = () => {
                         maxLength={2000}
                         required
                         placeholder="Писати тут..."
+                        component={Editor}
                       />
                     </label>
                     <label className="addBusiness__field">

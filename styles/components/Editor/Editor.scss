@@ -1,0 +1,32 @@
+.editor {
+    &__container {
+        width: 100%;
+        border: none;
+        position: relative;
+        background: #ffffff;
+        border-radius: 25px;
+        padding: 16px 25px;
+        outline: none;
+        font-size: 12px;
+        line-height: 15px;
+        cursor: text;
+
+        [contenteditable] {
+            outline: none;
+            height: 132px;
+            overflow: auto;
+        }
+    }
+
+    &__placeholder {
+        position: absolute;
+        top: 16px;
+        color: #808080;
+        pointer-events: none;
+
+        font-family: "Montserrat";
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

@@ -244,6 +244,9 @@ main {
 @import "./components/shared/Pagination.scss";
 @import "./components/shared/Reset.scss";
 
+// Editor Lexical
+@import "./components/Editor/Editor.scss";
+
 //Modal
 @import "./components/Modals/Modal-register.scss";
 @import "./components/Modals/Modal-auth.scss";
