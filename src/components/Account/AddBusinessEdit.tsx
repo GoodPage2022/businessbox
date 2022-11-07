@@ -226,6 +226,15 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     });
   }
 
+  function validate(e: any) {
+    const input = e.target as HTMLInputElement;
+    input?.setCustomValidity("");
+    const validityState = input?.validity;
+    if (!validityState?.valid) {
+      input?.setCustomValidity("Заповнити поле");
+    }
+  }
+
   return (
     <section className="addBusinessEdit">
       <div className="container addBusinessEdit__container">
@@ -272,6 +281,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         minLength={1}
                         maxLength={255}
                         required
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
                         placeholder="-----"
                       />
                     </label>
@@ -280,7 +292,6 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                       <Field
                         type="text"
                         name="business"
-                        required
                         placeholder="Торгівля"
                         component={CustomSelect}
                         options={OurCategories}
@@ -344,6 +355,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         }}
                         maxLength={255}
                         required
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
                         placeholder="-----"
                       />
                     </label>{" "}
@@ -364,6 +378,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                                   "",
                                 ),
                               );
+                            }}
+                            onFocus={(e: any) => {
+                              validate(e);
                             }}
                             maxLength={255}
                             required
@@ -411,6 +428,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         }}
                         minLength={1}
                         maxLength={255}
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
                         required
                         placeholder="-----"
                       />
@@ -435,6 +455,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                               );
                             }}
                             maxLength={255}
+                            onFocus={(e: any) => {
+                              validate(e);
+                            }}
                             required
                             placeholder="-----"
                           />

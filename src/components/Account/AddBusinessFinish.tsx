@@ -107,6 +107,15 @@ const AddBusinessFinish = () => {
     });
   }
 
+  function validate(e: any) {
+    const input = e.target as HTMLInputElement;
+    input?.setCustomValidity("");
+    const validityState = input?.validity;
+    if (!validityState?.valid) {
+      input?.setCustomValidity("Заповнити поле");
+    }
+  }
+
   return (
     <section className="addBusinessFinish">
       <div className="container addBusinessFinish__container">
@@ -178,6 +187,9 @@ const AddBusinessFinish = () => {
                         // classNamePrefix="custom-select"
                         required={isGoBackClicked ? false : true}
                         placeholder="-----"
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
                         component={CustomSelect}
                         // className="addBusinessFinish__select section__primary-text"
                         options={[
@@ -210,6 +222,9 @@ const AddBusinessFinish = () => {
                         );
                       }}
                       required={isGoBackClicked ? false : true}
+                      onFocus={(e: any) => {
+                        validate(e);
+                      }}
                       placeholder="-----"
                     />
                   </label>

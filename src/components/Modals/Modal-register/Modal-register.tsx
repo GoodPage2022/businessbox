@@ -87,6 +87,15 @@ function ModalRegister({ onClose }: { onClose: any }) {
     });
   }
 
+  function validate(e: any) {
+    const input = e.target as HTMLInputElement;
+    input?.setCustomValidity("");
+    const validityState = input?.validity;
+    if (!validityState?.valid) {
+      input?.setCustomValidity("Заповнити поле");
+    }
+  }
+
   return (
     <div
       className={`modal-register__overlay${
@@ -114,34 +123,12 @@ function ModalRegister({ onClose }: { onClose: any }) {
               city: "",
             }}
             validate={(values) => {
-              const errors: any = {};
-              if (!values.name) {
-                errors.name = "Обязательное поле";
-              }
-              if (!values.phone) {
-                errors.phone = "Обязательное поле";
-              }
-              if (!values.surname) {
-                errors.surname = "Обязательное поле";
-              }
-              if (!values.mail) {
-                errors.mail = "Обязательное поле";
-              }
-              if (!values.password) {
-                errors.password = "Обязательное поле";
-              }
-              if (!values.city) {
-                errors.city = "Обязательное поле";
-              }
-
               escapeHtml(values.name);
               // escapeHtml(values.business);
               escapeHtml(values.surname);
               escapeHtml(values.mail);
               escapeHtml(values.city);
               escapeHtml(values.phone);
-
-              return errors;
             }}
             onSubmit={handleSubmit}
           >
@@ -156,6 +143,9 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     minLength={1}
                     maxLength={255}
                     required
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="Петро"
                   />
                 </label>
@@ -167,6 +157,9 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     minLength={1}
                     maxLength={255}
                     name="surname"
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     required
                     placeholder="Петренко"
                   />
@@ -177,6 +170,9 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   <span className="modal-register__label">Телефон</span>
                   <Field
                     name="phone"
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     render={({ field }: { field: any }) => (
                       <MaskedInput
                         {...field}
@@ -200,6 +196,9 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     minLength={1}
                     maxLength={255}
                     required
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="example@mail.com"
                   />
                 </label>
@@ -215,6 +214,9 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     minLength={1}
                     maxLength={255}
                     required
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="Дніпро"
                   />
                 </label>
@@ -227,6 +229,9 @@ function ModalRegister({ onClose }: { onClose: any }) {
                       name="password"
                       required
                       minLength={6}
+                      onFocus={(e: any) => {
+                        validate(e);
+                      }}
                       maxLength={255}
                       placeholder="******"
                     />

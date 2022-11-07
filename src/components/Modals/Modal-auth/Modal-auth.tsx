@@ -121,6 +121,15 @@ function ModalAuth({ onClose }: { onClose: any }) {
     });
   }
 
+  function validate(e: any) {
+    const input = e.target as HTMLInputElement;
+    input?.setCustomValidity("");
+    const validityState = input?.validity;
+    if (!validityState?.valid) {
+      input?.setCustomValidity("Заповнити поле");
+    }
+  }
+
   return (
     <div
       className={`modal-auth__overlay${
@@ -178,6 +187,9 @@ function ModalAuth({ onClose }: { onClose: any }) {
                   minLength={1}
                   maxLength={255}
                   required
+                  onFocus={(e: any) => {
+                    validate(e);
+                  }}
                   placeholder="example@mail.com"
                 />
               </label>
@@ -192,6 +204,9 @@ function ModalAuth({ onClose }: { onClose: any }) {
                     minLength={6}
                     maxLength={255}
                     required
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="******"
                   />
                   <EyeSVG

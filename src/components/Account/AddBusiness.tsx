@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import CustomSelect from "../shared/CustomSelect";
 import CrossSVG from "../../assets/svg/cross.svg";
 import OurCategories from "../../constants/categories-select";
-import AddBusinessFinish from "./AddBusinessFinish";
 
 const AddBusiness = () => {
   const router = useRouter();
@@ -89,10 +88,7 @@ const AddBusiness = () => {
     }
   };
 
-  const handleSubmit = async (
-    values: any,
-    { resetForm, setFieldValue }: any,
-  ) => {
+  const handleSubmit = async (values: any, { resetForm }: any) => {
     const { name, price, description, business, state, year, city, currency } =
       values;
 
@@ -195,6 +191,15 @@ const AddBusiness = () => {
     });
   }
 
+  function validate(e: any) {
+    const input = e.target as HTMLInputElement;
+    input?.setCustomValidity("");
+    const validityState = input?.validity;
+    if (!validityState?.valid) {
+      input?.setCustomValidity("Заповнити поле");
+    }
+  }
+
   return (
     <section className="addBusiness">
       <div className="container addBusiness__container">
@@ -210,7 +215,6 @@ const AddBusiness = () => {
             file: null,
           }}
           validate={(values: any) => {
-            const errors: any = {};
             escapeHtml(values.name);
             escapeHtml(values.business);
             escapeHtml(values.price);
@@ -218,8 +222,6 @@ const AddBusiness = () => {
             escapeHtml(values.state);
             escapeHtml(values.year);
             escapeHtml(values.city);
-
-            return errors;
           }}
           onSubmit={handleSubmit}
         >
@@ -233,10 +235,14 @@ const AddBusiness = () => {
                       <Field
                         className="addBusiness__input section__primary-text"
                         type="text"
+                        id="name"
                         name="name"
                         minLength={1}
                         maxLength={255}
                         required
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
                         placeholder="-----"
                       />
                     </label>
@@ -245,8 +251,10 @@ const AddBusiness = () => {
                       <Field
                         type="text"
                         name="business"
-                        required
                         placeholder="Торгівля"
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
                         component={CustomSelect}
                         options={OurCategories}
                       />
@@ -283,6 +291,7 @@ const AddBusiness = () => {
                         className="addBusiness__textarea section__primary-text"
                         type="text"
                         name="description"
+                        id="description"
                         minLength={1}
                         maxLength={2000}
                         required
@@ -294,7 +303,12 @@ const AddBusiness = () => {
                       <Field
                         className="addBusiness__input section__primary-text"
                         type="text"
+                        required
                         name="year"
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
+                        id="year"
                         minLength={1}
                         maxLength={255}
                         onChange={(e: any) => {
@@ -306,7 +320,6 @@ const AddBusiness = () => {
                             ),
                           );
                         }}
-                        required
                         placeholder="-----"
                       />
                     </label>
@@ -318,6 +331,10 @@ const AddBusiness = () => {
                             className="addBusiness__input section__primary-text"
                             type="text"
                             name="price"
+                            id="price"
+                            onFocus={(e: any) => {
+                              validate(e);
+                            }}
                             pattern="[0-9]+"
                             onChange={(e: any) => {
                               setFieldValue(
@@ -362,6 +379,7 @@ const AddBusiness = () => {
                         className="addBusiness__input section__primary-text"
                         type="text"
                         name="year"
+                        id="year"
                         minLength={1}
                         maxLength={255}
                         onChange={(e: any) => {
@@ -374,6 +392,9 @@ const AddBusiness = () => {
                           );
                         }}
                         required
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
                         placeholder="-----"
                       />
                     </label>
@@ -385,6 +406,7 @@ const AddBusiness = () => {
                             className="addBusiness__input section__primary-text"
                             type="text"
                             name="price"
+                            id="price"
                             pattern="[0-9]+"
                             minLength={1}
                             maxLength={255}
@@ -397,6 +419,9 @@ const AddBusiness = () => {
                                   "",
                                 ),
                               );
+                            }}
+                            onFocus={(e: any) => {
+                              validate(e);
                             }}
                             placeholder="-----"
                           />
@@ -428,6 +453,7 @@ const AddBusiness = () => {
                         className="addBusiness__textarea section__primary-text"
                         type="text"
                         name="description"
+                        id="description"
                         minLength={1}
                         maxLength={2000}
                         required
