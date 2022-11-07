@@ -29,4 +29,12 @@
         font-size: 12px;
         line-height: 15px;
     }
+
+    &--hidden {
+        position: absolute;
+        bottom: 0px;
+        z-index: -1;
+        opacity: 0;
+        pointer-events: none;
+    }
 }

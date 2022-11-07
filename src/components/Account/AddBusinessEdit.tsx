@@ -323,7 +323,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                     </label>
                   </div>
                   <div className="addBusinessEdit__info-wrapper--right-desctop">
-                    <label className="addBusinessEdit__field">
+                    <div className="addBusinessEdit__field">
                       <span className="addBusinessEdit__label">Опис</span>
                       <Field
                         as="textarea"
@@ -336,7 +336,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         placeholder="Писати тут..."
                         component={Editor}
                       />
-                    </label>
+                    </div>
                     <label className="addBusinessEdit__field">
                       <span className="addBusinessEdit__label">
                         Рік створення
@@ -483,7 +483,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         />
                       </label>
                     </div>
-                    <label className="addBusinessEdit__field">
+                    <div className="addBusinessEdit__field">
                       <span className="addBusinessEdit__label">Опис</span>
                       <Field
                         as="textarea"
@@ -496,7 +496,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         placeholder="Писати тут..."
                         component={Editor}
                       />
-                    </label>
+                    </div>
                   </div>
                 </div>
                 <span className="addBusinessEdit__label">Медіа</span>

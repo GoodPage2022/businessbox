@@ -284,8 +284,9 @@ const AddBusiness = () => {
                       />
                     </label>
                   </div>
+                  {window.innerWidth > 767 && 
                   <div className="addBusiness__info-wrapper--right-desctop">
-                    <label className="addBusiness__field">
+                    <div className="addBusiness__field">
                       <span className="addBusiness__label">Опис</span>
                       <Field
                         as="textarea"
@@ -299,7 +300,7 @@ const AddBusiness = () => {
                         placeholder="Писати тут..."
                         component={Editor}
                       />
-                    </label>
+                    </div>
                     <label className="addBusiness__field">
                       <span className="addBusiness__label">Рік створення</span>
                       <Field
@@ -374,6 +375,8 @@ const AddBusiness = () => {
                       </label>
                     </div>
                   </div>
+                  }
+                  {window.innerWidth < 768 && 
                   <div className="addBusiness__info-wrapper--right-mob">
                     <label className="addBusiness__field">
                       <span className="addBusiness__label">Рік створення</span>
@@ -448,7 +451,7 @@ const AddBusiness = () => {
                         />
                       </label>
                     </div>
-                    <label className="addBusiness__field">
+                    <div className="addBusiness__field">
                       <span className="addBusiness__label">Опис</span>
                       <Field
                         as="textarea"
@@ -462,8 +465,9 @@ const AddBusiness = () => {
                         placeholder="Писати тут..."
                         component={Editor}
                       />
-                    </label>
+                    </div>
                   </div>
+                }
                 </div>
                 <span className="addBusiness__label">Медіа</span>
                 <div className="addBusiness__addMedia-wrapper">

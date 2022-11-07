@@ -9,18 +9,21 @@ import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import {$getRoot, $getSelection, EditorState, LexicalEditor} from 'lexical';
 import {$generateHtmlFromNodes} from '@lexical/html';
+import { useState } from "react";
 
 const Editor:React.FC<FieldProps> = ({
     field,
     form
 }): JSX.Element => {
     const theme = {}
+    const [htmlStringHidden, setHtmlStringHidden] = useState("")
 
     function editorOnChange(editorState: EditorState, editor: LexicalEditor) {
         editorState.read(() => {
             const htmlString = $generateHtmlFromNodes(editor, null);
 
             form.setFieldValue(field.name, htmlString);
+            setHtmlStringHidden($getRoot().getTextContent())
 
             console.log(htmlString);
         });
@@ -46,6 +49,19 @@ const Editor:React.FC<FieldProps> = ({
             />
             <OnChangePlugin onChange={editorOnChange} />
             <HistoryPlugin />
+
+            <input
+                className="editor--hidden"
+                type="text"
+                name="description-hidden"
+                id="description-hidden"
+                minLength={1}
+                maxLength={2000}
+                required
+                value={htmlStringHidden}
+                onInvalid={e => (e.target as HTMLInputElement).setCustomValidity('Заповнити поле')}
+                onInput={e => (e.target as HTMLInputElement).setCustomValidity('')}
+            />
         </div>
         </LexicalComposer>
     );
