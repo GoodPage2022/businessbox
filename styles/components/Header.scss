@@ -59,6 +59,7 @@
     align-items: center;
 
     &__btn {
+      position: relative;
       display: flex;
       align-items: center;
 
@@ -76,6 +77,18 @@
         border-radius: 15px;
         background: transparent;
         cursor: text;
+      }
+
+      &.exit {
+        & svg {
+          position: absolute;
+          width: 17px;
+          height: 20px;
+          right: 7px;
+          & path {
+            fill: $white-color;
+          }
+        }
       }
     }
   }

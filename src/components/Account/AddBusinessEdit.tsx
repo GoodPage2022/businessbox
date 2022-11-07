@@ -22,6 +22,10 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [listAreas, setListAreas] = useState<any>();
   const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
+  const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
+  const [isSaveClicked, setIsSaveClicked] = useState<boolean>(false);
+  const [isContinueClicked, setIsContinueClicked] = useState<boolean>(false);
+  const [currencyState, setCurrencyState] = useState(businessInfo?.currency);
 
   const getListAreas = async () => {
     try {
@@ -101,6 +105,10 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     let response;
 
     try {
+      console.log("start");
+      console.log(user);
+      console.log(projectId);
+
       response = await axios.post(`/api/businesses/get`, { user, projectId });
       console.log(response);
 
@@ -128,10 +136,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     }
   }, [businessInfo]);
 
-  const handleSubmit = async (
-    values: any,
-    { resetForm, setFieldValue }: any,
-  ) => {
+  const handleSubmit = async (values: any) => {
     const { name, price, description, business, state, year, city, currency } =
       values;
 
@@ -191,17 +196,20 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
         user,
       });
       console.log(newBusinessResponse);
-      router.push(`/catalog/${projectId}`);
       setAddBusinessError("");
-      console.log("newBusinessResponse");
-      console.log(newBusinessResponse);
+      if (isSaveClicked) {
+        router.push(`/catalog/${projectId}`);
+      }
+      if (isContinueClicked) {
+        setIsSentBusiness(true);
+        localStorage.setItem("currency", currencyState);
+        router.push(`/account/edit-business-finish/${projectId}`);
+      }
     } catch (err: any) {
       setAddBusinessError("На жаль, виникла помилка. Спробуйте ще раз");
       console.log("newUserResponse3");
       console.log(JSON.parse(err.response.data.err));
     }
-
-    // resetForm({});
   };
 
   function escapeHtml(text: string) {
@@ -217,8 +225,6 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       return map[m];
     });
   }
-
-  console.log(businessInfo);
 
   return (
     <section className="addBusinessEdit">
@@ -364,7 +370,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                             placeholder="-----"
                           />
                           <span className="addBusinessEdit__icon">
-                            {businessInfo?.currency === "Гривня" ? "₴" : "$"}
+                            {currencyState === "Гривня" ? "₴" : "$"}
                           </span>
                         </span>
                       </label>
@@ -375,6 +381,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                           name="currency"
                           required
                           placeholder="Оберіть"
+                          setter={setCurrencyState}
                           component={CustomSelect}
                           options={[
                             { value: "Гривня", label: "Гривня" },
@@ -546,12 +553,23 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                   >
                     Видалити
                   </button>
-                  <button
-                    type="submit"
-                    className="addBusinessEdit__save-button"
-                  >
-                    Зберегти
-                  </button>
+                  <div className="addBusinessEdit__buttons-wrapper">
+                    <button
+                      disabled={isSentBusiness ? true : false}
+                      type="submit"
+                      onClick={() => setIsContinueClicked(true)}
+                      className="addBusinessEdit__button"
+                    >
+                      Далі
+                    </button>
+                    <button
+                      type="submit"
+                      className="addBusinessEdit__save-button"
+                      onClick={() => setIsSaveClicked(true)}
+                    >
+                      Зберегти
+                    </button>
+                  </div>
                 </div>
               </Form>
             );

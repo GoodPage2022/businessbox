@@ -112,17 +112,8 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
               initialValues={{
                 email: "",
               }}
-              validate={(values) => {
+              validate={() => {
                 const errors: any = {};
-                // if (!values.name) {
-                //   errors.name = "Обязательное поле";
-                // }
-                // if (!values.phone) {
-                //   errors.phone = "Обязательное поле";
-                // }
-                // else if (!numberRegEpx.test(values.phone)) {
-                //   errors.phone = 'Не правильно введен номер'
-                // }
 
                 return errors;
               }}

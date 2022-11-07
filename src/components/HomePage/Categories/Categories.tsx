@@ -54,9 +54,14 @@ const Categories = () => {
 
         {i === 1 && (
           <button
-            onClick={() =>
-              user != null ? router.push("/account/add-business") : openModal()
-            }
+            onClick={() => {
+              if (user != null) {
+                router.push("/account/add-business");
+              } else {
+                localStorage.setItem("redirectToAddBusiness", "true");
+                openModal();
+              }
+            }}
             className="categories-second__button--white"
           >
             Продати бізнес
@@ -113,11 +118,14 @@ const Categories = () => {
           </p>
           <div className="categories-second__buttons">
             <button
-              onClick={() =>
-                user != null
-                  ? router.push("/account/add-business")
-                  : openModal()
-              }
+              onClick={() => {
+                if (user != null) {
+                  router.push("/account/add-business");
+                } else {
+                  localStorage.setItem("redirectToAddBusiness", "true");
+                  openModal();
+                }
+              }}
               className="categories-second__button--white"
             >
               Продати бізнес
