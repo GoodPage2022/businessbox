@@ -16,21 +16,19 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     arrows: false,
     swipeToSlide: true,
     className: "cards-slider",
-    adaptiveHeight: true,
+    // adaptiveHeight: true,
     autoplay: true,
     responsive: [
       {
         breakpoint: 1440,
         settings: {
           slidesToShow: 2.7,
-          infinite: true,
         },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 1.3,
-          infinite: true,
         },
       },
     ],
