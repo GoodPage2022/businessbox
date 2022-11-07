@@ -13,7 +13,7 @@ const handler = async(
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-    const { data: currencies }: { data: PrivatBankCurency[] } = await axios.get(`https://api. privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`)
+    const { data: currencies }: { data: PrivatBankCurency[] } = await axios.get(`https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5`)
     const currencyUSD = currencies.find((currency) => currency.ccy == "USD")
 
     try {
