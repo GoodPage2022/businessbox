@@ -6,7 +6,7 @@ const handler = async(
   res: NextApiResponse
 ) => {
   const token = (req.body.user != null && req.body.user?.api_key !== undefined) ? req.body.user.api_key : process.env.cockpitApiToken
-  const queryFilter = {is_approved: true}
+  const queryFilter = req.body.filter
   const queryLimit = req.body.limit
   const querySort = req.body.sort
   const querySkip = req.body.skip
@@ -16,7 +16,10 @@ const handler = async(
   let body: any = {}
 
   if (queryFilter) {
-    body["filter"] = queryFilter
+    body["filter"] = {
+      ...queryFilter, 
+      is_approved: true
+    }
   }
 
   if (querySort) {
