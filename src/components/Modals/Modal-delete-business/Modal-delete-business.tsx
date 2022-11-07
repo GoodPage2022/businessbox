@@ -71,6 +71,15 @@ function ModalDeleteBusiness({
     router.push("/account/my-businesses");
   };
 
+  function validate(e: any) {
+    const input = e.target as HTMLInputElement;
+    input?.setCustomValidity("");
+    const validityState = input?.validity;
+    if (!validityState?.valid) {
+      input?.setCustomValidity("Заповнити поле");
+    }
+  }
+
   return (
     <div
       className={`modal-deleteBusiness__overlay${
@@ -163,6 +172,9 @@ function ModalDeleteBusiness({
                     minLength={1}
                     maxLength={255}
                     required={values.deleteReason == "other" ? true : false}
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="Передумав продавати..."
                   />
                 </label>

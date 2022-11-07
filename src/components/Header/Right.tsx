@@ -95,6 +95,15 @@ const Right = () => {
             />
           )}
         </li>
+        {user != null && (
+          <li className="header__right__btn exit">
+            <IconButton
+              onClick={signOut}
+              borderColor="#FFFFFF"
+              icon={<ExitSVG />}
+            />
+          </li>
+        )}
         <li
           className="header__right__btn"
           onClick={() => {
@@ -108,15 +117,6 @@ const Right = () => {
         >
           <MainButtonRed label="Зареєструвати бізнес" />
         </li>
-        {user != null && (
-          <li className="header__right__btn exit">
-            <IconButton
-              onClick={signOut}
-              borderColor="#FFFFFF"
-              icon={<ExitSVG />}
-            />
-          </li>
-        )}
       </ul>
       <ModalAuth onClose={closeAuthModal} />
       <ModalRegister onClose={closeRegisterModal} />

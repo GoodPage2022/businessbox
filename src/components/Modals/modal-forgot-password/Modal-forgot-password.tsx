@@ -54,6 +54,15 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
     }
   };
 
+  function validate(e: any) {
+    const input = e.target as HTMLInputElement;
+    input?.setCustomValidity("");
+    const validityState = input?.validity;
+    if (!validityState?.valid) {
+      input?.setCustomValidity("Заповнити поле");
+    }
+  }
+
   return (
     <div
       className={`modal-forgotPassword__overlay${
@@ -135,6 +144,9 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
                     name="email"
                     required
                     placeholder="example@mail.com"
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                   />
                 </label>
 

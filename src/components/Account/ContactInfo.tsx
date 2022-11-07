@@ -160,6 +160,15 @@ const ContactInfo = () => {
     }
   };
 
+  function validate(e: any) {
+    const input = e.target as HTMLInputElement;
+    input?.setCustomValidity("");
+    const validityState = input?.validity;
+    if (!validityState?.valid) {
+      input?.setCustomValidity("Заповнити поле");
+    }
+  }
+
   return (
     <section className="contactInfo">
       <div className="container contactInfo__container">
@@ -277,6 +286,9 @@ const ContactInfo = () => {
                     name="name"
                     readOnly={state.isEdit ? false : true}
                     required
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="Петро"
                   />
                 </label>
@@ -294,6 +306,9 @@ const ContactInfo = () => {
                         value={field.value}
                         readOnly={state.isEdit ? false : true}
                         required
+                        onFocus={(e: any) => {
+                          validate(e);
+                        }}
                         className="contactInfo__input section__primary-text"
                       />
                     )}
@@ -309,6 +324,9 @@ const ContactInfo = () => {
                     name="surname"
                     readOnly={state.isEdit ? false : true}
                     required
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="Петренко"
                   />
                 </label>
@@ -320,6 +338,9 @@ const ContactInfo = () => {
                     name="email"
                     readOnly={state.isEdit ? false : true}
                     required
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="example@mail.com"
                   />
                 </label>
@@ -333,6 +354,9 @@ const ContactInfo = () => {
                     name="city"
                     readOnly={state.isEdit ? false : true}
                     required
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     placeholder="Дніпро"
                   />
                 </label>
@@ -342,6 +366,9 @@ const ContactInfo = () => {
                     className="contactInfo__input section__primary-text"
                     type="password"
                     name="password"
+                    onFocus={(e: any) => {
+                      validate(e);
+                    }}
                     readOnly={state.isEdit ? false : true}
                     placeholder="********"
                   />
