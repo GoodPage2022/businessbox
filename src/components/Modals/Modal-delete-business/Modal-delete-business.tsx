@@ -6,6 +6,7 @@ import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
 import axios from "axios";
 import { useRouter } from "next/router";
+import CustomInput from "../../shared/CustomInput";
 
 function ModalDeleteBusiness({
   onClose,
@@ -172,9 +173,7 @@ function ModalDeleteBusiness({
                     minLength={1}
                     maxLength={255}
                     required={values.deleteReason == "other" ? true : false}
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="Передумав продавати..."
                   />
                 </label>

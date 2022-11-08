@@ -45,6 +45,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isOpenModalRegisterFinish: !state.isOpenModalRegisterFinish,
       };
+    case "toggle_loader":
+      return {
+        ...state,
+        isShowLoader: !state.isShowLoader,
+      };
     default:
       return state;
   }
@@ -60,4 +65,5 @@ export const initialState = {
   isActiveHeaderSearch: false,
   isOpenDeleteBusiness: false,
   isOpenModalRegisterFinish: false,
+  isShowLoader: false,
 };

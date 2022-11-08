@@ -11,6 +11,8 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn as signInReducer } from "../../../../store/actions/auth";
 import { useSession, signIn as signInGoogle } from "next-auth/react";
+import CustomInput from "../../shared/CustomInput";
+import { Oval } from "react-loader-spinner";
 
 function ModalAuth({ onClose }: { onClose: any }) {
   const { data: session } = useSession();
@@ -19,6 +21,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
   const [authError, setAuthError] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const signInGoogleRequest = async (session: any) => {
     try {
@@ -79,10 +82,11 @@ function ModalAuth({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { mail, password } = values;
+    setIsLoading(true);
+    const { email, password } = values;
 
     const data = {
-      user: mail,
+      user: email,
       password,
       // user: "sdfsdf@sdf.df",
       // password: "secret"
@@ -105,6 +109,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
     } catch (err: any) {
       setAuthError("Хибний логін або пароль");
     }
+    setIsLoading(false);
   };
 
   function escapeHtml(text: string) {
@@ -121,15 +126,6 @@ function ModalAuth({ onClose }: { onClose: any }) {
     });
   }
 
-  function validate(e: any) {
-    const input = e.target as HTMLInputElement;
-    input?.setCustomValidity("");
-    const validityState = input?.validity;
-    if (!validityState?.valid) {
-      input?.setCustomValidity("Заповнити поле");
-    }
-  }
-
   return (
     <div
       className={`modal-auth__overlay${
@@ -138,6 +134,28 @@ function ModalAuth({ onClose }: { onClose: any }) {
       onClick={handleBackdropClick}
     >
       <div className="modal-auth__container">
+        {isLoading && (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              zIndex: "999999999",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        )}
         <div className="modal-auth__header">
           <h2 className="modal-auth__title title--white">Вікно входу</h2>
           <button onClick={onClose} className="modal-auth__button-close--mob">
@@ -153,13 +171,13 @@ function ModalAuth({ onClose }: { onClose: any }) {
           </button>
           <Formik
             initialValues={{
-              mail: "",
+              email: "",
               password: "",
             }}
             validate={(values) => {
               const errors: any = {};
               escapeHtml(values.password);
-              escapeHtml(values.mail);
+              escapeHtml(values.email);
               // if (!values.name) {
               //   errors.name = "Обязательное поле";
               // }
@@ -183,13 +201,11 @@ function ModalAuth({ onClose }: { onClose: any }) {
                 <Field
                   className="modal-auth__input section__primary-text"
                   type="email"
-                  name="mail"
+                  name="email"
                   minLength={1}
                   maxLength={255}
                   required
-                  onFocus={(e: any) => {
-                    validate(e);
-                  }}
+                  component={CustomInput}
                   placeholder="example@mail.com"
                 />
               </label>
@@ -204,9 +220,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
                     minLength={6}
                     maxLength={255}
                     required
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="******"
                   />
                   <EyeSVG

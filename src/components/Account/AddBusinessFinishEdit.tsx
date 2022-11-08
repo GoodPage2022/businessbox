@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { Oval } from "react-loader-spinner";
 
 const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -12,8 +13,10 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
   const [currency, setCurrency] = useState(localStorage.getItem("currency"));
   const [businessInfo, setBusinessInfo] = useState<any>(null);
   const [isGoBackClicked, setIsGoBackClicked] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getBusinessInfo = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.post(`/api/businesses/get`, {
         user,
@@ -26,6 +29,8 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
     } catch (error) {
       router.push("/404");
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -33,6 +38,7 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
   }, []);
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    setIsLoading(true);
     const {
       property_form,
       number_of_founders,
@@ -105,6 +111,7 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
       console.log(JSON.parse(err.response.data.err));
     }
 
+    setIsLoading(false);
     resetForm({});
   };
 
@@ -127,6 +134,28 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
   return (
     <section className="addBusinessFinish">
       <div className="container addBusinessFinish__container">
+        {isLoading && (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "50vh",
+              zIndex: "99999",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        )}
         <Formik
           enableReinitialize={true}
           initialValues={{

@@ -17,6 +17,7 @@ import BusinessCardFavorites from "../../shared/BusinessCardFavorite";
 
 import { signOut as signOutReducer } from "../../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
+import { Oval } from "react-loader-spinner";
 
 const CancelToken = axios.CancelToken;
 let cancel: any;
@@ -29,6 +30,7 @@ const CatalogView = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [filtersObj, setFiltersObj] = useState<any>({});
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [screenWidth, setScreenWidth] = useState<any>(window.screen.width);
   const router = useRouter();
   const { data: session } = useSession();
@@ -55,6 +57,7 @@ const CatalogView = () => {
   };
 
   const getBusinesses = async (resetLimit?: boolean) => {
+    dispatch({ type: "toggle_loader" });
     let filterSetOfExp: any = [];
 
     if (cancel !== undefined) {
@@ -157,9 +160,11 @@ const CatalogView = () => {
       if (response.data) {
         if (resetLimit) {
           setCountCards(response.data.entries.length);
+          setIsLoading(false);
           return response.data.entries.length;
         } else {
           setCards(response.data.entries);
+          setIsLoading(false);
           return response.data.entries;
         }
       }
@@ -178,15 +183,17 @@ const CatalogView = () => {
   };
 
   const getCurrencyRate = async () => {
-    const { data: rateUSD, status: rateUSDStus } = await axios.get(`/api/currency/get`);
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(
+      `/api/currency/get`,
+    );
 
     if (rateUSDStus == 200) {
       setRate(rateUSD);
     }
-  }
+  };
 
   useEffect(() => {
-    getCurrencyRate()
+    getCurrencyRate();
   }, []);
 
   useEffect(() => {
@@ -283,7 +290,26 @@ const CatalogView = () => {
         <h2 className="title catalogView__title">Каталог бізнесів</h2>
         <div className="catalogView__wrapper">
           <Sidebar changeFilter={changeFilter} filtersObj={filtersObj} />
-          {cards.length > 0 ? (
+          {isLoading ? (
+            <Oval
+              height={150}
+              width={150}
+              color="#f22a4e"
+              wrapperStyle={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                height: "50vh",
+              }}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="oval-loading"
+              secondaryColor="#e95973"
+              strokeWidth={3}
+              strokeWidthSecondary={3}
+            />
+          ) : cards.length > 0 ? (
             <ul
               className={`catalogView__cards ${isRowsActive ? "" : "active"}`}
             >
