@@ -237,6 +237,7 @@ const AddBusiness = () => {
             state: "",
             year: "",
             city: "",
+            currency: "Гривня",
             file: null,
           }}
           validate={(values: any) => {

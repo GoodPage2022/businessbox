@@ -274,7 +274,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
             state: businessInfo != null ? businessInfo.state._id : "",
             year: businessInfo != null ? businessInfo.year : "",
             city: businessInfo != null ? businessInfo.city._id : "",
-            // currency: businessInfo != null ? businessInfo.currency : "",
+            currency: businessInfo != null ? businessInfo.currency : "Гривня",
             file:
               businessInfo != null ? businessInfo.public_reviews_media : null,
           }}
