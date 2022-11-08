@@ -11,6 +11,8 @@ import { MainContext } from "../../contexts/mainContext";
 import React from "react";
 import ModalDeleteBusiness from "../Modals/Modal-delete-business/Modal-delete-business";
 import OurCategories from "../../constants/categories-select";
+import CustomInput from "../shared/CustomInput";
+import { Oval } from "react-loader-spinner";
 
 const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -18,7 +20,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [files, setFiles] = useState<any>();
   const [addBusinessError, setAddBusinessError] = useState("");
   const [businessInfo, setBusinessInfo] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [state, dispatch] = React.useContext(MainContext);
   const [listAreas, setListAreas] = useState<any>();
   const [listCities, setListCities] = useState<any>();
@@ -29,6 +31,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [currencyState, setCurrencyState] = useState(businessInfo?.currency);
 
   const getListAreas = async () => {
+    setIsLoading(true);
     try {
       const reponse = await axios.post("/api/locations/getAreas", {});
 
@@ -39,9 +42,11 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       console.log("error");
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const getListCities = async (selectedArea: string) => {
+    setIsLoading(true);
     try {
       const reponse = await axios.post("/api/locations/getCities", {
         selectedArea,
@@ -54,6 +59,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       console.log("error");
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -78,6 +84,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   };
 
   const uploadToServer = async (file: any) => {
+    setIsLoading(true);
     const uploadImageURL = file;
 
     const formData = new FormData();
@@ -95,14 +102,17 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       const reponse = await axios.post("/api/upload", formData, options);
       console.log("reponse");
       console.log(reponse);
+      setIsLoading(false);
       return reponse;
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
       return error;
     }
   };
 
   const getBusinessInfo = async () => {
+    setIsLoading(true);
     let response;
 
     try {
@@ -119,6 +129,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     } catch (error) {
       router.push("/404");
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -127,17 +139,15 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
 
   useEffect(() => {
     if (businessInfo == null) {
-      setLoading(true);
     } else {
       setFiles(businessInfo.images.map((img: any) => img.path));
       setSelectedArea(businessInfo.state._id);
       console.log(businessInfo.city._id);
-
-      setLoading(false);
     }
   }, [businessInfo]);
 
   const handleSubmit = async (values: any) => {
+    setIsLoading(true);
     const { name, price, description, business, state, year, city, currency } =
       values;
 
@@ -211,6 +221,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       console.log("newUserResponse3");
       console.log(JSON.parse(err.response.data.err));
     }
+
+    setIsLoading(false);
   };
 
   function escapeHtml(text: string) {
@@ -227,18 +239,31 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
     });
   }
 
-  function validate(e: any) {
-    const input = e.target as HTMLInputElement;
-    input?.setCustomValidity("");
-    const validityState = input?.validity;
-    if (!validityState?.valid) {
-      input?.setCustomValidity("Заповнити поле");
-    }
-  }
-
   return (
     <section className="addBusinessEdit">
       <div className="container addBusinessEdit__container">
+        {isLoading && (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "50vh",
+              zIndex: "99999",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        )}
         <Formik
           enableReinitialize={true}
           initialValues={{
@@ -282,9 +307,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         minLength={1}
                         maxLength={255}
                         required
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
+                        component={CustomInput}
                         placeholder="-----"
                       />
                     </label>
@@ -357,9 +380,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         }}
                         maxLength={255}
                         required
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
+                        component={CustomInput}
                         placeholder="-----"
                       />
                     </label>{" "}
@@ -381,9 +402,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                                 ),
                               );
                             }}
-                            onFocus={(e: any) => {
-                              validate(e);
-                            }}
+                            component={CustomInput}
                             maxLength={255}
                             required
                             placeholder="-----"
@@ -430,9 +449,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         }}
                         minLength={1}
                         maxLength={255}
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
+                        component={CustomInput}
                         required
                         placeholder="-----"
                       />
@@ -457,9 +474,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                               );
                             }}
                             maxLength={255}
-                            onFocus={(e: any) => {
-                              validate(e);
-                            }}
+                            component={CustomInput}
                             required
                             placeholder="-----"
                           />

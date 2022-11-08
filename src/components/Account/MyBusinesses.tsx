@@ -6,10 +6,12 @@ import { useSelector } from "react-redux";
 import PlusSVG from "../../assets/svg/plus.svg";
 import { useRouter } from "next/router";
 import CardsSlider from "../HomePage/CardsSlider/CardsSlider";
+import { Oval } from "react-loader-spinner";
 
 const MyBusinesses = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const router = useRouter();
   const getBusinesses = async () => {
@@ -25,9 +27,10 @@ const MyBusinesses = () => {
       console.log(response.data.entries);
 
       setCards(response.data.entries);
+      setIsLoading(false);
       return response.data.entries;
     }
-
+    setIsLoading(false);
     setCards([]);
     return [];
   };
@@ -39,7 +42,26 @@ const MyBusinesses = () => {
   return (
     <section className="myBusinesses">
       <div className="container myBusinesses__container">
-        {cards.length > 0 ? (
+        {isLoading ? (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "50vh",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        ) : cards.length > 0 ? (
           <>
             <ul className="myBusinesses__cards--desctop">
               {cards.map(

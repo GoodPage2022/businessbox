@@ -8,6 +8,8 @@ import CustomSelect from "../shared/CustomSelect";
 import Editor from "../shared/Editor";
 import CrossSVG from "../../assets/svg/cross.svg";
 import OurCategories from "../../constants/categories-select";
+import { Oval } from "react-loader-spinner";
+import CustomInput from "../shared/CustomInput";
 
 const AddBusiness = () => {
   const router = useRouter();
@@ -20,8 +22,10 @@ const AddBusiness = () => {
   const [selectedArea, setSelectedArea] = useState("");
   const [currencyState, setCurrencyState] = useState("Гривня");
   const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getListAreas = async () => {
+    setIsLoading(true);
     try {
       const reponse = await axios.post("/api/locations/getAreas", {});
 
@@ -32,9 +36,11 @@ const AddBusiness = () => {
       console.log("error");
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const getListCities = async (selectedArea: string) => {
+    setIsLoading(true);
     try {
       const reponse = await axios.post("/api/locations/getCities", {
         selectedArea,
@@ -47,6 +53,7 @@ const AddBusiness = () => {
       console.log("error");
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -62,6 +69,7 @@ const AddBusiness = () => {
   };
 
   const uploadToServer = async (file: any) => {
+    setIsLoading(true);
     const uploadImageURL = file;
 
     const formData = new FormData();
@@ -82,14 +90,17 @@ const AddBusiness = () => {
       setTempFiles([...tempFiles, response.data.url]);
       console.log("reponse");
       console.log(response);
+      setIsLoading(false);
       return response;
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
       return error;
     }
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    setIsLoading(true);
     const { name, price, description, business, state, year, city, currency } =
       values;
 
@@ -174,7 +185,7 @@ const AddBusiness = () => {
       console.log("newUserResponse3");
       console.log(JSON.parse(err.response.data.err));
     }
-
+    setIsLoading(false);
     resetForm({});
   };
 
@@ -192,18 +203,31 @@ const AddBusiness = () => {
     });
   }
 
-  function validate(e: any) {
-    const input = e.target as HTMLInputElement;
-    input?.setCustomValidity("");
-    const validityState = input?.validity;
-    if (!validityState?.valid) {
-      input?.setCustomValidity("Заповнити поле");
-    }
-  }
-
   return (
     <section className="addBusiness">
       <div className="container addBusiness__container">
+        {isLoading && (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "50vh",
+              zIndex: "99999",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        )}
         <Formik
           initialValues={{
             name: "",
@@ -241,10 +265,8 @@ const AddBusiness = () => {
                         minLength={1}
                         maxLength={255}
                         required
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
                         placeholder="-----"
+                        component={CustomInput}
                       />
                     </label>
                     <label className="addBusiness__field">
@@ -253,9 +275,6 @@ const AddBusiness = () => {
                         type="text"
                         name="business"
                         placeholder="Торгівля"
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
                         component={CustomSelect}
                         options={OurCategories}
                       />
@@ -284,190 +303,186 @@ const AddBusiness = () => {
                       />
                     </label>
                   </div>
-                  {window.innerWidth > 767 && 
-                  <div className="addBusiness__info-wrapper--right-desctop">
-                    <div className="addBusiness__field">
-                      <span className="addBusiness__label">Опис</span>
-                      <Field
-                        as="textarea"
-                        className="addBusiness__textarea section__primary-text"
-                        type="text"
-                        name="description"
-                        id="description"
-                        minLength={1}
-                        maxLength={2000}
-                        required
-                        placeholder="Писати тут..."
-                        component={Editor}
-                      />
-                    </div>
-                    <label className="addBusiness__field">
-                      <span className="addBusiness__label">Рік створення</span>
-                      <Field
-                        className="addBusiness__input section__primary-text"
-                        type="text"
-                        required
-                        name="year"
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
-                        id="year"
-                        minLength={1}
-                        maxLength={255}
-                        onChange={(e: any) => {
-                          setFieldValue(
-                            "year",
-                            e.target.value.replaceAll(
-                              /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
-                          );
-                        }}
-                        placeholder="-----"
-                      />
-                    </label>
-                    <div className="addBusiness__price">
-                      <label className="addBusiness__field">
-                        <span className="addBusiness__label">Ціна</span>
-                        <span className="addBusiness__input-thumb">
-                          <Field
-                            className="addBusiness__input section__primary-text"
-                            type="text"
-                            name="price"
-                            id="price"
-                            onFocus={(e: any) => {
-                              validate(e);
-                            }}
-                            pattern="[0-9]+"
-                            onChange={(e: any) => {
-                              setFieldValue(
-                                "price",
-                                e.target.value.replaceAll(
-                                  /[A-Za-zА-Яа-я,./'` ]/g,
-                                  "",
-                                ),
-                              );
-                            }}
-                            minLength={1}
-                            maxLength={255}
-                            required
-                            placeholder="-----"
-                          />
-                          <span className="addBusiness__icon">
-                            {currencyState === "Гривня" ? "₴" : "$"}
-                          </span>
-                        </span>
-                      </label>
-                      <label className="addBusiness__field">
-                        <span className="addBusiness__label">Валюта</span>
+                  {window.innerWidth > 767 && (
+                    <div className="addBusiness__info-wrapper--right-desctop">
+                      <div className="addBusiness__field">
+                        <span className="addBusiness__label">Опис</span>
                         <Field
+                          as="textarea"
+                          className="addBusiness__textarea section__primary-text"
                           type="text"
-                          name="currency"
+                          name="description"
+                          id="description"
+                          minLength={1}
+                          maxLength={2000}
                           required
-                          setter={setCurrencyState}
-                          placeholder="Оберіть"
-                          component={CustomSelect}
-                          options={[
-                            { value: "Гривня", label: "Гривня" },
-                            { value: "Долар", label: "Долар" },
-                          ]}
+                          placeholder="Писати тут..."
+                          component={Editor}
+                        />
+                      </div>
+                      <label className="addBusiness__field">
+                        <span className="addBusiness__label">
+                          Рік створення
+                        </span>
+                        <Field
+                          className="addBusiness__input section__primary-text"
+                          type="text"
+                          required
+                          name="year"
+                          id="year"
+                          minLength={1}
+                          maxLength={255}
+                          component={CustomInput}
+                          onChange={(e: any) => {
+                            setFieldValue(
+                              "year",
+                              e.target.value.replaceAll(
+                                /[A-Za-zА-Яа-я,./'` ]/g,
+                                "",
+                              ),
+                            );
+                          }}
+                          placeholder="-----"
                         />
                       </label>
-                    </div>
-                  </div>
-                  }
-                  {window.innerWidth < 768 && 
-                  <div className="addBusiness__info-wrapper--right-mob">
-                    <label className="addBusiness__field">
-                      <span className="addBusiness__label">Рік створення</span>
-                      <Field
-                        className="addBusiness__input section__primary-text"
-                        type="text"
-                        name="year"
-                        id="year"
-                        minLength={1}
-                        maxLength={255}
-                        onChange={(e: any) => {
-                          setFieldValue(
-                            "year",
-                            e.target.value.replaceAll(
-                              /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
-                          );
-                        }}
-                        required
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
-                        placeholder="-----"
-                      />
-                    </label>
-                    <div className="addBusiness__price">
-                      <label className="addBusiness__field">
-                        <span className="addBusiness__label">Ціна</span>
-                        <span className="addBusiness__input-thumb">
-                          <Field
-                            className="addBusiness__input section__primary-text"
-                            type="text"
-                            name="price"
-                            id="price"
-                            pattern="[0-9]+"
-                            minLength={1}
-                            maxLength={255}
-                            required
-                            onChange={(e: any) => {
-                              setFieldValue(
-                                "price",
-                                e.target.value.replaceAll(
-                                  /[A-Za-zА-Яа-я,./'` ]/g,
-                                  "",
-                                ),
-                              );
-                            }}
-                            onFocus={(e: any) => {
-                              validate(e);
-                            }}
-                            placeholder="-----"
-                          />
-                          <span className="addBusiness__icon">
-                            {currencyState === "Гривня" ? "₴" : "$"}
+                      <div className="addBusiness__price">
+                        <label className="addBusiness__field">
+                          <span className="addBusiness__label">Ціна</span>
+                          <span className="addBusiness__input-thumb">
+                            <Field
+                              className="addBusiness__input section__primary-text"
+                              type="text"
+                              name="price"
+                              id="price"
+                              component={CustomInput}
+                              pattern="[0-9]+"
+                              onChange={(e: any) => {
+                                setFieldValue(
+                                  "price",
+                                  e.target.value.replaceAll(
+                                    /[A-Za-zА-Яа-я,./'` ]/g,
+                                    "",
+                                  ),
+                                );
+                              }}
+                              minLength={1}
+                              maxLength={255}
+                              required
+                              placeholder="-----"
+                            />
+                            <span className="addBusiness__icon">
+                              {currencyState === "Гривня" ? "₴" : "$"}
+                            </span>
                           </span>
-                        </span>
-                      </label>
+                        </label>
+                        <label className="addBusiness__field">
+                          <span className="addBusiness__label">Валюта</span>
+                          <Field
+                            type="text"
+                            name="currency"
+                            required
+                            setter={setCurrencyState}
+                            placeholder="Оберіть"
+                            component={CustomSelect}
+                            options={[
+                              { value: "Гривня", label: "Гривня" },
+                              { value: "Долар", label: "Долар" },
+                            ]}
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  )}
+                  {window.innerWidth < 768 && (
+                    <div className="addBusiness__info-wrapper--right-mob">
                       <label className="addBusiness__field">
-                        <span className="addBusiness__label">Валюта</span>
+                        <span className="addBusiness__label">
+                          Рік створення
+                        </span>
                         <Field
+                          className="addBusiness__input section__primary-text"
                           type="text"
-                          name="currency"
+                          name="year"
+                          id="year"
+                          minLength={1}
+                          maxLength={255}
+                          component={CustomInput}
+                          onChange={(e: any) => {
+                            setFieldValue(
+                              "year",
+                              e.target.value.replaceAll(
+                                /[A-Za-zА-Яа-я,./'` ]/g,
+                                "",
+                              ),
+                            );
+                          }}
                           required
-                          setter={setCurrencyState}
-                          placeholder="Оберіть"
-                          component={CustomSelect}
-                          options={[
-                            { value: "Гривня", label: "Гривня" },
-                            { value: "Долар", label: "Долар" },
-                          ]}
+                          placeholder="-----"
                         />
                       </label>
+                      <div className="addBusiness__price">
+                        <label className="addBusiness__field">
+                          <span className="addBusiness__label">Ціна</span>
+                          <span className="addBusiness__input-thumb">
+                            <Field
+                              className="addBusiness__input section__primary-text"
+                              type="text"
+                              name="price"
+                              id="price"
+                              pattern="[0-9]+"
+                              minLength={1}
+                              maxLength={255}
+                              required
+                              onChange={(e: any) => {
+                                setFieldValue(
+                                  "price",
+                                  e.target.value.replaceAll(
+                                    /[A-Za-zА-Яа-я,./'` ]/g,
+                                    "",
+                                  ),
+                                );
+                              }}
+                              component={CustomInput}
+                              placeholder="-----"
+                            />
+                            <span className="addBusiness__icon">
+                              {currencyState === "Гривня" ? "₴" : "$"}
+                            </span>
+                          </span>
+                        </label>
+                        <label className="addBusiness__field">
+                          <span className="addBusiness__label">Валюта</span>
+                          <Field
+                            type="text"
+                            name="currency"
+                            required
+                            setter={setCurrencyState}
+                            placeholder="Оберіть"
+                            component={CustomSelect}
+                            options={[
+                              { value: "Гривня", label: "Гривня" },
+                              { value: "Долар", label: "Долар" },
+                            ]}
+                          />
+                        </label>
+                      </div>
+                      <div className="addBusiness__field">
+                        <span className="addBusiness__label">Опис</span>
+                        <Field
+                          as="textarea"
+                          className="addBusiness__textarea section__primary-text"
+                          type="text"
+                          name="description"
+                          id="description"
+                          minLength={1}
+                          maxLength={2000}
+                          required
+                          placeholder="Писати тут..."
+                          component={Editor}
+                        />
+                      </div>
                     </div>
-                    <div className="addBusiness__field">
-                      <span className="addBusiness__label">Опис</span>
-                      <Field
-                        as="textarea"
-                        className="addBusiness__textarea section__primary-text"
-                        type="text"
-                        name="description"
-                        id="description"
-                        minLength={1}
-                        maxLength={2000}
-                        required
-                        placeholder="Писати тут..."
-                        component={Editor}
-                      />
-                    </div>
-                  </div>
-                }
+                  )}
                 </div>
                 <span className="addBusiness__label">Медіа</span>
                 <div className="addBusiness__addMedia-wrapper">

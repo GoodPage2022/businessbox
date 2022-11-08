@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import CustomInput from "../shared/CustomInput";
+import { Oval } from "react-loader-spinner";
 
 const AddBusinessFinish = () => {
   const router = useRouter();
@@ -12,6 +14,7 @@ const AddBusinessFinish = () => {
   const { businessId } = router.query;
   const [currency, setCurrency] = useState(localStorage.getItem("currency"));
   const [isGoBackClicked, setIsGoBackClicked] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     window.onpopstate = () => {
@@ -20,6 +23,7 @@ const AddBusinessFinish = () => {
   });
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    setIsLoading(true);
     const {
       property_form,
       number_of_founders,
@@ -89,7 +93,7 @@ const AddBusinessFinish = () => {
       console.log("newUserResponse3");
       console.log(JSON.parse(err.response.data.err));
     }
-
+    setIsLoading(false);
     resetForm({});
   };
 
@@ -107,18 +111,31 @@ const AddBusinessFinish = () => {
     });
   }
 
-  function validate(e: any) {
-    const input = e.target as HTMLInputElement;
-    input?.setCustomValidity("");
-    const validityState = input?.validity;
-    if (!validityState?.valid) {
-      input?.setCustomValidity("Заповнити поле");
-    }
-  }
-
   return (
     <section className="addBusinessFinish">
       <div className="container addBusinessFinish__container">
+        {isLoading && (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "50vh",
+              zIndex: "99999",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        )}
         <Formik
           initialValues={{
             property_form: "",
@@ -187,9 +204,6 @@ const AddBusinessFinish = () => {
                         // classNamePrefix="custom-select"
                         required={isGoBackClicked ? false : true}
                         placeholder="-----"
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
                         component={CustomSelect}
                         // className="addBusinessFinish__select section__primary-text"
                         options={[
@@ -222,9 +236,7 @@ const AddBusinessFinish = () => {
                         );
                       }}
                       required={isGoBackClicked ? false : true}
-                      onFocus={(e: any) => {
-                        validate(e);
-                      }}
+                      component={CustomInput}
                       placeholder="-----"
                     />
                   </label>

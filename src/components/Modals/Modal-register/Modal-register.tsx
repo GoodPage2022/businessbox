@@ -7,11 +7,14 @@ import EyeSVG from "../../../assets/svg/eye.svg";
 import CrossSVG from "../../../assets/svg/cross.svg";
 import { MainContext } from "../../../contexts/mainContext";
 import phoneNumberMask from "../../../masks/phoneNumberMask";
+import CustomInput from "../../shared/CustomInput";
+import { Oval } from "react-loader-spinner";
 
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
   const [showPassword, setShowPassword] = useState(false);
   const [registerError, setRegisterError] = useState("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -34,15 +37,16 @@ function ModalRegister({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    const { name, phone, mail, surname, password, city } = values;
+    setIsLoading(true);
+    const { name, phone, email, surname, password, city } = values;
 
     const newUser = {
       user: {
         name,
-        user: mail,
+        user: email,
         password,
         // password: "secret",
-        email: mail,
+        email,
         group: "user",
         api_key: 1,
         phone,
@@ -71,6 +75,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
         setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
       }
     }
+    setIsLoading(false);
   };
 
   function escapeHtml(text: string) {
@@ -87,15 +92,6 @@ function ModalRegister({ onClose }: { onClose: any }) {
     });
   }
 
-  function validate(e: any) {
-    const input = e.target as HTMLInputElement;
-    input?.setCustomValidity("");
-    const validityState = input?.validity;
-    if (!validityState?.valid) {
-      input?.setCustomValidity("Заповнити поле");
-    }
-  }
-
   return (
     <div
       className={`modal-register__overlay${
@@ -104,6 +100,27 @@ function ModalRegister({ onClose }: { onClose: any }) {
       onClick={handleBackdropClick}
     >
       <div className="modal-register__container">
+        {isLoading && (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        )}
         <div className="modal-register__header">
           <h2 className="modal-register__title title--white">
             Вікно реєстрації
@@ -118,7 +135,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
               name: "",
               phone: "",
               surname: "",
-              mail: "",
+              email: "",
               password: "",
               city: "",
             }}
@@ -126,7 +143,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
               escapeHtml(values.name);
               // escapeHtml(values.business);
               escapeHtml(values.surname);
-              escapeHtml(values.mail);
+              escapeHtml(values.email);
               escapeHtml(values.city);
               escapeHtml(values.phone);
             }}
@@ -143,9 +160,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     minLength={1}
                     maxLength={255}
                     required
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="Петро"
                   />
                 </label>
@@ -157,9 +172,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     minLength={1}
                     maxLength={255}
                     name="surname"
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     required
                     placeholder="Петренко"
                   />
@@ -170,9 +183,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   <span className="modal-register__label">Телефон</span>
                   <Field
                     name="phone"
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     render={({ field }: { field: any }) => (
                       <MaskedInput
                         {...field}
@@ -192,13 +203,11 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   <Field
                     className="modal-register__input section__primary-text"
                     type="email"
-                    name="mail"
+                    name="email"
                     minLength={1}
                     maxLength={255}
                     required
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="example@mail.com"
                   />
                 </label>
@@ -214,9 +223,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                     minLength={1}
                     maxLength={255}
                     required
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="Дніпро"
                   />
                 </label>
@@ -229,9 +236,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
                       name="password"
                       required
                       minLength={6}
-                      onFocus={(e: any) => {
-                        validate(e);
-                      }}
+                      component={CustomInput}
                       maxLength={255}
                       placeholder="******"
                     />
