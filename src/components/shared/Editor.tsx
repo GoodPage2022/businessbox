@@ -32,12 +32,11 @@ const Editor:React.FC<FieldProps> = ({
         return null;
     }
 
-    function SetDataPlugin({data}: any) {
-        if (editorInit == true) return null
-        
+    const SetDataPlugin = ({data}: any) => {
         const [editor] = useLexicalComposerContext();
         
         useEffect(() => {
+            if (editorInit == true) return
             if (!data) return
 
             editor.update(() => {
