@@ -7,18 +7,18 @@ import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import {$createParagraphNode, $createTextNode, $getRoot, $getSelection, EditorState, LexicalEditor, RangeSelection} from 'lexical';
+import {$createParagraphNode, $getRoot, EditorState, LexicalEditor} from 'lexical';
 import {$generateHtmlFromNodes, $generateNodesFromDOM} from '@lexical/html';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Field } from "formik";
 
 
 const Editor:React.FC<FieldProps> = ({
     field,
-    form
+    form,
 }): JSX.Element => {
     const theme = {}
-    const [htmlStringHidden, setHtmlStringHidden] = useState("")
+    const [editorInit, setEditorInit] = useState<boolean>(false)
     
     function editorOnChange(editorState: EditorState, editor: LexicalEditor) {
         editorState.read(() => {
@@ -27,39 +27,38 @@ const Editor:React.FC<FieldProps> = ({
 
             form.setFieldValue(field.name, htmlString);
             form.setFieldValue("description-hidden", plainString);
-            setHtmlStringHidden(plainString)
-
-            console.log(htmlString);
         });
+
+        return null;
     }
 
-    function DescriptionValue() {
+    function SetDataPlugin({data}: any) {
+        if (editorInit == true) return null
+        
         const [editor] = useLexicalComposerContext();
-      
+        
         useEffect(() => {
-            if (htmlStringHidden == '' && field.value != '') {
-                editor.update(() => {
-                    const parser = new DOMParser();
-                    const dom = parser.parseFromString(field.value, 'text/html');
-                    const nodes = $generateNodesFromDOM(editor, dom);
-                    $getRoot().select();
+            if (!data) return
 
-                    const selection = $getSelection() as RangeSelection;
-                    selection.insertNodes(nodes);
-                  });
-                }
-        }, [editor, field.value]);
+            editor.update(() => {
+                const htmlString = $generateHtmlFromNodes(editor, null);
+                if (data == htmlString) return
+    
+                const parser = new DOMParser();
+                const dom = parser.parseFromString(data, "text/html");
+
+                const root = $getRoot()
+                root.clear();
+                
+                const nodes = $generateNodesFromDOM(editor, dom);
+                nodes.forEach((n)=> root.append(n))
+
+                setEditorInit(true)
+            });
+        }, [editor, data]);
       
         return null;
       }
-
-    // useEffect(()=>{
-    //     if (field.value && field.value != "") {
-    //         // setHtmlStringHidden(field.value)
-    //         form.setFieldValue(field.name, field.value);
-    //         form.setFieldValue("description-hidden", field.value);
-    //     }
-    // }, [field.value])
 
     function editorOnError(error: any) {
         console.error("Editor error: ", error);
@@ -81,7 +80,7 @@ const Editor:React.FC<FieldProps> = ({
             />
             <OnChangePlugin onChange={editorOnChange} />
             <HistoryPlugin />
-            <DescriptionValue />
+            <SetDataPlugin data={field.value} />
 
             <Field
                 className="editor--hidden"
