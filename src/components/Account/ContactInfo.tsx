@@ -13,10 +13,13 @@ import axios, { AxiosRequestConfig } from "axios";
 import { signIn as signInReducer } from "../../../store/actions/auth";
 import { signOut as signOutReducer } from "../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
+import CustomInput from "../shared/CustomInput";
+import { Oval } from "react-loader-spinner";
 
 const ContactInfo = () => {
   const { data: session } = useSession();
   const user = useSelector((state: any) => state.auth.user);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatchRedux = useDispatch();
 
   const defaultAvatar = "/assets/images/profile-photo.png";
@@ -38,6 +41,7 @@ const ContactInfo = () => {
   // };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    setIsLoading(true);
     dispatch({ type: "toggle_edit" });
     const { name, phone, email, surname, city, password } = values;
 
@@ -84,11 +88,11 @@ const ContactInfo = () => {
       console.log(error);
       resetForm({});
     }
-
-    // resetForm({});
+    setIsLoading(false);
   };
 
   const uploadToServer = async (e: any) => {
+    setIsLoading(true);
     const uploadImageURL = e.target.files[0];
 
     const formData = new FormData();
@@ -158,20 +162,34 @@ const ContactInfo = () => {
       console.log("error");
       console.log(error);
     }
+    setIsLoading(false);
   };
-
-  function validate(e: any) {
-    const input = e.target as HTMLInputElement;
-    input?.setCustomValidity("");
-    const validityState = input?.validity;
-    if (!validityState?.valid) {
-      input?.setCustomValidity("Заповнити поле");
-    }
-  }
 
   return (
     <section className="contactInfo">
       <div className="container contactInfo__container">
+        {isLoading && (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "50vh",
+              zIndex: "99999",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        )}
         <div className="contactInfo__profile">
           <div className="contactInfo__photo">
             <div className="contactInfo__image">
@@ -286,9 +304,7 @@ const ContactInfo = () => {
                     name="name"
                     readOnly={state.isEdit ? false : true}
                     required
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="Петро"
                   />
                 </label>
@@ -306,9 +322,7 @@ const ContactInfo = () => {
                         value={field.value}
                         readOnly={state.isEdit ? false : true}
                         required
-                        onFocus={(e: any) => {
-                          validate(e);
-                        }}
+                        component={CustomInput}
                         className="contactInfo__input section__primary-text"
                       />
                     )}
@@ -324,9 +338,7 @@ const ContactInfo = () => {
                     name="surname"
                     readOnly={state.isEdit ? false : true}
                     required
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="Петренко"
                   />
                 </label>
@@ -338,9 +350,7 @@ const ContactInfo = () => {
                     name="email"
                     readOnly={state.isEdit ? false : true}
                     required
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="example@mail.com"
                   />
                 </label>
@@ -354,9 +364,7 @@ const ContactInfo = () => {
                     name="city"
                     readOnly={state.isEdit ? false : true}
                     required
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     placeholder="Дніпро"
                   />
                 </label>
@@ -366,9 +374,7 @@ const ContactInfo = () => {
                     className="contactInfo__input section__primary-text"
                     type="password"
                     name="password"
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                     readOnly={state.isEdit ? false : true}
                     placeholder="********"
                   />

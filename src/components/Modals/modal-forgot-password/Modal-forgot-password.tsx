@@ -9,9 +9,11 @@ import CrossSVG from "../../../assets/svg/cross.svg";
 import GoogleSVG from "../../../assets/svg/google.svg";
 import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
+import CustomInput from "../../shared/CustomInput";
+import { Oval } from "react-loader-spinner";
 
 function ModalForgotPassword({ onClose }: { onClose: any }) {
-  const dispatchRedux = useDispatch();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [state, dispatch] = React.useContext(MainContext);
   const [isformSent, setIsformSent] = useState(false);
   const [isGetErr, setIsGetErr] = useState(false);
@@ -38,6 +40,7 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    setIsLoading(true);
     const { email } = values;
 
     const reqData = {
@@ -52,16 +55,8 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
       setIsGetErr(true);
       console.log(err);
     }
+    setIsLoading(false);
   };
-
-  function validate(e: any) {
-    const input = e.target as HTMLInputElement;
-    input?.setCustomValidity("");
-    const validityState = input?.validity;
-    if (!validityState?.valid) {
-      input?.setCustomValidity("Заповнити поле");
-    }
-  }
 
   return (
     <div
@@ -71,6 +66,28 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
       onClick={handleBackdropClick}
     >
       <div className="modal-forgotPassword__container">
+        {isLoading && (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              zIndex: "999999999",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        )}
         <div className="modal-forgotPassword__header">
           <h2 className="modal-forgotPassword__title title--white">
             Забули пароль
@@ -144,9 +161,7 @@ function ModalForgotPassword({ onClose }: { onClose: any }) {
                     name="email"
                     required
                     placeholder="example@mail.com"
-                    onFocus={(e: any) => {
-                      validate(e);
-                    }}
+                    component={CustomInput}
                   />
                 </label>
 

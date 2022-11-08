@@ -6,16 +6,19 @@ import { Chart } from "../Chart/Chart";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Oval } from "react-loader-spinner";
 
 const Favorites = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getBusinesses = async () => {
     console.log(user.favourites);
 
     if (!user.favourites || user.favourites.length == 0) {
       setCards([]);
+      setIsLoading(false);
       return [];
     }
 
@@ -31,15 +34,12 @@ const Favorites = () => {
 
     if (response.data) {
       setCards(response.data.entries);
+      setIsLoading(false);
       return response.data.entries;
     }
 
-    if (response.status == 401) {
-      console.log("sdfsdfsdf");
-      
-    }
-
     setCards([]);
+    setIsLoading(false);
     return [];
   };
 
@@ -50,7 +50,26 @@ const Favorites = () => {
   return (
     <section className="favorites">
       <div className="container favorites__container">
-        {cards.length > 0 ? (
+        {isLoading ? (
+          <Oval
+            height={150}
+            width={150}
+            color="#f22a4e"
+            wrapperStyle={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "50vh",
+            }}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#e95973"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
+        ) : cards.length > 0 ? (
           <>
             <ul className="favorites__cards--desctop">
               {cards.map(
@@ -85,7 +104,11 @@ const Favorites = () => {
                       isVerified={is_verified}
                     />
                     <div className="favorites__graphic">
-                      <Chart price_history={price_history} price={price} created={_created}  />
+                      <Chart
+                        price_history={price_history}
+                        price={price}
+                        created={_created}
+                      />
                     </div>
                   </div>
                 ),
@@ -124,7 +147,11 @@ const Favorites = () => {
                       isVerified={is_verified}
                     />
                     <div className="favorites__graphic">
-                      <Chart price_history={price_history} price={price} created={_created} />
+                      <Chart
+                        price_history={price_history}
+                        price={price}
+                        created={_created}
+                      />
                     </div>
                   </div>
                 ),
