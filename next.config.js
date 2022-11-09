@@ -15,7 +15,7 @@ const env = {
   jwtSecret: process.env.JWT_SECRET,
   cockpitApiUrl: process.env.API_URL,
   cockpitApiToken: process.env.API_TOKEN,
-  cockpitBaseUrl: process.env.BASE_URL,
+  baseUrl: process.env.BASE_URL,
   digiSpaceAccessKeyId: process.env.DIGI_SPACE_ACCESSS_KEY_ID,
   digiSpaceSecretAccessKey: process.env.DIGI_SPACE_SECRET_ACCESSS_KEY,
   digiSpaceEndpoint: process.env.DIGI_SPACE_ENDPOINT,

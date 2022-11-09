@@ -43,12 +43,12 @@ function ModalRegister({ onClose }: { onClose: any }) {
     const newUser = {
       user: {
         name,
-        user: email,
+        // user: email,
         password,
         // password: "secret",
         email,
-        group: "user",
-        api_key: 1,
+        // group: "user",
+        // api_key: 1,
         phone,
         surname,
         city,

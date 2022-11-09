@@ -1,14 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
-type Data = {
-  name: string;
-};
-
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const data = req.body;
   const newUser = {
-    user: data.user,
+    user: {
+      ...data.user,
+      group: "user",
+      api_key: 1,
+      user: data.user.email,
+      active: false,
+    },
   };
 
   try {
@@ -16,9 +18,38 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       `${process.env.cockpitApiUrl}/cockpit/saveUser?token=${process.env.cockpitApiToken}`,
       newUser,
     );
+
+    if (newUserResponse.status == 200) {
+      const resetKey =
+        newUserResponse.data._id.toString() +
+        newUserResponse.data.api_key.toString().slice(-10);
+      const userActivationLink =
+        `${process.env.baseUrl}/account/activate/` + resetKey;
+
+      const emailData = {
+        service_id: process.env.emailjsServiceId,
+        template_id: process.env.emailjsTemplateId,
+        user_id: process.env.emailjsUserId,
+        accessToken: process.env.emailjsAccessToken,
+        template_params: {
+          to_email: data.user.email,
+          link: userActivationLink,
+        },
+      };
+
+      try {
+        const response = await axios.post(
+          "https://api.emailjs.com/api/v1.0/email/send",
+          emailData,
+        );
+        console.log(response);
+      } catch (error: any) {
+        console.log(error);
+      }
+    }
     res.status(200).json(newUserResponse.data);
   } catch (err: any) {
-    res.status(500).json(err.response.data);
+    res.status(500).json(err?.response?.data);
   }
 };
 
