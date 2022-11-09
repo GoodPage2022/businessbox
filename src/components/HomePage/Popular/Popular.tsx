@@ -6,14 +6,12 @@ import { useRouter } from "next/router";
 
 import CustomSelect from "../../shared/CustomSelect";
 import FilterSVG from "../../../assets/svg/filter.svg";
-import DotsSVG from "../../../assets/svg/dots.svg";
-import LinesSVG from "../../../assets/svg/lines.svg";
-import IconButton from "../../shared/IconButton";
 import CardsSlider from "../CardsSlider/CardsSlider";
 
 import { signOut as signOutReducer } from "../../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
 import OurCategories from "../../../constants/categories-select";
+import { Oval } from "react-loader-spinner";
 
 const Popular = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -27,6 +25,7 @@ const Popular = () => {
   const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
   const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatchRedux = useDispatch();
 
   const getListAreas = async () => {
@@ -88,6 +87,7 @@ const Popular = () => {
   };
 
   const getBusinesses = async () => {
+    setIsLoading(true);
     const requestBody = {
       user,
       limit: 10,
@@ -105,6 +105,7 @@ const Popular = () => {
 
       if (response.data) {
         setCards(response.data.entries);
+        setIsLoading(false);
         return response.data.entries;
       }
     } catch (error: any) {
@@ -115,7 +116,7 @@ const Popular = () => {
         dispatchRedux(signOutReducer());
       }
     }
-
+    setIsLoading(false);
     setCards([]);
     return [];
   };
@@ -348,6 +349,27 @@ const Popular = () => {
         </div>
 
         <ul className="popular__cards">
+          {isLoading && (
+            <Oval
+              height={150}
+              width={150}
+              color="#f22a4e"
+              wrapperStyle={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                height: "100%",
+                zIndex: "99999",
+              }}
+              wrapperClass=""
+              visible={true}
+              ariaLabel="oval-loading"
+              secondaryColor="#e95973"
+              strokeWidth={3}
+              strokeWidthSecondary={3}
+            />
+          )}
           <CardsSlider cards={cards} />
         </ul>
       </div>
