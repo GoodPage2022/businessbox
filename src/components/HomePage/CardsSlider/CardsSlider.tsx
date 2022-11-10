@@ -1,10 +1,12 @@
 import React, { useMemo, useRef, useState, useEffect } from "react";
-import Slider from "react-slick";
+import Slider, { LazyLoadTypes } from "react-slick";
 
 import debounce from "lodash.debounce";
 
 import BusinessCard from "../../shared/BusinessCard";
 import axios from "axios";
+
+const ondemand: LazyLoadTypes = "ondemand";
 
 const CardsSlider = ({ cards }: { cards: any }) => {
   const settings = {
@@ -17,7 +19,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     swipeToSlide: true,
     className: "cards-slider",
     // adaptiveHeight: true,
-    lazyLoad: `ondemand`,
+    lazyLoad: ondemand,
     autoplay: true,
     responsive: [
       {
