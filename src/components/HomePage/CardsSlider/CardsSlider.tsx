@@ -17,6 +17,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     swipeToSlide: true,
     className: "cards-slider",
     // adaptiveHeight: true,
+    lazyLoad: `ondemand`,
     autoplay: true,
     responsive: [
       {

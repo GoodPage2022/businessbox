@@ -231,7 +231,7 @@
       flex: 1;
       opacity: 0;
       visibility: hidden;
-      transition: all .35s ease;
+      transition: all 0.35s ease;
 
       &.active {
         visibility: visible;
