@@ -147,7 +147,58 @@
 }
 
 .cards-slider {
-  margin-right: -30px;
+  position: relative;
+
+  .slick-prev,
+  .slick-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 20%;
+    z-index: 1;
+    opacity: 0;
+    transition: 1s all ease;
+    width: 70px;
+    height: 70px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    &::before {
+      position: absolute;
+      background-image: url("../../../../public/assets/svg/slider-arrow.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      object-fit: cover;
+      width: 40px;
+      height: 40px;
+      opacity: 1;
+      content: "";
+    }
+  }
+
+  .slick-next {
+    right: 10px;
+  }
+  .slick-prev {
+    left: 5px;
+    &::before {
+      -webkit-transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    .slick-prev {
+      opacity: 1;
+      left: -30px;
+    }
+    .slick-next {
+      opacity: 1;
+      right: -25px;
+    }
+  }
+
   .slick-list {
     margin: 0 -10px;
   }
@@ -163,7 +214,7 @@
     padding-bottom: 0px;
 
     &__container {
-      overflow: hidden;
+      overflow: visible;
     }
 
     &__buttons {
@@ -333,19 +384,13 @@
   // & > div {
 
   .cards-slider {
-    margin-right: -24px;
+    // margin-right: -24px;
 
     .slick-list {
       margin: 0;
     }
     .slick-slide {
       padding: 0;
-    }
-    & > div {
-      // height: 100% !important;
-      // & > div {
-      //   min-width: 100% !important;
-      // }
     }
   }
 }
@@ -354,7 +399,9 @@
   .popular {
     padding-top: 20px;
     padding-bottom: 20px;
-
+    &__container {
+      overflow: hidden;
+    }
     &__buttons {
       margin-bottom: 20px;
     }

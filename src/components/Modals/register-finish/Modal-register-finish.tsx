@@ -52,8 +52,9 @@ function ModalRegisterFinish({ onClose }: { onClose: any }) {
             <CrossSVG />
           </button>
           <p className="modal-registerFinish__send-title">
-            Дякуємо, реєстрація майже завершена! Перейдіть на пошту для
-            активації аккаунту
+            Вітаємо! Реєстрація пройшла успішно
+            {/* Дякуємо, реєстрація майже завершена! Перейдіть на пошту для
+            активації аккаунту */}
           </p>
         </div>
       </div>

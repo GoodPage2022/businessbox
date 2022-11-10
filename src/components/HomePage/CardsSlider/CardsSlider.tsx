@@ -8,6 +8,17 @@ import axios from "axios";
 
 const ondemand: LazyLoadTypes = "ondemand";
 
+function SampleNextArrow(props: any) {
+  const { className, onClick } = props;
+
+  return <div className={className} onClick={onClick} />;
+}
+
+function SamplePrevArrow(props: any) {
+  const { className, onClick } = props;
+  return <div className={className} onClick={onClick} />;
+}
+
 const CardsSlider = ({ cards }: { cards: any }) => {
   const settings = {
     dots: false,
@@ -15,23 +26,23 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     speed: 1000,
     slidesToShow: 4,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     swipeToSlide: true,
     className: "cards-slider",
-    // adaptiveHeight: true,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     lazyLoad: ondemand,
     autoplay: true,
     responsive: [
       {
         breakpoint: 1440,
-        settings: {
-          slidesToShow: 2.7,
-        },
+        settings: { lazyLoad: ondemand, slidesToShow: 2.7 },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 1.3,
+          arrows: false,
         },
       },
     ],
