@@ -22,7 +22,7 @@ const AddBusiness = () => {
   const [selectedArea, setSelectedArea] = useState("");
   const [currencyState, setCurrencyState] = useState("Гривня");
   const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getListAreas = async () => {
     setIsLoading(true);

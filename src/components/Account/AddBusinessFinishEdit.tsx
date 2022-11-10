@@ -13,7 +13,7 @@ const AddBusinessFinishEdit = ({ projectId }: { projectId: string }) => {
   const [currency, setCurrency] = useState(localStorage.getItem("currency"));
   const [businessInfo, setBusinessInfo] = useState<any>(null);
   const [isGoBackClicked, setIsGoBackClicked] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getBusinessInfo = async () => {
     setIsLoading(true);

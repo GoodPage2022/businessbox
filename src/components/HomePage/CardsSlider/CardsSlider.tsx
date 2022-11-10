@@ -90,11 +90,11 @@ const CardsSlider = ({ cards }: { cards: any }) => {
             price,
             is_verified,
             sold_out,
+            currency,
           }: any) => (
             <BusinessCard
               key={_id}
               alias={_id}
-              rate={rate}
               title={title}
               description={description}
               image={
@@ -110,6 +110,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
               views={view_count ?? 0}
               isVerified={is_verified}
               isSoldOut={sold_out}
+              currency={currency}
             />
           ),
         )}
@@ -130,7 +131,6 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         <BusinessCard
           key={_id}
           alias={_id}
-          rate={rate}
           title={title}
           description={description}
           image={

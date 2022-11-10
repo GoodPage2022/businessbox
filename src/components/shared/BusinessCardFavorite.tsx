@@ -8,6 +8,9 @@ import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
 import EyeSVG from "../../assets/svg/eye.svg";
+import UseUsd from "../../utils/useUsd";
+import UseUah from "../../utils/useUah";
+import axios from "axios";
 
 const BusinessCardFavorites = ({
   image,
@@ -17,8 +20,7 @@ const BusinessCardFavorites = ({
   views,
   isVerified,
   alias,
-  currency="Гривня",
-  rate=0
+  currency = "Гривня",
 }: {
   image: any;
   title: string;
@@ -33,11 +35,26 @@ const BusinessCardFavorites = ({
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
+  const [rate, setRate] = useState<number>(0);
+
+  const getCurrencyRate = async () => {
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(
+      `/api/currency/get`,
+    );
+
+    if (rateUSDStus == 200) {
+      setRate(rateUSD);
+    }
+  };
 
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
       setIsMyBusinessesPage(true);
     }
+  }, []);
+
+  useEffect(() => {
+    getCurrencyRate();
   }, []);
 
   return (
@@ -98,11 +115,13 @@ const BusinessCardFavorites = ({
                 {views}
               </p>
             </div>
-            <p className="business-card-favorite__price">{currency == "Гривня" ? (Number(price) / rate).toFixed(0) : Number(price).toFixed(0)}$</p>
+            <p className="business-card-favorite__price">
+              {UseUsd(currency, price, rate)}
+            </p>
           </div>
           <div className="business-card__footer--bottom">
             <p className="section__secondary-text">
-            {currency == "Гривня" ? Number(price).toFixed(0) : (Number(price) * rate).toFixed(0)} грн
+              {UseUah(currency, price, rate)}
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">

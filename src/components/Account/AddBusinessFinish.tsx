@@ -14,7 +14,7 @@ const AddBusinessFinish = () => {
   const { businessId } = router.query;
   const [currency, setCurrency] = useState(localStorage.getItem("currency"));
   const [isGoBackClicked, setIsGoBackClicked] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     window.onpopstate = () => {

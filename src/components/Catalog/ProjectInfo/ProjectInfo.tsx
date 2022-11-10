@@ -17,6 +17,8 @@ import Comment from "./Comment";
 import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
 import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
+import UseUsd from "../../../utils/useUsd";
+import UseUah from "../../../utils/useUah";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -207,15 +209,17 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getCurrencyRate = async () => {
-    const { data: rateUSD, status: rateUSDStus } = await axios.get(`/api/currency/get`);
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(
+      `/api/currency/get`,
+    );
 
     if (rateUSDStus == 200) {
       setRate(rateUSD);
     }
-  }
+  };
 
   useEffect(() => {
-    getCurrencyRate()
+    getCurrencyRate();
   }, []);
 
   useEffect(() => {
@@ -260,12 +264,9 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       });
 
       if (newCommentResponse.status == 200) {
-        setCommentIsSent(true)
-        setTimeout(
-          () => setCommentIsSent(false), 
-          3000
-        )
-        getBusinessComments()
+        setCommentIsSent(true);
+        setTimeout(() => setCommentIsSent(false), 3000);
+        getBusinessComments();
       }
 
       resetForm({});
@@ -388,13 +389,13 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         </div>
         <div className="projectInfo__categories-slider">
           <ul>
-          {/* <Slider {...categoriesSliderSettings}> */}
+            {/* <Slider {...categoriesSliderSettings}> */}
             {[projectInfo.area].map((content, id) => (
               <li key={id} className="categories__buttons__item">
                 <MainButtonBlack label={content} />
               </li>
             ))}
-          {/* </Slider> */}
+            {/* </Slider> */}
           </ul>
         </div>
         <p
@@ -421,10 +422,12 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
           <div className="projectInfo__price">
             <p className="section__primary-text">Ціна:</p>
-            <p className="projectInfo__amount title">{projectInfo.currency == "Гривня" ? (Number(projectInfo.price) / rate).toFixed(0) : Number(projectInfo.price).toFixed(0)}$</p>
+            <p className="projectInfo__amount title">
+              {UseUsd(projectInfo.currency, projectInfo.price, rate)}
+            </p>
             <div className="projectInfo__amount-uah">
               <p className="section__secondary-text">
-                {projectInfo.currency == "Гривня" ? Number(projectInfo.price).toFixed(0) : (Number(projectInfo.price) * rate).toFixed(0)} грн
+                {UseUah(projectInfo.currency, projectInfo.price, rate)}
               </p>
               <div className="projectInfo__rate">
                 <p className="projectInfo__rate--top section__secondary-text">
@@ -502,7 +505,13 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 />
               </label>
               <div className="projectInfo__button-send">
-                <p className={`projectInfo__button-send--success ${commentIsSent ? "active" : ""}`}>Коментар буде опубліковано після модерації</p>
+                <p
+                  className={`projectInfo__button-send--success ${
+                    commentIsSent ? "active" : ""
+                  }`}
+                >
+                  Коментар буде опубліковано після модерації
+                </p>
                 <MainButtonBlack label="Опублікувати" />
               </div>
             </Form>

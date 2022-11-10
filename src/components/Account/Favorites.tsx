@@ -83,6 +83,7 @@ const Favorites = () => {
                   is_verified,
                   price_history,
                   _created,
+                  currency,
                 }: any) => (
                   <div key={_id} className="favorites__cards__item">
                     <PopularCard
@@ -102,6 +103,7 @@ const Favorites = () => {
                       price={price}
                       views={view_count ?? 0}
                       isVerified={is_verified}
+                      currency={currency}
                     />
                     <div className="favorites__graphic">
                       <Chart
@@ -126,6 +128,7 @@ const Favorites = () => {
                   is_verified,
                   price_history,
                   _created,
+                  currency,
                 }: any) => (
                   <div key={_id} className="favorites__cards__item">
                     <PopularCardMob
@@ -145,6 +148,7 @@ const Favorites = () => {
                       price={price}
                       views={view_count ?? 0}
                       isVerified={is_verified}
+                      currency={currency}
                     />
                     <div className="favorites__graphic">
                       <Chart

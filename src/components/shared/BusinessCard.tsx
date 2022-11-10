@@ -11,6 +11,8 @@ import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
 import EyeSVG from "../../assets/svg/eye.svg";
+import UseUah from "../../utils/useUah";
+import UseUsd from "../../utils/useUsd";
 
 const BusinessCard = ({
   image,
@@ -21,8 +23,7 @@ const BusinessCard = ({
   isVerified,
   alias,
   isSoldOut,
-  currency="Гривня",
-  rate=0,
+  currency = "Гривня",
 }: {
   image: any;
   title: string;
@@ -32,8 +33,7 @@ const BusinessCard = ({
   isVerified: boolean;
   alias: string;
   isSoldOut?: boolean;
-  currency?: string,
-  rate?: number;
+  currency?: string;
 }) => {
   const dispatchRedux = useDispatch();
   const router = useRouter();
@@ -42,6 +42,8 @@ const BusinessCard = ({
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [clickTime, setClickTime] = useState<number>(0);
   const [clickPos, setClickPos] = useState<any>({});
+  const [rate, setRate] = useState<number>(0);
+
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
       setIsMyBusinessesPage(true);
@@ -75,6 +77,20 @@ const BusinessCard = ({
       );
     }
   };
+
+  const getCurrencyRate = async () => {
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(
+      `/api/currency/get`,
+    );
+
+    if (rateUSDStus == 200) {
+      setRate(rateUSD);
+    }
+  };
+
+  useEffect(() => {
+    getCurrencyRate();
+  }, []);
 
   return (
     <li
@@ -161,11 +177,13 @@ const BusinessCard = ({
                 {views}
               </p>
             </div>
-            <p className="business-card__price">{currency == "Гривня" ? (Number(price) / rate).toFixed(0) : Number(price).toFixed(0)}$</p>
+            <p className="business-card__price">
+              {UseUsd(currency, price, rate)}
+            </p>
           </div>
           <div className="business-card__footer--bottom">
             <p className="section__secondary-text">
-            {currency == "Гривня" ? Number(price).toFixed(0) : (Number(price) * rate).toFixed(0)} грн
+              {UseUah(currency, price, rate)}
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">
@@ -179,7 +197,9 @@ const BusinessCard = ({
         </div>
         <div className="business-card__footer-mob">
           <div className="business-card__footer-mob--first">
-            <p className="business-card__price">{currency == "Гривня" ? (Number(price) / rate).toFixed(0) : Number(price).toFixed(0)}$</p>
+            <p className="business-card__price">
+              {UseUsd(currency, price, rate)}
+            </p>
             {!!user && (
               <button
                 onClick={handleFavourites}
@@ -194,7 +214,7 @@ const BusinessCard = ({
 
           <div className="business-card__footer-mob--price">
             <p className="section__secondary-text">
-              {currency == "Гривня" ? Number(price).toFixed(0) : (Number(price) * rate).toFixed(0)} грн
+              {UseUah(currency, price, rate)}
             </p>
             <div className="business-card__rate">
               <p className="business-card__rate--top section__secondary-text">
