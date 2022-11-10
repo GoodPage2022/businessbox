@@ -74,6 +74,7 @@ const MyBusinesses = () => {
                   price,
                   is_verified,
                   sold_out,
+                  currency,
                 }: any) => (
                   <PopularCard
                     key={_id}
@@ -93,6 +94,7 @@ const MyBusinesses = () => {
                     views={view_count ?? 0}
                     isVerified={is_verified}
                     isSoldOut={sold_out}
+                    currency={currency}
                   />
                 ),
               )}
