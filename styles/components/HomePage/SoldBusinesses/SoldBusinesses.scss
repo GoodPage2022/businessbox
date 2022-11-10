@@ -54,7 +54,7 @@
   .soldBusinesses {
     padding-bottom: 80px;
     &__container {
-      overflow: hidden;
+      overflow: visible;
     }
     &__title {
       margin-bottom: 40px;
@@ -64,6 +64,9 @@
 
 @media screen and (max-width: $size-mobile) {
   .soldBusinesses {
+    &__container {
+      overflow: hidden;
+    }
     &__title {
       margin-bottom: 20px;
     }

@@ -19,7 +19,7 @@
     padding-bottom: 40px;
 
     &__container {
-      overflow: hidden;
+      overflow: visible;
     }
 
     &__title {
@@ -40,6 +40,9 @@
   .newBusinesses {
     padding-bottom: 20px;
 
+    &__container {
+      overflow: hidden;
+    }
     &__title {
       margin-bottom: 20px;
     }
