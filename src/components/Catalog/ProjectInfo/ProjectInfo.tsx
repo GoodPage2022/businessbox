@@ -32,13 +32,27 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const dispatchRedux = useDispatch();
   const [rate, setRate] = useState(0);
 
+  function SampleNextArrow(props: any) {
+    const { className, onClick } = props;
+
+    return <div className={className} onClick={onClick} />;
+  }
+
+  function SamplePrevArrow(props: any) {
+    const { className, onClick } = props;
+    return <div className={className} onClick={onClick} />;
+  }
+
   const imageSliderSettings = {
     dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 2.2,
     slidesToScroll: 1,
-    arrows: false,
+    className: "projectInfo__slick-slider",
+    arrows: true,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 1440,

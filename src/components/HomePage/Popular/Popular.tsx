@@ -123,8 +123,6 @@ const Popular = () => {
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     console.log(values);
-
-    // resetForm({});
   };
 
   useEffect(() => {
