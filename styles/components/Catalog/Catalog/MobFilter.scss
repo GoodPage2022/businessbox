@@ -65,6 +65,8 @@
       color: $grey-color;
       margin-top: 20px;
       cursor: pointer;
+      background: transparent;
+      border: none;
       z-index: 6666666;
     }
 
@@ -200,18 +202,6 @@
       grid-template-rows: repeat(5, 1fr);
       // grid-column-gap: 16px;
       grid-row-gap: 10px;
-    }
-
-    &__more-categories {
-      font-family: "Montserrat";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 17px;
-      color: $grey-color;
-      margin-top: 20px;
-      cursor: pointer;
-      z-index: 6666666;
     }
 
     &__city {

@@ -22,6 +22,7 @@ const MobFilter = ({
   const [filtersObjI, setFiltersObjI] = useState<any>({});
   const [initialValues, setInitialValues] = useState<any>({});
   const [cutOurCategories, setCutOurCategories] = useState<any>(null);
+  const [isCutCategories, setIsCutCategories] = useState<any>(false);
   const router = useRouter();
   const { filters } = router.query;
   const [state, dispatch] = React.useContext(MainContext);
@@ -34,40 +35,50 @@ const MobFilter = ({
       const reponse = await axios.post("/api/locations/getAreas", {});
 
       if (reponse.status == 200) {
-        setListAreas(reponse.data)
+        setListAreas(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
   const getListCities = async (selectedArea: string) => {
     try {
-      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+      const reponse = await axios.post("/api/locations/getCities", {
+        selectedArea,
+      });
 
       if (reponse.status == 200) {
-        setListCities(reponse.data)
+        setListCities(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
-  useEffect(()=>{
-    getListCities(selectedArea)
-  },[selectedArea])
+  useEffect(() => {
+    getListCities(selectedArea);
+  }, [selectedArea]);
 
-  useEffect(()=>{
-    getListAreas()
-  },[])
+  useEffect(() => {
+    getListAreas();
+  }, []);
 
   useEffect(() => {
     if (OurCategories.length > 10) {
       setCutOurCategories(OurCategories.slice(0, 10));
     }
   }, []);
+
+  useEffect(() => {
+    if (filtersObjI.category != null) {
+      setIsCutCategories(false);
+    } else {
+      setIsCutCategories(true);
+    }
+  }, [filtersObjI]);
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
@@ -105,7 +116,7 @@ const MobFilter = ({
       state: filtersObjI.state ?? "",
     });
 
-    setSelectedArea(filtersObjI.state)
+    setSelectedArea(filtersObjI.state);
   }, [filtersObjI]);
 
   useEffect(() => {
@@ -165,10 +176,35 @@ const MobFilter = ({
                   />
                 </div>
               </label>
-              <label className="mobFilter__field">
+              <div className="mobFilter__field">
                 <span className="mobFilter__label">Категорія</span>
                 <ul className="mobFilter__categories">
-                  {(cutOurCategories ?? OurCategories).map(
+                  {isCutCategories
+                    ? cutOurCategories?.map(
+                        ({ id, content }: { id: any; content: any }) => (
+                          <li key={id} className="mobFilter__category">
+                            <Checkbox
+                              datakey={id}
+                              changeFilter={changeFilter}
+                              text={content}
+                              categories={filtersObjI.category ?? []}
+                            />
+                          </li>
+                        ),
+                      )
+                    : OurCategories.map(
+                        ({ id, content }: { id: any; content: any }) => (
+                          <li key={id} className="mobFilter__category">
+                            <Checkbox
+                              datakey={id}
+                              changeFilter={changeFilter}
+                              text={content}
+                              categories={filtersObjI.category ?? []}
+                            />
+                          </li>
+                        ),
+                      )}
+                  {/* {(cutOurCategories ?? OurCategories).map(
                     ({ id, content }: { id: any; content: any }) => (
                       <li key={id} className="mobFilter__category">
                         <Checkbox
@@ -179,19 +215,20 @@ const MobFilter = ({
                         />
                       </li>
                     ),
-                  )}
+                  )} */}
                 </ul>
-                {cutOurCategories && (
-                  <p
+                {isCutCategories && (
+                  <button
+                    type="button"
                     onClick={() => {
-                      setCutOurCategories(null);
+                      setIsCutCategories(false);
                     }}
                     className="mobFilter__more-categories"
                   >
                     ще категорії <MoreCategoriesSVG />
-                  </p>
+                  </button>
                 )}
-              </label>
+              </div>
               <div className="mobFilter__city">
                 <label className="mobFilter__field">
                   <span className="mobFilter__label">Область</span>
