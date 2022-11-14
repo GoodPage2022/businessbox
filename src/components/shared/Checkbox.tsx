@@ -11,11 +11,10 @@ const Checkbox = ({
   categories: string[];
 }) => {
   const [isChosen, setIsChosen] = useState<boolean>(false);
-  const [isCheckboxtrue, setCheckboxtrue] = useState(true);
 
   useEffect(() => {
     setIsChosen(categories.includes(text));
-  }, [categories]);
+  }, [categories, text]);
 
   return (
     <div
@@ -50,6 +49,9 @@ const Checkbox = ({
         type="checkbox"
         className={`checkbox__input agree`}
         checked={isChosen}
+        onChange={() => {
+          console.log(isChosen);
+        }}
       />
       <label htmlFor={`cat_${datakey}`} className="checkbox__label">
         <span className="checkbox__text section__secondary-text">{text}</span>
