@@ -22,6 +22,7 @@ function SamplePrevArrow(props: any) {
 const CardsSlider = ({ cards }: { cards: any }) => {
   const settings = {
     dots: false,
+
     infinite: true,
     speed: 1000,
     slidesToShow: 4,
@@ -33,9 +34,11 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     prevArrow: <SamplePrevArrow />,
     lazyLoad: ondemand,
     autoplay: true,
+
     responsive: [
       {
         breakpoint: 1440,
+        infinite: true,
         settings: { lazyLoad: ondemand, slidesToShow: 2.7 },
       },
       {
@@ -43,6 +46,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         settings: {
           slidesToShow: 1.3,
           arrows: false,
+          infinite: false,
         },
       },
     ],

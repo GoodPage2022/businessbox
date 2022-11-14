@@ -82,7 +82,7 @@
   }
 
   &__image-slider {
-    padding: 20px 0 20px 20px;
+    padding: 20px 0 40px 20px;
     background: $white-color;
     margin-bottom: 40px;
 
@@ -243,6 +243,45 @@
   &__offers-title {
     margin-bottom: 40px;
   }
+
+  &__slick-slider {
+    .slick-prev,
+    .slick-next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      z-index: 1;
+      transition: 1s all ease;
+      width: 40px;
+      height: 40px;
+      top: auto;
+      bottom: -57px;
+      &::before {
+        position: absolute;
+        background-image: url("../../../../public/assets/svg/project-info-arrow.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        object-fit: cover;
+        width: 40px;
+        height: 40px;
+        opacity: 1;
+        content: "";
+      }
+    }
+
+    .slick-prev {
+      left: auto;
+      right: 70px;
+      &::before {
+        -webkit-transform: rotate(180deg);
+      }
+    }
+    .slick-next {
+      right: 12px;
+    }
+  }
 }
 
 .slick-track {
@@ -318,7 +357,7 @@
     }
 
     &__image-slider {
-      padding: 20px 0 20px 20px;
+      padding: 20px 0 40px 20px;
       background: $white-color;
       margin-bottom: 40px;
 
@@ -466,12 +505,12 @@
     }
 
     &__image-slider {
-      padding: 10px 0 10px 10px;
+      padding: 10px 0 40px 10px;
       margin-bottom: 20px;
       margin-right: -20px;
 
       &--image {
-        width: 247px !important;
+        width: 100% !important;
         height: 142px !important;
         border-radius: 12.455px;
       }
@@ -567,5 +606,12 @@
 
   .slick-track {
     margin-left: initial;
+  }
+  .slick-active {
+    padding: 0 5px;
+  }
+
+  .slick-list {
+    margin: 0 -5px;
   }
 }
