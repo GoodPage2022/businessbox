@@ -22,7 +22,6 @@ function SamplePrevArrow(props: any) {
 const CardsSlider = ({ cards }: { cards: any }) => {
   const settings = {
     dots: false,
-
     infinite: true,
     speed: 1000,
     slidesToShow: 4,

@@ -286,6 +286,7 @@
 
 .slick-track {
   margin-left: initial;
+  transition: transform 1000ms ease 0s !important;
 }
 
 @media screen and (max-width: $size-tablet) {
