@@ -26,6 +26,7 @@ const IconButton = ({
             filtersObj[filters[i - 1]] = setPageNumber;
           } else {
             filtersObj[filters[i - 1]] = f;
+            filtersObj["page"] = setPageNumber;
           }
         }
       });
