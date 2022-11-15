@@ -95,6 +95,8 @@ const MobFilter = ({
           } else {
             filtersObjB[filters[i - 1]] = f;
           }
+        } else {
+          filtersObjB = {};
         }
       });
     }
@@ -103,9 +105,7 @@ const MobFilter = ({
   };
 
   useEffect(() => {
-    if (filters) {
-      buildFiltersObj();
-    }
+    buildFiltersObj();
   }, [filters]);
 
   useEffect(() => {
