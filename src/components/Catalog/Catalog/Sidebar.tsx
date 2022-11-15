@@ -27,34 +27,36 @@ const Sidebar = ({
       const reponse = await axios.post("/api/locations/getAreas", {});
 
       if (reponse.status == 200) {
-        setListAreas(reponse.data)
+        setListAreas(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
   const getListCities = async (selectedArea: string) => {
     try {
-      const reponse = await axios.post("/api/locations/getCities", { selectedArea });
+      const reponse = await axios.post("/api/locations/getCities", {
+        selectedArea,
+      });
 
       if (reponse.status == 200) {
-        setListCities(reponse.data)
+        setListCities(reponse.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
-  }
+  };
 
-  useEffect(()=>{
-    getListCities(selectedArea)
-  },[selectedArea])
+  useEffect(() => {
+    getListCities(selectedArea);
+  }, [selectedArea]);
 
-  useEffect(()=>{
-    getListAreas()
-  },[])
+  useEffect(() => {
+    getListAreas();
+  }, []);
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
@@ -79,9 +81,7 @@ const Sidebar = ({
   };
 
   useEffect(() => {
-    if (filters) {
-      buildFiltersObj();
-    }
+    buildFiltersObj();
   }, [filters]);
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const Sidebar = ({
       state: filtersObjI.state ?? "",
     });
 
-    setSelectedArea(filtersObjI.state)
+    setSelectedArea(filtersObjI.state);
   }, [filtersObjI]);
 
   useEffect(() => {
@@ -142,7 +142,7 @@ const Sidebar = ({
                 />
               </div>
             </label>
-            <label className="sidebar__field">
+            <div className="sidebar__field">
               <span className="sidebar__label">Категорія</span>
               <ul className="sidebar__categories">
                 {OurCategories.map(({ id, content }) => (
@@ -156,7 +156,7 @@ const Sidebar = ({
                   </li>
                 ))}
               </ul>
-            </label>
+            </div>
             <label className="sidebar__field">
               <span className="sidebar__label">Область</span>
               <Field
