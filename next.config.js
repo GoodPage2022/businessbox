@@ -24,7 +24,14 @@ const env = {
   emailjsTemplateId2: process.env.EMAILJS_TEMPLATE_ID2,
   emailjsUserId: process.env.EMAILJS_USER_ID,
   emailjsAccessToken: process.env.EMAILJS_ACCESS_TOKEN,
-}
+  sendpulseUserId: process.env.SENDPULSE_USER_ID,
+  sendpulseSecret: process.env.SENDPULSE_SECRET,
+  sendpulseTokenStorage: process.env.SENDPULSE_TOKEN_STORAGE,
+  sendpulseTemplateId1: process.env.SENDPULSE_TEMPLATE_ID1,
+  sendpulseTemplateId2: process.env.SENDPULSE_TEMPLATE_ID2,
+  sendpulseSubject1: process.env.SENDPULSE_SUBJECT1,
+  sendpulseSubject2: process.env.SENDPULSE_SUBJECT2,
+ }
 
 module.exports = withReactSvg({
   env,
