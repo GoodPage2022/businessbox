@@ -28,6 +28,7 @@ Project uses:
 - Mongodb: ^4.9.1.
 - Formik: ^2.2.9.
 - Chart.js: ^3.9.1.
+- Sendpulse-api: ^1.1.5.
 
 All other dependencies are listed in package.json file.
 
