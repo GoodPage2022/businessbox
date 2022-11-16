@@ -3875,6 +3875,11 @@ semver@^7.3.7:
   dependencies:
     lru-cache "^6.0.0"
 
+sendpulse-api@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/sendpulse-api/-/sendpulse-api-1.1.5.tgz#dbe8c51c7166253a8a8d635dd3feb493b621d02e"
+  integrity sha512-0NdvSBcLNPEEnSVMFDSdni4M4sKk4HCaVKt/5RbrYsqJ8uckrn5H9YV0v/2R5GBDlu+9lpOFbVuBb83EwW49OQ==
+
 shallowequal@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"

@@ -44,6 +44,7 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.54.5",
+    "sendpulse-api": "^1.1.5",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
