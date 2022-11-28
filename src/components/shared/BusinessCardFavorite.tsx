@@ -92,15 +92,17 @@ const BusinessCardFavorites = ({
       <div className="business-card-favorite__info">
         <h3 className="business-card-favorite__title">
           <span>{title}</span>
+          <div>
+            <CheckSVG
+              data-tip={
+                isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
+              }
+              className={`business-card-favorite__ckeck-icon ${
+                isVerified ? "active" : ""
+              }`}
+            />
+          </div>
 
-          <CheckSVG
-            data-tip={
-              isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
-            }
-            className={`business-card-favorite__ckeck-icon ${
-              isVerified ? "active" : ""
-            }`}
-          />
           <ReactTooltip />
         </h3>
         <p
