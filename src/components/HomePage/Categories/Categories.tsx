@@ -1,13 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { MainContext } from "../../../contexts/mainContext";
 import MainSliderText from "../../../constants/main-slider";
+import axios from "axios";
 
 const Categories = () => {
   const user = useSelector((state: any) => state.auth.user);
   const router = useRouter();
+  const [businessesQuantity, setBusinessesQuantity] = useState(0);
+  const [businessesAmountPrice, setBusinessesAmountPrice] = useState(0);
+  const [rate, setRate] = useState(0);
+
+  const getCurrencyRate = async () => {
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(
+      `/api/currency/get`,
+    );
+
+    if (rateUSDStus == 200) {
+      setRate(rateUSD);
+    }
+  };
+
+  const getBusinesses = async () => {
+    const response = await axios.post(`/api/businesses/getList`);
+
+    if (response.data) {
+      const calculatedPrice = response.data.entries.reduce(
+        (acc: number, item: any) => {
+          if (!isNaN(Number(item.price))) {
+            if (item.currency == "Долар") {
+              item.price = Number(item.price) * rate;
+            }
+
+            return acc + Number(item.price);
+          }
+          return acc;
+        },
+        0,
+      );
+      setBusinessesQuantity(response.data.entries.length);
+      setBusinessesAmountPrice(calculatedPrice.toFixed(0));
+    }
+
+    return;
+  };
+
+  useEffect(() => {
+    getCurrencyRate();
+    getBusinesses();
+  }, []);
 
   const [state, dispatch] = React.useContext(MainContext);
   const settings = {
@@ -80,57 +123,58 @@ const Categories = () => {
   };
 
   return (
-    <Slider {...settings}>
-      <section className="categories-first">
-        <div className="container categories-first__container">
-          <h1 className="categories-first__title title--white">
-            Купити бізнес
-          </h1>
-          <p className="categories-first__text section__primary-text--white">
-            Ми відібрали і підготували у простій та зрозумілій формі бізнеси, що
-            продаються на ринку. <br /> Також з легкістю допоможено розкласти
-            будь-який варіант, що тобі сподобається, до дрібних деталей. Твоє
-            завдання - просто вказати пальцем)
-          </p>
-          <div className="categories-first__buttons">
-            <button
-              className="categories-first__button"
-              onClick={
-                () => router.push("/catalog")
-                // user != null ? router.push("/account/add-business") : openModal()
-              }
-            >
-              Купити зараз
-            </button>
-          </div>
-        </div>
-      </section>
-      <section className="categories-second">
-        <div className="container categories-second__container">
-          <h1 className="categories-second__title title--white">
-            Продати бізнес
-          </h1>
-          <p className="categories-second__text section__primary-text--white">
-            Головною метою нашої платформи є - конект людини що продає власний
-            бізнес з компетентним покупцем, який про нього мріє. В свою чергу ми
-            розберемо, пояснимо, упакуємо та прорекламуємо бізнес, щоб твій
-            покупець якомога швидше тебе знайшов.
-          </p>
-          <div className="categories-second__buttons">
-            <button
-              onClick={() => {
-                if (user != null) {
-                  router.push("/account/add-business");
-                } else {
-                  localStorage.setItem("redirectToAddBusiness", "true");
-                  openModal();
+    <div className="categories__wrapper">
+      <Slider {...settings}>
+        <section className="categories-first">
+          <div className="container categories-first__container">
+            <h1 className="categories-first__title title--white">
+              Купити бізнес
+            </h1>
+            <p className="categories-first__text section__primary-text--white">
+              Ми відібрали і підготували у простій та зрозумілій формі бізнеси,
+              що продаються на ринку. <br /> Також з легкістю допоможено
+              розкласти будь-який варіант, що тобі сподобається, до дрібних
+              деталей. Твоє завдання - просто вказати пальцем)
+            </p>
+            <div className="categories-first__buttons">
+              <button
+                className="categories-first__button"
+                onClick={
+                  () => router.push("/catalog")
+                  // user != null ? router.push("/account/add-business") : openModal()
                 }
-              }}
-              className="categories-second__button--white"
-            >
+              >
+                Купити зараз
+              </button>
+            </div>
+          </div>
+        </section>
+        <section className="categories-second">
+          <div className="container categories-second__container">
+            <h1 className="categories-second__title title--white">
               Продати бізнес
-            </button>
-            {/* <button
+            </h1>
+            <p className="categories-second__text section__primary-text--white">
+              Головною метою нашої платформи є - конект людини що продає власний
+              бізнес з компетентним покупцем, який про нього мріє. В свою чергу
+              ми розберемо, пояснимо, упакуємо та прорекламуємо бізнес, щоб твій
+              покупець якомога швидше тебе знайшов.
+            </p>
+            <div className="categories-second__buttons">
+              <button
+                onClick={() => {
+                  if (user != null) {
+                    router.push("/account/add-business");
+                  } else {
+                    localStorage.setItem("redirectToAddBusiness", "true");
+                    openModal();
+                  }
+                }}
+                className="categories-second__button--white"
+              >
+                Продати бізнес
+              </button>
+              {/* <button
               onClick={() =>
                 user != null ? router.push("/catalog") : openModal()
               }
@@ -138,24 +182,35 @@ const Categories = () => {
             >
               Інвестувати
             </button> */}
+            </div>
           </div>
-        </div>
-      </section>
-      <section className="categories-third">
-        <div className="container categories-third__container">
-          <h1 className="categories-third__title title--white">Франчайзинг</h1>
-          <p className="categories-third__text section__primary-text--white">
-            Ми відібрали та розклали по полицям найкращі варіанти франшиз у
-            зрозумілому для тебе форматі. Тепер знайти бажане можна на одній
-            сторінці не випускаючи каву з рук. А ми в свою чергу будемо постійно
-            доповнювати варіанти новими партнерами
-          </p>
-          <div className="categories-third__buttons">
-            <p className="title--white">Далі буде…</p>
+        </section>
+        <section className="categories-third">
+          <div className="container categories-third__container">
+            <h1 className="categories-third__title title--white">
+              Франчайзинг
+            </h1>
+            <p className="categories-third__text section__primary-text--white">
+              Ми відібрали та розклали по полицям найкращі варіанти франшиз у
+              зрозумілому для тебе форматі. Тепер знайти бажане можна на одній
+              сторінці не випускаючи каву з рук. А ми в свою чергу будемо
+              постійно доповнювати варіанти новими партнерами
+            </p>
+            <div className="categories-third__buttons">
+              <p className="title--white">Далі буде…</p>
+            </div>
           </div>
-        </div>
-      </section>
-    </Slider>
+        </section>
+      </Slider>
+      <div className="categories__popUp">
+        <p className="section__secondary-text">
+          Зареєстровано бізнесів: {businessesQuantity}
+        </p>
+        <p className="section__secondary-text">
+          Продається на сумму: {businessesAmountPrice} грн
+        </p>
+      </div>
+    </div>
   );
 };
 

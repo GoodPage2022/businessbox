@@ -1,6 +1,12 @@
 .addBusiness {
   padding-bottom: 80px;
+  &__disabled {
+    opacity: 0.5;
+  }
 
+  &__mb {
+    margin-bottom: 0 !important;
+  }
   &__failed {
     display: flex;
     align-items: center;
@@ -150,6 +156,16 @@
     margin-bottom: 10px;
   }
 
+  &__negotiatedPriceField {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  &__negotiatedPriceLabel {
+    margin-bottom: 0;
+    margin-left: 10px;
+    font-weight: normal;
+  }
   &__input {
     &-thumb {
       position: relative;
@@ -386,7 +402,6 @@
     }
 
     &__field {
-      display: block;
       width: 100%;
       font-size: 12px;
       line-height: 1.17;
@@ -401,11 +416,11 @@
       display: block;
       font-family: "Montserrat";
       font-style: normal;
-      font-weight: 600;
+      // font-weight: 600;
       font-size: 16px;
       line-height: 20px;
       color: $main-text-color;
-      margin-bottom: 10px;
+      // margin-bottom: 10px;
     }
 
     &__input {

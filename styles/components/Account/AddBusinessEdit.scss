@@ -1,5 +1,11 @@
 .addBusinessEdit {
   padding-bottom: 80px;
+  &__disabled {
+    opacity: 0.5;
+  }
+  &__mb {
+    margin-bottom: 0 !important;
+  }
 
   &__failed {
     display: flex;

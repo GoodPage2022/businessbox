@@ -24,10 +24,7 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
       userId: projectData._by,
     };
 
-    const response = await axios.post(
-      `/api/account/list`,
-      requestBody
-    );
+    const response = await axios.post(`/api/account/list`, requestBody);
 
     if (response.data) {
       // console.log(response.data[0]);
@@ -46,7 +43,13 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
         <div className="profileInfo__image">
           <Image
             className=""
-            src={projectData.contact_seller_name ? "/assets/images/profile-photo.png" : ((businessOwner && businessOwner.avatar?.path) ? businessOwner.avatar?.path : "/assets/images/profile-photo.png")}
+            src={
+              projectData.contact_seller_name
+                ? "/assets/images/profile-photo.png"
+                : businessOwner && businessOwner.avatar?.path
+                ? businessOwner.avatar?.path
+                : "/assets/images/profile-photo.png"
+            }
             layout="fill"
             objectFit="cover"
             alt="card-image"
@@ -54,49 +57,57 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
         </div>
         <div className="profileInfo__data">
           <p className="profileInfo__name section__primary-text">
-            {projectData.contact_seller_name ?? (businessOwner ? businessOwner.name : "Невідомо")}
+            {projectData.contact_seller_name ??
+              (businessOwner ? businessOwner.name : "Невідомо")}
           </p>
           <p className="profileInfo__city section__primary-text">
-            {projectData.contact_seller_name ? "" : (businessOwner ? businessOwner.city : "Невідомо")}
+            {projectData.contact_seller_name
+              ? ""
+              : businessOwner
+              ? businessOwner.city
+              : "Невідомо"}
           </p>
         </div>
       </div>
       <div className="profileInfo__networks">
         {isPhoneShow && (
           <p className="profileInfo__contact section__primary-text">
-            {user == null ? (
+            {/* {user == null ? (
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
-            ) : (projectData.contact_seller_phone ?? (businessOwner ? (
-              businessOwner.phone
             ) : (
-              "Невідомо"
-            )))}
+              projectData.contact_seller_phone ??
+              (businessOwner ? businessOwner.phone : "Невідомо")
+            )} */}
+            {projectData.contact_seller_phone ??
+              (businessOwner ? businessOwner.phone : "Невідомо")}
           </p>
         )}
         {isEmailShow && (
           <p className="profileInfo__contact section__primary-text">
-            {user == null ? (
+            {/* {user == null ? (
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
-            ) : (projectData.contact_seller_email ?? (businessOwner ? (
-              businessOwner.email
             ) : (
-              "Невідомо"
-            )))}
+              projectData.contact_seller_email ??
+              (businessOwner ? businessOwner.email : "Невідомо")
+            )} */}
+            {projectData.contact_seller_email ??
+              (businessOwner ? businessOwner.email : "Невідомо")}
           </p>
         )}
         {isInstagramShow && (
           <p className="profileInfo__contact section__primary-text">
-            {user == null ? (
+            {/* {user == null ? (
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
             ) : (
               projectData.instagram
-            )}
+            )} */}
+            {projectData.instagram}
           </p>
         )}
         <div className="profileInfo__networks--wrapper">

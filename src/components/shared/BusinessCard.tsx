@@ -154,15 +154,17 @@ const BusinessCard = ({
       <div className="business-card__info">
         <h3 className="business-card__title">
           <span>{title}</span>
+          <div>
+            <CheckSVG
+              data-tip={
+                isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
+              }
+              className={`business-card__ckeck-icon ${
+                isVerified ? "active" : ""
+              }`}
+            />
+          </div>
 
-          <CheckSVG
-            data-tip={
-              isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
-            }
-            className={`business-card__ckeck-icon ${
-              isVerified ? "active" : ""
-            }`}
-          />
           <ReactTooltip place="top" type="dark" effect="solid" />
         </h3>
         <p
