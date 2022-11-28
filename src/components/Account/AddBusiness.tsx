@@ -23,6 +23,7 @@ const AddBusiness = () => {
   const [currencyState, setCurrencyState] = useState("Гривня");
   const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isNegotiatedPrice, setIsNegotiatedPrice] = useState<boolean>(false);
 
   const getListAreas = async () => {
     setIsLoading(true);
@@ -107,7 +108,8 @@ const AddBusiness = () => {
     let newBusiness: any = {
       title: name,
       area: business,
-      price,
+      price: isNegotiatedPrice ? 0 : price,
+      negotiatedPrice: isNegotiatedPrice,
       description,
       state: {
         _id: state,
@@ -136,6 +138,7 @@ const AddBusiness = () => {
         },
       ],
     };
+    console.log(newBusiness);
 
     if (files) {
       const images = files.map((f: any) => ({
@@ -233,6 +236,7 @@ const AddBusiness = () => {
             name: "",
             business: "",
             price: "",
+            negotiatedPrice: false,
             description: "",
             state: "",
             year: "",
@@ -368,7 +372,8 @@ const AddBusiness = () => {
                               }}
                               minLength={1}
                               maxLength={255}
-                              required
+                              // value={isNegotiatedPrice ? 0 : }
+                              required={isNegotiatedPrice ? false : true}
                               placeholder="-----"
                             />
                             <span className="addBusiness__icon">
@@ -381,7 +386,6 @@ const AddBusiness = () => {
                           <Field
                             type="text"
                             name="currency"
-                            required
                             setter={setCurrencyState}
                             placeholder="Оберіть"
                             component={CustomSelect}
@@ -392,6 +396,17 @@ const AddBusiness = () => {
                           />
                         </label>
                       </div>
+                      <label className="addBusiness__field addBusiness__negotiatedPriceField">
+                        <input
+                          type="checkbox"
+                          name="negotiatedPrice"
+                          id=""
+                          onChange={() => setIsNegotiatedPrice((prev) => !prev)}
+                        />
+                        <span className="addBusiness__label  addBusiness__negotiatedPriceLabel">
+                          Договірна
+                        </span>
+                      </label>
                     </div>
                   )}
                   {window.innerWidth < 768 && (

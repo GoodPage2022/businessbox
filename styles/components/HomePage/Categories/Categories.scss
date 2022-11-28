@@ -14,6 +14,28 @@
     }
   }
 }
+
+.categories {
+  &__wrapper {
+    position: relative;
+  }
+
+  &__popUp {
+    position: absolute;
+    bottom: 75px;
+    right: 30px;
+    padding: 20px;
+    box-shadow: 5px 9px 15px rgb(242 42 78 / 50%);
+    background: $white-color;
+    width: 350px;
+    border-radius: 25px;
+    & p {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
 .categories-first {
   position: relative;
   padding-top: 280px;
