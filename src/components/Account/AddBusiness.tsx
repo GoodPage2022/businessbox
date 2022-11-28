@@ -350,12 +350,16 @@ const AddBusiness = () => {
                           placeholder="-----"
                         />
                       </label>
-                      <div className="addBusiness__price">
-                        <label className="addBusiness__field">
+                      <div
+                        className={`addBusiness__price ${
+                          isNegotiatedPrice ? "addBusiness__disabled" : ""
+                        }`}
+                      >
+                        <label className="addBusiness__field addBusiness__mb">
                           <span className="addBusiness__label">Ціна</span>
                           <span className="addBusiness__input-thumb">
                             <Field
-                              className="addBusiness__input section__primary-text"
+                              className="addBusiness__input section__primary-text "
                               type="text"
                               name="price"
                               id="price"
@@ -371,8 +375,8 @@ const AddBusiness = () => {
                                 );
                               }}
                               minLength={1}
+                              readOnly={isNegotiatedPrice}
                               maxLength={255}
-                              // value={isNegotiatedPrice ? 0 : }
                               required={isNegotiatedPrice ? false : true}
                               placeholder="-----"
                             />
@@ -436,8 +440,12 @@ const AddBusiness = () => {
                           placeholder="-----"
                         />
                       </label>
-                      <div className="addBusiness__price">
-                        <label className="addBusiness__field">
+                      <div
+                        className={`addBusiness__price ${
+                          isNegotiatedPrice ? "addBusiness__disabled" : ""
+                        }`}
+                      >
+                        <label className="addBusiness__field addBusiness__mb">
                           <span className="addBusiness__label">Ціна</span>
                           <span className="addBusiness__input-thumb">
                             <Field
@@ -447,8 +455,9 @@ const AddBusiness = () => {
                               id="price"
                               pattern="[0-9]+"
                               minLength={1}
+                              readOnly={isNegotiatedPrice}
                               maxLength={255}
-                              required
+                              required={isNegotiatedPrice ? false : true}
                               onChange={(e: any) => {
                                 setFieldValue(
                                   "price",
@@ -482,6 +491,17 @@ const AddBusiness = () => {
                           />
                         </label>
                       </div>
+                      <label className="addBusiness__field addBusiness__negotiatedPriceField">
+                        <input
+                          type="checkbox"
+                          name="negotiatedPrice"
+                          id=""
+                          onChange={() => setIsNegotiatedPrice((prev) => !prev)}
+                        />
+                        <span className="addBusiness__label  addBusiness__negotiatedPriceLabel">
+                          Договірна
+                        </span>
+                      </label>
                       <div className="addBusiness__field">
                         <span className="addBusiness__label">Опис</span>
                         <Field

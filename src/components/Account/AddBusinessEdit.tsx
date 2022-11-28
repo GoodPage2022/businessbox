@@ -29,6 +29,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [isSaveClicked, setIsSaveClicked] = useState<boolean>(false);
   const [isContinueClicked, setIsContinueClicked] = useState<boolean>(false);
   const [currencyState, setCurrencyState] = useState(businessInfo?.currency);
+  const [isNegotiatedPrice, setIsNegotiatedPrice] = useState<boolean>(false);
 
   const getListAreas = async () => {
     setIsLoading(true);
@@ -155,7 +156,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       _id: projectId,
       title: name,
       area: business,
-      price,
+      price: isNegotiatedPrice ? 0 : price,
+      negotiatedPrice: isNegotiatedPrice,
       description,
       state: {
         _id: state,
@@ -384,8 +386,12 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         placeholder="-----"
                       />
                     </label>{" "}
-                    <div className="addBusinessEdit__price">
-                      <label className="addBusinessEdit__field">
+                    <div
+                      className={`addBusinessEdit__price ${
+                        isNegotiatedPrice ? "addBusiness__disabled" : ""
+                      }`}
+                    >
+                      <label className="addBusinessEdit__field addBusinessEdit__mb">
                         <span className="addBusinessEdit__label">Ціна</span>
                         <span className="addBusinessEdit__input-thumb">
                           <Field
@@ -403,8 +409,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                               );
                             }}
                             component={CustomInput}
+                            readOnly={isNegotiatedPrice}
                             maxLength={255}
-                            required
+                            required={isNegotiatedPrice ? false : true}
                             placeholder="-----"
                           />
                           <span className="addBusinessEdit__icon">
@@ -428,6 +435,17 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         />
                       </label>
                     </div>
+                    <label className="addBusiness__field addBusiness__negotiatedPriceField">
+                      <input
+                        type="checkbox"
+                        name="negotiatedPrice"
+                        id=""
+                        onChange={() => setIsNegotiatedPrice((prev) => !prev)}
+                      />
+                      <span className="addBusiness__label  addBusiness__negotiatedPriceLabel">
+                        Договірна
+                      </span>
+                    </label>
                   </div>
                   <div className="addBusinessEdit__info-wrapper--right-mob">
                     <label className="addBusinessEdit__field">
@@ -454,8 +472,12 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         placeholder="-----"
                       />
                     </label>
-                    <div className="addBusinessEdit__price">
-                      <label className="addBusinessEdit__field">
+                    <div
+                      className={`addBusinessEdit__price ${
+                        isNegotiatedPrice ? "addBusiness__disabled" : ""
+                      }`}
+                    >
+                      <label className="addBusinessEdit__field addBusinessEdit__mb">
                         <span className="addBusinessEdit__label">Ціна</span>
                         <span className="addBusinessEdit__input-thumb">
                           <Field
@@ -473,9 +495,10 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                                 ),
                               );
                             }}
-                            maxLength={255}
                             component={CustomInput}
-                            required
+                            readOnly={isNegotiatedPrice}
+                            maxLength={255}
+                            required={isNegotiatedPrice ? false : true}
                             placeholder="-----"
                           />
                           <span className="addBusinessEdit__icon">
@@ -498,6 +521,17 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         />
                       </label>
                     </div>
+                    <label className="addBusiness__field addBusiness__negotiatedPriceField">
+                      <input
+                        type="checkbox"
+                        name="negotiatedPrice"
+                        id=""
+                        onChange={() => setIsNegotiatedPrice((prev) => !prev)}
+                      />
+                      <span className="addBusiness__label  addBusiness__negotiatedPriceLabel">
+                        Договірна
+                      </span>
+                    </label>
                     <div className="addBusinessEdit__field">
                       <span className="addBusinessEdit__label">Опис</span>
                       <Field
