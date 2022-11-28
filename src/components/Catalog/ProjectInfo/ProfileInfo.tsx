@@ -86,25 +86,28 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
         )}
         {isEmailShow && (
           <p className="profileInfo__contact section__primary-text">
-            {user == null ? (
+            {/* {user == null ? (
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
             ) : (
               projectData.contact_seller_email ??
               (businessOwner ? businessOwner.email : "Невідомо")
-            )}
+            )} */}
+            {projectData.contact_seller_email ??
+              (businessOwner ? businessOwner.email : "Невідомо")}
           </p>
         )}
         {isInstagramShow && (
           <p className="profileInfo__contact section__primary-text">
-            {user == null ? (
+            {/* {user == null ? (
               <span className="profileInfo__contact--notAuth">
                 Тільки для авторизованих користувачів
               </span>
             ) : (
               projectData.instagram
-            )}
+            )} */}
+            {projectData.instagram}
           </p>
         )}
         <div className="profileInfo__networks--wrapper">
