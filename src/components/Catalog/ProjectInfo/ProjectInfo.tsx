@@ -19,6 +19,9 @@ import { useDispatch, useSelector } from "react-redux";
 import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
 import UseUsd from "../../../utils/useUsd";
 import UseUah from "../../../utils/useUah";
+import ModalAnalysis from "../../Modals/Modal-analysis/Modal-analysis";
+import { MainContext } from "../../../contexts/mainContext";
+import React from "react";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -31,6 +34,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
   const [rate, setRate] = useState(0);
+  const [state, dispatch] = React.useContext(MainContext);
 
   function SampleNextArrow(props: any) {
     const { className, onClick } = props;
@@ -230,6 +234,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     if (rateUSDStus == 200) {
       setRate(rateUSD);
     }
+  };
+
+  const closeAnalysisModal = () => {
+    dispatch({ type: "toggle_analysisModal" });
   };
 
   useEffect(() => {
@@ -433,6 +441,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
+            <button
+              onClick={() => {
+                dispatch({ type: "toggle_analysisModal" });
+              }}
+              className="projectInfo__button-analysis"
+            >
+              Замовити аналіз бізнесу
+            </button>
           </div>
           <div className="projectInfo__price">
             <p className="section__primary-text">Ціна:</p>
@@ -469,6 +485,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
+            <button
+              onClick={() => {
+                dispatch({ type: "toggle_analysisModal" });
+              }}
+              className="projectInfo__button-analysis"
+            >
+              Замовити аналіз бізнесу
+            </button>
           </div>
         </div>
 
@@ -541,6 +565,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           <CardsSlider cards={cards} />
         </ul>
       </div>
+      <ModalAnalysis onClose={closeAnalysisModal} />
     </section>
   );
 };
