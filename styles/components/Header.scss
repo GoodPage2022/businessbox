@@ -28,7 +28,7 @@
     }
   }
   &__logo {
-    margin-right: 47px;
+    margin-right: 25px;
     &__text {
       font-family: Montserrat;
       font-size: 20px;
@@ -49,7 +49,7 @@
     display: flex;
     &__item {
       &:not(:last-child) {
-        margin-right: 47px;
+        margin-right: 20px;
       }
     }
   }
@@ -102,7 +102,7 @@
     font-size: 14px;
     line-height: 17px;
     color: $white-color;
-    width: 247px;
+    width: 210px;
     border: 1px solid $white-color;
     background: transparent /* $white-color */;
     border-radius: 15px;
@@ -303,7 +303,7 @@
       font-weight: 400;
       font-size: 14px;
       line-height: 17px;
-      width: 247px;
+
       cursor: text;
 
       &::placeholder {
@@ -323,7 +323,7 @@
       position: relative;
       width: 0;
       &.active {
-        width: 247px;
+        width: 210px;
         opacity: 1;
         visibility: visible;
       }
