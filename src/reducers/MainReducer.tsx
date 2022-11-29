@@ -50,6 +50,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isShowLoader: !state.isShowLoader,
       };
+    case "toggle_analysisModal":
+      return {
+        ...state,
+        isActiveAnalysisModal: !state.isActiveAnalysisModal,
+      };
     default:
       return state;
   }
@@ -66,4 +71,5 @@ export const initialState = {
   isOpenDeleteBusiness: false,
   isOpenModalRegisterFinish: false,
   isShowLoader: false,
+  isActiveAnalysisModal: false,
 };

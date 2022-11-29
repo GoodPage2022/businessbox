@@ -21,6 +21,7 @@ const BusinessCardFavorites = ({
   isVerified,
   alias,
   currency = "Гривня",
+  negotiatedPrice,
 }: {
   image: any;
   title: string;
@@ -31,6 +32,7 @@ const BusinessCardFavorites = ({
   alias: string;
   currency?: string;
   rate?: number;
+  negotiatedPrice?: boolean;
 }) => {
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
@@ -117,27 +119,40 @@ const BusinessCardFavorites = ({
                 {views}
               </p>
             </div>
-            <p className="business-card-favorite__price">
-              {UseUsd(currency, price, rate)}
-            </p>
+            {negotiatedPrice ? (
+              <p className="section__secondary-text">Договірна</p>
+            ) : (
+              <p className="business-card-favorite__price">
+                {UseUsd(currency, price, rate)}
+              </p>
+            )}
           </div>
-          <div className="business-card__footer--bottom">
-            <p className="section__secondary-text">
-              {UseUah(currency, price, rate)}
-            </p>
-            <div className="business-card__rate">
-              <p className="business-card__rate--top section__secondary-text">
-                USD {rate} грн
+          {negotiatedPrice ? (
+            ""
+          ) : (
+            <div className="business-card__footer--bottom">
+              <p className="section__secondary-text">
+                {UseUah(currency, price, rate)}
               </p>
-              <p className="business-card__rate--bottom">
-                за даними privatbank.ua
-              </p>
+              <div className="business-card__rate">
+                <p className="business-card__rate--top section__secondary-text">
+                  USD {rate} грн
+                </p>
+                <p className="business-card__rate--bottom">
+                  за даними privatbank.ua
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="business-card-favorite__footer-mob">
           <div className="business-card-favorite__footer-mob--first">
-            <p className="business-card-favorite__price">{price}$</p>
+            {negotiatedPrice ? (
+              <p className="section__secondary-text">Договірна</p>
+            ) : (
+              <p className="business-card-favorite__price">{price}$</p>
+            )}
+
             <button
               onClick={() => setIsLiked((prev) => !prev)}
               className={`business-card-favorite__heart-icon--mob ${
@@ -147,19 +162,23 @@ const BusinessCardFavorites = ({
               <HeartSVG />
             </button>
           </div>
-          <div className="business-card-favorite__footer-mob--price">
-            <p className="section__secondary-text">
-              {(Number(price) * rate).toFixed(0)} грн
-            </p>
-            <div className="business-card-favorite__rate">
-              <p className="business-card-favorite__rate--top section__secondary-text">
-                USD {rate} грн
+          {negotiatedPrice ? (
+            ""
+          ) : (
+            <div className="business-card-favorite__footer-mob--price">
+              <p className="section__secondary-text">
+                {(Number(price) * rate).toFixed(0)} грн
               </p>
-              <p className="business-card-favorite__rate--bottom">
-                за даними privatbank.ua
-              </p>
+              <div className="business-card-favorite__rate">
+                <p className="business-card-favorite__rate--top section__secondary-text">
+                  USD {rate} грн
+                </p>
+                <p className="business-card-favorite__rate--bottom">
+                  за даними privatbank.ua
+                </p>
+              </div>
             </div>
-          </div>
+          )}
           <div className="business-card-favorite__footer-mob--second">
             <div className="business-card-favorite__views">
               <EyeSVG className="business-card-favorite__eye-icon" />
