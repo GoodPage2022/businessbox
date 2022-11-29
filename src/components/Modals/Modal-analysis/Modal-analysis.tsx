@@ -35,7 +35,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
     }
   };
 
-  const handleSubmit = async (values: any) => {
+  const handleSubmit = async (values: any, { resetForm }: any) => {
     const projectLink = `${process.env.baseUrl}${router.asPath}`;
     setIsLoading(true);
     const { name, phone, email } = values;
@@ -50,12 +50,12 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
     };
 
     try {
-      // const response = await axios.post(`/api/account/signUp`, newUser);
-      // if (response.status == 200) {
-      //   onClose();
-      //   resetForm({});
-      //   setError("");
-      // }
+      const response = await axios.post(`/api/analysis/post`, newRequest);
+      if (response.status == 200) {
+        onClose();
+        resetForm({});
+        setError("");
+      }
     } catch (err: any) {
       console.log(err);
       setError("На жаль, виникла помилка. Спробуйте ще раз");
