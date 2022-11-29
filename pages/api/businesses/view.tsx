@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from "axios";
 import clientPromise from '../../../mongodb/mongodb'
+import { ObjectId } from 'mongodb'
 
 type Data = {
   name: string
@@ -25,7 +26,7 @@ const handler = async(
     const client = await clientPromise
     const db = client.db("bubox")
     const da = await db.collection('collections_Businesses')
-              .updateOne({ _id: data.data._id }, 
+              .updateOne({ _id: new ObjectId(data.data._id) }, 
                         { $set: { view_count: data.data.view_count } })        
     res.status(200).json( da )
   } catch (err: any) {
