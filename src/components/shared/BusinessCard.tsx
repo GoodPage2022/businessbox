@@ -24,6 +24,7 @@ const BusinessCard = ({
   alias,
   isSoldOut,
   currency = "Гривня",
+  negotiatedPrice,
 }: {
   image: any;
   title: string;
@@ -34,6 +35,7 @@ const BusinessCard = ({
   alias: string;
   isSoldOut?: boolean;
   currency?: string;
+  negotiatedPrice?: boolean;
 }) => {
   const dispatchRedux = useDispatch();
   const router = useRouter();
@@ -179,29 +181,35 @@ const BusinessCard = ({
                 {views}
               </p>
             </div>
+
             <p className="business-card__price">
-              {UseUsd(currency, price, rate)}
+              {negotiatedPrice ? "Договірна" : UseUsd(currency, price, rate)}
             </p>
           </div>
-          <div className="business-card__footer--bottom">
-            <p className="section__secondary-text">
-              {UseUah(currency, price, rate)}
-            </p>
-            <div className="business-card__rate">
-              <p className="business-card__rate--top section__secondary-text">
-                USD {rate} грн
+          {negotiatedPrice ? (
+            ""
+          ) : (
+            <div className="business-card__footer--bottom">
+              <p className="section__secondary-text">
+                {UseUah(currency, price, rate)}
               </p>
-              <p className="business-card__rate--bottom">
-                за даними privatbank.ua
-              </p>
+              <div className="business-card__rate">
+                <p className="business-card__rate--top section__secondary-text">
+                  USD {rate} грн
+                </p>
+                <p className="business-card__rate--bottom">
+                  за даними privatbank.ua
+                </p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="business-card__footer-mob">
           <div className="business-card__footer-mob--first">
             <p className="business-card__price">
-              {UseUsd(currency, price, rate)}
+              {negotiatedPrice ? "Договірна" : UseUsd(currency, price, rate)}
             </p>
+
             {!!user && (
               <button
                 onClick={handleFavourites}
@@ -213,20 +221,23 @@ const BusinessCard = ({
               </button>
             )}
           </div>
-
-          <div className="business-card__footer-mob--price">
-            <p className="section__secondary-text">
-              {UseUah(currency, price, rate)}
-            </p>
-            <div className="business-card__rate">
-              <p className="business-card__rate--top section__secondary-text">
-                USD {rate} грн
+          {negotiatedPrice ? (
+            ""
+          ) : (
+            <div className="business-card__footer-mob--price">
+              <p className="section__secondary-text">
+                {UseUah(currency, price, rate)}
               </p>
-              <p className="business-card__rate--bottom">
-                за даними privatbank.ua
-              </p>
+              <div className="business-card__rate">
+                <p className="business-card__rate--top section__secondary-text">
+                  USD {rate} грн
+                </p>
+                <p className="business-card__rate--bottom">
+                  за даними privatbank.ua
+                </p>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="business-card__footer-mob--second">
             <div className="business-card__views">

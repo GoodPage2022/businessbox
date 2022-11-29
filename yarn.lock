@@ -3596,6 +3596,11 @@ ramda@0.21.0:
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"
   integrity sha512-HGd5aczYKQXGILB+abY290V7Xz62eFajpa6AtMdwEmQSakJmgSO7ks4eI3HdR34j+X2Vz4Thp9VAJbrCAMbO2w==
 
+react-accessible-accordion@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-accessible-accordion/-/react-accessible-accordion-5.0.0.tgz#5b61d06aec38906a99f977c10324d9bddec0f64c"
+  integrity sha512-MT2obYpTgLIIfPr9d7hEyvPB5rg8uJcHpgA83JSRlEUHvzH48+8HJPvzSs+nM+XprTugDgLfhozO5qyJpBvYRQ==
+
 react-chartjs-2@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-chartjs-2/-/react-chartjs-2-4.3.1.tgz#9941e7397fb963f28bb557addb401e9ff96c6681"

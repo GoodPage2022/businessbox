@@ -308,6 +308,7 @@ const CatalogView = () => {
                   price,
                   is_verified,
                   currency,
+                  negotiatedPrice,
                 }: any) =>
                   isRowsActive && screenWidth < 768 ? (
                     <BusinessCardFavorites
@@ -328,6 +329,7 @@ const CatalogView = () => {
                       views={view_count ?? 0}
                       isVerified={is_verified}
                       currency={currency}
+                      negotiatedPrice={negotiatedPrice}
                     />
                   ) : (
                     <BusinessCard
@@ -348,6 +350,7 @@ const CatalogView = () => {
                       views={view_count ?? 0}
                       isVerified={is_verified}
                       currency={currency}
+                      negotiatedPrice={negotiatedPrice}
                     />
                   ),
               )}

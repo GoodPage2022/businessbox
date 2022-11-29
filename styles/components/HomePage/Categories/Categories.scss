@@ -509,6 +509,11 @@
 }
 
 @media screen and (max-width: $size-mobile) {
+  .categories {
+    &__popUp {
+      display: none;
+    }
+  }
   .categories-first {
     padding-top: 814px;
     padding-bottom: 10px;
