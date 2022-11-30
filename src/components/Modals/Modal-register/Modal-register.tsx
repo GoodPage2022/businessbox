@@ -86,7 +86,9 @@ function ModalRegister({ onClose }: { onClose: any }) {
       '"': "&quot;",
       "'": "&#039;",
     };
-
+    if (text == undefined) {
+      return;
+    }
     return text.replace(/[&<>"']/g, function (m: any) {
       return map[m];
     });

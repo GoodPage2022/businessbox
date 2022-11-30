@@ -4,11 +4,13 @@ const Checkbox = ({
   changeFilter,
   categories,
   datakey,
+  name,
 }: {
   datakey: number;
   text: string;
   changeFilter: any;
   categories: string[];
+  name?: string;
 }) => {
   const [isChosen, setIsChosen] = useState<boolean>(false);
 
@@ -20,6 +22,25 @@ const Checkbox = ({
     <div
       className="checkbox__wrapper"
       onClick={(e: any) => {
+        if (e.target.name == "sorting") {
+          if (!categories.includes(text)) {
+            changeFilter({
+              target: {
+                name: "sorting",
+                value: text,
+              },
+            });
+          } else {
+            changeFilter({
+              target: {
+                name: "sorting",
+                value: "",
+              },
+            });
+          }
+          setIsChosen((prev) => !prev);
+          return;
+        }
         if (e.target.name != "category") return true;
 
         if (!categories.includes(text)) {
@@ -43,7 +64,7 @@ const Checkbox = ({
       }}
     >
       <input
-        name="category"
+        name={name ?? "category"}
         value={text}
         id={`cat_${datakey}`}
         type="checkbox"

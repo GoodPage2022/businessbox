@@ -10,7 +10,6 @@ import { signIn as signInReducer } from "../../../../store/actions/auth";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
-import OurCategoriesShort from "../../../constants/categories-short";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
@@ -327,11 +326,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       '"': "&quot;",
       "'": "&#039;",
     };
-
+    if (text == undefined) {
+      return;
+    }
     return text.replace(/[&<>"']/g, function (m: any) {
       return map[m];
     });
   }
+  console.log(projectInfo.area);
 
   return (
     <section className="projectInfo">
@@ -410,11 +412,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           )}
         </div>
         <div className="projectInfo__categories-slider">
-          <ul>
+          <ul className="projectInfo__buttons">
             {/* <Slider {...categoriesSliderSettings}> */}
-            {[projectInfo.area].map((content, id) => (
-              <li key={id} className="categories__buttons__item">
-                <MainButtonBlack label={content} />
+            {projectInfo.area.map((business: string, idx: string) => (
+              <li key={idx} className="projectInfo__buttons__item">
+                <MainButtonBlack label={business} />
               </li>
             ))}
             {/* </Slider> */}

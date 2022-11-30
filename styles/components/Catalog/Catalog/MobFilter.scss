@@ -97,6 +97,12 @@
       // &:not(:last-child) {
       //   margin-right: 30px;
       // }
+      &--currency {
+        width: 332px;
+        & .custom-select__control {
+          border: 1px solid $grey-color;
+        }
+      }
     }
     &__label {
       display: block;

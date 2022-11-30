@@ -41,7 +41,7 @@
   &__input {
     display: none !important;
     &:checked + .checkbox__label::before {
-      background-color: $main-red-color;
+      background-color: #bc20d6;
     }
   }
 }

@@ -115,6 +115,13 @@ const RightMob = () => {
             />
           )}
         </li>
+        {user == null ? (
+          <li className="header__right__btn" onClick={openModal}>
+            <MainButton label={`Вхід`} />
+          </li>
+        ) : (
+          ""
+        )}
         <li
           className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
         >

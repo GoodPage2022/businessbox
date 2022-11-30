@@ -10,13 +10,13 @@ const Navbar = () => {
     <nav className="header__nav">
       <Logo />
       <ul className="header__nav__menu">
-        <li className="header__nav__menu__item ">
+        <li className="header__nav__menu__item">
           <Link href="/catalog">
             <a className="section__secondary-text--white">Каталог бізнесів</a>
           </Link>
         </li>
         {user && (
-          <li className="header__nav__menu__item   section__secondary-text--white">
+          <li className="header__nav__menu__item section__secondary-text--white">
             <Link href="/useful-tools">
               <a className="section__secondary-text--white">
                 Корисні інструменти
