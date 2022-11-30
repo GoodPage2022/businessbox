@@ -78,12 +78,21 @@
   }
   &__indicators {
     position: absolute !important;
-    right: 10px;
+    right: 0px;
     top: 21%;
   }
 
   &__indicator {
     color: $main-text-color !important;
+  }
+
+  &__clear-indicator {
+    display: none !important;
+  }
+
+  &__multi-value {
+    border-radius: 10px !important;
+    justify-content: space-between !important;
   }
 }
 
@@ -161,7 +170,7 @@
     }
     &__indicators {
       position: absolute !important;
-      right: 10px;
+      right: 0;
       top: 15%;
     }
 
@@ -240,7 +249,7 @@
     }
     &__indicators {
       position: absolute !important;
-      right: 10px;
+      right: 0;
       top: 5%;
     }
 

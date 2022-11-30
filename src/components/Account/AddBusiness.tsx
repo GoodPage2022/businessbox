@@ -104,6 +104,7 @@ const AddBusiness = () => {
     setIsLoading(true);
     const { name, price, description, business, state, year, city, currency } =
       values;
+    console.log(business);
 
     let newBusiness: any = {
       title: name,
@@ -200,7 +201,9 @@ const AddBusiness = () => {
       '"': "&quot;",
       "'": "&#039;",
     };
-
+    if (text == undefined) {
+      return;
+    }
     return text.replace(/[&<>"']/g, function (m: any) {
       return map[m];
     });
@@ -234,7 +237,7 @@ const AddBusiness = () => {
         <Formik
           initialValues={{
             name: "",
-            business: "",
+            business: [],
             price: "",
             negotiatedPrice: false,
             description: "",
@@ -246,7 +249,7 @@ const AddBusiness = () => {
           }}
           validate={(values: any) => {
             escapeHtml(values.name);
-            escapeHtml(values.business);
+            // escapeHtml(values.business);
             escapeHtml(values.price);
             escapeHtml(values.description);
             escapeHtml(values.state);
@@ -279,9 +282,11 @@ const AddBusiness = () => {
                       <Field
                         type="text"
                         name="business"
+                        required
                         placeholder="Торгівля"
                         component={CustomSelect}
                         options={OurCategories}
+                        isMulti={true}
                       />
                     </label>
                     <label className="addBusiness__field">

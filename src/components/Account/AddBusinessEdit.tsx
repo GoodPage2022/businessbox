@@ -235,7 +235,9 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
       '"': "&quot;",
       "'": "&#039;",
     };
-
+    if (text == undefined) {
+      return;
+    }
     return text.replace(/[&<>"']/g, function (m: any) {
       return map[m];
     });
@@ -270,7 +272,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
           enableReinitialize={true}
           initialValues={{
             name: businessInfo != null ? businessInfo.title : "",
-            business: businessInfo != null ? businessInfo.area : "",
+            business: businessInfo != null ? businessInfo.area : [],
             price: businessInfo != null ? businessInfo.price : "",
             description: businessInfo != null ? businessInfo.description : "",
             state: businessInfo != null ? businessInfo.state._id : "",
@@ -282,7 +284,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
           }}
           validate={(values: any) => {
             escapeHtml(values.name ?? "");
-            escapeHtml(values.business ?? "");
+            // escapeHtml(values.business ?? "");
             escapeHtml(values.price ?? "");
             escapeHtml(values.description ?? "");
             escapeHtml(values.state ?? "");
@@ -321,6 +323,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                         placeholder="Торгівля"
                         component={CustomSelect}
                         options={OurCategories}
+                        isMulti={true}
                       />
                     </label>
                     <label className="addBusinessEdit__field">
