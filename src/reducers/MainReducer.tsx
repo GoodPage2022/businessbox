@@ -55,6 +55,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveAnalysisModal: !state.isActiveAnalysisModal,
       };
+    case "toggle_currency":
+      return {
+        ...state,
+        isUah: !state.isUah,
+      };
     default:
       return state;
   }
@@ -72,4 +77,5 @@ export const initialState = {
   isOpenModalRegisterFinish: false,
   isShowLoader: false,
   isActiveAnalysisModal: false,
+  isUah: false,
 };

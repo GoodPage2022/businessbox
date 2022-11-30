@@ -106,6 +106,15 @@
     margin-bottom: 40px;
   }
 
+  &__buttons {
+    display: flex;
+    &__item {
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+  }
+
   &__button-wrapper {
     &--desctop {
       position: relative;
@@ -133,10 +142,10 @@
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
-    box-shadow: 0px 2px 20px rgba(242, 42, 78, 0.5);
+    // box-shadow: 0px 2px 20px rgba(242, 42, 78, 0.5);
     border-radius: 18px;
     border: none;
-    background: $main-red-color;
+    background: #bc20d6;
     cursor: pointer;
     font-family: "Montserrat";
     font-style: normal;
@@ -428,7 +437,6 @@
       padding: 7px 14px;
       border-radius: 15px;
       border: none;
-      background: $main-red-color;
       cursor: pointer;
       font-family: "Montserrat";
       font-style: normal;

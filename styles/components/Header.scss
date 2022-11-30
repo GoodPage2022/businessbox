@@ -274,8 +274,6 @@
     }
 
     &__right {
-      &.active {
-      }
       &__btn {
         justify-content: flex-end;
         &:not(:last-child) {

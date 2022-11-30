@@ -176,6 +176,21 @@ const MobFilter = ({
                   />
                 </div>
               </label>
+              <label className="mobFilter__field mobFilter__field--currency">
+                <span className="mobFilter__label">Валюта</span>
+                <Field
+                  type="text"
+                  name="currency"
+                  setter={() => dispatch({ type: "toggle_currency" })}
+                  placeholder="Оберіть"
+                  defaultValue={[{ value: "Долар", label: "Долар" }]}
+                  component={CustomSelect}
+                  options={[
+                    { value: "Гривня", label: "Гривня" },
+                    { value: "Долар", label: "Долар" },
+                  ]}
+                />
+              </label>
               <div className="mobFilter__field">
                 <span className="mobFilter__label">Категорія</span>
                 <ul className="mobFilter__categories">

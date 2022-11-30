@@ -245,6 +245,7 @@ const Popular = () => {
                       required
                       placeholder="-----"
                       changeFilter={changeFilter}
+                      isMulti={true}
                     ></Field>
                   </label>
                 </Form>
@@ -325,13 +326,11 @@ const Popular = () => {
                       className="popular__select section__primary-text"
                       type="text"
                       name="category"
-                      options={[
-                        { value: "yes", label: "Так" },
-                        { value: "no", label: "Ні" },
-                      ]}
+                      options={OurCategories}
                       required
                       placeholder="-----"
                       changeFilter={changeFilter}
+                      isMulti={true}
                     ></Field>
                   </label>
                 </Form>

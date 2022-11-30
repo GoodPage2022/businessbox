@@ -7,6 +7,8 @@ type CustomSelectProps = {
   side?: string;
   changeFilter?: (e: any) => void;
   setter?: (e: any) => void;
+  isMulti?: boolean;
+  defaultValue?: any;
 };
 
 const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
@@ -16,6 +18,8 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
   placeholder,
   setter,
   changeFilter,
+  isMulti,
+  defaultValue,
 }): JSX.Element => {
   return (
     <Select
@@ -24,7 +28,9 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       options={options}
       classNamePrefix="custom-select"
       // menuIsOpen
+      isMulti={isMulti}
       placeholder={placeholder}
+      defaultValue={defaultValue}
       onChange={(e) => {
         if (!!changeFilter)
           changeFilter({
@@ -36,8 +42,28 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
                   : e.label,
             },
           });
-        if (!!setter) setter(e.value);
-        form.setFieldValue(field.name, e.value);
+        if (isMulti) {
+          form.setFieldValue(
+            field.name,
+            e.map((i: any) => i.value),
+          );
+          if (!!changeFilter) {
+            changeFilter({
+              target: {
+                name: field.name,
+                value:
+                  field.name == "state" || field.name == "city"
+                    ? e.value
+                    : e.map((i: any) => i.value),
+              },
+            });
+          }
+
+          if (!!setter) setter(e.map((i: any) => i.value));
+        } else {
+          if (!!setter) setter(e.value);
+          form.setFieldValue(field.name, e.value);
+        }
       }}
       value={
         options

@@ -18,6 +18,7 @@ import BusinessCardFavorites from "../../shared/BusinessCardFavorite";
 import { signOut as signOutReducer } from "../../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
 import { Oval } from "react-loader-spinner";
+import Checkbox from "../../shared/Checkbox";
 
 const CancelToken = axios.CancelToken;
 let cancel: any;
@@ -31,14 +32,28 @@ const CatalogView = () => {
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [screenWidth, setScreenWidth] = useState<any>(window.screen.width);
+  const [rate, setRate] = useState<number>(0);
   const router = useRouter();
   const { data: session } = useSession();
   const dispatchRedux = useDispatch();
-
   const [state, dispatch] = React.useContext(MainContext);
   const { filters } = router.query;
 
   const cardsPerPage = screenWidth < 768 ? 8 : 9;
+
+  const getCurrencyRate = async () => {
+    const { data: rateUSD, status: rateUSDStus } = await axios.get(
+      `/api/currency/get`,
+    );
+
+    if (rateUSDStus == 200) {
+      setRate(rateUSD);
+    }
+  };
+
+  useEffect(() => {
+    getCurrencyRate();
+  }, []);
 
   const buildFiltersObj = () => {
     let filtersObjB: any = {};
@@ -62,7 +77,12 @@ const CatalogView = () => {
     if (cancel !== undefined) {
       cancel();
     }
-
+    let requestBody: any = {
+      user,
+      sort: {
+        _created: -1,
+      },
+    };
     Object.keys(filtersObj).map((f: any) => {
       switch (f) {
         case "page":
@@ -71,11 +91,33 @@ const CatalogView = () => {
           if (parseFloat(filtersObj[f]) > 0)
             filterSetOfExp.push({
               $expr: {
-                $gte: [
+                $or: [
                   {
-                    $toDouble: "$price",
+                    $and: [
+                      { currency: "Долар" },
+                      {
+                        $gte: [
+                          {
+                            $multiply: [rate, { $toDouble: "$price" }],
+                          },
+                          parseFloat(filtersObj[f]) * (!state.isUah ? rate : 1),
+                        ],
+                      },
+                    ],
                   },
-                  parseFloat(filtersObj[f]),
+                  {
+                    $and: [
+                      { currency: "Гривня" },
+                      {
+                        $gte: [
+                          {
+                            $toDouble: "$price",
+                          },
+                          parseFloat(filtersObj[f]) * (!state.isUah ? rate : 1),
+                        ],
+                      },
+                    ],
+                  },
                 ],
               },
             });
@@ -84,11 +126,33 @@ const CatalogView = () => {
           if (parseFloat(filtersObj[f]) > 0)
             filterSetOfExp.push({
               $expr: {
-                $lte: [
+                $or: [
                   {
-                    $toDouble: "$price",
+                    $and: [
+                      { currency: "Долар" },
+                      {
+                        $lte: [
+                          {
+                            $multiply: [rate, { $toDouble: "$price" }],
+                          },
+                          parseFloat(filtersObj[f]) * (!state.isUah ? rate : 1),
+                        ],
+                      },
+                    ],
                   },
-                  parseFloat(filtersObj[f]),
+                  {
+                    $and: [
+                      { currency: "Гривня" },
+                      {
+                        $lte: [
+                          {
+                            $toDouble: "$price",
+                          },
+                          parseFloat(filtersObj[f]) * (!state.isUah ? rate : 1),
+                        ],
+                      },
+                    ],
+                  },
                 ],
               },
             });
@@ -101,6 +165,10 @@ const CatalogView = () => {
             };
             filterSetOfExp.push(param);
           }
+          break;
+        case "sorting":
+          requestBody.sort["view_count"] = -1;
+          delete requestBody.sort["_created"];
           break;
         case "state":
           filterSetOfExp.push({
@@ -124,12 +192,10 @@ const CatalogView = () => {
       sold_out: false,
     });
 
-    let requestBody: any = {
-      user,
-      sort: {
-        _created: -1,
-      },
-    };
+    if (!filtersObj.sorting) {
+      requestBody.sort["_created"] = -1;
+      delete requestBody.sort["view_count"];
+    }
 
     if (!resetLimit) {
       requestBody["skip"] =
@@ -271,8 +337,19 @@ const CatalogView = () => {
             filtersObj={filtersObj}
           />
         </div>
+        <div className="catalogView__title-wrapper">
+          <h2 className="title catalogView__title">Каталог бізнесів</h2>
+          <p>
+            <Checkbox
+              text="Відсортувати за популярністю"
+              datakey={999}
+              changeFilter={changeFilter}
+              categories={filtersObj.sorting ?? []}
+              name={"sorting"}
+            />
+          </p>
+        </div>
 
-        <h2 className="title catalogView__title">Каталог бізнесів</h2>
         <div className="catalogView__wrapper">
           <Sidebar changeFilter={changeFilter} filtersObj={filtersObj} />
           {isLoading ? (

@@ -50,13 +50,13 @@ const BurgerMenu = () => {
         </li>
       </ul>
       <ul className="burgerMenu__buttons">
-        {user == null ? (
+        {/* {user == null ? (
           <li className="burgerMenu__button" onClick={openModal}>
             <MainButton label={`Вхід`} />
           </li>
         ) : (
           ""
-        )}
+        )} */}
 
         <li
           className="burgerMenu__button"
