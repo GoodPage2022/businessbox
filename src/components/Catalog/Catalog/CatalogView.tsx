@@ -18,6 +18,7 @@ import BusinessCardFavorites from "../../shared/BusinessCardFavorite";
 import { signOut as signOutReducer } from "../../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
 import { Oval } from "react-loader-spinner";
+import Checkbox from "../../shared/Checkbox";
 
 const CancelToken = axios.CancelToken;
 let cancel: any;
@@ -62,7 +63,12 @@ const CatalogView = () => {
     if (cancel !== undefined) {
       cancel();
     }
-
+    let requestBody: any = {
+      user,
+      sort: {
+        _created: -1,
+      },
+    };
     Object.keys(filtersObj).map((f: any) => {
       switch (f) {
         case "page":
@@ -102,6 +108,10 @@ const CatalogView = () => {
             filterSetOfExp.push(param);
           }
           break;
+        case "sorting":
+          requestBody.sort["view_count"] = -1;
+          delete requestBody.sort["_created"];
+          break;
         case "state":
           filterSetOfExp.push({
             "state._id": filtersObj[f],
@@ -124,12 +134,10 @@ const CatalogView = () => {
       sold_out: false,
     });
 
-    let requestBody: any = {
-      user,
-      sort: {
-        _created: -1,
-      },
-    };
+    if (!filtersObj.sorting) {
+      requestBody.sort["_created"] = -1;
+      delete requestBody.sort["view_count"];
+    }
 
     if (!resetLimit) {
       requestBody["skip"] =
@@ -271,8 +279,19 @@ const CatalogView = () => {
             filtersObj={filtersObj}
           />
         </div>
+        <div className="catalogView__title-wrapper">
+          <h2 className="title catalogView__title">Каталог бізнесів</h2>
+          <p>
+            <Checkbox
+              text="Відсортувати за популярністю"
+              datakey={999}
+              changeFilter={changeFilter}
+              categories={filtersObj.sorting ?? []}
+              name={"sorting"}
+            />
+          </p>
+        </div>
 
-        <h2 className="title catalogView__title">Каталог бізнесів</h2>
         <div className="catalogView__wrapper">
           <Sidebar changeFilter={changeFilter} filtersObj={filtersObj} />
           {isLoading ? (
