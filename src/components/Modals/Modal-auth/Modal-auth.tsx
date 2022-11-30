@@ -14,6 +14,9 @@ import { useSession, signIn as signInGoogle } from "next-auth/react";
 import CustomInput from "../../shared/CustomInput";
 import { Oval } from "react-loader-spinner";
 
+const CancelToken = axios.CancelToken;
+let cancel: any;
+
 function ModalAuth({ onClose }: { onClose: any }) {
   const { data: session } = useSession();
   const user = useSelector((state: any) => state.auth.user);
@@ -24,9 +27,18 @@ function ModalAuth({ onClose }: { onClose: any }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const signInGoogleRequest = async (session: any) => {
+    if (cancel !== undefined) {
+      cancel();
+    }
+
     try {
       const signInResponse = await axios.post(`/api/account/signIn`, {
         session,
+      },
+      {
+        cancelToken: new CancelToken((c) => {
+          cancel = c;
+        })
       });
       if (signInResponse.status == 200) {
         dispatchRedux(signInReducer(signInResponse.data));
@@ -39,6 +51,8 @@ function ModalAuth({ onClose }: { onClose: any }) {
         }
       }
     } catch (err: any) {
+      console.log(err);
+      
       setAuthError("Google auth error");
     }
   };
@@ -249,7 +263,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
               >
                 <GoogleSVG />
                 <span className="modal-auth__google--text section__secondary-text">
-                  Увійти за допомогою Google
+                  Google Authorization
                 </span>
               </button>
               <button
