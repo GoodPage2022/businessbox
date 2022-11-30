@@ -34,6 +34,8 @@ const Search = () => {
     initialValues,
     onSubmit: (values) => {
       console.log(values);
+      dispatch({ type: "toggle_headerSearch" });
+      router.push('/search/' + values.search);
     },
   });
 
@@ -45,6 +47,12 @@ const Search = () => {
     if (cancel !== undefined) {
       cancel();
     }
+
+    if (e.keyCode == 13) {
+      formik.handleSubmit()
+      return true
+    }
+    
 
     setSearchValue(e.target.value);
 

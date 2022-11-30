@@ -40,7 +40,6 @@ const PaginationItem = ({
         Object.keys(filtersObj).map((f: any) => {
           urlPage += "/" + f + "/" + filtersObj[f];
         });
-        console.log(filtersObj);
 
         router.push(urlPage);
       }}
