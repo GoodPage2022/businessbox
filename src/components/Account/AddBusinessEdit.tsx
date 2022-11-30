@@ -422,7 +422,11 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                           </span>
                         </span>
                       </label>
-                      <label className="addBusinessEdit__field">
+                      <label
+                        className={`addBusiness__field ${
+                          isNegotiatedPrice ? "pointer-none" : ""
+                        } `}
+                      >
                         <span className="addBusinessEdit__label">Валюта</span>
                         <Field
                           type="text"
@@ -509,7 +513,11 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                           </span>
                         </span>
                       </label>
-                      <label className="addBusinessEdit__field">
+                      <label
+                        className={`addBusiness__field ${
+                          isNegotiatedPrice ? "pointer-none" : ""
+                        } `}
+                      >
                         <span className="addBusinessEdit__label">Валюта</span>
                         <Field
                           type="text"
