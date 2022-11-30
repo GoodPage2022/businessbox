@@ -5,6 +5,8 @@ import CustomSelect from "../../shared/CustomSelect";
 import OurCategories from "../../../constants/categories";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { MainContext } from "../../../contexts/mainContext";
+import React from "react";
 
 const Sidebar = ({
   changeFilter,
@@ -21,6 +23,7 @@ const Sidebar = ({
   const [listAreas, setListAreas] = useState<any>();
   const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
+  const [state, dispatch] = React.useContext(MainContext);
 
   const getListAreas = async () => {
     try {
@@ -141,6 +144,21 @@ const Sidebar = ({
                   }}
                 />
               </div>
+            </label>
+            <label className="sidebar__field">
+              <span className="sidebar__label">Валюта</span>
+              <Field
+                type="text"
+                name="currency"
+                setter={() => dispatch({ type: "toggle_currency" })}
+                placeholder="Оберіть"
+                defaultValue={[{ value: "Долар", label: "Долар" }]}
+                component={CustomSelect}
+                options={[
+                  { value: "Гривня", label: "Гривня" },
+                  { value: "Долар", label: "Долар" },
+                ]}
+              />
             </label>
             <div className="sidebar__field">
               <span className="sidebar__label">Категорія</span>

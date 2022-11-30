@@ -8,6 +8,7 @@ type CustomSelectProps = {
   changeFilter?: (e: any) => void;
   setter?: (e: any) => void;
   isMulti?: boolean;
+  defaultValue?: any;
 };
 
 const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
@@ -18,6 +19,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
   setter,
   changeFilter,
   isMulti,
+  defaultValue,
 }): JSX.Element => {
   return (
     <Select
@@ -28,6 +30,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       // menuIsOpen
       isMulti={isMulti}
       placeholder={placeholder}
+      defaultValue={defaultValue}
       onChange={(e) => {
         if (!!changeFilter)
           changeFilter({
