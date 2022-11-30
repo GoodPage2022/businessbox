@@ -45,6 +45,8 @@ const handler = async(
     const response = await axios.post(queryUrl, body, options)
     return res.status(200).send( response.data )
   } catch (error: any) {
+    console.log(error);
+    
     return res.status((error.response ? (error.response.status ?? 500) : 500)).send(error)
   }
 }

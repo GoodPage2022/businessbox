@@ -7,13 +7,14 @@ const Pagination = ({
   pageNumber,
   countCards,
   cardsPerPage,
+  search
 }: {
   pageNumber: number;
   countCards: number;
   cardsPerPage: number;
+  search?: string
 }) => {
   const countPages = Math.ceil(countCards / cardsPerPage);
-  console.log(countPages);
 
   return (
     <div className="pagination">
@@ -26,6 +27,7 @@ const Pagination = ({
         {Array.from(Array(countPages).keys()).map((item) => (
           <PaginationItem
             key={item + 1}
+            search={search}
             item={item + 1}
             pageNumber={pageNumber}
           />

@@ -341,3 +341,18 @@
     }
   }
 }
+
+.searchView {
+  .showAlways {
+    display: block !important;
+  }
+
+  .catalogView__cards {
+    border: none;
+    padding: 0px;
+  }
+
+  .business-card {
+    width: auto;
+  }
+}

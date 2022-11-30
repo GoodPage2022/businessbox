@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 const PaginationItem = ({
   item,
   pageNumber,
+  search
 }: {
   item: number;
   pageNumber: number;
+  search?: string
 }) => {
   const isCurrentPage = pageNumber == item;
   const router = useRouter();
@@ -33,7 +35,7 @@ const PaginationItem = ({
   return (
     <li
       onClick={() => {
-        let urlPage = "/catalog";
+        let urlPage = search ? "/search/" + search : "/catalog";
 
         Object.keys(filtersObj).map((f: any) => {
           urlPage += "/" + f + "/" + filtersObj[f];
