@@ -44,6 +44,18 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
             field.name,
             e.map((i: any) => i.value),
           );
+          if (!!changeFilter) {
+            changeFilter({
+              target: {
+                name: field.name,
+                value:
+                  field.name == "state" || field.name == "city"
+                    ? e.value
+                    : e.map((i: any) => i.value),
+              },
+            });
+          }
+
           if (!!setter) setter(e.map((i: any) => i.value));
         } else {
           if (!!setter) setter(e.value);
