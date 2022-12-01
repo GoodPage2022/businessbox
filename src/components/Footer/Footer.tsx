@@ -105,7 +105,14 @@ const Footer: React.FC = () => {
             <a className="footer__logo__text">Business Box</a>
           </Link>
           <Networks />
-          <p className="section__secondary-text--white">Create by Good Page</p>
+          <p className="section__secondary-text--white">
+            Created by{" "}
+            <Link href="https://goodpage.studio">
+              <a target="_blank" className="section__secondary-text--white">
+                Good Page
+              </a>
+            </Link>
+          </p>
         </div>
         <div className="footer__categories">
           <FormikProvider value={formik}>
@@ -191,7 +198,14 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="footer__contacts">
-          <p className="section__secondary-text--white">Create by Good Page</p>
+          <p className="section__secondary-text--white">
+            Created by{" "}
+            <Link href="https://goodpage.studio">
+              <a target="_blank" className="section__secondary-text--white">
+                Good Page
+              </a>
+            </Link>
+          </p>
           <p className="footer__contacts--text section__secondary-text--white">
             <CopyrightSVG className="footer__contacts--icon" />
             Copyright 2022. All rights reserved.

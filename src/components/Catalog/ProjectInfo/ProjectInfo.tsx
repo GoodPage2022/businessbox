@@ -4,16 +4,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import ReactTooltip from "react-tooltip";
-import { findDOMNode } from "react-dom";
 import { Formik, Form, Field } from "formik";
 import { signIn as signInReducer } from "../../../../store/actions/auth";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
+import ArrowBackSVG from "../../../assets/svg/project-info-arrow.svg";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
-import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
 import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
 import UseUsd from "../../../utils/useUsd";
@@ -21,6 +20,9 @@ import UseUah from "../../../utils/useUah";
 import ModalAnalysis from "../../Modals/Modal-analysis/Modal-analysis";
 import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
+import Breadcrumbs from "./BreadCrumbs";
+import Link from "next/link";
+import LargeImage from "./LargeImage";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -51,6 +53,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     infinite: false,
     speed: 500,
     slidesToShow: 2.2,
+    // transformEnabled: false,
     slidesToScroll: 1,
     className: "projectInfo__slick-slider",
     arrows: true,
@@ -62,7 +65,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         settings: {
           slidesToShow: 1.4,
           slidesToScroll: 1,
-          infinite: true,
           dots: true,
         },
       },
@@ -239,6 +241,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     dispatch({ type: "toggle_analysisModal" });
   };
 
+  const closeLargeImage = () => {
+    dispatch({ type: "toggle_large-image" });
+  };
+
   useEffect(() => {
     getCurrencyRate();
   }, []);
@@ -333,11 +339,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       return map[m];
     });
   }
-  console.log(projectInfo.area);
 
   return (
     <section className="projectInfo">
       <div className="container projectInfo__container">
+        <div className="projectInfo__arrow-back" onClick={() => router.back()}>
+          <ArrowBackSVG />
+        </div>
+
         <div className="projectInfo__title">
           <h1 className="projectInfo__title--text title">
             {projectInfo.title}
@@ -377,12 +386,25 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <p className="projectInfo__city section__primary-text">
           {projectInfo.state?.display}, {projectInfo.city?.display}
         </p>
-
+        <Breadcrumbs
+          businessName={projectInfo.title}
+          categories={projectInfo.area}
+        />
         <div className="projectInfo__image-slider">
           {projectInfo.images && projectInfo.images.length > 1 ? (
             <Slider {...imageSliderSettings}>
               {projectInfo.images.map((img: any, index: number) => (
-                <li key={index} className="projectInfo__image-slider--image">
+                <li
+                  key={index}
+                  className="projectInfo__image-slider--image"
+                  onClick={() => {
+                    dispatch({ type: "toggle_large-image" });
+                    state.imageUrl =
+                      img.meta.assets == ""
+                        ? ``
+                        : `https://admin.bissbox.com${img.path}`;
+                  }}
+                >
                   <Image
                     className=""
                     src={`${
@@ -390,6 +412,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                     }${img.path}`}
                     layout="fill"
                     objectFit="cover"
+                    loading="eager"
                     alt=""
                   />
                 </li>
@@ -416,7 +439,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             {/* <Slider {...categoriesSliderSettings}> */}
             {projectInfo.area.map((business: string, idx: string) => (
               <li key={idx} className="projectInfo__buttons__item">
-                <MainButtonBlack label={business} />
+                <Link href={`/catalog/category/${business}`}>
+                  <a>
+                    <MainButtonBlack label={business} />
+                  </a>
+                </Link>
               </li>
             ))}
             {/* </Slider> */}
@@ -505,7 +532,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             </button>
           </div>
         </div>
-
         <ProfileInfo projectData={projectInfo} />
         {comments.length > 0 ? (
           <ul className="projectInfo__comments">
@@ -569,11 +595,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             Додавати коментарі можливо після авторизації
           </p>
         )}
-
         <h2 className="projectInfo__offers-title title">Схожі пропозиції</h2>
         <ul className="popular__cards">
           <CardsSlider cards={cards} />
         </ul>
+        <LargeImage onClose={closeLargeImage} />
       </div>
       <ModalAnalysis onClose={closeAnalysisModal} />
     </section>

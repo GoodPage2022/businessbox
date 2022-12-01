@@ -60,6 +60,12 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isUah: !state.isUah,
       };
+    case "toggle_large-image":
+      return {
+        ...state,
+        isOpenLargeImage: !state.isOpenLargeImage,
+        imageUrl: state.imageUrl,
+      };
     default:
       return state;
   }
@@ -78,4 +84,6 @@ export const initialState = {
   isShowLoader: false,
   isActiveAnalysisModal: false,
   isUah: false,
+  isOpenLargeImage: false,
+  imageUrl: "",
 };

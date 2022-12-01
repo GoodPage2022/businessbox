@@ -1,0 +1,58 @@
+.largeImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999999999;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  // top: -50%;
+  transition: all 0.35s ease;
+
+  &.active {
+    visibility: visible;
+    pointer-events: all;
+    opacity: 1;
+    top: 0;
+  }
+
+  &__container {
+    width: 1110px;
+  }
+
+  &__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    overflow: hidden;
+    border-radius: 25px;
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .largeImage {
+    &__container {
+      width: 700px;
+    }
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .largeImage {
+    &__container {
+      width: 95%;
+    }
+
+    &__image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 50vh;
+    }
+  }
+}

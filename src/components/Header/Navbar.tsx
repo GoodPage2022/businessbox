@@ -15,7 +15,7 @@ const Navbar = () => {
             <a className="section__secondary-text--white">Каталог бізнесів</a>
           </Link>
         </li>
-        {user && (
+        {/* {user && (
           <li className="header__nav__menu__item section__secondary-text--white">
             <Link href="/useful-tools">
               <a className="section__secondary-text--white">
@@ -23,7 +23,7 @@ const Navbar = () => {
               </a>
             </Link>
           </li>
-        )}
+        )} */}
         <li className="header__nav__menu__item   section__secondary-text--white">
           <Link href="#footer">
             <a className="section__secondary-text--white">Контакти</a>
