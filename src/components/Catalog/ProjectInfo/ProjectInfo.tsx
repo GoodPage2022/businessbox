@@ -4,16 +4,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import ReactTooltip from "react-tooltip";
-import { findDOMNode } from "react-dom";
 import { Formik, Form, Field } from "formik";
 import { signIn as signInReducer } from "../../../../store/actions/auth";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
+import ArrowBackSVG from "../../../assets/svg/project-info-arrow.svg";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
-import BusinessCard from "../../shared/BusinessCard";
 import { useDispatch, useSelector } from "react-redux";
 import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
 import UseUsd from "../../../utils/useUsd";
@@ -338,6 +337,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   return (
     <section className="projectInfo">
       <div className="container projectInfo__container">
+        <div className="projectInfo__arrow-back" onClick={() => router.back()}>
+          <ArrowBackSVG />
+        </div>
+
         <div className="projectInfo__title">
           <h1 className="projectInfo__title--text title">
             {projectInfo.title}
@@ -377,7 +380,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <p className="projectInfo__city section__primary-text">
           {projectInfo.state?.display}, {projectInfo.city?.display}
         </p>
-
         <div className="projectInfo__image-slider">
           {projectInfo.images && projectInfo.images.length > 1 ? (
             <Slider {...imageSliderSettings}>
@@ -505,7 +507,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             </button>
           </div>
         </div>
-
         <ProfileInfo projectData={projectInfo} />
         {comments.length > 0 ? (
           <ul className="projectInfo__comments">
@@ -569,7 +570,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             Додавати коментарі можливо після авторизації
           </p>
         )}
-
         <h2 className="projectInfo__offers-title title">Схожі пропозиції</h2>
         <ul className="popular__cards">
           <CardsSlider cards={cards} />

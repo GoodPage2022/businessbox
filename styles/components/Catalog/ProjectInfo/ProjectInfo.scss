@@ -1,12 +1,20 @@
 .projectInfo {
   position: relative;
-  padding-top: 120px;
+  padding-top: 100px;
   padding-bottom: 80px;
 
   &__container {
     position: relative;
   }
 
+  &__arrow-back {
+    display: flex;
+    margin-bottom: 5px;
+    cursor: pointer;
+    & svg {
+      -webkit-transform: rotate(180deg);
+    }
+  }
   &__title {
     display: flex;
     align-items: center;
@@ -317,7 +325,7 @@
 
 @media screen and (max-width: $size-tablet) {
   .projectInfo {
-    padding-top: 112px;
+    padding-top: 90px;
     padding-bottom: 40px;
 
     &__container {
@@ -524,7 +532,7 @@
 
 @media screen and (max-width: $size-mobile) {
   .projectInfo {
-    padding-top: 92px;
+    padding-top: 90px;
     padding-bottom: 40px;
 
     &__title {
