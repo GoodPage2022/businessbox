@@ -13,12 +13,8 @@ const UsefulToolsPage: NextPage = () => {
     router.push("/");
     return <></>;
   }
-
-  return (
-    <>
-      <UsefulTools />
-    </>
-  );
+  router.push("/");
+  return <>{/* <UsefulTools /> */}</>;
 };
 
 export default UsefulToolsPage;

@@ -32,14 +32,14 @@ const BurgerMenu = () => {
             <a className="section__primary-text--white">Каталог бізнесів</a>
           </Link>
         </li>
-        <li
+        {/* <li
           className="header__nav__menu__item   section__primary-text--white"
           onClick={() => dispatch({ type: "toggle_burger" })}
         >
           <Link href="/useful-tools">
             <a className="section__primary-text--white">Корисні інструменти</a>
           </Link>
-        </li>
+        </li> */}
         <li
           className="header__nav__menu__item   section__primary-text--white"
           onClick={() => dispatch({ type: "toggle_burger" })}
