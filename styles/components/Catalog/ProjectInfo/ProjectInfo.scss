@@ -403,6 +403,9 @@
         overflow: hidden;
         border-radius: 25px;
       }
+      .slick-track {
+        // transform: translate3d(0, 0px, 0px) !important;
+      }
     }
 
     &__description {

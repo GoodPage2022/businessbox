@@ -50,6 +50,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     infinite: false,
     speed: 500,
     slidesToShow: 2.2,
+    // transformEnabled: false,
     slidesToScroll: 1,
     className: "projectInfo__slick-slider",
     arrows: true,
@@ -61,7 +62,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         settings: {
           slidesToShow: 1.4,
           slidesToScroll: 1,
-          infinite: true,
           dots: true,
         },
       },
