@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import ArrowBackSVG from "../../../assets/svg/project-info-arrow.svg";
 const Breadcrumbs = ({
   businessName,
   categories,
@@ -16,9 +15,7 @@ const Breadcrumbs = ({
         <Link href="/">
           <a>
             Головна
-            <span className="breadcrumbs__arrow">
-              <ArrowBackSVG />
-            </span>
+            <span className="breadcrumbs__arrow">{">"}</span>
           </a>
         </Link>
       </li>
@@ -26,9 +23,7 @@ const Breadcrumbs = ({
         <Link href="/catalog">
           <a>
             Каталог
-            <span className="breadcrumbs__arrow">
-              <ArrowBackSVG />
-            </span>
+            <span className="breadcrumbs__arrow"> {">"}</span>
           </a>
         </Link>
       </li>
@@ -36,9 +31,7 @@ const Breadcrumbs = ({
         <Link href={`/catalog/category/${categories[0]}`}>
           <a>
             {categories[0]}
-            <span className="breadcrumbs__arrow">
-              <ArrowBackSVG />
-            </span>
+            <span className="breadcrumbs__arrow">{">"}</span>
           </a>
         </Link>
       </li>
