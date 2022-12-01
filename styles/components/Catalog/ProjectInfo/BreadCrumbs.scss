@@ -1,0 +1,34 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  &__item {
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+
+    & a {
+      display: flex;
+    }
+  }
+
+  &__arrow {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    & svg {
+      width: 25px;
+    }
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .breadCrumbs {
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .breadCrumbs {
+  }
+}

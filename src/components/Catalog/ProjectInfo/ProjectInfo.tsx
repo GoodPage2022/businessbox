@@ -20,6 +20,8 @@ import UseUah from "../../../utils/useUah";
 import ModalAnalysis from "../../Modals/Modal-analysis/Modal-analysis";
 import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
+import Breadcrumbs from "./BreadCrumbs";
+import Link from "next/link";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -380,6 +382,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <p className="projectInfo__city section__primary-text">
           {projectInfo.state?.display}, {projectInfo.city?.display}
         </p>
+        <Breadcrumbs
+          businessName={projectInfo.title}
+          categories={projectInfo.area}
+        />
         <div className="projectInfo__image-slider">
           {projectInfo.images && projectInfo.images.length > 1 ? (
             <Slider {...imageSliderSettings}>
@@ -418,7 +424,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             {/* <Slider {...categoriesSliderSettings}> */}
             {projectInfo.area.map((business: string, idx: string) => (
               <li key={idx} className="projectInfo__buttons__item">
-                <MainButtonBlack label={business} />
+                <Link href={`/catalog/category/${business}`}>
+                  <a>
+                    <MainButtonBlack label={business} />
+                  </a>
+                </Link>
               </li>
             ))}
             {/* </Slider> */}
