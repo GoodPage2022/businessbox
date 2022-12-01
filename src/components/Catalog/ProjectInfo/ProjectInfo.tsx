@@ -22,6 +22,7 @@ import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
 import Breadcrumbs from "./BreadCrumbs";
 import Link from "next/link";
+import LargeImage from "./LargeImage";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -240,6 +241,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     dispatch({ type: "toggle_analysisModal" });
   };
 
+  const closeLargeImage = () => {
+    dispatch({ type: "toggle_large-image" });
+  };
+
   useEffect(() => {
     getCurrencyRate();
   }, []);
@@ -334,7 +339,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       return map[m];
     });
   }
-  console.log(projectInfo.area);
 
   return (
     <section className="projectInfo">
@@ -390,7 +394,17 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           {projectInfo.images && projectInfo.images.length > 1 ? (
             <Slider {...imageSliderSettings}>
               {projectInfo.images.map((img: any, index: number) => (
-                <li key={index} className="projectInfo__image-slider--image">
+                <li
+                  key={index}
+                  className="projectInfo__image-slider--image"
+                  onClick={() => {
+                    dispatch({ type: "toggle_large-image" });
+                    state.imageUrl =
+                      img.meta.assets == ""
+                        ? ``
+                        : `https://admin.bissbox.com${img.path}`;
+                  }}
+                >
                   <Image
                     className=""
                     src={`${
@@ -398,6 +412,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                     }${img.path}`}
                     layout="fill"
                     objectFit="cover"
+                    loading="eager"
                     alt=""
                   />
                 </li>
@@ -584,6 +599,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <ul className="popular__cards">
           <CardsSlider cards={cards} />
         </ul>
+        <LargeImage onClose={closeLargeImage} />
       </div>
       <ModalAnalysis onClose={closeAnalysisModal} />
     </section>
