@@ -272,6 +272,12 @@ const MobFilter = ({
                   />
                 </label>
               </div>
+              <button
+                className="mobFilter__button"
+                onClick={() => dispatch({ type: "toggle_mobFilter" })}
+              >
+                Застосувати фільтри
+              </button>
             </Form>
           )}
         </Formik>
