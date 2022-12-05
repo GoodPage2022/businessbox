@@ -7,8 +7,6 @@ const Breadcrumbs = ({
   businessName: string;
   categories: [string];
 }) => {
-  console.log(categories);
-
   return (
     <ul className="breadcrumbs">
       <li className="breadcrumbs__item section__secondary-text">

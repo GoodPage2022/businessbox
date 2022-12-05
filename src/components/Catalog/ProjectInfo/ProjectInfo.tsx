@@ -401,7 +401,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                     dispatch({ type: "toggle_large-image" });
                     state.imageUrl =
                       img.meta.assets == ""
-                        ? ``
+                        ? `${img.path}`
                         : `https://admin.bissbox.com${img.path}`;
                   }}
                 >
@@ -420,7 +420,17 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             </Slider>
           ) : (
             projectInfo.images.map((img: any, index: number) => (
-              <li key={index} className="projectInfo__image-slider--image">
+              <li
+                key={index}
+                className="projectInfo__image-slider--image"
+                onClick={() => {
+                  dispatch({ type: "toggle_large-image" });
+                  state.imageUrl =
+                    img.meta.assets == ""
+                      ? `${img.path}`
+                      : `https://admin.bissbox.com${img.path}`;
+                }}
+              >
                 <Image
                   className=""
                   src={`${
