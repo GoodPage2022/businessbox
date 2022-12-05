@@ -143,10 +143,12 @@ const Footer: React.FC = () => {
           </Link>
           <div>
             <p className="footer__contacts--item">
-              <a href="tel:0501234567">+38 (050) 123-45-67</a>
+              <a href="tel:0662026304">+38 (066) 202-63-04</a>
             </p>
             <p className="footer__contacts--item">
-              <a href="mailto:example@gmail.com">example@gmail.com</a>
+              <a href="mailto:business888box@gmail.com">
+                business888box@gmail.com
+              </a>
             </p>
           </div>
           <p className="footer__contacts--text section__secondary-text--white">
@@ -164,10 +166,12 @@ const Footer: React.FC = () => {
         <Networks />
         <div>
           <p className="footer__contacts--item">
-            <a href="tel:0501234567">+38 (050) 123-45-67</a>
+            <a href="tel:0662026304">+38 (066) 202-63-04</a>
           </p>
           <p className="footer__contacts--item">
-            <a href="mailto:example@gmail.com">example@gmail.com</a>
+            <a href="mailto:business888box@gmail.com">
+              business888box@gmail.com
+            </a>
           </p>
         </div>
         <div className="footer__nav">
