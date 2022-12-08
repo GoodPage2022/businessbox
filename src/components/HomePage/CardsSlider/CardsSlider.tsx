@@ -146,6 +146,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         price,
         is_verified,
         sold_out,
+        currency,
         negotiatedPrice,
       }: any) => (
         <BusinessCard
@@ -164,6 +165,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
           views={view_count ?? 0}
           isVerified={is_verified}
           isSoldOut={sold_out}
+          currency={currency}
           negotiatedPrice={negotiatedPrice}
         />
       ),
