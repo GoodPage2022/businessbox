@@ -146,8 +146,8 @@ const Footer: React.FC = () => {
               <a href="tel:0662026304">+38 (066) 202-63-04</a>
             </p>
             <p className="footer__contacts--item">
-              <a href="mailto:business888box@gmail.com">
-                business888box@gmail.com
+              <a href="mailto:info@bissbox.com">
+              info@bissbox.com
               </a>
             </p>
           </div>
@@ -169,8 +169,8 @@ const Footer: React.FC = () => {
             <a href="tel:0662026304">+38 (066) 202-63-04</a>
           </p>
           <p className="footer__contacts--item">
-            <a href="mailto:business888box@gmail.com">
-              business888box@gmail.com
+            <a href="mailto:info@bissbox.com">
+            info@bissbox.com
             </a>
           </p>
         </div>
