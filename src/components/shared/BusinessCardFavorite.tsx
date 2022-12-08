@@ -150,7 +150,7 @@ const BusinessCardFavorites = ({
             {negotiatedPrice ? (
               <p className="section__secondary-text">Договірна</p>
             ) : (
-              <p className="business-card-favorite__price">{price}$</p>
+              <p className="business-card-favorite__price">{UseUsd(currency, price, rate)}</p>
             )}
 
             <button
@@ -167,7 +167,7 @@ const BusinessCardFavorites = ({
           ) : (
             <div className="business-card-favorite__footer-mob--price">
               <p className="section__secondary-text">
-                {(Number(price) * rate).toFixed(0)} грн
+              {UseUah(currency, price, rate)}
               </p>
               <div className="business-card-favorite__rate">
                 <p className="business-card-favorite__rate--top section__secondary-text">
