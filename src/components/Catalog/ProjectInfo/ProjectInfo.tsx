@@ -18,11 +18,13 @@ import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
 import UseUsd from "../../../utils/useUsd";
 import UseUah from "../../../utils/useUah";
 import ModalAnalysis from "../../Modals/Modal-analysis/Modal-analysis";
+import ModalAnalysisTariffs from "../../Modals/Modal-analysis/Modal-analysis-tariffs";
 import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
 import Breadcrumbs from "./BreadCrumbs";
 import Link from "next/link";
 import LargeImage from "./LargeImage";
+import ModalAnalysisThank from "../../Modals/Modal-analysis/Modal-analysis-thank";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -239,6 +241,13 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
   const closeAnalysisModal = () => {
     dispatch({ type: "toggle_analysisModal" });
+  };
+  const closeAnalysisTariffsModal = () => {
+    dispatch({ type: "toggle_analysisTariffsModal" });
+  };
+
+  const closeAnalysisThankModal = () => {
+    dispatch({ type: "toggle_analysisThankModal" });
   };
 
   const closeLargeImage = () => {
@@ -482,7 +491,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             )}
             <button
               onClick={() => {
-                dispatch({ type: "toggle_analysisModal" });
+                dispatch({ type: "toggle_analysisTariffsModal" });
               }}
               className="projectInfo__button-analysis"
             >
@@ -534,7 +543,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             )}
             <button
               onClick={() => {
-                dispatch({ type: "toggle_analysisModal" });
+                dispatch({ type: "toggle_analysisTariffsModal" });
               }}
               className="projectInfo__button-analysis"
             >
@@ -612,6 +621,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <LargeImage onClose={closeLargeImage} />
       </div>
       <ModalAnalysis onClose={closeAnalysisModal} />
+      <ModalAnalysisTariffs onClose={closeAnalysisTariffsModal} />
+      <ModalAnalysisThank onClose={closeAnalysisThankModal} />
     </section>
   );
 };

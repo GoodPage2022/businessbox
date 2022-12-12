@@ -90,6 +90,24 @@
           }
         }
       }
+
+      &--favorites {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 32px;
+        width: 34px;
+        border: 1px solid #ffffff;
+        border-radius: 15px;
+        background: transparent;
+        cursor: pointer;
+
+        & svg {
+          fill: white;
+          width: 18px;
+          height: 18px;
+        }
+      }
     }
   }
 
@@ -291,6 +309,10 @@
           border-radius: 15px;
           background: transparent;
           cursor: text;
+        }
+
+        &-wrapper {
+          display: flex;
         }
       }
     }

@@ -46,6 +46,8 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
         email,
         phone,
         link: projectLink,
+        tariff: state.tariff,
+        status: "Pending",
       },
     };
 
@@ -55,6 +57,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
         onClose();
         resetForm({});
         setError("");
+        dispatch({ type: "toggle_analysisThankModal" });
       }
     } catch (err: any) {
       console.log(err);
@@ -71,9 +74,9 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
       '"': "&quot;",
       "'": "&#039;",
     };
-if (text == undefined) {
-  return;
-}
+    if (text == undefined) {
+      return;
+    }
     return text.replace(/[&<>"']/g, function (m: any) {
       return map[m];
     });

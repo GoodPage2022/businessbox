@@ -1,0 +1,260 @@
+.modal-analysisThank {
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999999999;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    top: -50%;
+    transition: all 0.35s ease;
+
+    &.active {
+      visibility: visible;
+      pointer-events: all;
+      opacity: 1;
+      top: 0;
+    }
+  }
+  &__container {
+    position: relative;
+    display: flex;
+    width: 1110px;
+    border-radius: 25px;
+    overflow: hidden;
+  }
+
+  &__header {
+    min-width: 520px;
+    background-image: url("../../../public/assets/images/forgot-pass-bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 67px 42px;
+  }
+
+  &__text {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  &__button-close {
+    &--desctop {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-bottom: 36px;
+      height: 44px;
+      width: 44px;
+      border: none;
+      border-radius: 18px;
+      background: $main-text-color;
+      cursor: pointer;
+
+      & svg {
+        & path {
+          stroke: $white-color;
+        }
+      }
+    }
+    &--mob {
+      display: none;
+    }
+  }
+
+  &__body {
+    width: 100%;
+    padding: 40px 60px;
+    background: #fafafa;
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .modal-analysisThank {
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+
+    &__container {
+      display: flex;
+      width: 765px;
+
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    &__header {
+      min-width: 349px;
+      background-image: url("../../../public/assets/images/forgot-pass-bg.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 79px 14px 112px 24px;
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    &__text {
+      &--desctop {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: $white-color;
+        margin-top: 40px;
+      }
+      &--mob {
+        display: none;
+      }
+    }
+
+    &__button-close {
+      &--desctop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-bottom: 40px;
+        height: 32px;
+        width: 32px;
+        border: none;
+        border-radius: 18px;
+        background: $main-text-color;
+        cursor: pointer;
+
+        & svg {
+          width: 14px;
+          height: 14px;
+          & path {
+            stroke: $white-color;
+          }
+        }
+      }
+      &--mob {
+        display: none;
+      }
+    }
+
+    &__body {
+      width: 100%;
+      padding: 44px 24px 40px 44px;
+      background: #fafafa;
+    }
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .modal-analysisThank {
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+
+    &__container {
+      display: block;
+      width: 375px;
+      border-radius: 15px 15px 0px 0px;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 100%;
+      background-image: url("../../../public/assets/images/auth-modal-mob-bg.png");
+      padding: 20px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    &__text {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: block;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 12px;
+        color: $main-text-color;
+        margin-bottom: 20px;
+      }
+    }
+
+    &__button-close {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: none;
+        margin-bottom: 0;
+        width: 34px;
+        height: 32px;
+        border: none;
+        background: $white-color;
+        border-radius: 15px;
+        cursor: pointer;
+
+        & svg {
+          width: 14px;
+          height: 14px;
+          & path {
+            stroke: $main-text-color;
+          }
+        }
+      }
+    }
+
+    &__body {
+      padding: 20px 20px 40px;
+    }
+  }
+}

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
+import HeartSVG from "../../assets/svg/heart.svg";
 import UserSVG from "../../assets/svg/user.svg";
 import ExitSVG from "../../assets/svg/exit.svg";
 import SearchSVG from "../../assets/svg/search.svg";
@@ -80,6 +80,17 @@ const Right = () => {
             />
           )}
         </li>
+        {user != null && (
+          <li className="header__right__btn">
+            <button
+              onClick={() => router.push("/account/favorites")}
+              className={`header__right__btn--favorites`}
+            >
+              <HeartSVG />
+            </button>
+          </li>
+        )}
+
         <li
           className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
         >
