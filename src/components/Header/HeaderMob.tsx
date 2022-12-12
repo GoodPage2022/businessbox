@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import HeartSVG from "../../assets/svg/heart.svg";
 import ExitSVG from "../../assets/svg/exit.svg";
 import CloseBurgerSVG from "../../assets/svg/close-burger.svg";
 import BurgerSVG from "../../assets/svg/burger-menu.svg";
@@ -115,35 +116,48 @@ const RightMob = () => {
             />
           )}
         </li>
-        {user == null ? (
-          <li className="header__right__btn" onClick={openModal}>
-            <MainButton label={`Вхід`} />
-          </li>
-        ) : (
-          ""
-        )}
-        <li
-          className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
-        >
-          {user == null ? (
-            ""
-          ) : (
-            <IconButton
-              borderColor="#FFFFFF"
-              icon={<UserSVG />}
-              onClick={() => openContactInfo()}
-            />
+        <div className="header__right__btn-wrapper">
+          {user != null && (
+            <li className="header__right__btn">
+              <button
+                onClick={() => router.push("/account/favorites")}
+                className={`header__right__btn--favorites`}
+              >
+                <HeartSVG />
+              </button>
+            </li>
           )}
-        </li>
-        {user != null && (
-          <li className="header__right__btn exit">
-            <IconButton
-              onClick={signOut}
-              borderColor="#FFFFFF"
-              icon={<ExitSVG />}
-            />
+
+          {user == null ? (
+            <li className="header__right__btn" onClick={openModal}>
+              <MainButton label={`Вхід`} />
+            </li>
+          ) : (
+            ""
+          )}
+          <li
+            className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
+          >
+            {user == null ? (
+              ""
+            ) : (
+              <IconButton
+                borderColor="#FFFFFF"
+                icon={<UserSVG />}
+                onClick={() => openContactInfo()}
+              />
+            )}
           </li>
-        )}
+          {user != null && (
+            <li className="header__right__btn exit">
+              <IconButton
+                onClick={signOut}
+                borderColor="#FFFFFF"
+                icon={<ExitSVG />}
+              />
+            </li>
+          )}
+        </div>
       </ul>
 
       <ModalAuth onClose={closeAuthModal} />
