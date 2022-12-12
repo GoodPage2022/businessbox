@@ -24,6 +24,7 @@ import React from "react";
 import Breadcrumbs from "./BreadCrumbs";
 import Link from "next/link";
 import LargeImage from "./LargeImage";
+import ModalAnalysisThank from "../../Modals/Modal-analysis/Modal-analysis-thank";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -243,6 +244,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
   const closeAnalysisTariffsModal = () => {
     dispatch({ type: "toggle_analysisTariffsModal" });
+  };
+
+  const closeAnalysisThankModal = () => {
+    dispatch({ type: "toggle_analysisThankModal" });
   };
 
   const closeLargeImage = () => {
@@ -617,6 +622,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       </div>
       <ModalAnalysis onClose={closeAnalysisModal} />
       <ModalAnalysisTariffs onClose={closeAnalysisTariffsModal} />
+      <ModalAnalysisThank onClose={closeAnalysisThankModal} />
     </section>
   );
 };

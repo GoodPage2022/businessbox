@@ -46,7 +46,8 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
         email,
         phone,
         link: projectLink,
-        // tariff: state.tariff,
+        tariff: state.tariff,
+        status: "Pending",
       },
     };
 
@@ -56,6 +57,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
         onClose();
         resetForm({});
         setError("");
+        dispatch({ type: "toggle_analysisThankModal" });
       }
     } catch (err: any) {
       console.log(err);
