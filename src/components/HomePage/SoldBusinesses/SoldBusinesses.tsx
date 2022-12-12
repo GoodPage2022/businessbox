@@ -38,7 +38,9 @@ const SoldBusinesses = () => {
   useEffect(() => {
     getBusinesses();
   }, []);
-  return (
+
+  console.log(cards);
+  return cards.length ? (
     <section className="soldBusinesses">
       <div className="container soldBusinesses__container">
         <h2 className="soldBusinesses__title title">Продані</h2>
@@ -70,6 +72,8 @@ const SoldBusinesses = () => {
         </ul>
       </div>
     </section>
+  ) : (
+    <></>
   );
 };
 
