@@ -1,4 +1,3 @@
-import PopularCards from "../../constants/popular";
 import PopularCard from "../shared/BusinessCard";
 import { useEffect, useState } from "react";
 import axios from "axios";

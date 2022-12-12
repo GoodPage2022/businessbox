@@ -46,6 +46,7 @@ const BusinessCard = ({
   const [clickPos, setClickPos] = useState<any>({});
   const [rate, setRate] = useState<number>(0);
 
+  let onContextMenuClick = false;
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
       setIsMyBusinessesPage(true);
@@ -97,6 +98,11 @@ const BusinessCard = ({
   return (
     <li
       className={`business-card ${isSoldOut ? "sold" : ""}`}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        onContextMenuClick = true;
+        window.open(`/catalog/${alias}`, "_ blank", "noreferrer, noopener");
+      }}
       onMouseDown={(e: any) => {
         setClickTime(Date.now());
         setClickPos({
@@ -113,10 +119,12 @@ const BusinessCard = ({
 
         console.log(clickedTime);
         console.log(clickedPos);
-
-        if (clickedPos.x == 0 && clickedPos.y == 0) {
-          router.push(`/catalog/${alias}`);
-        }
+        setTimeout(function () {
+          if (clickedPos.x == 0 && clickedPos.y == 0 && !onContextMenuClick) {
+            console.log(onContextMenuClick);
+            router.push(`/catalog/${alias}`);
+          }
+        }, 0);
       }}
     >
       {/* <Link href={`/catalog/${alias}`}>
