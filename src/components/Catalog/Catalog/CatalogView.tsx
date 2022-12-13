@@ -19,6 +19,8 @@ import { signOut as signOutReducer } from "../../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
 import { Oval } from "react-loader-spinner";
 import Checkbox from "../../shared/Checkbox";
+import CustomSelect from "../../shared/CustomSelect";
+import { Field, FormikProvider, useFormik } from "formik";
 
 const CancelToken = axios.CancelToken;
 let cancel: any;
@@ -166,8 +168,16 @@ const CatalogView = () => {
             filterSetOfExp.push(param);
           }
           break;
-        case "sorting":
+        case "sort-by-popular":
           requestBody.sort["view_count"] = -1;
+          delete requestBody.sort["_created"];
+          break;
+        case "sort-by-price":
+          // filterSetOfExp.push({
+          //   $expr: { $toDouble: "$price" },
+          // });
+          // requestBody.sort[`{$toDouble: "$price"}`] = -1;
+          requestBody.sort["price"] = -1;
           delete requestBody.sort["_created"];
           break;
         case "state":
@@ -192,9 +202,16 @@ const CatalogView = () => {
       sold_out: false,
     });
 
-    if (!filtersObj.sorting) {
+    // console.log(requestBody, filterSetOfExp);
+
+    if (!filtersObj["sort-by-popular"]) {
       requestBody.sort["_created"] = -1;
       delete requestBody.sort["view_count"];
+    }
+
+    if (!filtersObj["sort-by-price"]) {
+      requestBody.sort["_created"] = -1;
+      delete requestBody.sort["price"];
     }
 
     if (!resetLimit) {
@@ -263,6 +280,17 @@ const CatalogView = () => {
   }, [filtersObj]);
 
   const changeFilter = (e: any) => {
+    // console.log(e.target.name);
+
+    if (
+      e.target.name == "sort-by-popular" ||
+      e.target.name == "sort-by-price"
+    ) {
+      console.log(filtersObj);
+      filtersObj["sort-by-price"] = "";
+      filtersObj["sort-by-popular"] = "";
+      //  if (filtersObj.)
+    }
     const filtersObjFirstPage = {
       ...filtersObj,
       page: undefined,
@@ -270,15 +298,34 @@ const CatalogView = () => {
     };
 
     setFiltersObj(filtersObjFirstPage);
-
+    // console.log(filtersObjFirstPage);
     let filtersObjFirstPageString = "";
     Object.keys(filtersObjFirstPage).map((f: any) => {
+      // console.log(filtersObjFirstPage[f]);
+      // if (
+      //   filtersObjFirstPage[f] == "Відсортувати за ціною" ||
+      //   filtersObjFirstPage[f] == "Відсортувати за популярністю"
+      // ) {
+      //   console.log(filtersObjFirstPageString.split("/"));
+      // }
       if (filtersObjFirstPage[f] != undefined && filtersObjFirstPage[f] != "")
         filtersObjFirstPageString += "/" + f + "/" + filtersObjFirstPage[f];
     });
+    // console.log(filtersObjFirstPageString);
 
     router.replace(`/catalog${filtersObjFirstPageString}`);
   };
+  const initialValues = {
+    sorting: "",
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      // console.log(values);
+    },
+  });
+
+  // console.log(cards);
 
   return (
     <section
@@ -339,7 +386,7 @@ const CatalogView = () => {
         </div>
         <div className="catalogView__title-wrapper">
           <h2 className="title catalogView__title">Каталог бізнесів</h2>
-          <p>
+          {/* <p>
             <Checkbox
               text="Відсортувати за популярністю"
               datakey={999}
@@ -347,7 +394,27 @@ const CatalogView = () => {
               categories={filtersObj.sorting ?? []}
               name={"sorting"}
             />
-          </p>
+          </p> */}
+          <FormikProvider value={formik}>
+            <Field
+              className="addBusinessFinish__input section__primary-text"
+              type="text"
+              name="sorting"
+              changeFilter={changeFilter}
+              placeholder="Відсортувати за ..."
+              component={CustomSelect}
+              options={[
+                {
+                  value: "Відсортувати за популярністю",
+                  label: "Відсортувати за популярністю",
+                },
+                {
+                  value: "Відсортувати за ціною",
+                  label: "Відсортувати за ціною",
+                },
+              ]}
+            />
+          </FormikProvider>
         </div>
 
         <div className="catalogView__wrapper">

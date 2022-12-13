@@ -1,54 +1,87 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
+import clientPromise from "../../../mongodb/mongodb";
+import { inspect } from "util";
 
 type Data = {
-  name: string
-}
+  name: string;
+};
 
-const handler = async(
-  req: NextApiRequest,
-  res: NextApiResponse<any>
-) => {
-  const token = (req.body.user != null && req.body.user?.api_key !== undefined) ? req.body.user.api_key : process.env.cockpitApiToken
-  const queryFilter = req.body.filter
-  const queryLimit = req.body.limit
-  const querySort = req.body.sort
-  const querySkip = req.body.skip
+const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
+  const token =
+    req.body.user != null && req.body.user?.api_key !== undefined
+      ? req.body.user.api_key
+      : process.env.cockpitApiToken;
+  const queryFilter = req.body.filter;
+  const queryLimit = req.body.limit;
+  const querySort = req.body.sort;
+  const querySkip = req.body.skip;
 
-  let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`
+  // let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`;
 
-  let body: any = {}
+  let pipeLine = [];
+
+  // let body: any = {};
 
   if (queryFilter) {
-    body["filter"] = queryFilter
+    // body["filter"] = queryFilter;
+    pipeLine.push({ $match: queryFilter });
   }
 
   if (querySort) {
-    body["sort"] = querySort
+    // body["sort"] = querySort;
+    if (querySort["price"]) {
+      pipeLine.push({
+        $addFields: {
+          priceDig: {
+            $toDouble: "$price",
+          },
+        },
+      });
+      delete querySort.price;
+      querySort["priceDig"] = -1;
+    }
+    pipeLine.push({ $sort: querySort });
   }
 
   if (queryLimit) {
-    body["limit"] = queryLimit
+    // body["limit"] = queryLimit;
+    pipeLine.push({ $limit: queryLimit });
   }
 
   if (querySkip) {
-    body["skip"] = querySkip
+    // body["skip"] = querySkip;
+    pipeLine.push({ $skip: querySkip });
   }
 
-  const options = {
-    headers: { 
-      'Content-Type': 'application/json'
-    }
-  }
-  
+  // const options = {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // };
+  inspect(pipeLine);
+  console.log(pipeLine);
   try {
-    const response = await axios.post(queryUrl, body, options)
-    return res.status(200).send( response.data )
+    const client = await clientPromise;
+    const db = client.db("bubox");
+    // const response = await axios.post(queryUrl, body, options);
+    const budinesses = await db
+      .collection("collections_Businesses")
+      .aggregate(pipeLine)
+      .toArray();
+    // console.log(response.data, "response.data");
+
+    // console.log(budinesses, "budinesses");
+    return res
+      .status(200)
+      .send({ entries: budinesses, total: budinesses.length });
   } catch (error: any) {
     console.log(error);
-    
-    return res.status((error.response ? (error.response.status ?? 500) : 500)).send(error)
-  }
-}
 
-export default handler
+    return res
+      .status(error.response ? error.response.status ?? 500 : 500)
+      .send(error);
+  }
+};
+
+export default handler;

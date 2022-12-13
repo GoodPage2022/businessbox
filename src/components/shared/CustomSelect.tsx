@@ -32,6 +32,19 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       placeholder={placeholder}
       defaultValue={defaultValue}
       onChange={(e) => {
+        if (!!changeFilter && field.name == "sorting") {
+          changeFilter({
+            target: {
+              name:
+                e.value == "Відсортувати за популярністю"
+                  ? "sort-by-popular"
+                  : "sort-by-price",
+              value: e.value,
+            },
+          });
+          return;
+        }
+
         if (!!changeFilter)
           changeFilter({
             target: {
