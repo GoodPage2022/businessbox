@@ -100,9 +100,9 @@ const MyBusinesses = () => {
                 ),
               )}
             </ul>
-            <ul className="myBusinesses__cards--tablet">
+            {/* <ul className="myBusinesses__cards--tablet">
               <CardsSlider cards={cards} />
-            </ul>
+            </ul> */}
             <button
               onClick={() => router.push("/account/add-business")}
               className="myBusinesses__button-plus"

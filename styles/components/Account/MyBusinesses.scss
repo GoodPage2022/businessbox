@@ -49,11 +49,20 @@
     }
     &__cards {
       &--desctop {
-        display: none;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 20px;
+        grid-row-gap: 30px;
+        border-left: none;
+        padding-left: 0px;
+        margin-bottom: 20px;
+        & .business-card {
+          width: 227px;
+        }
       }
-      &--tablet {
-        display: block;
-      }
+      // &--tablet {
+      //   display: block;
+      // }
     }
 
     &__button-plus {
@@ -98,6 +107,7 @@
         margin-bottom: 64px;
 
         .business-card {
+          width: 100%;
           &__info {
             padding: 10px 15px;
           }
