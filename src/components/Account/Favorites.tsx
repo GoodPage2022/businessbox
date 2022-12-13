@@ -14,7 +14,7 @@ const Favorites = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getBusinesses = async () => {
-    console.log(user.favourites);
+    // console.log(user.favourites);
 
     if (!user.favourites || user.favourites.length == 0) {
       setCards([]);

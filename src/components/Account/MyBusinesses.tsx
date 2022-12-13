@@ -23,7 +23,7 @@ const MyBusinesses = () => {
     });
 
     if (response.data) {
-      console.log(response.data.entries);
+      // console.log(response.data.entries);
 
       setCards(response.data.entries);
       setIsLoading(false);
