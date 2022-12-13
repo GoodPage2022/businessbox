@@ -8,6 +8,7 @@ import MailSVG from "../../../assets/svg/mail.svg";
 import InstagramSVG from "../../../assets/svg/instagram.svg";
 import YoutubeSVG from "../../../assets/svg/youtube.svg";
 import axios, { AxiosRequestConfig } from "axios";
+import Script from "next/script";
 
 const ProfileInfo = ({ projectData }: { projectData: any }) => {
   const [isPhoneShow, setIsPhoneShow] = useState(false);
@@ -116,6 +117,11 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               setIsPhoneShow((prev) => !prev);
               setIsEmailShow(false);
               setIsInstagramShow(false);
+              <Script id="google-analytics" strategy="afterInteractive">
+                {`
+                  gtag('event', 'conversion', {'send_to': 'AW-11042174734/IV-OCOD-4oQYEI7uqJEp'});
+                `}
+              </Script>;
             }}
             className="profileInfo__networks--item"
           >

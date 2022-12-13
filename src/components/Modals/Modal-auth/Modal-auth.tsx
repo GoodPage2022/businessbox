@@ -13,6 +13,7 @@ import { signIn as signInReducer } from "../../../../store/actions/auth";
 import { useSession, signIn as signInGoogle } from "next-auth/react";
 import CustomInput from "../../shared/CustomInput";
 import { Oval } from "react-loader-spinner";
+import Script from "next/script";
 
 const CancelToken = axios.CancelToken;
 let cancel: any;
@@ -32,14 +33,17 @@ function ModalAuth({ onClose }: { onClose: any }) {
     }
 
     try {
-      const signInResponse = await axios.post(`/api/account/signIn`, {
-        session,
-      },
-      {
-        cancelToken: new CancelToken((c) => {
-          cancel = c;
-        })
-      });
+      const signInResponse = await axios.post(
+        `/api/account/signIn`,
+        {
+          session,
+        },
+        {
+          cancelToken: new CancelToken((c) => {
+            cancel = c;
+          }),
+        },
+      );
       if (signInResponse.status == 200) {
         dispatchRedux(signInReducer(signInResponse.data));
         setAuthError("");
@@ -52,7 +56,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
       }
     } catch (err: any) {
       console.log(err);
-      
+
       setAuthError("Google auth error");
     }
   };
@@ -67,6 +71,11 @@ function ModalAuth({ onClose }: { onClose: any }) {
     router.push("/#register");
     dispatch({ type: "toggle_authModal" });
     dispatch({ type: "toggle_registrationModal" });
+    <Script id="google-analytics" strategy="afterInteractive">
+      {`
+          gtag('event', 'conversion', {'send_to': 'AW-11042174734/e0iYCN3-4oQYEI7uqJEp'});
+        `}
+    </Script>;
   };
 
   const openForgotPasswordModal = () => {

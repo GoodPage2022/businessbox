@@ -25,6 +25,7 @@ import Breadcrumbs from "./BreadCrumbs";
 import Link from "next/link";
 import LargeImage from "./LargeImage";
 import ModalAnalysisThank from "../../Modals/Modal-analysis/Modal-analysis-thank";
+import Script from "next/script";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -492,6 +493,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             <button
               onClick={() => {
                 dispatch({ type: "toggle_analysisTariffsModal" });
+                <Script id="google-analytics" strategy="afterInteractive">
+                  {`
+                  gtag('event', 'conversion', {'send_to': 'AW-11042174734/4IffCOP-4oQYEI7uqJEp'});
+                `}
+                </Script>;
               }}
               className="projectInfo__button-analysis"
             >
@@ -544,6 +550,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             <button
               onClick={() => {
                 dispatch({ type: "toggle_analysisTariffsModal" });
+                <Script id="google-analytics" strategy="afterInteractive">
+                  {`
+                  gtag('event', 'conversion', {'send_to': 'AW-11042174734/4IffCOP-4oQYEI7uqJEp'});
+                `}
+                </Script>;
               }}
               className="projectInfo__button-analysis"
             >
