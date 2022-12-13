@@ -39,7 +39,6 @@ const SoldBusinesses = () => {
     getBusinesses();
   }, []);
 
-  console.log(cards);
   return cards.length ? (
     <section className="soldBusinesses">
       <div className="container soldBusinesses__container">
