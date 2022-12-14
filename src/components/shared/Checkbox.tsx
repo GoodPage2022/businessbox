@@ -45,7 +45,7 @@ const Checkbox = ({
         // }
         if (e.target.name != "category") return true;
 
-        if (!categories.includes(text)) {
+        if (!categories.includes(text) && !!changeFilter) {
           changeFilter({
             target: {
               name: "category",
@@ -54,12 +54,14 @@ const Checkbox = ({
           });
         } else {
           const categoriesFiltered = categories.filter((c) => c != text);
-          changeFilter({
-            target: {
-              name: "category",
-              value: categoriesFiltered,
-            },
-          });
+          if (!!changeFilter) {
+            changeFilter({
+              target: {
+                name: "category",
+                value: categoriesFiltered,
+              },
+            });
+          }
         }
 
         setIsChosen((prev) => !prev);
