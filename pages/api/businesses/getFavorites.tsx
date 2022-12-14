@@ -1,11 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
 import clientPromise from "../../../mongodb/mongodb";
-import { inspect } from "util";
-
-type Data = {
-  name: string;
-};
+import { ObjectId } from "mongodb";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const token =
@@ -14,66 +9,43 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       : process.env.cockpitApiToken;
   const queryFilter = req.body.filter;
   const queryLimit = req.body.limit;
-  const querySort = req.body.sort;
   const querySkip = req.body.skip;
-
-  // let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`;
 
   let pipeLine = [];
 
-  // let body: any = {};
-
   if (queryFilter) {
-    // body["filter"] = queryFilter;
-    pipeLine.push({ $match: queryFilter });
-  }
-
-  if (querySort) {
-    // body["sort"] = querySort;
-    if (querySort["price"]) {
-      pipeLine.push({
-        $addFields: {
-          priceDig: {
-            $toDouble: "$price",
-          },
-        },
-      });
-      delete querySort.price;
-      querySort["priceDig"] = -1;
-    }
-    pipeLine.push({ $sort: querySort });
+    console.log(queryFilter);
+    
+    pipeLine.push({
+        $match: {
+            _id: {
+                $in: queryFilter.map((f: any) => new ObjectId(f._id)),
+            }
+        }
+    });
   }
 
   if (querySkip) {
-    // body["skip"] = querySkip;
     pipeLine.push({ $skip: querySkip });
   }
 
   if (queryLimit) {
-    // body["limit"] = queryLimit;
     pipeLine.push({ $limit: queryLimit });
   }
-
-  // console.log(pipeLine);
-  // console.log(JSON.stringify(pipeLine, null, 4));
-
 
   try {
     const client = await clientPromise;
     const db = client.db("bubox");
-    // const response = await axios.post(queryUrl, body, options);
+
     const budinesses = await db
       .collection("collections_Businesses")
       .aggregate(pipeLine)
       .toArray();
-    // console.log(response.data, "response.data");
 
-    return res
+      return res
       .status(200)
       .send({ entries: budinesses, total: budinesses.length });
   } catch (error: any) {
-    // console.log(error);
-
     return res
       .status(error.response ? error.response.status ?? 500 : 500)
       .send(error);
