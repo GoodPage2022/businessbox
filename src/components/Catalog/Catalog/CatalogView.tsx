@@ -173,11 +173,8 @@ const CatalogView = () => {
           delete requestBody.sort["_created"];
           break;
         case "sort-by-price":
-          // filterSetOfExp.push({
-          //   $expr: { $toDouble: "$price" },
-          // });
-          // requestBody.sort[`{$toDouble: "$price"}`] = -1;
           requestBody.sort["price"] = -1;
+          requestBody.rate = rate;
           delete requestBody.sort["_created"];
           break;
         case "state":
