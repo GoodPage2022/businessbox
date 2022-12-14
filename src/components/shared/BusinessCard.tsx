@@ -98,11 +98,11 @@ const BusinessCard = ({
   return (
     <li
       className={`business-card ${isSoldOut ? "sold" : ""}`}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        onContextMenuClick = true;
-        window.open(`/catalog/${alias}`, "_ blank", "noreferrer, noopener");
-      }}
+      // onContextMenu={(e) => {
+      //   e.preventDefault();
+      //   onContextMenuClick = true;
+      //   window.open(`/catalog/${alias}`, "_ blank", "noreferrer, noopener");
+      // }}
       onMouseDown={(e: any) => {
         setClickTime(Date.now());
         setClickPos({
@@ -120,9 +120,16 @@ const BusinessCard = ({
         console.log(clickedTime);
         console.log(clickedPos);
         setTimeout(function () {
-          if (clickedPos.x == 0 && clickedPos.y == 0 && !onContextMenuClick) {
-            console.log(onContextMenuClick);
-            router.push(`/catalog/${alias}`);
+          if (clickedPos.x == 0 && 
+              clickedPos.y == 0 && 
+              !onContextMenuClick) {
+
+                if ((typeof e.target.parentNode.className == 'string' && !e.target.parentNode.className.includes('business-card__heart-icon')) &&
+                (typeof e.target.className == 'string' && !e.target.className.includes('business-card__heart-icon'))) {
+                  console.log(onContextMenuClick);
+                  router.push(`/catalog/${alias}`);
+                  console.log("clicked END");
+                }
           }
         }, 0);
       }}
