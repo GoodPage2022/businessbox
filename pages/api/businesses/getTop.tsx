@@ -22,7 +22,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const budinesses = await db
       .collection("collections_Businesses")
       .aggregate(pipeLine)
-      .limit(2)
+      .limit(99)
       .toArray();
     return res
       .status(200)

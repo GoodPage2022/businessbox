@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios, { AxiosRequestConfig } from "axios";
 import { signIn as signInReducer } from "../../../store/actions/auth";
 
+import TopSVG from "../../assets/svg/top-label.svg";
 import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
@@ -25,6 +26,7 @@ const BusinessCard = ({
   isSoldOut,
   currency = "Гривня",
   negotiatedPrice,
+  order,
 }: {
   image: any;
   title: string;
@@ -36,6 +38,7 @@ const BusinessCard = ({
   isSoldOut?: boolean;
   currency?: string;
   negotiatedPrice?: boolean;
+  order?: number;
 }) => {
   const dispatchRedux = useDispatch();
   const router = useRouter();
@@ -120,20 +123,29 @@ const BusinessCard = ({
         console.log(clickedTime);
         console.log(clickedPos);
         setTimeout(function () {
-          if (clickedPos.x == 0 && 
-              clickedPos.y == 0 && 
-              !onContextMenuClick) {
-
-                if ((typeof e.target.parentNode.className == 'string' && !e.target.parentNode.className.includes('business-card__heart-icon')) &&
-                (typeof e.target.className == 'string' && !e.target.className.includes('business-card__heart-icon'))) {
-                  console.log(onContextMenuClick);
-                  router.push(`/catalog/${alias}`);
-                  console.log("clicked END");
-                }
+          if (clickedPos.x == 0 && clickedPos.y == 0 && !onContextMenuClick) {
+            if (
+              typeof e.target.parentNode.className == "string" &&
+              !e.target.parentNode.className.includes(
+                "business-card__heart-icon",
+              ) &&
+              typeof e.target.className == "string" &&
+              !e.target.className.includes("business-card__heart-icon")
+            ) {
+              console.log(onContextMenuClick);
+              router.push(`/catalog/${alias}`);
+              console.log("clicked END");
+            }
           }
         }, 0);
       }}
     >
+      {!!order && (
+        <div className="business-card__top">
+          <TopSVG />
+        </div>
+      )}
+
       {/* <Link href={`/catalog/${alias}`}>
         <a className="business-card__link"
         

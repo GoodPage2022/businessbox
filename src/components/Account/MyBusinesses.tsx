@@ -4,7 +4,6 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import PlusSVG from "../../assets/svg/plus.svg";
 import { useRouter } from "next/router";
-import CardsSlider from "../HomePage/CardsSlider/CardsSlider";
 import { Oval } from "react-loader-spinner";
 import RaiseRating from "./RaiseRating";
 import ModalRaiseRating from "../Modals/Modal-RaiseRating/Modal-RaiseRating";
@@ -81,8 +80,6 @@ const MyBusinesses = () => {
     }
   }, [cards, topBusinesses]);
 
-  console.log(lowRatingBusinesses);
-
   return (
     <section className="myBusinesses">
       <div className="container myBusinesses__container">
@@ -121,6 +118,7 @@ const MyBusinesses = () => {
                   sold_out,
                   currency,
                   negotiatedPrice,
+                  _order,
                 }: any) => (
                   <PopularCard
                     key={_id}
@@ -142,6 +140,7 @@ const MyBusinesses = () => {
                     isSoldOut={sold_out}
                     currency={currency}
                     negotiatedPrice={negotiatedPrice}
+                    order={_order}
                   />
                 ),
               )}
