@@ -45,6 +45,9 @@
     color: $main-text-color;
     margin-top: 20px;
   }
+  .custom-select__menu {
+    z-index: 555;
+  }
 }
 
 @media screen and (max-width: $size-tablet) {
@@ -358,5 +361,4 @@
   .business-card {
     width: auto;
   }
-
 }

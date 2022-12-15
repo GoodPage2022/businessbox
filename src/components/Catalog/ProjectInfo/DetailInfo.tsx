@@ -191,8 +191,10 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               Оборот протягом року
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.year_turnover +
-                (projectInfo.currency == "Долар" ? "$" : "₴") ?? "– – – – –"}
+              {projectInfo.year_turnover
+                ? projectInfo.year_turnover +
+                  (projectInfo.currency == "Долар" ? "$" : "₴")
+                : "– – – – –"}
             </p>
           </li>
           <li className="detailInfo__list-item">
@@ -200,8 +202,10 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               Приблизний щомісячний чистий прибуток
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.monthly_net_profit +
-                (projectInfo.currency == "Долар" ? "$" : "₴") ?? "– – – – –"}
+              {projectInfo.monthly_net_profit
+                ? projectInfo.monthly_net_profit +
+                  (projectInfo.currency == "Долар" ? "$" : "₴")
+                : "– – – – –"}
             </p>
           </li>
           <li className="detailInfo__list-item">
@@ -209,8 +213,10 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               Приблизний валовий дохід щомісячний
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.gross_monthly_income +
-                (projectInfo.currency == "Долар" ? "$" : "₴") ?? "– – – – –"}
+              {projectInfo.gross_monthly_income
+                ? projectInfo.gross_monthly_income +
+                  (projectInfo.currency == "Долар" ? "$" : "₴")
+                : "– – – – –"}
             </p>
           </li>
           <li className="detailInfo__list-item">
@@ -218,8 +224,10 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               Прогнозований оборот наступного року
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.estimated_turnover_next_year +
-                (projectInfo.currency == "Долар" ? "$" : "₴") ?? "– – – – –"}
+              {projectInfo.estimated_turnover_next_year
+                ? projectInfo.estimated_turnover_next_year +
+                  (projectInfo.currency == "Долар" ? "$" : "₴")
+                : "– – – – –"}
             </p>
           </li>
           <li className="detailInfo__list-item">
@@ -244,8 +252,10 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               Щомісячний зарплатний фонд (враховуючи премії та бонуси)
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.monthly_salary_fund +
-                (projectInfo.currency == "Долар" ? "$" : "₴") ?? "– – – – –"}
+              {projectInfo.monthly_salary_fund
+                ? projectInfo.monthly_salary_fund +
+                  (projectInfo.currency == "Долар" ? "$" : "₴")
+                : "– – – – –"}
             </p>
           </li>
           <li className="detailInfo__list-item">
@@ -253,8 +263,10 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               Приблизна ринкова вартість активів та обладнання
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.equipment_market_value +
-                (projectInfo.currency == "Долар" ? "$" : "₴") ?? "– – – – –"}
+              {projectInfo.equipment_market_value
+                ? projectInfo.equipment_market_value +
+                  (projectInfo.currency == "Долар" ? "$" : "₴")
+                : "– – – – –"}
             </p>
           </li>
           <li className="detailInfo__list-item">
@@ -262,8 +274,10 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               Приблизна сума непостійних витрат протягом року
             </p>
             <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.year_nonfixed_costs +
-                (projectInfo.currency == "Долар" ? "$" : "₴") ?? "– – – – –"}
+              {projectInfo.year_nonfixed_costs
+                ? projectInfo.year_nonfixed_costs +
+                  (projectInfo.currency == "Долар" ? "$" : "₴")
+                : "– – – – –"}
             </p>
           </li>
         </ul>
