@@ -174,7 +174,7 @@ const CatalogView = () => {
           delete requestBody.sort["_order"];
           break;
         case "sort-by-price":
-          requestBody.sort["price"] = -1;
+          requestBody.sort["price"] = filtersObj["sort-by-price"];
           requestBody.rate = rate;
           delete requestBody.sort["_created"];
           delete requestBody.sort["_order"];
@@ -281,16 +281,12 @@ const CatalogView = () => {
   }, [filtersObj]);
 
   const changeFilter = (e: any) => {
-    // console.log(e.target.name);
-
     if (
       e.target.name == "sort-by-popular" ||
       e.target.name == "sort-by-price"
     ) {
-      console.log(filtersObj);
       filtersObj["sort-by-price"] = "";
       filtersObj["sort-by-popular"] = "";
-      //  if (filtersObj.)
     }
     const filtersObjFirstPage = {
       ...filtersObj,
@@ -316,9 +312,6 @@ const CatalogView = () => {
       // console.log(values);
     },
   });
-
-  // console.log(cards);
-
   return (
     <section
       className={`catalogView ${state.isActiveMobFilter ? "active" : ""}`}
@@ -401,8 +394,12 @@ const CatalogView = () => {
                   label: "Відсортувати за популярністю",
                 },
                 {
-                  value: "Відсортувати за ціною",
-                  label: "Відсортувати за ціною",
+                  value: "Відсортувати за зростанням ціни",
+                  label: "Відсортувати за зростанням ціни",
+                },
+                {
+                  value: "Відсортувати за зменшенням ціни",
+                  label: "Відсортувати за зменшенням ціни",
                 },
               ]}
             />

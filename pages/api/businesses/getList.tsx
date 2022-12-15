@@ -31,6 +31,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
   if (querySort) {
     // body["sort"] = querySort;
+    let sortValue =
+      querySort?.price == "Відсортувати за зменшенням ціни" ? 1 : -1;
     if (querySort["price"]) {
       pipeLine.push({
         $addFields: {
@@ -45,7 +47,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       });
       delete querySort.price;
     }
-    let queryOrder = { priceDig: -1, ...querySort };
+    let queryOrder = { priceDig: sortValue, ...querySort };
     pipeLine.push({ $sort: queryOrder });
   }
 
@@ -61,7 +63,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
   // console.log(pipeLine);
   // console.log(JSON.stringify(pipeLine, null, 4));
-
 
   try {
     const client = await clientPromise;
