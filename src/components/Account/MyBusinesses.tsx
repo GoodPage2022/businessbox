@@ -6,11 +6,18 @@ import PlusSVG from "../../assets/svg/plus.svg";
 import { useRouter } from "next/router";
 import CardsSlider from "../HomePage/CardsSlider/CardsSlider";
 import { Oval } from "react-loader-spinner";
+import RaiseRating from "./RaiseRating";
+import ModalRaiseRating from "../Modals/Modal-RaiseRating/Modal-RaiseRating";
+import { MainContext } from "../../contexts/mainContext";
+import React from "react";
 
 const MyBusinesses = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [topBusinesses, setTopBusinesses] = useState<any>([]);
+  const [lowRatingBusinesses, setLowRatingBusinesses] = useState<any>([]);
+  const [state, dispatch] = React.useContext(MainContext);
 
   const router = useRouter();
   const getBusinesses = async () => {
@@ -34,9 +41,47 @@ const MyBusinesses = () => {
     return [];
   };
 
+  const getTopBusinesses = async () => {
+    const response = await axios.post(`/api/businesses/getTop`);
+
+    if (response.data) {
+      setTopBusinesses(response.data.entries);
+    }
+    setIsLoading(false);
+    return [];
+  };
+
+  const checkMyBusinessesRating = (
+    myBusinesses: [any],
+    topBusinesses: [any],
+  ) => {
+    const topBusinessesId = topBusinesses.map((business) => business._id);
+
+    const filteredBusinesses = myBusinesses.filter(
+      (business) => !topBusinessesId.includes(business._id),
+    );
+
+    setLowRatingBusinesses(filteredBusinesses);
+
+    return filteredBusinesses;
+  };
+
+  const closeRaiseRatingModal = () => {
+    dispatch({ type: "toggle_raiseRatingModal" });
+  };
+
   useEffect(() => {
     getBusinesses();
+    getTopBusinesses();
   }, []);
+
+  useEffect(() => {
+    if (topBusinesses.length > 0) {
+      checkMyBusinessesRating(cards, topBusinesses);
+    }
+  }, [cards, topBusinesses]);
+
+  console.log(lowRatingBusinesses);
 
   return (
     <section className="myBusinesses">
@@ -62,6 +107,7 @@ const MyBusinesses = () => {
           />
         ) : cards.length > 0 ? (
           <>
+            {lowRatingBusinesses.length > 0 && <RaiseRating />}
             <ul className="myBusinesses__cards--desctop">
               {cards.map(
                 ({
@@ -122,6 +168,10 @@ const MyBusinesses = () => {
           </div>
         )}
       </div>
+      <ModalRaiseRating
+        onClose={closeRaiseRatingModal}
+        lowRatingBusinesses={lowRatingBusinesses}
+      />
     </section>
   );
 };

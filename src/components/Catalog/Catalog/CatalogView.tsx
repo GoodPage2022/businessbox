@@ -40,7 +40,6 @@ const CatalogView = () => {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const { filters } = router.query;
-
   const cardsPerPage = screenWidth < 768 ? 8 : 9;
 
   const getCurrencyRate = async () => {
@@ -82,6 +81,7 @@ const CatalogView = () => {
     let requestBody: any = {
       user,
       sort: {
+        _order: -1,
         _created: -1,
       },
     };
@@ -171,14 +171,13 @@ const CatalogView = () => {
         case "sort-by-popular":
           requestBody.sort["view_count"] = -1;
           delete requestBody.sort["_created"];
+          delete requestBody.sort["_order"];
           break;
         case "sort-by-price":
-          // filterSetOfExp.push({
-          //   $expr: { $toDouble: "$price" },
-          // });
-          // requestBody.sort[`{$toDouble: "$price"}`] = -1;
           requestBody.sort["price"] = -1;
+          requestBody.rate = rate;
           delete requestBody.sort["_created"];
+          delete requestBody.sort["_order"];
           break;
         case "state":
           filterSetOfExp.push({
@@ -206,11 +205,13 @@ const CatalogView = () => {
 
     if (!filtersObj["sort-by-popular"]) {
       requestBody.sort["_created"] = -1;
+      requestBody.sort["_order"] = -1;
       delete requestBody.sort["view_count"];
     }
 
     if (!filtersObj["sort-by-price"]) {
       requestBody.sort["_created"] = -1;
+      requestBody.sort["_order"] = -1;
       delete requestBody.sort["price"];
     }
 
@@ -298,20 +299,11 @@ const CatalogView = () => {
     };
 
     setFiltersObj(filtersObjFirstPage);
-    // console.log(filtersObjFirstPage);
     let filtersObjFirstPageString = "";
     Object.keys(filtersObjFirstPage).map((f: any) => {
-      // console.log(filtersObjFirstPage[f]);
-      // if (
-      //   filtersObjFirstPage[f] == "Відсортувати за ціною" ||
-      //   filtersObjFirstPage[f] == "Відсортувати за популярністю"
-      // ) {
-      //   console.log(filtersObjFirstPageString.split("/"));
-      // }
       if (filtersObjFirstPage[f] != undefined && filtersObjFirstPage[f] != "")
         filtersObjFirstPageString += "/" + f + "/" + filtersObjFirstPage[f];
     });
-    // console.log(filtersObjFirstPageString);
 
     router.replace(`/catalog${filtersObjFirstPageString}`);
   };

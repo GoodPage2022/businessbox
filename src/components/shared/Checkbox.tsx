@@ -22,28 +22,30 @@ const Checkbox = ({
     <div
       className="checkbox__wrapper"
       onClick={(e: any) => {
-        if (e.target.name == "sorting") {
-          if (!categories.includes(text)) {
-            changeFilter({
-              target: {
-                name: "sorting",
-                value: text,
-              },
-            });
-          } else {
-            changeFilter({
-              target: {
-                name: "sorting",
-                value: "",
-              },
-            });
-          }
-          setIsChosen((prev) => !prev);
-          return;
-        }
+        console.log(e.target.name);
+
+        // if (e.target.name == "sorting") {
+        //   if (!categories.includes(text)) {
+        //     changeFilter({
+        //       target: {
+        //         name: "sorting",
+        //         value: text,
+        //       },
+        //     });
+        //   } else {
+        //     changeFilter({
+        //       target: {
+        //         name: "sorting",
+        //         value: "",
+        //       },
+        //     });
+        //   }
+        //   setIsChosen((prev) => !prev);
+        //   return;
+        // }
         if (e.target.name != "category") return true;
 
-        if (!categories.includes(text)) {
+        if (!categories.includes(text) && !!changeFilter) {
           changeFilter({
             target: {
               name: "category",
@@ -52,12 +54,14 @@ const Checkbox = ({
           });
         } else {
           const categoriesFiltered = categories.filter((c) => c != text);
-          changeFilter({
-            target: {
-              name: "category",
-              value: categoriesFiltered,
-            },
-          });
+          if (!!changeFilter) {
+            changeFilter({
+              target: {
+                name: "category",
+                value: categoriesFiltered,
+              },
+            });
+          }
         }
 
         setIsChosen((prev) => !prev);

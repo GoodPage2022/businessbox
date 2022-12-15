@@ -16,6 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const queryLimit = req.body.limit;
   const querySort = req.body.sort;
   const querySkip = req.body.skip;
+  const queryRate = req.body.rate;
 
   // let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`;
 
@@ -34,14 +35,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       pipeLine.push({
         $addFields: {
           priceDig: {
-            $toDouble: "$price",
+            $cond: [
+              { $eq: ["$currency", "Долар"] },
+              { $multiply: [queryRate, { $toDouble: "$price" }] },
+              { $toDouble: "$price" },
+            ],
           },
         },
       });
       delete querySort.price;
-      querySort["priceDig"] = -1;
     }
-    pipeLine.push({ $sort: querySort });
+    let queryOrder = { priceDig: -1, ...querySort };
+    pipeLine.push({ $sort: queryOrder });
   }
 
   if (querySkip) {
@@ -66,8 +71,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       .collection("collections_Businesses")
       .aggregate(pipeLine)
       .toArray();
-    // console.log(response.data, "response.data");
-
     return res
       .status(200)
       .send({ entries: budinesses, total: budinesses.length });

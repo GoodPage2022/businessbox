@@ -66,6 +66,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveAnalysisThankModal: !state.isActiveAnalysisThankModal,
       };
+    case "toggle_raiseRatingModal":
+      return {
+        ...state,
+        isActiveRaiseRatingModal: !state.isActiveRaiseRatingModal,
+      };
     case "toggle_currency":
       return {
         ...state,
@@ -77,6 +82,7 @@ export const reducer = (state: any, action: any) => {
         isOpenLargeImage: !state.isOpenLargeImage,
         imageUrl: state.imageUrl,
       };
+
     default:
       return state;
   }
@@ -96,6 +102,7 @@ export const initialState = {
   isActiveAnalysisModal: false,
   isActiveAnalysisTariffsModal: false,
   isActiveAnalysisThankModal: false,
+  isActiveRaiseRatingModal: false,
   tariff: "",
   isUah: false,
   isOpenLargeImage: false,
