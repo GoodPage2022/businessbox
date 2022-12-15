@@ -36,7 +36,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
           changeFilter({
             target: {
               name:
-                e.value == "Відсортувати за популярністю"
+                e.label == "Відсортувати за популярністю"
                   ? "sort-by-popular"
                   : "sort-by-price",
               value: e.value,
