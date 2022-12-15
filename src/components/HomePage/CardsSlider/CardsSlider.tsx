@@ -20,6 +20,8 @@ function SamplePrevArrow(props: any) {
 }
 
 const CardsSlider = ({ cards }: { cards: any }) => {
+  const [sliderClicked, setSliderClicked] = useState(false);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -95,7 +97,14 @@ const CardsSlider = ({ cards }: { cards: any }) => {
   };
 
   return cards.length > 1 ? (
-    <div onWheel={scroll}>
+    <div onWheel={scroll} className={`slider-fix ${sliderClicked ? 'sliderClicked' : ""}`} onMouseDown={(e: any)=>{
+      if (!e.target.className.includes('slick-arrow'))
+        setSliderClicked(!sliderClicked)
+    }} 
+    onMouseUp={(e: any)=>{
+      if (!e.target.className.includes('slick-arrow'))
+        setSliderClicked(!sliderClicked)
+    }}>
       <Slider {...settings} ref={slider}>
         {cards.map(
           ({

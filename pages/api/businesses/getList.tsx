@@ -49,21 +49,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     pipeLine.push({ $sort: queryOrder });
   }
 
-  if (queryLimit) {
-    // body["limit"] = queryLimit;
-    pipeLine.push({ $limit: queryLimit });
-  }
-
   if (querySkip) {
     // body["skip"] = querySkip;
     pipeLine.push({ $skip: querySkip });
   }
 
-  // const options = {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // };
+  if (queryLimit) {
+    // body["limit"] = queryLimit;
+    pipeLine.push({ $limit: queryLimit });
+  }
+
+  // console.log(pipeLine);
+  // console.log(JSON.stringify(pipeLine, null, 4));
+
+
   try {
     const client = await clientPromise;
     const db = client.db("bubox");
@@ -76,7 +75,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       .status(200)
       .send({ entries: budinesses, total: budinesses.length });
   } catch (error: any) {
-    console.log(error);
+    // console.log(error);
 
     return res
       .status(error.response ? error.response.status ?? 500 : 500)

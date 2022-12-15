@@ -14,23 +14,22 @@ const Favorites = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getBusinesses = async () => {
-    // console.log(user.favourites);
-
+    
     if (!user.favourites || user.favourites.length == 0) {
       setCards([]);
       setIsLoading(false);
       return [];
     }
 
-    const filter = {
-      _id: {
-        $in: user.favourites.map((f: any) => f._id),
-      },
-    };
-    const response = await axios.post(`/api/businesses/getList`, {
+    const filter = user.favourites;
+    const response = await axios.post(`/api/businesses/getFavorites`, {
       user,
       filter,
     });
+
+    console.log('response');
+    console.log(response);
+    
 
     if (response.data) {
       setCards(response.data.entries);

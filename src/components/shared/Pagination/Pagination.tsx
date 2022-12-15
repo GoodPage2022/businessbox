@@ -24,14 +24,21 @@ const Pagination = ({
         icon={<LeftArrowSVG />}
       />
       <ul className="pagination__list">
-        {Array.from(Array(countPages).keys()).map((item) => (
-          <PaginationItem
-            key={item + 1}
-            search={search}
-            item={item + 1}
-            pageNumber={pageNumber}
-          />
-        ))}
+        {Array.from(Array(countPages).keys()).map((item) => {
+          if (item == (parseInt(pageNumber.toString()) - 4)) return (<><span>...&nbsp;&nbsp;</span></>)
+          if (item == (parseInt(pageNumber.toString()) + 2)) return (<><span>...</span></>)
+          if (item > (parseInt(pageNumber.toString()) + 1)) return (<></>)
+          if (item < (parseInt(pageNumber.toString()) - 3)) return (<></>)
+
+          return (
+            <PaginationItem
+              key={item + 1}
+              search={search}
+              item={item + 1}
+              pageNumber={pageNumber}
+            />
+          )
+        })}
       </ul>
       <IconButton
         setPageNumber={
