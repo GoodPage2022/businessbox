@@ -16,6 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const queryLimit = req.body.limit;
   const querySort = req.body.sort;
   const querySkip = req.body.skip;
+  const queryRate = req.body.rate;
 
   // let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`;
 
@@ -30,18 +31,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
   if (querySort) {
     // body["sort"] = querySort;
+    let sortValue =
+      querySort?.price == "Відсортувати за зменшенням ціни" ? 1 : -1;
     if (querySort["price"]) {
       pipeLine.push({
         $addFields: {
           priceDig: {
-            $toDouble: "$price",
+            $cond: [
+              { $eq: ["$currency", "Долар"] },
+              { $multiply: [queryRate, { $toDouble: "$price" }] },
+              { $toDouble: "$price" },
+            ],
           },
         },
       });
       delete querySort.price;
-      querySort["priceDig"] = -1;
     }
-    pipeLine.push({ $sort: querySort });
+    let queryOrder = { priceDig: sortValue, ...querySort };
+    pipeLine.push({ $sort: queryOrder });
   }
 
   if (querySkip) {
@@ -57,7 +64,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   // console.log(pipeLine);
   // console.log(JSON.stringify(pipeLine, null, 4));
 
-
   try {
     const client = await clientPromise;
     const db = client.db("bubox");
@@ -66,8 +72,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       .collection("collections_Businesses")
       .aggregate(pipeLine)
       .toArray();
-    // console.log(response.data, "response.data");
-
     return res
       .status(200)
       .send({ entries: budinesses, total: budinesses.length });

@@ -15,6 +15,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
   const [showPassword, setShowPassword] = useState(false);
   const [registerError, setRegisterError] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -56,13 +57,20 @@ function ModalRegister({ onClose }: { onClose: any }) {
     };
 
     try {
-      const newUserResponse = await axios.post(`/api/account/signUp`, newUser);
+      if (agreePolicy) {
+        const newUserResponse = await axios.post(
+          `/api/account/signUp`,
+          newUser,
+        );
 
-      if (newUserResponse.status == 200) {
-        onClose();
-        resetForm({});
-        setRegisterError("");
-        dispatch({ type: "toggle_registrationFinishModal" });
+        if (newUserResponse.status == 200) {
+          onClose();
+          resetForm({});
+          setRegisterError("");
+          dispatch({ type: "toggle_registrationFinishModal" });
+        }
+      } else {
+        setRegisterError("Ви не дали згоду на обробку персональних даних");
       }
     } catch (err: any) {
       console.log("Register Error");
@@ -140,6 +148,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
               email: "",
               password: "",
               city: "",
+              checked: [],
             }}
             validate={(values) => {
               escapeHtml(values.name);
@@ -253,9 +262,28 @@ function ModalRegister({ onClose }: { onClose: any }) {
               {registerError && (
                 <div className="modal-register__failed">{registerError}</div>
               )}
-              <button className="modal-register__button" type="submit">
-                Зареєструватись
-              </button>
+              <div className="modal-register__policy">
+                <input
+                  className={`modal-register__checkbox__input ${
+                    agreePolicy ? "agree" : ""
+                  }`}
+                  type="checkbox"
+                  name="checked"
+                />
+                <label
+                  className="modal-register__checkbox__label"
+                  onClick={() => {
+                    setAgreePolicy((prev) => !prev);
+                  }}
+                >
+                  <span className="modal-register__checkbox__text section__secondary-text">
+                    Я згоден(а) на обробку персональних даних
+                  </span>
+                </label>
+                <button className="modal-register__button" type="submit">
+                  Зареєструватись
+                </button>
+              </div>
             </Form>
           </Formik>
         </div>

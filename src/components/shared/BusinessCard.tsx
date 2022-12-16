@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios, { AxiosRequestConfig } from "axios";
 import { signIn as signInReducer } from "../../../store/actions/auth";
 
+import TopSVG from "../../assets/svg/top-label.svg";
 import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
@@ -25,6 +26,7 @@ const BusinessCard = ({
   isSoldOut,
   currency = "Гривня",
   negotiatedPrice,
+  order,
 }: {
   image: any;
   title: string;
@@ -36,6 +38,7 @@ const BusinessCard = ({
   isSoldOut?: boolean;
   currency?: string;
   negotiatedPrice?: boolean;
+  order?: number;
 }) => {
   const dispatchRedux = useDispatch();
   const router = useRouter();
@@ -116,7 +119,6 @@ const BusinessCard = ({
       //     x: clickPos.x - e.screenX,
       //     y: clickPos.y - e.screenY,
       //   };
-
       //   console.log(clickedTime);
       //   console.log(clickedPos);
       //   setTimeout(function () {
@@ -134,6 +136,13 @@ const BusinessCard = ({
       //   }, 0);
       // }}
     >
+
+      {!!order && (
+        <div className="business-card__top">
+          <TopSVG />
+        </div>
+      )}
+
       <Link href={`/catalog/${alias}`}>
         <a className="business-card__link"
         

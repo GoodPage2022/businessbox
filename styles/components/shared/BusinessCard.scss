@@ -30,6 +30,13 @@
     visibility: visible;
   }
 
+  &__top {
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    z-index: 5;
+  }
+
   &__button-edit {
     position: absolute;
     top: 21px;

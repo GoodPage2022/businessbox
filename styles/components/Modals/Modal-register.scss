@@ -168,6 +168,51 @@
       cursor: pointer;
     }
   }
+  &__checkbox {
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    &__label {
+      position: relative;
+      display: flex;
+      font-family: "Alliance No.1";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+      color: #d3d2da;
+      cursor: pointer;
+
+      &::before {
+        display: inline-block;
+        min-width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        margin-right: 10px;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: 1px solid $grey-color;
+        content: "";
+      }
+    }
+
+    &__input {
+      display: none !important;
+      &.agree + .modal-register__checkbox__label::before {
+        background-color: #ac92ec;
+      }
+    }
+  }
+  &__policy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 @media screen and (max-width: $size-tablet) {
@@ -467,6 +512,10 @@
       border-radius: 18px;
       font-size: 14px;
       line-height: 17px;
+      margin-top: 15px;
+    }
+    &__policy {
+      display: block;
     }
   }
 }
