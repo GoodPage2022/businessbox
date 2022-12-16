@@ -31,8 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
   if (querySort) {
     // body["sort"] = querySort;
-    let sortValue =
-      querySort?.price == "Відсортувати за зменшенням ціни" ? 1 : -1;
+    let sortValue = querySort?.price == "decrease-price" ? -1 : 1;
     if (querySort["price"]) {
       pipeLine.push({
         $addFields: {
