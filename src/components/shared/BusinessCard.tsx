@@ -47,7 +47,8 @@ const BusinessCard = ({
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [clickTime, setClickTime] = useState<number>(0);
   const [clickPos, setClickPos] = useState<any>({});
-  const [rate, setRate] = useState<number>(0);
+  // const [rate, setRate] = useState<number>(0);
+  const rate = useSelector((state: any) => state.currency.value);
 
   let onContextMenuClick = false;
   useEffect(() => {
@@ -84,19 +85,19 @@ const BusinessCard = ({
     }
   };
 
-  const getCurrencyRate = async () => {
-    const { data: rateUSD, status: rateUSDStus } = await axios.get(
-      `/api/currency/get`,
-    );
+  // const getCurrencyRate = async () => {
+  //   const { data: rateUSD, status: rateUSDStus } = await axios.get(
+  //     `/api/currency/get`,
+  //   );
 
-    if (rateUSDStus == 200) {
-      setRate(rateUSD);
-    }
-  };
+  //   if (rateUSDStus == 200) {
+  //     setRate(rateUSD);
+  //   }
+  // };
 
-  useEffect(() => {
-    getCurrencyRate();
-  }, []);
+  // useEffect(() => {
+  //   getCurrencyRate();
+  // }, []);
 
   return (
     <li

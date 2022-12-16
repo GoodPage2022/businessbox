@@ -8,6 +8,7 @@ import debounce from "lodash.debounce";
 
 import BusinessCard from "../../shared/BusinessCard";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ondemand: LazyLoadTypes = "ondemand";
 
@@ -46,23 +47,25 @@ const CardsSlider = ({ cards }: { cards: any }) => {
   // };
 
   const [scrollLock, setScrollLock] = useState(false);
-  const [rate, setRate] = useState<number>(0);
+  // const [rate, setRate] = useState<number>(0);
+  const rate = useSelector((state: any) => state.currency.value);
+
 
   const slider = useRef<any>(null);
 
-  const getCurrencyRate = async () => {
-    const { data: rateUSD, status: rateUSDStus } = await axios.get(
-      `/api/currency/get`,
-    );
+  // const getCurrencyRate = async () => {
+  //   const { data: rateUSD, status: rateUSDStus } = await axios.get(
+  //     `/api/currency/get`,
+  //   );
 
-    if (rateUSDStus == 200) {
-      setRate(rateUSD);
-    }
-  };
+  //   if (rateUSDStus == 200) {
+  //     setRate(rateUSD);
+  //   }
+  // };
 
-  useEffect(() => {
-    getCurrencyRate();
-  }, []);
+  // useEffect(() => {
+  //   getCurrencyRate();
+  // }, []);
 
   const debouncedChangeHandler = useMemo(
     () =>

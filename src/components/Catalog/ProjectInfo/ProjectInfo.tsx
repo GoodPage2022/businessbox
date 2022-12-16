@@ -37,7 +37,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [comments, setComments] = useState<any>([]);
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
-  const [rate, setRate] = useState(0);
+  // const [rate, setRate] = useState(0);
+  const rate = useSelector((state: any) => state.currency.value);
   const [state, dispatch] = React.useContext(MainContext);
 
   function SampleNextArrow(props: any) {
@@ -230,15 +231,15 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     }
   };
 
-  const getCurrencyRate = async () => {
-    const { data: rateUSD, status: rateUSDStus } = await axios.get(
-      `/api/currency/get`,
-    );
+  // const getCurrencyRate = async () => {
+  //   const { data: rateUSD, status: rateUSDStus } = await axios.get(
+  //     `/api/currency/get`,
+  //   );
 
-    if (rateUSDStus == 200) {
-      setRate(rateUSD);
-    }
-  };
+  //   if (rateUSDStus == 200) {
+  //     setRate(rateUSD);
+  //   }
+  // };
 
   const closeAnalysisModal = () => {
     dispatch({ type: "toggle_analysisModal" });
@@ -255,9 +256,9 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     dispatch({ type: "toggle_large-image" });
   };
 
-  useEffect(() => {
-    getCurrencyRate();
-  }, []);
+  // useEffect(() => {
+  //   getCurrencyRate();
+  // }, []);
 
   useEffect(() => {
     getBusinesses();

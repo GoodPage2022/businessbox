@@ -11,6 +11,7 @@ import EyeSVG from "../../assets/svg/eye.svg";
 import UseUsd from "../../utils/useUsd";
 import UseUah from "../../utils/useUah";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const BusinessCardFavorites = ({
   image,
@@ -37,17 +38,18 @@ const BusinessCardFavorites = ({
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
-  const [rate, setRate] = useState<number>(0);
+  // const [rate, setRate] = useState<number>(0);
+  const rate = useSelector((state: any) => state.currency.value);
 
-  const getCurrencyRate = async () => {
-    const { data: rateUSD, status: rateUSDStus } = await axios.get(
-      `/api/currency/get`,
-    );
+  // const getCurrencyRate = async () => {
+  //   const { data: rateUSD, status: rateUSDStus } = await axios.get(
+  //     `/api/currency/get`,
+  //   );
 
-    if (rateUSDStus == 200) {
-      setRate(rateUSD);
-    }
-  };
+  //   if (rateUSDStus == 200) {
+  //     setRate(rateUSD);
+  //   }
+  // };
 
   useEffect(() => {
     if (router.pathname === "/account/my-businesses") {
@@ -55,9 +57,9 @@ const BusinessCardFavorites = ({
     }
   }, []);
 
-  useEffect(() => {
-    getCurrencyRate();
-  }, []);
+  // useEffect(() => {
+  //   getCurrencyRate();
+  // }, []);
 
   return (
     <li className="business-card-favorite">

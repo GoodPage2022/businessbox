@@ -11,11 +11,7 @@ import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps, session }: any) {
   let persistor = persistStore(store);
-  // if (router.asPath !== "/catalog") {
-  //   if (typeof window !== "undefined") {
-  //     document.querySelector("body")?.classList.remove("disable-scroll");
-  //   }
-  // }
+
   return (
     <>
       <Script

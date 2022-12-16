@@ -11,17 +11,18 @@ const Categories = () => {
   const router = useRouter();
   const [businessesQuantity, setBusinessesQuantity] = useState(0);
   const [businessesAmountPrice, setBusinessesAmountPrice] = useState(0);
-  const [rate, setRate] = useState(0);
+  // const [rate, setRate] = useState(0);
+  const rate = useSelector((state: any) => state.currency.value);
 
-  const getCurrencyRate = async () => {
-    const { data: rateUSD, status: rateUSDStus } = await axios.get(
-      `/api/currency/get`,
-    );
+  // const getCurrencyRate = async () => {
+  //   const { data: rateUSD, status: rateUSDStus } = await axios.get(
+  //     `/api/currency/get`,
+  //   );
 
-    if (rateUSDStus == 200) {
-      setRate(rateUSD);
-    }
-  };
+  //   if (rateUSDStus == 200) {
+  //     setRate(rateUSD);
+  //   }
+  // };
 
   const getBusinesses = async () => {
     const response = await axios.post(`/api/businesses/getList`);
@@ -48,7 +49,7 @@ const Categories = () => {
   };
 
   useEffect(() => {
-    getCurrencyRate();
+    // getCurrencyRate();
     getBusinesses();
   }, []);
 

@@ -4,10 +4,12 @@ import {combineReducers} from "redux";
 import { persistReducer } from 'redux-persist'
 import thunk from 'redux-thunk'
 import auth from './reducers/auth';
+import currency from './reducers/currency';
 
 
 const reducers = combineReducers({
-    auth
+    auth,
+    currency
 });
 
 const persistConfig = {
