@@ -45,12 +45,10 @@ const CardsSlider = ({ cards }: { cards: any }) => {
       spaceBetween={30}
       breakpoints={{
         1440: {
-          cssMode: false,
           spaceBetween: 0,
           slidesPerView: 4,
         },
         768: {
-          cssMode: false,
           spaceBetween: 0,
           slidesPerView: 2.7,
         },
@@ -62,7 +60,6 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         forceToAxis: true
       }}
       loop={true}
-      cssMode={true}
       navigation={true}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
