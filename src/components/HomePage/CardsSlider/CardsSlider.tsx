@@ -1,5 +1,8 @@
-import React, { useMemo, useRef, useState, useEffect } from "react";
+import React, { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import Slider, { LazyLoadTypes } from "react-slick";
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { Mousewheel } from 'swiper';
+import 'swiper/css';
 
 import debounce from "lodash.debounce";
 
@@ -8,50 +11,39 @@ import axios from "axios";
 
 const ondemand: LazyLoadTypes = "ondemand";
 
-function SampleNextArrow(props: any) {
-  const { className, onClick } = props;
-
-  return <div className={className} onClick={onClick} />;
-}
-
-function SamplePrevArrow(props: any) {
-  const { className, onClick } = props;
-  return <div className={className} onClick={onClick} />;
-}
-
 const CardsSlider = ({ cards }: { cards: any }) => {
-  const [sliderClicked, setSliderClicked] = useState(false);
+  // const [sliderClicked, setSliderClicked] = useState(false);
+// 
+  // const settings = {
+  //   dots: false,
+  //   infinite: true,
+  //   speed: 1000,
+  //   slidesToShow: 4,
+  //   slidesToScroll: 1,
+  //   arrows: true,
+  //   swipeToSlide: true,
+  //   className: "cards-slider",
+  //   nextArrow: <SampleNextArrow />,
+  //   prevArrow: <SamplePrevArrow />,
+  //   lazyLoad: ondemand,
+  //   autoplay: true,
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    arrows: true,
-    swipeToSlide: true,
-    className: "cards-slider",
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    lazyLoad: ondemand,
-    autoplay: true,
-
-    responsive: [
-      {
-        breakpoint: 1440,
-        infinite: true,
-        settings: { lazyLoad: ondemand, slidesToShow: 2.7 },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1.3,
-          arrows: false,
-          infinite: false,
-        },
-      },
-    ],
-  };
+  //   responsive: [
+  //     {
+  //       breakpoint: 1440,
+  //       infinite: true,
+  //       settings: { lazyLoad: ondemand, slidesToShow: 2.7 },
+  //     },
+  //     {
+  //       breakpoint: 768,
+  //       settings: {
+  //         slidesToShow: 1.3,
+  //         arrows: false,
+  //         infinite: false,
+  //       },
+  //     },
+  //   ],
+  // };
 
   const [scrollLock, setScrollLock] = useState(false);
   const [rate, setRate] = useState<number>(0);
@@ -80,33 +72,71 @@ const CardsSlider = ({ cards }: { cards: any }) => {
     [],
   );
 
-  const scroll = (e: any) => {
-    if (slider.current === null) return 0;
+  // const scroll = (e: any) => {
+  //   if (slider.current === null) return 0;
 
-    if (!scrollLock) {
-      if (e.nativeEvent.deltaX > 0) {
-        slider.current.slickNext();
-      } else if (e.nativeEvent.deltaX < 0) {
-        slider.current.slickPrev();
-      }
-    }
+  //   if (!scrollLock) {
+  //     if (e.nativeEvent.deltaX > 0) {
+  //       slider.current.slickNext();
+  //     } else if (e.nativeEvent.deltaX < 0) {
+  //       slider.current.slickPrev();
+  //     }
+  //   }
 
-    setScrollLock(true);
+  //   setScrollLock(true);
 
-    debouncedChangeHandler();
-  };
+  //   debouncedChangeHandler();
+  // };
 
+  const sliderRef = useRef<SwiperRef>(null);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
+
+  function SampleNextArrow() {
+    return <div className="slick-arrow slick-next" onClick={handleNext} />
+  }
+  
+  function SamplePrevArrow() {
+    return <div className="slick-arrow slick-prev" onClick={handlePrev} />
+  }
+    
   return cards.length > 1 ? (
-    <div onWheel={scroll} className={`slider-fix ${sliderClicked ? 'sliderClicked' : ""}`} onMouseDown={(e: any)=>{
-      if (!e.target.className.includes('slick-arrow'))
-        setSliderClicked(!sliderClicked)
-    }} 
-    onMouseUp={(e: any)=>{
-      if (!e.target.className.includes('slick-arrow'))
-        setSliderClicked(!sliderClicked)
-    }}>
-      <Slider {...settings} ref={slider}>
-        {cards.map(
+    <div className="swiper-outer">
+    <Swiper
+      ref={sliderRef}
+      modules={[ Mousewheel ]}
+      slidesPerView={1.3}
+      spaceBetween={30}
+      breakpoints={{
+        1440: {
+          spaceBetween: 0,
+          slidesPerView: 4,
+        },
+        768: {
+          spaceBetween: 0,
+          slidesPerView: 2.7,
+        },
+      }}
+      autoplay={{
+        delay: 3000,
+      }}
+      mousewheel={{
+        forceToAxis: true
+      }}
+      loop={true}
+      navigation={true}
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+      {cards.map(
           ({
             _id,
             title,
@@ -119,30 +149,34 @@ const CardsSlider = ({ cards }: { cards: any }) => {
             currency,
             negotiatedPrice,
           }: any) => (
-            <BusinessCard
-              key={_id}
-              alias={_id}
-              title={title}
-              description={description}
-              image={
-                images == null || !images.length
-                  ? ""
-                  : `${
-                      images[0].meta.assets == ""
-                        ? ``
-                        : `https://admin.bissbox.com`
-                    }${images[0].path}`
-              }
-              price={price}
-              views={view_count ?? 0}
-              isVerified={is_verified}
-              isSoldOut={sold_out}
-              currency={currency}
-              negotiatedPrice={negotiatedPrice}
-            />
+            <SwiperSlide>
+              <BusinessCard
+                key={_id}
+                alias={_id}
+                title={title}
+                description={description}
+                image={
+                  images == null || !images.length
+                    ? ""
+                    : `${
+                        images[0].meta.assets == ""
+                          ? ``
+                          : `https://admin.bissbox.com`
+                      }${images[0].path}`
+                }
+                price={price}
+                views={view_count ?? 0}
+                isVerified={is_verified}
+                isSoldOut={sold_out}
+                currency={currency}
+                negotiatedPrice={negotiatedPrice}
+              />
+            </SwiperSlide>
           ),
         )}
-      </Slider>
+    </Swiper>
+    <SamplePrevArrow />
+    <SampleNextArrow />
     </div>
   ) : (
     cards.map(

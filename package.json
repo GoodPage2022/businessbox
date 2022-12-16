@@ -46,7 +46,8 @@
     "redux-thunk": "^2.4.1",
     "sass": "^1.54.5",
     "sendpulse-api": "^1.1.5",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "swiper": "^8.4.5"
   },
   "devDependencies": {
     "@lexical/react": "^0.6.0",

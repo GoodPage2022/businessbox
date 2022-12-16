@@ -320,12 +320,12 @@
 }
 
 .slick-track {
-  margin-left: initial;
-  transition: transform 1000ms ease 0s !important;
+  // margin-left: initial;
+  // transition: transform 1000ms ease 0s !important;
 }
 
 .sliderClicked .slick-track {
-  transition: none !important;
+  // transition: none !important;
 }
 
 @media screen and (max-width: $size-tablet) {

@@ -103,42 +103,42 @@ const BusinessCard = ({
       //   onContextMenuClick = true;
       //   window.open(`/catalog/${alias}`, "_ blank", "noreferrer, noopener");
       // }}
-      onMouseDown={(e: any) => {
-        setClickTime(Date.now());
-        setClickPos({
-          x: e.screenX,
-          y: e.screenY,
-        });
-      }}
-      onMouseUp={(e: any) => {
-        const clickedTime = Date.now() - clickTime;
-        const clickedPos = {
-          x: clickPos.x - e.screenX,
-          y: clickPos.y - e.screenY,
-        };
+      // onMouseDown={(e: any) => {
+      //   setClickTime(Date.now());
+      //   setClickPos({
+      //     x: e.screenX,
+      //     y: e.screenY,
+      //   });
+      // }}
+      // onMouseUp={(e: any) => {
+      //   const clickedTime = Date.now() - clickTime;
+      //   const clickedPos = {
+      //     x: clickPos.x - e.screenX,
+      //     y: clickPos.y - e.screenY,
+      //   };
 
-        console.log(clickedTime);
-        console.log(clickedPos);
-        setTimeout(function () {
-          if (clickedPos.x == 0 && 
-              clickedPos.y == 0 && 
-              !onContextMenuClick) {
+      //   console.log(clickedTime);
+      //   console.log(clickedPos);
+      //   setTimeout(function () {
+      //     if (clickedPos.x == 0 && 
+      //         clickedPos.y == 0 && 
+      //         !onContextMenuClick) {
 
-                if ((typeof e.target.parentNode.className == 'string' && !e.target.parentNode.className.includes('business-card__heart-icon')) &&
-                (typeof e.target.className == 'string' && !e.target.className.includes('business-card__heart-icon'))) {
-                  console.log(onContextMenuClick);
-                  router.push(`/catalog/${alias}`);
-                  console.log("clicked END");
-                }
-          }
-        }, 0);
-      }}
+      //           if ((typeof e.target.parentNode.className == 'string' && !e.target.parentNode.className.includes('business-card__heart-icon')) &&
+      //           (typeof e.target.className == 'string' && !e.target.className.includes('business-card__heart-icon'))) {
+      //             console.log(onContextMenuClick);
+      //             router.push(`/catalog/${alias}`);
+      //             console.log("clicked END");
+      //           }
+      //     }
+      //   }, 0);
+      // }}
     >
-      {/* <Link href={`/catalog/${alias}`}>
+      <Link href={`/catalog/${alias}`}>
         <a className="business-card__link"
         
         title={title}></a>
-      </Link> */}
+      </Link>
       {isMyBusinessesPage ? (
         <button
           data-tip="Редагувати бізнес"

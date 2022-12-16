@@ -27,7 +27,7 @@ const handler = async(
     const db = client.db("bubox")
     const da = await db.collection('collections_Businesses')
               .updateOne({ _id: new ObjectId(data.data._id) }, 
-                        { $set: { view_count: data.data.view_count } })        
+                        { $set: { view_count: data.data.view_count.toString() } })      
     res.status(200).json( da )
   } catch (err: any) {
     res.status(500).json({error: err})
