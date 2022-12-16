@@ -1,49 +1,50 @@
-.slick-next, .slick-prev {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 20%;
-    z-index: 1;
-    opacity: 0;
-    transition: all 1s ease;
-    width: 70px;
-    height: 70px;
-    box-shadow: 0 0 50px rgb(0 0 0 / 30%);
-    background: hsla(0,0%,100%,.7);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-radius: 50%;
-  }
-  .slick-next:before, .slick-prev:before {
-    position: absolute;
-    background-image: url('/assets/svg/slider-arrow.svg');
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    -o-object-fit: cover;
-    object-fit: cover;
-    width: 40px;
-    height: 40px;
-    opacity: 1;
-    content: "";
-  }
-  .slick-next {
-    right: 0px;
-  }
-  .slick-prev {
-    left: 0px;
-  }
-  .slick-prev:before {
-    -webkit-transform: rotate(180deg);
-  }
-  .swiper-outer:hover .slick-next {
-    opacity: 1;
-    right: -25px;
-  }
-  .swiper-outer:hover .slick-prev {
-    opacity: 1;
-    left: -25px;
-  }
-  .swiper-outer {
+.swiper-outer {
     position: relative;
-  }
+
+    .slick-next, .slick-prev {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 20%;
+        z-index: 1;
+        opacity: 0;
+        transition: all 1s ease;
+        width: 70px;
+        height: 70px;
+        box-shadow: 0 0 50px rgb(0 0 0 / 30%);
+        background: hsla(0,0%,100%,.7);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+    }
+    .slick-next:before, .slick-prev:before {
+        position: absolute;
+        background-image: url('/assets/svg/slider-arrow.svg');
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        -o-object-fit: cover;
+        object-fit: cover;
+        width: 40px;
+        height: 40px;
+        opacity: 1;
+        content: "";
+    }
+    .slick-next {
+        right: 0px;
+    }
+    .slick-prev {
+        left: 0px;
+    }
+    .slick-prev:before {
+        -webkit-transform: rotate(180deg);
+    }
+    &:hover .slick-next {
+        opacity: 1;
+        right: -25px;
+    }
+    &:hover .slick-prev {
+        opacity: 1;
+        left: -25px;
+    }
+}
