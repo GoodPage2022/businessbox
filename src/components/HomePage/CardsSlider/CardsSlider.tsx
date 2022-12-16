@@ -149,7 +149,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
             currency,
             negotiatedPrice,
           }: any) => (
-            <SwiperSlide>
+            <SwiperSlide key={_id}>
               <BusinessCard
                 key={_id}
                 alias={_id}
