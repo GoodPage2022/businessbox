@@ -11,45 +11,20 @@ const Categories = () => {
   const router = useRouter();
   const [businessesQuantity, setBusinessesQuantity] = useState(0);
   const [businessesAmountPrice, setBusinessesAmountPrice] = useState(0);
-  // const [rate, setRate] = useState(0);
   const rate = useSelector((state: any) => state.currency.value);
 
-  // const getCurrencyRate = async () => {
-  //   const { data: rateUSD, status: rateUSDStus } = await axios.get(
-  //     `/api/currency/get`,
-  //   );
-
-  //   if (rateUSDStus == 200) {
-  //     setRate(rateUSD);
-  //   }
-  // };
-
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getList`);
+    const response = await axios.post(`/api/businesses/stats`, { rate });
 
     if (response.data) {
-      const calculatedPrice = response.data.entries.reduce(
-        (acc: number, item: any) => {
-          if (!isNaN(Number(item.price))) {
-            if (item.currency == "Долар") {
-              item.price = Number(item.price) * rate;
-            }
-
-            return acc + Number(item.price);
-          }
-          return acc;
-        },
-        0,
-      );
-      setBusinessesQuantity(response.data.entries.length);
-      setBusinessesAmountPrice(calculatedPrice.toFixed(0));
+      setBusinessesQuantity(response.data[0].count);
+      setBusinessesAmountPrice(response.data[0].total);
     }
 
     return;
   };
 
   useEffect(() => {
-    // getCurrencyRate();
     getBusinesses();
   }, []);
 
@@ -208,7 +183,7 @@ const Categories = () => {
           Зареєстровано бізнесів: {businessesQuantity}
         </p>
         <p className="section__secondary-text">
-          Продається на сумму: {businessesAmountPrice} грн
+          Продається на сумму: {businessesAmountPrice.toFixed()} грн
         </p>
       </div>
     </div>
