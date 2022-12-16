@@ -133,6 +133,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const getBusinesses = async () => {
     const requestBody: any = {
       user,
+      limit: 10,
       sort: {
         _created: -1,
       },
