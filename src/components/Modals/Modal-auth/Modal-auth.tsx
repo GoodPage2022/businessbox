@@ -269,7 +269,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
 
               <button
                 className="modal-auth__google"
-                onClick={() => signInGoogle()}
+                onClick={() => signInGoogle('google')}
                 type="button"
               >
                 <GoogleSVG />
