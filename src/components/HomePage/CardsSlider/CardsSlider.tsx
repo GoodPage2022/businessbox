@@ -1,95 +1,20 @@
 import React, { useMemo, useRef, useState, useEffect, useCallback } from "react";
-import Slider, { LazyLoadTypes } from "react-slick";
+// import Slider, { LazyLoadTypes } from "react-slick";
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper';
 import 'swiper/css';
 
-import debounce from "lodash.debounce";
+// import debounce from "lodash.debounce";
 
 import BusinessCard from "../../shared/BusinessCard";
-import axios from "axios";
-import { useSelector } from "react-redux";
+// import axios from "axios";
+// import { useSelector } from "react-redux";
 
-const ondemand: LazyLoadTypes = "ondemand";
+// const ondemand: LazyLoadTypes = "ondemand";
 
 const CardsSlider = ({ cards }: { cards: any }) => {
-  // const [sliderClicked, setSliderClicked] = useState(false);
-// 
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 1000,
-  //   slidesToShow: 4,
-  //   slidesToScroll: 1,
-  //   arrows: true,
-  //   swipeToSlide: true,
-  //   className: "cards-slider",
-  //   nextArrow: <SampleNextArrow />,
-  //   prevArrow: <SamplePrevArrow />,
-  //   lazyLoad: ondemand,
-  //   autoplay: true,
-
-  //   responsive: [
-  //     {
-  //       breakpoint: 1440,
-  //       infinite: true,
-  //       settings: { lazyLoad: ondemand, slidesToShow: 2.7 },
-  //     },
-  //     {
-  //       breakpoint: 768,
-  //       settings: {
-  //         slidesToShow: 1.3,
-  //         arrows: false,
-  //         infinite: false,
-  //       },
-  //     },
-  //   ],
-  // };
-
-  const [scrollLock, setScrollLock] = useState(false);
-  // const [rate, setRate] = useState<number>(0);
-  const rate = useSelector((state: any) => state.currency.value);
-
-
-  const slider = useRef<any>(null);
-
-  // const getCurrencyRate = async () => {
-  //   const { data: rateUSD, status: rateUSDStus } = await axios.get(
-  //     `/api/currency/get`,
-  //   );
-
-  //   if (rateUSDStus == 200) {
-  //     setRate(rateUSD);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getCurrencyRate();
-  // }, []);
-
-  const debouncedChangeHandler = useMemo(
-    () =>
-      debounce(() => {
-        setScrollLock(false);
-      }, 100),
-    [],
-  );
-
-  // const scroll = (e: any) => {
-  //   if (slider.current === null) return 0;
-
-  //   if (!scrollLock) {
-  //     if (e.nativeEvent.deltaX > 0) {
-  //       slider.current.slickNext();
-  //     } else if (e.nativeEvent.deltaX < 0) {
-  //       slider.current.slickPrev();
-  //     }
-  //   }
-
-  //   setScrollLock(true);
-
-  //   debouncedChangeHandler();
-  // };
+  // const [scrollLock, setScrollLock] = useState(false);
+  // const rate = useSelector((state: any) => state.currency.value);
 
   const sliderRef = useRef<SwiperRef>(null);
 
@@ -120,10 +45,12 @@ const CardsSlider = ({ cards }: { cards: any }) => {
       spaceBetween={30}
       breakpoints={{
         1440: {
+          cssMode: false,
           spaceBetween: 0,
           slidesPerView: 4,
         },
         768: {
+          cssMode: false,
           spaceBetween: 0,
           slidesPerView: 2.7,
         },
@@ -135,6 +62,7 @@ const CardsSlider = ({ cards }: { cards: any }) => {
         forceToAxis: true
       }}
       loop={true}
+      cssMode={true}
       navigation={true}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
