@@ -390,15 +390,15 @@ const CatalogView = () => {
               component={CustomSelect}
               options={[
                 {
-                  value: "Відсортувати за популярністю",
+                  value: "decrease-popular",
                   label: "Відсортувати за популярністю",
                 },
                 {
-                  value: "Відсортувати за зростанням ціни",
+                  value: "increase-price",
                   label: "Відсортувати за зростанням ціни",
                 },
                 {
-                  value: "Відсортувати за зменшенням ціни",
+                  value: "decrease-price",
                   label: "Відсортувати за зменшенням ціни",
                 },
               ]}
