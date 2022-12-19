@@ -120,6 +120,12 @@
     }
   }
 
+  &__catalog {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   &__contacts {
     display: flex;
     flex-direction: column;
