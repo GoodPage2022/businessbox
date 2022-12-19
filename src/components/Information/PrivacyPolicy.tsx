@@ -2,7 +2,7 @@ const PrivacyPolicy = () => {
   return (
     <section className="information">
       <div className="container information__container">
-        {/* <h1 className="title information__title">Політика конфеденційності</h1> */}
+        <h1 className="title information__title">Політика конфеденційності</h1>
         <h2 className="information__pre-title">
           1. ОБЛАСТЬ ЗАСТОСУВАННЯ ТА ЗГОДА{" "}
         </h2>
