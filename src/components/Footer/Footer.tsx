@@ -133,6 +133,26 @@ const Footer: React.FC = () => {
               Каталог бізнесів
             </a>
           </Link>
+          <Link href="/information/about-us">
+            <a className="section__secondary-text--white footer__categories--button">
+              Про нас
+            </a>
+          </Link>
+          <Link href="/information/delivery-payment">
+            <a className="section__secondary-text--white footer__categories--button">
+              Доставка і оплата
+            </a>
+          </Link>
+          <Link href="/information/public-offer">
+            <a className="section__secondary-text--white footer__categories--button">
+              Публічна оферта
+            </a>
+          </Link>
+          <Link href="/information/privacy-policy">
+            <a className="section__secondary-text--white footer__categories--button">
+              Умови конфіденційності
+            </a>
+          </Link>
         </div>
 
         <div className="footer__contacts">
@@ -146,9 +166,7 @@ const Footer: React.FC = () => {
               <a href="tel:0662026304">+38 (066) 202-63-04</a>
             </p>
             <p className="footer__contacts--item">
-              <a href="mailto:info@bissbox.com">
-              info@bissbox.com
-              </a>
+              <a href="mailto:info@bissbox.com">info@bissbox.com</a>
             </p>
           </div>
           <p className="footer__contacts--text section__secondary-text--white">
@@ -169,9 +187,7 @@ const Footer: React.FC = () => {
             <a href="tel:0662026304">+38 (066) 202-63-04</a>
           </p>
           <p className="footer__contacts--item">
-            <a href="mailto:info@bissbox.com">
-            info@bissbox.com
-            </a>
+            <a href="mailto:info@bissbox.com">info@bissbox.com</a>
           </p>
         </div>
         <div className="footer__nav">
@@ -191,6 +207,26 @@ const Footer: React.FC = () => {
             <Link href="/catalog">
               <a className="section__secondary-text--white footer__categories--button">
                 Каталог бізнесів
+              </a>
+            </Link>
+            <Link href="/information/about-us">
+              <a className="section__secondary-text--white footer__categories--button">
+                Про нас
+              </a>
+            </Link>
+            <Link href="/information/delivery-payment">
+              <a className="section__secondary-text--white footer__categories--button">
+                Доставка і оплата
+              </a>
+            </Link>
+            <Link href="/information/public-offer">
+              <a className="section__secondary-text--white footer__categories--button">
+                Публічна оферта
+              </a>
+            </Link>
+            <Link href="/information/privacy-policy">
+              <a className="section__secondary-text--white footer__categories--button">
+                Умови конфіденційності
               </a>
             </Link>
           </div>
