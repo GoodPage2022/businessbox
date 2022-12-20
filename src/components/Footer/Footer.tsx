@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Field, FieldProps, FormikProvider, useFormik } from "formik";
+import Image from "next/image";
 
 import Select from "react-select";
 import Networks from "./Networks";
@@ -126,6 +127,26 @@ const Footer: React.FC = () => {
               options={OurCategories}
             />
           </FormikProvider>
+          <div className="footer__images">
+            <div className="footer__image">
+              <Image
+                className=""
+                src="/assets/images/mastercard-logo.png"
+                layout="fill"
+                objectFit="contain"
+                alt="card-image"
+              />
+            </div>
+            <div className="footer__image">
+              <Image
+                className=""
+                src="/assets/images/visa-logo.png"
+                layout="fill"
+                objectFit="contain"
+                alt="card-image"
+              />
+            </div>
+          </div>
         </div>
         <div className="footer__catalog">
           <Link href="/catalog">
@@ -202,6 +223,26 @@ const Footer: React.FC = () => {
                 options={OurCategories}
               />
             </FormikProvider>
+            <div className="footer__images">
+              <div className="footer__image">
+                <Image
+                  className=""
+                  src="/assets/images/mastercard-logo.png"
+                  layout="fill"
+                  objectFit="contain"
+                  alt="card-image"
+                />
+              </div>
+              <div className="footer__image">
+                <Image
+                  className=""
+                  src="/assets/images/visa-logo.png"
+                  layout="fill"
+                  objectFit="contain"
+                  alt="card-image"
+                />
+              </div>
+            </div>
           </div>
           <div className="footer__catalog">
             <Link href="/catalog">
