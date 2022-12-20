@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const DeliveryPayment = () => {
   return (
     <section className="information">
@@ -21,26 +19,6 @@ const DeliveryPayment = () => {
           Вартість даної послуги становить 40 грн за одне підняття одного
           оголошення.
         </p>
-        <div className="information__images">
-          <div className="information__image">
-            <Image
-              className=""
-              src="/assets/images/mastercard-logo.png"
-              layout="fill"
-              objectFit="contain"
-              alt="card-image"
-            />
-          </div>
-          <div className="information__image">
-            <Image
-              className=""
-              src="/assets/images/visa-logo.png"
-              layout="fill"
-              objectFit="contain"
-              alt="card-image"
-            />
-          </div>
-        </div>
       </div>
     </section>
   );

@@ -60,14 +60,6 @@
       padding-left: 30px;
     }
   }
-  &__images {
-    display: flex;
-  }
-  &__image {
-    position: relative;
-    width: 125px;
-    height: 70px;
-  }
 }
 
 @media screen and (max-width: $size-tablet) {
