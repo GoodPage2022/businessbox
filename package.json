@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.171.0",
+    "@azarat/liqpay": "1.0.0",
     "@emailjs/browser": "^3.7.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@types/lodash.debounce": "^4.0.7",

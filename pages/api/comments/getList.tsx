@@ -42,7 +42,7 @@ const handler = async(
   
   try {
     const response = await axios.post(queryUrl, body, options)
-    console.log(response.data);
+    // console.log(response.data);
     
     res.status(200).json( response.data )
   } catch (err: any) {

@@ -19,12 +19,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       `${process.env.cockpitApiUrl}/collections/save/requesttoverify?token=${token}`,
       data,
     );
-    res.status(200).json({ data: analysisResponse.data });
+    return res.status(200).send(analysisResponse.data);
   } catch (err: any) {
     console.log(err);
-    console.log(req.body.user);
-
-    res.status(500).json({ err: JSON.stringify(err) });
+    return res.status(500).send({ err: JSON.stringify(err) });
   }
 };
 

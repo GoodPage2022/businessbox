@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import MaskedInput from "react-text-mask";
 import axios from "axios";
@@ -10,11 +10,16 @@ import CustomInput from "../../shared/CustomInput";
 import { Oval } from "react-loader-spinner";
 import { useRouter } from "next/router";
 
+import LiqPay from "@azarat/liqpay";
+
 function ModalAnalysis({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
   const [error, setError] = useState("");
+  const [liqpayForm, setLiqpayForm] = useState<JSX.Element>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const liqpayFormRef = useRef<HTMLFormElement>(null);
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -22,6 +27,13 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    if (!liqpayForm) return
+    if (!liqpayFormRef.current) return
+
+    liqpayFormRef.current?.submit()
+  }, [liqpayForm]);
 
   const handleKeyDown = (e: any) => {
     if (e.code === "Escape") {
@@ -54,16 +66,34 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
     try {
       const response = await axios.post(`/api/analysis/post`, newRequest);
       if (response.status == 200) {
-        onClose();
-        resetForm({});
-        setError("");
-        dispatch({ type: "toggle_analysisThankModal" });
+        console.log(response.data);
+        
+        const liqpay = new LiqPay('sandbox_i13254680548', 'sandbox_QlAH6aqaFsFWqoIK8aU8pN0gcUi7V61ngvXhbDQS');
+        const liqpayJSX = liqpay.cnb_form({
+          'language'       : 'ru',
+          'action'         : 'pay',
+          'amount'         : '1',
+          'currency'       : 'UAH',
+          'description'    : 'Оплата послуг Bissbox. Тариф Lite',
+          'order_id'       : response.data._id.toString(),
+          'version'        : '3',
+          'server_url'     : `https://bissbox.vercel.app/api/analysis/completeOrder`,
+          'result_url'     : `https://bissbox.vercel.app/catalog/636ba4bd8c04fa28f00f4d07`
+        }, liqpayFormRef);
+    
+        setLiqpayForm(liqpayJSX)
+    
+        // onClose();
+        // resetForm({});
+        // setError("");
+        // dispatch({ type: "toggle_analysisThankModal" });
       }
     } catch (err: any) {
       console.log(err);
       setError("На жаль, виникла помилка. Спробуйте ще раз");
     }
-    setIsLoading(false);
+
+    // setIsLoading(false);
   };
 
   function escapeHtml(text: string) {
@@ -144,6 +174,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
             <Form className="modal-analysis__form">
               <div className="modal-analysis__name-wrapper">
                 <label className="modal-analysis__field">
+                  test
                   <span className="modal-analysis__label">Ім’я</span>
                   <Field
                     className="modal-analysis__input section__primary-text"
@@ -201,6 +232,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
               </button>
             </Form>
           </Formik>
+          {liqpayForm}
         </div>
       </div>
     </div>
