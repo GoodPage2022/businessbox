@@ -4,7 +4,8 @@ import { ObjectId } from "mongodb";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const bodyParams = req.body
-    const dataDecoded = JSON.parse(Buffer.from(bodyParams.data, 'base64').toString('ascii'))
+    const dataDecoded = Buffer.from(bodyParams.data, 'base64').toString('ascii')
+    const dataParsed = JSON.parse(dataDecoded)
 
     try {
         const client = await clientPromise;
@@ -12,16 +13,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
         const orderComplete = await db
             .collection("debug")
-            .insertOne(dataDecoded)
+            .insertOne({
+                dataDecoded,
+                dataParsed,
+                bodyParams
+            })
     } catch (err: any) {
         console.log(err);
     }
 
-    if (!dataDecoded.order_id) {
+    if (!dataParsed.order_id) {
         return res.status(500).send({ err: "order_id is required" });
     }
 
-    if (dataDecoded.status != "success") {
+    if (dataParsed.status != "success") {
         return res.status(500).send({ err: "Payment Error" });
     }
 
@@ -32,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         const orderComplete = await db
             .collection("collections_requesttoverify")
             .updateOne({
-                _id: new ObjectId(dataDecoded.order_id.toString())
+                _id: new ObjectId(dataParsed.order_id.toString())
             }, {
                 $set: {
                     status: 'Paid'
