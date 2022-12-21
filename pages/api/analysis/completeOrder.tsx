@@ -8,20 +8,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const queryParams = req.query
     const bodyParams = req.body
 
-    if (!bodyParams.order_id) {
-        return res.status(500).send({ err: "order_id is required" });
-    }
+    // if (!bodyParams.order_id) {
+    //     return res.status(500).send({ err: "order_id is required" });
+    // }
 
-    if (bodyParams.status != "success") {
-        return res.status(500).send({ err: "Payment Error" });
-    }
+    // if (bodyParams.status != "success") {
+    //     return res.status(500).send({ err: "Payment Error" });
+    // }
 
     try {
         const client = await clientPromise;
         const db = client.db("bubox");
 
         const orderComplete = await db
-            .collection("debug")
+            .collection("test")
             .insertOne({
                 queryParams: queryParams,
                 bodyParams: bodyParams
