@@ -6,6 +6,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const bodyParams = req.body
     const dataDecoded = JSON.parse(Buffer.from(bodyParams.data, 'base64').toString('ascii'))
 
+    try {
+        const client = await clientPromise;
+        const db = client.db("bubox");
+
+        const orderComplete = await db
+            .collection("debug")
+            .insertOne(dataDecoded)
+    } catch (err: any) {
+        console.log(err);
+    }
+
     if (!dataDecoded.order_id) {
         return res.status(500).send({ err: "order_id is required" });
     }
