@@ -4,23 +4,8 @@ import { ObjectId } from "mongodb";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const bodyParams = req.body
-    const dataDecoded = Buffer.from(bodyParams.data, 'base64').toString('ascii')
+    const dataDecoded = Buffer.from(bodyParams.data, 'base64').toString('utf8')
     const dataParsed = JSON.parse(dataDecoded)
-
-    try {
-        const client = await clientPromise;
-        const db = client.db("bubox");
-
-        const orderComplete = await db
-            .collection("debug")
-            .insertOne({
-                dataDecoded,
-                dataParsed,
-                bodyParams
-            })
-    } catch (err: any) {
-        console.log(err);
-    }
 
     if (!dataParsed.order_id) {
         return res.status(500).send({ err: "order_id is required" });
