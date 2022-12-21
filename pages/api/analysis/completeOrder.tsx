@@ -21,13 +21,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         const db = client.db("bubox");
 
         const orderComplete = await db
-            .collection("collections_requesttoverify")
-            .updateOne({
-                _id: new ObjectId(bodyParams.order_id.toString())
-            }, {
-                $set: {
-                    status: 'Paid'
-                }
+            .collection("debug")
+            .insertOne({
+                queryParams: queryParams,
+                bodyParams: bodyParams
             })
   
         return res.status(200).send({ success: true });
