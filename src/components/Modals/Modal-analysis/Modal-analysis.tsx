@@ -46,7 +46,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
       'order_id'       : orderId.toString(),
       'version'        : '3',
       'server_url'     : `https://bissbox.vercel.app/api/analysis/completeOrder`,
-      'result_url'     : `https://bissbox.vercel.app/catalog/${projectId}`
+      'result_url'     : `https://bissbox.vercel.app/catalog/${projectId}?order_id=${orderId}`
     }, liqpayFormRef);
 
     setLiqpayForm(liqpayJSX)

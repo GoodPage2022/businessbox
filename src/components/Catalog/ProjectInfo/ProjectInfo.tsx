@@ -35,11 +35,42 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState<any>([]);
   const [comments, setComments] = useState<any>([]);
+  const [orderId, setOrderId] = useState<string>("");
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
   // const [rate, setRate] = useState(0);
   const rate = useSelector((state: any) => state.currency.value);
   const [state, dispatch] = React.useContext(MainContext);
+
+  useEffect(()=>{
+    if (!router) return
+    if (!router.query.order_id) return
+
+    setOrderId(router.query.order_id.toString())
+  },[router])
+
+  const getOrderStatus = async (orderId: string) => {
+    try {
+      const response = await axios.get(`/api/analysis/get`, {
+        params: {
+          order_id: orderId
+        }
+      });
+      
+      if (response.status == 200) {
+        if (response.data.status == "Paid") {
+          dispatch({ type: "toggle_analysisThankModal" });
+        }
+      }
+    } catch (err: any) {
+      console.log(err);
+    }
+  }
+
+  useEffect(()=>{
+    if (!orderId) return
+    getOrderStatus(orderId)
+  },[orderId])
 
   function SampleNextArrow(props: any) {
     const { className, onClick } = props;
