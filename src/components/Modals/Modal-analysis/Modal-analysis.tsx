@@ -15,12 +15,12 @@ import LiqPay from "@azarat/liqpay";
 function ModalAnalysis({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
   const [error, setError] = useState("");
-  const [liqpayForm, setLiqpayForm] = useState<JSX.Element>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [projectId, setProjectId] = useState<string>("");
   const [orderId, setOrderId] = useState<string>("");
   const [tariff, setTariff] = useState<string>("");
   const router = useRouter();
+  const [liqpayForm, setLiqpayForm] = useState<JSX.Element>();
   const liqpayFormRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {

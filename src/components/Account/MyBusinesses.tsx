@@ -60,6 +60,9 @@ const MyBusinesses = () => {
       (business) => !topBusinessesId.includes(business._id),
     );
 
+    console.log("filteredBusinesses", filteredBusinesses);
+    
+
     setLowRatingBusinesses(filteredBusinesses);
 
     return filteredBusinesses;

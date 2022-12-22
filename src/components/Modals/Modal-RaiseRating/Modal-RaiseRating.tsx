@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import CrossSVG from "../../../assets/svg/cross.svg";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,18 +6,49 @@ import { MainContext } from "../../../contexts/mainContext";
 import MainButtonRed from "../../shared/MainButtonRed";
 import axios from "axios";
 import { useRouter } from "next/router";
+import LiqPay from "@azarat/liqpay";
 
 function ModalRaiseRating({
   onClose,
   lowRatingBusinesses,
 }: {
   onClose: any;
-  lowRatingBusinesses: [any];
+  lowRatingBusinesses: any[];
 }) {
   const [state, dispatch] = React.useContext(MainContext);
   const [raiseRatingError, setraiseRatingError] = useState("");
   const user = useSelector((state: any) => state.auth.user);
   const router = useRouter();
+  const [liqpayForm, setLiqpayForm] = useState<JSX.Element>();
+  const liqpayFormRef = useRef<HTMLFormElement>(null);
+  const [projectsId, setProjectsId] = useState<string[]>();
+  const [orderId, setOrderId] = useState<string>("");
+
+  useEffect(() => {
+    if (!liqpayForm) return
+    if (!liqpayFormRef.current) return
+
+    liqpayFormRef.current?.submit()
+  }, [liqpayForm]);
+
+  useEffect(() => {
+    if (!orderId) return
+
+    const liqpay = new LiqPay(process.env.liqpayClientId ?? "", process.env.liqpayClientSecret ?? "");
+    const liqpayJSX = liqpay.cnb_form({
+      'language'       : 'ru',
+      'action'         : 'pay',
+      'amount'         : '40',
+      'currency'       : 'UAH',
+      'description'    : `Оплата послуг Bissbox. Послуга "Підняти в топ"`,
+      'order_id'       : orderId.toString(),
+      'version'        : '3',
+      'server_url'     : `https://bissbox.vercel.app/api/raiseToTop`,
+      'result_url'     : `https://bissbox.vercel.app/catalog/top/${orderId}`
+    }, liqpayFormRef);
+
+    setLiqpayForm(liqpayJSX) 
+  }, [orderId])
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -39,9 +70,18 @@ function ModalRaiseRating({
     }
   };
 
+  useEffect(() => {
+    if (!liqpayForm) return
+    if (!liqpayFormRef.current) return
+
+    liqpayFormRef.current?.submit()
+  }, [liqpayForm]);
+
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    
     // const { deleteReason, deleteReasonOther } = values;
     console.log(values);
+    // setProjectsId(values)
     // const data = {
     //   user,
     // deleteReason,
@@ -51,7 +91,15 @@ function ModalRaiseRating({
     // };
 
     try {
-      // const reponseDelete = await axios.post("/api/businesses/delete", data);
+      const createOrder = await axios.post("/api/businesses/topOrder", {
+        projects: values,
+        user,
+        status: "Pending"
+      });
+
+      if (createOrder.status == 200) {
+        setOrderId(createOrder.data._id)
+      }
     } catch (error) {
       console.log(error);
     }
@@ -126,6 +174,7 @@ function ModalRaiseRating({
                 </ul>
                 <div className="modal-raiseRating__button">
                   <MainButtonRed label="До оплати" />
+                  <div className="liqpayForm">{liqpayForm}</div>
                 </div>
               </Form>
             )}

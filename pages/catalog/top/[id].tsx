@@ -18,8 +18,16 @@ const Project: NextPage = () => {
         id,
       };
 
-      const response = await axios.post(`/api/businesses/raiseRating`, reqData);
-      console.log(response.data);
+      const order = await axios.get(`/api/businesses/getTopOrder`, {
+        params: {
+          order_id: id
+        }
+      });
+
+      if (order.status == 200) {
+        if (order.data.status != 'Paid') setIsError(true)
+      }
+      
     } catch (err: any) {
       setIsError(true);
       console.log(err);
