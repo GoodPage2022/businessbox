@@ -17,8 +17,40 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
   const [error, setError] = useState("");
   const [liqpayForm, setLiqpayForm] = useState<JSX.Element>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [projectId, setProjectId] = useState<string>("");
+  const [orderId, setOrderId] = useState<string>("");
+  const [tariff, setTariff] = useState<string>("");
   const router = useRouter();
   const liqpayFormRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (!router.query.project) return
+    setProjectId(router.query.project.toString())
+  },[router])
+
+  useEffect(() => {
+    if (!state.tariff) return
+    setTariff(state.tariff)
+  },[state])
+
+  useEffect(() => {
+    if (!orderId || !tariff || !projectId) return
+
+    const liqpay = new LiqPay(process.env.liqpayClientId ?? "", process.env.liqpayClientSecret ?? "");
+    const liqpayJSX = liqpay.cnb_form({
+      'language'       : 'ru',
+      'action'         : 'pay',
+      'amount'         : (tariff == "premium") ? '2' : '1',
+      'currency'       : 'UAH',
+      'description'    : `Оплата послуг Bissbox. Тариф "${tariff}"`,
+      'order_id'       : orderId.toString(),
+      'version'        : '3',
+      'server_url'     : `https://bissbox.vercel.app/api/analysis/completeOrder`,
+      'result_url'     : `https://bissbox.vercel.app/catalog/${projectId}`
+    }, liqpayFormRef);
+
+    setLiqpayForm(liqpayJSX)
+  },[orderId, tariff, projectId])
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -66,22 +98,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
     try {
       const response = await axios.post(`/api/analysis/post`, newRequest);
       if (response.status == 200) {
-        console.log(response.data);
-        
-        const liqpay = new LiqPay('sandbox_i13254680548', 'sandbox_QlAH6aqaFsFWqoIK8aU8pN0gcUi7V61ngvXhbDQS');
-        const liqpayJSX = liqpay.cnb_form({
-          'language'       : 'ru',
-          'action'         : 'pay',
-          'amount'         : '1',
-          'currency'       : 'UAH',
-          'description'    : 'Оплата послуг Bissbox. Тариф Lite',
-          'order_id'       : response.data._id.toString(),
-          'version'        : '3',
-          'server_url'     : `https://bissbox.vercel.app/api/analysis/completeOrder`,
-          'result_url'     : `https://bissbox.vercel.app/catalog/636ba4bd8c04fa28f00f4d07`
-        }, liqpayFormRef);
-    
-        setLiqpayForm(liqpayJSX)
+        setOrderId(response.data._id)
     
         // onClose();
         // resetForm({});

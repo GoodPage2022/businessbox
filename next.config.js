@@ -10,6 +10,8 @@ const withReactSvg = require('next-react-svg')
 const path = require('path')
 
 const env = {
+  liqpayClientId: process.env.LIQPAY_CLIENT_ID,
+  liqpayClientSecret: process.env.LIQPAY_CLIENT_SECRET,
   clientId: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   jwtSecret: process.env.JWT_SECRET,
