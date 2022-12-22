@@ -33,12 +33,13 @@ function ModalRaiseRating({
 
   useEffect(() => {
     if (!orderId) return
+    if (!projectsId || projectsId.length == 0) return
 
     const liqpay = new LiqPay(process.env.liqpayClientId ?? "", process.env.liqpayClientSecret ?? "");
     const liqpayJSX = liqpay.cnb_form({
       'language'       : 'ru',
       'action'         : 'pay',
-      'amount'         : '40',
+      'amount'         : (40 * projectsId.length).toString(),
       'currency'       : 'UAH',
       'description'    : `Оплата послуг Bissbox. Послуга "Підняти в топ"`,
       'order_id'       : orderId.toString(),
@@ -48,7 +49,7 @@ function ModalRaiseRating({
     }, liqpayFormRef);
 
     setLiqpayForm(liqpayJSX) 
-  }, [orderId])
+  }, [orderId, projectsId])
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -81,7 +82,7 @@ function ModalRaiseRating({
     
     // const { deleteReason, deleteReasonOther } = values;
     console.log(values);
-    // setProjectsId(values)
+    setProjectsId(values.checked)
     // const data = {
     //   user,
     // deleteReason,
@@ -92,13 +93,13 @@ function ModalRaiseRating({
 
     try {
       const createOrder = await axios.post("/api/businesses/topOrder", {
-        projects: values,
+        projects: values.checked,
         user,
         status: "Pending"
       });
 
       if (createOrder.status == 200) {
-        setOrderId(createOrder.data._id)
+        setOrderId(createOrder.data.insertedId)        
       }
     } catch (error) {
       console.log(error);
