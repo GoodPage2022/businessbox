@@ -9,6 +9,9 @@ const Project: NextPage = () => {
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
+    console.log(id);
+    console.log(typeof id == "string");
+    
     if (typeof id == "string") raiseRating(id);
   }, [id]);
 
@@ -24,7 +27,7 @@ const Project: NextPage = () => {
         }
       });
 
-      if (order.status == 200) {
+      if (order.status == 200) {        
         if (order.data.status != 'Paid') setIsError(true)
       }
       

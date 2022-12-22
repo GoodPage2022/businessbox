@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         const db = client.db("bubox");
 
         const orderTop = await db.collection("collections_toporders").findOne({
-            _id: new ObjectId(queryParams._id?.toString())
+            _id: new ObjectId(queryParams.order_id?.toString())
         })
 
         return res.status(200).send(orderTop);
