@@ -35,6 +35,9 @@ function ModalRaiseRating({
     if (!orderId) return
     if (!projectsId || projectsId.length == 0) return
 
+    console.log("projectsId", projectsId);
+    
+
     const liqpay = new LiqPay(process.env.liqpayClientId ?? "", process.env.liqpayClientSecret ?? "");
     const liqpayJSX = liqpay.cnb_form({
       'language'       : 'ru',
@@ -99,7 +102,9 @@ function ModalRaiseRating({
       });
 
       if (createOrder.status == 200) {
-        setOrderId(createOrder.data.insertedId)        
+        setOrderId(createOrder.data.insertedId)
+        console.log("insertedId", createOrder.data.insertedId);
+                
       }
     } catch (error) {
       console.log(error);
