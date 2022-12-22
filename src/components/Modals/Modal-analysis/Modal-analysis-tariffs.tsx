@@ -100,6 +100,7 @@ function ModalAnalysisTariffs({ onClose }: { onClose: any }) {
                   state.tariff = "light";
                 }}
               >
+                <div className="modal-analysisTariffs__price">1 грн</div>
                 <MainButtonRed label="Замовити Light" />
               </div>
             </ul>
@@ -130,6 +131,7 @@ function ModalAnalysisTariffs({ onClose }: { onClose: any }) {
                   state.tariff = "premium";
                 }}
               >
+                <div className="modal-analysisTariffs__price">2 грн</div>
                 <MainButtonRed label="Замовити Premium" />
               </div>
             </ul>

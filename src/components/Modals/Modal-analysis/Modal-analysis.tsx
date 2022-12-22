@@ -245,7 +245,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
 
               {error && <div className="modal-analysis__failed">{error}</div>}
               <button className="modal-analysis__button" type="submit">
-                Відправити
+                Перейти до оплати
               </button>
             </Form>
           </Formik>
