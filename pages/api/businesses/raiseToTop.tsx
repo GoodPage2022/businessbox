@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import clientPromise from "../../../mongodb/mongodb";
 
@@ -20,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
         const orderTop = await db
             .collection("collections_toporders").findOneAndUpdate({
-                _id: dataParsed.order_id
+                _id: new ObjectId(dataParsed.order_id)
             }, {
                 $set: {
                     status: 'Paid'
@@ -30,7 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         const raised = await db
             .collection("collections_Businesses")
             .updateMany(
-                { _id: { $in: orderTop.value?.projects } },
+                { _id: { $in: orderTop.value?.projects.map((id:string) => new ObjectId(id)) } },
                 { $set: { _order: Date.now() } },
             );  
 
