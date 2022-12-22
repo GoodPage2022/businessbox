@@ -11,7 +11,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         const orderTop = await db.collection("collections_toporders").insertOne({
             projects: bodyParams.projects,
             user: bodyParams.user,
-            status: bodyParams.status
+            status: bodyParams.status,
+            date: Date.now()
         })
 
         return res.status(200).send(orderTop);
