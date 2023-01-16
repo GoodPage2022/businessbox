@@ -117,6 +117,12 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               setIsPhoneShow((prev) => !prev);
               setIsEmailShow(false);
               setIsInstagramShow(false);
+              <Script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=G-3J60LWZ0W1"
+                strategy="afterInteractive"
+              ></Script>;
+
               <Script id="google-analytics" strategy="afterInteractive">
                 {`
                   gtag('event', 'conversion', {'send_to': 'AW-11042174734/IV-OCOD-4oQYEI7uqJEp'});

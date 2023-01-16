@@ -71,6 +71,11 @@ function ModalAuth({ onClose }: { onClose: any }) {
     router.push("/#register");
     dispatch({ type: "toggle_authModal" });
     dispatch({ type: "toggle_registrationModal" });
+    <Script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3J60LWZ0W1"
+      strategy="afterInteractive"
+    ></Script>;
     <Script id="google-analytics" strategy="afterInteractive">
       {`
           gtag('event', 'conversion', {'send_to': 'AW-11042174734/e0iYCN3-4oQYEI7uqJEp'});
@@ -269,7 +274,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
 
               <button
                 className="modal-auth__google"
-                onClick={() => signInGoogle('google')}
+                onClick={() => signInGoogle("google")}
                 type="button"
               >
                 <GoogleSVG />
