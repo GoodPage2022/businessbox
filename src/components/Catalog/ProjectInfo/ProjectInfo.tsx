@@ -42,21 +42,21 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const rate = useSelector((state: any) => state.currency.value);
   const [state, dispatch] = React.useContext(MainContext);
 
-  useEffect(()=>{
-    if (!router) return
-    if (!router.query.order_id) return
+  useEffect(() => {
+    if (!router) return;
+    if (!router.query.order_id) return;
 
-    setOrderId(router.query.order_id.toString())
-  },[router])
+    setOrderId(router.query.order_id.toString());
+  }, [router]);
 
   const getOrderStatus = async (orderId: string) => {
     try {
       const response = await axios.get(`/api/analysis/get`, {
         params: {
-          order_id: orderId
-        }
+          order_id: orderId,
+        },
       });
-      
+
       if (response.status == 200) {
         if (response.data.status == "Paid") {
           dispatch({ type: "toggle_analysisThankModal" });
@@ -65,12 +65,12 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     } catch (err: any) {
       console.log(err);
     }
-  }
+  };
 
-  useEffect(()=>{
-    if (!orderId) return
-    getOrderStatus(orderId)
-  },[orderId])
+  useEffect(() => {
+    if (!orderId) return;
+    getOrderStatus(orderId);
+  }, [orderId]);
 
   function SampleNextArrow(props: any) {
     const { className, onClick } = props;
@@ -523,7 +523,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
-            <button
+            {/* <button
               onClick={() => {
                 dispatch({ type: "toggle_analysisTariffsModal" });
                 <Script
@@ -540,7 +540,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               className="projectInfo__button-analysis"
             >
               Замовити аналіз бізнесу
-            </button>
+            </button> */}
           </div>
           <div className="projectInfo__price">
             <p className="section__primary-text">Ціна:</p>
@@ -585,7 +585,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
-            <button
+            {/* <button
               onClick={() => {
                 dispatch({ type: "toggle_analysisTariffsModal" });
                 <Script
@@ -602,7 +602,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               className="projectInfo__button-analysis"
             >
               Замовити аналіз бізнесу
-            </button>
+            </button> */}
           </div>
         </div>
         <ProfileInfo projectData={projectInfo} />
