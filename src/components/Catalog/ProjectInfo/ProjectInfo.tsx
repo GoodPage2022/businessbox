@@ -523,7 +523,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
-            {/* <button
+            <button
               onClick={() => {
                 dispatch({ type: "toggle_analysisTariffsModal" });
                 <Script
@@ -540,7 +540,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               className="projectInfo__button-analysis"
             >
               Замовити аналіз бізнесу
-            </button> */}
+            </button>
           </div>
           <div className="projectInfo__price">
             <p className="section__primary-text">Ціна:</p>
@@ -585,7 +585,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
-            {/* <button
+            <button
               onClick={() => {
                 dispatch({ type: "toggle_analysisTariffsModal" });
                 <Script
@@ -602,7 +602,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               className="projectInfo__button-analysis"
             >
               Замовити аналіз бізнесу
-            </button> */}
+            </button>
           </div>
         </div>
         <ProfileInfo projectData={projectInfo} />

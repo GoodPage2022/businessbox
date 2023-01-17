@@ -106,7 +106,7 @@ const MyBusinesses = () => {
           />
         ) : cards.length > 0 ? (
           <>
-            {/* {lowRatingBusinesses.length > 0 && <RaiseRating />} */}
+            {lowRatingBusinesses.length > 0 && <RaiseRating />}
             <ul className="myBusinesses__cards--desctop">
               {cards.map(
                 ({
