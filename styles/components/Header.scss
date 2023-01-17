@@ -96,6 +96,12 @@
         }
       }
 
+      & svg {
+        & path {
+          fill: white;
+        }
+      }
+
       &--favorites {
         display: flex;
         align-items: center;

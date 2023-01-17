@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
+import PhoneSVG from "../../assets/svg/phone.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import UserSVG from "../../assets/svg/user.svg";
 import ExitSVG from "../../assets/svg/exit.svg";
@@ -79,6 +80,13 @@ const Right = () => {
               icon={<SearchSVG />}
             />
           )}
+        </li>{" "}
+        <li className="header__right__btn">
+          <IconButton
+            onClick={() => dispatch({ type: "toggle_phoneModal" })}
+            borderColor="#FFFFFF"
+            icon={<PhoneSVG />}
+          />
         </li>
         {user != null && (
           <li className="header__right__btn">
@@ -90,7 +98,6 @@ const Right = () => {
             </button>
           </li>
         )}
-
         <li
           className="header__right__btn" /* onClick={user == null ? openModal : signOut} */
         >

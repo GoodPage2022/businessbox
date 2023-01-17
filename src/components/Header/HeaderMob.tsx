@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import PhoneSVG from "../../assets/svg/phone.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import ExitSVG from "../../assets/svg/exit.svg";
 import CloseBurgerSVG from "../../assets/svg/close-burger.svg";
@@ -121,6 +122,13 @@ const RightMob = () => {
               icon={<SearchSVG />}
             />
           )}
+        </li>
+        <li className="header__right__btn">
+          <IconButton
+            onClick={() => dispatch({ type: "toggle_phoneModal" })}
+            borderColor="#FFFFFF"
+            icon={<PhoneSVG />}
+          />
         </li>
         <div className="header__right__btn-wrapper">
           {user != null && (

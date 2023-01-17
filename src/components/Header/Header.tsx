@@ -6,6 +6,7 @@ import Right from "./Right";
 import HeaderMob from "./HeaderMob";
 import BurgerMenu from "./BurgerMenu";
 import { MainContext } from "../../contexts/mainContext";
+import ModalPhone from "../Modals/modal-phone/Modal-phone";
 
 const Header = () => {
   const [offset, setOffset] = useState(0);
@@ -23,6 +24,10 @@ const Header = () => {
   const closeMenuBurger = () => {
     setShowModal((prevState) => !prevState);
     setActive(!active);
+  };
+
+  const closeModal = () => {
+    dispatch({ type: "toggle_phoneModal" });
   };
 
   useEffect(() => {
@@ -52,6 +57,7 @@ const Header = () => {
           <HeaderMob />
         </div>
 
+        <ModalPhone onClose={closeModal} />
         <BurgerMenu />
       </header>
     </>

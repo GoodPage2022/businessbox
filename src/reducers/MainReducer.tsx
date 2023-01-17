@@ -66,6 +66,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveAnalysisThankModal: !state.isActiveAnalysisThankModal,
       };
+    case "toggle_phoneModal":
+      return {
+        ...state,
+        isActivePhoneModal: !state.isActivePhoneModal,
+      };
     case "toggle_raiseRatingModal":
       return {
         ...state,
@@ -107,4 +112,5 @@ export const initialState = {
   isUah: false,
   isOpenLargeImage: false,
   imageUrl: "",
+  isActivePhoneModal: false,
 };
