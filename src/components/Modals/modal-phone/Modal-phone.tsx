@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import ReactTooltip from "react-tooltip";
-import ArrowSVG from "../../../assets/svg/arrow-project.svg";
+import CopySVG from "../../../assets/svg/copy.svg";
 import CrossSVG from "../../../assets/svg/cross.svg";
 import { MainContext } from "../../../contexts/mainContext";
 import { Oval } from "react-loader-spinner";
@@ -59,7 +59,7 @@ function ModalPhone({ onClose }: { onClose: any }) {
               data-event-off={"focusout"}
             >
               <div>
-                <ArrowSVG />
+                <CopySVG />
               </div>
             </button>
             <ReactTooltip

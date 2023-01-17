@@ -31,6 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
   if (querySort) {
     // body["sort"] = querySort;
+    let queryOrder = { ...querySort };
     let sortValue = querySort?.price == "decrease-price" ? -1 : 1;
     if (querySort["price"]) {
       pipeLine.push({
@@ -45,8 +46,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         },
       });
       delete querySort.price;
+      queryOrder = { priceDig: sortValue, ...querySort };
     }
-    let queryOrder = { priceDig: sortValue, ...querySort };
+
+    if (querySort["view_count"]) {
+      pipeLine.push({
+        $addFields: {
+          viewCountDig: {
+            $toDouble: "$view_count",
+          },
+        },
+      });
+      delete querySort.view_count;
+      queryOrder = { viewCountDig: -1, ...querySort };
+    }
+
     pipeLine.push({ $sort: queryOrder });
   }
 
