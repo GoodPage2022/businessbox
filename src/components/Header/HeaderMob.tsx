@@ -8,6 +8,8 @@ import CloseBurgerSVG from "../../assets/svg/close-burger.svg";
 import BurgerSVG from "../../assets/svg/burger-menu.svg";
 import UserSVG from "../../assets/svg/user.svg";
 import SearchSVG from "../../assets/svg/search.svg";
+
+import LogoSVG from "../../assets/svg/logo.svg";
 import IconButton from "../shared/IconButton";
 import MainButton from "../shared/MainButton";
 import MainButtonRed from "../shared/MainButtonRed";
@@ -95,6 +97,7 @@ const RightMob = () => {
               state.isActiveHeaderSearch ? "hidden" : ""
             }`}
           >
+            <LogoSVG />
             Business Box
           </a>
         </Link>
