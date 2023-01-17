@@ -97,8 +97,11 @@ const RightMob = () => {
               state.isActiveHeaderSearch ? "hidden" : ""
             }`}
           >
-            <LogoSVG />
-            Business Box
+            <div className="header__logo__svg">
+              <LogoSVG />
+            </div>
+
+            {/* Business Box */}
           </a>
         </Link>
       </div>

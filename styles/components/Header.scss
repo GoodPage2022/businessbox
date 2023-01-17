@@ -38,6 +38,11 @@
       text-align: left;
       color: $white-color;
     }
+
+    &__svg {
+      width: 70px;
+      height: 70px;
+    }
   }
 
   &__nav {
