@@ -123,8 +123,8 @@ const BusinessCard = ({
       //   console.log(clickedTime);
       //   console.log(clickedPos);
       //   setTimeout(function () {
-      //     if (clickedPos.x == 0 && 
-      //         clickedPos.y == 0 && 
+      //     if (clickedPos.x == 0 &&
+      //         clickedPos.y == 0 &&
       //         !onContextMenuClick) {
 
       //           if ((typeof e.target.parentNode.className == 'string' && !e.target.parentNode.className.includes('business-card__heart-icon')) &&
@@ -137,7 +137,6 @@ const BusinessCard = ({
       //   }, 0);
       // }}
     >
-
       {!!order && (
         <div className="business-card__top">
           <TopSVG />
@@ -145,9 +144,7 @@ const BusinessCard = ({
       )}
 
       <Link href={`/catalog/${alias}`}>
-        <a className="business-card__link"
-        
-        title={title}></a>
+        <a className="business-card__link" title={title}></a>
       </Link>
       {isMyBusinessesPage ? (
         <button
@@ -181,7 +178,7 @@ const BusinessCard = ({
       <div className="business-card__info">
         <h3 className="business-card__title">
           <span>{title}</span>
-          <div>
+          {/* <div>
             <CheckSVG
               data-tip={
                 isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
@@ -190,7 +187,7 @@ const BusinessCard = ({
                 isVerified ? "active" : ""
               }`}
             />
-          </div>
+          </div> */}
 
           <ReactTooltip place="top" type="dark" effect="solid" />
         </h3>
@@ -271,14 +268,14 @@ const BusinessCard = ({
                 {views}
               </p>
             </div>
-            <CheckSVG
+            {/* <CheckSVG
               data-tip={
                 isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
               }
               className={`business-card__ckeck-icon--mob ${
                 isVerified ? "active" : ""
               }`}
-            />
+            /> */}
             <ReactTooltip place="top" type="dark" effect="solid" />
           </div>
         </div>
