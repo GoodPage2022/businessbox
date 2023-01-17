@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import ReactTooltip from "react-tooltip";
 
+import ArrowBackSVG from "../../../assets/svg/project-info-arrow.svg";
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
 import BusinessCard from "../../shared/BusinessCard";
@@ -116,6 +117,9 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
   return (
     <section className="detailInfo">
       <div className="container detailInfo__container">
+        <div className="projectInfo__arrow-back" onClick={() => router.back()}>
+          <ArrowBackSVG />
+        </div>
         <div className="detailInfo__title">
           <h1 className="detailInfo__title--text title">{projectInfo.title}</h1>
           <div className="detailInfo__title--icons">

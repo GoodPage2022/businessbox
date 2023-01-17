@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import PhoneSVG from "../../assets/svg/phone.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import ExitSVG from "../../assets/svg/exit.svg";
 import CloseBurgerSVG from "../../assets/svg/close-burger.svg";
 import BurgerSVG from "../../assets/svg/burger-menu.svg";
 import UserSVG from "../../assets/svg/user.svg";
 import SearchSVG from "../../assets/svg/search.svg";
+
+import LogoSVG from "../../assets/svg/logo.svg";
 import IconButton from "../shared/IconButton";
 import MainButton from "../shared/MainButton";
 import MainButtonRed from "../shared/MainButtonRed";
@@ -95,7 +98,11 @@ const RightMob = () => {
               state.isActiveHeaderSearch ? "hidden" : ""
             }`}
           >
-            Business Box
+            <div className="header__logo__svg">
+              <LogoSVG />
+            </div>
+
+            {/* Business Box */}
           </a>
         </Link>
       </div>
@@ -115,6 +122,13 @@ const RightMob = () => {
               icon={<SearchSVG />}
             />
           )}
+        </li>
+        <li className="header__right__btn">
+          <IconButton
+            onClick={() => dispatch({ type: "toggle_phoneModal" })}
+            borderColor="#FFFFFF"
+            icon={<PhoneSVG />}
+          />
         </li>
         <div className="header__right__btn-wrapper">
           {user != null && (

@@ -96,7 +96,7 @@ const BusinessCardFavorites = ({
       <div className="business-card-favorite__info">
         <h3 className="business-card-favorite__title">
           <span>{title}</span>
-          <div>
+          {/* <div>
             <CheckSVG
               data-tip={
                 isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
@@ -105,7 +105,7 @@ const BusinessCardFavorites = ({
                 isVerified ? "active" : ""
               }`}
             />
-          </div>
+          </div> */}
 
           <ReactTooltip />
         </h3>
@@ -152,7 +152,9 @@ const BusinessCardFavorites = ({
             {negotiatedPrice ? (
               <p className="section__secondary-text">Договірна</p>
             ) : (
-              <p className="business-card-favorite__price">{UseUsd(currency, price, rate)}</p>
+              <p className="business-card-favorite__price">
+                {UseUsd(currency, price, rate)}
+              </p>
             )}
 
             <button
@@ -169,7 +171,7 @@ const BusinessCardFavorites = ({
           ) : (
             <div className="business-card-favorite__footer-mob--price">
               <p className="section__secondary-text">
-              {UseUah(currency, price, rate)}
+                {UseUah(currency, price, rate)}
               </p>
               <div className="business-card-favorite__rate">
                 <p className="business-card-favorite__rate--top section__secondary-text">
@@ -188,14 +190,14 @@ const BusinessCardFavorites = ({
                 {views}
               </p>
             </div>
-            <CheckSVG
+            {/* <CheckSVG
               data-tip={
                 isVerified ? "Верифіковано сайтом" : "Не верифіковано сайтом"
               }
               className={`business-card-favorite__ckeck-icon--mob ${
                 isVerified ? "active" : ""
               }`}
-            />
+            /> */}
             <ReactTooltip />
           </div>
         </div>
