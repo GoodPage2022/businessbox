@@ -47,8 +47,8 @@ function ModalRaiseRating({
       'description'    : `Оплата послуг Bissbox. Послуга "Підняти в топ"`,
       'order_id'       : orderId.toString(),
       'version'        : '3',
-      'server_url'     : `https://bissbox.vercel.app/api/businesses/raiseToTop`,
-      'result_url'     : `https://bissbox.vercel.app/catalog/top/${orderId}`
+      'server_url'     : `${process.env.baseUrl}/api/businesses/raiseToTop`,
+      'result_url'     : `${process.env.baseUrl}/catalog/top/${orderId}`
     }, liqpayFormRef);
 
     setLiqpayForm(liqpayJSX) 

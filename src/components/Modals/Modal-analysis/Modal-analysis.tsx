@@ -45,8 +45,8 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
   //     'description'    : `Оплата послуг Bissbox. Тариф "${tariff}"`,
   //     'order_id'       : orderId.toString(),
   //     'version'        : '3',
-  //     'server_url'     : `https://bissbox.vercel.app/api/analysis/completeOrder`,
-  //     'result_url'     : `https://bissbox.vercel.app/catalog/${projectId}?order_id=${orderId}`
+  //     'server_url'     : `${process.env.baseUrl}/api/analysis/completeOrder`,
+  //     'result_url'     : `${process.env.baseUrl}/catalog/${projectId}?order_id=${orderId}`
   //   }, liqpayFormRef);
 
   //   setLiqpayForm(liqpayJSX)
@@ -100,7 +100,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
       if (response.status == 200) {
         // setOrderId(response.data._id)
         dispatch({ type: "toggle_analysisModal" });
-        router.push(`https://bissbox.vercel.app/catalog/${projectId}?order_id=${response.data._id}`)
+        router.push(`${process.env.baseUrl}/catalog/${projectId}?order_id=${response.data._id}`)
 
         // onClose();
         // resetForm({});
