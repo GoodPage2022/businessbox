@@ -18,6 +18,19 @@
     border-radius: 15px;
     background: $white-color;
     cursor: pointer;
+
+    &--youtube {
+      background: #ff0000;
+    }
+    &--whatsapp {
+      background: #3adc49;
+    }
+    &--viber {
+      background: #864cb2;
+    }
+    &--telegram {
+      background: #4e9ce5;
+    }
   }
 }
 
