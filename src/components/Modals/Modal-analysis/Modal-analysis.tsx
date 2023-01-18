@@ -17,8 +17,8 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [projectId, setProjectId] = useState<string>("");
-  const [orderId, setOrderId] = useState<string>("");
-  const [tariff, setTariff] = useState<string>("");
+  // const [orderId, setOrderId] = useState<string>("");
+  // const [tariff, setTariff] = useState<string>("");
   const router = useRouter();
   const [liqpayForm, setLiqpayForm] = useState<JSX.Element>();
   const liqpayFormRef = useRef<HTMLFormElement>(null);
@@ -28,29 +28,29 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
     setProjectId(router.query.project.toString())
   },[router])
 
-  useEffect(() => {
-    if (!state.tariff) return
-    setTariff(state.tariff)
-  },[state])
+  // useEffect(() => {
+  //   if (!state.tariff) return
+  //   setTariff(state.tariff)
+  // },[state])
 
-  useEffect(() => {
-    if (!orderId || !tariff || !projectId) return
+  // useEffect(() => {
+  //   if (!orderId || !tariff || !projectId) return
 
-    const liqpay = new LiqPay(process.env.liqpayClientId ?? "", process.env.liqpayClientSecret ?? "");
-    const liqpayJSX = liqpay.cnb_form({
-      'language'       : 'ru',
-      'action'         : 'pay',
-      'amount'         : (tariff == "premium") ? '2' : '1',
-      'currency'       : 'UAH',
-      'description'    : `Оплата послуг Bissbox. Тариф "${tariff}"`,
-      'order_id'       : orderId.toString(),
-      'version'        : '3',
-      'server_url'     : `https://bissbox.vercel.app/api/analysis/completeOrder`,
-      'result_url'     : `https://bissbox.vercel.app/catalog/${projectId}?order_id=${orderId}`
-    }, liqpayFormRef);
+  //   const liqpay = new LiqPay(process.env.liqpayClientId ?? "", process.env.liqpayClientSecret ?? "");
+  //   const liqpayJSX = liqpay.cnb_form({
+  //     'language'       : 'ru',
+  //     'action'         : 'pay',
+  //     'amount'         : (tariff == "premium") ? '2' : '1',
+  //     'currency'       : 'UAH',
+  //     'description'    : `Оплата послуг Bissbox. Тариф "${tariff}"`,
+  //     'order_id'       : orderId.toString(),
+  //     'version'        : '3',
+  //     'server_url'     : `https://bissbox.vercel.app/api/analysis/completeOrder`,
+  //     'result_url'     : `https://bissbox.vercel.app/catalog/${projectId}?order_id=${orderId}`
+  //   }, liqpayFormRef);
 
-    setLiqpayForm(liqpayJSX)
-  },[orderId, tariff, projectId])
+  //   setLiqpayForm(liqpayJSX)
+  // },[orderId, tariff, projectId])
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -60,12 +60,12 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
     };
   }, []);
 
-  useEffect(() => {
-    if (!liqpayForm) return
-    if (!liqpayFormRef.current) return
+  // useEffect(() => {
+  //   if (!liqpayForm) return
+  //   if (!liqpayFormRef.current) return
 
-    liqpayFormRef.current?.submit()
-  }, [liqpayForm]);
+  //   liqpayFormRef.current?.submit()
+  // }, [liqpayForm]);
 
   const handleKeyDown = (e: any) => {
     if (e.code === "Escape") {
@@ -98,7 +98,8 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
     try {
       const response = await axios.post(`/api/analysis/post`, newRequest);
       if (response.status == 200) {
-        setOrderId(response.data._id)
+        // setOrderId(response.data._id)
+        router.push(`https://bissbox.vercel.app/catalog/${projectId}?order_id=${response.data._id}`)
     
         // onClose();
         // resetForm({});
@@ -245,11 +246,11 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
 
               {error && <div className="modal-analysis__failed">{error}</div>}
               <button className="modal-analysis__button" type="submit">
-                Перейти до оплати
+                Відправити
               </button>
             </Form>
           </Formik>
-          {liqpayForm}
+          {/* {liqpayForm} */}
         </div>
       </div>
     </div>

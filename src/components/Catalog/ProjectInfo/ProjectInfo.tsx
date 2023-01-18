@@ -58,7 +58,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       });
 
       if (response.status == 200) {
-        if (response.data.status == "Paid") {
+        if (response.data.status == "Paid" || response.data.status == "Pending") {
           dispatch({ type: "toggle_analysisThankModal" });
         }
       }
