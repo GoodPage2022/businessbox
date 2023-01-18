@@ -99,8 +99,9 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
       const response = await axios.post(`/api/analysis/post`, newRequest);
       if (response.status == 200) {
         // setOrderId(response.data._id)
+        dispatch({ type: "toggle_analysisModal" });
         router.push(`https://bissbox.vercel.app/catalog/${projectId}?order_id=${response.data._id}`)
-    
+
         // onClose();
         // resetForm({});
         // setError("");
