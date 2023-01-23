@@ -9,9 +9,11 @@ import { persistStore } from "redux-persist";
 
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps, session }: any) {
   let persistor = persistStore(store);
+  const router = useRouter();
 
   return (
     <>
@@ -23,11 +25,11 @@ function MyApp({ Component, pageProps, session }: any) {
         />
         <meta property="og:title" content="Business Box" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${process.env.baseUrl}`} />
         <meta
-          property="og:image"
-          content="https://static.olx.ua/static/olxua/naspersclassifieds-regional/olxeu-atlas-web-olxua/static/img/fb/fb-image_redesign.png?t=23-01-23"
+          property="og:url"
+          content={`${process.env.baseUrl}${router.asPath}`}
         />
+        <meta property="og:image" content="/assets/images/BB-meta.png" />
 
         <meta
           property="og:description"
