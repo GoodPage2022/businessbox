@@ -101,7 +101,6 @@ const RightMob = () => {
             {/* <div className="header__logo__svg">
               <LogoSVG />
             </div> */}
-
             Business Box
           </a>
         </Link>
@@ -123,12 +122,18 @@ const RightMob = () => {
             />
           )}
         </li>
-        <li className="header__right__btn">
+        <li className="header__right__btn phoneModal">
           <IconButton
             onClick={() => dispatch({ type: "toggle_phoneModal" })}
             borderColor="#FFFFFF"
             icon={<PhoneSVG />}
           />
+        </li>
+
+        <li className="header__right__btn phoneModalMob">
+          <a href="tel:0662026304">
+            <PhoneSVG />
+          </a>
         </li>
         <div className="header__right__btn-wrapper">
           {user != null && (

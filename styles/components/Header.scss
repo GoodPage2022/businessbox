@@ -68,6 +68,10 @@
       display: flex;
       align-items: center;
 
+      &.phoneModalMob {
+        display: none;
+      }
+
       &:not(:last-child) {
         margin-right: 20px;
       }
@@ -611,6 +615,25 @@
           border-radius: 15px;
           background: transparent;
           cursor: text;
+        }
+
+        &.phoneModal {
+          display: none;
+        }
+
+        &.phoneModalMob {
+          display: block;
+          & a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 32px;
+            width: 34px;
+            border: 1px solid #ffffff;
+            border-radius: 15px;
+            background: transparent;
+            cursor: pointer;
+          }
         }
       }
     }
