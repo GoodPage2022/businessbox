@@ -18,9 +18,9 @@ const BaseLayout: FC<Props> = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const dispatchRedux = useDispatch();
 
-  useEffect(()=>{
-    getCurrencyRate()
-  },[])
+  useEffect(() => {
+    getCurrencyRate();
+  }, []);
 
   const getCurrencyRate = async () => {
     const { data: rateUSD, status: rateUSDStus } = await axios.get(
@@ -31,7 +31,7 @@ const BaseLayout: FC<Props> = ({ children }) => {
       dispatchRedux(
         setCurrencyReducer({
           value: rateUSD,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         }),
       );
     }
@@ -41,6 +41,11 @@ const BaseLayout: FC<Props> = ({ children }) => {
     <>
       <Head>
         <title>Business-box</title>
+        <meta
+          name="description"
+          content="Business Box – перша унікальна платформа по купівлі, продажу бізнесу,  інвестуванню та пошуку інвестицій. Головною метою – є надання професійних послуг з питань купівлі, продажу, аналізу, навчанню, модернізації, інвестуванню та пошку інвестицій. Платформа заснована трьома підприємцями Дмитро Буряк, Олександр Найда та Віталій Лубінець та враховує різний досвід їх діючих бізнесів та бізнесіів та володарів бізнесу з якими вини близько дотичнв. Функціонал даного інструменту розрахований на легке та логічне використання платформи, як для досвідченого користувача, так і для новачка."
+        />
+
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </Head>
       <MainContext.Provider value={[state, dispatch]}>
