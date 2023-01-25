@@ -72,6 +72,12 @@
         display: none;
       }
 
+      &.phoneModal {
+        & path {
+          fill: #47ad51;
+        }
+      }
+
       &:not(:last-child) {
         margin-right: 20px;
       }
@@ -622,6 +628,9 @@
         }
 
         &.phoneModalMob {
+          & path {
+            fill: #47ad51;
+          }
           display: block;
           & a {
             display: flex;

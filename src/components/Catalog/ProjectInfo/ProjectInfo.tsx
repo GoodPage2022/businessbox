@@ -58,7 +58,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       });
 
       if (response.status == 200) {
-        if (response.data.status == "Paid" || response.data.status == "Pending") {
+        if (
+          response.data.status == "Paid" ||
+          response.data.status == "Pending"
+        ) {
           dispatch({ type: "toggle_analysisThankModal" });
         }
       }
@@ -526,16 +529,24 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             <button
               onClick={() => {
                 dispatch({ type: "toggle_analysisTariffsModal" });
-                <Script
-                  async
-                  src="https://www.googletagmanager.com/gtag/js?id=G-3J60LWZ0W1"
-                  strategy="afterInteractive"
-                ></Script>;
-                <Script id="google-analytics" strategy="afterInteractive">
-                  {`
+                <>
+                  <Script
+                    async
+                    src="https://www.googletagmanager.com/gtag/js?id=G-3J60LWZ0W1"
+                    strategy="afterInteractive"
+                  ></Script>
+                  <Script id="google-analytics">
+                    {` window.dataLayer = window.dataLayer || [];
+                     function gtag(){window.dataLayer.push(arguments);}
+                     gtag('js', new Date());
+                     gtag('config', 'G-3J60LWZ0W1');')`}
+                  </Script>
+                  <Script id="google-analytics" strategy="afterInteractive">
+                    {`
                   gtag('event', 'conversion', {'send_to': 'AW-11042174734/4IffCOP-4oQYEI7uqJEp'});
                 `}
-                </Script>;
+                  </Script>
+                </>;
               }}
               className="projectInfo__button-analysis"
             >
@@ -588,16 +599,26 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             <button
               onClick={() => {
                 dispatch({ type: "toggle_analysisTariffsModal" });
-                <Script
-                  async
-                  src="https://www.googletagmanager.com/gtag/js?id=G-3J60LWZ0W1"
-                  strategy="afterInteractive"
-                ></Script>;
-                <Script id="google-analytics" strategy="afterInteractive">
-                  {`
+                <>
+                  <Script
+                    async
+                    src="https://www.googletagmanager.com/gtag/js?id=G-3J60LWZ0W1"
+                    strategy="afterInteractive"
+                  ></Script>
+
+                  <Script id="google-analytics">
+                    {` window.dataLayer = window.dataLayer || [];
+                     function gtag(){window.dataLayer.push(arguments);}
+                     gtag('js', new Date());
+                     gtag('config', 'G-3J60LWZ0W1');')`}
+                  </Script>
+
+                  <Script id="google-analytics" strategy="afterInteractive">
+                    {`
                   gtag('event', 'conversion', {'send_to': 'AW-11042174734/4IffCOP-4oQYEI7uqJEp'});
                 `}
-                </Script>;
+                  </Script>
+                </>;
               }}
               className="projectInfo__button-analysis"
             >
