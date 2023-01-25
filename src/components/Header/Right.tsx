@@ -81,7 +81,7 @@ const Right = () => {
             />
           )}
         </li>{" "}
-        <li className="header__right__btn">
+        <li className="header__right__btn phoneModal">
           <IconButton
             onClick={() => dispatch({ type: "toggle_phoneModal" })}
             borderColor="#FFFFFF"

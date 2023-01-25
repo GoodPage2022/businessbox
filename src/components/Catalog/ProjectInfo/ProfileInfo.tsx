@@ -117,17 +117,24 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               setIsPhoneShow((prev) => !prev);
               setIsEmailShow(false);
               setIsInstagramShow(false);
-              <Script
-                async
-                src="https://www.googletagmanager.com/gtag/js?id=G-3J60LWZ0W1"
-                strategy="afterInteractive"
-              ></Script>;
-
-              <Script id="google-analytics" strategy="afterInteractive">
-                {`
+              <>
+                <Script
+                  async
+                  src="https://www.googletagmanager.com/gtag/js?id=G-3J60LWZ0W1"
+                  strategy="afterInteractive"
+                ></Script>
+                <Script id="google-analytics">
+                  {` window.dataLayer = window.dataLayer || [];
+                     function gtag(){window.dataLayer.push(arguments);}
+                     gtag('js', new Date());
+                     gtag('config', 'G-3J60LWZ0W1');')`}
+                </Script>
+                <Script id="google-analytics" strategy="afterInteractive">
+                  {`
                   gtag('event', 'conversion', {'send_to': 'AW-11042174734/IV-OCOD-4oQYEI7uqJEp'});
                 `}
-              </Script>;
+                </Script>
+              </>;
             }}
             className="profileInfo__networks--item"
           >
