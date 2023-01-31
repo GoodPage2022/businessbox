@@ -38,7 +38,7 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
 
   //   const liqpay = new LiqPay(process.env.liqpayClientId ?? "", process.env.liqpayClientSecret ?? "");
   //   const liqpayJSX = liqpay.cnb_form({
-  //     'language'       : 'ru',
+  //     'language'       : 'ua',
   //     'action'         : 'pay',
   //     'amount'         : (tariff == "premium") ? '2' : '1',
   //     'currency'       : 'UAH',

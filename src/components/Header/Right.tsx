@@ -82,11 +82,14 @@ const Right = () => {
           )}
         </li>{" "}
         <li className="header__right__btn phoneModal">
-          <IconButton
+          {/* <IconButton
             onClick={() => dispatch({ type: "toggle_phoneModal" })}
             borderColor="#FFFFFF"
             icon={<PhoneSVG />}
-          />
+          /> */}
+          <a href="tel:0662026304">
+            <PhoneSVG />
+          </a>
         </li>
         {user != null && (
           <li className="header__right__btn">

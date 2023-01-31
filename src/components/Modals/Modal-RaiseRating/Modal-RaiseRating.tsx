@@ -25,34 +25,39 @@ function ModalRaiseRating({
   const [orderId, setOrderId] = useState<string>("");
 
   useEffect(() => {
-    if (!liqpayForm) return
-    if (!liqpayFormRef.current) return
+    if (!liqpayForm) return;
+    if (!liqpayFormRef.current) return;
 
-    liqpayFormRef.current?.submit()
+    liqpayFormRef.current?.submit();
   }, [liqpayForm]);
 
   useEffect(() => {
-    if (!orderId) return
-    if (!projectsId || projectsId.length == 0) return
+    if (!orderId) return;
+    if (!projectsId || projectsId.length == 0) return;
 
     console.log("projectsId", projectsId);
-    
 
-    const liqpay = new LiqPay(process.env.liqpayClientId ?? "", process.env.liqpayClientSecret ?? "");
-    const liqpayJSX = liqpay.cnb_form({
-      'language'       : 'ru',
-      'action'         : 'pay',
-      'amount'         : (40 * projectsId.length).toString(),
-      'currency'       : 'UAH',
-      'description'    : `Оплата послуг Bissbox. Послуга "Підняти в топ"`,
-      'order_id'       : orderId.toString(),
-      'version'        : '3',
-      'server_url'     : `${process.env.baseUrl}/api/businesses/raiseToTop`,
-      'result_url'     : `${process.env.baseUrl}/catalog/top/${orderId}`
-    }, liqpayFormRef);
+    const liqpay = new LiqPay(
+      process.env.liqpayClientId ?? "",
+      process.env.liqpayClientSecret ?? "",
+    );
+    const liqpayJSX = liqpay.cnb_form(
+      {
+        language: "ua",
+        action: "pay",
+        amount: (40 * projectsId.length).toString(),
+        currency: "UAH",
+        description: `Оплата послуг Bissbox. Послуга "Підняти в топ"`,
+        order_id: orderId.toString(),
+        version: "3",
+        server_url: `${process.env.baseUrl}/api/businesses/raiseToTop`,
+        result_url: `${process.env.baseUrl}/catalog/top/${orderId}`,
+      },
+      liqpayFormRef,
+    );
 
-    setLiqpayForm(liqpayJSX) 
-  }, [orderId, projectsId])
+    setLiqpayForm(liqpayJSX);
+  }, [orderId, projectsId]);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
@@ -75,17 +80,16 @@ function ModalRaiseRating({
   };
 
   useEffect(() => {
-    if (!liqpayForm) return
-    if (!liqpayFormRef.current) return
+    if (!liqpayForm) return;
+    if (!liqpayFormRef.current) return;
 
-    liqpayFormRef.current?.submit()
+    liqpayFormRef.current?.submit();
   }, [liqpayForm]);
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
-    
     // const { deleteReason, deleteReasonOther } = values;
     console.log(values);
-    setProjectsId(values.checked)
+    setProjectsId(values.checked);
     // const data = {
     //   user,
     // deleteReason,
@@ -98,13 +102,12 @@ function ModalRaiseRating({
       const createOrder = await axios.post("/api/businesses/topOrder", {
         projects: values.checked,
         user,
-        status: "Pending"
+        status: "Pending",
       });
 
       if (createOrder.status == 200) {
-        setOrderId(createOrder.data.insertedId)
+        setOrderId(createOrder.data.insertedId);
         console.log("insertedId", createOrder.data.insertedId);
-                
       }
     } catch (error) {
       console.log(error);

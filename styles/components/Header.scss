@@ -76,6 +76,18 @@
         & path {
           fill: #47ad51;
         }
+
+        & a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 32px;
+          width: 34px;
+          border: 2px solid #47ad51;
+          border-radius: 15px;
+          background: transparent;
+          cursor: pointer;
+        }
       }
 
       &:not(:last-child) {
@@ -638,7 +650,7 @@
             justify-content: center;
             height: 32px;
             width: 34px;
-            border: 1px solid #ffffff;
+            border: 2px solid #47ad51;
             border-radius: 15px;
             background: transparent;
             cursor: pointer;
