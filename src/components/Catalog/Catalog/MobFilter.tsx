@@ -150,6 +150,15 @@ const MobFilter = ({
         >
           {({ values }) => (
             <Form className="mobFilter__form">
+              <button
+                type="button"
+                onClick={() => {
+                  changeFilter("e", true);
+                }}
+                className="mobFilter__reset-btn  section__secondary-text"
+              >
+                Скинути фільтри
+              </button>
               <label className="mobFilter__field">
                 <span className="mobFilter__label">Ціна</span>
                 <div className="mobFilter__price">

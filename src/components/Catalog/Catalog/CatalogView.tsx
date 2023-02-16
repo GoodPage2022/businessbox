@@ -281,7 +281,12 @@ const CatalogView = () => {
     setPageNumber(filtersObj.page ?? 1);
   }, [filtersObj]);
 
-  const changeFilter = (e: any) => {
+  const changeFilter = (e: any, clean?: boolean) => {
+    if (clean) {
+      setFiltersObj({});
+      router.push("/catalog");
+      return;
+    }
     if (
       e.target.name == "sort-by-popular" ||
       e.target.name == "sort-by-price"

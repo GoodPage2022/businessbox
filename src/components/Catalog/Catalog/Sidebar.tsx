@@ -119,6 +119,15 @@ const Sidebar = ({
       >
         {({ values }) => (
           <Form className="sidebar__form">
+            <button
+              type="button"
+              onClick={() => {
+                changeFilter("e", true);
+              }}
+              className="sidebar__reset-btn  section__secondary-text"
+            >
+              Скинути фільтри
+            </button>
             <label className="sidebar__field">
               <span className="sidebar__label">Ціна</span>
               <div className="sidebar__price">
