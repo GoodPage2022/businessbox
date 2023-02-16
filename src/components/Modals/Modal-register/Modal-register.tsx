@@ -9,6 +9,7 @@ import { MainContext } from "../../../contexts/mainContext";
 import phoneNumberMask from "../../../masks/phoneNumberMask";
 import CustomInput from "../../shared/CustomInput";
 import { Oval } from "react-loader-spinner";
+import Link from "next/link";
 
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
@@ -272,12 +273,29 @@ function ModalRegister({ onClose }: { onClose: any }) {
                 />
                 <label
                   className="modal-register__checkbox__label"
-                  onClick={() => {
-                    setAgreePolicy((prev) => !prev);
-                  }}
+                  onClick={() => setAgreePolicy((prev) => !prev)}
                 >
                   <span className="modal-register__checkbox__text section__secondary-text">
-                    Я згоден(а) на обробку персональних даних
+                    Я згоден(а) з{" "}
+                    <Link href="/information/public-offer">
+                      <a
+                        onClick={() => setAgreePolicy((prev) => !prev)}
+                        target="_blank"
+                        className="modal-register__link"
+                      >
+                        договором оферти
+                      </a>
+                    </Link>{" "}
+                    та{" "}
+                    <Link href="/information/privacy-policy">
+                      <a
+                        onClick={() => setAgreePolicy((prev) => !prev)}
+                        target="_blank"
+                        className="modal-register__link"
+                      >
+                        конфіденційності
+                      </a>
+                    </Link>{" "}
                   </span>
                 </label>
                 <button className="modal-register__button" type="submit">
