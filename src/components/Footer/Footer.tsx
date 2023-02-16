@@ -161,7 +161,7 @@ const Footer: React.FC = () => {
           </Link>
           <Link href="/information/delivery-payment">
             <a className="section__secondary-text--white footer__categories--button">
-              Доставка і оплата
+              Оплата і надання послуг
             </a>
           </Link>
           <Link href="/information/public-offer">
@@ -257,7 +257,7 @@ const Footer: React.FC = () => {
             </Link>
             <Link href="/information/delivery-payment">
               <a className="section__secondary-text--white footer__categories--button">
-                Доставка і оплата
+                Оплата і надання послуг
               </a>
             </Link>
             <Link href="/information/public-offer">

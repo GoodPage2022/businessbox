@@ -16,6 +16,11 @@
     opacity: 1;
   }
 
+  &__link {
+    text-decoration: underline;
+    color: #f22a4e;
+  }
+
   &__overlay {
     position: fixed;
     top: 0;

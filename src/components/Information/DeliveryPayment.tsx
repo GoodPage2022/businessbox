@@ -2,7 +2,7 @@ const DeliveryPayment = () => {
   return (
     <section className="information">
       <div className="container information__container">
-        <h1 className="title information__title">Оплата і доставка</h1>
+        <h1 className="title information__title">Оплата і надання послуг</h1>
         <h2 className="information__pre-title">Просування оголошення</h2>
         <p className="information__text section__primary-text">
           Як частина функціональності Веб-сайту (Сервісу), Business Box дозволяє
