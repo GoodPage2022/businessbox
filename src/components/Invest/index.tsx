@@ -21,6 +21,14 @@ const Invest = () => {
     }
   };
 
+  const onInvestmentBusinessClick = () => {
+    if (!user) {
+      router.push("/invest/add-business");
+      // openModalAuth();
+    } else {
+    }
+  };
+
   return (
     <>
       <section className="invest">
@@ -33,7 +41,10 @@ const Invest = () => {
                 підримка
               </p>
             </button>
-            <button className="invest__card">
+            <button
+              className="invest__card"
+              onClick={onInvestmentBusinessClick}
+            >
               <h2 className="invest__card--title">
                 Маю бізнес для інвестування
               </h2>
