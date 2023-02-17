@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import CustomSelect from "../../shared/CustomSelect";
 import Editor from "../../shared/Editor";
-import CrossSVG from "../../assets/svg/cross.svg";
+import CrossSVG from "../../../assets/svg/cross.svg";
 import { MainContext } from "../../../contexts/mainContext";
 import React from "react";
 import ModalDeleteBusiness from "../../Modals/Modal-delete-business/Modal-delete-business";

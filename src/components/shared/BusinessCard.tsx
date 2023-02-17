@@ -8,6 +8,8 @@ import axios, { AxiosRequestConfig } from "axios";
 import { signIn as signInReducer } from "../../../store/actions/auth";
 
 import TopSVG from "../../assets/svg/top-label.svg";
+import InvestSVG from "../../assets/svg/invest.svg";
+
 import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
@@ -49,6 +51,8 @@ const BusinessCard = ({
   const [clickPos, setClickPos] = useState<any>({});
   // const [rate, setRate] = useState<number>(0);
   const rate = useSelector((state: any) => state.currency.value);
+  const [isInvestmentBusiness, setIsInvestmentBusiness] =
+    useState<boolean>(false);
 
   let onContextMenuClick = false;
   useEffect(() => {
@@ -140,6 +144,12 @@ const BusinessCard = ({
       {!!order && (
         <div className="business-card__top">
           <TopSVG />
+        </div>
+      )}
+
+      {!isInvestmentBusiness && isMyBusinessesPage && (
+        <div className="business-card__invest">
+          <InvestSVG />
         </div>
       )}
 

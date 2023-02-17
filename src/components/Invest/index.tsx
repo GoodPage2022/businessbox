@@ -23,9 +23,9 @@ const Invest = () => {
 
   const onInvestmentBusinessClick = () => {
     if (!user) {
-      router.push("/invest/add-business");
-      // openModalAuth();
+      openModalAuth();
     } else {
+      router.push("/invest/add-business");
     }
   };
 
