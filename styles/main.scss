@@ -237,6 +237,9 @@ main {
 //UsefulTools
 @import "./components/UsefulTools/UsefulTools.scss";
 
+//Invest
+@import "./components/Invest/Invest.scss";
+
 // Footer
 @import "./components/Footer/Footer.scss";
 @import "./components/Footer/Networks.scss";
@@ -271,6 +274,7 @@ main {
 @import "./components/Modals/Modal-analysis-thank.scss";
 @import "./components/Modals/Modal-raise-rating.scss";
 @import "./components/Modals/Modal-phone.scss";
+@import "./components/Modals/Modal-moreAboutBusiness.scss";
 
 // Slick/slider
 @import "slick-carousel/slick/slick.css";

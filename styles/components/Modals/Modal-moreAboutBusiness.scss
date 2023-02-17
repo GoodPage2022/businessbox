@@ -1,0 +1,481 @@
+.modal-moreAboutBusiness {
+  &__failed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 16px 8px;
+    border: none;
+    border-radius: 15px;
+    background: #f22a4e;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #ffffff;
+    margin-bottom: 11px;
+    opacity: 1;
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999999999;
+
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    top: -50%;
+    transition: all 0.35s ease;
+
+    &.active {
+      visibility: visible;
+      pointer-events: all;
+      opacity: 1;
+      top: 0;
+    }
+  }
+  &__container {
+    position: relative;
+    width: 750px;
+    border-radius: 25px;
+    overflow: hidden;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url("../../../public/assets/images/register-modal-bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px 60px;
+  }
+
+  &__title {
+    margin-bottom: 15px;
+  }
+
+  &__button-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 44px;
+    border: none;
+    border-radius: 18px;
+    background: $white-color;
+    cursor: pointer;
+  }
+
+  &__body {
+    padding: 40px 60px 60px 65px;
+    background: #fafafa;
+
+    [action="https://www.liqpay.ua/api/3/checkout"]
+    {
+      display: none !important;
+    }
+  }
+
+  &__name-wrapper {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  &__field {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: 0.01em;
+    color: black;
+    &:not(:last-child) {
+      margin-right: 30px;
+    }
+  }
+
+  &__field--password {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: 0.01em;
+    color: black;
+  }
+  &__eye-icon {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+  }
+  &__label {
+    display: block;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $main-text-color;
+    margin-bottom: 10px;
+  }
+
+  &__input {
+    width: 100%;
+    border: none;
+    background: $white-color;
+    border-radius: 25px;
+    padding: 20px 25px;
+    outline: none;
+    cursor: text;
+
+    &::placeholder {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      color: $grey-color;
+    }
+
+    &-wrapper {
+      position: relative;
+      display: block;
+    }
+  }
+  &__phone-wrapper {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  &__city-wrapper {
+    display: flex;
+    margin-bottom: 40px;
+  }
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 18px;
+    background: $main-red-color;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $white-color;
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .modal-moreAboutBusiness {
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+
+    &__overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999999999;
+
+      visibility: hidden;
+      pointer-events: none;
+      opacity: 0;
+      top: -50%;
+      transition: all 0.35s ease;
+
+      &.active {
+        visibility: visible;
+        pointer-events: all;
+        opacity: 1;
+        top: 0;
+      }
+    }
+    &__container {
+      width: 650px;
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-image: url("../../../public/assets/images/register-modal-bg.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 40px 22px 40px 24px;
+    }
+
+    &__button-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      width: 32px;
+      border: none;
+      border-radius: 18px;
+      background: $white-color;
+      cursor: pointer;
+
+      & svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__body {
+      padding: 40px 24px;
+      background: #fafafa;
+    }
+
+    &__name-wrapper {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    &__field {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      &:not(:last-child) {
+        margin-right: 27px;
+      }
+    }
+
+    &__field--password {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+    }
+    &__eye-icon {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      transform: translate(0, -50%);
+      cursor: pointer;
+    }
+    &__label {
+      display: block;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: $main-text-color;
+      margin-bottom: 10px;
+    }
+
+    &__input {
+      width: 100%;
+      border: none;
+      background: $white-color;
+      border-radius: 25px;
+      padding: 16px 20px;
+      font-size: 12px;
+      line-height: 15px;
+      outline: none;
+      cursor: text;
+
+      &::placeholder {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 15px;
+        color: $grey-color;
+      }
+
+      &-wrapper {
+        position: relative;
+        display: block;
+      }
+    }
+    &__phone-wrapper {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    &__city-wrapper {
+      display: flex;
+      margin-bottom: 38px;
+    }
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      padding: 7px 16px;
+      border: none;
+      border-radius: 15px;
+      background: $main-red-color;
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: $white-color;
+      &:not(:disabled) {
+        cursor: pointer;
+      }
+    }
+  }
+}
+@media screen and (max-width: $size-mobile) {
+  .modal-moreAboutBusiness {
+    &__failed {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px 8px;
+      border: none;
+      border-radius: 15px;
+      background: #f22a4e;
+      font-family: "Montserrat";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #ffffff;
+      margin-bottom: 11px;
+      opacity: 1;
+    }
+    &__container {
+      width: 375px;
+      border-radius: 15px 15px 0px 0px;
+    }
+
+    &__header {
+      background-image: url("../../../public/assets/images/register-modal-mob-bg.png");
+      padding: 20px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    &__button-close {
+      width: 34px;
+      height: 32px;
+      border-radius: 15px;
+
+      & svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    &__body {
+      padding: 20px 20px 40px;
+    }
+
+    &__field {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      &:not(:last-child) {
+        margin-right: 30px;
+      }
+    }
+
+    &__field--password {
+      display: block;
+      width: 100%;
+      font-size: 12px;
+      line-height: 1.17;
+      letter-spacing: 0.01em;
+      color: black;
+      margin-bottom: 40px;
+    }
+    &__eye-icon {
+      right: 20px;
+    }
+    &__label {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    &__input {
+      border-radius: 15px;
+      padding: 10px 20px;
+      font-size: 10px;
+      line-height: 12px;
+      &::placeholder {
+        font-size: 10px;
+        line-height: 12px;
+      }
+
+      &-wrapper {
+        position: relative;
+        display: block;
+      }
+    }
+    &__phone-wrapper {
+      display: block;
+      margin-bottom: 0;
+
+      & label {
+        margin-bottom: 20px;
+      }
+    }
+    &__city-wrapper {
+      display: block;
+      margin-bottom: 40px;
+
+      & label:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+    &__button {
+      padding: 7px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+  }
+}
