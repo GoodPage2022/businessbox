@@ -26,6 +26,7 @@ import Link from "next/link";
 import LargeImage from "./LargeImage";
 import ModalAnalysisThank from "../../Modals/Modal-analysis/Modal-analysis-thank";
 import Script from "next/script";
+import ModalMoreAboutBusiness from "../../Modals/Invest/Modal-MoreAboutBusiness";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -35,6 +36,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState<any>([]);
   const [comments, setComments] = useState<any>([]);
+  const [isInvestmentBusiness, setIsInvestmentBusiness] =
+    useState<boolean>(false);
   const [orderId, setOrderId] = useState<string>("");
   const user = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
@@ -291,6 +294,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     dispatch({ type: "toggle_large-image" });
   };
 
+  const closeMoreAboutBusinessModal = () => {
+    dispatch({ type: "toggle_moreAboutBusinessModal" });
+  };
+
   // useEffect(() => {
   //   getCurrencyRate();
   // }, []);
@@ -521,23 +528,39 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             >
               Відкрити повну інформацію
             </button>
-            {isAuth && (
+            {!isAuth && (
               <p className="projectInfo__err-msg">
                 Тільки для авторизованих користувачів
               </p>
             )}
-            <button
-              onClick={() => {
-                dispatch({ type: "toggle_analysisTariffsModal" });
-                window.gtag('event', 'conversion', {'send_to': 'AW-11042174734/4IffCOP-4oQYEI7uqJEp'});
-              }}
-              className="projectInfo__button-analysis"
-            >
-              Замовити аналіз бізнесу
-            </button>
+            $
+            {!isInvestmentBusiness ? (
+              <button
+                onClick={() => {
+                  dispatch({ type: "toggle_moreAboutBusinessModal" });
+                }}
+                className="projectInfo__button-analysis"
+              >
+                Детальніше про бізнес
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  dispatch({ type: "toggle_analysisTariffsModal" });
+                  window.gtag("event", "conversion", {
+                    send_to: "AW-11042174734/4IffCOP-4oQYEI7uqJEp",
+                  });
+                }}
+                className="projectInfo__button-analysis"
+              >
+                Замовити аналіз бізнесу
+              </button>
+            )}{" "}
           </div>
           <div className="projectInfo__price">
-            <p className="section__primary-text">Ціна:</p>
+            <p className="section__primary-text">
+              {`Ціна${!isInvestmentBusiness ? ", розмір вкладень:" : ":"} `}
+            </p>
 
             <p className="projectInfo__amount title">
               {projectInfo.negotiatedPrice
@@ -579,15 +602,28 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
-            <button
-              onClick={() => {
-                dispatch({ type: "toggle_analysisTariffsModal" });
-                window.gtag('event', 'conversion', {'send_to': 'AW-11042174734/4IffCOP-4oQYEI7uqJEp'});
-              }}
-              className="projectInfo__button-analysis"
-            >
-              Замовити аналіз бізнесу
-            </button>
+            {!isInvestmentBusiness ? (
+              <button
+                onClick={() => {
+                  dispatch({ type: "toggle_moreAboutBusinessModal" });
+                }}
+                className="projectInfo__button-analysis"
+              >
+                Детальніше про бізнес
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  dispatch({ type: "toggle_analysisTariffsModal" });
+                  window.gtag("event", "conversion", {
+                    send_to: "AW-11042174734/4IffCOP-4oQYEI7uqJEp",
+                  });
+                }}
+                className="projectInfo__button-analysis"
+              >
+                Замовити аналіз бізнесу
+              </button>
+            )}{" "}
           </div>
         </div>
         <ProfileInfo projectData={projectInfo} />
@@ -662,6 +698,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       <ModalAnalysis onClose={closeAnalysisModal} />
       <ModalAnalysisTariffs onClose={closeAnalysisTariffsModal} />
       <ModalAnalysisThank onClose={closeAnalysisThankModal} />
+
+      <ModalMoreAboutBusiness onClose={closeMoreAboutBusinessModal} />
     </section>
   );
 };

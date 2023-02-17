@@ -13,8 +13,11 @@ import CardsSlider from "../../HomePage/CardsSlider/CardsSlider";
 
 const DetailInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
-  const [isLiked, setIsLiked] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isInvestmentBusiness, setIsInvestmentBusiness] =
+    useState<boolean>(false);
+  const [isBusinessCreated, setIsBusinessCreated] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const dispatchRedux = useDispatch();
   const [cards, setCards] = useState<any>([]);
   const user = useSelector((state: any) => state.auth.user);
@@ -157,134 +160,190 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
         <p className="detailInfo__city section__primary-text">
           {projectInfo.state?.display}, {projectInfo.city?.display}
         </p>
-        <ul className="detailInfo__list">
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Форма власності
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.property_form ?? "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Кількість засновників
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.number_of_founders ?? "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Кількість працівників
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.crm ?? "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Ваш бізнес має сезонність?
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.seasonality ? "так" : "ні"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Оборот протягом року
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.year_turnover
-                ? projectInfo.year_turnover +
-                  (projectInfo.currency == "Долар" ? "$" : "₴")
-                : "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Приблизний щомісячний чистий прибуток
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.monthly_net_profit
-                ? projectInfo.monthly_net_profit +
-                  (projectInfo.currency == "Долар" ? "$" : "₴")
-                : "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Приблизний валовий дохід щомісячний
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.gross_monthly_income
-                ? projectInfo.gross_monthly_income +
-                  (projectInfo.currency == "Долар" ? "$" : "₴")
-                : "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Прогнозований оборот наступного року
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.estimated_turnover_next_year
-                ? projectInfo.estimated_turnover_next_year +
-                  (projectInfo.currency == "Долар" ? "$" : "₴")
-                : "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Наявність кредитів
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.loans ? "так" : "ні"}
-            </p>
-          </li>
+        {!isBusinessCreated ? (
+          <ul className="detailInfo__list">
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Форма власності
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.property_form ?? "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Кількість засновників
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.number_of_founders ?? "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Кількість працівників
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.crm ?? "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Ваш бізнес має сезонність?
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.seasonality ? "так" : "ні"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Оборот протягом року
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.year_turnover
+                  ? projectInfo.year_turnover +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Приблизний щомісячний чистий прибуток
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.monthly_net_profit
+                  ? projectInfo.monthly_net_profit +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Приблизний валовий дохід щомісячний
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.gross_monthly_income
+                  ? projectInfo.gross_monthly_income +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Прогнозований оборот наступного року
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.estimated_turnover_next_year
+                  ? projectInfo.estimated_turnover_next_year +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Наявність кредитів
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.loans ? "так" : "ні"}
+              </p>
+            </li>
 
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Орієнтовний період окупності бізнесу
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.return_on_investment ?? "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Щомісячний зарплатний фонд (враховуючи премії та бонуси)
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.monthly_salary_fund
-                ? projectInfo.monthly_salary_fund +
-                  (projectInfo.currency == "Долар" ? "$" : "₴")
-                : "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Приблизна ринкова вартість активів та обладнання
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.equipment_market_value
-                ? projectInfo.equipment_market_value +
-                  (projectInfo.currency == "Долар" ? "$" : "₴")
-                : "– – – – –"}
-            </p>
-          </li>
-          <li className="detailInfo__list-item">
-            <p className="detailInfo__list-item--left section__primary-text--bold">
-              Приблизна сума непостійних витрат протягом року
-            </p>
-            <p className="detailInfo__list-item--right section__primary-text">
-              {projectInfo.year_nonfixed_costs
-                ? projectInfo.year_nonfixed_costs +
-                  (projectInfo.currency == "Долар" ? "$" : "₴")
-                : "– – – – –"}
-            </p>
-          </li>
-        </ul>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Орієнтовний період окупності бізнесу
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.return_on_investment ?? "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Щомісячний зарплатний фонд (враховуючи премії та бонуси)
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.monthly_salary_fund
+                  ? projectInfo.monthly_salary_fund +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Приблизна ринкова вартість активів та обладнання
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.equipment_market_value
+                  ? projectInfo.equipment_market_value +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Приблизна сума непостійних витрат протягом року
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.year_nonfixed_costs
+                  ? projectInfo.year_nonfixed_costs +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+          </ul>
+        ) : (
+          <ul className="detailInfo__list">
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Кількість засновників
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.number_of_founders ?? "– – – – –"}
+              </p>
+            </li>
+
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Ваш бізнес має сезонність?
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.seasonality ? "так" : "ні"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Відсоток повернення на капітал
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.year_turnover
+                  ? projectInfo.year_turnover +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Період повернення інвестицій
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.monthly_net_profit
+                  ? projectInfo.monthly_net_profit +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Річний дохід
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.gross_monthly_income
+                  ? projectInfo.gross_monthly_income +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+          </ul>
+        )}
+
         <div className="detailInfo__first-wrapper">
           <div className="detailInfo__data-wrapper--left">
             <p className="detailInfo__data-label section__primary-text--bold">
