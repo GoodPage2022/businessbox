@@ -10,6 +10,7 @@ import phoneNumberMask from "../../../masks/phoneNumberMask";
 import CustomInput from "../../shared/CustomInput";
 import { Oval } from "react-loader-spinner";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function ModalRegister({ onClose }: { onClose: any }) {
   const [state, dispatch] = React.useContext(MainContext);
@@ -17,7 +18,8 @@ function ModalRegister({ onClose }: { onClose: any }) {
   const [registerError, setRegisterError] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
-
+  const router = useRouter();
+  console.log(state.isInvestor == 1, "asaasasdasdasd");
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -54,6 +56,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
         phone,
         surname,
         city,
+        investor: state.isInvestor,
       },
     };
 
@@ -64,6 +67,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
           newUser,
         );
 
+        console.log(newUserResponse, "newUserResponse");
         if (newUserResponse.status == 200) {
           onClose();
           resetForm({});

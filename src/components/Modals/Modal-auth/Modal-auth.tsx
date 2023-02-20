@@ -71,7 +71,9 @@ function ModalAuth({ onClose }: { onClose: any }) {
     router.push("/#register");
     dispatch({ type: "toggle_authModal" });
     dispatch({ type: "toggle_registrationModal" });
-    window.gtag('event', 'conversion', {'send_to': 'AW-11042174734/e0iYCN3-4oQYEI7uqJEp'});
+    window.gtag("event", "conversion", {
+      send_to: "AW-11042174734/e0iYCN3-4oQYEI7uqJEp",
+    });
   };
 
   const openForgotPasswordModal = () => {
@@ -118,6 +120,13 @@ function ModalAuth({ onClose }: { onClose: any }) {
         onClose();
         resetForm({});
         setAuthError("");
+        console.log(signInResponse.data);
+        if (state.isInvestor == 1 && signInResponse.data.investor == 1) {
+          router.push("/invest/catalog");
+          dispatch({ type: "toggle_investor" });
+          state.isInvestor = 0;
+          return;
+        }
         if (localStorage.getItem("redirectToAddBusiness")) {
           localStorage.removeItem("redirectToAddBusiness");
           router.push("/account/add-business");
