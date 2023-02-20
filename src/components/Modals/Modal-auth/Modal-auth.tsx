@@ -127,6 +127,12 @@ function ModalAuth({ onClose }: { onClose: any }) {
           state.isInvestor = 0;
           return;
         }
+        if (state.isInvestor == 1 && signInResponse.data.investor != 1) {
+          router.push("/invest/add-business");
+          dispatch({ type: "toggle_investor" });
+          state.isInvestor = 0;
+          return;
+        }
         if (localStorage.getItem("redirectToAddBusiness")) {
           localStorage.removeItem("redirectToAddBusiness");
           router.push("/account/add-business");

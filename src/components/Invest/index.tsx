@@ -10,7 +10,7 @@ const Invest = () => {
   const router = useRouter();
   console.log(state.isInvestor, "state.isInvestorindex");
   const openModalAuth = () => {
-    dispatch({ type: "toggle_registrationModal" });
+    dispatch({ type: "toggle_authModal" });
     dispatch({ type: "toggle_investor" });
     state.isInvestor = 1;
   };
