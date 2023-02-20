@@ -56,6 +56,12 @@ function ModalRegisterFinish({ onClose }: { onClose: any }) {
             {/* Дякуємо, реєстрація майже завершена! Перейдіть на пошту для
             активації аккаунту */}
           </p>
+          {state.isInvestor == 1 && (
+            <p className="modal-registerFinish__send-title">
+              Тепер ви маєте змогу авторизуватись для перегляду каталогу
+              бізнесів для інвестицій.
+            </p>
+          )}
         </div>
       </div>
     </div>
