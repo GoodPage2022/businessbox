@@ -17,7 +17,13 @@ const BurgerMenu = () => {
   };
 
   const openAddBusiness = () => {
-    router.push("/account/add-business");
+    router.push(
+      `${
+        router.pathname.includes("invest")
+          ? "/invest/add-business"
+          : "/account/add-business"
+      }`,
+    );
     dispatch({ type: "toggle_burger" });
   };
 

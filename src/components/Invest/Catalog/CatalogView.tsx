@@ -230,6 +230,7 @@ const CatalogView = () => {
       };
     }
 
+    console.log(requestBody, "filter");
     try {
       const response = await axios.post(
         `/api/businesses/getList`,
