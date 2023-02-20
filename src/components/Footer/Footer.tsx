@@ -151,7 +151,7 @@ const Footer: React.FC = () => {
         <div className="footer__catalog">
           <Link href="/catalog">
             <a className="section__secondary-text--white footer__categories--button">
-              Каталог бізнесів
+              Купівля бізнесу
             </a>
           </Link>
           <Link href="/information/about-us">
@@ -247,7 +247,7 @@ const Footer: React.FC = () => {
           <div className="footer__catalog">
             <Link href="/catalog">
               <a className="section__secondary-text--white footer__categories--button">
-                Каталог бізнесів
+                Купівля бізнесу
               </a>
             </Link>
             <Link href="/information/about-us">

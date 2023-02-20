@@ -92,6 +92,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isOpenMoreAboutBusiness: !state.isOpenMoreAboutBusiness,
       };
+    case "toggle_investor":
+      return {
+        ...state,
+        isInvestor: state.isInvestor,
+      };
 
     default:
       return state;
@@ -119,4 +124,5 @@ export const initialState = {
   imageUrl: "",
   isActivePhoneModal: false,
   isOpenMoreAboutBusiness: false,
+  isInvestor: 0,
 };

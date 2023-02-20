@@ -12,7 +12,7 @@ const Navbar = () => {
       <ul className="header__nav__menu">
         <li className="header__nav__menu__item">
           <Link href="/catalog">
-            <a className="section__secondary-text--white">Каталог бізнесів</a>
+            <a className="section__secondary-text--white">Купівля бізнесу</a>
           </Link>
         </li>
         {/* {user && (

@@ -17,7 +17,13 @@ const BurgerMenu = () => {
   };
 
   const openAddBusiness = () => {
-    router.push("/account/add-business");
+    router.push(
+      `${
+        router.pathname.includes("invest")
+          ? "/invest/add-business"
+          : "/account/add-business"
+      }`,
+    );
     dispatch({ type: "toggle_burger" });
   };
 
@@ -29,7 +35,7 @@ const BurgerMenu = () => {
           onClick={() => dispatch({ type: "toggle_burger" })}
         >
           <Link href="/catalog">
-            <a className="section__primary-text--white">Каталог бізнесів</a>
+            <a className="section__primary-text--white">Купівля бізнесу</a>
           </Link>
         </li>
         {/* <li

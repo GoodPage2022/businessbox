@@ -8,9 +8,11 @@ const Invest = () => {
   const [state, dispatch] = useContext(MainContext);
   const user = useSelector((state: any) => state.auth.user);
   const router = useRouter();
-
+  console.log(state.isInvestor, "state.isInvestorindex");
   const openModalAuth = () => {
     dispatch({ type: "toggle_authModal" });
+    dispatch({ type: "toggle_investor" });
+    state.isInvestor = 1;
   };
 
   const onForInvestorClick = () => {

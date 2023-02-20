@@ -30,7 +30,7 @@ const Right = () => {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const router = useRouter();
-
+  console.log(router.pathname, "router.query");
   const signOut = async () => {
     if (session !== undefined) {
       await signOutGoogle();
@@ -129,7 +129,13 @@ const Right = () => {
           className="header__right__btn"
           onClick={() => {
             if (user != null) {
-              router.push("/account/add-business");
+              router.push(
+                `${
+                  router.pathname.includes("invest")
+                    ? "/invest/add-business"
+                    : "/account/add-business"
+                }`,
+              );
             } else {
               localStorage.setItem("redirectToAddBusiness", "true");
               openModal();

@@ -16,6 +16,7 @@ const AddBusinessFinish = () => {
   const [isGoBackClicked, setIsGoBackClicked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isBusinessCreated, setIsBusinessCreated] = useState<boolean>(false);
+
   useEffect(() => {
     window.onpopstate = () => {
       router.push(`/account/edit-business/${businessId}`);

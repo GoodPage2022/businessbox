@@ -102,8 +102,17 @@ const AddBusiness = () => {
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     setIsLoading(true);
-    const { name, price, description, business, state, year, city, currency } =
-      values;
+    const {
+      name,
+      price,
+      description,
+      business,
+      state,
+      year,
+      city,
+      currency,
+      invest_status,
+    } = values;
     console.log(business);
 
     let newBusiness: any = {
@@ -112,6 +121,7 @@ const AddBusiness = () => {
       price: isNegotiatedPrice ? 0 : price,
       negotiatedPrice: isNegotiatedPrice,
       description,
+      invest_status,
       state: {
         _id: state,
         link: "Areas",
@@ -337,7 +347,7 @@ const AddBusiness = () => {
 
                         <Field
                           type="text"
-                          name="status"
+                          name="invest_status"
                           // setter={() => dispatch({ type: "toggle_currency" })}
                           placeholder="Оберіть"
                           defaultValue={[
@@ -430,7 +440,7 @@ const AddBusiness = () => {
                         </span>
                         <Field
                           type="text"
-                          name="status"
+                          name="invest_status"
                           // setter={() => dispatch({ type: "toggle_currency" })}
                           placeholder="Оберіть"
                           defaultValue={[
