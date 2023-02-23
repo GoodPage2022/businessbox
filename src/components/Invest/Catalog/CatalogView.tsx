@@ -190,6 +190,11 @@ const CatalogView = () => {
             "city._id": filtersObj[f],
           });
           break;
+        case "invest_status":
+          filterSetOfExp.push({
+            invest_status: filtersObj[f],
+          });
+          break;
         default:
           let param: any = {};
           param[f] = filtersObj[f];
@@ -200,6 +205,7 @@ const CatalogView = () => {
 
     filterSetOfExp.push({
       sold_out: false,
+      investing: true,
     });
 
     // console.log(requestBody, filterSetOfExp);
@@ -248,6 +254,7 @@ const CatalogView = () => {
           setIsLoading(false);
           return response.data.entries.length;
         } else {
+          console.log(response.data.entries, "response.data.entries");
           setCards(response.data.entries);
           setIsLoading(false);
           return response.data.entries;
@@ -285,7 +292,7 @@ const CatalogView = () => {
   const changeFilter = (e: any, clean?: boolean) => {
     if (clean) {
       setFiltersObj({});
-      router.push("/catalog");
+      router.push("/invest/catalog");
       return;
     }
     if (
@@ -308,7 +315,7 @@ const CatalogView = () => {
         filtersObjFirstPageString += "/" + f + "/" + filtersObjFirstPage[f];
     });
 
-    router.replace(`/catalog${filtersObjFirstPageString}`);
+    router.replace(`/invest/catalog${filtersObjFirstPageString}`);
   };
   const initialValues = {
     sorting: "",

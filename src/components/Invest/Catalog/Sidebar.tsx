@@ -21,7 +21,6 @@ const Sidebar = ({
   const router = useRouter();
   const { filters } = router.query;
   const [listAreas, setListAreas] = useState<any>();
-  const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
   const [state, dispatch] = React.useContext(MainContext);
 
@@ -37,25 +36,6 @@ const Sidebar = ({
       console.log(error);
     }
   };
-
-  const getListCities = async (selectedArea: string) => {
-    try {
-      const reponse = await axios.post("/api/locations/getCities", {
-        selectedArea,
-      });
-
-      if (reponse.status == 200) {
-        setListCities(reponse.data);
-      }
-    } catch (error) {
-      console.log("error");
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getListCities(selectedArea);
-  }, [selectedArea]);
 
   useEffect(() => {
     getListAreas();
@@ -132,7 +112,7 @@ const Sidebar = ({
               <span className="sidebar__label">Розмір інвестицій</span>
               <div className="sidebar__price">
                 <Field
-                  className="sidebar__input section__primary-text"
+                  className="sidebar__input sidebar__price-input"
                   type="text"
                   name="priceFrom"
                   placeholder="від"
@@ -143,7 +123,7 @@ const Sidebar = ({
                 />
                 <p className="sidebar__price--text">—</p>
                 <Field
-                  className="sidebar__input section__primary-text"
+                  className="sidebar__input sidebar__price-input"
                   type="text"
                   name="priceTo"
                   placeholder="до"
@@ -188,8 +168,8 @@ const Sidebar = ({
               <span className="sidebar__label">Статус бізнесу</span>
               <Field
                 type="text"
-                name="currency"
-                // setter={() => dispatch({ type: "toggle_currency" })}
+                name="invest_status"
+                changeFilter={changeFilter}
                 placeholder="Оберіть"
                 defaultValue={[{ value: "Вже працює", label: "Вже працює" }]}
                 component={CustomSelect}

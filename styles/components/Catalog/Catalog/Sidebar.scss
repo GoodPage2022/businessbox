@@ -44,6 +44,15 @@
     // &:not(:last-child) {
     //   margin-right: 30px;
     // }
+
+    &.sidebar__select-region {
+      .custom-select__option {
+        font-size: 14px !important;
+      }
+      .custom-select__single-value {
+        font-size: 16px !important;
+      }
+    }
   }
   &__label {
     display: block;
@@ -75,6 +84,11 @@
       line-height: 24px;
       color: $grey-color;
     }
+  }
+
+  &__price-input {
+    font-size: 15px;
+    padding: 18px 22px;
   }
 
   &__select {

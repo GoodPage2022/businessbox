@@ -44,7 +44,7 @@ const IndexPage = () => {
       <Categories />
       <Popular />
       <NewBusinesses />
-      <SoldBusinesses />
+      {/* <SoldBusinesses /> */}
       <RegisterBusiness />
     </>
   );

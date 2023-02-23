@@ -132,7 +132,7 @@ const Sidebar = ({
               <span className="sidebar__label">Ціна</span>
               <div className="sidebar__price">
                 <Field
-                  className="sidebar__input section__primary-text"
+                  className="sidebar__input sidebar__price-input"
                   type="text"
                   name="priceFrom"
                   placeholder="від"
@@ -143,7 +143,7 @@ const Sidebar = ({
                 />
                 <p className="sidebar__price--text">—</p>
                 <Field
-                  className="sidebar__input section__primary-text"
+                  className="sidebar__input sidebar__price-input"
                   type="text"
                   name="priceTo"
                   placeholder="до"
@@ -184,7 +184,7 @@ const Sidebar = ({
                 ))}
               </ul>
             </div>
-            <label className="sidebar__field">
+            <label className="sidebar__field sidebar__select-region">
               <span className="sidebar__label">Область</span>
               <Field
                 component={CustomSelect}
@@ -198,7 +198,7 @@ const Sidebar = ({
                 placeholder="-----"
               ></Field>
             </label>
-            <label className="sidebar__field">
+            <label className="sidebar__field  sidebar__select-region">
               <span className="sidebar__label">Місто</span>
               <Field
                 type="text"

@@ -3,13 +3,14 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import axios, { AxiosRequestConfig } from "axios";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CustomSelect from "../../shared/CustomSelect";
 import Editor from "../../shared/Editor";
 import CrossSVG from "../../../assets/svg/cross.svg";
 import OurCategories from "../../../constants/categories-select";
 import { Oval } from "react-loader-spinner";
 import CustomInput from "../../shared/CustomInput";
+import { MainContext } from "../../../contexts/mainContext";
 
 const AddBusiness = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const AddBusiness = () => {
   const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isNegotiatedPrice, setIsNegotiatedPrice] = useState<boolean>(false);
+  const [mainContextState, dispatch] = useContext(MainContext);
 
   const getListAreas = async () => {
     setIsLoading(true);
@@ -122,6 +124,7 @@ const AddBusiness = () => {
       negotiatedPrice: isNegotiatedPrice,
       description,
       invest_status,
+      investing: true,
       state: {
         _id: state,
         link: "Areas",
@@ -187,8 +190,13 @@ const AddBusiness = () => {
       }
       setIsSentBusiness(true);
       localStorage.setItem("currency", currencyState);
+
+      if (invest_status == "На етапі створення") {
+        dispatch({ type: "toggle_businessOnStageCreation" });
+      }
+
       router.push(
-        `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
+        `/invest/add-business-finish/${newBusinessResponse.data.data._id}`,
       );
 
       setAddBusinessError("");
@@ -256,6 +264,7 @@ const AddBusiness = () => {
             city: "",
             currency: "Гривня",
             file: null,
+            invest_status: "Вже працює",
           }}
           validate={(values: any) => {
             escapeHtml(values.name);
@@ -350,9 +359,6 @@ const AddBusiness = () => {
                           name="invest_status"
                           // setter={() => dispatch({ type: "toggle_currency" })}
                           placeholder="Оберіть"
-                          defaultValue={[
-                            { value: "Вже працює", label: "Вже працює" },
-                          ]}
                           component={CustomSelect}
                           options={[
                             { value: "Вже працює", label: "Вже працює" },

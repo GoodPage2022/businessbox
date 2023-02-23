@@ -35,6 +35,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [commentIsSent, setCommentIsSent] = useState(false);
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState<any>([]);
+
+  const [creationDate, setCreationDate] = useState<string>("");
   const [comments, setComments] = useState<any>([]);
   const [isInvestmentBusiness, setIsInvestmentBusiness] =
     useState<boolean>(false);
@@ -245,7 +247,19 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       response = await axios.post(`/api/businesses/get`, { user, projectId });
       if (response.data) {
         if (response.data.entries.length > 0) {
+          console.log(response.data.entries[0], "response.data.entries[0]");
           setProjectInfo(response.data.entries[0]);
+          const timeformat: Intl.DateTimeFormatOptions = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          };
+
+          setCreationDate(
+            new Date(
+              response.data.entries[0]._created * 1000,
+            ).toLocaleDateString("uk-UA", timeformat),
+          );
         } else {
           router.push("/404");
           return false;
@@ -626,6 +640,9 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             )}{" "}
           </div>
         </div>
+        <p className="projectInfo__date section__secondary-text">
+          Дата створення бізнесу: {creationDate}
+        </p>
         <ProfileInfo projectData={projectInfo} />
         {comments.length > 0 ? (
           <ul className="projectInfo__comments">

@@ -3,19 +3,21 @@ import CustomSelect from "../../shared/CustomSelect";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CustomInput from "../../shared/CustomInput";
 import { Oval } from "react-loader-spinner";
+import { MainContext } from "../../../contexts/mainContext";
 
 const AddBusinessFinish = () => {
   const router = useRouter();
+  const [mainContextState, dispatch] = useContext(MainContext);
   const user = useSelector((state: any) => state.auth.user);
   const [addBusinessError, setAddBusinessError] = useState("");
   const { businessId } = router.query;
   const [currency, setCurrency] = useState(localStorage.getItem("currency"));
   const [isGoBackClicked, setIsGoBackClicked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isBusinessCreated, setIsBusinessCreated] = useState<boolean>(false);
+  // const [isBusinessCreated, setIsBusinessCreated] = useState<boolean>(false);
 
   useEffect(() => {
     window.onpopstate = () => {
@@ -47,6 +49,8 @@ const AddBusinessFinish = () => {
       public_reviews,
       financial_accounting_system,
       crm,
+      capital_return_percentage,
+      annual_profit,
     } = values;
 
     const newBusiness = {
@@ -73,6 +77,8 @@ const AddBusinessFinish = () => {
       financial_accounting_system,
       crm,
       _by: user._id,
+      capital_return_percentage,
+      annual_profit,
     };
 
     try {
@@ -84,6 +90,9 @@ const AddBusinessFinish = () => {
       console.log("newUserResponse");
       console.log(newBusinessResponse);
       localStorage.removeItem("currency");
+      if (mainContextState.businessOnStageCreation) {
+        dispatch({ type: "toggle_businessOnStageCreation" });
+      }
       if (isGoBackClicked) {
         router.push(`/account/edit-business/${businessId}`);
       } else {
@@ -162,6 +171,8 @@ const AddBusinessFinish = () => {
             public_reviews: "",
             financial_accounting_system: "",
             crm: "",
+            capital_return_percentage: "",
+            annual_profit: "",
           }}
           validate={(values: any) => {
             escapeHtml(values.property_form);
@@ -195,7 +206,144 @@ const AddBusinessFinish = () => {
             return (
               <Form className="addBusinessFinish__form">
                 <div className="addBusinessFinish__top">
-                  {isBusinessCreated ? (
+                  {mainContextState.businessOnStageCreation ? (
+                    <>
+                      <div className="addBusinessFinish__first-wrapper">
+                        <label className="addBusinessFinish__field">
+                          <span className="addBusinessFinish__label">
+                            Кількість засновників
+                          </span>
+                          <Field
+                            className="addBusinessFinish__input section__primary-text"
+                            type="text"
+                            name="number_of_founders"
+                            minLength={1}
+                            maxLength={255}
+                            onChange={(e: any) => {
+                              setFieldValue(
+                                "number_of_founders",
+                                e.target.value.replaceAll(
+                                  /[A-Za-zА-Яа-я,./'` ]/g,
+                                  "",
+                                ),
+                              );
+                            }}
+                            required={isGoBackClicked ? false : true}
+                            component={CustomInput}
+                            placeholder="-----"
+                          />
+                        </label>
+
+                        <label className="addBusinessFinish__field">
+                          <span className="addBusinessFinish__label">
+                            Ваш бізнес має сезонність?
+                          </span>
+                          <span className="addBusinessFinish__select--thumb">
+                            <Field
+                              // as="select"
+                              component={CustomSelect}
+                              className="addBusinessFinish__select section__primary-text"
+                              type="text"
+                              name="seasonality"
+                              options={[
+                                { value: "yes", label: "Так" },
+                                { value: "no", label: "Ні" },
+                              ]}
+                              placeholder="Так"
+                            >
+                              {/* <option value="yes">Так</option>
+                    <option value="no">Ні</option> */}
+                            </Field>
+
+                            {/* <PolygonSVG className="addBusinessFinish__select--icon" /> */}
+                          </span>
+                        </label>
+                      </div>
+                      <div className="addBusinessFinish__second-wrapper">
+                        <label className="addBusinessFinish__field">
+                          <span className="addBusinessFinish__label">
+                            Відсоток повернення на капітал
+                          </span>
+                          <span className="addBusinessFinish__input-thumb">
+                            <Field
+                              className="addBusinessFinish__input section__primary-text"
+                              type="text"
+                              name="capital_return_percentage"
+                              onChange={(e: any) => {
+                                setFieldValue(
+                                  "capital_return_percentage",
+                                  e.target.value.replaceAll(
+                                    /[A-Za-zА-Яа-я,./'` ]/g,
+                                    "",
+                                  ),
+                                );
+                              }}
+                              minLength={1}
+                              maxLength={255}
+                              placeholder="-----"
+                            />
+                            <span className="addBusinessFinish__icon">
+                              {currency === "Гривня" ? "₴" : "$"}
+                            </span>
+                          </span>
+                        </label>
+                        <label className="addBusinessFinish__field">
+                          <span className="addBusinessFinish__label">
+                            Період повернення інвестицій
+                          </span>
+                          <span className="addBusinessFinish__input-thumb">
+                            <Field
+                              className="addBusinessFinish__input section__primary-text"
+                              type="text"
+                              name="return_on_investment"
+                              minLength={1}
+                              onChange={(e: any) => {
+                                setFieldValue(
+                                  "return_on_investment",
+                                  e.target.value.replaceAll(
+                                    /[A-Za-zА-Яа-я,./'` ]/g,
+                                    "",
+                                  ),
+                                );
+                              }}
+                              maxLength={255}
+                              placeholder="-----"
+                            />
+                            <span className="addBusinessFinish__icon">
+                              {currency === "Гривня" ? "₴" : "$"}
+                            </span>
+                          </span>
+                        </label>
+                        <label className="addBusinessFinish__field">
+                          <span className="addBusinessFinish__label">
+                            Річний дохід
+                          </span>
+                          <span className="addBusinessFinish__input-thumb">
+                            <Field
+                              className="addBusinessFinish__input section__primary-text"
+                              type="text"
+                              name="annual_profit"
+                              minLength={1}
+                              onChange={(e: any) => {
+                                setFieldValue(
+                                  "annual_profit",
+                                  e.target.value.replaceAll(
+                                    /[A-Za-zА-Яа-я,./'` ]/g,
+                                    "",
+                                  ),
+                                );
+                              }}
+                              maxLength={255}
+                              placeholder="-----"
+                            />
+                            <span className="addBusinessFinish__icon">
+                              {currency === "Гривня" ? "₴" : "$"}
+                            </span>
+                          </span>
+                        </label>
+                      </div>
+                    </>
+                  ) : (
                     <>
                       <div className="addBusinessFinish__first-wrapper">
                         <label className="addBusinessFinish__field">
@@ -522,143 +670,6 @@ const AddBusinessFinish = () => {
                               onChange={(e: any) => {
                                 setFieldValue(
                                   "year_nonfixed_costs",
-                                  e.target.value.replaceAll(
-                                    /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
-                                );
-                              }}
-                              maxLength={255}
-                              placeholder="-----"
-                            />
-                            <span className="addBusinessFinish__icon">
-                              {currency === "Гривня" ? "₴" : "$"}
-                            </span>
-                          </span>
-                        </label>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="addBusinessFinish__first-wrapper">
-                        <label className="addBusinessFinish__field">
-                          <span className="addBusinessFinish__label">
-                            Кількість засновників
-                          </span>
-                          <Field
-                            className="addBusinessFinish__input section__primary-text"
-                            type="text"
-                            name="number_of_founders"
-                            minLength={1}
-                            maxLength={255}
-                            onChange={(e: any) => {
-                              setFieldValue(
-                                "number_of_founders",
-                                e.target.value.replaceAll(
-                                  /[A-Za-zА-Яа-я,./'` ]/g,
-                                  "",
-                                ),
-                              );
-                            }}
-                            required={isGoBackClicked ? false : true}
-                            component={CustomInput}
-                            placeholder="-----"
-                          />
-                        </label>
-
-                        <label className="addBusinessFinish__field">
-                          <span className="addBusinessFinish__label">
-                            Ваш бізнес має сезонність?
-                          </span>
-                          <span className="addBusinessFinish__select--thumb">
-                            <Field
-                              // as="select"
-                              component={CustomSelect}
-                              className="addBusinessFinish__select section__primary-text"
-                              type="text"
-                              name="seasonality"
-                              options={[
-                                { value: "yes", label: "Так" },
-                                { value: "no", label: "Ні" },
-                              ]}
-                              placeholder="Так"
-                            >
-                              {/* <option value="yes">Так</option>
-                    <option value="no">Ні</option> */}
-                            </Field>
-
-                            {/* <PolygonSVG className="addBusinessFinish__select--icon" /> */}
-                          </span>
-                        </label>
-                      </div>
-                      <div className="addBusinessFinish__second-wrapper">
-                        <label className="addBusinessFinish__field">
-                          <span className="addBusinessFinish__label">
-                            Відсоток повернення на капітал
-                          </span>
-                          <span className="addBusinessFinish__input-thumb">
-                            <Field
-                              className="addBusinessFinish__input section__primary-text"
-                              type="text"
-                              name="year_turnover"
-                              onChange={(e: any) => {
-                                setFieldValue(
-                                  "year_turnover",
-                                  e.target.value.replaceAll(
-                                    /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
-                                );
-                              }}
-                              minLength={1}
-                              maxLength={255}
-                              placeholder="-----"
-                            />
-                            <span className="addBusinessFinish__icon">
-                              {currency === "Гривня" ? "₴" : "$"}
-                            </span>
-                          </span>
-                        </label>
-                        <label className="addBusinessFinish__field">
-                          <span className="addBusinessFinish__label">
-                            Період повернення інвестицій
-                          </span>
-                          <span className="addBusinessFinish__input-thumb">
-                            <Field
-                              className="addBusinessFinish__input section__primary-text"
-                              type="text"
-                              name="monthly_net_profit"
-                              minLength={1}
-                              onChange={(e: any) => {
-                                setFieldValue(
-                                  "monthly_net_profit",
-                                  e.target.value.replaceAll(
-                                    /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
-                                );
-                              }}
-                              maxLength={255}
-                              placeholder="-----"
-                            />
-                            <span className="addBusinessFinish__icon">
-                              {currency === "Гривня" ? "₴" : "$"}
-                            </span>
-                          </span>
-                        </label>
-                        <label className="addBusinessFinish__field">
-                          <span className="addBusinessFinish__label">
-                            Річний дохід
-                          </span>
-                          <span className="addBusinessFinish__input-thumb">
-                            <Field
-                              className="addBusinessFinish__input section__primary-text"
-                              type="text"
-                              name="gross_monthly_income"
-                              minLength={1}
-                              onChange={(e: any) => {
-                                setFieldValue(
-                                  "gross_monthly_income",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
                                     "",

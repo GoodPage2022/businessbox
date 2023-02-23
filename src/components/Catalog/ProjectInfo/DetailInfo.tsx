@@ -313,8 +313,8 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
                 Відсоток повернення на капітал
               </p>
               <p className="detailInfo__list-item--right section__primary-text">
-                {projectInfo.year_turnover
-                  ? projectInfo.year_turnover +
+                {projectInfo.capital_return_percentage
+                  ? projectInfo.capital_return_percentage +
                     (projectInfo.currency == "Долар" ? "$" : "₴")
                   : "– – – – –"}
               </p>
@@ -324,8 +324,8 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
                 Період повернення інвестицій
               </p>
               <p className="detailInfo__list-item--right section__primary-text">
-                {projectInfo.monthly_net_profit
-                  ? projectInfo.monthly_net_profit +
+                {projectInfo.return_on_investment
+                  ? projectInfo.return_on_investment +
                     (projectInfo.currency == "Долар" ? "$" : "₴")
                   : "– – – – –"}
               </p>
@@ -335,8 +335,8 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
                 Річний дохід
               </p>
               <p className="detailInfo__list-item--right section__primary-text">
-                {projectInfo.gross_monthly_income
-                  ? projectInfo.gross_monthly_income +
+                {projectInfo.annual_profit
+                  ? projectInfo.annual_profit +
                     (projectInfo.currency == "Долар" ? "$" : "₴")
                   : "– – – – –"}
               </p>
