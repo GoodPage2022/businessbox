@@ -69,6 +69,7 @@ function ModalDeleteBusiness({
       console.log(error);
     }
 
+    dispatch({ type: "toggle_deleteBusiness" });
     router.push("/account/my-businesses");
   };
 

@@ -10,7 +10,7 @@ const Categories = () => {
   const user = useSelector((state: any) => state.auth.user);
   const router = useRouter();
   const [businessesQuantity, setBusinessesQuantity] = useState(0);
-  const [businessesAmountPrice, setBusinessesAmountPrice] = useState(0);
+  const [businessesAmountPrice, setBusinessesAmountPrice] = useState("0");
   const rate = useSelector((state: any) => state.currency.value);
 
   const getBusinesses = async () => {
@@ -18,7 +18,12 @@ const Categories = () => {
 
     if (response.data) {
       setBusinessesQuantity(response.data[0].count);
-      setBusinessesAmountPrice(response.data[0].total);
+      const formatedPrice = new Intl.NumberFormat("uk-UA", {
+        notation: "compact",
+        compactDisplay: "long",
+      }).format(response.data[0].total);
+
+      setBusinessesAmountPrice(formatedPrice);
     }
 
     return;
@@ -183,7 +188,7 @@ const Categories = () => {
           Зареєстровано бізнесів: {businessesQuantity}
         </p>
         <p className="section__secondary-text">
-          Продається на сумму: {businessesAmountPrice.toFixed()} грн
+          Продається на сумму: {businessesAmountPrice} грн
         </p>
       </div>
     </div>
