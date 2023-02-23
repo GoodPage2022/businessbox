@@ -28,7 +28,7 @@ const Networks = () => {
         </Link>
       </li>
       <li className="networks__item">
-        <Link href="@Valentyna_Business_box">
+        <Link href="https://t.me/bissbox">
           <a className="section__secondary-text--white" target="blank">
             <button className="networks__btn networks__btn--telegram">
               <TelegramSVG />
