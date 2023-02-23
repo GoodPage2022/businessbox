@@ -29,6 +29,7 @@ const BusinessCard = ({
   currency = "Гривня",
   negotiatedPrice,
   order,
+  investing,
 }: {
   image: any;
   title: string;
@@ -41,6 +42,7 @@ const BusinessCard = ({
   currency?: string;
   negotiatedPrice?: boolean;
   order?: number;
+  investing?: boolean;
 }) => {
   const dispatchRedux = useDispatch();
   const router = useRouter();
@@ -51,8 +53,8 @@ const BusinessCard = ({
   const [clickPos, setClickPos] = useState<any>({});
   // const [rate, setRate] = useState<number>(0);
   const rate = useSelector((state: any) => state.currency.value);
-  const [isInvestmentBusiness, setIsInvestmentBusiness] =
-    useState<boolean>(false);
+  // const [isInvestmentBusiness, setIsInvestmentBusiness] =
+  //   useState<boolean>(false);
 
   let onContextMenuClick = false;
   useEffect(() => {
@@ -147,7 +149,7 @@ const BusinessCard = ({
         </div>
       )}
 
-      {!isInvestmentBusiness && isMyBusinessesPage && (
+      {investing && isMyBusinessesPage && (
         <div className="business-card__invest">
           <InvestSVG />
         </div>

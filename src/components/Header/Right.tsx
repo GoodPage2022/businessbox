@@ -30,7 +30,7 @@ const Right = () => {
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
   const router = useRouter();
-  console.log(router.pathname, "router.query");
+  // console.log(router.pathname, "router.query");
   const signOut = async () => {
     if (session !== undefined) {
       await signOutGoogle();

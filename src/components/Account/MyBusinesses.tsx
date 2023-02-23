@@ -121,6 +121,7 @@ const MyBusinesses = () => {
                   currency,
                   negotiatedPrice,
                   _order,
+                  investing,
                 }: any) => (
                   <PopularCard
                     key={_id}
@@ -143,6 +144,7 @@ const MyBusinesses = () => {
                     currency={currency}
                     negotiatedPrice={negotiatedPrice}
                     order={_order}
+                    investing={investing}
                   />
                 ),
               )}

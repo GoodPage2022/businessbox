@@ -98,6 +98,12 @@ export const reducer = (state: any, action: any) => {
         isInvestor: state.isInvestor,
       };
 
+    case "toggle_businessOnStageCreation":
+      return {
+        ...state,
+        businessOnStageCreation: !state.businessOnStageCreation,
+      };
+
     default:
       return state;
   }
@@ -125,4 +131,5 @@ export const initialState = {
   isActivePhoneModal: false,
   isOpenMoreAboutBusiness: false,
   isInvestor: 0,
+  businessOnStageCreation: false,
 };

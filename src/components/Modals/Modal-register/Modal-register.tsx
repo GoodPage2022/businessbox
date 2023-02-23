@@ -19,7 +19,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [agreePolicy, setAgreePolicy] = useState<boolean>(false);
   const router = useRouter();
-  console.log(state.isInvestor == 1, "asaasasdasdasd");
+  // console.log(state.isInvestor == 1, "asaasasdasdasd");
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
