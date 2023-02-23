@@ -132,7 +132,7 @@ const Sidebar = ({
               <span className="sidebar__label">Ціна</span>
               <div className="sidebar__price">
                 <Field
-                  className="sidebar__input section__primary-text"
+                  className="sidebar__input sidebar__price-input"
                   type="text"
                   name="priceFrom"
                   placeholder="від"
@@ -143,7 +143,7 @@ const Sidebar = ({
                 />
                 <p className="sidebar__price--text">—</p>
                 <Field
-                  className="sidebar__input section__primary-text"
+                  className="sidebar__input sidebar__price-input"
                   type="text"
                   name="priceTo"
                   placeholder="до"
