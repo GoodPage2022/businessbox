@@ -200,6 +200,7 @@ const CatalogView = () => {
 
     filterSetOfExp.push({
       sold_out: false,
+      investing: { $exists: false },
     });
 
     // console.log(requestBody, filterSetOfExp);

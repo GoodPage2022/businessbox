@@ -122,6 +122,7 @@ const AddBusiness = () => {
       negotiatedPrice: isNegotiatedPrice,
       description,
       invest_status,
+      investing: true,
       state: {
         _id: state,
         link: "Areas",
@@ -188,7 +189,7 @@ const AddBusiness = () => {
       setIsSentBusiness(true);
       localStorage.setItem("currency", currencyState);
       router.push(
-        `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
+        `/invest/add-business-finish/${newBusinessResponse.data.data._id}`,
       );
 
       setAddBusinessError("");
@@ -256,6 +257,7 @@ const AddBusiness = () => {
             city: "",
             currency: "Гривня",
             file: null,
+            invest_status: "Вже працює",
           }}
           validate={(values: any) => {
             escapeHtml(values.name);
@@ -350,9 +352,6 @@ const AddBusiness = () => {
                           name="invest_status"
                           // setter={() => dispatch({ type: "toggle_currency" })}
                           placeholder="Оберіть"
-                          defaultValue={[
-                            { value: "Вже працює", label: "Вже працює" },
-                          ]}
                           component={CustomSelect}
                           options={[
                             { value: "Вже працює", label: "Вже працює" },
