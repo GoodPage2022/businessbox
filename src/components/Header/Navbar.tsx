@@ -10,10 +10,18 @@ const Navbar = () => {
     <nav className="header__nav">
       <Logo />
       <ul className="header__nav__menu">
-        <li className="header__nav__menu__item">
-          <Link href="/catalog">
-            <a className="section__secondary-text--white">Купівля бізнесу</a>
-          </Link>
+        <li className="header__nav__menu__item header__nav__menu__catalog">
+          {/* <Link href="#"> */}
+          <p className="section__secondary-text--white">Каталог бізнесу</p>
+          {/* </Link> */}
+          <div className="header__nav__menu__dropdown">
+            <Link href="/invest/catalog">
+              <a className="section__secondary-text--white">Інвестування</a>
+            </Link>
+            <Link href="/catalog">
+              <a className="section__secondary-text--white">Купівля</a>
+            </Link>
+          </div>
         </li>
         {/* {user && (
           <li className="header__nav__menu__item section__secondary-text--white">
