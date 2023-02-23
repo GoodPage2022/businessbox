@@ -184,7 +184,7 @@ const Sidebar = ({
                 ))}
               </ul>
             </div>
-            <label className="sidebar__field">
+            <label className="sidebar__field sidebar__select-region">
               <span className="sidebar__label">Область</span>
               <Field
                 component={CustomSelect}
@@ -198,7 +198,7 @@ const Sidebar = ({
                 placeholder="-----"
               ></Field>
             </label>
-            <label className="sidebar__field">
+            <label className="sidebar__field  sidebar__select-region">
               <span className="sidebar__label">Місто</span>
               <Field
                 type="text"
