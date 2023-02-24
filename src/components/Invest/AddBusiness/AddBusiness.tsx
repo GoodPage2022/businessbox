@@ -103,6 +103,10 @@ const AddBusiness = () => {
   };
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
+    if (files.length == 0) {
+      setAddBusinessError("Додайте медіафайл");
+      return;
+    }
     setIsLoading(true);
     const {
       name,

@@ -148,6 +148,10 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   }, [businessInfo]);
 
   const handleSubmit = async (values: any) => {
+    if (files.length == 0) {
+      setAddBusinessError("Додайте медіафайл");
+      return;
+    }
     setIsLoading(true);
     const { name, price, description, business, state, year, city, currency } =
       values;

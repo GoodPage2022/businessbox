@@ -36,7 +36,10 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getList`, { user });
+    const response = await axios.post(`/api/businesses/getList`, {
+      user,
+      limit: 10,
+    });
 
     if (response.data) {
       setCards(response.data.entries);
