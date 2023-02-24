@@ -2,7 +2,6 @@ import { Html, Head, Main, NextScript } from "next/document";
 import { FB_PIXEL_ID } from "../lib/fpixel";
 
 export default function Document() {
-  console.log(process.env.fbPixelId, "asdasdasd");
   return (
     <Html>
       <Head>

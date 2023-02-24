@@ -248,6 +248,10 @@ const AddBusiness = () => {
             file: null,
           }}
           validate={(values: any) => {
+            console.log(values);
+            // if (values.file == null) {
+            //   setAddBusinessError();
+            // }
             escapeHtml(values.name);
             // escapeHtml(values.business);
             escapeHtml(values.price);
@@ -565,6 +569,7 @@ const AddBusiness = () => {
                       accept="image/*,.png,.jpg"
                       className="addBusiness__custom-file-input--desctop"
                       data-label={`Додати медіафайл`}
+                      required
                       onChange={async (e) => {
                         if (e.currentTarget?.files?.length) {
                           const uploadedFiles: any = await uploadToServer(
