@@ -6,6 +6,8 @@ import axios from "axios";
 import ReactTooltip from "react-tooltip";
 import { Formik, Form, Field } from "formik";
 import { signIn as signInReducer } from "../../../../store/actions/auth";
+import { signOut as signOutReducer } from "../../../../store/actions/auth";
+import { useSession, signOut as signOutGoogle } from "next-auth/react";
 
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
@@ -35,6 +37,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [commentIsSent, setCommentIsSent] = useState(false);
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState<any>([]);
+  const { data: session } = useSession();
 
   const [creationDate, setCreationDate] = useState<string>("");
   const [comments, setComments] = useState<any>([]);
@@ -245,9 +248,18 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
     try {
       response = await axios.post(`/api/businesses/get`, { user, projectId });
+
+      if (response.status == 401) {
+        if (session !== undefined) {
+          await signOutGoogle();
+        }
+        dispatchRedux(signOutReducer());
+        router.push("/");
+        return;
+      }
+
       if (response.data) {
         if (response.data.entries.length > 0) {
-          console.log(response.data.entries[0], "response.data.entries[0]");
           setProjectInfo(response.data.entries[0]);
           const timeformat: Intl.DateTimeFormatOptions = {
             year: "numeric",

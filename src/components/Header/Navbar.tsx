@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import { useSelector } from "react-redux";
+import ArrowSVG from "../../../src/assets/svg/catalog-arrow.svg";
 
 const Navbar = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -12,7 +13,9 @@ const Navbar = () => {
       <ul className="header__nav__menu">
         <li className="header__nav__menu__item header__nav__menu__catalog">
           {/* <Link href="#"> */}
-          <p className="section__secondary-text--white">Каталог бізнесу</p>
+          <p className="section__secondary-text--white">
+            Каталог бізнесу <ArrowSVG />
+          </p>
           {/* </Link> */}
           <div className="header__nav__menu__dropdown">
             <Link href="/invest/catalog">
