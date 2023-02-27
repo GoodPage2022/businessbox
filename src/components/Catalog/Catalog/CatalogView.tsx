@@ -412,7 +412,13 @@ const CatalogView = () => {
             />
           </FormikProvider>
         </div>
-
+        <p className="catalogView__qty section__primary-text">
+          Знайдено{" "}
+          <span className="section__primary-text catalogView__qty--bold">
+            {countCards}
+          </span>{" "}
+          бізнесів
+        </p>
         <div className="catalogView__wrapper">
           <Sidebar changeFilter={changeFilter} filtersObj={filtersObj} />
           {isLoading ? (

@@ -29,6 +29,7 @@ import LargeImage from "./LargeImage";
 import ModalAnalysisThank from "../../Modals/Modal-analysis/Modal-analysis-thank";
 import Script from "next/script";
 import ModalMoreAboutBusiness from "../../Modals/Invest/Modal-MoreAboutBusiness";
+import ModalThankComment from "../../Modals/Modal-thank-comment/Modal-thank-comment";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
@@ -324,6 +325,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     dispatch({ type: "toggle_moreAboutBusinessModal" });
   };
 
+  const closeThankComment = () => {
+    dispatch({ type: "toggle_thankComment" });
+  };
+
   // useEffect(() => {
   //   getCurrencyRate();
   // }, []);
@@ -370,6 +375,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       });
 
       if (newCommentResponse.status == 200) {
+        dispatch({ type: "toggle_thankComment" });
         setCommentIsSent(true);
         setTimeout(() => setCommentIsSent(false), 3000);
         getBusinessComments();
@@ -729,6 +735,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       <ModalAnalysisThank onClose={closeAnalysisThankModal} />
 
       <ModalMoreAboutBusiness onClose={closeMoreAboutBusinessModal} />
+      <ModalThankComment onClose={closeThankComment} />
     </section>
   );
 };

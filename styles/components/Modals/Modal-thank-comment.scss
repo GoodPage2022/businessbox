@@ -1,0 +1,157 @@
+.modal-thankComment {
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999999999;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    top: -50%;
+    transition: all 0.35s ease;
+
+    &.active {
+      visibility: visible;
+      pointer-events: all;
+      opacity: 1;
+      top: 0;
+    }
+  }
+  &__container {
+    position: relative;
+    display: flex;
+    width: 1110px;
+
+    border-radius: 25px;
+    overflow: hidden;
+  }
+
+  &__header {
+    position: relative;
+    min-width: 520px;
+    background-image: url("../../../public/assets/images/forgot-pass-bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 90px 50px 90px 60px;
+  }
+
+  &__text {
+    &--desctop {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: $white-color;
+      margin-top: 40px;
+    }
+    &--mob {
+      display: none;
+    }
+  }
+
+  &__button-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-bottom: 25px;
+    height: 44px;
+    width: 44px;
+    border: none;
+    border-radius: 18px;
+    background: $white-color;
+    cursor: pointer;
+
+    & svg {
+      & path {
+        stroke: $main-text-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .modal-thankComment {
+    &__container {
+      display: flex;
+      width: 765px;
+
+      border-radius: 25px;
+      overflow: hidden;
+    }
+
+    &__header {
+      min-width: 349px;
+      background-image: url("../../../public/assets/images/forgot-pass-bg.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 40px 24px 60px 24px;
+    }
+
+    &__title {
+      font-size: 32px;
+      line-height: 38px;
+    }
+
+    &__text {
+      &--desctop {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: $white-color;
+        margin-top: 40px;
+      }
+      &--mob {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .modal-thankComment {
+    &__container {
+      display: block;
+      width: 375px;
+      border-radius: 15px 15px 0px 0px;
+    }
+
+    &__header {
+      min-width: 100%;
+      background-image: url("../../../public/assets/images/auth-modal-mob-bg.png");
+      padding: 40px 20px;
+    }
+
+    &__title {
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    &__text {
+      &--desctop {
+        display: none;
+      }
+      &--mob {
+        display: block;
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 12px;
+        color: $main-text-color;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
