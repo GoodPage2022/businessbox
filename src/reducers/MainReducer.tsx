@@ -104,6 +104,12 @@ export const reducer = (state: any, action: any) => {
         businessOnStageCreation: !state.businessOnStageCreation,
       };
 
+    case "toggle_thankComment":
+      return {
+        ...state,
+        thankComment: !state.thankComment,
+      };
+
     default:
       return state;
   }
@@ -132,4 +138,5 @@ export const initialState = {
   isOpenMoreAboutBusiness: false,
   isInvestor: 0,
   businessOnStageCreation: false,
+  thankComment: false,
 };
