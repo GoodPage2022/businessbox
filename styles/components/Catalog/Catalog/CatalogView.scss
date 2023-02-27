@@ -16,6 +16,15 @@
     display: flex;
   }
 
+  &__qty {
+    margin-left: 285px;
+    margin-bottom: 20px;
+
+    &--bold {
+      font-weight: 700;
+    }
+  }
+
   &__cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -160,6 +169,10 @@
 
     &__wrapper {
       display: block;
+    }
+
+    &__qty {
+      margin-left: 0;
     }
 
     &__cards {
