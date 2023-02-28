@@ -97,7 +97,7 @@ const CatalogView = () => {
                 $or: [
                   {
                     $and: [
-                      { currency: "Долар" },
+                      { $eq: ["$currency", "Долар"] },
                       {
                         $gte: [
                           {
@@ -110,7 +110,7 @@ const CatalogView = () => {
                   },
                   {
                     $and: [
-                      { currency: "Гривня" },
+                      { $eq: ["$currency", "Гривня"] },
                       {
                         $gte: [
                           {

@@ -132,7 +132,7 @@ const CatalogView = () => {
                 $or: [
                   {
                     $and: [
-                      { currency: "Долар" },
+                      { $eq: ["$currency", "Долар"] },
                       {
                         $lte: [
                           {
@@ -145,7 +145,7 @@ const CatalogView = () => {
                   },
                   {
                     $and: [
-                      { currency: "Гривня" },
+                      { $eq: ["$currency", "Гривня"] },
                       {
                         $lte: [
                           {
@@ -280,7 +280,7 @@ const CatalogView = () => {
   useEffect(() => {
     getBusinesses();
     setPageNumber(filtersObj.page ?? 1);
-  }, [filtersObj]);
+  }, [filtersObj, state.isUah]);
 
   const changeFilter = (e: any, clean?: boolean) => {
     if (clean) {
