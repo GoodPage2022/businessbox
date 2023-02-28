@@ -738,7 +738,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       </div>
       <ModalAnalysis onClose={closeAnalysisModal} />
       <ModalAnalysisTariffs onClose={closeAnalysisTariffsModal} />
-      <ModalAnalysisThank onClose={closeAnalysisThankModal} />
+      <ModalAnalysisThank orderId={orderId} onClose={closeAnalysisThankModal} />
 
       <ModalMoreAboutBusiness onClose={closeMoreAboutBusinessModal} />
       <ModalThankComment onClose={closeThankComment} />
