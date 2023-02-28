@@ -36,9 +36,16 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinesses = async () => {
+    const filter = {
+      $and: [
+        { area: { $in: projectInfo.area } },
+        { sold_out: false, investing: { $exists: false } },
+      ],
+    };
     const response = await axios.post(`/api/businesses/getList`, {
       user,
       limit: 10,
+      filter,
     });
 
     if (response.data) {
@@ -85,7 +92,6 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
   };
 
   useEffect(() => {
-    getBusinesses();
     getBusinessInfo();
   }, []);
 
@@ -94,6 +100,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
       setLoading(true);
     } else {
       setLoading(false);
+      getBusinesses();
     }
   }, [projectInfo]);
 

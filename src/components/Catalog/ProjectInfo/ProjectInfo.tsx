@@ -181,7 +181,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         _created: -1,
       },
       filter: {
-        sold_out: false,
+        $and: [
+          { area: { $in: projectInfo.area } },
+          { sold_out: false, investing: { $exists: false } },
+        ],
       },
     };
 
@@ -334,8 +337,12 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   // }, []);
 
   useEffect(() => {
-    getBusinesses();
-  }, []);
+    if (projectInfo == null) {
+      return;
+    } else {
+      getBusinesses();
+    }
+  }, [projectInfo]);
 
   useEffect(() => {
     getBusinessInfo();
@@ -560,12 +567,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             >
               Відкрити повну інформацію
             </button>
-            {!isAuth && (
+            {isAuth && (
               <p className="projectInfo__err-msg">
                 Тільки для авторизованих користувачів
               </p>
             )}
-            $
             {!isInvestmentBusiness ? (
               <button
                 onClick={() => {
@@ -634,7 +640,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
-            {!isInvestmentBusiness ? (
+            {isInvestmentBusiness ? (
               <button
                 onClick={() => {
                   dispatch({ type: "toggle_moreAboutBusinessModal" });
@@ -732,7 +738,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       </div>
       <ModalAnalysis onClose={closeAnalysisModal} />
       <ModalAnalysisTariffs onClose={closeAnalysisTariffsModal} />
-      <ModalAnalysisThank onClose={closeAnalysisThankModal} />
+      <ModalAnalysisThank orderId={orderId} onClose={closeAnalysisThankModal} />
 
       <ModalMoreAboutBusiness onClose={closeMoreAboutBusinessModal} />
       <ModalThankComment onClose={closeThankComment} />

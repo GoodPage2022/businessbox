@@ -6,7 +6,6 @@
 
 // module.exports = nextConfig
 
-const withReactSvg = require('next-react-svg')
 const path = require('path')
 
 const env = {
@@ -36,7 +35,14 @@ const env = {
   nextPublicFacebookPixelId: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID
  }
 
-module.exports = withReactSvg({
+
+const nextReactSvgConfig = {
+  include: path.resolve(__dirname, 'src/assets/svg'),
+};
+
+const withReactSvg = require('next-react-svg')(nextReactSvgConfig);
+
+  const nextConfig = {
   env,
   images: {
     domains: ['admin.bissbox.com', '157.230.99.45', 'localhost', "daydrive.fra1.digitaloceanspaces.com"]
@@ -45,4 +51,6 @@ module.exports = withReactSvg({
   webpack(config, options) {
     return config
   },
-})
+}
+
+module.exports = withReactSvg(nextConfig)
