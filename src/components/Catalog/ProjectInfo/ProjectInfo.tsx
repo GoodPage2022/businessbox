@@ -567,12 +567,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             >
               Відкрити повну інформацію
             </button>
-            {!isAuth && (
+            {isAuth && (
               <p className="projectInfo__err-msg">
                 Тільки для авторизованих користувачів
               </p>
             )}
-            $
             {!isInvestmentBusiness ? (
               <button
                 onClick={() => {
@@ -641,7 +640,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                 Тільки для авторизованих користувачів
               </p>
             )}
-            {!isInvestmentBusiness ? (
+            {isInvestmentBusiness ? (
               <button
                 onClick={() => {
                   dispatch({ type: "toggle_moreAboutBusinessModal" });
