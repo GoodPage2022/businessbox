@@ -12,15 +12,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       : process.env.cockpitApiToken;
   const id = req.body.projectId;
 
-  console.log(token, "dsfsdfsdf");
-  console.log(id, "id, ");
-
   try {
     const response = await axios.get(
       `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}&filter[_id]=${id}`,
     );
-    console.log(response, "response");
-    console.log(response.data, "response.data");
 
     res.status(200).json(response.data);
   } catch (error: any) {

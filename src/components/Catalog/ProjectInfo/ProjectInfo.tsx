@@ -181,7 +181,10 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         _created: -1,
       },
       filter: {
-        sold_out: false,
+        $and: [
+          { area: { $in: projectInfo.area } },
+          { sold_out: false, investing: { $exists: false } },
+        ],
       },
     };
 
@@ -334,8 +337,12 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   // }, []);
 
   useEffect(() => {
-    getBusinesses();
-  }, []);
+    if (projectInfo == null) {
+      return;
+    } else {
+      getBusinesses();
+    }
+  }, [projectInfo]);
 
   useEffect(() => {
     getBusinessInfo();
