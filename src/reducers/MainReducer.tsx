@@ -61,10 +61,22 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveAnalysisTariffsModal: !state.isActiveAnalysisTariffsModal,
       };
-    case "toggle_analysisThankModal":
+    case "toggle_analysisThankSuccessModal":
       return {
         ...state,
-        isActiveAnalysisThankModal: !state.isActiveAnalysisThankModal,
+        isActiveAnalysisThankSuccessModal:
+          !state.isActiveAnalysisThankSuccessModal,
+      };
+    case "toggle_analysisThankErrorModal":
+      return {
+        ...state,
+        isActiveAnalysisThankErrorModal: !state.isActiveAnalysisThankErrorModal,
+      };
+    case "toggle_analysisThankPendingModal":
+      return {
+        ...state,
+        isActiveAnalysisThankPendingModal:
+          !state.isActiveAnalysisThankPendingModal,
       };
     case "toggle_phoneModal":
       return {
@@ -128,7 +140,9 @@ export const initialState = {
   isShowLoader: false,
   isActiveAnalysisModal: false,
   isActiveAnalysisTariffsModal: false,
-  isActiveAnalysisThankModal: false,
+  isActiveAnalysisThankSuccessModal: false,
+  isActiveAnalysisThankErrorModal: false,
+  isActiveAnalysisThankPendingModal: false,
   isActiveRaiseRatingModal: false,
   tariff: "",
   isUah: false,

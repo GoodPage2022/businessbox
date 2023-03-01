@@ -1,22 +1,15 @@
-import axios from "axios";
-import crypto from "crypto";
+import { ObjectId } from "mongodb";
+import type { NextApiRequest, NextApiResponse } from "next";
 import LiqPay from "@azarat/liqpay";
+import clientPromise from "../../../mongodb/mongodb";
 
-const str_to_sign = (str: string) => {
-  const sha1 = crypto.createHash("sha1");
-  sha1.update(str);
-  return sha1.digest("base64");
-};
-
-const handler = async (req: any, res: any) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const { orderId } = req.body;
 
   const liqpay = new LiqPay(
     process.env.liqpayClientId ?? "",
     process.env.liqpayClientSecret ?? "",
   );
-
-  console.log(orderId, "orderId");
 
   liqpay.api(
     "request",
@@ -27,17 +20,21 @@ const handler = async (req: any, res: any) => {
     },
     async (json: any) => {
       if (json.data?.status == "success") {
-        const options = {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-          },
-        };
+        const client = await clientPromise;
+        const db = client.db("bubox");
 
-        const data = {
-          orderId,
-        };
-
-        // const response = await axios.post(`${process.env.apiUrl}/index.php?route=api/sale/liqpay|success&api_token=${apiToken}`, data, options);
+        const order = await db
+          .collection("collections_requesttoverify")
+          .updateOne(
+            {
+              _id: new ObjectId(orderId),
+            },
+            {
+              $set: {
+                status: "Paid",
+              },
+            },
+          );
       }
       return res.status(200).send(json.data.status);
     },
