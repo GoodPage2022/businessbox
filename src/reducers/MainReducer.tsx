@@ -97,7 +97,8 @@ export const reducer = (state: any, action: any) => {
       return {
         ...state,
         isOpenLargeImage: !state.isOpenLargeImage,
-        imageUrl: state.imageUrl,
+        imageIdx: state.imageIdx,
+        images: state.images,
       };
     case "toggle_moreAboutBusinessModal":
       return {
@@ -148,6 +149,7 @@ export const initialState = {
   isUah: false,
   isOpenLargeImage: false,
   imageUrl: "",
+  images: [],
   isActivePhoneModal: false,
   isOpenMoreAboutBusiness: false,
   isInvestor: 0,

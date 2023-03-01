@@ -7,6 +7,42 @@
     position: relative;
   }
 
+  &__tg {
+    position: fixed;
+    bottom: 10%;
+    right: 80px;
+    transition: all 500ms ease;
+    z-index: 9999999999;
+    &.scrolled {
+      bottom: 280px;
+
+      @media screen and (max-width: $size-mobile) {
+        bottom: 485px;
+      }
+    }
+    @media screen and (max-width: $size-tablet) {
+      right: 20px;
+    }
+    & svg {
+      width: 80px;
+      height: 80px;
+    }
+
+    &--text {
+      position: absolute;
+      left: -10px;
+      bottom: 75px;
+      text-align: center;
+      opacity: 0;
+      width: 100px;
+      transition: all 300ms ease-in;
+    }
+
+    &:hover &--text {
+      opacity: 1;
+    }
+  }
+
   &__arrow-back {
     display: flex;
     margin-bottom: 5px;
