@@ -46,7 +46,7 @@ const LargeImage = ({ onClose }: { onClose: any }) => {
       className={`largeImage ${state.isOpenLargeImage ? "active" : ""}`}
       onClick={handleBackdropClick}
     >
-      <div className="largeImage__container" onClick={onClose}>
+      <div className="largeImage__container">
         <div className="largeImage__image-wrapper">
           <Image
             className=""

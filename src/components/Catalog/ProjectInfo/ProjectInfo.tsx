@@ -12,7 +12,7 @@ import { useSession, signOut as signOutGoogle } from "next-auth/react";
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
 import ArrowBackSVG from "../../../assets/svg/project-info-arrow.svg";
-import TelegramSVG from "../../../assets/svg/Telegram-tg.svg";
+import TelegramSVG from "../../../assets/svg/tg-connect.svg";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
@@ -36,7 +36,7 @@ import ModalThankComment from "../../Modals/Modal-thank-comment/Modal-thank-comm
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
-  const [offset, setOffset] = useState(0);
+  // const [offset, setOffset] = useState(0);
   const [isAuth, setIsAuth] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [commentIsSent, setCommentIsSent] = useState(false);
@@ -55,13 +55,13 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const rate = useSelector((state: any) => state.currency.value);
   const [state, dispatch] = React.useContext(MainContext);
 
-  useEffect(() => {
-    const onScroll = () => setOffset(window.pageYOffset);
+  // useEffect(() => {
+  //   // const onScroll = () => setOffset(window.pageYOffset);
 
-    window.removeEventListener("scroll", onScroll);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  //   window.removeEventListener("scroll", onScroll);
+  //   window.addEventListener("scroll", onScroll, { passive: true });
+  //   return () => window.removeEventListener("scroll", onScroll);
+  // }, []);
 
   useEffect(() => {
     if (!router) return;
@@ -537,9 +537,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   key={index}
                   className="projectInfo__image-slider--image"
                   onClick={() => {
-                    dispatch({ type: "toggle_large-image" });
-                    state.imageIdx = index;
-                    state.images = projectInfo.images;
+                    if (!state.isOpenLargeImage) {
+                      dispatch({ type: "toggle_large-image" });
+                      state.imageIdx = index;
+                      state.images = projectInfo.images;
+                    }
                   }}
                 >
                   <Image
@@ -781,10 +783,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         </ul>
         <LargeImage onClose={closeLargeImage} />
         <Link href="https://t.me/bissbox">
-          <a
-            target="_blank"
-            className={`projectInfo__tg ${offset > 1550 ? " scrolled" : ""}`}
-          >
+          <a target="_blank" className={`projectInfo__tg`}>
             <p className="projectInfo__tg--text section__secondary-text">
               Оперативно на каналі
             </p>
