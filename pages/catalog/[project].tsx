@@ -6,34 +6,9 @@ import Head from "next/head";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const Project: NextPage = () => {
+const Project: NextPage = ({projectInfo}:any) => {
   const router = useRouter();
   const { project } = router.query;
-  const [projectInfo, setProjectInfo] = useState<any>(null);
-  const user = useSelector((state: any) => state.auth.user);
-
-  const getBusinessInfo = async () => {
-    let response;
-
-    try {
-      response = await axios.post(`/api/businesses/get`, { user, projectId: project });
-
-      if (response.data) {
-        if (response.data.entries.length > 0) {    
-          // console.log(response.data.entries[0].description.replace(/(<([^>]+)>)/gi, "").substring(0, 255), "sdfsdf");
-                
-          setProjectInfo(response.data.entries[0]);
-        }
-      }
-    } catch (error) {
-      return false;
-    }
-  }
-
-  useEffect(()=>{
-    if (!projectInfo && project)
-      getBusinessInfo()
-  },[project])
 
   if (typeof project != "string") return <></>;
 
@@ -49,3 +24,27 @@ const Project: NextPage = () => {
 };
 
 export default Project;
+
+export async function getServerSideProps(context: any) {
+  const { project } = context.params
+
+  try {
+    const response = await axios.post(`${process.env.baseUrl}/api/businesses/get`, { user: null, projectId: project });
+
+    if (response.data) {
+      if (response.data.entries.length > 0) {    
+        console.log(response.data.entries);
+        
+        return {
+          props: {
+            projectInfo: response.data.entries[0]
+          }
+        }         
+      }
+    }
+  } catch (error: any) {
+    return {
+      props: {}
+    }
+  }
+}
