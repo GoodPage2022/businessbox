@@ -10,4 +10,12 @@ jobs:
     - name: Update USD currency
       run: |
             curl --request POST \
-            --url 'https://business-box.vercel.app/api/currency/update'
+            --url 'https://bissbox.com/api/currency/update'
+    - name: Check all liqpay Analysis orders
+      run: |
+            curl --request POST \
+            --url 'https://bissbox.com/api/analysis/check-liqpay-all'
+    - name: Check all liqpay ToTop orders
+      run: |
+            curl --request POST \
+            --url 'https://bissbox.com/api/toporders/check-liqpay-all'
