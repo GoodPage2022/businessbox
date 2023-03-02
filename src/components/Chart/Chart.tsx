@@ -80,7 +80,7 @@ export const options = {
 let screenWidth = 0;
 if (typeof window !== "undefined") {
   // browser code
-  screenWidth = window.screen.width;
+  screenWidth = window?.screen.width;
 }
 
 // data.labels.unshift("");
