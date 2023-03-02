@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Helmet } from 'react-helmet'
 
 const Project: NextPage = ({projectInfo}:any) => {
   const router = useRouter();
@@ -14,11 +15,11 @@ const Project: NextPage = ({projectInfo}:any) => {
 
   return (
     <>
-      <Head>
+      <Helmet>
         <title>Business Box | {projectInfo?.title}</title>
         <meta property="og:title" content={`Business Box | ${projectInfo?.title}`} />
         <meta property="og:description" content={projectInfo?.description.replace(/(<([^>]+)>)/gi, "").substring(0, 255)} />
-      </Head>
+      </Helmet>
       <ProjectInfo projectId={project} />
     </>
   );
