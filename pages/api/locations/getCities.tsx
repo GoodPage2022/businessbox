@@ -20,9 +20,22 @@ const handler = async(
             value: a._id
         }))
 
-        const listCitiesSorted = listCities.sort((a, b) => {
+        let listCitiesSorted = listCities.sort((a, b) => {
             let fa = a.label.toLowerCase(),
                 fb = b.label.toLowerCase();
+        
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        });
+
+        listCitiesSorted = listCities.sort((a, b) => {
+            let fa = a.label.toLowerCase() == "м.київ" ? -1 : 1,
+                fb = b.label.toLowerCase() == "м.київ" ? -1 : 1;
         
             if (fa < fb) {
                 return -1;
