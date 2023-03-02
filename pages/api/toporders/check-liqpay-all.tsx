@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const db = client.db("bubox");
 
   const orders = await db
-    .collection("collections_requesttoverify")
+    .collection("collections_toporders")
     .aggregate()
     .toArray();
   // console.log(orders, "orderssss");
@@ -35,7 +35,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
               ordersProcessed.push({
                 order: item._id.toString(),
-                status: json.data?.status
+                status: json.data?.status,
+                code: json.data?.code
               })
 
               if (json.data?.status == "success") {
@@ -64,7 +65,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
             async (json: any) => {
               ordersProcessed.push({
                 order: item._id.toString(),
-                status: 'error'
+                status: 'request error'
               })
 
               resolve()
