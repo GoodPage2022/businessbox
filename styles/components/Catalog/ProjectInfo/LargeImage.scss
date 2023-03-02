@@ -23,7 +23,35 @@
   }
 
   &__container {
+    position: relative;
     width: 1110px;
+  }
+  &__buttons {
+    position: absolute;
+    transform: translate(-50%, 0);
+    bottom: -50px;
+    left: 50%;
+    display: flex;
+  }
+
+  &__btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    & svg {
+      path {
+        stroke: white;
+        fill: white;
+      }
+    }
+  }
+
+  &__first-btn {
+    margin-right: 75px;
+    & svg {
+      -webkit-transform: rotate(180deg);
+    }
   }
 
   &__image-wrapper {

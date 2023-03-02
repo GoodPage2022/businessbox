@@ -12,6 +12,7 @@ import { useSession, signOut as signOutGoogle } from "next-auth/react";
 import HeartSVG from "../../../assets/svg/heart.svg";
 import ArrowSVG from "../../../assets/svg/arrow-project.svg";
 import ArrowBackSVG from "../../../assets/svg/project-info-arrow.svg";
+import TelegramSVG from "../../../assets/svg/tg-connect.svg";
 import MainButtonBlack from "../../shared/MainButtonBlack";
 import ProfileInfo from "./ProfileInfo";
 import Comment from "./Comment";
@@ -26,13 +27,16 @@ import React from "react";
 import Breadcrumbs from "./BreadCrumbs";
 import Link from "next/link";
 import LargeImage from "./LargeImage";
-import ModalAnalysisThank from "../../Modals/Modal-analysis/Modal-analysis-thank";
+import ModalAnalysisThankSuccess from "../../Modals/Modal-analysis/Modal-analysis-thank-success";
+import ModalAnalysisThankError from "../../Modals/Modal-analysis/Modal-analysis-thank-error";
+import ModalAnalysisThankPending from "../../Modals/Modal-analysis/Modal-analysis-thank-pending";
 import Script from "next/script";
 import ModalMoreAboutBusiness from "../../Modals/Invest/Modal-MoreAboutBusiness";
 import ModalThankComment from "../../Modals/Modal-thank-comment/Modal-thank-comment";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const router = useRouter();
+  // const [offset, setOffset] = useState(0);
   const [isAuth, setIsAuth] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [commentIsSent, setCommentIsSent] = useState(false);
@@ -51,6 +55,14 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const rate = useSelector((state: any) => state.currency.value);
   const [state, dispatch] = React.useContext(MainContext);
 
+  // useEffect(() => {
+  //   // const onScroll = () => setOffset(window.pageYOffset);
+
+  //   window.removeEventListener("scroll", onScroll);
+  //   window.addEventListener("scroll", onScroll, { passive: true });
+  //   return () => window.removeEventListener("scroll", onScroll);
+  // }, []);
+
   useEffect(() => {
     if (!router) return;
     if (!router.query.order_id) return;
@@ -58,30 +70,57 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     setOrderId(router.query.order_id.toString());
   }, [router]);
 
-  const getOrderStatus = async (orderId: string) => {
-    try {
-      const response = await axios.get(`/api/analysis/get`, {
-        params: {
-          order_id: orderId,
-        },
-      });
+  // const getOrderStatus = async (orderId: string) => {
+  //   try {
+  //     const response = await axios.get(`/api/analysis/get`, {
+  //       params: {
+  //         order_id: orderId,
+  //       },
+  //     });
 
-      if (response.status == 200) {
-        if (
-          response.data.status == "Paid" ||
-          response.data.status == "Pending"
-        ) {
-          dispatch({ type: "toggle_analysisThankModal" });
-        }
+  //     if (response.status == 200) {
+  //       if (
+  //         response.data.status == "Paid" ||
+  //         response.data.status == "Pending"
+  //       ) {
+  //         dispatch({ type: "toggle_analysisThankModal" });
+  //       }
+  //     }
+  //   } catch (err: any) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const liqpayInfo = async (orderId: string) => {
+    const options = {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    };
+
+    try {
+      const checkLiqpay = await axios.post(
+        "/api/analysis/check-liqpay",
+        { orderId },
+        options,
+      );
+      if (checkLiqpay.data == "success") {
+        dispatch({ type: "toggle_analysisThankSuccessModal" });
+        return;
       }
-    } catch (err: any) {
-      console.log(err);
+      if (checkLiqpay.data == "error") {
+        dispatch({ type: "toggle_analysisThankErrorModal" });
+      } else {
+        dispatch({ type: "toggle_analysisThankPendingModal" });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
     if (!orderId) return;
-    getOrderStatus(orderId);
+    liqpayInfo(orderId);
   }, [orderId]);
 
   function SampleNextArrow(props: any) {
@@ -316,8 +355,16 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     dispatch({ type: "toggle_analysisTariffsModal" });
   };
 
-  const closeAnalysisThankModal = () => {
-    dispatch({ type: "toggle_analysisThankModal" });
+  const closeAnalysisThankSuccessModal = () => {
+    dispatch({ type: "toggle_analysisThankSuccessModal" });
+  };
+
+  const closeAnalysisThankErrorModal = () => {
+    dispatch({ type: "toggle_analysisThankErrorModal" });
+  };
+
+  const closeAnalysisThankPendingModal = () => {
+    dispatch({ type: "toggle_analysisThankPendingModal" });
   };
 
   const closeLargeImage = () => {
@@ -490,11 +537,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   key={index}
                   className="projectInfo__image-slider--image"
                   onClick={() => {
-                    dispatch({ type: "toggle_large-image" });
-                    state.imageUrl =
-                      img.meta.assets == ""
-                        ? `${img.path}`
-                        : `https://admin.bissbox.com${img.path}`;
+                    if (!state.isOpenLargeImage) {
+                      dispatch({ type: "toggle_large-image" });
+                      state.imageIdx = index;
+                      state.images = projectInfo.images;
+                    }
                   }}
                 >
                   <Image
@@ -735,10 +782,21 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           <CardsSlider cards={cards} />
         </ul>
         <LargeImage onClose={closeLargeImage} />
+        <Link href="https://t.me/bissbox">
+          <a target="_blank" className={`projectInfo__tg`}>
+            <p className="projectInfo__tg--text section__secondary-text">
+              Оперативно на каналі
+            </p>
+            <TelegramSVG />
+          </a>
+        </Link>
       </div>
+
       <ModalAnalysis onClose={closeAnalysisModal} />
       <ModalAnalysisTariffs onClose={closeAnalysisTariffsModal} />
-      <ModalAnalysisThank orderId={orderId} onClose={closeAnalysisThankModal} />
+      <ModalAnalysisThankSuccess onClose={closeAnalysisThankSuccessModal} />
+      <ModalAnalysisThankError onClose={closeAnalysisThankErrorModal} />
+      <ModalAnalysisThankPending onClose={closeAnalysisThankPendingModal} />
 
       <ModalMoreAboutBusiness onClose={closeMoreAboutBusinessModal} />
       <ModalThankComment onClose={closeThankComment} />
