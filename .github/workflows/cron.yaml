@@ -1,5 +1,6 @@
 name: daily-cron
 on:
+  workflow_dispatch:
   schedule:
   - cron: '05 4,9,12,15,19 * * *'
 
