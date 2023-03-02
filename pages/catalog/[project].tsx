@@ -15,11 +15,13 @@ const Project: NextPage = ({projectInfo}:any) => {
 
   return (
     <>
-      <Helmet>
-        <title>Business Box | {projectInfo?.title}</title>
-        <meta property="og:title" content={`Business Box | ${projectInfo?.title}`} />
-        <meta property="og:description" content={projectInfo?.description.replace(/(<([^>]+)>)/gi, "").substring(0, 255)} />
-      </Helmet>
+      <Helmet title = {`Business Box | ${projectInfo?.title}`}
+          meta={[
+        {
+          name: `description`,
+          content: projectInfo?.description.replace(/(<([^>]+)>)/gi, "").substring(0, 255),
+        } 
+      ]} />
       <ProjectInfo projectId={project} />
     </>
   );
