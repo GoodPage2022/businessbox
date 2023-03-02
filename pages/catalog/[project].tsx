@@ -16,6 +16,7 @@ const Project: NextPage = ({projectInfo}:any) => {
     <>
       <Head>
         <title>Business Box | {projectInfo?.title}</title>
+        <meta property="og:title" content={`Business Box | ${projectInfo?.title}`} />
         <meta property="og:description" content={projectInfo?.description.replace(/(<([^>]+)>)/gi, "").substring(0, 255)} />
       </Head>
       <ProjectInfo projectId={project} />
