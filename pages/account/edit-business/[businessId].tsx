@@ -12,7 +12,8 @@ const EditBusiness: NextPage = () => {
   const user = useSelector((state: any) => state.auth.user);
 
   if (user == null) {
-    router.push("/");
+    if (typeof window !== "undefined")
+      router.push("/");
     return <></>;
   }
 

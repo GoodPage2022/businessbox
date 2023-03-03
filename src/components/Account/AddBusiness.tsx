@@ -317,7 +317,7 @@ const AddBusiness = () => {
                       />
                     </label>
                   </div>
-                  {window.innerWidth > 767 && (
+                  {typeof window !== "undefined" && window.innerWidth > 767 && (
                     <div className="addBusiness__info-wrapper--right-desctop">
                       <div className="addBusiness__field">
                         <span className="addBusiness__label">Опис</span>
@@ -426,7 +426,7 @@ const AddBusiness = () => {
                       </label>
                     </div>
                   )}
-                  {window.innerWidth < 768 && (
+                  {typeof window !== "undefined" && window.innerWidth < 768 && (
                     <div className="addBusiness__info-wrapper--right-mob">
                       <label className="addBusiness__field">
                         <span className="addBusiness__label">

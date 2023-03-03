@@ -10,10 +10,13 @@ const UsefulToolsPage: NextPage = () => {
   const user = useSelector((state: any) => state.auth.user);
 
   if (user == null) {
+    if (typeof window !== "undefined")
     router.push("/");
     return <></>;
   }
-  router.push("/");
+
+  if (typeof window !== "undefined")
+    router.push("/");
   return <>{/* <UsefulTools /> */}</>;
 };
 
