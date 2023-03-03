@@ -51,7 +51,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
         password,
         // password: "secret",
         email,
-        // group: "user",
+        group: state.isInvestor == 1 ? "investor" : "user",
         // api_key: 1,
         phone,
         surname,
