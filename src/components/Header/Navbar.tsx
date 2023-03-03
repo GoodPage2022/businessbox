@@ -14,18 +14,28 @@ const Navbar = () => {
         <li className="header__nav__menu__item header__nav__menu__catalog">
           {/* <Link href="#"> */}
           <p className="section__secondary-text--white">
-            Каталог бізнесу <ArrowSVG />
+            Каталог бізнесів <ArrowSVG />
           </p>
           {/* </Link> */}
           <div className="header__nav__menu__dropdown">
-            <Link href="/invest/catalog">
-              <a className="section__secondary-text--white">Інвестування</a>
-            </Link>
+            {user && (
+              <Link href="/invest/catalog">
+                <a className="section__secondary-text--white">Інвестування</a>
+              </Link>
+            )}
             <Link href="/catalog">
               <a className="section__secondary-text--white">Купівля</a>
             </Link>
           </div>
         </li>
+
+        {!user && (
+          <li className="header__nav__menu__item   section__secondary-text--white">
+            <Link href="/invest">
+              <a className="section__secondary-text--white">Інвестування</a>
+            </Link>
+          </li>
+        )}
         {/* {user && (
           <li className="header__nav__menu__item section__secondary-text--white">
             <Link href="/useful-tools">

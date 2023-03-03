@@ -343,6 +343,11 @@
       padding-left: 78px;
       margin: 0 auto;
       &__item {
+        .sub-menu {
+          display: block;
+          margin-top: 15px;
+          padding-left: 20px;
+        }
         &:not(:last-child) {
           margin-bottom: 40px;
           margin-right: 0;
