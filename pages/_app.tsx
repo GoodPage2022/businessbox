@@ -12,36 +12,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 import * as fbq from "../lib/fpixel";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps, session }: any) {
-  let persistor = persistStore(store);
+  // let persistor = persistStore(store);
   const router = useRouter();
-  const [projectInfo, setProjectInfo] = useState<any>(null);
-
-  const { project } = router.query
-
-  const getProjectInfo = async() => {
-    try {
-      const response = await axios.post(`/api/businesses/get`, { user: null, projectId: project });
-
-      if (response.data) {
-        if (response.data.entries.length > 0) {
-          setProjectInfo(response.data.entries[0]);
-          // console.log(response.data.entries[0]);
-          
-        }
-      }
-    } catch (error: any) {
-      console.log(error);
-    }    
-  }
-
-  useEffect(() => {
-    if (project)
-      getProjectInfo()
-  },[project])
 
   useEffect(() => {
     // This pageview only triggers the first time (it's important for Pixel to have real information)
@@ -60,12 +35,12 @@ function MyApp({ Component, pageProps, session }: any) {
   return (
     <>
       <Head>
-        <title>{project ? `Business Box | ${projectInfo?.title}` : `Business Box`}</title>
+        {/* <title>Business Box</title> */}
         {/* <meta
           name="description"
           content="Business Box – перша унікальна платформа по купівлі, продажу бізнесу,  інвестуванню та пошуку інвестицій. Головною метою – є надання професійних послуг з питань купівлі, продажу, аналізу, навчанню, модернізації, інвестуванню та пошку інвестицій. Платформа заснована трьома підприємцями Дмитро Буряк, Олександр Найда та Віталій Лубінець та враховує різний досвід їх діючих бізнесів та бізнесіів та володарів бізнесу з якими вини близько дотичнв. Функціонал даного інструменту розрахований на легке та логічне використання платформи, як для досвідченого користувача, так і для новачка."
         /> */}
-        <meta property="og:title" content={project ? `Business Box | ${projectInfo?.title}` : `Business Box`} />
+        {/* <meta property="og:title" content="Business Box" /> */}
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
@@ -113,11 +88,11 @@ function MyApp({ Component, pageProps, session }: any) {
 
       <SessionProvider session={session}>
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
+          {/* <PersistGate loading={null} persistor={persistor}> */}
             <BaseLayout>
               <Component {...pageProps} />
             </BaseLayout>
-          </PersistGate>
+          {/* </PersistGate> */}
         </Provider>
       </SessionProvider>
     </>

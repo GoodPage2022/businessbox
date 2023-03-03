@@ -5,6 +5,8 @@ import { persistReducer } from 'redux-persist'
 import thunk from 'redux-thunk'
 import auth from './reducers/auth';
 import currency from './reducers/currency';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import persistStore from 'redux-persist/lib/persistStore';
 
 
 const reducers = combineReducers({
@@ -14,7 +16,12 @@ const reducers = combineReducers({
 
 const persistConfig = {
     key: 'root',
-    storage
+    storage,
+
+    whitelist: [
+		'currency',
+		'auth',
+	],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -24,6 +31,12 @@ const store = configureStore({
     reducer: persistedReducer,
     devTools: process.env.NODE_ENV !== 'production',
     middleware: [thunk]
+});
+
+setupListeners(store.dispatch);
+
+export const persistor = persistStore(store, {}, () => {
+	persistor.persist();
 });
 
 export default store;

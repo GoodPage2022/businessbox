@@ -26,10 +26,16 @@ const initialValues = {
 
 const Right = () => {
   const { data: session } = useSession();
-  const user = useSelector((state: any) => state.auth.user);
+  const userUseSelector = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
+  const [user, setUser] = React.useState(null);
   const router = useRouter();
+
+  React.useEffect(()=>{
+    setUser(userUseSelector)
+  },[userUseSelector])
+
   // console.log(router.pathname, "router.query");
   const signOut = async () => {
     if (session !== undefined) {

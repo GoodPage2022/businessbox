@@ -32,10 +32,15 @@ const initialValues = {
 
 const RightMob = () => {
   const { data: session } = useSession();
-  const user = useSelector((state: any) => state.auth.user);
+  const userUseSelector = useSelector((state: any) => state.auth.user);
   const dispatchRedux = useDispatch();
   const [state, dispatch] = React.useContext(MainContext);
+  const [user, setUser] = React.useState(null);
   const router = useRouter();
+
+  React.useEffect(()=>{
+    setUser(userUseSelector)
+  },[userUseSelector])
 
   const signOut = async () => {
     if (session !== undefined) {
