@@ -24,7 +24,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
                 _id: new ObjectId(dataParsed.order_id)
             }, {
                 $set: {
-                    status: 'Paid'
+                    status: 'Paid',
+                    _modified: Date.now().toString().substring(0, 10)
                 }
             })
 
