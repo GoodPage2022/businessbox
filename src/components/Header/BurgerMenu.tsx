@@ -34,10 +34,32 @@ const BurgerMenu = () => {
           className="header__nav__menu__item"
           onClick={() => dispatch({ type: "toggle_burger" })}
         >
+          <p className="section__primary-text--white">Каталог бізнесів</p>
+          {user && (
+            <Link href="/invest/catalog">
+              <a className="section__primary-text--white sub-menu">
+                Інвестування
+              </a>
+            </Link>
+          )}
           <Link href="/catalog">
-            <a className="section__primary-text--white">Купівля бізнесу</a>
+            <a className="section__primary-text--white sub-menu">Купівля</a>
           </Link>
+          {/* <Link href="/catalog">
+            <a className="section__primary-text--white">Купівля бізнесу</a>
+          </Link> */}
         </li>
+
+        {!user && (
+          <li
+            className="header__nav__menu__item"
+            onClick={() => dispatch({ type: "toggle_burger" })}
+          >
+            <Link href="/invest">
+              <a className="section__primary-text--white">Інвестування</a>
+            </Link>
+          </li>
+        )}
         {/* <li
           className="header__nav__menu__item   section__primary-text--white"
           onClick={() => dispatch({ type: "toggle_burger" })}

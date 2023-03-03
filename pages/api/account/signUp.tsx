@@ -6,7 +6,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const newUser = {
     user: {
       ...data.user,
-      group: "user",
       api_key: 1,
       user: data.user.email,
       active: true /* false !!!!!!!!!!!!!! */,

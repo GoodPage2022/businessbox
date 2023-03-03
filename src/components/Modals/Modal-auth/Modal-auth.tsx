@@ -37,6 +37,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
         `/api/account/signIn`,
         {
           session,
+          group: state.isInvestor == 1 ? "investor" : "user",
         },
         {
           cancelToken: new CancelToken((c) => {
