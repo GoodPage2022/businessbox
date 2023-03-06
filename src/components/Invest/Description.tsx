@@ -1,17 +1,16 @@
+import RocketSVG from "../../assets/svg/rocket.svg";
 const Description = () => {
   return (
     <div className="container invest__container">
       <p className="invest__text section__primary-text">
-        Клієнт дуже важливий, за клієнтом піде клієнт. Duis feugiat sapien і
-        lectus convallis commodo. Curabitur vulputate lectus не від стрілок,
-        нехай буде багато членів і не приймає. Меценат Tellus Sapien, dapibus a
-        ullamcorper sit amet, hendrerit sit amet ex. Футбол футбольний сезон.
-        But rutrum tellus neque, and eleifend orci convallis molestie. Все життя
-        школи часом буває дитячим салатом чи, піснею. Еней якраз такий м`який,
-        йому треба вкладати в озеро. Перед ним, перш за все, в горлах лікарні
-        стелити ліжка догляду та догляду; Завтра я проведу трохи часу зі
-        стрілками. Але урна самого життя. Хворобливі і вагітні гравці. До того
-        часу лікар хоче знати, що робити.
+        Даний розділ створений для взаємодії бізнес проектів, що шукають
+        інвестиції, та інвесторів, що шукають куди б інвестувати. Наша платформа
+        є точкою взаємодії цих двох напрямків, та може надати додаткову детальну
+        аналітику стосовно того чи іншого проекту (надається за окремим запитом)
+      </p>
+      <p className="invest__text section__primary-text">
+        Обирайте напрям, що вас зацікавив та долучайтеся долучайтесь{" "}
+        <RocketSVG />
       </p>
     </div>
   );

@@ -1,11 +1,16 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import { useSelector } from "react-redux";
 import ArrowSVG from "../../../src/assets/svg/catalog-arrow.svg";
 
 const Navbar = () => {
-  const user = useSelector((state: any) => state.auth.user);
+  const userUseSelector = useSelector((state: any) => state.auth.user);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(userUseSelector);
+  }, [userUseSelector]);
 
   return (
     <nav className="header__nav">

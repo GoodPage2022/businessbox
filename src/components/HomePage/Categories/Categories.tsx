@@ -92,7 +92,13 @@ const Categories = () => {
           </button>
         )}
         {i === 2 && (
-          <p className="title--white categories-third__continue">Далі буде…</p>
+          // <p className="title--white categories-third__continue">Далі буде…</p>
+          <button
+            className="categories-first__button"
+            onClick={() => router.push("/invest")}
+          >
+            Детальніше
+          </button>
         )}
       </div>
     ),
@@ -168,17 +174,24 @@ const Categories = () => {
         </section>
         <section className="categories-third">
           <div className="container categories-third__container">
-            <h1 className="categories-third__title title--white">
-              Франчайзинг
-            </h1>
+            <h1 className="categories-third__title title--white">Інвестиції</h1>
             <p className="categories-third__text section__primary-text--white">
-              Ми відібрали та розклали по полицям найкращі варіанти франшиз у
-              зрозумілому для тебе форматі. Тепер знайти бажане можна на одній
-              сторінці не випускаючи каву з рук. А ми в свою чергу будемо
-              постійно доповнювати варіанти новими партнерами
+              Даний розділ створений для взаємодії бізнес проектів, що шукають
+              інвестиції, та інвесторів, що шукають куди б інвестувати. Наша
+              платформа є точкою взаємодії цих двох напрямків, та може надати
+              додаткову детальну аналітику стосовно того чи іншого проекту
             </p>
             <div className="categories-third__buttons">
-              <p className="title--white">Далі буде…</p>
+              {/* <p className="title--white">Далі буде…</p> */}
+              <button
+                className="categories-first__button"
+                onClick={
+                  () => router.push("/invest")
+                  // user != null ? router.push("/account/add-business") : openModal()
+                }
+              >
+                Детальніше
+              </button>
             </div>
           </div>
         </section>
