@@ -7,7 +7,7 @@
   background-size: cover;
   &__cards {
     display: flex;
-    align-items: center;
+    // align-items: center;
     justify-content: space-around;
   }
   &__card {
@@ -50,9 +50,16 @@
     }
   }
 
-  &__text {
+  &__container {
     padding-top: 60px;
     padding-bottom: 60px;
+  }
+
+  &__text {
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 

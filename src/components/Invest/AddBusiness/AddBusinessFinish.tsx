@@ -309,9 +309,6 @@ const AddBusinessFinish = () => {
                               maxLength={255}
                               placeholder="-----"
                             />
-                            <span className="addBusinessFinish__icon">
-                              {currency === "Гривня" ? "₴" : "$"}
-                            </span>
                           </span>
                         </label>
                         <label className="addBusinessFinish__field">

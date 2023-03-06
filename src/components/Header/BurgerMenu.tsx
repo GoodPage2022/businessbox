@@ -3,12 +3,17 @@ import router from "next/router";
 import MainButton from "../shared/MainButton";
 import { useSelector } from "react-redux";
 import { MainContext } from "../../contexts/mainContext";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainButtonRed from "../shared/MainButtonRed";
 
 const BurgerMenu = () => {
   const [state, dispatch] = React.useContext(MainContext);
-  const user = useSelector((state: any) => state.auth.user);
+  const userUseSelector = useSelector((state: any) => state.auth.user);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(userUseSelector);
+  }, [userUseSelector]);
 
   const openModal = () => {
     router.push("#auth");

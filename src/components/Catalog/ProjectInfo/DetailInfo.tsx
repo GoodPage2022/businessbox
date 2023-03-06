@@ -335,8 +335,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               </p>
               <p className="detailInfo__list-item--right section__primary-text">
                 {projectInfo.return_on_investment
-                  ? projectInfo.return_on_investment +
-                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  ? projectInfo.return_on_investment
                   : "– – – – –"}
               </p>
             </li>
