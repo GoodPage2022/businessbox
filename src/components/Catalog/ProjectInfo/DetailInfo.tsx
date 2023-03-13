@@ -16,7 +16,6 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isInvestmentBusiness, setIsInvestmentBusiness] =
     useState<boolean>(false);
-  const [isBusinessCreated, setIsBusinessCreated] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const dispatchRedux = useDispatch();
   const [cards, setCards] = useState<any>([]);
@@ -126,7 +125,7 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
   };
 
   if (loading) return <></>;
-
+  console.log(projectInfo, "projectInfo");
   return (
     <section className="detailInfo">
       <div className="container detailInfo__container">
@@ -170,7 +169,59 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
         <p className="detailInfo__city section__primary-text">
           {projectInfo.state?.display}, {projectInfo.city?.display}
         </p>
-        {!isBusinessCreated ? (
+        {projectInfo.invest_status == "На етапі створення" ? (
+          <ul className="detailInfo__list">
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Кількість засновників
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.number_of_founders ?? "– – – – –"}
+              </p>
+            </li>
+
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Ваш бізнес має сезонність?
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.seasonality ? "так" : "ні"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Відсоток повернення на капітал
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.capital_return_percentage
+                  ? projectInfo.capital_return_percentage +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Період повернення інвестицій
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.return_on_investment
+                  ? projectInfo.return_on_investment
+                  : "– – – – –"}
+              </p>
+            </li>
+            <li className="detailInfo__list-item">
+              <p className="detailInfo__list-item--left section__primary-text--bold">
+                Річний дохід
+              </p>
+              <p className="detailInfo__list-item--right section__primary-text">
+                {projectInfo.annual_profit
+                  ? projectInfo.annual_profit +
+                    (projectInfo.currency == "Долар" ? "$" : "₴")
+                  : "– – – – –"}
+              </p>
+            </li>
+          </ul>
+        ) : (
           <ul className="detailInfo__list">
             <li className="detailInfo__list-item">
               <p className="detailInfo__list-item--left section__primary-text--bold">
@@ -294,58 +345,6 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
               <p className="detailInfo__list-item--right section__primary-text">
                 {projectInfo.year_nonfixed_costs
                   ? projectInfo.year_nonfixed_costs +
-                    (projectInfo.currency == "Долар" ? "$" : "₴")
-                  : "– – – – –"}
-              </p>
-            </li>
-          </ul>
-        ) : (
-          <ul className="detailInfo__list">
-            <li className="detailInfo__list-item">
-              <p className="detailInfo__list-item--left section__primary-text--bold">
-                Кількість засновників
-              </p>
-              <p className="detailInfo__list-item--right section__primary-text">
-                {projectInfo.number_of_founders ?? "– – – – –"}
-              </p>
-            </li>
-
-            <li className="detailInfo__list-item">
-              <p className="detailInfo__list-item--left section__primary-text--bold">
-                Ваш бізнес має сезонність?
-              </p>
-              <p className="detailInfo__list-item--right section__primary-text">
-                {projectInfo.seasonality ? "так" : "ні"}
-              </p>
-            </li>
-            <li className="detailInfo__list-item">
-              <p className="detailInfo__list-item--left section__primary-text--bold">
-                Відсоток повернення на капітал
-              </p>
-              <p className="detailInfo__list-item--right section__primary-text">
-                {projectInfo.capital_return_percentage
-                  ? projectInfo.capital_return_percentage +
-                    (projectInfo.currency == "Долар" ? "$" : "₴")
-                  : "– – – – –"}
-              </p>
-            </li>
-            <li className="detailInfo__list-item">
-              <p className="detailInfo__list-item--left section__primary-text--bold">
-                Період повернення інвестицій
-              </p>
-              <p className="detailInfo__list-item--right section__primary-text">
-                {projectInfo.return_on_investment
-                  ? projectInfo.return_on_investment
-                  : "– – – – –"}
-              </p>
-            </li>
-            <li className="detailInfo__list-item">
-              <p className="detailInfo__list-item--left section__primary-text--bold">
-                Річний дохід
-              </p>
-              <p className="detailInfo__list-item--right section__primary-text">
-                {projectInfo.annual_profit
-                  ? projectInfo.annual_profit +
                     (projectInfo.currency == "Долар" ? "$" : "₴")
                   : "– – – – –"}
               </p>
