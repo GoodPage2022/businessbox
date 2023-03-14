@@ -7,6 +7,9 @@ import Networks from "./Networks";
 import CopyrightSVG from "../../assets/svg/copyright.svg";
 import OurCategories from "../../constants/categories-select";
 import { useRouter } from "next/router";
+import { MainContext } from "../../contexts/mainContext";
+import { useContext } from "react";
+import ModalPayment from "../Modals/Modal-payment/Modal-payment";
 
 type CustomSelectProps = {
   options: any;
@@ -86,10 +89,15 @@ const initialValues = {
 
 const Footer: React.FC = () => {
   const router = useRouter();
+  const [state, dispatch] = useContext(MainContext);
 
   const changeFilter = (e: any) => {
     let filtersUrl = `/catalog/category/${e.target.value}`;
     router.push(filtersUrl);
+  };
+
+  const closeModalPayment = () => {
+    dispatch({ type: "toggle_paymentModal" });
   };
 
   const formik = useFormik({
@@ -128,7 +136,13 @@ const Footer: React.FC = () => {
             />
           </FormikProvider>
           <div className="footer__images">
-            <div className="footer__image">
+            <div
+              className="footer__image"
+              onClick={() => {
+                dispatch({ type: "toggle_paymentModal" });
+                state.method = "mastercard";
+              }}
+            >
               <Image
                 className=""
                 src="/assets/images/mastercard-logo.png"
@@ -137,7 +151,13 @@ const Footer: React.FC = () => {
                 alt="card-image"
               />
             </div>
-            <div className="footer__image">
+            <div
+              className="footer__image"
+              onClick={() => {
+                dispatch({ type: "toggle_paymentModal" });
+                state.method = "visa";
+              }}
+            >
               <Image
                 className=""
                 src="/assets/images/visa-logo.png"
@@ -224,7 +244,13 @@ const Footer: React.FC = () => {
               />
             </FormikProvider>
             <div className="footer__images">
-              <div className="footer__image">
+              <div
+                className="footer__image"
+                onClick={() => {
+                  dispatch({ type: "toggle_paymentModal" });
+                  state.method = "mastercard";
+                }}
+              >
                 <Image
                   className=""
                   src="/assets/images/mastercard-logo.png"
@@ -233,7 +259,13 @@ const Footer: React.FC = () => {
                   alt="card-image"
                 />
               </div>
-              <div className="footer__image">
+              <div
+                className="footer__image"
+                onClick={() => {
+                  dispatch({ type: "toggle_paymentModal" });
+                  state.method = "visa";
+                }}
+              >
                 <Image
                   className=""
                   src="/assets/images/visa-logo.png"
@@ -293,6 +325,7 @@ const Footer: React.FC = () => {
           </p>
         </div>
       </div>
+      <ModalPayment onClose={closeModalPayment} />
     </footer>
   );
 };

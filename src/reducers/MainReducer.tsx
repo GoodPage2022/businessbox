@@ -122,7 +122,12 @@ export const reducer = (state: any, action: any) => {
         ...state,
         thankComment: !state.thankComment,
       };
-
+    case "toggle_paymentModal":
+      return {
+        ...state,
+        isActiveModalPayment: !state.isActiveModalPayment,
+        method: state.method,
+      };
     default:
       return state;
   }
@@ -155,4 +160,6 @@ export const initialState = {
   isInvestor: 0,
   businessOnStageCreation: false,
   thankComment: false,
+  isActiveModalPayment: false,
+  method: "",
 };
