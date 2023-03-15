@@ -23,14 +23,15 @@ const Navbar = () => {
           </p>
           {/* </Link> */}
           <div className="header__nav__menu__dropdown">
+            {" "}
+            <Link href="/catalog">
+              <a className="section__secondary-text--white">Купівля</a>
+            </Link>
             {user && (
               <Link href="/invest/catalog">
                 <a className="section__secondary-text--white">Інвестування</a>
               </Link>
             )}
-            <Link href="/catalog">
-              <a className="section__secondary-text--white">Купівля</a>
-            </Link>
           </div>
         </li>
 

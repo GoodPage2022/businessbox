@@ -320,7 +320,15 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           return false;
         }
       }
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response.data.error.status == 401) {
+        if (session !== undefined) {
+          await signOutGoogle();
+        }
+        dispatchRedux(signOutReducer());
+        return;
+      }
+
       router.push("/404");
       return false;
     }
@@ -604,7 +612,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         />
         <div className="projectInfo__info-wrapper">
           <div className="projectInfo__button-wrapper--mob">
-            <button
+            {/* <button
               className="projectInfo__button-info"
               onClick={() =>
                 user != null
@@ -618,7 +626,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               <p className="projectInfo__err-msg">
                 Тільки для авторизованих користувачів
               </p>
-            )}
+            )} */}
             {!isInvestmentBusiness ? (
               <button
                 onClick={() => {
@@ -672,7 +680,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             )}
           </div>
           <div className="projectInfo__button-wrapper--desctop">
-            <button
+            {/* <button
               className="projectInfo__button-info"
               onClick={() =>
                 user != null
@@ -686,7 +694,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
               <p className="projectInfo__err-msg">
                 Тільки для авторизованих користувачів
               </p>
-            )}
+            )} */}
             {isInvestmentBusiness ? (
               <button
                 onClick={() => {
@@ -711,9 +719,9 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             )}{" "}
           </div>
         </div>
-        <p className="projectInfo__date section__secondary-text">
+        {/* <p className="projectInfo__date section__secondary-text">
           Дата створення бізнесу: {creationDate}
-        </p>
+        </p> */}
         <ProfileInfo projectData={projectInfo} />
         {comments.length > 0 ? (
           <ul className="projectInfo__comments">

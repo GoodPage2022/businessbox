@@ -40,6 +40,9 @@ const BurgerMenu = () => {
           onClick={() => dispatch({ type: "toggle_burger" })}
         >
           <p className="section__primary-text--white">Каталог бізнесів</p>
+          <Link href="/catalog">
+            <a className="section__primary-text--white sub-menu">Купівля</a>
+          </Link>
           {user && (
             <Link href="/invest/catalog">
               <a className="section__primary-text--white sub-menu">
@@ -47,9 +50,7 @@ const BurgerMenu = () => {
               </a>
             </Link>
           )}
-          <Link href="/catalog">
-            <a className="section__primary-text--white sub-menu">Купівля</a>
-          </Link>
+
           {/* <Link href="/catalog">
             <a className="section__primary-text--white">Купівля бізнесу</a>
           </Link> */}
