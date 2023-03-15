@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { MainContext } from "../../../contexts/mainContext";
 import ArrowBackSVG from "../../../assets/svg/project-info-arrow.svg";
+import CrossSVG from "../../../assets/svg/cross.svg";
 
 const LargeImage = ({ onClose }: { onClose: any }) => {
   const [state, dispatch] = React.useContext(MainContext);
@@ -46,6 +47,10 @@ const LargeImage = ({ onClose }: { onClose: any }) => {
       className={`largeImage ${state.isOpenLargeImage ? "active" : ""}`}
       onClick={handleBackdropClick}
     >
+      <div className="largeImage__close">
+        <CrossSVG />
+      </div>
+
       <div className="largeImage__container">
         <div className="largeImage__image-wrapper">
           <Image

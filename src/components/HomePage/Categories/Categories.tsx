@@ -201,7 +201,7 @@ const Categories = () => {
           Зареєстровано бізнесів: {businessesQuantity}
         </p>
         <p className="section__secondary-text">
-          Продається на сумму: {businessesAmountPrice} грн
+          Продається на сумму: <span>{businessesAmountPrice}</span> грн
         </p>
       </div>
     </div>
