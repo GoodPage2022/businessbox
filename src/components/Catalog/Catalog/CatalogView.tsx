@@ -293,6 +293,9 @@ const CatalogView = () => {
     }
   }, []);
   const changeFilter = (e: any, clean?: boolean) => {
+    if (e.target?.name == "state") {
+      filtersObj["city"] = "";
+    }
     if (clean) {
       setFiltersObj({});
       router.push("/catalog");

@@ -78,11 +78,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
           form.setFieldValue(field.name, e.value);
         }
       }}
-      value={
-        options
-          ? options.find((option: any) => option.value === field.value)
-          : ""
-      }
+      value={options?.find((option: any) => option.value === field.value) ?? ""}
     />
   );
 };
