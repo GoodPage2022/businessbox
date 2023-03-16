@@ -169,6 +169,24 @@
       margin-right: 5px;
     }
   }
+
+  @media screen and (min-width: $size-mobile) {
+    .networks {
+      flex-wrap: wrap;
+      width: 150px;
+      align-items: center;
+      justify-content: center;
+      &__item {
+        &:not(:last-child) {
+          margin-right: 20px !important;
+        }
+
+        &:nth-child(3) {
+          margin-right: 0 !important;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: $size-tablet) {
@@ -336,14 +354,6 @@
 
       &--icon {
         margin-right: 5px;
-      }
-    }
-  }
-
-  .networks {
-    &__item {
-      &:not(:last-child) {
-        margin-right: 10px !important;
       }
     }
   }
