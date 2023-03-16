@@ -283,7 +283,7 @@ const CatalogView = () => {
   useEffect(() => {
     if (cards.length > 0) {
       getBusinesses(true);
-    }
+    } else setCountCards(0);
   }, [cards]);
 
   useEffect(() => {
