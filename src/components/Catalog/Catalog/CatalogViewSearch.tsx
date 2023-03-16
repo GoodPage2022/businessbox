@@ -30,7 +30,9 @@ const CatalogViewSearch = () => {
   const [filtersObj, setFiltersObj] = useState<any>({});
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [screenWidth, setScreenWidth] = useState<any>(typeof window !== 'undefined' ? window?.screen.width : 0);
+  const [screenWidth, setScreenWidth] = useState<any>(
+    typeof window !== "undefined" ? window?.screen.width : 0,
+  );
   const router = useRouter();
   const { data: session } = useSession();
   const dispatchRedux = useDispatch();
@@ -46,13 +48,13 @@ const CatalogViewSearch = () => {
     let filtersObjB: any = {};
 
     if (s && Array.isArray(s)) {
-        const sSliced = s.slice(1, s.length)
+      const sSliced = s.slice(1, s.length);
 
-        sSliced.map((f: string, i: number) => {
-            if (i % 2 == 1) {
-                filtersObjB[sSliced[i - 1]] = f;
-            }
-        });
+      sSliced.map((f: string, i: number) => {
+        if (i % 2 == 1) {
+          filtersObjB[sSliced[i - 1]] = f;
+        }
+      });
     }
 
     setFiltersObj(filtersObjB);
@@ -85,20 +87,20 @@ const CatalogViewSearch = () => {
     });
 
     filterSetOfExp.push({
-        $or: [
-            {
-                title: {
-                    $regex: Array.isArray(s) ? s[0] : s,
-                    $options: 'i'
-                }
-            },
-            {
-                description: {
-                    $regex: Array.isArray(s) ? s[0] : s,
-                    $options: 'i'
-                }
-            }
-        ]
+      $or: [
+        {
+          title: {
+            $regex: Array.isArray(s) ? s[0] : s,
+            $options: "i",
+          },
+        },
+        {
+          description: {
+            $regex: Array.isArray(s) ? s[0] : s,
+            $options: "i",
+          },
+        },
+      ],
     });
 
     let requestBody: any = {
@@ -109,11 +111,11 @@ const CatalogViewSearch = () => {
     };
 
     if (!resetLimit) {
-        requestBody["skip"] =
+      requestBody["skip"] =
         filtersObj.page && filtersObj.page > 1
-            ? cardsPerPage * (parseInt(filtersObj.page) - 1)
-            : 0;
-        requestBody["limit"] = cardsPerPage;
+          ? cardsPerPage * (parseInt(filtersObj.page) - 1)
+          : 0;
+      requestBody["limit"] = cardsPerPage;
     }
 
     if (filterSetOfExp.length) {
@@ -161,22 +163,22 @@ const CatalogViewSearch = () => {
   useEffect(() => {
     if (cards.length > 0) {
       getBusinesses(true);
-    }
+    } else setCountCards(0);
   }, [cards]);
 
   useEffect(() => {
     getBusinesses();
     setPageNumber(filtersObj.page ?? 1);
   }, [filtersObj]);
-  
+
   return (
-    <section
-      className={`catalogView searchView`}
-    >
+    <section className={`catalogView searchView`}>
       <div className="container catalogView__container">
         <div className={`catalogView__buttons`}></div>
 
-        <h2 className="title catalogView__title showAlways">Пошук: &quot;{ Array.isArray(s) ? s[0] : s }&quot;</h2>
+        <h2 className="title catalogView__title showAlways">
+          Пошук: &quot;{Array.isArray(s) ? s[0] : s}&quot;
+        </h2>
         <div className="catalogView__wrapper">
           {isLoading ? (
             <Oval
