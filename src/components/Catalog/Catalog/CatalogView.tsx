@@ -34,7 +34,9 @@ const CatalogView = () => {
   const [filtersObj, setFiltersObj] = useState<any>({});
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [screenWidth, setScreenWidth] = useState<any>(typeof window !== 'undefined' ? window?.screen.width : 0);
+  const [screenWidth, setScreenWidth] = useState<any>(
+    typeof window !== "undefined" ? window?.screen.width : 0,
+  );
   // const [rate, setRate] = useState<number>(0);
   const router = useRouter();
   const { data: session } = useSession();
@@ -274,7 +276,7 @@ const CatalogView = () => {
   useEffect(() => {
     if (cards.length > 0) {
       getBusinesses(true);
-    }
+    } else setCountCards(0);
   }, [cards]);
 
   useEffect(() => {
@@ -282,7 +284,18 @@ const CatalogView = () => {
     setPageNumber(filtersObj.page ?? 1);
   }, [filtersObj, state.isUah]);
 
+  useEffect(() => {
+    if (state.isActiveAnalysisTariffsModal) {
+      dispatch({ type: "toggle_analysisTariffsModal" });
+    }
+    if (state.isActiveAnalysisModal) {
+      dispatch({ type: "toggle_analysisModal" });
+    }
+  }, []);
   const changeFilter = (e: any, clean?: boolean) => {
+    if (e.target?.name == "state") {
+      filtersObj["city"] = "";
+    }
     if (clean) {
       setFiltersObj({});
       router.push("/catalog");

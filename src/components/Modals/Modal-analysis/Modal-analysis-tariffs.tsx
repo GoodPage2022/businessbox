@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import CrossSVG from "../../../assets/svg/cross.svg";
 import { MainContext } from "../../../contexts/mainContext";
-import { Oval } from "react-loader-spinner";
-import { useRouter } from "next/router";
 import MainButtonRed from "../../shared/MainButtonRed";
 
 function ModalAnalysisTariffs({ onClose }: { onClose: any }) {
-  const [state, dispatch] = React.useContext(MainContext);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
+  const [state, dispatch] = useContext(MainContext);
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -32,32 +28,11 @@ function ModalAnalysisTariffs({ onClose }: { onClose: any }) {
   return (
     <div
       className={`modal-analysisTariffs__overlay${
-        state.isActiveAnalysisTariffsModal == true ? " active" : ""
+        state.isActiveAnalysisTariffsModal ? " active" : ""
       }`}
       onClick={handleBackdropClick}
     >
       <div className="modal-analysisTariffs__container">
-        {isLoading && (
-          <Oval
-            height={150}
-            width={150}
-            color="#f22a4e"
-            wrapperStyle={{
-              position: "absolute",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-              height: "100%",
-            }}
-            wrapperClass=""
-            visible={true}
-            ariaLabel="oval-loading"
-            secondaryColor="#e95973"
-            strokeWidth={3}
-            strokeWidthSecondary={3}
-          />
-        )}
         <div className="modal-analysisTariffs__header">
           <h2 className="modal-analysisTariffs__title title--white">
             Аналітика бізнесу

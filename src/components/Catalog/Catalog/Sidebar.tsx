@@ -24,7 +24,6 @@ const Sidebar = ({
   const [listCities, setListCities] = useState<any>();
   const [selectedArea, setSelectedArea] = useState("");
   const [state, dispatch] = React.useContext(MainContext);
-
   const getListAreas = async () => {
     try {
       const reponse = await axios.post("/api/locations/getAreas", {});
@@ -97,7 +96,6 @@ const Sidebar = ({
 
     setSelectedArea(filtersObjI.state);
   }, [filtersObjI]);
-
   useEffect(() => {
     if (debouncedChange != undefined) {
       const timeOutId = setTimeout(() => changeFilter(debouncedChange), 500);
@@ -112,106 +110,107 @@ const Sidebar = ({
         initialValues={initialValues}
         validate={(values: any) => {
           const errors: any = {};
-
           return errors;
         }}
         onSubmit={handleSubmit}
       >
-        {({ values }) => (
-          <Form className="sidebar__form">
-            <button
-              type="button"
-              onClick={() => {
-                changeFilter("e", true);
-              }}
-              className="sidebar__reset-btn  section__secondary-text"
-            >
-              Скинути фільтри
-            </button>
-            <label className="sidebar__field">
-              <span className="sidebar__label">Ціна</span>
-              <div className="sidebar__price">
+        {({ values }) => {
+          return (
+            <Form className="sidebar__form">
+              <button
+                type="button"
+                onClick={() => {
+                  changeFilter("e", true);
+                }}
+                className="sidebar__reset-btn  section__secondary-text"
+              >
+                Скинути фільтри
+              </button>
+              <label className="sidebar__field">
+                <span className="sidebar__label">Ціна</span>
+                <div className="sidebar__price">
+                  <Field
+                    className="sidebar__input sidebar__price-input"
+                    type="text"
+                    name="priceFrom"
+                    placeholder="від"
+                    onChange={(e: any) => {
+                      values[e.currentTarget.name] = e.currentTarget.value;
+                      setDebouncedChange(e);
+                    }}
+                  />
+                  <p className="sidebar__price--text">—</p>
+                  <Field
+                    className="sidebar__input sidebar__price-input"
+                    type="text"
+                    name="priceTo"
+                    placeholder="до"
+                    onChange={(e: any) => {
+                      values[e.currentTarget.name] = e.currentTarget.value;
+                      setDebouncedChange(e);
+                    }}
+                  />
+                </div>
+              </label>
+              <label className="sidebar__field">
+                <span className="sidebar__label">Валюта</span>
                 <Field
-                  className="sidebar__input sidebar__price-input"
                   type="text"
-                  name="priceFrom"
-                  placeholder="від"
-                  onChange={(e: any) => {
-                    values[e.currentTarget.name] = e.currentTarget.value;
-                    setDebouncedChange(e);
-                  }}
+                  name="currency"
+                  setter={() => dispatch({ type: "toggle_currency" })}
+                  placeholder="Оберіть"
+                  defaultValue={[{ value: "Долар", label: "Долар" }]}
+                  component={CustomSelect}
+                  options={[
+                    { value: "Гривня", label: "Гривня" },
+                    { value: "Долар", label: "Долар" },
+                  ]}
                 />
-                <p className="sidebar__price--text">—</p>
-                <Field
-                  className="sidebar__input sidebar__price-input"
-                  type="text"
-                  name="priceTo"
-                  placeholder="до"
-                  onChange={(e: any) => {
-                    values[e.currentTarget.name] = e.currentTarget.value;
-                    setDebouncedChange(e);
-                  }}
-                />
+              </label>
+              <div className="sidebar__field">
+                <span className="sidebar__label">Категорія</span>
+                <ul className="sidebar__categories">
+                  {OurCategories.map(({ id, content }) => (
+                    <li key={id} className="sidebar__category">
+                      <Checkbox
+                        datakey={id}
+                        changeFilter={changeFilter}
+                        text={content}
+                        categories={filtersObjI.category ?? []}
+                      />
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </label>
-            <label className="sidebar__field">
-              <span className="sidebar__label">Валюта</span>
-              <Field
-                type="text"
-                name="currency"
-                setter={() => dispatch({ type: "toggle_currency" })}
-                placeholder="Оберіть"
-                defaultValue={[{ value: "Долар", label: "Долар" }]}
-                component={CustomSelect}
-                options={[
-                  { value: "Гривня", label: "Гривня" },
-                  { value: "Долар", label: "Долар" },
-                ]}
-              />
-            </label>
-            <div className="sidebar__field">
-              <span className="sidebar__label">Категорія</span>
-              <ul className="sidebar__categories">
-                {OurCategories.map(({ id, content }) => (
-                  <li key={id} className="sidebar__category">
-                    <Checkbox
-                      datakey={id}
-                      changeFilter={changeFilter}
-                      text={content}
-                      categories={filtersObjI.category ?? []}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <label className="sidebar__field sidebar__select-region">
-              <span className="sidebar__label">Область</span>
-              <Field
-                component={CustomSelect}
-                className="sidebar__select section__primary-text"
-                type="text"
-                name="state"
-                setter={setSelectedArea}
-                options={listAreas}
-                changeFilter={changeFilter}
-                required
-                placeholder="-----"
-              ></Field>
-            </label>
-            <label className="sidebar__field  sidebar__select-region">
-              <span className="sidebar__label">Місто</span>
-              <Field
-                type="text"
-                name="city"
-                required
-                placeholder="-----"
-                component={CustomSelect}
-                changeFilter={changeFilter}
-                options={listCities}
-              />
-            </label>
-          </Form>
-        )}
+              <label className="sidebar__field sidebar__select-region">
+                <span className="sidebar__label">Область</span>
+                <Field
+                  component={CustomSelect}
+                  className="sidebar__select section__primary-text"
+                  type="text"
+                  name="state"
+                  setter={setSelectedArea}
+                  options={listAreas}
+                  changeFilter={changeFilter}
+                  required
+                  placeholder="-----"
+                ></Field>
+              </label>
+              <label className="sidebar__field  sidebar__select-region">
+                <span className="sidebar__label">Місто</span>
+                <Field
+                  type="text"
+                  name="city"
+                  required
+                  placeholder="-----"
+                  component={CustomSelect}
+                  changeFilter={changeFilter}
+                  options={listCities}
+                />
+              </label>
+            </Form>
+          );
+        }}
       </Formik>
     </div>
   );

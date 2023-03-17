@@ -46,6 +46,16 @@ const Networks = () => {
           </a>
         </Link>
       </li>
+
+      <li className="networks__item ">
+        <Link href="https://www.instagram.com/biss.box/?igshid=YmMyMTA2M2Y%3D">
+          <a className="section__secondary-text--white" target="blank">
+            <button className="networks__btn networks__btn--instagram">
+              <InstagramSVG />
+            </button>
+          </a>
+        </Link>
+      </li>
     </ul>
   );
 };
