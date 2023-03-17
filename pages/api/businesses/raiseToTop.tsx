@@ -32,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         const raised = await db
             .collection("collections_Businesses")
             .updateMany(
-                { _id: { $in: orderTop.value?.projects.map((id:string) => new ObjectId(id)) } },
+                { _id: { $in: orderTop.value?.projects.map((project:any) => new ObjectId(project?._id)) } },
                 { $set: { _order: Date.now() } },
             );  
 

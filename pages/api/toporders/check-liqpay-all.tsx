@@ -48,18 +48,29 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
               }                
 
               const order = await db
-                .collection("collections_requesttoverify")
-                .updateOne(
+                .collection("collections_toporders")
+                .findOneAndUpdate(
                   {
                     _id: new ObjectId(item._id.toString()),
                   },
                   {
                     $set: {
                       status: status,
+                      _modified: Date.now().toString().substring(0, 10)
                     },
                   },
+                  { returnDocument: 'after' }
                 );
 
+              if (json.data?.status == "success" && order.value) {
+                const raised = await db
+                  .collection("collections_Businesses")
+                  .updateMany(
+                      { _id: { $in: order.value?.projects.map((project:any) => new ObjectId(project?._id)) } },
+                      { $set: { _order: Date.now() } },
+                );  
+              }
+    
               resolve()
             },
             async (json: any) => {
