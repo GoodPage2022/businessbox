@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const querySort = req.body.sort;
   const querySkip = req.body.skip;
   const queryRate = req.body.rate;
-  console.log(queryFilter, "req.body");
+  // console.log(queryFilter, "req.body");
   // let queryUrl = `${process.env.cockpitApiUrl}/collections/get/Businesses?token=${token}`;
 
   let pipeLine = [];
@@ -76,6 +76,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
 
   // console.log(pipeLine);
   // console.log(JSON.stringify(pipeLine, null, 4));
+
+  console.log(JSON.stringify(pipeLine), "pipeLine");
+  
 
   try {
     const client = await clientPromise;

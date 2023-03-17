@@ -35,10 +35,21 @@ const DetailInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinesses = async () => {
+    console.log('2222');
+    
     const filter = {
       $and: [
         { area: { $in: projectInfo.area } },
-        { sold_out: false, investing: { $exists: false } },
+        { 
+          sold_out: false, 
+          // investing: { $exists: false } 
+        },
+        {
+          "$or": [
+            {"investing": {$exists: false}}, 
+            {"investing": false}
+          ]
+        }
       ],
     };
     const response = await axios.post(`/api/businesses/getList`, {

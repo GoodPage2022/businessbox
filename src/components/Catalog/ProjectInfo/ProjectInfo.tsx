@@ -213,6 +213,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinesses = async () => {
+    console.log('111111');
+    
     const requestBody: any = {
       user,
       limit: 10,
@@ -222,7 +224,16 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       filter: {
         $and: [
           { area: { $in: projectInfo.area } },
-          { sold_out: false, investing: { $exists: false } },
+          {
+            sold_out: false, 
+            // investing: { $exists: false } 
+          },
+          {
+            "$or": [
+              {"investing": {$exists: false}}, 
+              {"investing": false}
+            ]
+          }
         ],
       },
     };

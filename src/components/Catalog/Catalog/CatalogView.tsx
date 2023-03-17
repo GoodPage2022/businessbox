@@ -202,8 +202,17 @@ const CatalogView = () => {
 
     filterSetOfExp.push({
       sold_out: false,
-      investing: { $exists: false },
+      // investing: { $exists: false },
     });
+
+    filterSetOfExp.push({
+      "$or": [
+        {"investing": {$exists: false}}, 
+        {"investing": false}
+      ]
+    });
+    console.log("3433");
+    
 
     // console.log(requestBody, filterSetOfExp);
 
@@ -232,6 +241,9 @@ const CatalogView = () => {
         $and: filterSetOfExp,
       };
     }
+
+    console.log(requestBody, "requestBody");
+    
 
     try {
       const response = await axios.post(
