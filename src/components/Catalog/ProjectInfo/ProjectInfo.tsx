@@ -213,8 +213,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinesses = async () => {
-    console.log('111111');
-    
+    console.log("111111");
+
     const requestBody: any = {
       user,
       limit: 10,
@@ -225,15 +225,12 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         $and: [
           { area: { $in: projectInfo.area } },
           {
-            sold_out: false, 
-            // investing: { $exists: false } 
+            sold_out: false,
+            // investing: { $exists: false }
           },
           {
-            "$or": [
-              {"investing": {$exists: false}}, 
-              {"investing": false}
-            ]
-          }
+            $or: [{ investing: { $exists: false } }, { investing: false }],
+          },
         ],
       },
     };
@@ -557,9 +554,9 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
                   className="projectInfo__image-slider--image"
                   onClick={() => {
                     if (!state.isOpenLargeImage) {
-                      dispatch({ type: "toggle_large-image" });
                       state.imageIdx = index;
                       state.images = projectInfo.images;
+                      dispatch({ type: "toggle_large-image" });
                     }
                   }}
                 >
