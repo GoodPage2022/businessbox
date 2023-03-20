@@ -43,20 +43,20 @@ const BurgerMenu = () => {
           <Link href="/catalog">
             <a className="section__primary-text--white sub-menu">Купівля</a>
           </Link>
-          {/* {user && (
+          {user && (
             <Link href="/invest/catalog">
               <a className="section__primary-text--white sub-menu">
                 Інвестування
               </a>
             </Link>
-          )} */}
+          )}
 
           {/* <Link href="/catalog">
             <a className="section__primary-text--white">Купівля бізнесу</a>
           </Link> */}
         </li>
 
-        {/* {!user && (
+        {!user && (
           <li
             className="header__nav__menu__item"
             onClick={() => dispatch({ type: "toggle_burger" })}
@@ -65,7 +65,7 @@ const BurgerMenu = () => {
               <a className="section__primary-text--white">Інвестування</a>
             </Link>
           </li>
-        )} */}
+        )}
         {/* <li
           className="header__nav__menu__item   section__primary-text--white"
           onClick={() => dispatch({ type: "toggle_burger" })}

@@ -27,21 +27,21 @@ const Navbar = () => {
             <Link href="/catalog">
               <a className="section__secondary-text--white">Купівля</a>
             </Link>
-            {/* {user && (
+            {user && (
               <Link href="/invest/catalog">
                 <a className="section__secondary-text--white">Інвестування</a>
               </Link>
-            )} */}
+            )}
           </div>
         </li>
 
-        {/* {!user && (
+        {!user && (
           <li className="header__nav__menu__item   section__secondary-text--white">
             <Link href="/invest">
               <a className="section__secondary-text--white">Інвестування</a>
             </Link>
           </li>
-        )} */}
+        )}
         {/* {user && (
           <li className="header__nav__menu__item section__secondary-text--white">
             <Link href="/useful-tools">
