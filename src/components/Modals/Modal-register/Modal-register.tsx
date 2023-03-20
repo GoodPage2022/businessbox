@@ -56,7 +56,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
         phone,
         surname,
         city,
-        investor: state.isInvestor,
+        investor: state.isInvestor == 1 ? 1 : 0,
       },
     };
 

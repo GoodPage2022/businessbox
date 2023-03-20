@@ -122,13 +122,13 @@ function ModalAuth({ onClose }: { onClose: any }) {
         resetForm({});
         setAuthError("");
         console.log(signInResponse.data);
-        if (state.isInvestor == 1 && signInResponse.data.investor == 1) {
+        if (state.isInvestor == 1) {
           router.push("/invest/catalog");
           dispatch({ type: "toggle_investor" });
           state.isInvestor = 0;
           return;
         }
-        if (state.isInvestor == 1 && signInResponse.data.investor != 1) {
+        if (state.isInvestor == 2) {
           router.push("/invest/add-business");
           dispatch({ type: "toggle_investor" });
           state.isInvestor = 0;
