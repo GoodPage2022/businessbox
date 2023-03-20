@@ -1,12 +1,26 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MainContext } from "../../../contexts/mainContext";
 import ArrowBackSVG from "../../../assets/svg/project-info-arrow.svg";
 import CrossSVG from "../../../assets/svg/cross.svg";
 
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import "swiper/css";
+
 const LargeImage = ({ onClose }: { onClose: any }) => {
   const [state, dispatch] = React.useContext(MainContext);
-  const [currentImageIdx, setCurrentImageIdx] = useState(0);
+  const sliderRef = useRef<SwiperRef>(null);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
+
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
@@ -15,19 +29,10 @@ const LargeImage = ({ onClose }: { onClose: any }) => {
     };
   }, []);
 
-  const handlePrev = () => {
-    if (currentImageIdx == 0) return;
-    setCurrentImageIdx((prev) => prev - 1);
-  };
-
-  const handleNext = () => {
-    if (currentImageIdx == state.images.length - 1) return;
-    setCurrentImageIdx((prev) => prev + 1);
-  };
-
   useEffect(() => {
     if (!state.imageIdx) return;
-    setCurrentImageIdx(state.imageIdx);
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideTo(state.imageIdx, 0);
   }, [state.imageIdx]);
 
   const handleKeyDown = (e: any) => {
@@ -47,23 +52,29 @@ const LargeImage = ({ onClose }: { onClose: any }) => {
       className={`largeImage ${state.isOpenLargeImage ? "active" : ""}`}
       onClick={handleBackdropClick}
     >
-      <div className="largeImage__close">
+      <div className="largeImage__close" onClick={onClose}>
         <CrossSVG />
       </div>
 
       <div className="largeImage__container">
         <div className="largeImage__image-wrapper">
-          <Image
-            className=""
-            src={
-              state.images[currentImageIdx]?.meta.assets == ""
-                ? `${state.images[currentImageIdx].path}`
-                : `https://admin.bissbox.com/${state.images[currentImageIdx]?.path}`
-            }
-            layout="fill"
-            objectFit="contain"
-            alt=""
-          />
+          <Swiper ref={sliderRef} spaceBetween={50} slidesPerView={1}>
+            {state.images.map((image: any) => (
+              <SwiperSlide key={image.path}>
+                <Image
+                  className=""
+                  src={
+                    image.meta.assets == ""
+                      ? image.path
+                      : `https://admin.bissbox.com/${image.path}`
+                  }
+                  layout="fill"
+                  objectFit="contain"
+                  alt=""
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
 
         <div className="largeImage__buttons">

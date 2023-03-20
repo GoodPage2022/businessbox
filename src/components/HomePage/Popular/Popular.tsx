@@ -92,6 +92,7 @@ const Popular = () => {
       user,
       limit: 10,
       sort: {
+        _order: -1,
         view_count: -1,
         _created: -1,
       },

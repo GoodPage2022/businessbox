@@ -213,14 +213,18 @@ const CatalogView = () => {
     // console.log(requestBody, filterSetOfExp);
 
     if (!filtersObj["sort-by-popular"]) {
-      requestBody.sort["_created"] = -1;
-      requestBody.sort["_order"] = -1;
+      if (!filtersObj["sort-by-price"]) {
+        requestBody.sort["_created"] = -1;
+        requestBody.sort["_order"] = -1;
+      }
       delete requestBody.sort["view_count"];
     }
 
     if (!filtersObj["sort-by-price"]) {
-      requestBody.sort["_created"] = -1;
-      requestBody.sort["_order"] = -1;
+      if (!filtersObj["sort-by-popular"]) {
+        requestBody.sort["_created"] = -1;
+        requestBody.sort["_order"] = -1;
+      }
       delete requestBody.sort["price"];
     }
 

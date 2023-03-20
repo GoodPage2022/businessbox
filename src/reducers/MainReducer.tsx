@@ -96,9 +96,9 @@ export const reducer = (state: any, action: any) => {
     case "toggle_large-image":
       return {
         ...state,
-        isOpenLargeImage: !state.isOpenLargeImage,
         imageIdx: state.imageIdx,
         images: state.images,
+        isOpenLargeImage: !state.isOpenLargeImage,
       };
     case "toggle_moreAboutBusinessModal":
       return {

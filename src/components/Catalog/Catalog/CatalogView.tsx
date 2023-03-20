@@ -199,32 +199,29 @@ const CatalogView = () => {
           break;
       }
     });
-
+    console.log(filtersObj, "filtersObj");
     filterSetOfExp.push({
       sold_out: false,
       // investing: { $exists: false },
     });
 
     filterSetOfExp.push({
-      "$or": [
-        {"investing": {$exists: false}}, 
-        {"investing": false}
-      ]
+      $or: [{ investing: { $exists: false } }, { investing: false }],
     });
-    console.log("3433");
-    
-
-    // console.log(requestBody, filterSetOfExp);
 
     if (!filtersObj["sort-by-popular"]) {
-      requestBody.sort["_created"] = -1;
-      requestBody.sort["_order"] = -1;
+      if (!filtersObj["sort-by-price"]) {
+        requestBody.sort["_created"] = -1;
+        requestBody.sort["_order"] = -1;
+      }
       delete requestBody.sort["view_count"];
     }
 
     if (!filtersObj["sort-by-price"]) {
-      requestBody.sort["_created"] = -1;
-      requestBody.sort["_order"] = -1;
+      if (!filtersObj["sort-by-popular"]) {
+        requestBody.sort["_created"] = -1;
+        requestBody.sort["_order"] = -1;
+      }
       delete requestBody.sort["price"];
     }
 
@@ -243,7 +240,6 @@ const CatalogView = () => {
     }
 
     console.log(requestBody, "requestBody");
-    
 
     try {
       const response = await axios.post(
