@@ -58,7 +58,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         },
       });
       delete querySort.view_count;
-      queryOrder = { viewCountDig: -1, ...querySort };
+      queryOrder = { ...querySort, viewCountDig: -1 };
     }
 
     pipeLine.push({ $sort: queryOrder });
@@ -78,8 +78,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   // console.log(JSON.stringify(pipeLine, null, 4));
 
   console.log(JSON.stringify(pipeLine), "pipeLine");
-  
-
   try {
     const client = await clientPromise;
     const db = client.db("bubox");
