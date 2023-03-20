@@ -47,7 +47,7 @@ const LargeImage = ({ onClose }: { onClose: any }) => {
       className={`largeImage ${state.isOpenLargeImage ? "active" : ""}`}
       onClick={handleBackdropClick}
     >
-      <div className="largeImage__close">
+      <div className="largeImage__close" onClick={onClose}>
         <CrossSVG />
       </div>
 
