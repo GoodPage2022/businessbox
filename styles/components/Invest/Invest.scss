@@ -103,3 +103,20 @@
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .invest {
+    &__card {
+      width: 50%;
+      &--title {
+        font-size: 22px;
+        line-height: 26px;
+      }
+
+      &--text {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+  }
+}
