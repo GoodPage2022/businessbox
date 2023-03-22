@@ -378,7 +378,7 @@ const CatalogView = () => {
               <FilterSVG />
             </button>
           </div>
-          <div className="catalogView__buttons--right">
+          {/* <div className="catalogView__buttons--right">
             <button
               onClick={() => setIsRowsActive((prev) => !prev)}
               className={`catalogView__button__columns ${
@@ -395,7 +395,7 @@ const CatalogView = () => {
             >
               <LinesSVG />
             </button>
-          </div>
+          </div> */}
           <MobFilter
             isActive={state.isActiveMobFilter}
             changeFilter={changeFilter}
