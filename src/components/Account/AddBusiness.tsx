@@ -13,7 +13,6 @@ import CustomInput from "../shared/CustomInput";
 
 const AddBusiness = () => {
   const router = useRouter();
-  const user = useSelector((state: any) => state.auth.user);
   const [files, setFiles] = useState<string[]>([]);
   const [tempFiles, setTempFiles] = useState<string[]>([]);
   const [addBusinessError, setAddBusinessError] = useState("");
@@ -24,6 +23,12 @@ const AddBusiness = () => {
   const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isNegotiatedPrice, setIsNegotiatedPrice] = useState<boolean>(false);
+
+  const [user, setUser] = useState<any>(null);
+  const userUseSelector = useSelector((state: any) => state.auth.user);
+  useEffect(()=>{
+    setUser(userUseSelector)
+  },[userUseSelector])
 
   const getListAreas = async () => {
     setIsLoading(true);
@@ -70,6 +75,8 @@ const AddBusiness = () => {
   };
 
   const uploadToServer = async (file: any) => {
+    if (user == null) return;
+    
     setIsLoading(true);
     const uploadImageURL = file;
 

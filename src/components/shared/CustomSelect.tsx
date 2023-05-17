@@ -21,6 +21,10 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
   isMulti,
   defaultValue,
 }): JSX.Element => {
+  if (field.name=="business")
+    console.log([options[1], options[2]]);
+  // console.log(field);
+  
   return (
     <Select
       styles={customStyles}
@@ -78,7 +82,9 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
           form.setFieldValue(field.name, e.value);
         }
       }}
-      value={options?.find((option: any) => option.value === field.value) ?? ""}
+      value={isMulti && field.name == 'business' ? 
+        options?.filter((option: any) => field.value.includes(option.value)) ?? ""
+         : options?.find((option: any) => option.value === field.value) ?? ""}
     />
   );
 };

@@ -8,11 +8,17 @@ import AccountLayout from "../../src/layouts/AccountLayout";
 
 const AddMyBusiness: NextPage = () => {
   const router = useRouter()
-  const user = useSelector((state: any) => state.auth.user);
+
+  const [user, setUser] = React.useState<any>(null);
+  const userUseSelector = useSelector((state: any) => state.auth.user);
+  React.useEffect(()=>{
+    if (userUseSelector == null && typeof window !== "undefined")
+    router.push('/')
+
+    setUser(userUseSelector)
+  },[userUseSelector])
 
   if (user == null) {
-    if (typeof window !== "undefined")
-      router.push('/')
     return (<></>)
   }
 
