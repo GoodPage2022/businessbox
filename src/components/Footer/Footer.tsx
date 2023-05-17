@@ -17,6 +17,7 @@ type CustomSelectProps = {
   side?: string;
   setter?: (e: any) => void;
   changeFilter?: (e: any) => void;
+  instanceId: string;
 };
 
 const FooterSelect: React.FC<FieldProps & CustomSelectProps> = ({
@@ -26,11 +27,13 @@ const FooterSelect: React.FC<FieldProps & CustomSelectProps> = ({
   placeholder,
   setter,
   changeFilter,
+  instanceId,
 }): JSX.Element => {
   return (
     <Select
       styles={customStyles}
       name={field.name}
+      instanceId={instanceId}
       options={options}
       classNamePrefix="footer__select"
       // menuIsOpen
@@ -132,6 +135,7 @@ const Footer: React.FC = () => {
               changeFilter={changeFilter}
               placeholder="Категорії"
               component={FooterSelect}
+              instanceId={"8"}
               options={OurCategories}
             />
           </FormikProvider>
@@ -239,6 +243,7 @@ const Footer: React.FC = () => {
                 name="categories"
                 required
                 placeholder="Категорії"
+                instanceId={"9"}
                 component={FooterSelect}
                 options={OurCategories}
               />

@@ -9,6 +9,7 @@ type CustomSelectProps = {
   setter?: (e: any) => void;
   isMulti?: boolean;
   defaultValue?: any;
+  instanceId?: string;
 };
 
 const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
@@ -20,6 +21,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
   changeFilter,
   isMulti,
   defaultValue,
+  instanceId,
 }): JSX.Element => {
   if (field.name=="business")
     console.log([options[1], options[2]]);
@@ -31,6 +33,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       name={field.name}
       options={options}
       classNamePrefix="custom-select"
+      instanceId={instanceId}
       // menuIsOpen
       isMulti={isMulti}
       placeholder={placeholder}
@@ -62,7 +65,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
         if (isMulti) {
           form.setFieldValue(
             field.name,
-            e.map((i: any) => i.value),
+            e.map((i: any) => i.value)
           );
           if (!!changeFilter) {
             changeFilter({
