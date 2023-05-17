@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import { MainContext } from "../../contexts/mainContext";
@@ -13,15 +12,21 @@ const AccountHeader = ({}) => {
   const { pathname } = useRouter();
   const router = useRouter();
   const [state, dispatch] = React.useContext(MainContext);
-  const [isContactInfo, setIsContactInfo] = useState(() =>
-    pathname === "/account/contact-info" ? true : false,
-  );
-  const [isBusiness, setIsBusiness] = useState(() =>
-    pathname === "/account/my-businesses" ? true : false,
-  );
-  const [isFavorites, setIsFavorites] = useState(() =>
-    pathname === "/account/favorites" ? true : false,
-  );
+  const [isContactInfo, setIsContactInfo] = useState(false);
+  const [isBusiness, setIsBusiness] = useState(false);
+  const [isFavorites, setIsFavorites] = useState(false);
+
+  useEffect(() => {
+    if (pathname === "/account/contact-info") {
+      setIsContactInfo(true);
+    }
+    if (pathname === "/account/my-businesses") {
+      setIsBusiness(true);
+    }
+    if (pathname === "/account/favorites") {
+      setIsFavorites(true);
+    }
+  }, [pathname]);
 
   const categoriesSliderSettings = {
     dots: false,
@@ -64,47 +69,41 @@ const AccountHeader = ({}) => {
         <ul className="accountHeader__left">
           <li className="accountHeader__left--item">
             {isContactInfo ? (
-              <Link href="/account/contact-info">
-                <a>
-                  <MainButtonGrey label="Контактна інформація" />
-                </a>
-              </Link>
+              <MainButtonGrey
+                onClick={() => router.push("/account/contact-info")}
+                label="Контактна інформація"
+              />
             ) : (
-              <Link href="/account/contact-info">
-                <a>
-                  <MainButtonBlack label="Контактна інформація" />
-                </a>
-              </Link>
+              <MainButtonBlack
+                onClick={() => router.push("/account/contact-info")}
+                label="Контактна інформація"
+              />
             )}
           </li>
           <li className="accountHeader__left--item">
             {isBusiness ? (
-              <Link href="/account/my-businesses">
-                <a>
-                  <MainButtonGrey label="Мої бізнеси" />
-                </a>
-              </Link>
+              <MainButtonGrey
+                onClick={() => router.push("/account/my-businesses")}
+                label="Мої бізнеси"
+              />
             ) : (
-              <Link href="/account/my-businesses">
-                <a>
-                  <MainButtonBlack label="Мої бізнеси" />
-                </a>
-              </Link>
+              <MainButtonBlack
+                onClick={() => router.push("/account/my-businesses")}
+                label="Мої бізнеси"
+              />
             )}
           </li>
           <li className="accountHeader__left--item">
             {isFavorites ? (
-              <Link href="/account/favorites">
-                <a>
-                  <MainButtonGrey label="Обрані" />
-                </a>
-              </Link>
+              <MainButtonGrey
+                onClick={() => router.push("/account/favorites")}
+                label="Обрані"
+              />
             ) : (
-              <Link href="/account/favorites">
-                <a>
-                  <MainButtonBlack label="Обрані" />
-                </a>
-              </Link>
+              <MainButtonBlack
+                onClick={() => router.push("/account/favorites")}
+                label="Обрані"
+              />
             )}
           </li>
         </ul>
@@ -134,65 +133,53 @@ const AccountHeader = ({}) => {
         <Slider {...categoriesSliderSettings}>
           <li className="accountHeader__left--item">
             {isContactInfo ? (
-              <Link href="/account/contact-info">
-                <a>
-                  <button className="main-button-grey section__primary-text">
-                    Контактна інформація
-                  </button>
-                  {/* <MainButtonGrey label="Контактна інформація" /> */}
-                </a>
-              </Link>
+              <button
+                onClick={() => router.push("/account/contact-info")}
+                className="main-button-grey section__primary-text"
+              >
+                Контактна інформація
+              </button>
             ) : (
-              <Link href="/account/contact-info">
-                <a>
-                  <button className="main-button-black section__primary-text">
-                    Контактна інформація
-                  </button>
-                  {/* <MainButtonBlack label="Контактна інформація" /> */}
-                </a>
-              </Link>
+              <button
+                onClick={() => router.push("/account/contact-info")}
+                className="main-button-black section__primary-text"
+              >
+                Контактна інформація
+              </button>
             )}
           </li>
           <li className="accountHeader__left--item">
             {isBusiness ? (
-              <Link href="/account/my-businesses">
-                <a>
-                  <button className="main-button-grey section__primary-text">
-                    Мої бізнеси
-                  </button>
-                  {/* <MainButtonGrey label="Мої бізнеси" /> */}
-                </a>
-              </Link>
+              <button
+                onClick={() => router.push("/account/my-businesses")}
+                className="main-button-grey section__primary-text"
+              >
+                Мої бізнеси
+              </button>
             ) : (
-              <Link href="/account/my-businesses">
-                <a>
-                  <button className="main-button-black section__primary-text">
-                    Мої бізнеси
-                  </button>
-                  {/* <MainButtonBlack label="Мої бізнеси" /> */}
-                </a>
-              </Link>
+              <button
+                onClick={() => router.push("/account/my-businesses")}
+                className="main-button-black section__primary-text"
+              >
+                Мої бізнеси
+              </button>
             )}
           </li>
           <li className="accountHeader__left--item">
             {isFavorites ? (
-              <Link href="/account/favorites">
-                <a>
-                  <button className="main-button-grey section__primary-text">
-                    Обрані
-                  </button>
-                  {/* <MainButtonGrey label="Обрані" /> */}
-                </a>
-              </Link>
+              <button
+                onClick={() => router.push("/account/favorites")}
+                className="main-button-grey section__primary-text"
+              >
+                Обрані
+              </button>
             ) : (
-              <Link href="/account/favorites">
-                <a>
-                  <button className="main-button-black section__primary-text">
-                    Обрані
-                  </button>
-                  {/* <MainButtonBlack label="Обрані" /> */}
-                </a>
-              </Link>
+              <button
+                onClick={() => router.push("/account/favorites")}
+                className="main-button-black section__primary-text"
+              >
+                Обрані
+              </button>
             )}
           </li>
         </Slider>

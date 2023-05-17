@@ -1,6 +1,15 @@
-const MainButtonBlack = ({ label }: { label: string }) => {
+const MainButtonBlack = ({
+  label,
+  onClick,
+}: {
+  label: string;
+  onClick?: any;
+}) => {
   return (
-    <button className="main-button-black section__secondary-text">
+    <button
+      onClick={onClick}
+      className="main-button-black section__secondary-text"
+    >
       {label}
     </button>
   );

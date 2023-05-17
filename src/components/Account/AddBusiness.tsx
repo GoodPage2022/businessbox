@@ -24,6 +24,13 @@ const AddBusiness = () => {
   const [isSentBusiness, setIsSentBusiness] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isNegotiatedPrice, setIsNegotiatedPrice] = useState<boolean>(false);
+  const [isDesctop, setIsDesctop] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth > 767) {
+      setIsDesctop(true);
+    }
+  }, []);
 
   const getListAreas = async () => {
     setIsLoading(true);
@@ -182,7 +189,7 @@ const AddBusiness = () => {
       setIsSentBusiness(true);
       localStorage.setItem("currency", currencyState);
       router.push(
-        `/account/add-business-finish/${newBusinessResponse.data.data._id}`,
+        `/account/add-business-finish/${newBusinessResponse.data.data._id}`
       );
 
       setAddBusinessError("");
@@ -286,6 +293,7 @@ const AddBusiness = () => {
                       <Field
                         type="text"
                         name="business"
+                        instanceId={"1"}
                         required
                         placeholder="Торгівля"
                         component={CustomSelect}
@@ -298,6 +306,7 @@ const AddBusiness = () => {
                       <Field
                         type="text"
                         name="state"
+                        instanceId={"2"}
                         required
                         placeholder="Оберіть"
                         component={CustomSelect}
@@ -314,10 +323,11 @@ const AddBusiness = () => {
                         placeholder="Оберіть"
                         component={CustomSelect}
                         options={listCities}
+                        instanceId={"3"}
                       />
                     </label>
                   </div>
-                  {typeof window !== "undefined" && window.innerWidth > 767 && (
+                  {isDesctop && (
                     <div className="addBusiness__info-wrapper--right-desctop">
                       <div className="addBusiness__field">
                         <span className="addBusiness__label">Опис</span>
@@ -352,8 +362,8 @@ const AddBusiness = () => {
                               "year",
                               e.target.value.replaceAll(
                                 /[A-Za-zА-Яа-я,./'` ]/g,
-                                "",
-                              ),
+                                ""
+                              )
                             );
                           }}
                           placeholder="-----"
@@ -379,8 +389,8 @@ const AddBusiness = () => {
                                   "price",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               minLength={1}
@@ -406,6 +416,7 @@ const AddBusiness = () => {
                             setter={setCurrencyState}
                             placeholder="Оберіть"
                             component={CustomSelect}
+                            instanceId={"4"}
                             options={[
                               { value: "Гривня", label: "Гривня" },
                               { value: "Долар", label: "Долар" },
@@ -445,8 +456,8 @@ const AddBusiness = () => {
                               "year",
                               e.target.value.replaceAll(
                                 /[A-Za-zА-Яа-я,./'` ]/g,
-                                "",
-                              ),
+                                ""
+                              )
                             );
                           }}
                           required
@@ -476,8 +487,8 @@ const AddBusiness = () => {
                                   "price",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               component={CustomInput}
@@ -501,6 +512,7 @@ const AddBusiness = () => {
                             setter={setCurrencyState}
                             placeholder="Оберіть"
                             component={CustomSelect}
+                            instanceId={"5"}
                             options={[
                               { value: "Гривня", label: "Гривня" },
                               { value: "Долар", label: "Долар" },
@@ -572,7 +584,7 @@ const AddBusiness = () => {
                       onChange={async (e) => {
                         if (e.currentTarget?.files?.length) {
                           const uploadedFiles: any = await uploadToServer(
-                            e.currentTarget.files[0],
+                            e.currentTarget.files[0]
                           );
                           console.log(uploadedFiles.data.url);
                           setFiles([...files, uploadedFiles.data.url]);
@@ -580,7 +592,7 @@ const AddBusiness = () => {
                       }}
                     />
                     <input
-                      id="file"
+                      id="file-2"
                       name="file"
                       type="file"
                       multiple
@@ -594,7 +606,7 @@ const AddBusiness = () => {
                       onChange={async (e) => {
                         if (e.currentTarget?.files?.length) {
                           const uploadedFiles: any = await uploadToServer(
-                            e.currentTarget.files[0],
+                            e.currentTarget.files[0]
                           );
                           console.log(uploadedFiles.data.url);
                           setFiles([...files, uploadedFiles.data.url]);
