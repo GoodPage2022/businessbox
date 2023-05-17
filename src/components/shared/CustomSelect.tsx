@@ -82,7 +82,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
           form.setFieldValue(field.name, e.value);
         }
       }}
-      value={isMulti && field.name == 'business' ? 
+      value={isMulti ? 
         options?.filter((option: any) => field.value.includes(option.value)) ?? ""
          : options?.find((option: any) => option.value === field.value) ?? ""}
     />
