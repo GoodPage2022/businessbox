@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps, session }: any) {
           content="Business Box – перша унікальна платформа по купівлі, продажу бізнесу,  інвестуванню та пошуку інвестицій. Головною метою – є надання професійних послуг з питань купівлі, продажу, аналізу, навчанню, модернізації, інвестуванню та пошку інвестицій. Платформа заснована трьома підприємцями Дмитро Буряк, Олександр Найда та Віталій Лубінець та враховує різний досвід їх діючих бізнесів та бізнесіів та володарів бізнесу з якими вини близько дотичнв. Функціонал даного інструменту розрахований на легке та логічне використання платформи, як для досвідченого користувача, так і для новачка."
         />
 
-        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="/fav.jpg" type="image/x-icon" />
       </Head>
       <Script
         async
@@ -89,9 +89,9 @@ function MyApp({ Component, pageProps, session }: any) {
       <SessionProvider session={session}>
         <Provider store={store}>
           {/* <PersistGate loading={null} persistor={persistor}> */}
-            <BaseLayout>
-              <Component {...pageProps} />
-            </BaseLayout>
+          <BaseLayout>
+            <Component {...pageProps} />
+          </BaseLayout>
           {/* </PersistGate> */}
         </Provider>
       </SessionProvider>
