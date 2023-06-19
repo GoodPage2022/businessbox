@@ -213,8 +213,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   const getBusinesses = async () => {
-    console.log("111111");
-
     const requestBody: any = {
       user,
       limit: 10,

@@ -21,20 +21,30 @@ const RegisterBusiness = () => {
           бізнес?
           <br /> Реєструй вже зараз
         </h2>
-
-        <button
-          className="registerBusiness__button section__primary-text--white"
-          onClick={() => {
-            if (user != null) {
-              router.push("/account/add-business");
-            } else {
-              localStorage.setItem("redirectToAddBusiness", "true");
-              openModal();
-            }
-          }}
-        >
-          Зареєструвати
-        </button>
+        <div className="registerBusiness__btn-wrapper">
+          {" "}
+          <button
+            className="registerBusiness__button section__primary-text--white"
+            onClick={() => {
+              if (user != null) {
+                router.push("/account/add-business");
+              } else {
+                localStorage.setItem("redirectToAddBusiness", "true");
+                openModal();
+              }
+            }}
+          >
+            Зареєструвати
+          </button>
+          <button
+            className="registerBusiness__button section__primary-text--white"
+            onClick={() => {
+              router.push("/information/delivery-payment");
+            }}
+          >
+            Тарифи
+          </button>
+        </div>
       </div>
     </section>
   );
