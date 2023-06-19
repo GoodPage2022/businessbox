@@ -43,6 +43,11 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState<any>([]);
   const { data: session } = useSession();
+  const [businessOwner, setBusinessOwner]: [
+    businessOwner: any,
+    setBusinessOwner: any
+  ] = useState(null);
+  const [otherCards, setOtherCards] = useState<any>([]);
 
   const [creationDate, setCreationDate] = useState<string>("");
   const [comments, setComments] = useState<any>([]);
@@ -418,6 +423,52 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     }
   }, [projectInfo]);
 
+  const getBusinessOwner = async () => {
+    const requestBody = {
+      userId: projectInfo._by,
+    };
+
+    const response = await axios.post(`/api/account/list`, requestBody);
+
+    if (response.data) {
+      setBusinessOwner(response.data[0]);
+      return;
+    }
+  };
+
+  const getOtherBusinesses = async (businessOwnerId: string) => {
+    const filter = {
+      _by: businessOwnerId,
+    };
+    const response = await axios.post(`/api/businesses/getList`, {
+      user,
+      filter,
+    });
+
+    if (response.data) {
+      const filteredBusinesses = response.data.entries.filter(
+        (item: any) => item._id != projectInfo._id
+      );
+
+      setOtherCards(filteredBusinesses);
+      // setIsLoading(false);
+      return;
+    }
+    // setIsLoading(false);
+    setOtherCards([]);
+    return;
+  };
+
+  useEffect(() => {
+    if (projectInfo && projectInfo._by) getBusinessOwner();
+  }, [projectInfo]);
+
+  useEffect(() => {
+    if (businessOwner && businessOwner._id) {
+      getOtherBusinesses(businessOwner._id);
+    }
+  }, [businessOwner]);
+
   if (loading) return <></>;
 
   const handleSubmit = async (
@@ -499,7 +550,6 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <div className="projectInfo__arrow-back" onClick={() => router.back()}>
           <ArrowBackSVG />
         </div>
-
         <div className="projectInfo__title">
           <h1 className="projectInfo__title--text title">
             {projectInfo.title}
@@ -728,7 +778,22 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <p className="projectInfo__date section__secondary-text">
           Дата створення бізнесу: {creationDate}
         </p>
-        <ProfileInfo projectData={projectInfo} />
+        <ProfileInfo
+          projectData={projectInfo}
+          businessOwner={businessOwner}
+          isOtherBusinesses={otherCards.length > 1}
+        />
+        {otherCards.length > 0 && state.isShowOtherBusinesses && (
+          <>
+            {" "}
+            <h2 className="projectInfo__offers-title title">
+              Інші бізнеси продавця
+            </h2>
+            <ul className="popular__cards">
+              <CardsSlider cards={otherCards} />
+            </ul>
+          </>
+        )}{" "}
         {comments.length > 0 ? (
           <ul className="projectInfo__comments">
             {comments.map(({ _id, name, mail, date, text, image }: any) => (
