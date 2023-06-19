@@ -102,7 +102,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       const checkLiqpay = await axios.post(
         "/api/analysis/check-liqpay",
         { orderId },
-        options,
+        options
       );
       if (checkLiqpay.data == "success") {
         dispatch({ type: "toggle_analysisThankSuccessModal" });
@@ -171,7 +171,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       setIsLiked(
         user.favourites.map((f: any) => f._id).includes(projectInfo._id)
           ? true
-          : false,
+          : false
       );
   }, [user, projectInfo]);
 
@@ -320,8 +320,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
           setCreationDate(
             new Date(
-              response.data.entries[0]._created * 1000,
-            ).toLocaleDateString("uk-UA", timeformat),
+              response.data.entries[0]._created * 1000
+            ).toLocaleDateString("uk-UA", timeformat)
           );
         } else {
           router.push("/404");
@@ -424,7 +424,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
   const handleSubmit = async (
     values: any,
-    { resetForm, setFieldValue }: any,
+    { resetForm, setFieldValue }: any
   ) => {
     const { comment } = values;
 
@@ -474,7 +474,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         signInReducer({
           ...user,
           favourites: response.data,
-        }),
+        })
       );
     }
   };
@@ -727,9 +727,9 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
             )}{" "}
           </div>
         </div>
-        {/* <p className="projectInfo__date section__secondary-text">
+        <p className="projectInfo__date section__secondary-text">
           Дата створення бізнесу: {creationDate}
-        </p> */}
+        </p>
         <ProfileInfo projectData={projectInfo} />
         {comments.length > 0 ? (
           <ul className="projectInfo__comments">
