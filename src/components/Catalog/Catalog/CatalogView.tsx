@@ -35,7 +35,7 @@ const CatalogView = () => {
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [screenWidth, setScreenWidth] = useState<any>(
-    typeof window !== "undefined" ? window?.screen.width : 0,
+    typeof window !== "undefined" ? window?.screen.width : 0
   );
   // const [rate, setRate] = useState<number>(0);
   const router = useRouter();
@@ -182,6 +182,11 @@ const CatalogView = () => {
           delete requestBody.sort["_created"];
           delete requestBody.sort["_order"];
           break;
+        case "sort-by-date":
+          requestBody.sort["_created"] =
+            filtersObj["sort-by-date"] === "decrease-date" ? -1 : 1;
+          delete requestBody.sort["_order"];
+          break;
         case "state":
           filterSetOfExp.push({
             "state._id": filtersObj[f],
@@ -211,16 +216,20 @@ const CatalogView = () => {
 
     if (!filtersObj["sort-by-popular"]) {
       if (!filtersObj["sort-by-price"]) {
-        requestBody.sort["_created"] = -1;
-        requestBody.sort["_order"] = -1;
+        if (!filtersObj["sort-by-date"]) {
+          requestBody.sort["_created"] = -1;
+          requestBody.sort["_order"] = -1;
+        }
       }
       delete requestBody.sort["view_count"];
     }
 
     if (!filtersObj["sort-by-price"]) {
       if (!filtersObj["sort-by-popular"]) {
-        requestBody.sort["_created"] = -1;
-        requestBody.sort["_order"] = -1;
+        if (!filtersObj["sort-by-date"]) {
+          requestBody.sort["_created"] = -1;
+          requestBody.sort["_order"] = -1;
+        }
       }
       delete requestBody.sort["price"];
     }
@@ -239,8 +248,6 @@ const CatalogView = () => {
       };
     }
 
-    console.log(requestBody, "requestBody");
-
     try {
       const response = await axios.post(
         `/api/businesses/getList`,
@@ -249,7 +256,7 @@ const CatalogView = () => {
           cancelToken: new CancelToken((c) => {
             cancel = c;
           }),
-        },
+        }
       );
 
       if (response.data) {
@@ -311,10 +318,12 @@ const CatalogView = () => {
     }
     if (
       e.target.name == "sort-by-popular" ||
-      e.target.name == "sort-by-price"
+      e.target.name == "sort-by-price" ||
+      e.target.name == "sort-by-date"
     ) {
       filtersObj["sort-by-price"] = "";
       filtersObj["sort-by-popular"] = "";
+      filtersObj["sort-by-date"] = "";
     }
     const filtersObjFirstPage = {
       ...filtersObj,
@@ -429,6 +438,14 @@ const CatalogView = () => {
                   value: "decrease-price",
                   label: "Відсортувати за зменшенням ціни",
                 },
+                {
+                  value: "decrease-date",
+                  label: "Відсортувати за датою (спочатку новіші)",
+                },
+                {
+                  value: "increase-date",
+                  label: "Відсортувати за датою (спочатку старіші)",
+                },
               ]}
             />
           </FormikProvider>
@@ -519,7 +536,7 @@ const CatalogView = () => {
                       currency={currency}
                       negotiatedPrice={negotiatedPrice}
                     />
-                  ),
+                  )
               )}
             </ul>
           ) : (
