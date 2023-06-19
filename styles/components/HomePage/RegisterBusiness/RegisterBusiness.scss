@@ -10,6 +10,10 @@
     margin-bottom: 30px;
   }
 
+  &__btn-wrapper {
+    display: flex;
+  }
+
   &__button {
     display: flex;
     align-items: center;
@@ -26,6 +30,10 @@
     align-items: center;
     color: $main-text-color;
     cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 32px;
+    }
   }
 }
 
@@ -66,6 +74,9 @@
     &__button {
       padding: 6px 12px;
       border-radius: 11px;
+      &:not(:last-child) {
+        margin-right: 24px;
+      }
     }
   }
 }

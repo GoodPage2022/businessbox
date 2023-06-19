@@ -11,6 +11,7 @@ interface ContextType {
     isActiveMobFilter: boolean;
     isActiveHeaderSearch: boolean;
     isOpenDeleteBusiness: boolean;
+    isShowOtherBusinesses: boolean;
   };
   dispatch: React.Dispatch<{ type: string; value: unknown }>;
 }

@@ -1,42 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import PhoneSVG from "../../../assets/svg/phone.svg";
 import MailSVG from "../../../assets/svg/mail.svg";
 import InstagramSVG from "../../../assets/svg/instagram.svg";
 import YoutubeSVG from "../../../assets/svg/youtube.svg";
-import axios, { AxiosRequestConfig } from "axios";
 import Script from "next/script";
+import React from "react";
+import { MainContext } from "../../../contexts/mainContext";
 
-const ProfileInfo = ({ projectData }: { projectData: any }) => {
+const ProfileInfo = ({
+  projectData,
+  businessOwner,
+  isOtherBusinesses,
+}: {
+  projectData: any;
+  businessOwner: any;
+  isOtherBusinesses: boolean;
+}) => {
   const [isPhoneShow, setIsPhoneShow] = useState(false);
   const [isEmailShow, setIsEmailShow] = useState(false);
-  const [businessOwner, setBusinessOwner]: [
-    businessOwner: any,
-    setBusinessOwner: any,
-  ] = useState(null);
+
   const [isInstagramShow, setIsInstagramShow] = useState(false);
   const user = useSelector((state: any) => state.auth.user);
-
-  const getUser = async () => {
-    const requestBody = {
-      userId: projectData._by,
-    };
-
-    const response = await axios.post(`/api/account/list`, requestBody);
-
-    if (response.data) {
-      // console.log(response.data[0]);
-      setBusinessOwner(response.data[0]);
-      return response.data;
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
+  const [state, dispatch] = React.useContext(MainContext);
 
   return (
     <div className="profileInfo">
@@ -68,8 +57,16 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               ? businessOwner.city
               : "Невідомо"}
           </p>
+          {isOtherBusinesses && (
+            <button
+              onClick={() => dispatch({ type: "toggle_otherBusinesses" })}
+              className="profileInfo__other-businesses section__primary-text"
+            >
+              Інші бізнеси продавця
+            </button>
+          )}{" "}
         </div>
-      </div>
+      </div>{" "}
       <div className="profileInfo__networks">
         {isPhoneShow && (
           <p className="profileInfo__contact section__primary-text">
@@ -117,7 +114,9 @@ const ProfileInfo = ({ projectData }: { projectData: any }) => {
               setIsPhoneShow((prev) => !prev);
               setIsEmailShow(false);
               setIsInstagramShow(false);
-              window.gtag('event', 'conversion', {'send_to': 'AW-11042174734/IV-OCOD-4oQYEI7uqJEp'});
+              window.gtag("event", "conversion", {
+                send_to: "AW-11042174734/IV-OCOD-4oQYEI7uqJEp",
+              });
             }}
             className="profileInfo__networks--item"
           >

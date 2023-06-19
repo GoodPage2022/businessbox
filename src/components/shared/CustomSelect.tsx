@@ -23,10 +23,9 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
   defaultValue,
   instanceId,
 }): JSX.Element => {
-  if (field.name=="business")
-    console.log([options[1], options[2]]);
+  if (field.name == "business") console.log([options[1], options[2]]);
   // console.log(field);
-  
+
   return (
     <Select
       styles={customStyles}
@@ -40,12 +39,29 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       defaultValue={defaultValue}
       onChange={(e) => {
         if (!!changeFilter && field.name == "sorting") {
+          let sortName: string = "";
+          switch (e.value) {
+            case "decrease-popular":
+              sortName = "sort-by-popular";
+              break;
+            case "increase-price":
+              sortName = "sort-by-price";
+              break;
+            case "decrease-price":
+              sortName = "sort-by-price";
+              break;
+            case "increase-date":
+              sortName = "sort-by-date";
+              break;
+            case "decrease-date":
+              sortName = "sort-by-date";
+              break;
+            default:
+              break;
+          }
           changeFilter({
             target: {
-              name:
-                e.label == "Відсортувати за популярністю"
-                  ? "sort-by-popular"
-                  : "sort-by-price",
+              name: sortName,
               value: e.value,
             },
           });
@@ -85,9 +101,13 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
           form.setFieldValue(field.name, e.value);
         }
       }}
-      value={isMulti ? 
-        options?.filter((option: any) => field.value.includes(option.value)) ?? ""
-         : options?.find((option: any) => option.value === field.value) ?? ""}
+      value={
+        isMulti
+          ? options?.filter((option: any) =>
+              field.value.includes(option.value)
+            ) ?? ""
+          : options?.find((option: any) => option.value === field.value) ?? ""
+      }
     />
   );
 };
