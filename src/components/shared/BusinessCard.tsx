@@ -10,6 +10,7 @@ import { signIn as signInReducer } from "../../../store/actions/auth";
 import TopSVG from "../../assets/svg/top-label.svg";
 import InvestSVG from "../../assets/svg/invest.svg";
 
+import SoldSVG from "../../assets/svg/sold.svg";
 import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
@@ -66,7 +67,7 @@ const BusinessCard = ({
   useEffect(() => {
     if (!!user && !!user.favourites)
       setIsLiked(
-        user.favourites.map((f: any) => f._id).includes(alias) ? true : false,
+        user.favourites.map((f: any) => f._id).includes(alias) ? true : false
       );
   }, [user]);
 
@@ -86,7 +87,7 @@ const BusinessCard = ({
         signInReducer({
           ...user,
           favourites: response.data,
-        }),
+        })
       );
     }
   };
@@ -143,6 +144,12 @@ const BusinessCard = ({
       //   }, 0);
       // }}
     >
+      {isSoldOut && (
+        <div className="business-card__sold-label">
+          <SoldSVG />
+        </div>
+      )}
+
       {!!order && (
         <div className="business-card__top">
           <TopSVG />

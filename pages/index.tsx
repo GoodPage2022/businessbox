@@ -46,7 +46,7 @@ const IndexPage = () => {
       <Categories />
       <Popular />
       <NewBusinesses />
-      {/* <SoldBusinesses /> */}
+      <SoldBusinesses />
       <RegisterBusiness />
       <Link href="https://t.me/bissbox">
         <a target="_blank" className={`projectInfo__tg`}>

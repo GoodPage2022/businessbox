@@ -77,7 +77,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   // console.log(pipeLine);
   // console.log(JSON.stringify(pipeLine, null, 4));
 
-  console.log(JSON.stringify(pipeLine), "pipeLine");
+  // console.log(JSON.stringify(pipeLine), "pipeLine");
   try {
     const client = await clientPromise;
     const db = client.db("bubox");
