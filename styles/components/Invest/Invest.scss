@@ -53,6 +53,15 @@
       color: #ffffff;
       text-align: start;
     }
+
+    &--link {
+      display: block;
+      font-weight: 700;
+      text-decoration: underline;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
   }
 
   &__container {
