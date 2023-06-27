@@ -37,6 +37,20 @@
     z-index: 5;
   }
 
+  &__sold-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+
+    & svg {
+      & path {
+        fill: #3700ff;
+      }
+    }
+  }
+
   &__invest {
     position: absolute;
     top: -15px;

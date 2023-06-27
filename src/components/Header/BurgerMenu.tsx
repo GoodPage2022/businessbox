@@ -27,8 +27,13 @@ const BurgerMenu = () => {
         router.pathname.includes("invest")
           ? "/invest/add-business"
           : "/account/add-business"
-      }`,
+      }`
     );
+    dispatch({ type: "toggle_burger" });
+  };
+
+  const openBusinessType = () => {
+    router.push(`/business-type`);
     dispatch({ type: "toggle_burger" });
   };
 
@@ -92,17 +97,7 @@ const BurgerMenu = () => {
           ""
         )} */}
 
-        <li
-          className="burgerMenu__button"
-          onClick={() => {
-            if (user != null) {
-              openAddBusiness();
-            } else {
-              localStorage.setItem("redirectToAddBusiness", "true");
-              openModal();
-            }
-          }}
-        >
+        <li className="burgerMenu__button" onClick={openBusinessType}>
           <MainButtonRed label="Зареєструвати бізнес" />
         </li>
       </ul>

@@ -32,9 +32,9 @@ const Right = () => {
   const [user, setUser] = React.useState(null);
   const router = useRouter();
 
-  React.useEffect(()=>{
-    setUser(userUseSelector)
-  },[userUseSelector])
+  React.useEffect(() => {
+    setUser(userUseSelector);
+  }, [userUseSelector]);
 
   // console.log(router.pathname, "router.query");
   const signOut = async () => {
@@ -134,18 +134,19 @@ const Right = () => {
         <li
           className="header__right__btn"
           onClick={() => {
-            if (user != null) {
-              router.push(
-                `${
-                  router.pathname.includes("invest")
-                    ? "/invest/add-business"
-                    : "/account/add-business"
-                }`,
-              );
-            } else {
-              localStorage.setItem("redirectToAddBusiness", "true");
-              openModal();
-            }
+            // if (user != null) {
+            router.push(
+              "/business-type"
+              // `${
+              //   router.pathname.includes("invest")
+              //     ? "/invest/add-business"
+              //     : "/account/add-business"
+              // }`,
+            );
+            // } else {
+            //   localStorage.setItem("redirectToAddBusiness", "true");
+            //   openModal();
+            // }
           }}
         >
           <MainButtonRed label="Зареєструвати бізнес" />

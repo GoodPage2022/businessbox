@@ -43,7 +43,7 @@ function ModalAuth({ onClose }: { onClose: any }) {
           cancelToken: new CancelToken((c) => {
             cancel = c;
           }),
-        },
+        }
       );
       if (signInResponse.status == 200) {
         dispatchRedux(signInReducer(signInResponse.data));
@@ -51,9 +51,14 @@ function ModalAuth({ onClose }: { onClose: any }) {
         if (localStorage.getItem("redirectToAddBusiness")) {
           localStorage.removeItem("redirectToAddBusiness");
           router.push("/account/add-business");
-        } else {
-          router.push("/");
+          return;
         }
+        if (localStorage.getItem("redirectToAddInvestBusiness")) {
+          localStorage.removeItem("redirectToAddInvestBusiness");
+          router.push("/invest/add-business");
+          return;
+        }
+        router.push("/");
       }
     } catch (err: any) {
       console.log(err);
@@ -137,9 +142,14 @@ function ModalAuth({ onClose }: { onClose: any }) {
         if (localStorage.getItem("redirectToAddBusiness")) {
           localStorage.removeItem("redirectToAddBusiness");
           router.push("/account/add-business");
-        } else {
-          router.push("/");
+          return;
         }
+        if (localStorage.getItem("redirectToAddInvestBusiness")) {
+          localStorage.removeItem("redirectToAddInvestBusiness");
+          router.push("/invest/add-business");
+          return;
+        }
+        router.push("/");
       }
     } catch (err: any) {
       setAuthError("Хибний логін або пароль");

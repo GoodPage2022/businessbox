@@ -5,6 +5,11 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  &.business-type {
+    padding-top: 200px;
+    padding-bottom: 200px;
+  }
   &__cards {
     display: flex;
     // align-items: center;
@@ -48,6 +53,15 @@
       color: #ffffff;
       text-align: start;
     }
+
+    &--link {
+      display: block;
+      font-weight: 700;
+      text-decoration: underline;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
   }
 
   &__container {
@@ -60,6 +74,24 @@
       width: 20px;
       height: 20px;
     }
+  }
+
+  &__button-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 18px;
+    border: none;
+    background: #ac92ec;
+    cursor: pointer;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $main-text-color;
+    margin-top: 20px;
   }
 }
 
@@ -117,6 +149,15 @@
         font-size: 14px;
         line-height: 18px;
       }
+    }
+
+    &__button-register {
+      padding: 8px 16px;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 20px;
+      color: $main-text-color;
+      margin-top: 20px;
     }
   }
 }

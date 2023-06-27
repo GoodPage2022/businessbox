@@ -12,7 +12,6 @@ const Invest = () => {
 
   const user = useSelector((state: any) => state.auth.user);
   const router = useRouter();
-  console.log(state.isInvestor, "state.isInvestorindex");
 
   const onForInvestorClick = () => {
     if (!user) {
@@ -55,6 +54,12 @@ const Invest = () => {
                     запитом окремо та залежить від типу, сфери діяльності,
                     масштабу та локального розташування обраного проекту.{" "}
                   </p>
+                  <button
+                    className="invest__card--text invest__card--link"
+                    onClick={onForInvestorClick}
+                  >
+                    Перейти до каталогу
+                  </button>
                   <div onClick={() => setDetailForInvestor(false)}>
                     <MainButtonRed label="Згорнути" />
                   </div>
@@ -113,7 +118,13 @@ const Invest = () => {
                     <p className="invest__card--text">
                       7. Прикріпити коротку фінансову звітність (достатньо p&l)
                     </p>
-                  </div>
+                  </div>{" "}
+                  <button
+                    className="invest__card--text invest__card--link"
+                    onClick={onInvestmentBusinessClick}
+                  >
+                    Зареєструвати бізнес
+                  </button>
                   <div onClick={() => setDetailFindInvest(false)}>
                     <MainButtonRed label="Згорнути" />
                   </div>
