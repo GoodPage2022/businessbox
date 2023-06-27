@@ -36,7 +36,7 @@ const BusinessType = () => {
               <h2 className="invest__card--title">Маю бізнес для продажу</h2>
 
               <div>
-                <button className="invest__button-register">
+                <button className="invest__card--text invest__card--link">
                   Зареєструвати бізнес
                 </button>
               </div>
@@ -46,7 +46,7 @@ const BusinessType = () => {
                 Маю бізнес для інвестування
               </h2>{" "}
               <div>
-                <button className="invest__button-register">
+                <button className="invest__card--text invest__card--link">
                   Зареєструвати бізнес
                 </button>
               </div>
