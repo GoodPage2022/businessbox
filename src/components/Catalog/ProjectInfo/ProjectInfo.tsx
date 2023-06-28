@@ -431,12 +431,15 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     const requestBody = {
       userId: projectInfo._by,
     };
+    try {
+      const response = await axios.post(`/api/account/list`, requestBody);
 
-    const response = await axios.post(`/api/account/list`, requestBody);
-
-    if (response.data) {
-      setBusinessOwner(response.data[0]);
-      return;
+      if (response.data) {
+        setBusinessOwner(response.data[0]);
+        return;
+      }
+    } catch (error) {
+      console.log(error, "getBusinessOwnerErr");
     }
   };
 
