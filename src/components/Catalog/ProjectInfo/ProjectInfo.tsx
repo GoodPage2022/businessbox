@@ -47,6 +47,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     businessOwner: any,
     setBusinessOwner: any
   ] = useState(null);
+
+  const [isViewProfile, setIsViewProfile] = useState(false);
   const [otherCards, setOtherCards] = useState<any>([]);
 
   const [creationDate, setCreationDate] = useState<string>("");
@@ -258,41 +260,43 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       filter: { "business._id": projectId },
     };
 
-    const response = await axios.post(`/api/comments/getList`, requestBody);
+    try {
+      const response = await axios.post(`/api/comments/getList`, requestBody);
 
-    if (response.data) {
-      const commentUserIds = response.data.entries.map((c: any) => c.user);
+      if (response.data && response.data.entries.length > 0) {
+        const commentUserIds = response.data.entries.map((c: any) => c.user);
 
-      const requestBody = {
-        userId: commentUserIds,
-      };
+        const requestBody = {
+          userId: commentUserIds,
+        };
+        const getUsers = await axios.post(`/api/account/list`, requestBody);
 
-      const getUsers = await axios.post(`/api/account/list`, requestBody);
+        if (getUsers.data) {
+          const commentObjects = response.data.entries.map((c: any) => ({
+            _id: c._id,
+            name: getUsers.data.filter((u: any) => u._id == c.user)[0].name,
+            mail: getUsers.data.filter((u: any) => u._id == c.user)[0].email,
+            date: new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            }).format(c.date),
+            text: c.comment,
+            image:
+              getUsers.data.filter((u: any) => u._id == c.user)[0].avatar
+                ?.path ?? "/assets/images/profile-photo.png",
+          }));
 
-      if (getUsers.data) {
-        const commentObjects = response.data.entries.map((c: any) => ({
-          _id: c._id,
-          name: getUsers.data.filter((u: any) => u._id == c.user)[0].name,
-          mail: getUsers.data.filter((u: any) => u._id == c.user)[0].email,
-          date: new Intl.DateTimeFormat("en-US", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-          }).format(c.date),
-          text: c.comment,
-          image:
-            getUsers.data.filter((u: any) => u._id == c.user)[0].avatar?.path ??
-            "/assets/images/profile-photo.png",
-        }));
-
-        setComments(commentObjects);
-        return response.data.entries;
+          setComments(commentObjects);
+          return response.data.entries;
+        }
       }
+    } catch (error) {
+      console.log(error, "err");
     }
-
     setComments([]);
     return [];
   };
@@ -460,8 +464,17 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   useEffect(() => {
+    console.log(businessOwner, "owner");
     if (projectInfo && projectInfo._by) getBusinessOwner();
   }, [projectInfo]);
+
+  useEffect(() => {
+    setIsViewProfile(false);
+  }, [router.query]);
+
+  useEffect(() => {
+    setIsViewProfile(true);
+  }, [businessOwner]);
 
   useEffect(() => {
     if (businessOwner && businessOwner._id) {
@@ -778,11 +791,13 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <p className="projectInfo__date section__secondary-text">
           Дата створення бізнесу: {creationDate}
         </p>
-        <ProfileInfo
-          projectData={projectInfo}
-          businessOwner={businessOwner}
-          isOtherBusinesses={otherCards.length > 1}
-        />
+        {isViewProfile && (
+          <ProfileInfo
+            projectData={projectInfo}
+            businessOwner={businessOwner}
+            isOtherBusinesses={otherCards.length > 1}
+          />
+        )}
         {otherCards.length > 0 && state.isShowOtherBusinesses && (
           <>
             {" "}
