@@ -58,6 +58,20 @@
 @media screen and (max-width: $size-tablet) {
   .accountHeader {
     padding-top: 112px;
+    &__left {
+      display: flex;
+      &--item:not(:last-child) {
+        margin-right: 14px;
+      }
+    }
+    .main-button-black {
+      width: 120px;
+      height: 100%;
+    }
+    .main-button-grey {
+      width: 120px;
+      height: 100%;
+    }
   }
 }
 
@@ -65,6 +79,15 @@
   .accountHeader {
     padding-top: 92px;
     padding-bottom: 20px;
+
+    .main-button-black {
+      width: auto;
+      height: auto;
+    }
+    .main-button-grey {
+      width: auto;
+      height: auto;
+    }
 
     &__slider {
       margin-right: -20px;

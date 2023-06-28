@@ -15,6 +15,7 @@ const AccountHeader = ({}) => {
   const [isContactInfo, setIsContactInfo] = useState(false);
   const [isBusiness, setIsBusiness] = useState(false);
   const [isFavorites, setIsFavorites] = useState(false);
+  const [isInactiveBusiness, setIsInactiveBusiness] = useState(false);
 
   useEffect(() => {
     if (pathname === "/account/contact-info") {
@@ -25,6 +26,9 @@ const AccountHeader = ({}) => {
     }
     if (pathname === "/account/favorites") {
       setIsFavorites(true);
+    }
+    if (pathname === "/account/inactive-businesses") {
+      setIsInactiveBusiness(true);
     }
   }, [pathname]);
 
@@ -90,6 +94,19 @@ const AccountHeader = ({}) => {
               <MainButtonBlack
                 onClick={() => router.push("/account/my-businesses")}
                 label="Мої бізнеси"
+              />
+            )}
+          </li>{" "}
+          <li className="accountHeader__left--item">
+            {isInactiveBusiness ? (
+              <MainButtonGrey
+                onClick={() => router.push("/account/inactive-businesses")}
+                label="Неактивні бізнеси"
+              />
+            ) : (
+              <MainButtonBlack
+                onClick={() => router.push("/account/inactive-businesses")}
+                label="Неактивні бізнеси"
               />
             )}
           </li>
@@ -162,6 +179,23 @@ const AccountHeader = ({}) => {
                 className="main-button-black section__primary-text"
               >
                 Мої бізнеси
+              </button>
+            )}
+          </li>
+          <li className="accountHeader__left--item">
+            {isInactiveBusiness ? (
+              <button
+                onClick={() => router.push("/account/inactive-businesses")}
+                className="main-button-grey section__primary-text"
+              >
+                Неактивні бізнеси
+              </button>
+            ) : (
+              <button
+                onClick={() => router.push("/account/inactive-businesses")}
+                className="main-button-black section__primary-text"
+              >
+                Неактивні бізнеси
               </button>
             )}
           </li>
