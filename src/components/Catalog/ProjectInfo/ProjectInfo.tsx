@@ -47,6 +47,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     businessOwner: any,
     setBusinessOwner: any
   ] = useState(null);
+
+  const [isViewProfile, setIsViewProfile] = useState(false);
   const [otherCards, setOtherCards] = useState<any>([]);
 
   const [creationDate, setCreationDate] = useState<string>("");
@@ -463,9 +465,16 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
 
   useEffect(() => {
     console.log(businessOwner, "owner");
-
     if (projectInfo && projectInfo._by) getBusinessOwner();
   }, [projectInfo]);
+
+  useEffect(() => {
+    setIsViewProfile(false);
+  }, [router.query]);
+
+  useEffect(() => {
+    setIsViewProfile(true);
+  }, [businessOwner]);
 
   useEffect(() => {
     if (businessOwner && businessOwner._id) {
@@ -782,11 +791,13 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <p className="projectInfo__date section__secondary-text">
           Дата створення бізнесу: {creationDate}
         </p>
-        <ProfileInfo
-          projectData={projectInfo}
-          businessOwner={businessOwner}
-          isOtherBusinesses={otherCards.length > 1}
-        />
+        {isViewProfile && (
+          <ProfileInfo
+            projectData={projectInfo}
+            businessOwner={businessOwner}
+            isOtherBusinesses={otherCards.length > 1}
+          />
+        )}
         {otherCards.length > 0 && state.isShowOtherBusinesses && (
           <>
             {" "}
