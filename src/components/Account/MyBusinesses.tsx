@@ -52,12 +52,12 @@ const MyBusinesses = () => {
 
   const checkMyBusinessesRating = (
     myBusinesses: [any],
-    topBusinesses: [any],
+    topBusinesses: [any]
   ) => {
     const topBusinessesId = topBusinesses.map((business) => business._id);
 
     const filteredBusinesses = myBusinesses.filter(
-      (business) => !topBusinessesId.includes(business._id),
+      (business) => !topBusinessesId.includes(business._id)
     );
 
     console.log("filteredBusinesses", filteredBusinesses);
@@ -66,6 +66,21 @@ const MyBusinesses = () => {
 
     return filteredBusinesses;
   };
+
+  const activateBusiness = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/checkActivity`, {
+        id: "649bf057eb340f7fd5066c53",
+      });
+      console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
+
+  useEffect(() => {
+    activateBusiness();
+  }, []);
 
   const closeRaiseRatingModal = () => {
     dispatch({ type: "toggle_raiseRatingModal" });
@@ -146,7 +161,7 @@ const MyBusinesses = () => {
                     order={_order}
                     investing={investing}
                   />
-                ),
+                )
               )}
             </ul>
             {/* <ul className="myBusinesses__cards--tablet">
