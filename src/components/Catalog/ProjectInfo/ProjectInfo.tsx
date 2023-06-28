@@ -258,41 +258,43 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       filter: { "business._id": projectId },
     };
 
-    const response = await axios.post(`/api/comments/getList`, requestBody);
+    try {
+      const response = await axios.post(`/api/comments/getList`, requestBody);
 
-    if (response.data) {
-      const commentUserIds = response.data.entries.map((c: any) => c.user);
+      if (response.data && response.data.entries.length > 0) {
+        const commentUserIds = response.data.entries.map((c: any) => c.user);
 
-      const requestBody = {
-        userId: commentUserIds,
-      };
+        const requestBody = {
+          userId: commentUserIds,
+        };
+        const getUsers = await axios.post(`/api/account/list`, requestBody);
 
-      const getUsers = await axios.post(`/api/account/list`, requestBody);
+        if (getUsers.data) {
+          const commentObjects = response.data.entries.map((c: any) => ({
+            _id: c._id,
+            name: getUsers.data.filter((u: any) => u._id == c.user)[0].name,
+            mail: getUsers.data.filter((u: any) => u._id == c.user)[0].email,
+            date: new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            }).format(c.date),
+            text: c.comment,
+            image:
+              getUsers.data.filter((u: any) => u._id == c.user)[0].avatar
+                ?.path ?? "/assets/images/profile-photo.png",
+          }));
 
-      if (getUsers.data) {
-        const commentObjects = response.data.entries.map((c: any) => ({
-          _id: c._id,
-          name: getUsers.data.filter((u: any) => u._id == c.user)[0].name,
-          mail: getUsers.data.filter((u: any) => u._id == c.user)[0].email,
-          date: new Intl.DateTimeFormat("en-US", {
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-          }).format(c.date),
-          text: c.comment,
-          image:
-            getUsers.data.filter((u: any) => u._id == c.user)[0].avatar?.path ??
-            "/assets/images/profile-photo.png",
-        }));
-
-        setComments(commentObjects);
-        return response.data.entries;
+          setComments(commentObjects);
+          return response.data.entries;
+        }
       }
+    } catch (error) {
+      console.log(error, "err");
     }
-
     setComments([]);
     return [];
   };
@@ -460,6 +462,8 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   useEffect(() => {
+    console.log(businessOwner, "owner");
+
     if (projectInfo && projectInfo._by) getBusinessOwner();
   }, [projectInfo]);
 
