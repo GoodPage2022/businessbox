@@ -6,7 +6,7 @@
 
 // module.exports = nextConfig
 
-const path = require('path')
+const path = require("path");
 
 const env = {
   liqpayClientId: process.env.LIQPAY_CLIENT_ID,
@@ -30,27 +30,32 @@ const env = {
   sendpulseTokenStorage: process.env.SENDPULSE_TOKEN_STORAGE,
   sendpulseTemplateId1: process.env.SENDPULSE_TEMPLATE_ID1,
   sendpulseTemplateId2: process.env.SENDPULSE_TEMPLATE_ID2,
+  sendpulseTemplateId3: process.env.SENDPULSE_TEMPLATE_ID3,
   sendpulseSubject1: process.env.SENDPULSE_SUBJECT1,
   sendpulseSubject2: process.env.SENDPULSE_SUBJECT2,
-  nextPublicFacebookPixelId: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID
- }
-
-
-const nextReactSvgConfig = {
-  include: path.resolve(__dirname, 'src/assets/svg'),
+  nextPublicFacebookPixelId: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID,
 };
 
-const withReactSvg = require('next-react-svg')(nextReactSvgConfig);
+const nextReactSvgConfig = {
+  include: path.resolve(__dirname, "src/assets/svg"),
+};
 
-  const nextConfig = {
+const withReactSvg = require("next-react-svg")(nextReactSvgConfig);
+
+const nextConfig = {
   env,
   images: {
-    domains: ['admin.bissbox.com', '157.230.99.45', 'localhost', "daydrive.fra1.digitaloceanspaces.com"]
+    domains: [
+      "admin.bissbox.com",
+      "157.230.99.45",
+      "localhost",
+      "daydrive.fra1.digitaloceanspaces.com",
+    ],
   },
-  include: path.resolve(__dirname, 'src/assets/svg'),
+  include: path.resolve(__dirname, "src/assets/svg"),
   webpack(config, options) {
-    return config
+    return config;
   },
-}
+};
 
-module.exports = withReactSvg(nextConfig)
+module.exports = withReactSvg(nextConfig);
