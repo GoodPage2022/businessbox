@@ -485,23 +485,30 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     }
   }, [businessOwner]);
 
+  // const sendEmail = async (comment: string) => {
+  //   const reqData = {
+  //     toEmail: "businessOwner.email",
+  //     comment: comment,
+  //     businessLink: `${process.env.baseUrl}/${router.asPath}`,
+  //   };
+
+  //   try {
+  //     const response = await axios.post(
+  //       `/api/comments/check-email-send`,
+  //       reqData
+  //     );
+
+  //     console.log(response.data);
+  //   } catch (err: any) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   sendEmail("comment");
+  // }, []);
+
   if (loading) return <></>;
-
-  const sendEmail = async (comment: string) => {
-    const reqData = {
-      toEmail: businessOwner.email,
-      comment: comment,
-      businessLink: `${process.env.baseUrl}/${router.asPath}`,
-    };
-
-    try {
-      const response = await axios.post(`/api/comments/send`, reqData);
-
-      console.log(response.data);
-    } catch (err: any) {
-      console.log(err);
-    }
-  };
 
   const handleSubmit = async (
     values: any,
@@ -526,7 +533,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       });
 
       if (newCommentResponse.status == 200) {
-        sendEmail(comment);
+        // sendEmail(comment);
         dispatch({ type: "toggle_thankComment" });
         setCommentIsSent(true);
         setTimeout(() => setCommentIsSent(false), 3000);
