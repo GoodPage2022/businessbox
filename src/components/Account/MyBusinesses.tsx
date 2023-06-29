@@ -69,7 +69,7 @@ const MyBusinesses = () => {
 
   const activateBusiness = async () => {
     try {
-      const response = await axios.post(`/api/businesses/checkActivity`, {
+      const response = await axios.post(`/api/businesses/activateBusiness`, {
         id: "649bf057eb340f7fd5066c53",
       });
       console.log(response.data, "response");
@@ -78,8 +78,18 @@ const MyBusinesses = () => {
     }
   };
 
+  const checkBusinesses = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/checkActivity`, {});
+      console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
+
   useEffect(() => {
-    activateBusiness();
+    // activateBusiness();
+    // checkBusinesses();
   }, []);
 
   const closeRaiseRatingModal = () => {
