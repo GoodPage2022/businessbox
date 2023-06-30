@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import PlusSVG from "../../assets/svg/plus.svg";
 import { useRouter } from "next/router";
 import { Oval } from "react-loader-spinner";
-import RaiseRating from "./RaiseRating";
 import ModalRaiseRating from "../Modals/Modal-RaiseRating/Modal-RaiseRating";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
@@ -134,7 +133,6 @@ const InactiveBusinesses = () => {
           />
         ) : cards.length > 0 ? (
           <>
-            {lowRatingBusinesses.length > 0 && <RaiseRating />}
             <ul className="myBusinesses__cards--desctop">
               {cards.map(
                 ({
