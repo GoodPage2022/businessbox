@@ -122,6 +122,7 @@ const AddBusiness = () => {
     console.log(business);
 
     let newBusiness: any = {
+      active: true,
       title: name,
       area: business,
       price: isNegotiatedPrice ? 0 : price,
@@ -200,7 +201,7 @@ const AddBusiness = () => {
       }
 
       router.push(
-        `/invest/add-business-finish/${newBusinessResponse.data.data._id}`,
+        `/invest/add-business-finish/${newBusinessResponse.data.data._id}`
       );
 
       setAddBusinessError("");
@@ -395,8 +396,8 @@ const AddBusiness = () => {
                                   "price",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               minLength={1}
@@ -491,8 +492,8 @@ const AddBusiness = () => {
                                   "price",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               component={CustomInput}
@@ -587,7 +588,7 @@ const AddBusiness = () => {
                       onChange={async (e) => {
                         if (e.currentTarget?.files?.length) {
                           const uploadedFiles: any = await uploadToServer(
-                            e.currentTarget.files[0],
+                            e.currentTarget.files[0]
                           );
                           console.log(uploadedFiles.data.url);
                           setFiles([...files, uploadedFiles.data.url]);
@@ -609,7 +610,7 @@ const AddBusiness = () => {
                       onChange={async (e) => {
                         if (e.currentTarget?.files?.length) {
                           const uploadedFiles: any = await uploadToServer(
-                            e.currentTarget.files[0],
+                            e.currentTarget.files[0]
                           );
                           console.log(uploadedFiles.data.url);
                           setFiles([...files, uploadedFiles.data.url]);

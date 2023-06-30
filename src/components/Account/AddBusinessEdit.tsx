@@ -31,6 +31,10 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [currencyState, setCurrencyState] = useState(businessInfo?.currency);
   const [isNegotiatedPrice, setIsNegotiatedPrice] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (businessInfo?.currency) setCurrencyState(businessInfo?.currency);
+  }, [businessInfo?.currency]);
+
   const getListAreas = async () => {
     setIsLoading(true);
     try {
@@ -77,7 +81,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
         console.log("fi", fi);
 
         return fi != i;
-      }),
+      })
     );
   };
   const closeModal = () => {
@@ -383,8 +387,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                             "year",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         maxLength={255}
@@ -411,8 +415,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                                 "price",
                                 e.target.value.replaceAll(
                                   /[A-Za-zА-Яа-я,./'` ]/g,
-                                  "",
-                                ),
+                                  ""
+                                )
                               );
                             }}
                             component={CustomInput}
@@ -472,8 +476,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                             "year",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         minLength={1}
@@ -502,8 +506,8 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                                 "price",
                                 e.target.value.replaceAll(
                                   /[A-Za-zА-Яа-я,./'` ]/g,
-                                  "",
-                                ),
+                                  ""
+                                )
                               );
                             }}
                             component={CustomInput}
@@ -598,7 +602,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                       onChange={async (e) => {
                         if (e.currentTarget?.files?.length) {
                           const uploadedFiles: any = await uploadToServer(
-                            e.currentTarget.files[0],
+                            e.currentTarget.files[0]
                           );
                           console.log(uploadedFiles.data.url);
                           setFiles([...files, uploadedFiles.data.url]);
@@ -620,7 +624,7 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
                       onChange={async (e) => {
                         if (e.currentTarget?.files?.length) {
                           const uploadedFiles: any = await uploadToServer(
-                            e.currentTarget.files[0],
+                            e.currentTarget.files[0]
                           );
                           console.log(uploadedFiles.data.url);
                           setFiles([...files, uploadedFiles.data.url]);

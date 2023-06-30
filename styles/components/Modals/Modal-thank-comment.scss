@@ -26,10 +26,16 @@
   &__container {
     position: relative;
     display: flex;
-    width: 1110px;
+    // width: 1110px;
 
     border-radius: 25px;
     overflow: hidden;
+  }
+
+  &__title {
+    &.text-center {
+      text-align: center;
+    }
   }
 
   &__header {
@@ -82,7 +88,7 @@
   .modal-thankComment {
     &__container {
       display: flex;
-      width: 765px;
+      // width: 765px;
 
       border-radius: 25px;
       overflow: hidden;
@@ -98,7 +104,7 @@
     }
 
     &__title {
-      font-size: 32px;
+      font-size: 33px;
       line-height: 38px;
     }
 
@@ -123,7 +129,7 @@
   .modal-thankComment {
     &__container {
       display: block;
-      width: 375px;
+      // width: 375px;
       border-radius: 15px 15px 0px 0px;
     }
 

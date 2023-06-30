@@ -18,6 +18,7 @@ const SoldBusinesses = () => {
         _created: -1,
       },
       filter: {
+        // active: true,
         sold_out: true,
       },
     };

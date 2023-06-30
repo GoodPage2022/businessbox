@@ -17,6 +17,10 @@ import CheckSVG from "../../assets/svg/check.svg";
 import EyeSVG from "../../assets/svg/eye.svg";
 import UseUah from "../../utils/useUah";
 import UseUsd from "../../utils/useUsd";
+import MainButtonRed from "./MainButtonRed";
+import MainButtonBlack from "./MainButtonBlack";
+import { MainContext } from "../../contexts/mainContext";
+import ModalActive from "../Modals/Modal-active/Modal-active";
 
 const BusinessCard = ({
   image,
@@ -31,6 +35,7 @@ const BusinessCard = ({
   negotiatedPrice,
   order,
   investing,
+  inactive = false,
 }: {
   image: any;
   title: string;
@@ -44,7 +49,9 @@ const BusinessCard = ({
   negotiatedPrice?: boolean;
   order?: number;
   investing?: boolean;
+  inactive?: boolean;
 }) => {
+  const [state, dispatch] = React.useContext(MainContext);
   const dispatchRedux = useDispatch();
   const router = useRouter();
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
@@ -63,6 +70,20 @@ const BusinessCard = ({
       setIsMyBusinessesPage(true);
     }
   }, []);
+
+  const onSoldClick = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/sold-business`, {
+        id: alias,
+      });
+      if (response.data.success) {
+        dispatch({ type: "toggle_thankSold" });
+      }
+      // console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
 
   useEffect(() => {
     if (!!user && !!user.favourites)
@@ -163,7 +184,10 @@ const BusinessCard = ({
       )}
 
       <Link href={`/catalog/${alias}`}>
-        <a className="business-card__link" title={title}></a>
+        <a
+          className={`business-card__link ${inactive ? "inactive" : ""}`}
+          title={title}
+        ></a>
       </Link>
       {isMyBusinessesPage ? (
         <button
@@ -297,8 +321,25 @@ const BusinessCard = ({
             /> */}
             <ReactTooltip place="top" type="dark" effect="solid" />
           </div>
-        </div>
+        </div>{" "}
+        {inactive && !isSoldOut && (
+          <div className="business-card__inactive">
+            <MainButtonRed
+              label="Активувати"
+              onClick={() => {
+                dispatch({ type: "toggle_modalActive" });
+              }}
+            />{" "}
+            <MainButtonBlack label="Продано" onClick={onSoldClick} />
+          </div>
+        )}
       </div>
+      <ModalActive
+        onClose={() => {
+          dispatch({ type: "toggle_modalActive" });
+        }}
+        projectId={alias}
+      />
     </li>
   );
 };

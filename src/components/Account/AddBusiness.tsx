@@ -33,9 +33,9 @@ const AddBusiness = () => {
 
   const [user, setUser] = useState<any>(null);
   const userUseSelector = useSelector((state: any) => state.auth.user);
-  useEffect(()=>{
-    setUser(userUseSelector)
-  },[userUseSelector])
+  useEffect(() => {
+    setUser(userUseSelector);
+  }, [userUseSelector]);
 
   const getListAreas = async () => {
     setIsLoading(true);
@@ -83,7 +83,7 @@ const AddBusiness = () => {
 
   const uploadToServer = async (file: any) => {
     if (user == null) return;
-    
+
     setIsLoading(true);
     const uploadImageURL = file;
 
@@ -125,6 +125,7 @@ const AddBusiness = () => {
     console.log(business);
 
     let newBusiness: any = {
+      active: true,
       title: name,
       area: business,
       price: isNegotiatedPrice ? 0 : price,

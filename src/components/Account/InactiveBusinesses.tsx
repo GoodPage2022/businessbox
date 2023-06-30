@@ -5,24 +5,23 @@ import { useSelector } from "react-redux";
 import PlusSVG from "../../assets/svg/plus.svg";
 import { useRouter } from "next/router";
 import { Oval } from "react-loader-spinner";
-import RaiseRating from "./RaiseRating";
-import ModalRaiseRating from "../Modals/Modal-RaiseRating/Modal-RaiseRating";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
+import ModalThankActive from "../Modals/Modal-thank-active/Modal-thank-active";
+import ModalThankSold from "../Modals/Modal-thank-sold/Modal-thank-sold";
 
-const MyBusinesses = () => {
+const InactiveBusinesses = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [topBusinesses, setTopBusinesses] = useState<any>([]);
-  const [lowRatingBusinesses, setLowRatingBusinesses] = useState<any>([]);
+
   const [state, dispatch] = React.useContext(MainContext);
 
   const router = useRouter();
   const getBusinesses = async () => {
     const filter = {
       _by: user._id,
-      active: true,
+      active: false,
     };
     const response = await axios.post(`/api/businesses/getList`, {
       user,
@@ -41,81 +40,9 @@ const MyBusinesses = () => {
     return [];
   };
 
-  const getTopBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getTop`);
-
-    if (response.data) {
-      setTopBusinesses(response.data.entries);
-    }
-    setIsLoading(false);
-    return [];
-  };
-
-  const checkMyBusinessesRating = (
-    myBusinesses: [any],
-    topBusinesses: [any]
-  ) => {
-    const topBusinessesId = topBusinesses.map((business) => business._id);
-
-    const filteredBusinesses = myBusinesses.filter(
-      (business) => !topBusinessesId.includes(business._id)
-    );
-
-    console.log("filteredBusinesses", filteredBusinesses);
-
-    setLowRatingBusinesses(filteredBusinesses);
-
-    return filteredBusinesses;
-  };
-
-  const activateBusiness = async () => {
-    try {
-      const response = await axios.post(`/api/businesses/activateBusiness`, {
-        id: "649bf057eb340f7fd5066c53",
-      });
-      console.log(response.data, "response");
-    } catch (error) {
-      console.log(error, "errer");
-    }
-  };
-
-  const checkBusinesses = async () => {
-    try {
-      const response = await axios.post(`/api/businesses/checkActivity`, {});
-      console.log(response.data, "response");
-    } catch (error) {
-      console.log(error, "errer");
-    }
-  };
-  const sendNews = async () => {
-    try {
-      const response = await axios.post(`/api/businesses/send-news`, {});
-      console.log(response.data, "response");
-    } catch (error) {
-      console.log(error, "errer");
-    }
-  };
-
-  useEffect(() => {
-    // activateBusiness();
-    // checkBusinesses();
-    // sendNews();
-  }, []);
-
-  const closeRaiseRatingModal = () => {
-    dispatch({ type: "toggle_raiseRatingModal" });
-  };
-
   useEffect(() => {
     getBusinesses();
-    getTopBusinesses();
-  }, []);
-
-  useEffect(() => {
-    if (topBusinesses.length > 0) {
-      checkMyBusinessesRating(cards, topBusinesses);
-    }
-  }, [cards, topBusinesses]);
+  }, [state.thankActive, state.thankSold]);
 
   return (
     <section className="myBusinesses">
@@ -141,7 +68,6 @@ const MyBusinesses = () => {
           />
         ) : cards.length > 0 ? (
           <>
-            {lowRatingBusinesses.length > 0 && <RaiseRating />}
             <ul className="myBusinesses__cards--desctop">
               {cards.map(
                 ({
@@ -180,6 +106,7 @@ const MyBusinesses = () => {
                     negotiatedPrice={negotiatedPrice}
                     order={_order}
                     investing={investing}
+                    inactive={true}
                   />
                 )
               )}
@@ -199,19 +126,26 @@ const MyBusinesses = () => {
           </>
         ) : (
           <div className="myBusinesses__empty">
-            <h1 className="title">Тут немає жодної вашої компанії</h1>
+            <h1 className="title">У Вас немає неактивних бізнесів</h1>
             <p className="myBusinesses__text">
-              Натисніть «Додати бізнес», щоб додати новий
+              Бізнес деактивується через 30 днів з моменту публікації
             </p>
           </div>
         )}
       </div>
-      <ModalRaiseRating
-        onClose={closeRaiseRatingModal}
-        lowRatingBusinesses={lowRatingBusinesses}
+
+      <ModalThankActive
+        onClose={() => {
+          dispatch({ type: "toggle_thankActive" });
+        }}
+      />
+      <ModalThankSold
+        onClose={() => {
+          dispatch({ type: "toggle_thankSold" });
+        }}
       />
     </section>
   );
 };
 
-export default MyBusinesses;
+export default InactiveBusinesses;

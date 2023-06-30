@@ -211,6 +211,7 @@ const CatalogView = () => {
     });
 
     filterSetOfExp.push({
+      active: true,
       sold_out: false,
       investing: true,
     });

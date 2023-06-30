@@ -122,6 +122,16 @@ export const reducer = (state: any, action: any) => {
         ...state,
         thankComment: !state.thankComment,
       };
+    case "toggle_thankActive":
+      return {
+        ...state,
+        thankActive: !state.thankActive,
+      };
+    case "toggle_thankSold":
+      return {
+        ...state,
+        thankSold: !state.thankSold,
+      };
     case "toggle_paymentModal":
       return {
         ...state,
@@ -133,6 +143,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isShowOtherBusinesses: !state.isShowOtherBusinesses,
       };
+    case "toggle_modalActive":
+      return {
+        ...state,
+        isOpenModalActive: !state.isOpenModalActive,
+      };
     default:
       return state;
   }
@@ -140,6 +155,7 @@ export const reducer = (state: any, action: any) => {
 
 export const initialState = {
   isEdit: false,
+  thankSold: false,
   isActiveModalAuth: false,
   isActiveModalRegistration: false,
   isActiveModalForgotPassword: false,
@@ -147,6 +163,7 @@ export const initialState = {
   isActiveMobFilter: false,
   isActiveHeaderSearch: false,
   isOpenDeleteBusiness: false,
+  isOpenModalActive: false,
   isOpenModalRegisterFinish: false,
   isShowLoader: false,
   isActiveAnalysisModal: false,
@@ -155,6 +172,7 @@ export const initialState = {
   isActiveAnalysisThankErrorModal: false,
   isActiveAnalysisThankPendingModal: false,
   isActiveRaiseRatingModal: false,
+  thankActive: false,
   tariff: "",
   isUah: false,
   isOpenLargeImage: false,

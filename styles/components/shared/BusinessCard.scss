@@ -85,6 +85,10 @@
     z-index: 9;
     user-select: none;
     -webkit-user-drag: none;
+
+    &.inactive {
+      height: 70%;
+    }
   }
 
   &__image {
@@ -232,6 +236,20 @@
     font-size: 20px;
     line-height: 24px;
     color: $main-text-color;
+  }
+
+  &__inactive {
+    margin-top: 10px;
+    & button {
+      width: 100%;
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+
+    .main-button-black {
+      border-color: #f22a4e;
+    }
   }
 }
 
