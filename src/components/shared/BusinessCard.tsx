@@ -71,6 +71,20 @@ const BusinessCard = ({
     }
   }, []);
 
+  const onSoldClick = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/sold-business`, {
+        id: alias,
+      });
+      if (response.data.success) {
+        dispatch({ type: "toggle_thankSold" });
+      }
+      // console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
+
   useEffect(() => {
     if (!!user && !!user.favourites)
       setIsLiked(
@@ -308,7 +322,7 @@ const BusinessCard = ({
             <ReactTooltip place="top" type="dark" effect="solid" />
           </div>
         </div>{" "}
-        {inactive && (
+        {inactive && !isSoldOut && (
           <div className="business-card__inactive">
             <MainButtonRed
               label="Активувати"
@@ -316,7 +330,7 @@ const BusinessCard = ({
                 dispatch({ type: "toggle_modalActive" });
               }}
             />{" "}
-            <MainButtonBlack label="Продано" />
+            <MainButtonBlack label="Продано" onClick={onSoldClick} />
           </div>
         )}
       </div>

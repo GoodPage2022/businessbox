@@ -9,11 +9,20 @@ const Project: NextPage = () => {
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(id);
-    console.log(typeof id == "string");
-    
     if (typeof id == "string") raiseRating(id);
   }, [id]);
+
+  const activateBusiness = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/activateBusiness`, {
+        id,
+      });
+
+      // console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
 
   const raiseRating = async (id: string) => {
     try {
@@ -23,14 +32,17 @@ const Project: NextPage = () => {
 
       const order = await axios.get(`/api/businesses/getTopOrder`, {
         params: {
-          order_id: id
-        }
+          order_id: id,
+        },
       });
 
-      if (order.status == 200) {        
-        if (order.data.status != 'Paid') setIsError(true)
+      if (order.status == 200) {
+        if (order.data.status != "Paid") {
+          setIsError(true);
+        } else {
+          activateBusiness();
+        }
       }
-      
     } catch (err: any) {
       setIsError(true);
       console.log(err);

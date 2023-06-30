@@ -127,6 +127,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         thankActive: !state.thankActive,
       };
+    case "toggle_thankSold":
+      return {
+        ...state,
+        thankSold: !state.thankSold,
+      };
     case "toggle_paymentModal":
       return {
         ...state,
@@ -150,6 +155,7 @@ export const reducer = (state: any, action: any) => {
 
 export const initialState = {
   isEdit: false,
+  thankSold: false,
   isActiveModalAuth: false,
   isActiveModalRegistration: false,
   isActiveModalForgotPassword: false,

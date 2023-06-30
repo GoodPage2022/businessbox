@@ -8,6 +8,7 @@ import { Oval } from "react-loader-spinner";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
 import ModalThankActive from "../Modals/Modal-thank-active/Modal-thank-active";
+import ModalThankSold from "../Modals/Modal-thank-sold/Modal-thank-sold";
 
 const InactiveBusinesses = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -41,7 +42,7 @@ const InactiveBusinesses = () => {
 
   useEffect(() => {
     getBusinesses();
-  }, [state.thankActive]);
+  }, [state.thankActive, state.thankSold]);
 
   return (
     <section className="myBusinesses">
@@ -136,6 +137,11 @@ const InactiveBusinesses = () => {
       <ModalThankActive
         onClose={() => {
           dispatch({ type: "toggle_thankActive" });
+        }}
+      />
+      <ModalThankSold
+        onClose={() => {
+          dispatch({ type: "toggle_thankSold" });
         }}
       />
     </section>
