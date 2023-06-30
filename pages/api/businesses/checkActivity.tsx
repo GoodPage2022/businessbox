@@ -51,7 +51,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const businesses = await db
       .collection("collections_Businesses")
       .find(query)
-      .limit(2)
+      // .limit(2)
       .toArray();
 
     businesses.map(async (item) => {

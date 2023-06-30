@@ -87,10 +87,19 @@ const MyBusinesses = () => {
       console.log(error, "errer");
     }
   };
+  const sendNews = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/send-news`, {});
+      console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
 
   useEffect(() => {
     // activateBusiness();
     // checkBusinesses();
+    // sendNews();
   }, []);
 
   const closeRaiseRatingModal = () => {
