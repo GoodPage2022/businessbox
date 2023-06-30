@@ -53,6 +53,13 @@ function ModalAuth({ onClose }: { onClose: any }) {
           router.push("/account/add-business");
           return;
         }
+
+        if (localStorage.getItem("redirectToInactiveBusinesses")) {
+          localStorage.removeItem("redirectToInactiveBusinesses");
+          router.push("/account/inactive-businesses");
+          return;
+        }
+
         if (localStorage.getItem("redirectToAddInvestBusiness")) {
           localStorage.removeItem("redirectToAddInvestBusiness");
           router.push("/invest/add-business");
@@ -144,6 +151,13 @@ function ModalAuth({ onClose }: { onClose: any }) {
           router.push("/account/add-business");
           return;
         }
+
+        if (localStorage.getItem("redirectToInactiveBusinesses")) {
+          localStorage.removeItem("redirectToInactiveBusinesses");
+          router.push("/account/inactive-businesses");
+          return;
+        }
+
         if (localStorage.getItem("redirectToAddInvestBusiness")) {
           localStorage.removeItem("redirectToAddInvestBusiness");
           router.push("/invest/add-business");
