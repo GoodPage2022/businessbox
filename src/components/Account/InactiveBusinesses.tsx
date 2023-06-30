@@ -173,6 +173,7 @@ const InactiveBusinesses = () => {
                     negotiatedPrice={negotiatedPrice}
                     order={_order}
                     investing={investing}
+                    inactive={true}
                   />
                 )
               )}

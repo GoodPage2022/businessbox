@@ -39,7 +39,7 @@ function ModalRaiseRating({
 
     const liqpay = new LiqPay(
       process.env.liqpayClientId ?? "",
-      process.env.liqpayClientSecret ?? "",
+      process.env.liqpayClientSecret ?? ""
     );
     const liqpayJSX = liqpay.cnb_form(
       {
@@ -53,7 +53,7 @@ function ModalRaiseRating({
         server_url: `${process.env.baseUrl}/api/businesses/raiseToTop`,
         result_url: `${process.env.baseUrl}/catalog/top/${orderId}`,
       },
-      liqpayFormRef,
+      liqpayFormRef
     );
 
     setLiqpayForm(liqpayJSX);

@@ -133,6 +133,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isShowOtherBusinesses: !state.isShowOtherBusinesses,
       };
+    case "toggle_modalActive":
+      return {
+        ...state,
+        isOpenModalActive: !state.isOpenModalActive,
+      };
     default:
       return state;
   }
@@ -147,6 +152,7 @@ export const initialState = {
   isActiveMobFilter: false,
   isActiveHeaderSearch: false,
   isOpenDeleteBusiness: false,
+  isOpenModalActive: false,
   isOpenModalRegisterFinish: false,
   isShowLoader: false,
   isActiveAnalysisModal: false,
