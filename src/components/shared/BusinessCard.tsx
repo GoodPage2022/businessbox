@@ -63,7 +63,6 @@ const BusinessCard = ({
   const rate = useSelector((state: any) => state.currency.value);
   // const [isInvestmentBusiness, setIsInvestmentBusiness] =
   //   useState<boolean>(false);
-  console.log(alias, "alias");
 
   let onContextMenuClick = false;
   useEffect(() => {

@@ -17,11 +17,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       {
         $set: {
           _activationTimeStamp: Number(Date.now().toString().substring(0, 10)),
+          active: true,
         },
       }
     );
 
-    res.status(200).json(da);
+    res.status(200).json({ success: true });
   } catch (err: any) {
     res.status(500).json({ error: err });
   }

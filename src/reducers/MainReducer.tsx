@@ -122,6 +122,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         thankComment: !state.thankComment,
       };
+    case "toggle_thankActive":
+      return {
+        ...state,
+        thankActive: !state.thankActive,
+      };
     case "toggle_paymentModal":
       return {
         ...state,
@@ -161,6 +166,7 @@ export const initialState = {
   isActiveAnalysisThankErrorModal: false,
   isActiveAnalysisThankPendingModal: false,
   isActiveRaiseRatingModal: false,
+  thankActive: false,
   tariff: "",
   isUah: false,
   isOpenLargeImage: false,

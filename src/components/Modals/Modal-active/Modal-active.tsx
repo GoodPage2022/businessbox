@@ -93,6 +93,21 @@ function ModalActive({
     }
   };
 
+  const activateBusiness = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/activateBusiness`, {
+        id: projectId,
+      });
+      if (response.data.success) {
+        dispatch({ type: "toggle_modalActive" });
+        dispatch({ type: "toggle_thankActive" });
+      }
+      // console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
+
   return (
     <div
       className={`modal-active__overlay${
@@ -148,8 +163,11 @@ function ModalActive({
           </ul>
 
           <div className="modal-active__buttons">
-            <MainButtonBlack label="Опублікувати без реклами" />
-            <MainButtonRed label="Оплатити " onClick={openLiqpay} />
+            <MainButtonBlack
+              label="Опублікувати без реклами"
+              onClick={activateBusiness}
+            />
+            <MainButtonRed label="Оплатити" onClick={openLiqpay} />
           </div>
           <div className="liqpayForm">{liqpayForm}</div>
         </div>

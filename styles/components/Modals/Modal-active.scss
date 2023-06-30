@@ -49,6 +49,8 @@
   }
 
   &__header {
+    display: flex;
+    align-items: center;
     width: 100%;
     background-image: url("../../../public/assets/images/forgot-pass-bg.png");
     background-position: center;
