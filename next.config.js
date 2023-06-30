@@ -31,6 +31,7 @@ const env = {
   sendpulseTemplateId1: process.env.SENDPULSE_TEMPLATE_ID1,
   sendpulseTemplateId2: process.env.SENDPULSE_TEMPLATE_ID2,
   sendpulseTemplateId3: process.env.SENDPULSE_TEMPLATE_ID3,
+  sendpulseTemplateId4: process.env.SENDPULSE_TEMPLATE_ID4,
   sendpulseSubject1: process.env.SENDPULSE_SUBJECT1,
   sendpulseSubject2: process.env.SENDPULSE_SUBJECT2,
   nextPublicFacebookPixelId: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID,
