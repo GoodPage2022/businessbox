@@ -31,6 +31,10 @@ const AddBusinessEdit = ({ projectId }: { projectId: string }) => {
   const [currencyState, setCurrencyState] = useState(businessInfo?.currency);
   const [isNegotiatedPrice, setIsNegotiatedPrice] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (businessInfo?.currency) setCurrencyState(businessInfo?.currency);
+  }, [businessInfo?.currency]);
+
   const getListAreas = async () => {
     setIsLoading(true);
     try {
