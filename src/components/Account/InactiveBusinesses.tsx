@@ -22,6 +22,7 @@ const InactiveBusinesses = () => {
   const getBusinesses = async () => {
     const filter = {
       _by: user._id,
+      active: false,
     };
     const response = await axios.post(`/api/businesses/getList`, {
       user,
@@ -78,8 +79,20 @@ const InactiveBusinesses = () => {
     }
   };
 
+  const addActive = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/addActive`, {
+        id: "649bf057eb340f7fd5066c53",
+      });
+      console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
+
   useEffect(() => {
-    activateBusiness();
+    // activateBusiness();
+    // addActive();
   }, []);
 
   const closeRaiseRatingModal = () => {

@@ -97,6 +97,7 @@ const Popular = () => {
         _created: -1,
       },
       filter: {
+        active: true,
         sold_out: false,
       },
     };
@@ -135,7 +136,7 @@ const Popular = () => {
       className="popular"
       onClick={(e) => {
         setMobFilter(
-          document.querySelector(".popular__filter--mob") as HTMLElement,
+          document.querySelector(".popular__filter--mob") as HTMLElement
         );
         // console.log(e.target == mobFilter);
         // console.log(mobFilter);

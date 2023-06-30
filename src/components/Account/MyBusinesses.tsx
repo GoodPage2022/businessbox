@@ -22,6 +22,7 @@ const MyBusinesses = () => {
   const getBusinesses = async () => {
     const filter = {
       _by: user._id,
+      active: true,
     };
     const response = await axios.post(`/api/businesses/getList`, {
       user,

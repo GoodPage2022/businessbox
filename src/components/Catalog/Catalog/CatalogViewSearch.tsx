@@ -31,7 +31,7 @@ const CatalogViewSearch = () => {
   const [isRowsActive, setIsRowsActive] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [screenWidth, setScreenWidth] = useState<any>(
-    typeof window !== "undefined" ? window?.screen.width : 0,
+    typeof window !== "undefined" ? window?.screen.width : 0
   );
   const router = useRouter();
   const { data: session } = useSession();
@@ -84,6 +84,7 @@ const CatalogViewSearch = () => {
 
     filterSetOfExp.push({
       sold_out: false,
+      active: true,
     });
 
     filterSetOfExp.push({
@@ -132,7 +133,7 @@ const CatalogViewSearch = () => {
           cancelToken: new CancelToken((c) => {
             cancel = c;
           }),
-        },
+        }
       );
 
       if (response.data) {
@@ -257,7 +258,7 @@ const CatalogViewSearch = () => {
                       currency={currency}
                       negotiatedPrice={negotiatedPrice}
                     />
-                  ),
+                  )
               )}
             </ul>
           ) : (
