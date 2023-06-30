@@ -100,6 +100,9 @@
     &__title {
       font-size: 32px;
       line-height: 38px;
+      &.text-center {
+        text-align: center;
+      }
     }
 
     &__text {

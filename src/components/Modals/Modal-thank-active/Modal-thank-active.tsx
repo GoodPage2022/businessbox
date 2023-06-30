@@ -42,8 +42,11 @@ function ModalThankActive({ onClose }: { onClose: any }) {
             <CrossSVG />
           </button>
 
-          <h2 className="modal-thankComment__title title--white">
-            Дякуємо! Ваш бізнес буде активним ще 30 днів.
+          <h2 className="modal-thankComment__title text-center title--white">
+            Дякуємо!
+          </h2>
+          <h2 className="modal-thankComment__title text-center title--white">
+            Ваш бізнес буде активним ще 30 днів.
           </h2>
         </div>
       </div>

@@ -41,9 +41,11 @@ function ModalThankSold({ onClose }: { onClose: any }) {
           >
             <CrossSVG />
           </button>
-
-          <h2 className="modal-thankComment__title title--white">
-            Круто! Ми дуже раді, що Вам вдалося продати бізнес :)
+          <h2 className="modal-thankComment__title text-center title--white">
+            Круто!
+          </h2>{" "}
+          <h2 className="modal-thankComment__title text-center title--white">
+            Ми дуже раді, що Вам вдалося продати бізнес :)
           </h2>
         </div>
       </div>
