@@ -61,6 +61,8 @@ const BusinessCard = ({
   const [clickPos, setClickPos] = useState<any>({});
   // const [rate, setRate] = useState<number>(0);
   const rate = useSelector((state: any) => state.currency.value);
+  const [topBusinesses, setTopBusinesses] = useState<any>([]);
+  const [isTopBusinesses, setIsTopBusinesses] = useState<boolean>(false);
   // const [isInvestmentBusiness, setIsInvestmentBusiness] =
   //   useState<boolean>(false);
 
@@ -84,6 +86,36 @@ const BusinessCard = ({
       console.log(error, "errer");
     }
   };
+
+  const getTopBusinesses = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/getTop`);
+
+      if (response.data) {
+        setTopBusinesses(response.data.entries);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkIsBusinessTop = () => {
+    topBusinesses.forEach((business: any) => {
+      if (business._id === alias) {
+        setIsTopBusinesses(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getTopBusinesses();
+  }, []);
+
+  useEffect(() => {
+    if (topBusinesses.length > 0) {
+      checkIsBusinessTop();
+    }
+  }, [topBusinesses]);
 
   useEffect(() => {
     if (!!user && !!user.favourites)
@@ -171,7 +203,7 @@ const BusinessCard = ({
         </div>
       )}
 
-      {!!order && (
+      {isTopBusinesses && (
         <div className="business-card__top">
           <TopSVG />
         </div>

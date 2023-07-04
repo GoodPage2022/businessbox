@@ -2,11 +2,13 @@ import type { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Oval } from "react-loader-spinner";
 
 const Project: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (typeof id == "string") raiseRating(id);
@@ -47,25 +49,49 @@ const Project: NextPage = () => {
       setIsError(true);
       console.log(err);
     }
+    setIsLoading(false);
   };
 
   return (
     <>
       <section className="reset">
         <div className="container">
-          <div className="reset__empty">
-            {isError ? (
-              <h1 className="title">
-                Упс, щось пішло не так. Повторіть спробу пізніше або напишіть
-                нам на пошту
-              </h1>
-            ) : (
-              <h1 className="title">
-                Дякуємо, оплата пройшла успішно! Тепер ваш бізнес(и) будуть
-                відображатись більшій кількості потенційних покупців
-              </h1>
-            )}
-          </div>
+          {isLoading ? (
+            <Oval
+              height={150}
+              width={150}
+              color="#f22a4e"
+              wrapperStyle={{
+                position: "absolute",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                height: "50vh",
+                zIndex: "99999",
+              }}
+              wrapperClass="oval-loading"
+              visible={true}
+              ariaLabel="oval-loading"
+              secondaryColor="#e95973"
+              strokeWidth={3}
+              strokeWidthSecondary={3}
+            />
+          ) : (
+            <div className="reset__empty">
+              {isError ? (
+                <h1 className="title">
+                  Упс, щось пішло не так. Повторіть спробу пізніше або напишіть
+                  нам на пошту
+                </h1>
+              ) : (
+                <h1 className="title">
+                  Дякуємо, оплата пройшла успішно! Тепер ваш бізнес(и) будуть
+                  відображатись більшій кількості потенційних покупців
+                </h1>
+              )}
+            </div>
+          )}{" "}
         </div>
       </section>
     </>

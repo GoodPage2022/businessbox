@@ -17,32 +17,31 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     day: "numeric",
   };
   const today = new Date();
-  const twentyOneDaysAgo = new Date();
+  const twentyThreeDaysAgo = new Date();
   const sevenDaysLater = new Date();
   sevenDaysLater.setDate(today.getDate() + 7); // plus 7 days
-  twentyOneDaysAgo.setDate(today.getDate() - 23); // minus 23 days
+  twentyThreeDaysAgo.setDate(today.getDate() - 23); // minus 23 days
   const inactiveDate = new Date(sevenDaysLater).toLocaleDateString(
     "uk-UA",
     timeformat
   );
-  const twentyOneDaysAgoMs = Math.floor(twentyOneDaysAgo.getTime());
-  const twentyOneDaysAgoSec = Math.floor(twentyOneDaysAgo.getTime() / 1000);
-  // console.log(inactiveDate, "ffffffff");
+  const twentyThreeDaysAgoMs = Math.floor(twentyThreeDaysAgo.getTime());
+  const twentyThreeDaysAgoSec = Math.floor(twentyThreeDaysAgo.getTime() / 1000);
 
   try {
     const query = {
       $and: [
-        { _created: { $lt: twentyOneDaysAgoSec } },
+        { _created: { $lt: twentyThreeDaysAgoSec } },
         {
           $or: [
             { _order: { $exists: false } },
-            { _order: { $lt: twentyOneDaysAgoMs } },
+            { _order: { $lt: twentyThreeDaysAgoMs } },
           ],
         },
         {
           $or: [
             { _activationTimeStamp: { $exists: false } },
-            { _activationTimeStamp: { $lt: twentyOneDaysAgoSec } },
+            { _activationTimeStamp: { $lt: twentyThreeDaysAgoSec } },
           ],
         },
       ],

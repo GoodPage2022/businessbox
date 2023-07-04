@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ReactTooltip from "react-tooltip";
 
+import TopSVG from "../../assets/svg/top-label.svg";
 import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
 import CheckSVG from "../../assets/svg/check.svg";
@@ -38,6 +39,8 @@ const BusinessCardFavorites = ({
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
+  const [topBusinesses, setTopBusinesses] = useState<any>([]);
+  const [isTopBusinesses, setIsTopBusinesses] = useState<boolean>(false);
   // const [rate, setRate] = useState<number>(0);
   const rate = useSelector((state: any) => state.currency.value);
 
@@ -61,8 +64,44 @@ const BusinessCardFavorites = ({
   //   getCurrencyRate();
   // }, []);
 
+  const getTopBusinesses = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/getTop`);
+
+      if (response.data) {
+        setTopBusinesses(response.data.entries);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkIsBusinessTop = () => {
+    topBusinesses.forEach((business: any) => {
+      if (business._id === alias) {
+        setIsTopBusinesses(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getTopBusinesses();
+  }, []);
+
+  useEffect(() => {
+    if (topBusinesses.length > 0) {
+      checkIsBusinessTop();
+    }
+  }, [topBusinesses]);
+
   return (
     <li className="business-card-favorite">
+      {isTopBusinesses && (
+        <div className="business-card__top">
+          <TopSVG />
+        </div>
+      )}
+
       <Link href={`/catalog/${alias}`}>
         <a className="business-card-favorite__link" title={title}></a>
       </Link>

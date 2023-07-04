@@ -8,6 +8,11 @@ type Data = {
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
+  const today = new Date();
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(today.getDate() - 30); // minus 30 days
+  const thirtyDaysAgoAgoMs = Math.floor(thirtyDaysAgo.getTime());
+
   const token =
     req.body.user != null && req.body.user?.api_key !== undefined
       ? req.body.user.api_key
@@ -47,6 +52,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       });
       delete querySort.price;
       queryOrder = { priceDig: sortValue, ...querySort };
+    }
+
+    if (querySort["_order"]) {
+      pipeLine.push({
+        $addFields: {
+          newOrder: {
+            $cond: [{ $gt: ["$_order", thirtyDaysAgoAgoMs] }, "$_order", -1],
+          },
+        },
+      });
+      delete querySort._order;
+      queryOrder = { newOrder: -1, ...querySort };
     }
 
     if (querySort["view_count"]) {

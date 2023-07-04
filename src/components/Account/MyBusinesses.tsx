@@ -42,13 +42,15 @@ const MyBusinesses = () => {
   };
 
   const getTopBusinesses = async () => {
-    const response = await axios.post(`/api/businesses/getTop`);
+    try {
+      const response = await axios.post(`/api/businesses/getTop`);
 
-    if (response.data) {
-      setTopBusinesses(response.data.entries);
+      if (response.data) {
+        setTopBusinesses(response.data.entries);
+      }
+    } catch (error) {
+      console.log(error);
     }
-    setIsLoading(false);
-    return [];
   };
 
   const checkMyBusinessesRating = (

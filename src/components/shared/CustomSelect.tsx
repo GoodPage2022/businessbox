@@ -104,7 +104,7 @@ const CustomSelect: React.FC<FieldProps & CustomSelectProps> = ({
       value={
         isMulti
           ? options?.filter((option: any) =>
-              field.value.includes(option.value)
+              field?.value?.includes(option.value)
             ) ?? ""
           : options?.find((option: any) => option.value === field.value) ?? ""
       }
