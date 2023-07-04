@@ -8,7 +8,7 @@ type Data = {
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const today = new Date();
   const thirtyDaysAgo = new Date();
-  thirtyDaysAgo.setDate(today.getDate() - 30); // minus 23 days
+  thirtyDaysAgo.setDate(today.getDate() - 30); // minus 30 days
   const thirtyDaysAgoAgoMs = Math.floor(thirtyDaysAgo.getTime());
 
   let pipeLine = [
