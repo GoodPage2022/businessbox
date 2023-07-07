@@ -76,13 +76,13 @@ const BurgerMenu = () => {
           className="header__nav__menu__item   section__primary-text--white"
           onClick={() => {
             dispatch({ type: "toggle_burger" });
-            if (!user) {
-              dispatch({ type: "toggle_authModal" });
-              localStorage.setItem("redirectToInformation", "true");
-            }
+            // if (!user) {
+            //   dispatch({ type: "toggle_authModal" });
+            //   localStorage.setItem("redirectToInformation", "true");
+            // }
           }}
         >
-          <Link href={`${!user ? "#" : "/useful-information"}`}>
+          <Link href={`/useful-information`}>
             <a className="section__primary-text--white">Корисна інформація</a>
           </Link>
         </li>

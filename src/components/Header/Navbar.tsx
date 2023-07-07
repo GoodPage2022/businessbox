@@ -47,14 +47,14 @@ const Navbar = () => {
 
         <li
           onClick={() => {
-            if (!user) {
-              dispatch({ type: "toggle_authModal" });
-              localStorage.setItem("redirectToInformation", "true");
-            }
+            // if (!user) {
+            //   dispatch({ type: "toggle_authModal" });
+            //   localStorage.setItem("redirectToInformation", "true");
+            // }
           }}
           className="header__nav__menu__item   section__secondary-text--white"
         >
-          <Link href={`${!user ? "#" : "/useful-information"}`}>
+          <Link href={`/useful-information`}>
             <a className="section__secondary-text--white">Корисна інформація</a>
           </Link>
         </li>
