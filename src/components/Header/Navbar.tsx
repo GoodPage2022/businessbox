@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import { useSelector } from "react-redux";
 import ArrowSVG from "../../../src/assets/svg/catalog-arrow.svg";
+import { MainContext } from "../../contexts/mainContext";
 
 const Navbar = () => {
+  const [state, dispatch] = useContext(MainContext);
   const userUseSelector = useSelector((state: any) => state.auth.user);
   const [user, setUser] = useState(null);
 
@@ -42,15 +44,21 @@ const Navbar = () => {
             </Link>
           </li>
         )}
-        {/* {user && (
-          <li className="header__nav__menu__item section__secondary-text--white">
-            <Link href="/useful-tools">
-              <a className="section__secondary-text--white">
-                Корисні інструменти
-              </a>
-            </Link>
-          </li>
-        )} */}
+
+        <li
+          onClick={() => {
+            if (!user) {
+              dispatch({ type: "toggle_authModal" });
+              localStorage.setItem("redirectToInformation", "true");
+            }
+          }}
+          className="header__nav__menu__item   section__secondary-text--white"
+        >
+          <Link href={`${!user ? "#" : "/useful-information"}`}>
+            <a className="section__secondary-text--white">Корисна інформація</a>
+          </Link>
+        </li>
+
         <li className="header__nav__menu__item   section__secondary-text--white">
           <Link href="#footer">
             <a className="section__secondary-text--white">Контакти</a>

@@ -823,7 +823,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           <ProfileInfo
             projectData={projectInfo}
             businessOwner={businessOwner}
-            isOtherBusinesses={otherCards.length > 1}
+            isOtherBusinesses={otherCards.length > 0}
           />
         )}
         {otherCards.length > 0 && state.isShowOtherBusinesses && (
