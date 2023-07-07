@@ -54,11 +54,11 @@ function ModalAuth({ onClose }: { onClose: any }) {
           return;
         }
 
-        if (localStorage.getItem("redirectToInformation")) {
-          localStorage.removeItem("redirectToInformation");
-          router.push("/useful-information");
-          return;
-        }
+        // if (localStorage.getItem("redirectToInformation")) {
+        //   localStorage.removeItem("redirectToInformation");
+        //   router.push("/useful-information");
+        //   return;
+        // }
 
         if (localStorage.getItem("redirectToInactiveBusinesses")) {
           localStorage.removeItem("redirectToInactiveBusinesses");
@@ -158,11 +158,11 @@ function ModalAuth({ onClose }: { onClose: any }) {
           return;
         }
 
-        if (localStorage.getItem("redirectToInformation")) {
-          localStorage.removeItem("redirectToInformation");
-          router.push("/useful-information");
-          return;
-        }
+        // if (localStorage.getItem("redirectToInformation")) {
+        //   localStorage.removeItem("redirectToInformation");
+        //   router.push("/useful-information");
+        //   return;
+        // }
 
         if (localStorage.getItem("redirectToInactiveBusinesses")) {
           localStorage.removeItem("redirectToInactiveBusinesses");
