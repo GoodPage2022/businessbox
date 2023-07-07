@@ -83,6 +83,15 @@ const BurgerMenu = () => {
           className="header__nav__menu__item   section__primary-text--white"
           onClick={() => dispatch({ type: "toggle_burger" })}
         >
+          <Link href="/useful-information">
+            <a className="section__primary-text--white">Корисна інформація</a>
+          </Link>
+        </li>
+
+        <li
+          className="header__nav__menu__item   section__primary-text--white"
+          onClick={() => dispatch({ type: "toggle_burger" })}
+        >
           <Link href="#footer">
             <a className="section__primary-text--white">Контакти</a>
           </Link>

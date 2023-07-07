@@ -42,15 +42,13 @@ const Navbar = () => {
             </Link>
           </li>
         )}
-        {/* {user && (
-          <li className="header__nav__menu__item section__secondary-text--white">
-            <Link href="/useful-tools">
-              <a className="section__secondary-text--white">
-                Корисні інструменти
-              </a>
-            </Link>
-          </li>
-        )} */}
+
+        <li className="header__nav__menu__item   section__secondary-text--white">
+          <Link href="/useful-information">
+            <a className="section__secondary-text--white">Корисна інформація</a>
+          </Link>
+        </li>
+
         <li className="header__nav__menu__item   section__secondary-text--white">
           <Link href="#footer">
             <a className="section__secondary-text--white">Контакти</a>
