@@ -209,6 +209,8 @@ const CatalogView = () => {
       sold_out: false,
       active: true,
       // investing: { $exists: false },
+
+      // $or: [{ active: true }, { sold_out: true }],
     });
 
     filterSetOfExp.push({
@@ -494,6 +496,7 @@ const CatalogView = () => {
                   is_verified,
                   currency,
                   negotiatedPrice,
+                  sold_out,
                 }: any) =>
                   isRowsActive && screenWidth < 768 ? (
                     <BusinessCardFavorites
@@ -521,6 +524,7 @@ const CatalogView = () => {
                       key={_id}
                       alias={_id}
                       title={title}
+                      isSoldOut={sold_out}
                       description={description}
                       image={
                         images == null || !images.length
