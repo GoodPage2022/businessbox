@@ -1,6 +1,30 @@
 .usefulTools {
   padding-top: 120px;
+  padding-bottom: 80px;
   &__title {
     margin-bottom: 30px;
+  }
+
+  &__file {
+    iframe {
+      width: 100%;
+    }
+  }
+  .react-pdf__Page {
+    background-color: #f5f5f5 !important;
+  }
+  .react-pdf__Page__canvas {
+    margin: 0 auto;
+    width: 80% !important;
+    height: 80% !important;
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .usefulTools {
+    .react-pdf__Page__canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
   }
 }
