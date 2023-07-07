@@ -54,6 +54,12 @@ function ModalAuth({ onClose }: { onClose: any }) {
           return;
         }
 
+        if (localStorage.getItem("redirectToInformation")) {
+          localStorage.removeItem("redirectToInformation");
+          router.push("/useful-information");
+          return;
+        }
+
         if (localStorage.getItem("redirectToInactiveBusinesses")) {
           localStorage.removeItem("redirectToInactiveBusinesses");
           router.push("/account/inactive-businesses");
@@ -149,6 +155,12 @@ function ModalAuth({ onClose }: { onClose: any }) {
         if (localStorage.getItem("redirectToAddBusiness")) {
           localStorage.removeItem("redirectToAddBusiness");
           router.push("/account/add-business");
+          return;
+        }
+
+        if (localStorage.getItem("redirectToInformation")) {
+          localStorage.removeItem("redirectToInformation");
+          router.push("/useful-information");
           return;
         }
 

@@ -71,19 +71,18 @@ const BurgerMenu = () => {
             </Link>
           </li>
         )}
-        {/* <li
-          className="header__nav__menu__item   section__primary-text--white"
-          onClick={() => dispatch({ type: "toggle_burger" })}
-        >
-          <Link href="/useful-tools">
-            <a className="section__primary-text--white">Корисні інструменти</a>
-          </Link>
-        </li> */}
+
         <li
           className="header__nav__menu__item   section__primary-text--white"
-          onClick={() => dispatch({ type: "toggle_burger" })}
+          onClick={() => {
+            dispatch({ type: "toggle_burger" });
+            if (!user) {
+              dispatch({ type: "toggle_authModal" });
+              localStorage.setItem("redirectToInformation", "true");
+            }
+          }}
         >
-          <Link href="/useful-information">
+          <Link href={`${!user ? "#" : "/useful-information"}`}>
             <a className="section__primary-text--white">Корисна інформація</a>
           </Link>
         </li>
