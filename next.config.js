@@ -53,6 +53,7 @@ const nextConfig = {
       "localhost",
       "daydrive.fra1.digitaloceanspaces.com",
     ],
+    unoptimized: process.env.UNOPTIMIZED == "true" ? true : false,
   },
   include: path.resolve(__dirname, "src/assets/svg"),
   webpack(config, options) {
