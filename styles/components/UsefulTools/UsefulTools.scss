@@ -3,28 +3,96 @@
   padding-bottom: 80px;
   &__title {
     margin-bottom: 30px;
+    color: #6d64e8;
   }
 
-  &__file {
-    iframe {
-      width: 100%;
+  &__pre-title {
+    color: #6d64e8;
+    margin-bottom: 20px;
+  }
+
+  &__date {
+    color: #e6469b;
+    padding-left: 30px;
+    margin-bottom: 10px;
+  }
+
+  &__small-title {
+    color: #6d64e8;
+    font-weight: 700;
+    text-align: justify;
+  }
+
+  &__small-pre-title {
+    color: #351c75;
+    font-weight: 700;
+    text-align: justify;
+  }
+
+  &__text {
+    text-align: justify;
+    text-indent: 20px;
+  }
+
+  &__list-item {
+    text-indent: 0;
+    position: relative;
+    &::before {
+      position: absolute;
+      left: -22px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border: 2px solid black;
+      content: "";
+    }
+
+    &--red {
+      color: red;
+      &::before {
+        border: 2px solid red;
+      }
     }
   }
-  .react-pdf__Page {
-    background-color: #f5f5f5 !important;
+
+  .mb-5 {
+    margin-bottom: 5px;
   }
-  .react-pdf__Page__canvas {
-    margin: 0 auto;
-    width: 80% !important;
-    height: 80% !important;
+  .mb-10 {
+    margin-bottom: 10px;
+  }
+  .mb-15 {
+    margin-bottom: 15px;
+  }
+  .mb-20 {
+    margin-bottom: 20px;
+  }
+  .mb-30 {
+    margin-bottom: 30px;
+  }
+
+  .fw-700 {
+    font-weight: 700;
+  }
+  .color-violet {
+    color: #351c75;
+  }
+  .pl-30 {
+    padding-left: 30px;
+  }
+  .text-indent-none {
+    text-indent: 0;
+  }
+  .text-italic {
+    font-style: italic;
+  }
+
+  .scroll-margin-top {
+    scroll-margin-top: 72px;
   }
 }
 
 @media screen and (max-width: $size-tablet) {
   .usefulTools {
-    .react-pdf__Page__canvas {
-      width: 100% !important;
-      height: 100% !important;
-    }
   }
 }
