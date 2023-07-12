@@ -24,7 +24,7 @@ const UsefulToolsPage: NextPage = () => {
           content="Як підготувати бізнес до продажу або залучення інвестицій"
         />
       </Head>
-      <UsefulTools />;{" "}
+      <UsefulTools />;
     </>
   );
 };
