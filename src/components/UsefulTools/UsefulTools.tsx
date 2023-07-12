@@ -625,7 +625,7 @@ const UsefulTools = () => {
             <li className="usefulTools__text section__primary-text usefulTools__list-item  mb-10">
               захисту персональних даних;
             </li>{" "}
-            <li className="usefulTools__text section__primary-text usefulTools__list-item usefulTools__list-item--red mb-10">
+            <li className="usefulTools__text section__primary-text usefulTools__list-item mb-10">
               протидії легалізації та моніторингу руху коштів (фінансового
               контролю);
             </li>{" "}
