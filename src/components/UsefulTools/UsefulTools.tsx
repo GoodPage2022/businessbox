@@ -18,72 +18,101 @@ const UsefulTools = () => {
         <ul className="mb-30">
           <li className="usefulTools__text text-indent-none section__primary-text mb-5">
             <Link href="#first">
-              1. Визначте об`єкт інвестування чи продажу
+              <a className="color-black">
+                1. Визначте об`єкт інвестування чи продажу
+              </a>
             </Link>
           </li>
-          <li className="usefulTools__text text-indent-none section__primary-text mb-5">
+          <li className="usefulTools__text text-indent-none section__primary-text mb-5 color-black">
             <Link href="#second">
-              2. Оформіть на компанію всі активи, які використовуються або
-              використовуватимуться компанією у бізнесі
+              <a className="color-black">
+                2. Оформіть на компанію всі активи, які використовуються або
+                використовуватимуться компанією у бізнесі
+              </a>
             </Link>{" "}
             <p className="pl-30 section__primary-text mb-5">
               {" "}
-              <Link href="#third">1.1. Права Інтелектуальної власності</Link>
+              <Link href="#third">
+                <a className="color-black">
+                  1.1. Права Інтелектуальної власності
+                </a>
+              </Link>
             </p>{" "}
             <p className="pl-30 section__primary-text mb-5">
-              {" "}
-              <Link href="#fourth">1.3. Нерухомість, транспортні засоби</Link>
+              <Link href="#fourth">
+                <a className="color-black">
+                  1.3. Нерухомість, транспортні засоби
+                </a>
+              </Link>
             </p>
           </li>
           <li className="usefulTools__text text-indent-none section__primary-text mb-5">
             <Link href="#fifth">
-              3. Права та доступи до інформаційних ресурсів та каналів
-              комунікації
+              <a className="color-black">
+                3. Права та доступи до інформаційних ресурсів та каналів
+                комунікації
+              </a>
             </Link>
           </li>
           <li className="usefulTools__text text-indent-none section__primary-text mb-5">
             <Link href="#sixth">
-              4. Упорядкуйте всі важливі корпоративні документи
+              <a className="color-black">
+                4. Упорядкуйте всі важливі корпоративні документи
+              </a>
             </Link>
           </li>
           <li className="usefulTools__text text-indent-none section__primary-text mb-5">
             <Link href="#seventh">
-              5. Усуньте ймовірність виникнення конфліктів у компанії
+              <a className="color-black">
+                5. Усуньте ймовірність виникнення конфліктів у компанії{" "}
+              </a>
             </Link>{" "}
             <p className="usefulTools__text text-indent-none section__primary-text mb-5 pl-30">
               <Link href="#eighth">
-                Висока ймовірність конфлікту може бути обумовлена:
+                <a className="color-black">
+                  Висока ймовірність конфлікту може бути обумовлена:{" "}
+                </a>
               </Link>
             </p>
           </li>
           <li className="usefulTools__text text-indent-none section__primary-text mb-5">
             <Link href="#tenth">
-              6. Наведіть показники, відображені в інвестиційній презентації, у
-              відповідність до реальності
+              <a className="color-black">
+                6. Наведіть показники, відображені в інвестиційній презентації,
+                у відповідність до реальності{" "}
+              </a>
             </Link>{" "}
           </li>
           <li className="usefulTools__text text-indent-none section__primary-text mb-5">
             <Link href="#eleventh">
-              8. Дізнайтеся про потенційного інвестора якнайбільше інформації
-              (легальными способами, звичайно)
+              <a className="color-black">
+                8. Дізнайтеся про потенційного інвестора якнайбільше інформації
+                (легальными способами, звичайно){" "}
+              </a>
             </Link>
           </li>
           <li className="usefulTools__text text-indent-none section__primary-text mb-5">
             <Link href="#twelfth">
-              9. Усуньте порушення законодавства та прав третіх осіб, у тому
-              числі підстави для таких порушень
+              <a className="color-black">
+                9. Усуньте порушення законодавства та прав третіх осіб, у тому
+                числі підстави для таких порушень
+              </a>
             </Link>
             <p className="usefulTools__text text-indent-none section__primary-text mb-5 pl-30">
               <Link href="#thirteenth">
-                Такі порушення можуть існувати в області:
+                <a className="color-black">
+                  Такі порушення можуть існувати в області:
+                </a>
               </Link>
             </p>
           </li>
 
           <li className="usefulTools__text text-indent-none section__primary-text">
             <Link href="#fourteenth">
-              10. Намагайтеся визначити реальну вартість (оцінку) своєї
-              компанії, не варто її недооцінювати та переоцінювати
+              <a className="color-black">
+                10. Намагайтеся визначити реальну вартість (оцінку) своєї
+                компанії, не варто її недооцінювати та переоцінювати
+              </a>
             </Link>
           </li>
         </ul>
@@ -153,15 +182,8 @@ const UsefulTools = () => {
           </p>
           <p className="usefulTools__text section__primary-text mb-10">
             Використання ж компанією об`єктів ІВ без оформлення зазначених
-            документів створює ризик стягнення з неї{" "}
-            <Link href={"#"}>
-              <a target="_blank"> чималої компенсації</a>
-            </Link>{" "}
-            на користь автора та накладення{" "}
-            <Link href={"#"}>
-              <a target="_blank"> заборони на використання об`єкта ІВ </a>
-            </Link>{" "}
-            .
+            документів створює ризик стягнення з неї чималої компенсації на
+            користь автора та накладення заборони на використання об`єкта ІВ .
           </p>{" "}
           <p className="usefulTools__text section__primary-text mb-10">
             Тому жоден грамотний інвестор не інвестуватиме в проект, поки
@@ -197,9 +219,7 @@ const UsefulTools = () => {
                   графічний та інший контент
                 </span>{" "}
                 - виняткові права на зазначені об`єкти за договором повинні бути
-                передані компанії від їх авторів. Реєструвати права на зазначені
-                активи у Роспатенті не обов`язково, достатньо документально
-                оформити передачу компанії виняткових прав.
+                передані компанії від їх авторів.
               </li>{" "}
               <li className="usefulTools__text section__primary-text usefulTools__list-item mb-10">
                 <span className="color-violet fw-700">
@@ -231,7 +251,6 @@ const UsefulTools = () => {
               <li className="usefulTools__text section__primary-text usefulTools__list-item mb-10">
                 <span className="color-violet fw-700">Ноу-хау</span> - виключне
                 право на секрет виробництва також має належати компанії.
-                Реєструвати ноу-хау у Роспатенті не потрібно.
               </li>{" "}
               <li className="usefulTools__text section__primary-text usefulTools__list-item">
                 інше

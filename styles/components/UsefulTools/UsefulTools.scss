@@ -77,6 +77,11 @@
   .color-violet {
     color: #351c75;
   }
+
+  .color-black {
+    color: #0c0c0c;
+  }
+
   .pl-30 {
     padding-left: 30px;
   }
@@ -88,11 +93,22 @@
   }
 
   .scroll-margin-top {
-    scroll-margin-top: 72px;
+    scroll-margin-top: 85px;
   }
 }
 
 @media screen and (max-width: $size-tablet) {
   .usefulTools {
+    .scroll-margin-top {
+      scroll-margin-top: 80px;
+    }
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .usefulTools {
+    .scroll-margin-top {
+      scroll-margin-top: 75px;
+    }
   }
 }
