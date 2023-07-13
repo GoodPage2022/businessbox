@@ -84,6 +84,7 @@ const CatalogView = () => {
     let requestBody: any = {
       user,
       sort: {
+        sold_out: 1,
         _order: -1,
         _created: -1,
       },
@@ -212,7 +213,7 @@ const CatalogView = () => {
 
     filterSetOfExp.push({
       active: true,
-      sold_out: false,
+      // sold_out: false,
       investing: true,
     });
 
