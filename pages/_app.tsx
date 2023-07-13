@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 
 import * as fbq from "../lib/fpixel";
 import { useEffect } from "react";
-import 'core-js/features/array/at'
 
 function MyApp({ Component, pageProps, session }: any) {
   // let persistor = persistStore(store);
