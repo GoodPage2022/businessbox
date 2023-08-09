@@ -34,28 +34,32 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     const comements = response.data.entries;
 
-    comements.map(async (item: any) => {
+    for (let index = 0; index < comements.length; index++) {
       const user = {};
       const business = await axios.post(
         `${process.env.baseUrl}/api/businesses/get`,
-        { user, projectId: item.business._id }
+        { user, projectId: comements[index].business._id }
       );
+      let userEmail = "";
 
       const businessOwner = business.data.entries[0]._by;
+      if (business.data.entries[0].contact_seller_email) {
+        userEmail = business.data.entries[0].contact_seller_email;
+      } else {
+        const response = await axios.post(
+          `${process.env.baseUrl}/api/account/list`,
+          {
+            userId: businessOwner,
+          }
+        );
 
-      const response = await axios.post(
-        `${process.env.baseUrl}/api/account/list`,
-        {
-          userId: businessOwner,
-        }
-      );
-
-      const userEmail = response.data[0].email;
+        userEmail = response.data[0].email;
+      }
 
       const reqData = {
         toEmail: userEmail,
-        comment: item.comment,
-        businessLink: `${process.env.baseUrl}/catalog/${item.business._id}`,
+        comment: comements[index].comment,
+        businessLink: `${process.env.baseUrl}/catalog/${comements[index].business._id}`,
       };
 
       const emailResponse = await axios.post(
@@ -68,7 +72,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           .collection("collections_Comments")
           .findOneAndUpdate(
             {
-              _id: new ObjectId(item._id.toString()),
+              _id: new ObjectId(comements[index]._id.toString()),
             },
             {
               $set: {
@@ -79,7 +83,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             { returnDocument: "after" }
           );
       }
-    });
+    }
     res.status(200).json(response.data);
   } catch (err: any) {
     console.log(err, "errrerer");
