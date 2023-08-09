@@ -36,6 +36,7 @@ const BusinessCard = ({
   order,
   investing,
   inactive = false,
+  warned = false,
 }: {
   image: any;
   title: string;
@@ -50,6 +51,7 @@ const BusinessCard = ({
   order?: number;
   investing?: boolean;
   inactive?: boolean;
+  warned?: boolean;
 }) => {
   const [state, dispatch] = React.useContext(MainContext);
   const dispatchRedux = useDispatch();
@@ -217,7 +219,9 @@ const BusinessCard = ({
 
       <Link href={`/catalog/${alias}`}>
         <a
-          className={`business-card__link ${inactive ? "inactive" : ""}`}
+          className={`business-card__link ${
+            inactive || warned ? "inactive" : ""
+          }`}
           title={title}
         ></a>
       </Link>
@@ -363,6 +367,16 @@ const BusinessCard = ({
               }}
             />{" "}
             <MainButtonBlack label="Продано" onClick={onSoldClick} />
+          </div>
+        )}
+        {warned && (
+          <div className="business-card__inactive">
+            <MainButtonRed
+              label="Активувати ще на 30 днів"
+              onClick={() => {
+                dispatch({ type: "toggle_modalActive" });
+              }}
+            />{" "}
           </div>
         )}
       </div>

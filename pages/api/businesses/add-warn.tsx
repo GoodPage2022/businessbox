@@ -16,14 +16,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       { _id: new ObjectId(id) },
       {
         $set: {
-          _activationTimeStamp: Number(Date.now().toString().substring(0, 10)),
-          active: true,
-          warned: false,
+          warned: true,
         },
       }
     );
 
-    res.status(200).json({ success: true });
+    res.status(200).json(da);
   } catch (err: any) {
     res.status(500).json({ error: err });
   }

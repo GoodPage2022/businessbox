@@ -44,38 +44,54 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
             { _activationTimeStamp: { $lt: twentyThreeDaysAgoSec } },
           ],
         },
+        {
+          $or: [{ warned: { $exists: false } }, { warned: false }],
+        },
       ],
     };
 
     const businesses = await db
       .collection("collections_Businesses")
       .find(query)
-      // .limit(2)
       .toArray();
 
-    businesses.map(async (item) => {
-      const user = await axios.post(`${process.env.baseUrl}/api/account/list`, {
-        userId: item._by,
-      });
+    // console.log(businesses, "businesses");
+    if (businesses.length > 0)
+      for (let index = 0; index < businesses.length; index++) {
+        let userEmail = "";
+        if (businesses[index].contact_seller_email) {
+          userEmail = businesses[index].contact_seller_email;
+        } else {
+          const user = await axios.post(
+            `${process.env.baseUrl}/api/account/list`,
+            {
+              userId: businesses[index]._by,
+            }
+          );
+          userEmail = user.data[0].email;
+        }
 
-      const userEmail = user.data[0].email;
-      console.log(userEmail, "userEmail");
+        const reqData = {
+          toEmail: /* "80970410371q@gmail.com" */ userEmail,
+          date: inactiveDate,
+          businessLink: `https://bissbox.com/catalog/${businesses[index]._id}`,
+        };
 
-      const reqData = {
-        toEmail: "80970410371q@gmail.com" /* userEmail */,
-        date: inactiveDate,
-        businessLink: `${process.env.baseUrl}/catalog/${item._id}`,
-      };
+        const emailResponse = await axios.post(
+          `${process.env.baseUrl}/api/businesses/send-warn`,
+          reqData
+        );
+        console.log(emailResponse.data, "asdadsasd");
 
-      // const emailResponse = await axios.post(
-      //   `${process.env.baseUrl}/api/businesses/send-warn`,
-      //   reqData
-      // );
-
-      // console.log(emailResponse, "emailResponse");
-    });
-
-    // console.log(businesses, "da");
+        if (emailResponse.data === "Email sent") {
+          const res = await axios.post(
+            `${process.env.baseUrl}/api/businesses/add-warn`,
+            {
+              id: businesses[index]._id,
+            }
+          );
+        }
+      }
 
     res.status(200).json(businesses);
   } catch (err: any) {

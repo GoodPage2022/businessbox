@@ -32,14 +32,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       ],
     };
 
-    sendpulse.init(userId, secret, tokenStorage, function () {
-      const answerGetter = function answerGetter(data: any) {
-        console.log(data);
+    sendpulse.init(userId, secret, tokenStorage, async function () {
+      const answerGetter = async function answerGetter(data: any) {
+        console.log(data, "reer");
+        if (data?.result) {
+          return res.status(200).send("Email sent");
+        } else {
+          return res.status(200).send("Email not sent");
+        }
       };
-      sendpulse.smtpSendMail(answerGetter, data);
-    });
 
-    return res.status(200).send("Email sent");
+      await sendpulse.smtpSendMail(answerGetter, data);
+    });
   } catch (error) {
     return res.status(504).send(error);
   }
