@@ -48,13 +48,13 @@ const BurgerMenu = () => {
           <Link href="/catalog">
             <a className="section__primary-text--white sub-menu">Купівля</a>
           </Link>
-          {user && (
-            <Link href="/invest/catalog">
-              <a className="section__primary-text--white sub-menu">
-                Інвестування
-              </a>
-            </Link>
-          )}
+          {/* {user && ( */}
+          <Link href="/invest/catalog">
+            <a className="section__primary-text--white sub-menu">
+              Інвестування
+            </a>
+          </Link>
+          {/* )} */}
 
           {/* <Link href="/catalog">
             <a className="section__primary-text--white">Купівля бізнесу</a>

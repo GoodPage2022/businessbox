@@ -9,6 +9,7 @@ import RaiseRating from "./RaiseRating";
 import ModalRaiseRating from "../Modals/Modal-RaiseRating/Modal-RaiseRating";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
+import ModalThankActive from "../Modals/Modal-thank-active/Modal-thank-active";
 
 const MyBusinesses = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -83,16 +84,108 @@ const MyBusinesses = () => {
 
   const checkBusinesses = async () => {
     try {
-      const response = await axios.post(`/api/businesses/checkActivity`, {});
+      const response = await axios.post(
+        `/api/businesses/check-activity-warn`,
+        {}
+      );
       console.log(response.data, "response");
     } catch (error) {
       console.log(error, "errer");
     }
   };
-  const sendNews = async () => {
+
+  const checkBusinessesInactive = async () => {
+    console.log("rerr");
+
     try {
-      const response = await axios.post(`/api/businesses/send-news`, {});
+      const response = await axios.post(
+        `/api/businesses/check-activity-inactive`,
+        {}
+      );
       console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
+
+  useEffect(() => {
+    // checkBusinessesInactive();
+    // checkBusinesses();
+  }, []);
+
+  const addTimestamp = async () => {
+    try {
+      const response = await axios.post(`/api/businesses/add-timestamp`, {});
+      console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
+  const sendNews = async (email: string) => {
+    try {
+      const response = await axios.post(`/api/businesses/send-news`, {
+        email,
+      });
+      console.log(response.data, "response");
+    } catch (error) {
+      console.log(error, "errer");
+    }
+  };
+
+  const getBusinessOwner = async (by: any) => {
+    // console.log(by, "by");
+
+    const requestBody = {
+      userId: by,
+    };
+    try {
+      const response = await axios.post(`/api/account/list`, requestBody);
+      if (response.data) {
+        const emails = response.data.map((user: any) => {
+          return user.email;
+        });
+        return emails;
+      }
+    } catch (error) {
+      console.log(error, "getBusinessOwnerErr");
+    }
+  };
+
+  const getUsers = async () => {
+    try {
+      // const response = await axios.post(`/api/businesses/get-users`, {});
+      // console.log(response.data, "response");
+
+      // const otherEma: any = [];
+      // const ownerId: any = [];
+      // response.data.entries.map((item: any) => {
+      //   if (item.contact_seller_email) {
+      //     // console.log(item.contact_seller_email, "ccc");
+      //     if (otherEma.includes(item.contact_seller_email)) {
+      //       return;
+      //     }
+      //     otherEma.push(item.contact_seller_email);
+      //   } else {
+      //     if (ownerId.includes(item._by)) {
+      //       return;
+      //     } else ownerId.push(item._by);
+      //   }
+      // });
+
+      // const data = await getBusinessOwner(ownerId);
+
+      // otherEma.forEach((oter: any) => {
+      //   data.forEach((dat: any) => {
+      //     if (oter == dat) {
+      //       console.log(oter, dat);
+      //     }
+      //   });
+      // });
+      const em = [""];
+
+      em.map((item: string) => {
+        sendNews(item);
+      });
     } catch (error) {
       console.log(error, "errer");
     }
@@ -101,7 +194,7 @@ const MyBusinesses = () => {
   useEffect(() => {
     // activateBusiness();
     // checkBusinesses();
-    // sendNews();
+    // getUsers();
   }, []);
 
   const closeRaiseRatingModal = () => {
@@ -159,6 +252,7 @@ const MyBusinesses = () => {
                   negotiatedPrice,
                   _order,
                   investing,
+                  warned,
                 }: any) => (
                   <PopularCard
                     key={_id}
@@ -182,6 +276,7 @@ const MyBusinesses = () => {
                     negotiatedPrice={negotiatedPrice}
                     order={_order}
                     investing={investing}
+                    warned={warned}
                   />
                 )
               )}
@@ -211,6 +306,11 @@ const MyBusinesses = () => {
       <ModalRaiseRating
         onClose={closeRaiseRatingModal}
         lowRatingBusinesses={lowRatingBusinesses}
+      />
+      <ModalThankActive
+        onClose={() => {
+          dispatch({ type: "toggle_thankActive" });
+        }}
       />
     </section>
   );

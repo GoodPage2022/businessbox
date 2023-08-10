@@ -16,8 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
       { _id: new ObjectId(id) },
       {
         $set: {
-          _activationTimeStamp: Number(Date.now().toString().substring(0, 10)),
-          active: true,
+          active: false,
           warned: false,
         },
       }

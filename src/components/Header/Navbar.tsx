@@ -29,11 +29,11 @@ const Navbar = () => {
             <Link href="/catalog">
               <a className="section__secondary-text--white">Купівля</a>
             </Link>
-            {user && (
-              <Link href="/invest/catalog">
-                <a className="section__secondary-text--white">Інвестування</a>
-              </Link>
-            )}
+            {/* {user && ( */}
+            <Link href="/invest/catalog">
+              <a className="section__secondary-text--white">Інвестування</a>
+            </Link>
+            {/* )} */}
           </div>
         </li>
 

@@ -3,7 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import sendpulse from "sendpulse-api";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const reqBody = req.body;
+  const { email } = req.body;
+  // console.log(email, "erqbid");
 
   try {
     const userId = process.env.sendpulseUserId;
@@ -24,7 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       },
       to: [
         {
-          email: "80970410371q@gmail.com",
+          email,
         },
       ],
     };

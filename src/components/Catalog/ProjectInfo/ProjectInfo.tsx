@@ -817,7 +817,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           </div>
         </div>
         <p className="projectInfo__date section__secondary-text">
-          Дата створення бізнесу: {creationDate}
+          Дата розміщення бізнесу: {creationDate}
         </p>
         {isViewProfile && (
           <ProfileInfo
