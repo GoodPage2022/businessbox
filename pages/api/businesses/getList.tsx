@@ -75,7 +75,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
         },
       });
       delete querySort.view_count;
-      queryOrder = { ...querySort, viewCountDig: -1 };
+      queryOrder = { viewCountDig: -1, ...querySort };
     }
 
     pipeLine.push({ $sort: queryOrder });
