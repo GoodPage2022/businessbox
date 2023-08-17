@@ -33,6 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return;
     }
     const comements = response.data.entries;
+    console.log(comements, "comements");
 
     for (let index = 0; index < comements.length; index++) {
       const user = {};
@@ -41,11 +42,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         { user, projectId: comements[index].business._id }
       );
       let userEmail = "";
-
-      const businessOwner = business.data.entries[0]._by;
+      console.log(business.data.entries, "business");
+      if (business.data.entries.length == 0) {
+        continue;
+      }
       if (business.data.entries[0].contact_seller_email) {
         userEmail = business.data.entries[0].contact_seller_email;
       } else {
+        const businessOwner = business.data.entries[0]._by;
         const response = await axios.post(
           `${process.env.baseUrl}/api/account/list`,
           {
@@ -56,12 +60,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         userEmail = response.data[0].email;
       }
 
+      console.log(userEmail, "userEmail");
+
       const reqData = {
         toEmail: userEmail,
         comment: comements[index].comment,
         businessLink: `${process.env.baseUrl}/catalog/${comements[index].business._id}`,
       };
-
+      console.log(reqData, " reqData");
       const emailResponse = await axios.post(
         `${process.env.baseUrl}/api/comments/send`,
         reqData
