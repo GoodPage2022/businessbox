@@ -468,7 +468,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   };
 
   useEffect(() => {
-    console.log(businessOwner, "owner");
+    // console.log(businessOwner, "owner");
     if (projectInfo && projectInfo._by) getBusinessOwner();
   }, [projectInfo]);
 
@@ -486,27 +486,22 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
     }
   }, [businessOwner]);
 
-  // const sendEmail = async (comment: string) => {
-  //   const reqData = {
-  //     toEmail: "businessOwner.email",
-  //     comment: comment,
-  //     businessLink: `${process.env.baseUrl}/${router.asPath}`,
-  //   };
+  const sendEmail = async () => {
+    try {
+      const response = await axios.post(
+        `/api/comments/check-email-send`
+        // reqData
+      );
 
-  //   try {
-  //     const response = await axios.post(
-  //       `/api/comments/check-email-send`,
-  //       reqData
-  //     );
-
-  //     console.log(response.data);
-  //   } catch (err: any) {
-  //     console.log(err);
-  //   }
-  // };
+      console.log(response, "v");
+    } catch (err: any) {
+      console.log(err, "err");
+    }
+    console.log("dnnnnn");
+  };
 
   // useEffect(() => {
-  //   sendEmail("comment");
+  // sendEmail();
   // }, []);
 
   if (loading) return <></>;
