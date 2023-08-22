@@ -1,0 +1,114 @@
+.sidebar {
+  width: 270px;
+  padding-right: 15px;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &__reset-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    color: #f22a4e;
+  }
+
+  &__price {
+    display: flex;
+
+    &--text {
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__category {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__field {
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: 0.01em;
+    color: black;
+    margin-bottom: 40px;
+    // margin-top: auto;
+    // &:not(:last-child) {
+    //   margin-right: 30px;
+    // }
+
+    &.sidebar__select-region {
+      .custom-select__option {
+        font-size: 14px !important;
+      }
+      .custom-select__single-value {
+        font-size: 16px !important;
+      }
+    }
+  }
+  &__label {
+    display: block;
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $main-text-color;
+    margin-bottom: 20px;
+  }
+  &__input {
+    &-thumb {
+      position: relative;
+    }
+    width: 110px;
+    border: none;
+    background: $white-color;
+    border-radius: 25px;
+    padding: 20px 25px;
+    outline: none;
+    cursor: text;
+
+    &::placeholder {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      color: $grey-color;
+    }
+  }
+
+  &__price-input {
+    font-size: 15px;
+    padding: 18px 22px;
+  }
+
+  &__select {
+    outline: none;
+    cursor: pointer;
+
+    &::placeholder {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      color: $grey-color;
+    }
+    appearance: none;
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .sidebar {
+    display: none;
+  }
+}

@@ -1,0 +1,75 @@
+.expert-card {
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #ececec;
+  overflow: visible;
+  padding: 25px 20px 20px;
+  height: 220px;
+
+  &__link {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  &__scales {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 5px;
+  }
+
+  &__scale {
+    height: 100%;
+    width: calc(25% - 5px);
+    background: #ac92ec;
+  }
+
+  &__top-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  &__name {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 117%;
+    color: #000;
+  }
+  &__image {
+    position: relative;
+    min-height: 80px;
+    min-width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+  &__specialization-item {
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.5625rem;
+    color: #667474;
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .expert-card {
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .business-card {
+  }
+}

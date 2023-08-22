@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import FilterSVG from "../../assets/svg/filter.svg";
 import DotsSVG from "../../../assets/svg/dots1.svg";
 import LinesSVG from "../../../assets/svg/lines.svg";
-import BusinessCard from "../shared/BusinessCard";
+import ExpertCard from "../shared/ExpertCard";
 import Sidebar from "./Sidebar";
 import Pagination from "../shared/Pagination/Pagination";
 import { useRouter } from "next/router";
@@ -13,7 +13,6 @@ import IconButton from "../shared/IconButton";
 import MobFilter from "./MobFilter";
 import { MainContext } from "../../contexts/mainContext";
 import React from "react";
-import BusinessCardFavorites from "../shared/BusinessCardFavorite";
 
 import { signOut as signOutReducer } from "../../../store/actions/auth";
 import { useSession, signOut as signOutGoogle } from "next-auth/react";
@@ -60,7 +59,7 @@ const CatalogView = () => {
     setFiltersObj(filtersObjB);
   };
 
-  const getBusinesses = async (resetLimit?: boolean) => {
+  const getExperts = async (resetLimit?: boolean) => {
     dispatch({ type: "toggle_loader" });
     let filterSetOfExp: any = [];
 
@@ -93,10 +92,6 @@ const CatalogView = () => {
     });
     filterSetOfExp.push({});
 
-    filterSetOfExp.push({
-      $or: [{ investing: { $exists: false } }, { investing: false }],
-    });
-
     if (!resetLimit) {
       requestBody["skip"] =
         filtersObj.page && filtersObj.page > 1
@@ -112,15 +107,12 @@ const CatalogView = () => {
     }
 
     try {
-      const response = await axios.post(
-        `/api/businesses/getList`,
-        requestBody,
-        {
-          cancelToken: new CancelToken((c) => {
-            cancel = c;
-          }),
-        }
-      );
+      const response = await axios.post(`/api/experts/getList`, requestBody, {
+        cancelToken: new CancelToken((c) => {
+          cancel = c;
+        }),
+      });
+      console.log(response.data, "response.data");
 
       if (response.data) {
         if (resetLimit) {
@@ -153,12 +145,12 @@ const CatalogView = () => {
 
   useEffect(() => {
     if (cards.length > 0) {
-      getBusinesses(true);
+      getExperts(true);
     } else setCountCards(0);
   }, [cards]);
 
   useEffect(() => {
-    getBusinesses();
+    getExperts();
     setPageNumber(filtersObj.page ?? 1);
   }, [filtersObj, state.isUah]);
 
@@ -214,11 +206,13 @@ const CatalogView = () => {
   });
   return (
     <section
-      className={`catalogView ${state.isActiveMobFilter ? "active" : ""}`}
+      className={`experts-catalogView ${
+        state.isActiveMobFilter ? "active" : ""
+      }`}
     >
-      <div className="container catalogView__container">
+      <div className="container experts-catalogView__container">
         <div
-          className={`catalogView__buttons ${
+          className={`experts-catalogView__buttons ${
             state.isActiveMobFilter ? "active" : ""
           }`}
           onClick={(e) => {
@@ -230,9 +224,9 @@ const CatalogView = () => {
             }
           }}
         >
-          <div className="catalogView__buttons--left">
+          <div className="experts-catalogView__buttons--left">
             <button
-              className={`catalogView__button__mob-filter ${
+              className={`experts-catalogView__button__mob-filter ${
                 state.isActiveMobFilter ? "active" : ""
               }`}
               onClick={() => {
@@ -245,32 +239,15 @@ const CatalogView = () => {
               <FilterSVG />
             </button>
           </div>
-          {/* <div className="catalogView__buttons--right">
-            <button
-              onClick={() => setIsRowsActive((prev) => !prev)}
-              className={`catalogView__button__columns ${
-                isRowsActive ? "active" : ""
-              }`}
-            >
-              <DotsSVG />
-            </button>
-            <button
-              onClick={() => setIsRowsActive((prev) => !prev)}
-              className={`catalogView__button__rows ${
-                !isRowsActive ? "active" : ""
-              }`}
-            >
-              <LinesSVG />
-            </button>
-          </div> */}
+
           <MobFilter
             isActive={state.isActiveMobFilter}
             changeFilter={changeFilter}
             filtersObj={filtersObj}
           />
         </div>
-        <div className="catalogView__title-wrapper">
-          <h2 className="title catalogView__title">Каталог бізнесів</h2>
+        <div className="experts-catalogView__title-wrapper">
+          <h2 className="title experts-catalogView__title">Каталог бізнесів</h2>
           {/* <p>
             <Checkbox
               text="Відсортувати за популярністю"
@@ -280,47 +257,15 @@ const CatalogView = () => {
               name={"sorting"}
             />
           </p> */}
-          <FormikProvider value={formik}>
-            <Field
-              className="addBusinessFinish__input section__primary-text"
-              type="text"
-              name="sorting"
-              changeFilter={changeFilter}
-              placeholder="Відсортувати за ..."
-              component={CustomSelect}
-              options={[
-                {
-                  value: "decrease-popular",
-                  label: "Відсортувати за популярністю",
-                },
-                {
-                  value: "increase-price",
-                  label: "Відсортувати за зростанням ціни",
-                },
-                {
-                  value: "decrease-price",
-                  label: "Відсортувати за зменшенням ціни",
-                },
-                {
-                  value: "decrease-date",
-                  label: "Відсортувати за датою (спочатку новіші)",
-                },
-                {
-                  value: "increase-date",
-                  label: "Відсортувати за датою (спочатку старіші)",
-                },
-              ]}
-            />
-          </FormikProvider>
         </div>
-        <p className="catalogView__qty section__primary-text">
-          Знайдено{" "}
-          <span className="section__primary-text catalogView__qty--bold">
+        <p className="experts-catalogView__qty section__primary-text">
+          Знайдено експертів:
+          <span className="section__primary-text experts-catalogView__qty--bold">
+            {" "}
             {countCards}
           </span>{" "}
-          бізнесів
         </p>
-        <div className="catalogView__wrapper">
+        <div className="experts-catalogView__wrapper">
           <Sidebar changeFilter={changeFilter} filtersObj={filtersObj} />
           {isLoading ? (
             <Oval
@@ -343,74 +288,35 @@ const CatalogView = () => {
             />
           ) : cards.length > 0 ? (
             <ul
-              className={`catalogView__cards ${isRowsActive ? "" : "active"}`}
+              className={`experts-catalogView__cards ${
+                isRowsActive ? "" : "active"
+              }`}
             >
               {cards.map(
                 ({
                   _id,
-                  title,
-                  description,
-                  images,
-                  view_count,
-                  price,
-                  is_verified,
-                  currency,
-                  negotiatedPrice,
-                  sold_out,
-                }: any) =>
-                  isRowsActive && screenWidth < 768 ? (
-                    <BusinessCardFavorites
-                      key={_id}
-                      alias={_id}
-                      title={title}
-                      description={description}
-                      image={
-                        images == null || !images.length
-                          ? ""
-                          : `${
-                              images[0].meta.assets == ""
-                                ? ``
-                                : `https://admin.bissbox.com`
-                            }${images[0].path}`
-                      }
-                      price={price}
-                      views={view_count ?? 0}
-                      isVerified={is_verified}
-                      currency={currency}
-                      negotiatedPrice={negotiatedPrice}
-                    />
-                  ) : (
-                    <BusinessCard
-                      key={_id}
-                      alias={_id}
-                      title={title}
-                      isSoldOut={sold_out}
-                      description={description}
-                      image={
-                        images == null || !images.length
-                          ? ""
-                          : `${
-                              images[0].meta.assets == ""
-                                ? ``
-                                : `https://admin.bissbox.com`
-                            }${images[0].path}`
-                      }
-                      price={price}
-                      views={view_count ?? 0}
-                      isVerified={is_verified}
-                      currency={currency}
-                      negotiatedPrice={negotiatedPrice}
-                    />
-                  )
+                  firstname,
+                  lastname,
+                  avatar,
+                  field_of_expertise,
+                }: any) => (
+                  <ExpertCard
+                    key={_id}
+                    id={_id}
+                    firstname={firstname}
+                    lastname={lastname}
+                    specialization={field_of_expertise}
+                    image={`https://admin.bissbox.com/storage/uploads${avatar.path}`}
+                  />
+                )
               )}
             </ul>
           ) : (
-            <div className="catalogView__empty">
-              <h1 className="title">На жаль, бізнесів поки що немає</h1>
+            <div className="experts-catalogView__empty">
+              <h1 className="title">На жаль, експертів поки що немає</h1>
             </div>
           )}
         </div>
-        {/* {Math.ceil(countCards / cardsPerPage)} */}
         {Math.ceil(countCards / cardsPerPage) > 1 && (
           <Pagination
             cardsPerPage={cardsPerPage}

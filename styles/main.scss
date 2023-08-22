@@ -240,6 +240,9 @@ main {
 //Invest
 @import "./components/Invest/Invest.scss";
 
+//Experts
+@import "./components/Experts/Catalog/CatalogView.scss";
+
 // Footer
 @import "./components/Footer/Footer.scss";
 @import "./components/Footer/Networks.scss";
@@ -256,6 +259,7 @@ main {
 @import "./components/shared/Checkbox.scss";
 @import "./components/shared/Pagination.scss";
 @import "./components/shared/Reset.scss";
+@import "./components/shared/ExpertCard.scss";
 
 // Editor Lexical
 @import "./components/Editor/Editor.scss";
