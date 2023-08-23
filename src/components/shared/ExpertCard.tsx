@@ -10,7 +10,7 @@ import { signIn as signInReducer } from "../../../store/actions/auth";
 import { MainContext } from "../../contexts/mainContext";
 import ModalActive from "../Modals/Modal-active/Modal-active";
 
-const BusinessCard = ({
+const ExpertCard = ({
   image,
   firstname,
   lastname,
@@ -77,4 +77,4 @@ const BusinessCard = ({
   );
 };
 
-export default BusinessCard;
+export default ExpertCard;

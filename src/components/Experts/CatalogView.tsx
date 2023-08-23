@@ -163,23 +163,12 @@ const CatalogView = () => {
     }
   }, []);
   const changeFilter = (e: any, clean?: boolean) => {
-    if (e.target?.name == "state") {
-      filtersObj["city"] = "";
-    }
     if (clean) {
       setFiltersObj({});
-      router.push("/catalog");
+      router.push("/experts");
       return;
     }
-    if (
-      e.target.name == "sort-by-popular" ||
-      e.target.name == "sort-by-price" ||
-      e.target.name == "sort-by-date"
-    ) {
-      filtersObj["sort-by-price"] = "";
-      filtersObj["sort-by-popular"] = "";
-      filtersObj["sort-by-date"] = "";
-    }
+
     const filtersObjFirstPage = {
       ...filtersObj,
       page: undefined,
@@ -193,7 +182,7 @@ const CatalogView = () => {
         filtersObjFirstPageString += "/" + f + "/" + filtersObjFirstPage[f];
     });
 
-    router.replace(`/catalog${filtersObjFirstPageString}`);
+    router.replace(`/experts${filtersObjFirstPageString}`);
   };
   const initialValues = {
     sorting: "",

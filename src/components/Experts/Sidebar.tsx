@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import Checkbox from "../shared/Checkbox";
 import CustomSelect from "../shared/CustomSelect";
-import OurCategories from "../../constants/categories";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { MainContext } from "../../contexts/mainContext";
@@ -20,44 +19,25 @@ const Sidebar = ({
   const [initialValues, setInitialValues] = useState<any>({});
   const router = useRouter();
   const { filters } = router.query;
-  const [listAreas, setListAreas] = useState<any>();
-  const [listCities, setListCities] = useState<any>();
-  const [selectedArea, setSelectedArea] = useState("");
+  const [fieldsExpertise, setFieldsExpertise] = useState<any>();
   const [state, dispatch] = React.useContext(MainContext);
-  const getListAreas = async () => {
-    try {
-      const reponse = await axios.post("/api/locations/getAreas", {});
 
-      if (reponse.status == 200) {
-        setListAreas(reponse.data);
+  const getFieldsExpertise = async () => {
+    try {
+      const response = await axios.post("/api/experts/getFieldsExpertise", {});
+
+      if (response.status == 200) {
+        setFieldsExpertise(response.data);
       }
     } catch (error) {
       console.log("error");
       console.log(error);
     }
   };
-
-  const getListCities = async (selectedArea: string) => {
-    try {
-      const reponse = await axios.post("/api/locations/getCities", {
-        selectedArea,
-      });
-
-      if (reponse.status == 200) {
-        setListCities(reponse.data);
-      }
-    } catch (error) {
-      console.log("error");
-      console.log(error);
-    }
-  };
+  console.log(fieldsExpertise, "fieldsExpertise");
 
   useEffect(() => {
-    getListCities(selectedArea);
-  }, [selectedArea]);
-
-  useEffect(() => {
-    getListAreas();
+    getFieldsExpertise();
   }, []);
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
@@ -94,7 +74,7 @@ const Sidebar = ({
       state: filtersObjI.state ?? "",
     });
 
-    setSelectedArea(filtersObjI.state);
+    // setSelectedArea(filtersObjI.state);
   }, [filtersObjI]);
   useEffect(() => {
     if (debouncedChange != undefined) {
@@ -102,6 +82,7 @@ const Sidebar = ({
       return () => clearTimeout(timeOutId);
     }
   }, [debouncedChange]);
+  console.log(filtersObjI, "filtersObjI");
 
   return (
     <div className="sidebar">
@@ -130,16 +111,17 @@ const Sidebar = ({
               <div className="sidebar__field">
                 <span className="sidebar__label">Категорія</span>
                 <ul className="sidebar__categories">
-                  {OurCategories.map(({ id, content }) => (
-                    <li key={id} className="sidebar__category">
-                      <Checkbox
-                        datakey={id}
-                        changeFilter={changeFilter}
-                        text={content}
-                        categories={filtersObjI.category ?? []}
-                      />
-                    </li>
-                  ))}
+                  {fieldsExpertise &&
+                    fieldsExpertise.map((item: string, index: number) => (
+                      <li key={index} className="sidebar__category">
+                        <Checkbox
+                          datakey={index}
+                          changeFilter={changeFilter}
+                          text={item}
+                          categories={filtersObjI.category ?? []}
+                        />
+                      </li>
+                    ))}
                 </ul>
               </div>
             </Form>
