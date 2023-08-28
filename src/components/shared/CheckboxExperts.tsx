@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-const Checkbox = ({
+const CheckboxExperts = ({
   text,
   changeFilter,
   categories,
@@ -17,12 +17,13 @@ const Checkbox = ({
   useEffect(() => {
     setIsChosen(categories.includes(text));
   }, [categories, text]);
+  // console.log(categories, text);
 
   return (
     <div
       className="checkbox__wrapper"
       onClick={(e: any) => {
-        console.log(e.target.name);
+        console.log(e.target.name, "etarhetname");
 
         // if (e.target.name == "sorting") {
         //   if (!categories.includes(text)) {
@@ -43,21 +44,25 @@ const Checkbox = ({
         //   setIsChosen((prev) => !prev);
         //   return;
         // }
-        if (e.target.name != "category") return true;
+        // if (e.target.name != "category") return true;
 
         if (!categories.includes(text) && !!changeFilter) {
+          console.log("aaa");
+
           changeFilter({
             target: {
-              name: "category",
+              name: "specialization",
               value: [...categories, text],
             },
           });
         } else {
           const categoriesFiltered = categories.filter((c) => c != text);
+          console.log("bbb");
+
           if (!!changeFilter) {
             changeFilter({
               target: {
-                name: "category",
+                name: "specialization",
                 value: categoriesFiltered,
               },
             });
@@ -75,7 +80,7 @@ const Checkbox = ({
         className={`checkbox__input agree`}
         checked={isChosen}
         onChange={() => {
-          console.log(isChosen);
+          // console.log(isChosen);
         }}
       />
       <label htmlFor={`cat_${datakey}`} className="checkbox__label">
@@ -85,4 +90,4 @@ const Checkbox = ({
   );
 };
 
-export default Checkbox;
+export default CheckboxExperts;

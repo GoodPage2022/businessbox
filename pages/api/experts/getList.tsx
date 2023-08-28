@@ -17,6 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const querySkip = req.body.skip;
 
   let pipeLine = [];
+  console.log(queryFilter, "queryFilter");
 
   // let body: any = {};
 
@@ -31,6 +32,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   if (queryLimit) {
     pipeLine.push({ $limit: queryLimit });
   }
+
+  // console.log(pipeLine[0]["$match"]["$and"], "pipeLine");
 
   try {
     const client = await clientPromise;

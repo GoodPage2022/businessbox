@@ -73,10 +73,10 @@ const CatalogView = () => {
       switch (f) {
         case "page":
           break;
-        case "category":
+        case "specialization":
           if (filtersObj[f].length > 0) {
             let param: any = {};
-            param["area"] = {
+            param["field_of_expertise"] = {
               $in: filtersObj[f],
             };
             filterSetOfExp.push(param);
@@ -229,11 +229,11 @@ const CatalogView = () => {
             </button>
           </div>
 
-          <MobFilter
+          {/* <MobFilter
             isActive={state.isActiveMobFilter}
             changeFilter={changeFilter}
             filtersObj={filtersObj}
-          />
+          /> */}
         </div>
         <div className="experts-catalogView__title-wrapper">
           <h2 className="title experts-catalogView__title">Каталог бізнесів</h2>
