@@ -1,0 +1,71 @@
+.heroExpert {
+  padding-top: 100px;
+  padding-bottom: 60px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    background-image: url("../../../../public/assets/images/expert-bg-xl.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 24px;
+  }
+
+  &__image {
+    position: relative;
+    bottom: -75px;
+    width: 273px;
+    height: 273px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 40px;
+    // margin-bottom: 20px;
+
+    & img {
+      // width: 316px;
+      // height: 316px;
+    }
+  }
+
+  &__city {
+    color: white;
+    margin-bottom: 10px;
+  }
+
+  &__name {
+    color: white;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  &__specialization {
+    color: white;
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .heroExpert {
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .heroExpert {
+    padding-top: 156px;
+    padding-bottom: 104px;
+    background-image: url("../../../../public/assets/images/expert-bg-s.jpg");
+
+    &__container {
+      display: block;
+      background-image: none;
+    }
+
+    &__image {
+      bottom: 0;
+      width: 316px;
+      height: 316px;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+}
