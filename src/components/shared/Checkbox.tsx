@@ -17,6 +17,7 @@ const Checkbox = ({
   useEffect(() => {
     setIsChosen(categories.includes(text));
   }, [categories, text]);
+  console.log(categories, text);
 
   return (
     <div
