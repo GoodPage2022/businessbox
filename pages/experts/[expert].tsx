@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import axios from "axios";
 import HeroExpert from "../../src/components/Experts/Details/Hero";
+import Expertise from "../../src/components/Experts/Details/Expertise";
 
 const Project: NextPage = ({ expert }: any) => {
   if (!expert || typeof expert?._id != "string") return <></>;
@@ -23,6 +24,7 @@ const Project: NextPage = ({ expert }: any) => {
         />
       </Head> */}
       <HeroExpert data={expert} />
+      <Expertise data={expert} />
     </>
   );
 };

@@ -51,8 +51,8 @@
 
 @media screen and (max-width: $size-mobile) {
   .heroExpert {
-    padding-top: 156px;
-    padding-bottom: 104px;
+    padding-top: 100px;
+    padding-bottom: 0;
     background-image: url("../../../../public/assets/images/expert-bg-s.jpg");
 
     &__container {
