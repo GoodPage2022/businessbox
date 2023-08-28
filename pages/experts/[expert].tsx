@@ -6,6 +6,7 @@ import Head from "next/head";
 import axios from "axios";
 import HeroExpert from "../../src/components/Experts/Details/Hero";
 import Expertise from "../../src/components/Experts/Details/Expertise";
+import Video from "../../src/components/Experts/Details/Video";
 
 const Project: NextPage = ({ expert }: any) => {
   if (!expert || typeof expert?._id != "string") return <></>;
@@ -25,6 +26,7 @@ const Project: NextPage = ({ expert }: any) => {
       </Head> */}
       <HeroExpert data={expert} />
       <Expertise data={expert} />
+      <Video video={expert.video} />
     </>
   );
 };
