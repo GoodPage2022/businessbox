@@ -224,7 +224,7 @@ const Categories = () => {
                   // user != null ? router.push("/account/add-business") : openModal()
                 }
               >
-                Детальніше
+                Обрати експерта
               </button>
             </div>
           </div>
