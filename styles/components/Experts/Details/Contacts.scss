@@ -1,0 +1,118 @@
+.contacts {
+  padding-top: 100px;
+  padding-bottom: 60px;
+
+  &__container {
+    padding: 24px;
+    background: white;
+    border-radius: 25px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  &__network {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-right: 30px;
+    }
+
+    & svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    &-text {
+      position: absolute;
+      left: -50px;
+      opacity: 0;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      &.active {
+        left: 0;
+        position: relative;
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      & a {
+        display: block;
+      }
+    }
+
+    &.facebook {
+      & svg {
+        path {
+          fill: #3b5998;
+        }
+      }
+    }
+
+    &.telegram {
+      & svg {
+        path {
+          fill: #4e9ce5;
+        }
+      }
+    }
+
+    &.youtube {
+      & svg {
+        path {
+          fill: #ff0000;
+        }
+      }
+    }
+    &.instagram {
+      & svg {
+        path {
+          fill: #de345f;
+        }
+
+        circle {
+          stroke: #de345f;
+        }
+        rect {
+          stroke: #de345f;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .contacts {
+    &__network {
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .contacts {
+    padding-top: 100px;
+    padding-bottom: 0;
+
+    &__wrapper {
+    }
+
+    &__network {
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+}
