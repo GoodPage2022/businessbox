@@ -100,6 +100,15 @@ const Categories = () => {
             Детальніше
           </button>
         )}
+        {i === 3 && (
+          // <p className="title--white categories-third__continue">Далі буде…</p>
+          <button
+            className="categories-first__button"
+            onClick={() => router.push("/experts")}
+          >
+            Детальніше
+          </button>
+        )}
       </div>
     ),
   };
@@ -191,6 +200,31 @@ const Categories = () => {
                 }
               >
                 Детальніше
+              </button>
+            </div>
+          </div>
+        </section>
+        <section className="categories-fourth">
+          <div className="container categories-fourth__container">
+            <h1 className="categories-fourth__title title--white">
+              Прокачка бізнесу
+            </h1>
+            <p className="categories-fourth__text section__primary-text--white">
+              Розділ, який надає вам можливість звертатися до перевірених та
+              досвідчених фахівців, яких ми знаємо і в яких впевнені. Тут ви
+              знайдете відомих професіоналів, готових допомогти вам з усіма
+              аспектами вашого бізнесу
+            </p>
+            <div className="categories-fourth__buttons">
+              {/* <p className="title--white">Далі буде…</p> */}
+              <button
+                className="categories-first__button"
+                onClick={
+                  () => router.push("/experts")
+                  // user != null ? router.push("/account/add-business") : openModal()
+                }
+              >
+                Обрати експерта
               </button>
             </div>
           </div>

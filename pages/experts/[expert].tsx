@@ -7,6 +7,8 @@ import axios from "axios";
 import HeroExpert from "../../src/components/Experts/Details/Hero";
 import Expertise from "../../src/components/Experts/Details/Expertise";
 import Video from "../../src/components/Experts/Details/Video";
+import ExpertsSlider from "../../src/components/Experts/Details/ExpertsSlider";
+import Contacts from "../../src/components/Experts/Details/Contacts";
 
 const Project: NextPage = ({ expert }: any) => {
   if (!expert || typeof expert?._id != "string") return <></>;
@@ -27,6 +29,8 @@ const Project: NextPage = ({ expert }: any) => {
       <HeroExpert data={expert} />
       <Expertise data={expert} />
       <Video video={expert.video} />
+      <ExpertsSlider images={expert.images} />
+      <Contacts data={expert} />
     </>
   );
 };
