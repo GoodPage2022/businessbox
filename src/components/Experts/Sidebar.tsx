@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
-import Checkbox from "../shared/Checkbox";
+import Checkbox from "../shared/CheckboxExperts";
 import CustomSelect from "../shared/CustomSelect";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -34,7 +34,7 @@ const Sidebar = ({
       console.log(error);
     }
   };
-  console.log(fieldsExpertise, "fieldsExpertise");
+  // console.log(fieldsExpertise, "fieldsExpertise");
 
   useEffect(() => {
     getFieldsExpertise();
@@ -67,13 +67,12 @@ const Sidebar = ({
   }, [filters]);
 
   useEffect(() => {
-    setInitialValues({
-      priceTo: filtersObjI.priceTo ?? "",
-      priceFrom: filtersObjI.priceFrom ?? "",
-      city: filtersObjI.city ?? "",
-      state: filtersObjI.state ?? "",
-    });
-
+    // setInitialValues({
+    //   priceTo: filtersObjI.priceTo ?? "",
+    //   priceFrom: filtersObjI.priceFrom ?? "",
+    //   city: filtersObjI.city ?? "",
+    //   state: filtersObjI.state ?? "",
+    // });
     // setSelectedArea(filtersObjI.state);
   }, [filtersObjI]);
   useEffect(() => {
@@ -82,7 +81,6 @@ const Sidebar = ({
       return () => clearTimeout(timeOutId);
     }
   }, [debouncedChange]);
-  console.log(filtersObjI, "filtersObjI");
 
   return (
     <div className="sidebar">
@@ -118,6 +116,7 @@ const Sidebar = ({
                           datakey={index}
                           changeFilter={changeFilter}
                           text={item}
+                          name="specialization"
                           categories={filtersObjI.category ?? []}
                         />
                       </li>

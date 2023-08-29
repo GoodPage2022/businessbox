@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
-import Checkbox from "../shared/Checkbox";
+import Checkbox from "../shared/CheckboxExperts";
 import CustomSelect from "../shared/CustomSelect";
 import OurCategories from "../../constants/categories";
 import { useRouter } from "next/router";
