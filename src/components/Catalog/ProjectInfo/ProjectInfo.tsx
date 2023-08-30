@@ -33,8 +33,10 @@ import ModalAnalysisThankPending from "../../Modals/Modal-analysis/Modal-analysi
 import Script from "next/script";
 import ModalMoreAboutBusiness from "../../Modals/Invest/Modal-MoreAboutBusiness";
 import ModalThankComment from "../../Modals/Modal-thank-comment/Modal-thank-comment";
+import InvestSlider from "../../Invest/Catalog/Slider";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
+  const [slides, setSlides] = useState([]);
   const router = useRouter();
   // const [offset, setOffset] = useState(0);
   const [isAuth, setIsAuth] = useState(false);
@@ -504,6 +506,33 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
   // sendEmail();
   // }, []);
 
+  const getSlides = async () => {
+    try {
+      const response = await axios.post(`/api/invest-slider/getList`);
+      if (response.data) {
+        response.data.entries.forEach((item: any) => {
+          if (item.business_id == projectId) {
+            console.log(item, projectId, "rrr");
+
+            setSlides(response.data.entries);
+          }
+        });
+
+        console.log(response.data, "asdasd");
+
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    return [];
+  };
+
+  useEffect(() => {
+    getSlides();
+  }, []);
+
   if (loading) return <></>;
 
   const handleSubmit = async (
@@ -586,6 +615,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         <div className="projectInfo__arrow-back" onClick={() => router.back()}>
           <ArrowBackSVG />
         </div>
+        {slides.length > 0 && <InvestSlider slides={slides} />}
         <div className="projectInfo__title">
           <h1 className="projectInfo__title--text title">
             {projectInfo.title}

@@ -7,7 +7,7 @@ import React, {
 } from "react";
 // import Slider, { LazyLoadTypes } from "react-slick";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
-import { Mousewheel } from "swiper";
+import { Mousewheel, Autoplay } from "swiper";
 import "swiper/css";
 
 // import debounce from "lodash.debounce";
@@ -20,8 +20,8 @@ import InvestSlide from "./Slide";
 
 // const ondemand: LazyLoadTypes = "ondemand";
 
-const InvestSlider = () => {
-  const [slides, setSlides] = useState([]);
+const InvestSlider = ({ slides }: { slides: any }) => {
+  // const [slides, setSlides] = useState([]);
   // const rate = useSelector((state: any) => state.currency.value);
 
   const sliderRef = useRef<SwiperRef>(null);
@@ -44,25 +44,25 @@ const InvestSlider = () => {
     return <div className="slick-arrow slick-prev" onClick={handlePrev} />;
   }
 
-  const getSlides = async () => {
-    try {
-      const response = await axios.post(`/api/invest-slider/getList`);
-      if (response.data) {
-        setSlides(response.data.entries);
-        console.log(response.data, "ddd");
+  // const getSlides = async () => {
+  //   try {
+  //     const response = await axios.post(`/api/invest-slider/getList`);
+  //     if (response.data) {
+  //       setSlides(response.data.entries);
+  //       console.log(response.data, "ddd");
 
-        return;
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  //       return;
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
 
-    return [];
-  };
+  //   return [];
+  // };
 
-  useEffect(() => {
-    getSlides();
-  }, []);
+  // useEffect(() => {
+  //   getSlides();
+  // }, []);
 
   return (
     <div className="investSlider">
@@ -70,13 +70,11 @@ const InvestSlider = () => {
         <div className="swiper-outer">
           <Swiper
             ref={sliderRef}
-            modules={[Mousewheel]}
+            modules={[Mousewheel, Autoplay]}
             slidesPerView={1}
             spaceBetween={0}
             breakpoints={{}}
-            autoplay={{
-              delay: 3000,
-            }}
+            autoplay={{ delay: 5000 }}
             mousewheel={{
               forceToAxis: true,
             }}
