@@ -21,36 +21,21 @@ const MobFilter = ({
   const [debouncedChange, setDebouncedChange] = useState<any>();
   const [filtersObjI, setFiltersObjI] = useState<any>({});
   const [initialValues, setInitialValues] = useState<any>({});
-  const [cutOurCategories, setCutOurCategories] = useState<any>(null);
-  const [isCutCategories, setIsCutCategories] = useState<any>(false);
+  const [cutFieldsExpertise, setCutFieldsExpertise] = useState<any>(null);
+  const [isCutFieldsExpertise, setIsCutFieldsExpertise] = useState<any>(false);
   const router = useRouter();
   const { filters } = router.query;
   const [state, dispatch] = React.useContext(MainContext);
-  const [listAreas, setListAreas] = useState<any>();
-  const [listCities, setListCities] = useState<any>();
-  const [selectedArea, setSelectedArea] = useState("");
+  const [fieldsExpertise, setFieldsExpertise] = useState<any>([]);
 
-  const getListAreas = async () => {
+  console.log(isCutFieldsExpertise, "cutFieldsExpertise");
+
+  const getFieldsExpertise = async () => {
     try {
-      const reponse = await axios.post("/api/locations/getAreas", {});
+      const response = await axios.post("/api/experts/getFieldsExpertise", {});
 
-      if (reponse.status == 200) {
-        setListAreas(reponse.data);
-      }
-    } catch (error) {
-      console.log("error");
-      console.log(error);
-    }
-  };
-
-  const getListCities = async (selectedArea: string) => {
-    try {
-      const reponse = await axios.post("/api/locations/getCities", {
-        selectedArea,
-      });
-
-      if (reponse.status == 200) {
-        setListCities(reponse.data);
+      if (response.status == 200) {
+        setFieldsExpertise(response.data);
       }
     } catch (error) {
       console.log("error");
@@ -59,26 +44,23 @@ const MobFilter = ({
   };
 
   useEffect(() => {
-    getListCities(selectedArea);
-  }, [selectedArea]);
-
-  useEffect(() => {
-    getListAreas();
+    getFieldsExpertise();
   }, []);
 
   useEffect(() => {
-    if (OurCategories.length > 10) {
-      setCutOurCategories(OurCategories.slice(0, 10));
+    if (fieldsExpertise.length > 10) {
+      setCutFieldsExpertise(fieldsExpertise.slice(0, 10));
     }
-  }, []);
+  }, [fieldsExpertise]);
 
   useEffect(() => {
-    if (filtersObjI.category != null) {
-      setIsCutCategories(false);
+    console.log(filtersObjI.specialization, cutFieldsExpertise, "cutf");
+    if (filtersObjI.specialization != undefined || cutFieldsExpertise == null) {
+      setIsCutFieldsExpertise(false);
     } else {
-      setIsCutCategories(true);
+      setIsCutFieldsExpertise(true);
     }
-  }, [filtersObjI]);
+  }, [filtersObjI, fieldsExpertise]);
 
   const handleSubmit = async (values: any, { resetForm }: any) => {
     resetForm({});
@@ -90,7 +72,7 @@ const MobFilter = ({
     if (filters && Array.isArray(filters)) {
       filters.map((f: string, i: number) => {
         if (i % 2 == 1) {
-          if (filters[i - 1] == "category") {
+          if (filters[i - 1] == "specialization") {
             filtersObjB[filters[i - 1]] = f.split(",").filter((c) => c != "");
           } else {
             filtersObjB[filters[i - 1]] = f;
@@ -104,20 +86,11 @@ const MobFilter = ({
     setFiltersObjI(filtersObjB);
   };
 
+  console.log(fieldsExpertise, "fieldsExpertise");
+
   useEffect(() => {
     buildFiltersObj();
   }, [filters]);
-
-  useEffect(() => {
-    setInitialValues({
-      priceTo: filtersObjI.priceTo ?? "",
-      priceFrom: filtersObjI.priceFrom ?? "",
-      city: filtersObjI.city ?? "",
-      state: filtersObjI.state ?? "",
-    });
-
-    setSelectedArea(filtersObjI.state);
-  }, [filtersObjI]);
 
   useEffect(() => {
     if (debouncedChange != undefined) {
@@ -163,31 +136,29 @@ const MobFilter = ({
               <div className="mobFilter__field">
                 <span className="mobFilter__label">Категорія</span>
                 <ul className="mobFilter__categories">
-                  {isCutCategories
-                    ? cutOurCategories?.map(
+                  {isCutFieldsExpertise
+                    ? cutFieldsExpertise?.map(
                         ({ id, content }: { id: any; content: any }) => (
                           <li key={id} className="mobFilter__category">
                             <Checkbox
                               datakey={id}
                               changeFilter={changeFilter}
                               text={content}
-                              categories={filtersObjI.category ?? []}
+                              specializations={filtersObjI.specialization ?? []}
                             />
                           </li>
                         )
                       )
-                    : OurCategories.map(
-                        ({ id, content }: { id: any; content: any }) => (
-                          <li key={id} className="mobFilter__category">
-                            <Checkbox
-                              datakey={id}
-                              changeFilter={changeFilter}
-                              text={content}
-                              categories={filtersObjI.category ?? []}
-                            />
-                          </li>
-                        )
-                      )}
+                    : fieldsExpertise.map((item: string, index: number) => (
+                        <li key={index} className="mobFilter__category">
+                          <Checkbox
+                            datakey={index}
+                            changeFilter={changeFilter}
+                            text={item}
+                            specializations={filtersObjI.specialization ?? []}
+                          />
+                        </li>
+                      ))}
                   {/* {(cutOurCategories ?? OurCategories).map(
                     ({ id, content }: { id: any; content: any }) => (
                       <li key={id} className="mobFilter__category">
@@ -201,11 +172,11 @@ const MobFilter = ({
                     ),
                   )} */}
                 </ul>
-                {isCutCategories && (
+                {isCutFieldsExpertise && (
                   <button
                     type="button"
                     onClick={() => {
-                      setIsCutCategories(false);
+                      setIsCutFieldsExpertise(false);
                     }}
                     className="mobFilter__more-categories"
                   >

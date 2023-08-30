@@ -51,7 +51,7 @@ const CatalogView = () => {
       filters.map((f: string, i: number) => {
         if (i % 2 == 1) {
           filtersObjB[filters[i - 1]] =
-            filters[i - 1] == "category" ? f.split(",") : f;
+            filters[i - 1] == "specialization" ? f.split(",") : f;
         }
       });
     }
@@ -112,7 +112,6 @@ const CatalogView = () => {
           cancel = c;
         }),
       });
-      console.log(response.data, "response.data");
 
       if (response.data) {
         if (resetLimit) {
@@ -229,11 +228,13 @@ const CatalogView = () => {
             </button>
           </div>
 
-          {/* <MobFilter
-            isActive={state.isActiveMobFilter}
-            changeFilter={changeFilter}
-            filtersObj={filtersObj}
-          /> */}
+          {state.isActiveMobFilter && (
+            <MobFilter
+              isActive={state.isActiveMobFilter}
+              changeFilter={changeFilter}
+              filtersObj={filtersObj}
+            />
+          )}
         </div>
         <div className="experts-catalogView__title-wrapper">
           <h2 className="title experts-catalogView__title">Каталог бізнесів</h2>

@@ -19,7 +19,7 @@ const Sidebar = ({
   const [initialValues, setInitialValues] = useState<any>({});
   const router = useRouter();
   const { filters } = router.query;
-  const [fieldsExpertise, setFieldsExpertise] = useState<any>();
+  const [fieldsExpertise, setFieldsExpertise] = useState<any>([]);
   const [state, dispatch] = React.useContext(MainContext);
 
   const getFieldsExpertise = async () => {
@@ -50,7 +50,7 @@ const Sidebar = ({
     if (filters && Array.isArray(filters)) {
       filters.map((f: string, i: number) => {
         if (i % 2 == 1) {
-          if (filters[i - 1] == "category") {
+          if (filters[i - 1] == "specialization") {
             filtersObjB[filters[i - 1]] = f.split(",").filter((c) => c != "");
           } else {
             filtersObjB[filters[i - 1]] = f;
@@ -58,7 +58,6 @@ const Sidebar = ({
         }
       });
     }
-
     setFiltersObjI(filtersObjB);
   };
 
@@ -66,15 +65,6 @@ const Sidebar = ({
     buildFiltersObj();
   }, [filters]);
 
-  useEffect(() => {
-    // setInitialValues({
-    //   priceTo: filtersObjI.priceTo ?? "",
-    //   priceFrom: filtersObjI.priceFrom ?? "",
-    //   city: filtersObjI.city ?? "",
-    //   state: filtersObjI.state ?? "",
-    // });
-    // setSelectedArea(filtersObjI.state);
-  }, [filtersObjI]);
   useEffect(() => {
     if (debouncedChange != undefined) {
       const timeOutId = setTimeout(() => changeFilter(debouncedChange), 500);
@@ -117,7 +107,7 @@ const Sidebar = ({
                           changeFilter={changeFilter}
                           text={item}
                           name="specialization"
-                          categories={filtersObjI.category ?? []}
+                          specializations={filtersObjI.specialization ?? []}
                         />
                       </li>
                     ))}
