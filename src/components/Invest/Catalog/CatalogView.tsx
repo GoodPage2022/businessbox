@@ -21,6 +21,7 @@ import { Oval } from "react-loader-spinner";
 import Checkbox from "../../shared/Checkbox";
 import CustomSelect from "../../shared/CustomSelect";
 import { Field, FormikProvider, useFormik } from "formik";
+import InvestSlider from "./Slider";
 
 const CancelToken = axios.CancelToken;
 let cancel: any;
@@ -460,6 +461,7 @@ const CatalogView = () => {
           </FormikProvider>
         </div>
 
+        <InvestSlider />
         <p className="catalogView__qty section__primary-text">
           Знайдено{" "}
           <span className="section__primary-text catalogView__qty--bold">

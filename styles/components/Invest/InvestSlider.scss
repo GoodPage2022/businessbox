@@ -1,0 +1,41 @@
+.investSlider {
+  height: 216px;
+  margin-bottom: 40px;
+
+  .slick-arrow {
+    top: 50% !important;
+    transform: translate(0, -50%);
+  }
+}
+.investSlide {
+  cursor: pointer;
+  position: relative;
+  &__image {
+    position: relative;
+    height: 216px;
+
+    &--mob {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .investSlider {
+  }
+  .investSlide {
+    &__image {
+      &--desk {
+        display: none;
+      }
+      &--mob {
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .investSlider {
+  }
+}
