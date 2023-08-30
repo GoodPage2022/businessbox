@@ -42,6 +42,12 @@ const IconButton = ({
           onClick();
         } else {
           let urlPage = "/catalog";
+          if (router.asPath.includes("invest")) {
+            urlPage = "/invest/catalog";
+          }
+          if (router.asPath.includes("experts")) {
+            urlPage = "/experts";
+          }
 
           Object.keys(filtersObj).map((f: any) => {
             urlPage += "/" + f + "/" + filtersObj[f];
