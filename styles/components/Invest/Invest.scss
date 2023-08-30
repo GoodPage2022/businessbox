@@ -61,6 +61,7 @@
       text-decoration: underline;
       background: transparent;
       border: none;
+      font-size: 24px;
       cursor: pointer;
     }
   }
@@ -112,6 +113,12 @@
     &__button {
       padding: 10px 20px;
       border-radius: 18px;
+    }
+
+    &__card {
+      &--link {
+        font-size: 20px;
+      }
     }
   }
 }
