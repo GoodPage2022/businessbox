@@ -45,6 +45,12 @@ const Navbar = () => {
           </li>
         )}
 
+        <li className="header__nav__menu__item   section__secondary-text--white">
+          <Link href={`/experts`}>
+            <a className="section__secondary-text--white">Прокачка</a>
+          </Link>
+        </li>
+
         <li
           onClick={() => {
             // if (!user) {

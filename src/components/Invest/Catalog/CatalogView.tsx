@@ -21,11 +21,13 @@ import { Oval } from "react-loader-spinner";
 import Checkbox from "../../shared/Checkbox";
 import CustomSelect from "../../shared/CustomSelect";
 import { Field, FormikProvider, useFormik } from "formik";
+import InvestSlider from "./Slider";
 
 const CancelToken = axios.CancelToken;
 let cancel: any;
 
 const CatalogView = () => {
+  const [slides, setSlides] = useState([]);
   const user = useSelector((state: any) => state.auth.user);
   const rate = useSelector((state: any) => state.currency.value);
   const [cards, setCards] = useState<any>([]);
@@ -358,6 +360,27 @@ const CatalogView = () => {
       // console.log(values);
     },
   });
+
+  const getSlides = async () => {
+    try {
+      const response = await axios.post(`/api/invest-slider/getList`);
+      if (response.data) {
+        setSlides(response.data.entries);
+        console.log(response.data, "asdasd");
+
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    return [];
+  };
+
+  useEffect(() => {
+    getSlides();
+  }, []);
+
   return (
     <section
       className={`catalogView ${state.isActiveMobFilter ? "active" : ""}`}
@@ -460,6 +483,7 @@ const CatalogView = () => {
           </FormikProvider>
         </div>
 
+        {slides.length > 0 && <InvestSlider slides={slides} />}
         <p className="catalogView__qty section__primary-text">
           Знайдено{" "}
           <span className="section__primary-text catalogView__qty--bold">
