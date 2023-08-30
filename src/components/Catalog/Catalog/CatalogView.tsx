@@ -284,7 +284,6 @@ const CatalogView = () => {
       console.log(error);
     }
 
-    setCards([]);
     return [];
   };
 

@@ -14,6 +14,7 @@ const Contacts = ({ data }: any) => {
   const [isFacebookClicked, setIsFacebookClicked] = useState(false);
   const [isTelegramClicked, setIsTelegramClicked] = useState(false);
   const [isInstagramClicked, setIsInstagramClicked] = useState(false);
+  console.log(data, "sadasd");
 
   return (
     <div className="contacts">
@@ -38,12 +39,16 @@ const Contacts = ({ data }: any) => {
                   isPhoneClicked && "active"
                 } section__primary-text`}
               >
-                <Link href={`tel:${data.phone_1}`}>
-                  <a className="section__primary-text">{data.phone_1}</a>
-                </Link>
-                <Link href={`tel:${data.phone_2}`}>
-                  <a className="section__primary-text">{data.phone_2}</a>
-                </Link>
+                {data.phone_1 && (
+                  <Link href={`tel:${data.phone_1}`}>
+                    <a className="section__primary-text">{data.phone_1}</a>
+                  </Link>
+                )}
+                {data.phone_2 && (
+                  <Link href={`tel:${data.phone_2}`}>
+                    <a className="section__primary-text">{data.phone_2}</a>
+                  </Link>
+                )}
               </div>
             </div>
           )}
@@ -68,12 +73,16 @@ const Contacts = ({ data }: any) => {
                 } section__primary-text`}
               >
                 {" "}
-                <Link href={`mailto::${data.email_1}`}>
-                  <a className="section__primary-text">{data.email_1}</a>
-                </Link>{" "}
-                <Link href={`mailto::${data.email_2}`}>
-                  <a className="section__primary-text">{data.email_2}</a>
-                </Link>{" "}
+                {data.email_1 && (
+                  <Link href={`mailto:${data.email_1}`}>
+                    <a className="section__primary-text">{data.email_1}</a>
+                  </Link>
+                )}
+                {data.email_2 && (
+                  <Link href={`mailto:${data.email_2}`}>
+                    <a className="section__primary-text">{data.email_2}</a>
+                  </Link>
+                )}
               </div>
             </div>
           )}
@@ -105,16 +114,20 @@ const Contacts = ({ data }: any) => {
                   isFacebookClicked && "active"
                 } section__primary-text`}
               >
-                <Link href={data.facebook_1}>
-                  <a target="_blank" className="section__primary-text">
-                    {data.facebook_1}
-                  </a>
-                </Link>{" "}
-                <Link href={data.facebook_1}>
-                  <a target="_blank" className="section__primary-text">
-                    {data.facebook_2}
-                  </a>
-                </Link>{" "}
+                {data.facebook_1 && (
+                  <Link href={data.facebook_1}>
+                    <a target="_blank" className="section__primary-text">
+                      {data.facebook_1}
+                    </a>
+                  </Link>
+                )}
+                {data.facebook_2 && (
+                  <Link href={data.facebook_1}>
+                    <a target="_blank" className="section__primary-text">
+                      {data.facebook_2}
+                    </a>
+                  </Link>
+                )}
               </div>
             </div>
           )}
@@ -139,16 +152,20 @@ const Contacts = ({ data }: any) => {
                 } section__primary-text`}
               >
                 {" "}
-                <Link href={data.telegram_1}>
-                  <a target="_blank" className="section__primary-text">
-                    {data.telegram_1}
-                  </a>
-                </Link>{" "}
-                <Link href={data.telegram_2}>
-                  <a target="_blank" className="section__primary-text">
-                    {data.telegram_2}
-                  </a>
-                </Link>{" "}
+                {data.telegram_1 && (
+                  <Link href={data.telegram_1}>
+                    <a target="_blank" className="section__primary-text">
+                      {data.telegram_1}
+                    </a>
+                  </Link>
+                )}
+                {data.telegram_2 && (
+                  <Link href={data.telegram_2}>
+                    <a target="_blank" className="section__primary-text">
+                      {data.telegram_2}
+                    </a>
+                  </Link>
+                )}
               </div>
             </div>
           )}
@@ -173,16 +190,20 @@ const Contacts = ({ data }: any) => {
                 } section__primary-text`}
               >
                 {" "}
-                <Link href={data.instagram_1}>
-                  <a target="_blank" className="section__primary-text">
-                    {data.instagram_1}
-                  </a>
-                </Link>{" "}
-                <Link href={data.instagram_2}>
-                  <a target="_blank" className="section__primary-text">
-                    {data.instagram_2}
-                  </a>
-                </Link>{" "}
+                {data.instagram_1 && (
+                  <Link href={data.instagram_1}>
+                    <a target="_blank" className="section__primary-text">
+                      {data.instagram_1}
+                    </a>
+                  </Link>
+                )}
+                {data.instagram_2 && (
+                  <Link href={data.instagram_2}>
+                    <a target="_blank" className="section__primary-text">
+                      {data.instagram_2}
+                    </a>
+                  </Link>
+                )}
               </div>
             </div>
           )}

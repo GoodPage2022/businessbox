@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const PaginationItem = ({
   item,
   pageNumber,
-  search
+  search,
 }: {
   item: number;
   pageNumber: number;
-  search?: string
+  search?: string;
 }) => {
   const isCurrentPage = pageNumber == item;
   const router = useRouter();
   const { filters } = router.query;
+  const [path, setPath] = useState<string>("/catalog");
   let filtersObj: any = {};
 
   if (filters && Array.isArray(filters)) {
@@ -32,10 +33,19 @@ const PaginationItem = ({
     filtersObj["page"] = item;
   }
 
+  useEffect(() => {
+    if (router.asPath.includes("invest")) {
+      setPath("/invest/catalog");
+    }
+    if (router.asPath.includes("experts")) {
+      setPath("/experts");
+    }
+  }, [router]);
+
   return (
     <li
       onClick={() => {
-        let urlPage = search ? "/search/" + search : "/catalog";
+        let urlPage = search ? "/search/" + search : path;
 
         Object.keys(filtersObj).map((f: any) => {
           urlPage += "/" + f + "/" + filtersObj[f];

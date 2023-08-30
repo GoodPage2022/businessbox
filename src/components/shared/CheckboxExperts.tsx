@@ -2,29 +2,26 @@ import { useEffect, useState } from "react";
 const CheckboxExperts = ({
   text,
   changeFilter,
-  categories,
+  specializations,
   datakey,
   name,
 }: {
   datakey: number;
   text: string;
   changeFilter: any;
-  categories: string[];
+  specializations: string[];
   name?: string;
 }) => {
   const [isChosen, setIsChosen] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsChosen(categories.includes(text));
-  }, [categories, text]);
-  // console.log(categories, text);
+    setIsChosen(specializations.includes(text));
+  }, [specializations, text]);
 
   return (
     <div
       className="checkbox__wrapper"
       onClick={(e: any) => {
-        console.log(e.target.name, "etarhetname");
-
         // if (e.target.name == "sorting") {
         //   if (!categories.includes(text)) {
         //     changeFilter({
@@ -46,18 +43,15 @@ const CheckboxExperts = ({
         // }
         // if (e.target.name != "category") return true;
 
-        if (!categories.includes(text) && !!changeFilter) {
-          console.log("aaa");
-
+        if (!specializations.includes(text) && !!changeFilter) {
           changeFilter({
             target: {
               name: "specialization",
-              value: [...categories, text],
+              value: [...specializations, text],
             },
           });
         } else {
-          const categoriesFiltered = categories.filter((c) => c != text);
-          console.log("bbb");
+          const categoriesFiltered = specializations.filter((c) => c != text);
 
           if (!!changeFilter) {
             changeFilter({
@@ -68,7 +62,6 @@ const CheckboxExperts = ({
             });
           }
         }
-
         setIsChosen((prev) => !prev);
       }}
     >

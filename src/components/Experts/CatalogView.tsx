@@ -20,9 +20,10 @@ import { Oval } from "react-loader-spinner";
 // import Checkbox from "../shared/Checkbox";
 import CustomSelect from "../shared/CustomSelect";
 import { Field, FormikProvider, useFormik } from "formik";
+import Search from "./Search";
 
-const CancelToken = axios.CancelToken;
-let cancel: any;
+// const CancelToken = axios.CancelToken;
+// let cancel: any;
 
 const CatalogView = () => {
   const user = useSelector((state: any) => state.auth.user);
@@ -51,7 +52,7 @@ const CatalogView = () => {
       filters.map((f: string, i: number) => {
         if (i % 2 == 1) {
           filtersObjB[filters[i - 1]] =
-            filters[i - 1] == "category" ? f.split(",") : f;
+            filters[i - 1] == "specialization" ? f.split(",") : f;
         }
       });
     }
@@ -60,12 +61,14 @@ const CatalogView = () => {
   };
 
   const getExperts = async (resetLimit?: boolean) => {
-    dispatch({ type: "toggle_loader" });
+    // if (!resetLimit) dispatch({ type: "toggle_loader" });
+
+    if (!resetLimit) setIsLoading(true);
     let filterSetOfExp: any = [];
 
-    if (cancel !== undefined) {
-      cancel();
-    }
+    // if (cancel !== undefined) {
+    //   cancel();
+    // }
     let requestBody: any = {
       user,
     };
@@ -107,22 +110,24 @@ const CatalogView = () => {
     }
 
     try {
-      const response = await axios.post(`/api/experts/getList`, requestBody, {
+      const response = await axios.post(
+        `/api/experts/getList`,
+        requestBody /*  {
         cancelToken: new CancelToken((c) => {
           cancel = c;
         }),
-      });
-      console.log(response.data, "response.data");
+      } */
+      );
 
       if (response.data) {
         if (resetLimit) {
           setCountCards(response.data.entries.length);
           setIsLoading(false);
-          return response.data.entries.length;
+          return;
         } else {
           setCards(response.data.entries);
           setIsLoading(false);
-          return response.data.entries;
+          return;
         }
       }
     } catch (error: any) {
@@ -135,12 +140,12 @@ const CatalogView = () => {
       console.log(error);
     }
 
-    setCards([]);
-    return [];
+    // setCards([]);
+    return;
   };
 
   useEffect(() => {
-    if (!!filters && filters.length) buildFiltersObj();
+    if (!!filters && filters.length && cards.length == 0) buildFiltersObj();
   }, [filters]);
 
   useEffect(() => {
@@ -152,7 +157,7 @@ const CatalogView = () => {
   useEffect(() => {
     getExperts();
     setPageNumber(filtersObj.page ?? 1);
-  }, [filtersObj, state.isUah]);
+  }, [filtersObj]);
 
   useEffect(() => {
     if (state.isActiveAnalysisTariffsModal) {
@@ -162,6 +167,7 @@ const CatalogView = () => {
       dispatch({ type: "toggle_analysisModal" });
     }
   }, []);
+
   const changeFilter = (e: any, clean?: boolean) => {
     if (clean) {
       setFiltersObj({});
@@ -229,14 +235,18 @@ const CatalogView = () => {
             </button>
           </div>
 
-          {/* <MobFilter
-            isActive={state.isActiveMobFilter}
-            changeFilter={changeFilter}
-            filtersObj={filtersObj}
-          /> */}
+          {state.isActiveMobFilter && (
+            <MobFilter
+              isActive={state.isActiveMobFilter}
+              changeFilter={changeFilter}
+              filtersObj={filtersObj}
+            />
+          )}
         </div>
         <div className="experts-catalogView__title-wrapper">
-          <h2 className="title experts-catalogView__title">Каталог бізнесів</h2>
+          <h2 className="title experts-catalogView__title">
+            Каталог експертів
+          </h2>
           {/* <p>
             <Checkbox
               text="Відсортувати за популярністю"
@@ -246,6 +256,7 @@ const CatalogView = () => {
               name={"sorting"}
             />
           </p> */}
+          <Search />
         </div>
         <p className="experts-catalogView__qty section__primary-text">
           Знайдено експертів:

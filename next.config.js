@@ -45,6 +45,7 @@ const nextReactSvgConfig = {
 const withReactSvg = require("next-react-svg")(nextReactSvgConfig);
 
 const nextConfig = {
+  reactStrictMode: false,
   env,
   images: {
     domains: [

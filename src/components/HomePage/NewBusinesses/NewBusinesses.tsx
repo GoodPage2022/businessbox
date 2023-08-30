@@ -20,6 +20,7 @@ const NewBusinesses = () => {
       },
       filter: {
         sold_out: false,
+        investing: false,
       },
     };
 
