@@ -1,5 +1,5 @@
 .contacts {
-  padding-top: 100px;
+  padding-top: 20px;
   padding-bottom: 60px;
 
   &__container {
@@ -14,7 +14,7 @@
   }
 
   &__title {
-    font-size: 48px;
+    font-size: 32px;
     margin-bottom: 20px;
   }
 
@@ -103,9 +103,6 @@
 
 @media screen and (max-width: $size-mobile) {
   .contacts {
-    padding-top: 100px;
-    padding-bottom: 0;
-
     &__wrapper {
     }
 
