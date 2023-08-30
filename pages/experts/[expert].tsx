@@ -28,7 +28,9 @@ const Project: NextPage = ({ expert }: any) => {
       </Head> */}
       <HeroExpert data={expert} />
       <Expertise data={expert} />
-      <Video video={expert.video} />
+      {expert.video && expert.video.length > 2 && (
+        <Video video={expert.video} />
+      )}
       <ExpertsSlider images={expert.images} />
       <Contacts data={expert} />
     </>
