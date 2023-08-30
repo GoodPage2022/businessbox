@@ -27,7 +27,7 @@ const Expertise = ({ data }: any) => {
       <div className="expertise__container container">
         <div className="expertise__description">
           {" "}
-          <h3 className="expertise__title">Формати надання експертизи</h3>{" "}
+          <h3 className="expertise__title">Експертиза</h3>{" "}
           <div dangerouslySetInnerHTML={{ __html: data.expertise }} />
         </div>
         <div className="expertise__form">
