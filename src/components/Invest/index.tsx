@@ -14,13 +14,14 @@ const Invest = () => {
   const router = useRouter();
 
   const onForInvestorClick = () => {
-    if (!user) {
-      dispatch({ type: "toggle_authModal" });
-      dispatch({ type: "toggle_investor" });
-      state.isInvestor = 1;
-    } else {
-      router.push("/invest/catalog");
-    }
+    // if (!user) {
+    //   dispatch({ type: "toggle_authModal" });
+    //   dispatch({ type: "toggle_investor" });
+    //   state.isInvestor = 1;
+    // } else {
+    //   router.push("/invest/catalog");
+    // }
+    router.push("/invest/catalog");
   };
 
   const onInvestmentBusinessClick = () => {

@@ -1,5 +1,4 @@
 .investSlider {
-  height: 216px;
   margin-bottom: 40px;
 
   .slick-arrow {
@@ -25,6 +24,7 @@
   }
   .investSlide {
     &__image {
+      height: 144px;
       &--desk {
         display: none;
       }
@@ -37,5 +37,28 @@
 
 @media screen and (max-width: $size-mobile) {
   .investSlider {
+    margin-right: -20px;
+    margin-left: -20px;
+    margin-bottom: 20px;
+  }
+  .investSlide {
+    &__image {
+      // height: 74px;
+    }
+  }
+  .catalogView__title-wrapper {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .investSlider {
+    margin-right: -20px;
+    margin-left: -20px;
+  }
+  .investSlide {
+    &__image {
+      height: 97px;
+    }
   }
 }
