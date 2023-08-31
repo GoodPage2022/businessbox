@@ -47,7 +47,7 @@ const Navbar = () => {
 
         <li className="header__nav__menu__item   section__secondary-text--white">
           <Link href={`/experts`}>
-            <a className="section__secondary-text--white">Прокачка</a>
+            <a className="section__secondary-text--white">Прокачка бізнесу</a>
           </Link>
         </li>
 
