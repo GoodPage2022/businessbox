@@ -72,7 +72,7 @@ const Categories = () => {
             className="categories-first__button"
             onClick={() => router.push("/catalog")}
           >
-            Купити зараз
+            Переглянути варіанти
           </button>
         )}
 
@@ -86,7 +86,7 @@ const Categories = () => {
                 openModal();
               }
             }}
-            className="categories-second__button--white"
+            className="categories-first__button"
           >
             Продати бізнес
           </button>
@@ -140,7 +140,7 @@ const Categories = () => {
                   // user != null ? router.push("/account/add-business") : openModal()
                 }
               >
-                Купити зараз
+                Переглянути варіанти
               </button>
             </div>
           </div>
@@ -166,7 +166,7 @@ const Categories = () => {
                     openModal();
                   }
                 }}
-                className="categories-second__button--white"
+                className="categories-first__button"
               >
                 Продати бізнес
               </button>
