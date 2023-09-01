@@ -76,7 +76,7 @@ const AddBusinessFinish = () => {
       public_reviews,
       financial_accounting_system,
       crm,
-      _by: user._id,
+      _by: user ? user._id : "",
       capital_return_percentage,
       annual_profit,
     };
@@ -224,8 +224,8 @@ const AddBusinessFinish = () => {
                                 "number_of_founders",
                                 e.target.value.replaceAll(
                                   /[A-Za-zА-Яа-я,./'` ]/g,
-                                  "",
-                                ),
+                                  ""
+                                )
                               );
                             }}
                             required={isGoBackClicked ? false : true}
@@ -274,8 +274,8 @@ const AddBusinessFinish = () => {
                                   "capital_return_percentage",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               minLength={1}
@@ -302,8 +302,8 @@ const AddBusinessFinish = () => {
                                   "return_on_investment",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               maxLength={255}
@@ -326,8 +326,8 @@ const AddBusinessFinish = () => {
                                   "annual_profit",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               maxLength={255}
@@ -382,8 +382,8 @@ const AddBusinessFinish = () => {
                                 "number_of_founders",
                                 e.target.value.replaceAll(
                                   /[A-Za-zА-Яа-я,./'` ]/g,
-                                  "",
-                                ),
+                                  ""
+                                )
                               );
                             }}
                             required={isGoBackClicked ? false : true}
@@ -405,8 +405,8 @@ const AddBusinessFinish = () => {
                                 "number_of_employees",
                                 e.target.value.replaceAll(
                                   /[A-Za-zА-Яа-я,./'` ]/g,
-                                  "",
-                                ),
+                                  ""
+                                )
                               );
                             }}
                             name="number_of_employees"
@@ -453,8 +453,8 @@ const AddBusinessFinish = () => {
                                   "year_turnover",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               minLength={1}
@@ -481,8 +481,8 @@ const AddBusinessFinish = () => {
                                   "monthly_net_profit",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               maxLength={255}
@@ -508,8 +508,8 @@ const AddBusinessFinish = () => {
                                   "gross_monthly_income",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               maxLength={255}
@@ -538,8 +538,8 @@ const AddBusinessFinish = () => {
                                     "estimated_turnover_next_year",
                                     e.target.value.replaceAll(
                                       /[A-Za-zА-Яа-я,./'` ]/g,
-                                      "",
-                                    ),
+                                      ""
+                                    )
                                   );
                                 }}
                                 maxLength={255}
@@ -585,8 +585,8 @@ const AddBusinessFinish = () => {
                                   "return_on_investment",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               maxLength={255}
@@ -614,8 +614,8 @@ const AddBusinessFinish = () => {
                                   "equipment_market_value",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               maxLength={255}
@@ -641,8 +641,8 @@ const AddBusinessFinish = () => {
                                   "monthly_salary_fund",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               minLength={1}
@@ -669,8 +669,8 @@ const AddBusinessFinish = () => {
                                   "year_nonfixed_costs",
                                   e.target.value.replaceAll(
                                     /[A-Za-zА-Яа-я,./'` ]/g,
-                                    "",
-                                  ),
+                                    ""
+                                  )
                                 );
                               }}
                               maxLength={255}

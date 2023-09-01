@@ -22,7 +22,7 @@ const MyBusinesses = () => {
   const router = useRouter();
   const getBusinesses = async () => {
     const filter = {
-      _by: user._id,
+      _by: user ? user._id : "",
       active: true,
     };
     const response = await axios.post(`/api/businesses/getList`, {
