@@ -12,7 +12,9 @@ const AddBusinessFinish = () => {
   const user = useSelector((state: any) => state.auth.user);
   const [addBusinessError, setAddBusinessError] = useState("");
   const { businessId } = router.query;
-  const [currency, setCurrency] = useState(localStorage.getItem("currency"));
+  const [currency, setCurrency] = useState(
+    typeof window !== "undefined" ? localStorage.getItem("currency") : ""
+  );
   const [isGoBackClicked, setIsGoBackClicked] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -71,7 +73,7 @@ const AddBusinessFinish = () => {
       public_reviews,
       financial_accounting_system,
       crm,
-      _by: user._id,
+      _by: user ? user._id : "",
     };
 
     try {
@@ -82,7 +84,7 @@ const AddBusinessFinish = () => {
       setAddBusinessError("");
       console.log("newUserResponse");
       console.log(newBusinessResponse);
-      localStorage.removeItem("currency");
+      if (typeof window !== "undefined") localStorage.removeItem("currency");
       if (isGoBackClicked) {
         router.push(`/account/edit-business/${businessId}`);
       } else {
@@ -105,9 +107,9 @@ const AddBusinessFinish = () => {
       '"': "&quot;",
       "'": "&#039;",
     };
-if (text == undefined) {
-  return;
-}
+    if (text == undefined) {
+      return;
+    }
     return text.replace(/[&<>"']/g, function (m: any) {
       return map[m];
     });
@@ -231,10 +233,7 @@ if (text == undefined) {
                       onChange={(e: any) => {
                         setFieldValue(
                           "number_of_founders",
-                          e.target.value.replaceAll(
-                            /[A-Za-zА-Яа-я,./'` ]/g,
-                            "",
-                          ),
+                          e.target.value.replaceAll(/[A-Za-zА-Яа-я,./'` ]/g, "")
                         );
                       }}
                       required={isGoBackClicked ? false : true}
@@ -254,10 +253,7 @@ if (text == undefined) {
                       onChange={(e: any) => {
                         setFieldValue(
                           "number_of_employees",
-                          e.target.value.replaceAll(
-                            /[A-Za-zА-Яа-я,./'` ]/g,
-                            "",
-                          ),
+                          e.target.value.replaceAll(/[A-Za-zА-Яа-я,./'` ]/g, "")
                         );
                       }}
                       name="number_of_employees"
@@ -304,8 +300,8 @@ if (text == undefined) {
                             "year_turnover",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         minLength={1}
@@ -332,8 +328,8 @@ if (text == undefined) {
                             "monthly_net_profit",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         maxLength={255}
@@ -359,8 +355,8 @@ if (text == undefined) {
                             "gross_monthly_income",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         maxLength={255}
@@ -389,8 +385,8 @@ if (text == undefined) {
                               "estimated_turnover_next_year",
                               e.target.value.replaceAll(
                                 /[A-Za-zА-Яа-я,./'` ]/g,
-                                "",
-                              ),
+                                ""
+                              )
                             );
                           }}
                           maxLength={255}
@@ -436,8 +432,8 @@ if (text == undefined) {
                             "return_on_investment",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         maxLength={255}
@@ -465,8 +461,8 @@ if (text == undefined) {
                             "equipment_market_value",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         maxLength={255}
@@ -491,8 +487,8 @@ if (text == undefined) {
                             "monthly_salary_fund",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         minLength={1}
@@ -519,8 +515,8 @@ if (text == undefined) {
                             "year_nonfixed_costs",
                             e.target.value.replaceAll(
                               /[A-Za-zА-Яа-я,./'` ]/g,
-                              "",
-                            ),
+                              ""
+                            )
                           );
                         }}
                         maxLength={255}

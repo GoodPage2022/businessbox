@@ -7,8 +7,8 @@ import AddBusiness from "../../src/components/Invest/AddBusiness/AddBusiness";
 import AccountLayout from "../../src/layouts/AccountLayout";
 
 const AddMyBusiness: NextPage = () => {
-  const router = useRouter();
-  const user = useSelector((state: any) => state.auth.user);
+  // const router = useRouter();
+  // const user = useSelector((state: any) => state.auth.user);
 
   // if (user == null) {
   //   router.push('/')

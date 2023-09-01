@@ -9,7 +9,7 @@ import AccountLayout from "../../../src/layouts/AccountLayout";
 const AddMyBusinessFinish: NextPage = () => {
   const router = useRouter();
   const { businessId } = router.query;
-  const user = useSelector((state: any) => state.auth.user);
+  // const user = useSelector((state: any) => state.auth.user);
 
   // if (user == null) {
   //   router.push("/");

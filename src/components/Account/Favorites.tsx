@@ -9,13 +9,18 @@ import { useSelector } from "react-redux";
 import { Oval } from "react-loader-spinner";
 
 const Favorites = () => {
-  const user = useSelector((state: any) => state.auth.user);
   const [cards, setCards] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const userSelector = useSelector((state: any) => state.auth.user);
+  const [user, setUser] = useState<any>({});
+
+  useEffect(() => {
+    setUser(userSelector);
+  }, [userSelector]);
+
   const getBusinesses = async () => {
-    
-    if (!user.favourites || user.favourites.length == 0) {
+    if (user && (!user.favourites || user.favourites.length == 0)) {
       setCards([]);
       setIsLoading(false);
       return [];
@@ -27,9 +32,8 @@ const Favorites = () => {
       filter,
     });
 
-    console.log('response');
+    console.log("response");
     console.log(response);
-    
 
     if (response.data) {
       setCards(response.data.entries);
@@ -43,8 +47,8 @@ const Favorites = () => {
   };
 
   useEffect(() => {
-    getBusinesses();
-  }, []);
+    if (user) getBusinesses();
+  }, [user]);
 
   return (
     <section className="favorites">
@@ -114,7 +118,7 @@ const Favorites = () => {
                       />
                     </div>
                   </div>
-                ),
+                )
               )}
             </ul>
             <ul className="favorites__cards--mob">
@@ -161,7 +165,7 @@ const Favorites = () => {
                       />
                     </div>
                   </div>
-                ),
+                )
               )}
             </ul>
           </>

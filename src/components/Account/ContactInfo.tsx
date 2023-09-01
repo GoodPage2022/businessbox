@@ -28,7 +28,7 @@ const ContactInfo = () => {
   const [state, dispatch] = React.useContext(MainContext);
 
   useEffect(() => {
-    if (!!user.avatar) {
+    if (user && !!user.avatar) {
       setAvatar(user.avatar.path);
     }
   }, [user]);
@@ -62,7 +62,7 @@ const ContactInfo = () => {
     try {
       const updateUserResponse = await axios.post(
         `/api/account/userUpdate`,
-        data,
+        data
       );
 
       if (updateUserResponse.status == 200) {
@@ -75,7 +75,7 @@ const ContactInfo = () => {
             phone,
             surname,
             city,
-          }),
+          })
         );
       }
       resetForm({
@@ -115,7 +115,7 @@ const ContactInfo = () => {
             reponse.data.files
               ? "/avatars/" + reponse.data.files.file.originalFilename
               : reponse.data.url
-          }`,
+          }`
         );
 
         const data = {
@@ -135,7 +135,7 @@ const ContactInfo = () => {
         try {
           const updateUserResponse = await axios.post(
             `/api/account/userUpdate`,
-            data,
+            data
           );
 
           if (updateUserResponse.status == 200) {
@@ -149,7 +149,7 @@ const ContactInfo = () => {
                       : reponse.data.url
                   }`,
                 },
-              }),
+              })
             );
           }
           console.log(updateUserResponse);
@@ -228,7 +228,7 @@ const ContactInfo = () => {
                   try {
                     const updateUserResponse = await axios.post(
                       `/api/account/userUpdate`,
-                      data,
+                      data
                     );
 
                     if (updateUserResponse.status == 200) {
@@ -238,7 +238,7 @@ const ContactInfo = () => {
                           avatar: {
                             path: defaultAvatar,
                           },
-                        }),
+                        })
                       );
                     }
 
@@ -263,11 +263,11 @@ const ContactInfo = () => {
 
           <Formik
             initialValues={{
-              name: user.name,
-              phone: user.phone,
-              surname: user.surname,
-              email: user.email,
-              city: user.city,
+              name: user ? user.name : "",
+              phone: user ? user.phone : "",
+              surname: user ? user.surname : "",
+              email: user ? user.email : "",
+              city: user ? user.city : "",
               password: "",
             }}
             validate={(values) => {
