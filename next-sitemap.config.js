@@ -3,9 +3,14 @@ module.exports = {
     siteUrl: 'https://bissbox.com',
     generateRobotsTxt: true,
     exclude: [
-      '/sitemap-0.xml',
       '/sitemap-catalog.xml',
-      '/sitemap-static.xml',
+      // '/sitemap-static.xml',
+      '/account/add-business',
+      '/account/add-business-finish',
+      '/account/contact-info',
+      '/account/favorites',
+      '/account/inactive-businesses',
+      '/account/my-businesses',
     ],
     // additionalPaths: async (config) => {
     //   const result = []
@@ -25,7 +30,7 @@ module.exports = {
     robotsTxtOptions: {
       additionalSitemaps: [
         'https://bissbox.com/sitemap-catalog.xml',
-        'https://bissbox.com/sitemap-static.xml',
+        // 'https://bissbox.com/sitemap-static.xml',
       ],
     },
   }
