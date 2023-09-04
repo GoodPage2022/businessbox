@@ -7,7 +7,11 @@ const HeroExpert = ({ data }: any) => {
         <div className="heroExpert__image">
           <Image
             className=""
-            src={`https://admin.bissbox.com/storage/uploads${data.avatar.path}`}
+            src={
+              data && data.avatar
+                ? `https://admin.bissbox.com/storage/uploads${data.avatar.path}`
+                : ""
+            }
             layout="fill"
             objectFit="cover"
             alt="avatar"

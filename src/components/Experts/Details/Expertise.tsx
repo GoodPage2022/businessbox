@@ -25,21 +25,26 @@ const Expertise = ({ data }: any) => {
   return (
     <div className="expertise">
       <div className="expertise__container container">
-        <div className="expertise__description">
-          {" "}
-          <h3 className="expertise__title">Експертиза</h3>{" "}
-          <div dangerouslySetInnerHTML={{ __html: data.expertise }} />
-        </div>
-        <div className="expertise__form">
-          <h3 className="expertise__title">Формати надання експертизи</h3>{" "}
-          <ul className="expertise__list">
-            {data.examinationForm.map((item: any, idx: number) => (
-              <li className="expertise__list-item" key={idx}>
-                {item.value}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {data && data.expertise ? (
+          <div className="expertise__description">
+            {" "}
+            <h3 className="expertise__title">Експертиза</h3>{" "}
+            <div dangerouslySetInnerHTML={{ __html: data.expertise }} />
+          </div>
+        ) : null}
+        {data && data.examinationForm ? (
+          <div className="expertise__form">
+            <h3 className="expertise__title">Формати надання експертизи</h3>{" "}
+            <ul className="expertise__list">
+              {data &&
+                data.examinationForm?.map((item: any, idx: number) => (
+                  <li className="expertise__list-item" key={idx}>
+                    {item.value}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     </div>
   );

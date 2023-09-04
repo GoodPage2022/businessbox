@@ -66,7 +66,7 @@ const ExpertCard = ({
         </p>
       </div>
       <div className="expert-card__specialization">
-        {specialization.map((item, idx) => (
+        {specialization?.map((item, idx) => (
           <span className="expert-card__specialization-item" key={idx}>
             {item}
             {specialization.length == idx + 1 ? "" : ", "}

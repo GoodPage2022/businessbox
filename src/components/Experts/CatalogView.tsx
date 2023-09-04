@@ -305,8 +305,16 @@ const CatalogView = () => {
                     id={_id}
                     firstname={firstname}
                     lastname={lastname}
-                    specialization={field_of_expertise}
-                    image={`https://admin.bissbox.com/storage/uploads${avatar.path}`}
+                    specialization={
+                      Array.isArray(field_of_expertise)
+                        ? field_of_expertise
+                        : [field_of_expertise]
+                    }
+                    image={
+                      avatar && avatar.path
+                        ? `https://admin.bissbox.com/storage/uploads${avatar.path}`
+                        : ""
+                    }
                   />
                 )
               )}
