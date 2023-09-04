@@ -34,6 +34,7 @@ import Script from "next/script";
 import ModalMoreAboutBusiness from "../../Modals/Invest/Modal-MoreAboutBusiness";
 import ModalThankComment from "../../Modals/Modal-thank-comment/Modal-thank-comment";
 import InvestSlider from "../../Invest/Catalog/Slider";
+import Video from "../../Experts/Details/Video";
 
 const ProjectInfo = ({ projectId }: { projectId: string }) => {
   const [slides, setSlides] = useState([]);
@@ -732,6 +733,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
           className="projectInfo__description section__primary-text"
           dangerouslySetInnerHTML={{ __html: projectInfo.description }}
         />
+        {projectInfo.video && <Video video={projectInfo.video} />}
         <div className="projectInfo__info-wrapper">
           <div className="projectInfo__button-wrapper--mob">
             {/* <button
