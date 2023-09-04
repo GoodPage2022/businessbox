@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://bissbox.com
+
+# Sitemaps
+Sitemap: https://bissbox.com/sitemap.xml
+Sitemap: https://bissbox.com/sitemap-catalog.xml
+Sitemap: https://bissbox.com/sitemap-static.xml
