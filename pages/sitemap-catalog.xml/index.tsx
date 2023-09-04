@@ -13,8 +13,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     urls.push({
       loc: 'https://bissbox.com/catalog/' + _e._id,
       lastmod: new Date().toISOString(),
-      // changefreq
-      // priority
+      changefreq: 'weekly',
+      priority: 0.7
     })
   }
 
