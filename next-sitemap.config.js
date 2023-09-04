@@ -3,6 +3,7 @@ module.exports = {
     siteUrl: 'https://bissbox.com',
     generateRobotsTxt: true,
     exclude: [
+      '/sitemap-0.xml',
       '/sitemap-catalog.xml',
       '/sitemap-static.xml',
     ],
