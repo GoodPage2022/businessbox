@@ -145,7 +145,8 @@ const CatalogView = () => {
   };
 
   useEffect(() => {
-    if (!!filters && filters.length && cards.length == 0) buildFiltersObj();
+    if (!!filters && filters.length /* && cards.length == 0 */)
+      buildFiltersObj();
   }, [filters]);
 
   useEffect(() => {
