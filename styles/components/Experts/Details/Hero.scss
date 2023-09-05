@@ -67,5 +67,14 @@
       margin-right: 0;
       margin-bottom: 20px;
     }
+
+    .breadcrumbs {
+      &__item {
+        color: white;
+        & a {
+          color: white;
+        }
+      }
+    }
   }
 }
