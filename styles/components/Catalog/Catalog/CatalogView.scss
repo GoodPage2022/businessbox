@@ -365,6 +365,9 @@
     .business-card-favorite {
       display: flex;
       height: 228px;
+      &__description {
+        height: 67px;
+      }
     }
 
     .business-card {
