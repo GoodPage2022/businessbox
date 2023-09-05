@@ -12,11 +12,24 @@
   &__description {
     position: relative;
     width: 70%;
-    padding-right: 10px;
+    padding-right: 20px;
     & p {
-      // font-family: ;
+      font-family: "Montserrat";
       font-size: 20px;
       line-height: 130%;
+      text-align: justify;
+    }
+    & span {
+      font-family: "Montserrat";
+      font-size: 20px;
+      line-height: 130%;
+      text-align: justify;
+    }
+    & div {
+      font-family: "Montserrat";
+      font-size: 20px;
+      line-height: 130%;
+      text-align: justify;
     }
 
     &::after {
@@ -49,7 +62,7 @@
     font-family: "Montserrat";
     position: relative;
     font-size: 20px;
-    line-height: 100%;
+    line-height: 130%;
 
     &:not(:last-child) {
       margin-bottom: 15px;
