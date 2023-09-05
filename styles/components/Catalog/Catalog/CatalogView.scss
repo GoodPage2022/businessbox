@@ -57,6 +57,10 @@
   .custom-select__menu {
     z-index: 555;
   }
+
+  .business-card-favorite {
+    display: none;
+  }
 }
 
 @media screen and (max-width: $size-tablet) {
@@ -356,6 +360,14 @@
       line-height: 29px;
       color: $main-text-color;
       margin-top: 20px;
+    }
+
+    .business-card-favorite {
+      display: flex;
+    }
+
+    .business-card {
+      display: none;
     }
   }
 }

@@ -215,8 +215,10 @@ const CatalogViewSearch = () => {
                   is_verified,
                   currency,
                   negotiatedPrice,
-                }: any) =>
-                  isRowsActive && screenWidth < 768 ? (
+                }: any) => (
+                  // isRowsActive && screenWidth < 768 ? (
+                  <>
+                    {" "}
                     <BusinessCardFavorites
                       key={_id}
                       alias={_id}
@@ -237,7 +239,7 @@ const CatalogViewSearch = () => {
                       currency={currency}
                       negotiatedPrice={negotiatedPrice}
                     />
-                  ) : (
+                    {/* ) : ( */}
                     <BusinessCard
                       key={_id}
                       alias={_id}
@@ -258,7 +260,9 @@ const CatalogViewSearch = () => {
                       currency={currency}
                       negotiatedPrice={negotiatedPrice}
                     />
-                  )
+                  </>
+                )
+                // )
               )}
             </ul>
           ) : (

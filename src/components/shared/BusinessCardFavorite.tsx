@@ -36,6 +36,7 @@ const BusinessCardFavorites = ({
   rate?: number;
   negotiatedPrice?: boolean;
 }) => {
+  const user = useSelector((state: any) => state.auth.user);
   const router = useRouter();
   const [isLiked, setIsLiked] = useState(false);
   const [isMyBusinessesPage, setIsMyBusinessesPage] = useState(false);
@@ -196,14 +197,16 @@ const BusinessCardFavorites = ({
               </p>
             )}
 
-            <button
-              onClick={() => setIsLiked((prev) => !prev)}
-              className={`business-card-favorite__heart-icon--mob ${
-                isLiked ? "active" : ""
-              }`}
-            >
-              <HeartSVG />
-            </button>
+            {!!user && (
+              <button
+                onClick={() => setIsLiked((prev) => !prev)}
+                className={`business-card-favorite__heart-icon--mob ${
+                  isLiked ? "active" : ""
+                }`}
+              >
+                <HeartSVG />
+              </button>
+            )}
           </div>
           {negotiatedPrice ? (
             ""
