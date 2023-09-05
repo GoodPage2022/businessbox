@@ -15,8 +15,8 @@
   &__image {
     position: relative;
     bottom: -75px;
-    width: 273px;
-    height: 273px;
+    min-width: 273px;
+    min-height: 273px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 40px;
