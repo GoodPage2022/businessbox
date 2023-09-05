@@ -31,7 +31,7 @@ const Project: NextPage = ({ expert }: any) => {
       {expert.video && expert.video.length > 2 && (
         <Video video={expert.video} />
       )}
-      <ExpertsSlider images={expert.images} />
+      {expert.images != null && <ExpertsSlider images={expert.images} />}
       <Contacts data={expert} />
     </>
   );
