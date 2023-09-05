@@ -1,6 +1,6 @@
 .expertise {
   // padding-top: 40px;
-  padding-bottom: 60px;
+  padding-bottom: 20px;
 
   &__container {
     display: flex;
@@ -14,6 +14,7 @@
     width: 70%;
     padding-right: 10px;
     & p {
+      // font-family: ;
       font-size: 20px;
       line-height: 130%;
     }
@@ -34,6 +35,7 @@
     width: 30%;
   }
   &__title {
+    font-family: "Montserrat";
     font-weight: 700;
     font-size: 28px;
     margin-bottom: 20px;
@@ -44,6 +46,7 @@
   }
 
   &__list-item {
+    font-family: "Montserrat";
     position: relative;
     font-size: 20px;
     line-height: 100%;
@@ -73,7 +76,7 @@
 
 @media screen and (max-width: $size-mobile) {
   .expertise {
-    padding-bottom: 48px;
+    padding-bottom: 0;
     &__container {
       display: block;
       border: none;
