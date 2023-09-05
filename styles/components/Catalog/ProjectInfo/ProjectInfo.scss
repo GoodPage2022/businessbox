@@ -369,6 +369,11 @@
       right: 12px;
     }
   }
+
+  .video {
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
 }
 
 .slick-track {
@@ -699,6 +704,10 @@
 
     &__offers-title {
       margin-bottom: 40px;
+    }
+    .video {
+      padding-top: 20px;
+      padding-bottom: 20px;
     }
   }
 
