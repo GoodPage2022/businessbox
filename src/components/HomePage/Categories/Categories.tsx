@@ -204,7 +204,7 @@ const Categories = () => {
             </div>
           </div>
         </section>
-        <section className="categories-fourth">
+        {/*   <section className="categories-fourth">
           <div className="container categories-fourth__container">
             <h1 className="categories-fourth__title title--white">
               Прокачка бізнесу
@@ -216,19 +216,17 @@ const Categories = () => {
               аспектами вашого бізнесу
             </p>
             <div className="categories-fourth__buttons">
-              {/* <p className="title--white">Далі буде…</p> */}
               <button
                 className="categories-first__button"
                 onClick={
                   () => router.push("/experts")
-                  // user != null ? router.push("/account/add-business") : openModal()
                 }
               >
                 Обрати експерта
               </button>
             </div>
           </div>
-        </section>
+        </section> */}
       </Slider>
       <div className="categories__popUp">
         <p className="section__secondary-text">
