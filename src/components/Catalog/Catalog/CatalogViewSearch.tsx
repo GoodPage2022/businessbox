@@ -84,7 +84,7 @@ const CatalogViewSearch = () => {
 
     filterSetOfExp.push({
       sold_out: false,
-      active: true,
+      // active: true,
     });
 
     filterSetOfExp.push({

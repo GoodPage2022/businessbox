@@ -208,9 +208,8 @@ const CatalogView = () => {
     console.log(filtersObj, "filtersObj");
     filterSetOfExp.push({
       // sold_out: false,
-      active: true,
+      // active: true,
       // investing: { $exists: false },
-
       // $or: [{ active: true }, { sold_out: true }],
     });
 

@@ -233,7 +233,7 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
         $and: [
           { area: { $in: projectInfo.area } },
           {
-            active: true,
+            // active: true,
             sold_out: false,
             // investing: { $exists: false }
           },
