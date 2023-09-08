@@ -97,7 +97,7 @@ const Popular = () => {
         _created: -1,
       },
       filter: {
-        active: true,
+        // active: true,
         sold_out: false,
       },
     };
