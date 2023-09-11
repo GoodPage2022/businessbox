@@ -10,11 +10,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     msg += "Phone: " + req.body.phone + "\r\n";
   if (req.body.hasOwnProperty("email") && req.body.email.length > 0)
     msg += "Email: " + req.body.email + "\r\n";
+  if (
+    req.body.hasOwnProperty("areaOfBusiness") &&
+    req.body.areaOfBusiness.length > 0
+  )
+    msg += "Сфера бізнесу: " + req.body.areaOfBusiness + "\r\n";
   if (req.body.hasOwnProperty("comment") && req.body.comment.length > 0)
-    msg += "Comment: " + req.body.comment + "\r\n";
+    msg += "Питання: " + req.body.comment + "\r\n";
   const endpoint =
     "https://api.telegram.org/bot" + process.env.botKey + "/sendMessage";
-
   const data = {
     chat_id: "340185055",
     text: msg,

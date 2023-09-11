@@ -45,15 +45,14 @@ function ModalExpertCallback({ onClose }: { onClose: any }) {
     console.log(values, "values");
 
     setIsLoading(true);
-    const { name, phone, email, surname, city, comment } = values;
+    const { name, phone, email, areaOfBusiness, comment } = values;
 
     const data = {
       title: `Форма Отримати консультацію`,
       name,
       phone,
       email,
-      surname,
-      city,
+      areaOfBusiness,
       comment,
       url: `${process.env.baseUrl}${router.asPath}`,
     };
@@ -141,17 +140,15 @@ function ModalExpertCallback({ onClose }: { onClose: any }) {
               initialValues={{
                 name: "",
                 phone: "",
-                surname: "",
                 email: "",
                 comment: "",
-                city: "",
+                areaOfBusiness: "",
               }}
               validate={(values) => {
                 escapeHtml(values.name);
-                // escapeHtml(values.business);
-                escapeHtml(values.surname);
+                escapeHtml(values.areaOfBusiness);
                 escapeHtml(values.email);
-                escapeHtml(values.city);
+                escapeHtml(values.comment);
                 escapeHtml(values.phone);
               }}
               onSubmit={handleSubmit}
@@ -159,7 +156,7 @@ function ModalExpertCallback({ onClose }: { onClose: any }) {
               <Form className="modal-register__form">
                 <div className="modal-register__name-wrapper">
                   <label className="modal-register__field">
-                    <span className="modal-register__label">Ім’я</span>
+                    <span className="modal-register__label">ФІО</span>
                     <Field
                       className="modal-register__input section__primary-text"
                       type="text"
@@ -168,24 +165,9 @@ function ModalExpertCallback({ onClose }: { onClose: any }) {
                       maxLength={255}
                       required
                       component={CustomInput}
-                      placeholder="Петро"
+                      placeholder="Петро Петро Петрович"
                     />
                   </label>
-                  <label className="modal-register__field">
-                    <span className="modal-register__label">Прізвище</span>
-                    <Field
-                      className="modal-register__input section__primary-text"
-                      type="text"
-                      minLength={1}
-                      maxLength={255}
-                      name="surname"
-                      component={CustomInput}
-                      required
-                      placeholder="Петренко"
-                    />
-                  </label>
-                </div>
-                <div className="modal-register__phone-wrapper">
                   <label className="modal-register__field">
                     <span className="modal-register__label">Телефон</span>
                     <Field
@@ -203,6 +185,8 @@ function ModalExpertCallback({ onClose }: { onClose: any }) {
                       )}
                     />
                   </label>
+                </div>
+                <div className="modal-register__phone-wrapper">
                   <label className="modal-register__field">
                     <span className="modal-register__label">
                       Електронна пошта
@@ -218,26 +202,24 @@ function ModalExpertCallback({ onClose }: { onClose: any }) {
                       placeholder="example@mail.com"
                     />
                   </label>
+                  <label className="modal-register__field">
+                    <span className="modal-register__label">Сфера бізнесу</span>
+                    <Field
+                      className="modal-register__input section__primary-text"
+                      type="text"
+                      name="areaOfBusiness"
+                      minLength={1}
+                      maxLength={255}
+                      required
+                      component={CustomInput}
+                      placeholder="Торгівля"
+                    />
+                  </label>
                 </div>
 
-                {/* <div className="modal-register__city-wrapper">
-                <label className="modal-register__field">
-                  <span className="modal-register__label">Місто</span>
-                  <Field
-                    className="modal-register__input section__primary-text"
-                    type="text"
-                    name="city"
-                    minLength={1}
-                    maxLength={255}
-                    required
-                    component={CustomInput}
-                    placeholder="Дніпро"
-                  />
-                </label>
-              </div> */}
                 <label className="modal-moreAboutBusiness__field">
                   <span className="modal-moreAboutBusiness__label">
-                    Коментар
+                    Питання до експерта
                   </span>
                   <Field
                     as="textarea"
@@ -247,7 +229,7 @@ function ModalExpertCallback({ onClose }: { onClose: any }) {
                     minLength={1}
                     maxLength={1000}
                     required
-                    placeholder="Додати коментар..."
+                    placeholder="Ваше питання..."
                   />
                 </label>
 
