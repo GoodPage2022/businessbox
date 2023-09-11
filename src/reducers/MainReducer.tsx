@@ -35,6 +35,11 @@ export const reducer = (state: any, action: any) => {
         ...state,
         isActiveHeaderSearch: !state.isActiveHeaderSearch,
       };
+    case "toggle_expertCallback":
+      return {
+        ...state,
+        isActiveModalExpertCallback: !state.isActiveModalExpertCallback,
+      };
     case "toggle_deleteBusiness":
       return {
         ...state,
@@ -161,6 +166,7 @@ export const initialState = {
   isActiveModalForgotPassword: false,
   isOpenBurger: false,
   isActiveMobFilter: false,
+  isActiveModalExpertCallback: false,
   isActiveHeaderSearch: false,
   isOpenDeleteBusiness: false,
   isOpenModalActive: false,

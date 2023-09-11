@@ -9,6 +9,7 @@ import Expertise from "../../src/components/Experts/Details/Expertise";
 import Video from "../../src/components/Experts/Details/Video";
 import ExpertsSlider from "../../src/components/Experts/Details/ExpertsSlider";
 import Contacts from "../../src/components/Experts/Details/Contacts";
+import Callback from "../../src/components/Experts/Details/Callback";
 
 const Project: NextPage = ({ expert }: any) => {
   if (!expert || typeof expert?._id != "string") return <></>;
@@ -32,7 +33,8 @@ const Project: NextPage = ({ expert }: any) => {
         <Video video={expert.video} />
       )}
       {expert.images != null && <ExpertsSlider images={expert.images} />}
-      <Contacts data={expert} />
+      {/* <Contacts data={expert} /> */}
+      <Callback />
     </>
   );
 };
