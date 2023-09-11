@@ -9,6 +9,7 @@
 const path = require("path");
 
 const env = {
+  botKey: process.env.BOT_KEY,
   liqpayClientId: process.env.LIQPAY_CLIENT_ID,
   liqpayClientSecret: process.env.LIQPAY_CLIENT_SECRET,
   clientId: process.env.GOOGLE_CLIENT_ID,

@@ -14,7 +14,6 @@ const Contacts = ({ data }: any) => {
   const [isFacebookClicked, setIsFacebookClicked] = useState(false);
   const [isTelegramClicked, setIsTelegramClicked] = useState(false);
   const [isInstagramClicked, setIsInstagramClicked] = useState(false);
-  console.log(data, "sadasd");
 
   return (
     <div className="contacts">

@@ -1,0 +1,27 @@
+.callback {
+  padding-top: 20px;
+  padding-bottom: 60px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: white;
+    border-radius: 25px;
+  }
+
+  .main-button--red {
+    background: #ac92ec;
+  }
+}
+
+@media screen and (max-width: $size-tablet) {
+  .callback {
+  }
+}
+
+@media screen and (max-width: $size-mobile) {
+  .callback {
+  }
+}
