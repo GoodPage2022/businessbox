@@ -20,11 +20,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const endpoint =
     "https://api.telegram.org/bot" + process.env.botKey + "/sendMessage";
   const data = {
-    chat_id: "340185055",
+    chat_id: "-1001697526786",
     text: msg,
   };
-
-  console.log(data, "data");
 
   const u = new URLSearchParams(data).toString();
 
@@ -35,10 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   };
 
-  console.log(endpoint, "endpoint");
-
   const response = await fetch(endpoint + "?" + u, options);
-  console.log(response, "response");
 
   const result = await response.json();
 
