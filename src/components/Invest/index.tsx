@@ -39,7 +39,7 @@ const Invest = () => {
       <section className="invest">
         <div className="container invest__container">
           <div className="invest__cards">
-            <div className="invest__card">
+            {/* <div className="invest__card">
               {detailForInvestor ? (
                 <>
                   <h2 className="invest__card--title">Для інвестора</h2>
@@ -149,6 +149,50 @@ const Invest = () => {
                   </div>
                 </>
               )}
+            </div> */}
+
+            <div className="invest__large-card">
+              <h2 className="invest__card--title">
+                Для інвестора та того, хто шукає інвестиції
+              </h2>
+              <p className="invest__card--text">
+                В даному розділі ви можете знайти цікаві проекти для
+                інвестування, ознайомитися з умовами залучення коштів та
+                підібрати для себе оптимальний варіант з точки зору
+                інтерес/ризик/прибуток.
+              </p>
+              <p className="invest__card--text">
+                Також ви можете розмістити свою пропозицію (бізнес) під
+                залучення інвестицій. Для цього необхідно надати максимум
+                інформації стосовно предмету інвестування, а саме:
+              </p>{" "}
+              <p className="invest__card--text">
+                1. Детально описати продукт (бізнес, проект)
+              </p>{" "}
+              <p className="invest__card--text">
+                2. Яка сума інвестицій необхідна?
+              </p>{" "}
+              <p className="invest__card--text">
+                3. На яких умовах ви готові залучати кошти?
+              </p>{" "}
+              <p className="invest__card--text">
+                4. Вказати термін повернення інвестицій.
+              </p>{" "}
+              <p className="invest__card--text">
+                5. Вказати цільову дохідність інвестицій.
+              </p>{" "}
+              <p className="invest__card--text">
+                6. Вказати забезпечення коштів (якщо таке є).
+              </p>{" "}
+              <p className="invest__card--text">
+                7. Прикріпити коротку фінансову звітність (достатньо p&l)
+              </p>
+              <button
+                className="invest__card--text invest__card--link"
+                onClick={onForInvestorClick}
+              >
+                Перейти до каталогу
+              </button>
             </div>
           </div>
         </div>
