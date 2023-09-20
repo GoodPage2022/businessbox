@@ -13,7 +13,7 @@ const Callback = ({}: any) => {
       <div className="callback__container container">
         <MainButtonRed
           onClick={() => dispatch({ type: "toggle_expertCallback" })}
-          label="Замовити зворотній дзвінок"
+          label="Замовити зворотній зв'язок"
         />
         <ModalExpertCallback
           onClose={() => dispatch({ type: "toggle_expertCallback" })}
