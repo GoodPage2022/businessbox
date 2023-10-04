@@ -15,6 +15,7 @@ const SoldBusinesses = () => {
       user,
       limit: 10,
       sort: {
+        _modified: -1,
         _created: -1,
       },
       filter: {
