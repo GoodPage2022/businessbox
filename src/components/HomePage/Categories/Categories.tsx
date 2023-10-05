@@ -204,7 +204,8 @@ const Categories = () => {
             </div>
           </div>
         </section>
-        {/*   <section className="categories-fourth">
+
+        <section className="categories-fourth">
           <div className="container categories-fourth__container">
             <h1 className="categories-fourth__title title--white">
               Прокачка бізнесу
@@ -218,15 +219,13 @@ const Categories = () => {
             <div className="categories-fourth__buttons">
               <button
                 className="categories-first__button"
-                onClick={
-                  () => router.push("/experts")
-                }
+                onClick={() => router.push("/experts")}
               >
                 Обрати експерта
               </button>
             </div>
           </div>
-        </section> */}
+        </section>
       </Slider>
       <div className="categories__popUp">
         <p className="section__secondary-text">
