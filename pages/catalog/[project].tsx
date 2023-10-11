@@ -23,7 +23,10 @@ const Project: NextPage = ({ project, isSold }: any) => {
         <section className="projectInfo">
           <div className="container projectInfo__container">
             {" "}
-            <div className="projectInfo__sold title">Бізнес було продано</div>
+            <div className="projectInfo__sold">
+              <p className="title">Упс:(</p>
+              <p className="title">Бізнес вже проданий</p>
+            </div>
           </div>{" "}
         </section>
       ) : (

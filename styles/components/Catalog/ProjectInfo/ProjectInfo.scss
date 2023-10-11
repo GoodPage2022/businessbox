@@ -5,8 +5,9 @@
 
   &__sold {
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
     text-align: center;
     height: 30vh;
   }
