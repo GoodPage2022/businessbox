@@ -3,6 +3,13 @@
   padding-top: 100px;
   padding-bottom: 80px;
 
+  &__sold {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    height: 30vh;
+  }
   &__container {
     position: relative;
   }
