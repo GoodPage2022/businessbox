@@ -513,13 +513,9 @@ const ProjectInfo = ({ projectId }: { projectId: string }) => {
       if (response.data) {
         response.data.entries.forEach((item: any) => {
           if (item.business_id == projectId) {
-            console.log(item, projectId, "rrr");
-
             setSlides(response.data.entries);
           }
         });
-
-        console.log(response.data, "asdasd");
 
         return;
       }
