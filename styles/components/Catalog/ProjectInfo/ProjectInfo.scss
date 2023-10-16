@@ -604,6 +604,11 @@
     padding-top: 90px;
     padding-bottom: 40px;
 
+    &__sold {
+      .title {
+        text-align: center;
+      }
+    }
     &__title {
       margin-bottom: 5px;
       &--heart-icon {
