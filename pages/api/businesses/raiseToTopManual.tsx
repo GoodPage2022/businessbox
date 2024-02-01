@@ -4,8 +4,12 @@ import RaiseToTop from "../../../src/utils/raiseToTop";
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const { args }: any = req.body;
 
+  console.log(args, "args");
+
   if (args[0] != "toporders" || args[2] != false)
-    return res.status(500).send("error");
+    return res
+      .status(500)
+      .send("error args[0] != toporders || args[2] != false");
 
   const { manual_order, _id } = args[1];
 
