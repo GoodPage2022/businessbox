@@ -313,19 +313,21 @@ const ContactInfo = () => {
                   <span className="contactInfo__label">Телефон</span>
                   <Field
                     name="phone"
-                    render={({ field }: { field: any }) => (
-                      <MaskedInput
-                        {...field}
-                        mask={phoneNumberMask}
-                        placeholder="+380 (__) __ __ __"
-                        type="text"
-                        value={field.value}
-                        readOnly={state.isEdit ? false : true}
-                        required
-                        component={CustomInput}
-                        className="contactInfo__input section__primary-text"
-                      />
-                    )}
+                    type="text"
+                    component={CustomInput}
+                    className="contactInfo__input section__primary-text"
+                    readOnly={state.isEdit ? false : true}
+                    required
+                    placeholder="+___ (__) __ __ __"
+                    // render={({ field }: { field: any }) => (
+                    //   <MaskedInput
+                    //     {...field}
+                    //     mask={phoneNumberMask}
+                    //     placeholder="+380 (__) __ __ __"
+                    //     type="text"
+                    //     value={field.value}
+                    //   />
+                    // )}
                   />
                 </label>
               </div>

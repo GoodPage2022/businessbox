@@ -65,13 +65,13 @@ function ModalMoreAboutBusiness({ onClose }: { onClose: any }) {
     try {
       const response = await axios.post(
         `/api/moreAboutBusiness/post`,
-        newRequest,
+        newRequest
       );
       if (response.status == 200) {
         // setOrderId(response.data._id)
         dispatch({ type: "toggle_moreAboutBusinessModal" });
         router.push(
-          `${process.env.baseUrl}/catalog/${projectId}?order_id=${response.data._id}`,
+          `${process.env.baseUrl}/catalog/${projectId}?order_id=${response.data._id}`
         );
 
         // onClose();
@@ -188,16 +188,10 @@ function ModalMoreAboutBusiness({ onClose }: { onClose: any }) {
                   <Field
                     name="phone"
                     component={CustomInput}
-                    render={({ field }: { field: any }) => (
-                      <MaskedInput
-                        {...field}
-                        mask={phoneNumberMask}
-                        required
-                        placeholder="+380 (__) __ __ __"
-                        type="text"
-                        className="modal-moreAboutBusiness__input section__primary-text"
-                      />
-                    )}
+                    type="text"
+                    required
+                    className="modal-moreAboutBusiness__input section__primary-text"
+                    placeholder="+___ (__) __ __ __"
                   />
                 </label>
               </div>
