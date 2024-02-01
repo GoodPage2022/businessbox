@@ -594,8 +594,8 @@ const AddBusiness = () => {
                           const uploadedFiles: any = await uploadToServer(
                             e.currentTarget.files[0]
                           );
-                          console.log(uploadedFiles.data.url);
-                          setFiles([...files, uploadedFiles.data.url]);
+                          console.log(uploadedFiles?.data?.url);
+                          setFiles([...files, uploadedFiles?.data?.url]);
                         }
                       }}
                     />
@@ -616,8 +616,8 @@ const AddBusiness = () => {
                           const uploadedFiles: any = await uploadToServer(
                             e.currentTarget.files[0]
                           );
-                          console.log(uploadedFiles.data.url);
-                          setFiles([...files, uploadedFiles.data.url]);
+                          console.log(uploadedFiles?.data?.url);
+                          setFiles([...files, uploadedFiles?.data?.url]);
                         }
                       }}
                     />

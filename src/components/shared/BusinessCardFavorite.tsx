@@ -118,7 +118,7 @@ const BusinessCardFavorites = ({
         {image && (
           <Image
             className=""
-            src={image}
+            src={image != "undefined" ? image : "/assets/images/BB-meta.png"}
             layout="fill"
             objectFit="cover"
             alt="card-image"
