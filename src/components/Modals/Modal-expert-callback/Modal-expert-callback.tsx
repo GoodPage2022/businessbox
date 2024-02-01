@@ -173,16 +173,11 @@ function ModalExpertCallback({ onClose }: { onClose: any }) {
                     <Field
                       name="phone"
                       component={CustomInput}
-                      render={({ field }: { field: any }) => (
-                        <MaskedInput
-                          {...field}
-                          mask={phoneNumberMask}
-                          required
-                          placeholder="+380 (__) __ __ __"
-                          type="text"
-                          className="modal-register__input section__primary-text"
-                        />
-                      )}
+                      placeholder="+___ (__) __ __ __"
+                      type="text"
+                      maxLength={20}
+                      className="modal-register__input section__primary-text"
+                      required
                     />
                   </label>
                 </div>

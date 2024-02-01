@@ -64,7 +64,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
       if (agreePolicy) {
         const newUserResponse = await axios.post(
           `/api/account/signUp`,
-          newUser,
+          newUser
         );
 
         console.log(newUserResponse, "newUserResponse");
@@ -82,7 +82,7 @@ function ModalRegister({ onClose }: { onClose: any }) {
       console.log(err);
       if (err.response.data.error === "Username is already used!") {
         setRegisterError(
-          "Користувач з такою поштою вже зареєстрований в системі. Змініть пошту або скористайтеся функцією відновлення паролю",
+          "Користувач з такою поштою вже зареєстрований в системі. Змініть пошту або скористайтеся функцією відновлення паролю"
         );
       } else {
         setRegisterError("На жаль, виникла помилка. Спробуйте ще раз");
@@ -200,16 +200,11 @@ function ModalRegister({ onClose }: { onClose: any }) {
                   <Field
                     name="phone"
                     component={CustomInput}
-                    render={({ field }: { field: any }) => (
-                      <MaskedInput
-                        {...field}
-                        mask={phoneNumberMask}
-                        required
-                        placeholder="+380 (__) __ __ __"
-                        type="text"
-                        className="modal-register__input section__primary-text"
-                      />
-                    )}
+                    required
+                    placeholder="+___ (__) __ __ __"
+                    type="text"
+                    maxLength={20}
+                    className="modal-register__input section__primary-text"
                   />
                 </label>
                 <label className="modal-register__field">

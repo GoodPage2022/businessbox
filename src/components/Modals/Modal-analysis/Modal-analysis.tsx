@@ -24,9 +24,9 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
   const liqpayFormRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if (!router.query.project) return
-    setProjectId(router.query.project.toString())
-  },[router])
+    if (!router.query.project) return;
+    setProjectId(router.query.project.toString());
+  }, [router]);
 
   // useEffect(() => {
   //   if (!state.tariff) return
@@ -100,7 +100,9 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
       if (response.status == 200) {
         // setOrderId(response.data._id)
         dispatch({ type: "toggle_analysisModal" });
-        router.push(`${process.env.baseUrl}/catalog/${projectId}?order_id=${response.data._id}`)
+        router.push(
+          `${process.env.baseUrl}/catalog/${projectId}?order_id=${response.data._id}`
+        );
 
         // onClose();
         // resetForm({});
@@ -213,16 +215,11 @@ function ModalAnalysis({ onClose }: { onClose: any }) {
                   <Field
                     name="phone"
                     component={CustomInput}
-                    render={({ field }: { field: any }) => (
-                      <MaskedInput
-                        {...field}
-                        mask={phoneNumberMask}
-                        required
-                        placeholder="+380 (__) __ __ __"
-                        type="text"
-                        className="modal-analysis__input section__primary-text"
-                      />
-                    )}
+                    placeholder="+___ (__) __ __ __"
+                    type="text"
+                    maxLength={20}
+                    className="modal-analysis__input section__primary-text"
+                    required
                   />
                 </label>
               </div>
