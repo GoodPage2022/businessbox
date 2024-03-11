@@ -83,7 +83,7 @@ const BurgerMenu = () => {
           }}
         >
           <Link href={`/experts`}>
-            <a className="section__primary-text--white">Прокачка бізнесу</a>
+            <a className="section__primary-text--white">Ментори-практики</a>
           </Link>
         </li>
 

@@ -208,7 +208,7 @@ const Categories = () => {
         <section className="categories-fourth">
           <div className="container categories-fourth__container">
             <h1 className="categories-fourth__title title--white">
-              Прокачка бізнесу
+              Ментори-практики
             </h1>
             <p className="categories-fourth__text section__primary-text--white">
               Розділ, який надає вам можливість звертатися до перевірених та
