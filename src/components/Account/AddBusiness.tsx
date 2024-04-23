@@ -98,8 +98,6 @@ const AddBusiness = () => {
       headers: { "Content-Type": "multipart/form-data" },
     };
 
-    console.log("send form");
-
     try {
       const response = await axios.post("/api/upload", formData, options);
       setTempFiles([...tempFiles, response.data.url]);
@@ -122,7 +120,6 @@ const AddBusiness = () => {
     setIsLoading(true);
     const { name, price, description, business, state, year, city, currency } =
       values;
-    console.log(business);
 
     let newBusiness: any = {
       active: true,
@@ -171,9 +168,6 @@ const AddBusiness = () => {
 
       newBusiness["images"] = images;
     }
-
-    console.log("newBusiness");
-    console.log(newBusiness);
 
     try {
       const newBusinessResponse = await axios.post(`/api/businesses/post`, {
@@ -594,7 +588,6 @@ const AddBusiness = () => {
                           const uploadedFiles: any = await uploadToServer(
                             e.currentTarget.files[0]
                           );
-                          console.log(uploadedFiles?.data?.url);
                           setFiles([...files, uploadedFiles?.data?.url]);
                         }
                       }}
@@ -616,7 +609,6 @@ const AddBusiness = () => {
                           const uploadedFiles: any = await uploadToServer(
                             e.currentTarget.files[0]
                           );
-                          console.log(uploadedFiles?.data?.url);
                           setFiles([...files, uploadedFiles?.data?.url]);
                         }
                       }}
