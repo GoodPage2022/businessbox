@@ -1,6 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (Object.keys(req.body).length === 0) {
+    return res.status(404).json({ msg: "body is empty" });
+  }
+
   let msg = "Заявка з сайту\r\n";
   if (req.body.hasOwnProperty("title")) msg = req.body.title + "\r\n";
   if (req.body.hasOwnProperty("url") && req.body.url.length > 0)
@@ -37,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const result = await response.json();
 
-  res.status(200).json(result);
+  return res.status(200).json(result);
 };
 
 export default handler;
