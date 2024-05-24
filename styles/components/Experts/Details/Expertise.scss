@@ -110,6 +110,20 @@
       &::after {
         display: none;
       }
+
+      & p {
+        text-align: start;
+      }
+      & span {
+        text-align: start;
+      }
+      & div {
+        text-align: start;
+      }
+
+      & em {
+        text-align: start;
+      }
     }
 
     &__form {
