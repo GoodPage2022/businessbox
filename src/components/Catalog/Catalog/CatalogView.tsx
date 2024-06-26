@@ -515,6 +515,7 @@ const CatalogView = () => {
                       }
                       price={price}
                       views={view_count ?? 0}
+                      isSoldOut={sold_out}
                       isVerified={is_verified}
                       currency={currency}
                       negotiatedPrice={negotiatedPrice}

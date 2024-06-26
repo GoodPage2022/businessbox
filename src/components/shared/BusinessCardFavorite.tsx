@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ReactTooltip from "react-tooltip";
 
+import SoldSVG from "../../assets/svg/sold.svg";
 import TopSVG from "../../assets/svg/top-label.svg";
 import EditSVG from "../../assets/svg/edit.svg";
 import HeartSVG from "../../assets/svg/heart.svg";
@@ -20,6 +21,7 @@ const BusinessCardFavorites = ({
   description,
   price,
   views,
+  isSoldOut,
   isVerified,
   alias,
   currency = "Гривня",
@@ -30,6 +32,7 @@ const BusinessCardFavorites = ({
   description: string;
   price: string;
   views: string;
+  isSoldOut?: boolean;
   isVerified: boolean;
   alias: string;
   currency?: string;
@@ -96,7 +99,7 @@ const BusinessCardFavorites = ({
   }, [topBusinesses]);
 
   return (
-    <li className="business-card-favorite">
+    <li className={`business-card-favorite${isSoldOut ? " sold" : ""}`}>
       {isTopBusinesses && (
         <div className="business-card__top">
           <TopSVG />
@@ -106,6 +109,12 @@ const BusinessCardFavorites = ({
       <Link href={`/catalog/${alias}`}>
         <a className="business-card-favorite__link" title={title}></a>
       </Link>
+      {isSoldOut && (
+        <div className="business-card__sold-label">
+          <SoldSVG />
+        </div>
+      )}
+
       {isMyBusinessesPage ? (
         <button
           className="business-card-favorite__button-edit"
